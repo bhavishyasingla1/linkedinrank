@@ -1,0 +1,666 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import FileUpload from '@/components/FileUpload'
+import Link from 'next/link'
+
+const PREVIEW_SLIDES = [
+    { type: 'score' as const },
+    { type: 'recommendation' as const },
+    { type: 'roadmap' as const },
+]
+
+export default function HomePage() {
+    const [openFaq, setOpenFaq] = useState<number | null>(null)
+    const [slideIndex, setSlideIndex] = useState(0)
+    const [copied, setCopied] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const AI_PROMPT = 'Here is my LinkedIn PDF and my LinkedInRank analysis report. Rewrite my headline, About section, and all experience descriptions based on the scoring feedback. Keep my voice authentic.'
+
+    const copyPrompt = () => {
+        navigator.clipboard.writeText(AI_PROMPT)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setSlideIndex(prev => (prev + 1) % PREVIEW_SLIDES.length)
+        }, 3500)
+        return () => clearInterval(timer)
+    }, [])
+
+    return (
+        <main className="min-h-screen bg-white">
+            {/* Header */}
+            <header className="border-b border-gray-100 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
+                    <Link href="/" className="font-bold text-base sm:text-lg md:text-xl tracking-tight text-[#0A0F1C] no-underline inline-block py-1 transition-all">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
+                    <nav className="hidden md:flex items-center gap-6">
+                        <Link href="/how-linkedin-rank-works" className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">How It Works</Link>
+                        <Link href="/linkedin-optimization-guide" className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Guides</Link>
+                        <Link href="/faq" className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">FAQ</Link>
+                        <button onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary text-sm !py-2 !px-4 cursor-pointer">Analyze Profile</button>
+                    </nav>
+                    <div className="flex md:hidden items-center gap-2">
+                        <button onClick={() => { setMobileMenuOpen(false); document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' }); }} className="btn-primary text-sm !py-1.5 !px-3.5 cursor-pointer">Analyze</button>
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" aria-label="Toggle menu">
+                            {mobileMenuOpen ? (
+                                <svg className="w-5 h-5 text-[#0A0F1C]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            ) : (
+                                <svg className="w-5 h-5 text-[#0A0F1C]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                            )}
+                        </button>
+                    </div>
+                </div>
+                {/* Mobile menu */}
+                {mobileMenuOpen && (
+                    <div className="md:hidden border-t border-gray-100 bg-white">
+                        <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
+                            <Link href="/how-linkedin-rank-works" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50 rounded-lg px-3 py-2.5 transition-colors no-underline">How It Works</Link>
+                            <Link href="/linkedin-optimization-guide" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50 rounded-lg px-3 py-2.5 transition-colors no-underline">Guides</Link>
+                            <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50 rounded-lg px-3 py-2.5 transition-colors no-underline">FAQ</Link>
+                        </nav>
+                    </div>
+                )}
+            </header>
+
+            {/* Hero */}
+            <section className="bg-white pt-16 sm:pt-24 pb-16 sm:pb-20">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        {/* Left: Copy */}
+                        <div>
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] mb-6">
+                                <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                                <span className="text-xs font-semibold text-[#0A66C2]">Improve your LinkedIn profile today</span>
+                            </div>
+                            <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#0A0F1C] leading-[1.15] mb-5 tracking-tight">
+                                Find What&apos;s Holding Your LinkedIn Profile <span className="text-gradient-brand">Back</span>
+                            </h1>
+                            <p className="text-[16px] sm:text-[17px] text-[#4B5563] max-w-lg mb-8 leading-relaxed">
+                                Upload your LinkedIn PDF. Get a score out of 100, see exactly which sections need work, and get AI-powered rewrites you can copy-paste — all in under 60 seconds.
+                            </p>
+
+                            {/* Trust row */}
+                            <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8">
+                                {[
+                                    'No login required',
+                                    'Files auto-deleted',
+                                    'Under 1 minute',
+                                ].map((text, i) => (
+                                    <div key={i} className="flex items-center gap-1.5">
+                                        <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                        <span className="text-sm text-[#4B5563]">{text}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <button onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary text-sm cursor-pointer">Analyze My Profile — It&apos;s Free</button>
+                        </div>
+
+                        {/* Right: Report Preview Slideshow */}
+                        <div className="hidden lg:block">
+                            <div className="bg-white border border-gray-200 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] relative overflow-hidden">
+                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0A66C2] to-[#4F46E5]" />
+
+                                <div key={slideIndex} className="animate-fade-in min-h-[340px]">
+                                    {/* Slide 1: Score + Category breakdown */}
+                                    {slideIndex === 0 && (
+                                        <div className="p-7">
+                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-5">Your Report</p>
+                                            <div className="flex items-center gap-6 mb-6">
+                                                <div className="relative w-28 h-28 shrink-0">
+                                                    <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                                                        <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" strokeWidth="7" />
+                                                        <circle cx="60" cy="60" r="52" fill="none" stroke="#0A66C2" strokeWidth="7" strokeDasharray={2 * Math.PI * 52} strokeDashoffset={2 * Math.PI * 52 * (1 - 0.74)} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.8s ease-out' }} />
+                                                    </svg>
+                                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                                        <span className="text-3xl font-bold text-[#0A0F1C] tabular-nums">74</span>
+                                                        <span className="text-[10px] text-[#9CA3AF]">/ 100</span>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2 flex-1">
+                                                    {[
+                                                        { label: 'Headline', score: 14, max: 20, pct: 70 },
+                                                        { label: 'About', score: 16, max: 20, pct: 80 },
+                                                        { label: 'Experience', score: 18, max: 25, pct: 72 },
+                                                        { label: 'Skills', score: 11, max: 15, pct: 73 },
+                                                    ].map((c, i) => (
+                                                        <div key={i}>
+                                                            <div className="flex justify-between text-[11px] mb-0.5">
+                                                                <span className="font-semibold text-[#0A0F1C]">{c.label}</span>
+                                                                <span className="text-[#9CA3AF] tabular-nums">{c.score}/{c.max}</span>
+                                                            </div>
+                                                            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                                                <div className="h-full rounded-full bg-gradient-to-r from-[#0A66C2] to-[#4F46E5]" style={{ width: `${c.pct}%`, transition: 'width 0.7s ease-out' }} />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-[#92400E] bg-[#FEF3C7]">
+                                                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" /></svg>
+                                                    Gold
+                                                </span>
+                                                <span className="text-[11px] text-[#6B7280]">Top 30% of analyzed profiles</span>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Slide 2: Recommendation + AI Rewrite */}
+                                    {slideIndex === 1 && (
+                                        <div className="p-7">
+                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-4">AI Recommendations</p>
+                                            <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-4 mb-4">
+                                                <div className="flex items-start gap-2.5 mb-3">
+                                                    <div className="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center shrink-0 mt-0.5">
+                                                        <svg className="w-3.5 h-3.5 text-[#D97706]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" /></svg>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs font-bold text-[#0A0F1C]">Your headline is too generic</p>
+                                                        <p className="text-[11px] text-[#6B7280] mt-0.5">It doesn&apos;t include keywords recruiters search for</p>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <div className="bg-white border border-gray-200 rounded-lg px-3 py-2">
+                                                        <p className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-0.5">Before</p>
+                                                        <p className="text-xs text-[#4B5563]">Marketing Manager at TechCorp</p>
+                                                    </div>
+                                                    <div className="bg-white border border-[#DBEAFE] rounded-lg px-3 py-2">
+                                                        <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mb-0.5">After</p>
+                                                        <p className="text-xs text-[#0A0F1C] font-medium">B2B SaaS Growth Marketer | Demand Gen & Content Strategy | 3x Pipeline Growth</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">+6 pts</span>
+                                                <span className="text-[11px] text-[#6B7280]">Expected score increase from this fix</span>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Slide 3: Improvement Roadmap */}
+                                    {slideIndex === 2 && (
+                                        <div className="p-7">
+                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-4">Improvement Roadmap</p>
+                                            <div className="space-y-2.5">
+                                                {[
+                                                    { fix: 'Add metrics to experience bullets', pts: '+5', time: '10 min', done: false },
+                                                    { fix: 'Rewrite headline with keywords', pts: '+6', time: '5 min', done: false },
+                                                    { fix: 'Expand About to 200+ words', pts: '+4', time: '15 min', done: true },
+                                                    { fix: 'Add 5 more relevant skills', pts: '+3', time: '3 min', done: false },
+                                                ].map((item, i) => (
+                                                    <div key={i} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border ${item.done ? 'bg-emerald-50/50 border-emerald-100' : 'bg-white border-gray-100'}`}>
+                                                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${item.done ? 'bg-emerald-500' : 'border-2 border-gray-200'}`}>
+                                                            {item.done && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>}
+                                                        </div>
+                                                        <p className={`flex-1 text-xs font-medium ${item.done ? 'text-[#6B7280] line-through' : 'text-[#0A0F1C]'}`}>{item.fix}</p>
+                                                        <span className={`text-[11px] font-bold tabular-nums shrink-0 ${item.done ? 'text-emerald-500' : 'text-[#0A66C2]'}`}>{item.pts}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="mt-3 flex items-center justify-between">
+                                                <span className="text-[11px] text-[#6B7280]">Total potential gain</span>
+                                                <span className="text-sm font-bold text-[#0A66C2]">+18 pts</span>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Slide labels + indicators */}
+                                <div className="border-t border-gray-100 px-5 py-3 flex items-center justify-between">
+                                    <div className="flex items-center gap-4">
+                                        {['Score', 'AI Rewrite', 'Roadmap'].map((label, i) => (
+                                            <button key={i} onClick={() => setSlideIndex(i)} className={`text-[11px] font-semibold transition-colors cursor-pointer ${i === slideIndex ? 'text-[#0A66C2]' : 'text-[#9CA3AF] hover:text-[#6B7280]'}`}>{label}</button>
+                                        ))}
+                                    </div>
+                                    <div className="flex gap-1.5">
+                                        {PREVIEW_SLIDES.map((_, i) => (
+                                            <button key={i} onClick={() => setSlideIndex(i)} className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === slideIndex ? 'bg-[#0A66C2] w-5' : 'bg-gray-200 w-1.5'}`} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Upload */}
+            <section id="upload" className="bg-[#F8FAFC] py-16 scroll-mt-20">
+                <div className="max-w-xl mx-auto px-6">
+                    <FileUpload />
+                    {/* PDF instructions */}
+                    <div className="mt-5 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">How to export your LinkedIn PDF</p>
+                        <ol className="space-y-2.5">
+                            {[
+                                'Go to your LinkedIn profile page',
+                                'Click "More" then "Save to PDF"',
+                                'Upload the downloaded file above'
+                            ].map((step, i) => (
+                                <li key={i} className="flex items-start gap-3">
+                                    <span className="w-5 h-5 rounded-md bg-[#0A66C2] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                                    <span className="text-sm text-[#4B5563] font-medium">{step}</span>
+                                </li>
+                            ))}
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            {/* How It Works */}
+            <section className="bg-white py-24 border-t border-gray-100">
+                <div className="max-w-4xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">How It Works</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Three steps to a stronger profile</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        {[
+                            { step: '01', title: 'Upload PDF', desc: 'Export your LinkedIn profile as a PDF and upload it. No login, no signup.' },
+                            { step: '02', title: 'Signal Analysis', desc: 'AI + rule-based evaluation across 30+ visible profile signals, adapted to your career stage.' },
+                            { step: '03', title: 'Improvement Roadmap', desc: 'Structured score breakdown with personalized recommendations and a prioritized path to a stronger profile.' },
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-shadow">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white text-sm font-bold flex items-center justify-center mb-4">{item.step}</div>
+                                <h3 className="text-base font-bold text-[#0A0F1C] mb-2">{item.title}</h3>
+                                <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Evaluation Framework — Card-based */}
+            <section className="bg-[#F8FAFC] py-24">
+                <div className="max-w-4xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Evaluation Framework</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-3">How your profile is evaluated</h2>
+                    <p className="text-[15px] text-[#4B5563] mb-12 max-w-2xl">We evaluate 30+ visible profile signals across headline clarity, experience depth, keyword alignment, and structure. Only what appears in your LinkedIn PDF is scored.</p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {[
+                            { label: 'Headline', weight: 20, signals: ['Role clarity', 'Keyword presence', 'Positioning strength'] },
+                            { label: 'About / Summary', weight: 20, signals: ['Professional direction', 'Skills mentioned', 'Structure & readability'] },
+                            { label: 'Experience', weight: 25, signals: ['Action verbs & impact', 'Role descriptions', 'Quantified outcomes'] },
+                            { label: 'Skills', weight: 15, signals: ['Relevance to role', 'Specificity level', 'Tools & platforms'] },
+                            { label: 'Education', weight: 10, signals: ['Degree completeness', 'Field alignment', 'Certifications'] },
+                            { label: 'Completeness', weight: 10, signals: ['Section coverage', 'Content depth', 'Logical structure'] },
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-shadow">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="text-sm font-bold text-[#0A0F1C]">{item.label}</h3>
+                                    <span className="text-xs font-bold text-[#0A66C2] bg-[#EFF6FF] px-2 py-0.5 rounded-md">{item.weight} pts</span>
+                                </div>
+                                <ul className="space-y-1.5">
+                                    {item.signals.map((s, j) => (
+                                        <li key={j} className="flex items-center gap-2 text-sm text-[#6B7280]">
+                                            <div className="w-1 h-1 rounded-full bg-[#0A66C2] shrink-0"></div>
+                                            {s}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* What You Get */}
+            <section className="bg-white py-24 border-t border-gray-100">
+                <div className="max-w-4xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">What You Get</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Your complete LinkedInRank report includes</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {[
+                            { title: 'Profile Score & Tier', desc: 'Score out of 100 with Bronze, Silver, Gold, or Platinum tier and peer context for your career stage.', icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z' },
+                            { title: 'Category Breakdown', desc: 'Detailed scores for Headline, About, Experience, Skills, Education, and Completeness with signal-level feedback.', icon: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z' },
+                            { title: 'Signal-Level Feedback', desc: 'See exactly which signals passed and which need work within each category — no guessing what to fix.', icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+                            { title: 'Personalized Recommendations', desc: 'Specific fixes for your weakest areas with before/after examples you can implement immediately.', icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10' },
+                            { title: 'Improvement Roadmap', desc: 'Prioritized steps showing exactly how many points each fix adds to your LinkedInRank score.', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
+                            { title: 'Best Practices', desc: 'LinkedIn profile best practices based on your career stage — actionable tips you can apply right away.', icon: 'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18' },
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.07)] transition-shadow">
+                                <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] flex items-center justify-center mb-4">
+                                    <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                                </div>
+                                <h3 className="text-base font-bold text-[#0A0F1C] mb-1.5">{item.title}</h3>
+                                <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* AI Guidance */}
+            <section className="bg-[#F8FAFC] py-24">
+                <div className="max-w-4xl mx-auto px-6">
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
+                            <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                            <span className="text-xs font-semibold text-[#0A66C2]">After Your Report</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-3">Let AI rewrite your profile</h2>
+                        <p className="text-[15px] text-[#4B5563] max-w-xl mx-auto leading-relaxed">
+                            Get your LinkedInRank report, then hand it to any AI assistant with your LinkedIn PDF. It rewrites every section using your scores.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                        {[
+                            { step: '1', title: 'Analyze your profile', desc: 'Upload your LinkedIn PDF and get your score with section-by-section feedback.', icon: 'M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5' },
+                            { step: '2', title: 'Copy the AI prompt', desc: 'One click copies a ready-made prompt. Paste it into ChatGPT, Claude, or Gemini.', icon: 'M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184' },
+                            { step: '3', title: 'Get a rewritten profile', desc: 'The AI rewrites your headline, about, experience — everything, based on real data.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
+                        ].map((item) => (
+                            <div key={item.step} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                                <div className="w-9 h-9 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center mb-3">
+                                    <svg className="w-4.5 h-4.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                                </div>
+                                <p className="text-xs font-bold text-[#0A66C2] mb-1">Step {item.step}</p>
+                                <h3 className="text-sm font-bold text-[#0A0F1C] mb-1">{item.title}</h3>
+                                <p className="text-xs text-[#6B7280] leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
+                            <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Ready-to-use prompt</p>
+                            <button
+                                onClick={copyPrompt}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-3 py-1.5 rounded-lg hover:bg-[#DBEAFE] transition-colors cursor-pointer shrink-0"
+                            >
+                                {copied ? (
+                                    <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg> Copied!</>
+                                ) : (
+                                    <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg> Copy prompt</>
+                                )}
+                            </button>
+                        </div>
+                        <p className="text-[15px] text-[#0A0F1C] leading-relaxed font-medium italic">
+                            &ldquo;{AI_PROMPT}&rdquo;
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2 mt-5">
+                            {['ChatGPT', 'Claude', 'Gemini', 'Copilot', 'Perplexity'].map((name) => (
+                                <span key={name} className="text-[11px] font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-2.5 py-1 rounded-full">{name}</span>
+                            ))}
+                            <span className="text-[10px] text-[#9CA3AF] ml-1">Works with any AI</span>
+                        </div>
+                        <div className="mt-5 pt-4 border-t border-gray-100">
+                            <Link href="/ai-prompts-linkedin" className="text-sm font-semibold text-[#0A66C2] no-underline hover:underline inline-flex items-center gap-1">
+                                Browse 26 more AI prompts for every profile section <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Privacy */}
+            <section className="bg-[#EFF6FF] py-20">
+                <div className="max-w-3xl mx-auto px-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-[#DBEAFE] mb-5">
+                        <svg className="w-6 h-6 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold text-[#0A0F1C] mb-3">Your data stays yours</h2>
+                    <p className="text-[15px] text-[#4B5563] max-w-lg mx-auto leading-relaxed">
+                        Your file is processed in memory and never stored. No accounts, no cookies, no tracking.
+                        Analysis runs entirely server-side and results are discarded after delivery.
+                    </p>
+                </div>
+            </section>
+
+            {/* FAQ */}
+            <section className="bg-white py-24 border-t border-gray-100">
+                <div className="max-w-2xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">FAQ</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-10">Common questions</h2>
+
+                    <div className="space-y-0">
+                        {[
+                            { q: 'How does LinkedInRank score my profile?', a: 'We evaluate 30+ visible profile signals across 6 categories: Headline (20 pts), About (20 pts), Experience (25 pts), Skills (15 pts), Education (10 pts), and Completeness (10 pts). Rule-based analysis handles structure, while Gemini AI evaluates content quality. Your total score is out of 100.' },
+                            { q: 'Is my LinkedIn data stored or shared?', a: 'Never. Your PDF is processed entirely in memory and discarded immediately after analysis. We don\'t store files, don\'t create accounts, don\'t set cookies, and don\'t track you. Your data stays yours — always.' },
+                            { q: 'What file do I need to upload?', a: 'You need your LinkedIn profile PDF. To get it: go to your LinkedIn profile → click "More" → select "Save to PDF." The file is usually under 1MB. We only accept PDF format.' },
+                            { q: 'Can I use AI to improve my profile after the analysis?', a: 'Yes! Download your LinkedInRank report and upload it alongside your LinkedIn PDF to ChatGPT, Claude, or Gemini. Ask the AI to rewrite your sections based on the scoring feedback. We also have 26 ready-to-use AI prompts for every profile section.' },
+                            { q: 'Who is LinkedInRank for?', a: 'Anyone with a LinkedIn profile — students building their first profile, job seekers optimizing for recruiters, founders establishing credibility, and experienced professionals auditing their presence. Scoring adapts to your career stage automatically.' },
+                            { q: 'How is this different from other LinkedIn tools?', a: 'Most tools give generic tips. LinkedInRank provides a structured, data-backed score with section-by-section breakdowns, AI-powered recommendations personalized to your role, and concrete before/after rewrites. It\'s free, private, and takes under 60 seconds.' },
+                            { q: 'What\'s a good LinkedIn score?', a: 'Scores are tiered: Bronze (0-49), Silver (50-69), Gold (70-84), and Platinum (85-100). Most profiles score between 40-65. A score above 70 puts you in the top tier of optimized profiles.' },
+                        ].map((item, i) => (
+                            <div key={i} className="border-b border-gray-100">
+                                <button
+                                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                    className="w-full flex items-center justify-between py-5 text-left"
+                                >
+                                    <span className="text-[15px] font-semibold text-[#0A0F1C] pr-4">{item.q}</span>
+                                    <svg className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                                {openFaq === i && (
+                                    <p className="text-sm text-[#4B5563] pb-5 leading-relaxed animate-fade-in">{item.a}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <Link href="/faq" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors inline-flex items-center gap-1.5">
+                            See all FAQs <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Guides */}
+            <section className="py-20 bg-[#F8FAFC] border-t border-gray-100 border-b border-b-gray-100">
+                <div className="max-w-4xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Guides</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-4">Level up your LinkedIn presence</h2>
+                    <p className="text-[15px] text-[#4B5563] mb-10 max-w-xl">In-depth guides to help you optimize every section of your profile, avoid common mistakes, and stand out to recruiters.</p>
+
+                    {/* Featured guides */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-8">
+                        {[
+                            { href: '/linkedin-optimization-guide', title: 'Full Optimization Guide', desc: 'A complete walkthrough to optimize every section of your LinkedIn profile.', color: '#0A66C2' },
+                            { href: '/linkedin-headline-guide', title: 'Headline Guide', desc: 'Craft a headline that gets you found and makes recruiters click.', color: '#2563EB' },
+                            { href: '/linkedin-about-guide', title: 'About Section Guide', desc: 'Write a compelling About section that tells your professional story.', color: '#4F46E5' },
+                            { href: '/linkedin-profile-checklist', title: 'Profile Checklist', desc: 'A section-by-section checklist to make sure nothing is missed.', color: '#7C3AED' },
+                            { href: '/recruiter-psychology', title: 'Recruiter Psychology', desc: 'What recruiters actually look at and how they evaluate profiles.', color: '#9333EA' },
+                            { href: '/linkedin-mistakes', title: 'Top 10 Mistakes', desc: 'The most common LinkedIn profile mistakes and how to fix them.', color: '#A855F7' },
+                        ].map((guide, i) => (
+                            <Link
+                                key={i}
+                                href={guide.href}
+                                className="group bg-white border border-gray-200 rounded-xl p-5 no-underline hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                            >
+                                <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: guide.color + '12', color: guide.color }}>
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                                </div>
+                                <h3 className="text-sm font-bold text-[#0A0F1C] mb-1 group-hover:text-[#0A66C2] transition-colors">{guide.title}</h3>
+                                <p className="text-xs text-[#6B7280] leading-relaxed">{guide.desc}</p>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* By role */}
+                    <div className="mb-8">
+                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">By Role</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {[
+                                { href: '/for-students', title: 'For Students', desc: 'Build a strong profile as a student or new graduate.', color: '#0A66C2' },
+                                { href: '/for-jobseekers', title: 'For Job Seekers', desc: 'Get noticed by recruiters and hiring managers.', color: '#2563EB' },
+                                { href: '/for-founders', title: 'For Founders', desc: 'Position yourself as a credible leader.', color: '#4F46E5' },
+                            ].map((guide, i) => (
+                                <Link key={i} href={guide.href} className="group flex items-center gap-3 p-3.5 bg-[#F8FAFC] border border-gray-100 rounded-lg no-underline hover:bg-white hover:border-gray-200 hover:shadow-sm transition-all">
+                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: guide.color + '12', color: guide.color }}>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{guide.title}</p>
+                                        <p className="text-[11px] text-[#9CA3AF]">{guide.desc}</p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* By headline */}
+                    <div className="mb-8">
+                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Headline By Profession</p>
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                            {[
+                                { href: '/linkedin-headline-software-engineers', title: 'Software Engineers' },
+                                { href: '/linkedin-headline-marketers', title: 'Marketers' },
+                                { href: '/linkedin-headline-designers', title: 'Designers' },
+                                { href: '/linkedin-headline-mba', title: 'MBA Graduates' },
+                                { href: '/linkedin-headline-data-scientists', title: 'Data Scientists' },
+                                { href: '/linkedin-headline-product-managers', title: 'Product Managers' },
+                                { href: '/linkedin-headline-consultants', title: 'Consultants' },
+                                { href: '/linkedin-headline-sales', title: 'Sales Professionals' },
+                                { href: '/linkedin-headline-hr', title: 'HR & Recruiters' },
+                                { href: '/linkedin-headline-finance', title: 'Finance & Accounting' },
+                                { href: '/linkedin-headline-healthcare', title: 'Healthcare' },
+                                { href: '/linkedin-headline-teachers', title: 'Educators' },
+                            ].map((guide, i) => (
+                                <Link key={i} href={guide.href} className="text-xs font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-3.5 py-2 rounded-lg no-underline hover:bg-[#DBEAFE] transition-colors">
+                                    {guide.title} →
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* AI Prompts */}
+                    <div className="mb-8">
+                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">AI Prompt Guides</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {[
+                                { href: '/ai-prompts-linkedin', title: 'All AI Prompts', desc: '26 prompts for every section', color: '#0A66C2' },
+                                { href: '/ai-prompts-linkedin-headline', title: 'Headline Prompts', desc: '6 headline templates', color: '#2563EB' },
+                                { href: '/ai-prompts-linkedin-about', title: 'About Prompts', desc: '6 about section templates', color: '#4F46E5' },
+                                { href: '/ai-prompts-linkedin-experience', title: 'Experience Prompts', desc: '5 experience templates', color: '#7C3AED' },
+                                { href: '/ai-prompts-linkedin-skills', title: 'Skills Prompts', desc: '4 skills optimization templates', color: '#9333EA' },
+                                { href: '/ai-prompts-linkedin-summary', title: 'Full Profile Rewrite', desc: '5 positioning templates', color: '#A855F7' },
+                            ].map((guide, i) => (
+                                <Link key={i} href={guide.href} className="group flex items-center gap-3 p-3.5 bg-[#F8FAFC] border border-gray-100 rounded-lg no-underline hover:bg-white hover:border-gray-200 hover:shadow-sm transition-all">
+                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: guide.color + '12', color: guide.color }}>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{guide.title}</p>
+                                        <p className="text-[11px] text-[#9CA3AF]">{guide.desc}</p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* More guides */}
+                    <div className="mb-8">
+                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">More Guides</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                            {[
+                                { href: '/linkedin-keywords-guide', title: 'Keywords & SEO Guide', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' },
+                                { href: '/linkedin-profile-photo-guide', title: 'Profile Photo Guide', icon: 'M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z' },
+                                { href: '/linkedin-personal-branding', title: 'Personal Branding', icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
+                                { href: '/linkedin-content-strategy', title: 'Content Strategy', icon: 'M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z' },
+                                { href: '/linkedin-best-practices', title: 'Best Practices', icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+                                { href: '/linkedin-resume-vs-profile', title: 'Resume vs Profile', icon: 'M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5' },
+                                { href: '/get-noticed-recruiters', title: 'Get Noticed by Recruiters', icon: 'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z' },
+                                { href: '/top-1-percent-profiles', title: 'Top 1% Profiles', icon: 'M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0' },
+                                { href: '/viral-post-formulas', title: 'Viral Post Formulas', icon: 'M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z' },
+                                { href: '/compare-linkedin-review-tools', title: 'Compare Review Tools', icon: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z' },
+                                { href: '/linkedinrank-vs-manual-audits', title: 'LinkedInRank vs Manual Audits', icon: 'M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z' },
+                            ].map((guide, i) => (
+                                <Link key={i} href={guide.href} className="group flex items-center gap-3 px-3.5 py-3 bg-white border border-gray-100 rounded-xl no-underline hover:border-[#DBEAFE] hover:shadow-sm transition-all">
+                                    <div className="w-7 h-7 rounded-lg bg-[#F8FAFC] border border-gray-100 flex items-center justify-center shrink-0 group-hover:bg-[#EFF6FF] group-hover:border-[#DBEAFE] transition-colors">
+                                        <svg className="w-3.5 h-3.5 text-[#9CA3AF] group-hover:text-[#0A66C2] transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={guide.icon} /></svg>
+                                    </div>
+                                    <span className="text-xs font-medium text-[#4B5563] group-hover:text-[#0A66C2] transition-colors">{guide.title}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="text-center">
+                        <Link href="/linkedin-optimization-guide" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors inline-flex items-center gap-1.5">
+                            View complete guide directory <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="bg-[#0A0F1C] text-white pt-16 pb-8">
+                <div className="max-w-5xl mx-auto px-6">
+                    {/* CTA strip */}
+                    <div className="relative rounded-2xl p-6 sm:p-8 mb-14 overflow-hidden border border-white/10">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2] to-[#4F46E5] opacity-90" />
+                        <div className="relative flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 className="text-lg font-bold text-white mb-1">Ready to improve your LinkedIn?</h3>
+                                <p className="text-sm text-white/70">Get your free score in under 60 seconds. No login required.</p>
+                            </div>
+                            <button onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-[#0A66C2] font-semibold text-sm px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer shrink-0">
+                                Analyze Profile — It&apos;s Free
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Links grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
+                        <div>
+                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Product</p>
+                            <nav className="flex flex-col gap-2.5">
+                                <Link href="/how-linkedin-rank-works" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">How It Works</Link>
+                                <Link href="/methodology" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Methodology</Link>
+                                <Link href="/faq" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">FAQ</Link>
+                                <Link href="/about" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">About</Link>
+                                <Link href="/contact" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Contact</Link>
+                            </nav>
+                        </div>
+                        <div>
+                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Guides</p>
+                            <nav className="flex flex-col gap-2.5">
+                                <Link href="/linkedin-profile-checklist" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Profile Checklist</Link>
+                                <Link href="/linkedin-optimization-guide" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Optimization Guide</Link>
+                                <Link href="/ai-prompts-linkedin" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">AI Prompts</Link>
+                                <Link href="/linkedin-headline-guide" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Headline Guide</Link>
+                                <Link href="/linkedin-about-guide" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">About Section Guide</Link>
+                                <Link href="/recruiter-psychology" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Recruiter Psychology</Link>
+                            </nav>
+                        </div>
+                        <div>
+                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">For You</p>
+                            <nav className="flex flex-col gap-2.5">
+                                <Link href="/for-students" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Students</Link>
+                                <Link href="/for-jobseekers" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Job Seekers</Link>
+                                <Link href="/for-founders" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Founders</Link>
+                                <Link href="/linkedin-keywords-guide" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Keywords Guide</Link>
+                                <Link href="/linkedin-mistakes" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Top 10 Mistakes</Link>
+                            </nav>
+                        </div>
+                        <div>
+                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Legal</p>
+                            <nav className="flex flex-col gap-2.5">
+                                <Link href="/privacy" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Privacy</Link>
+                                <Link href="/terms" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Terms</Link>
+                                <Link href="/data-security" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Data Security</Link>
+                                <Link href="/story" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Our Story</Link>
+                            </nav>
+                        </div>
+                    </div>
+
+                    {/* Bottom bar */}
+                    <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                            <Link href="/" className="font-bold text-sm text-white no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
+                            <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                        </div>
+                        <p className="text-xs text-white/30">&copy; {new Date().getFullYear()} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">Bhavishya Singla</a></p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    )
+}
