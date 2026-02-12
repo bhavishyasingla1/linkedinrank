@@ -30,6 +30,53 @@ export default function LoadingAnalysisPage() {
         let stageIndex = 0
         const totalStages = STAGES.length
 
+        const analyzeFile = async () => {
+            try {
+                const fileDataStr = sessionStorage.getItem('uploadingFile')
+                if (!fileDataStr) {
+                    router.push('/')
+                    return
+                }
+
+                const { fileName, fileContent } = JSON.parse(fileDataStr)
+
+                // Convert base64 back to blob
+                const byteCharacters = atob(fileContent)
+                const byteNumbers = new Array(byteCharacters.length)
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i)
+                }
+                const byteArray = new Uint8Array(byteNumbers)
+                const blob = new Blob([byteArray], { type: 'application/pdf' })
+                const file = new File([blob], fileName, { type: 'application/pdf' })
+
+                const formData = new FormData()
+                formData.append('file', file)
+
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    body: formData,
+                })
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}))
+                    throw new Error(errorData.error || `Analysis failed (${response.status})`)
+                }
+
+                const result = await response.json()
+                const analysisData = result.data || result
+
+                sessionStorage.setItem('analysisResult', JSON.stringify(analysisData))
+                sessionStorage.removeItem('uploadingFile')
+                router.push('/results')
+            } catch (error: any) {
+                console.error('Analysis error:', error)
+                sessionStorage.setItem('analysisError', error.message)
+                sessionStorage.removeItem('uploadingFile')
+                router.push('/')
+            }
+        }
+
         const runStage = async () => {
             if (!mounted || stageIndex >= totalStages) return
 
@@ -68,53 +115,6 @@ export default function LoadingAnalysisPage() {
             mounted = false
         }
     }, [router])
-
-    const analyzeFile = async () => {
-        try {
-            const fileDataStr = sessionStorage.getItem('uploadingFile')
-            if (!fileDataStr) {
-                router.push('/')
-                return
-            }
-
-            const { fileName, fileContent } = JSON.parse(fileDataStr)
-
-            // Convert base64 back to blob
-            const byteCharacters = atob(fileContent)
-            const byteNumbers = new Array(byteCharacters.length)
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i)
-            }
-            const byteArray = new Uint8Array(byteNumbers)
-            const blob = new Blob([byteArray], { type: 'application/pdf' })
-            const file = new File([blob], fileName, { type: 'application/pdf' })
-
-            const formData = new FormData()
-            formData.append('file', file)
-
-            const response = await fetch('/api/analyze', {
-                method: 'POST',
-                body: formData,
-            })
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}))
-                throw new Error(errorData.error || `Analysis failed (${response.status})`)
-            }
-
-            const result = await response.json()
-            const analysisData = result.data || result
-
-            sessionStorage.setItem('analysisResult', JSON.stringify(analysisData))
-            sessionStorage.removeItem('uploadingFile')
-            router.push('/results')
-        } catch (error: any) {
-            console.error('Analysis error:', error)
-            sessionStorage.setItem('analysisError', error.message)
-            sessionStorage.removeItem('uploadingFile')
-            router.push('/')
-        }
-    }
 
     return (
         <main className="min-h-screen bg-white flex items-center justify-center p-6">

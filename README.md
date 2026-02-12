@@ -1,159 +1,153 @@
-# LinkedIn Rank
+# LinkedInRank
 
-> **Know Your LinkedIn Strength in 60 Seconds**
+> **Find What's Holding Your LinkedIn Profile Back — In Under 60 Seconds**
 
-A premium web application that analyzes LinkedIn profile PDFs and generates data-backed scores with personalized recommendations.
+Upload your LinkedIn PDF. Get a score out of 100, see exactly which sections need work, and get AI-powered rewrites you can copy-paste.
 
-## 🚀 Features
+**Live:** [linkedinrank.com](https://linkedinrank.com)
 
-- **Rule-Based Scoring** - 25+ LinkedIn best-practice signals analyzed instantly
-- **AI-Powered Suggestions** - Groq API provides personalized improvement tips
-- **Premium UX** - LinkedIn-inspired design with smooth animations
-- **100% Private** - No data storage, in-memory processing only
-- **Mobile Responsive** - Works perfectly on all devices
+## Features
 
-## 📊 Scoring Categories
+- **30+ Signal Scoring** — Rule-based engine evaluates headline, about, experience, skills, education, and completeness
+- **AI-Powered Recommendations** — Google Gemini generates personalized rewrites with before/after examples
+- **Career Stage Adaptation** — Scoring adjusts for Student, Early-career, Mid-career, and Senior/Founder/Academic profiles
+- **Tier System** — Bronze (0–54), Silver (55–69), Gold (70–84), Platinum (85–100)
+- **Improvement Roadmap** — Prioritized actions ranked by point gain
+- **100% Private** — No login, no data storage, in-memory processing, PDF deleted immediately
+- **Mobile Responsive** — Optimized headers with hamburger navigation on all 50+ pages
 
-1. **Profile Clarity** (30%) - Headline, about section, experience quality
-2. **Credibility Signals** (20%) - Recommendations, certifications, metrics
-3. **Personal Brand** (20%) - Niche clarity, differentiation, messaging
-4. **Recruiter Readiness** (15%) - Skills, keywords, searchability  
-5. **Visibility Potential** (15%) - Shareability, engagement keywords
+## Scoring Categories
 
-## 🛠️ Tech Stack
+| Category | Points | Signals |
+|----------|--------|---------|
+| **Headline** | 20 | Role clarity, keywords, specificity, positioning |
+| **About / Summary** | 20 | Direction, skills mention, structure, credibility |
+| **Experience** | 25 | Descriptions, action verbs, impact, quantification |
+| **Skills** | 15 | Relevance, specificity, alignment with role |
+| **Education & Credentials** | 10 | Completeness, field alignment, certifications |
+| **Completeness & Structure** | 10 | Section coverage, content depth, logical flow |
 
-- **Frontend**: Next.js 14, React, TailwindCSS
-- **Backend**: Next.js API Routes
-- **PDF Parsing**: pdf-parse
-- **AI**: Groq API (free tier - LLaMA/Mixtral models)
-- **Animations**: Framer Motion
-- **Deploy**: Vercel
+## Tech Stack
 
-## 📦 Installation
+- **Framework:** Next.js 14 (App Router), React 18, TypeScript
+- **Styling:** TailwindCSS 3
+- **PDF Parsing:** pdf-parse
+- **AI:** Google Gemini (`@google/generative-ai`)
+- **Image Processing:** sharp
+- **Deploy:** Vercel
+- **SEO:** 53-page sitemap, structured data (JSON-LD), robots.txt, llm.txt
+
+## Quick Start
 
 ```bash
-# Clone the repository
+# Clone and install
+git clone https://github.com/your-username/linkedinrank.git
 cd linkedinrank
-
-# Install dependencies
 npm install
 
-# Create environment file
+# Configure environment
 cp .env.example .env
-
-# Add your Groq API key to .env
-# Get free key at: https://console.groq.com
-GROQ_API_KEY=your_key_here
+# Add your Google Gemini API key to .env
+# Get a key at: https://aistudio.google.com/apikey
+# GEMINI_API_KEY=your_key_here
 
 # Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open [http://localhost:3000](http://localhost:3000).
 
-## 🎯 How It Works
+## How It Works
 
-1. **Upload** - User uploads their LinkedIn PDF
-2. **Parse** - Extract text and structure profile data
-3. **Score** - Rule-based engine calculates scores instantly
-4. **Enhance** - Groq API generates AI suggestions (parallel, optional)
-5. **Display** - Beautiful results dashboard with recommendations
-6. **Share** - Downloadable score card (coming soon)
+1. **Upload** — User exports LinkedIn profile as PDF and uploads it
+2. **Parse** — `pdfParser.ts` extracts structured data (name, headline, about, experience, skills, education, certifications)
+3. **Score** — `scoringEngine.ts` evaluates 30+ signals across 6 categories with career-stage adaptation
+4. **AI Analysis** — `aiSuggestions.ts` sends profile data to Google Gemini for personalized recommendations and rewrites
+5. **Results** — Interactive dashboard with score breakdown, recommendations, improvement roadmap, and downloadable report
 
-## 🧠 Scoring Logic
-
-### Rule-Based (Primary - Instant)
-
-- **Headline**: Length (40-120 chars), keywords, avoids generic phrases
-- **Experience**: Regex detection for numbers, %, $, growth keywords
-- **Skills**: Count, keyword matching, relevance
-- **Recommendations**: Tier system (0/1-2/3+)
-- **Completeness**: Checks for About, Experience, Skills, Education, Certifications
-
-### AI Suggestions (Secondary - Optional)
-
-- Only used for generating specific improvement suggestions
-- Archetype labeling
-- Headline/about rewrite examples
-- Falls back to templates if API unavailable
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 linkedinrank/
 ├── app/
-│   ├── api/analyze/route.ts    # PDF upload & analysis endpoint
-│   ├── results/page.tsx         # Results dashboard
-│   ├── layout.tsx               # Root layout
-│   ├── page.tsx                 # Landing page
-│   └── globals.css              # Global styles
+│   ├── api/
+│   │   ├── analyze/route.ts        # PDF upload & analysis endpoint
+│   │   ├── debug/route.ts          # Debug extraction endpoint
+│   │   └── health/route.ts         # Health check
+│   ├── page.tsx                     # Homepage
+│   ├── results/page.tsx             # Results dashboard
+│   ├── loading-analysis/page.tsx    # Analysis loading screen
+│   ├── layout.tsx                   # Root layout with metadata
+│   ├── globals.css                  # Global styles & animations
+│   ├── sitemap.ts                   # Dynamic sitemap (53 URLs)
+│   ├── about/                       # About page
+│   ├── methodology/                 # Scoring methodology
+│   ├── faq/                         # FAQ with schema markup
+│   ├── linkedin-optimization-guide/ # Pillar SEO guide
+│   ├── linkedin-headline-guide/     # Headline writing guide
+│   └── [40+ more content pages]
 ├── components/
-│   ├── FileUpload.tsx           # Drag & drop upload
-│   ├── AnalysisLoading.tsx      # Loading animation
-│   ├── ScoreHero.tsx            # Score display with confetti
-│   ├── CategoryScores.tsx       # Category breakdown  
-│   └── RecommendationCards.tsx  # Swipeable suggestions
+│   ├── SiteHeader.tsx               # Reusable header with mobile menu
+│   ├── FileUpload.tsx               # Drag & drop PDF upload
+│   ├── ScoreHero.tsx                # Score display with tier badge
+│   ├── CategoryScores.tsx           # Category breakdown cards
+│   ├── RecommendationCards.tsx      # AI recommendation cards
+│   ├── ImprovementPath.tsx          # Prioritized improvement roadmap
+│   ├── HeadlineRewriter.tsx         # AI headline rewrite tool
+│   ├── AnalysisLoading.tsx          # Loading animation
+│   ├── LoadingScreen.tsx            # Generic loading screen
+│   └── TierBadge.tsx                # Bronze/Silver/Gold/Platinum badge
 ├── lib/
-│   ├── scoringEngine.ts         # PRIMARY: Rule-based scoring
-│   ├── pdfParser.ts             # PDF text extraction
-│   ├── aiSuggestions.ts         # SECONDARY: Groq AI suggestions
-│   ├── types.ts                 # TypeScript definitions
-│   └── constants.ts             # App constants
-└── tailwind.config.js           # Design system
+│   ├── scoringEngine.ts             # Rule-based scoring (30+ signals)
+│   ├── pdfParser.ts                 # LinkedIn PDF text extraction
+│   ├── aiSuggestions.ts             # Google Gemini AI integration
+│   ├── types.ts                     # TypeScript definitions
+│   └── constants.ts                 # App constants & tier definitions
+├── public/
+│   ├── robots.txt                   # Search engine directives
+│   └── llm.txt                      # LLM-readable site description
+├── next.config.js                   # Security headers, server config
+├── tailwind.config.js               # Design system tokens
+└── tsconfig.json                    # TypeScript configuration
 ```
 
-## 🎨 Design System
+## Environment Variables
 
-### Colors
-- Primary: `#0A66C2` (LinkedIn blue)
-- Secondary: `#004182`
-- Accent: `#66B2FF`
-- Success: `#1DB954`
-- Warning: `#F5A623`
-- Error: `#E24A4A`
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GEMINI_API_KEY` | Yes | Google Gemini API key for AI recommendations |
 
-### Typography
-- Font: Inter
-- Premium animations
-- Smooth transitions
+## Privacy & Security
 
-## 🔐 Privacy
+- In-memory PDF processing — no files stored
+- No database, no persistent storage
+- No login or accounts required
+- No cookies or tracking
+- Security headers: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`
+- API routes return `Cache-Control: no-store`
 
-- ✅ In-memory PDF processing
-- ✅ Files auto-deleted after analysis  
-- ✅ No database, no persistent storage
-- ✅ No login required
-- ✅ No tracking
+## Deployment (Vercel)
 
-## 🚢 Deployment
+1. Push to GitHub
+2. Import project in [vercel.com](https://vercel.com)
+3. Add `GEMINI_API_KEY` in Settings → Environment Variables
+4. Deploy — Vercel auto-detects Next.js, no extra config needed
 
-### Vercel (Recommended)
+**Node.js requirement:** `>=18.18.0`
 
-```bash
-# Install Vercel CLI
-npm i -g vercel
+## Scripts
 
-# Deploy
-vercel
-```
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-Add `GROQ_API_KEY` to your Vercel environment variables.
-
-## 📝 To-Do
-
-- [ ] Share card image generation (PNG download)
-- [ ] More archetype variations
-- [ ] Industry-specific scoring
-- [ ] LinkedIn profile URL input (alternative to PDF)
-
-## 🤝 Contributing
-
-Contributions welcome! This is a production-ready SaaS MVP.
-
-## 📄 License
+## License
 
 MIT
 
 ---
 
-**Built with ❤️ for LinkedIn creators and job seekers**
+**Built by [Bhavishya Singla](https://www.linkedin.com/in/bhavishyasingla1/) for LinkedIn creators and job seekers.**
