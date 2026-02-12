@@ -214,12 +214,12 @@ export default function HomePage() {
                                 <div className="border-t border-gray-100 px-5 py-3 flex items-center justify-between">
                                     <div className="flex items-center gap-4">
                                         {['Score', 'AI Rewrite', 'Roadmap'].map((label, i) => (
-                                            <button key={i} onClick={() => setSlideIndex(i)} className={`text-[11px] font-semibold transition-colors cursor-pointer ${i === slideIndex ? 'text-[#0A66C2]' : 'text-[#6B7280] hover:text-[#0A0F1C]'}`}>{label}</button>
+                                            <button key={i} onClick={() => setSlideIndex(i)} className={`text-[11px] font-semibold transition-colors cursor-pointer py-2 px-1 ${i === slideIndex ? 'text-[#0A66C2]' : 'text-[#6B7280] hover:text-[#0A0F1C]'}`}>{label}</button>
                                         ))}
                                     </div>
-                                    <div className="flex gap-1.5 items-center">
+                                    <div className="flex gap-0 items-center">
                                         {PREVIEW_SLIDES.map((_, i) => (
-                                            <button key={i} onClick={() => setSlideIndex(i)} aria-label={`Go to slide ${i + 1}`} className="p-2 -m-2 cursor-pointer">
+                                            <button key={i} onClick={() => setSlideIndex(i)} aria-label={`Go to slide ${i + 1}`} className="p-3 cursor-pointer">
                                                 <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-[#0A66C2] w-5' : 'bg-gray-200 w-1.5'}`} />
                                             </button>
                                         ))}

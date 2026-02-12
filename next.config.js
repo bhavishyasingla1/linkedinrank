@@ -5,6 +5,11 @@ const nextConfig = {
             bodySizeLimit: '10mb',
         },
         serverComponentsExternalPackages: ['pdf-parse'],
+        optimizeCss: true,
+        optimizePackageImports: ['@google/generative-ai'],
+    },
+    compiler: {
+        removeConsole: process.env.NODE_ENV === 'production',
     },
     async headers() {
         return [
