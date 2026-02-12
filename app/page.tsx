@@ -109,7 +109,7 @@ export default function HomePage() {
                                     {/* Slide 1: Score + Category breakdown */}
                                     {slideIndex === 0 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-5">Your Report</p>
+                                            <p className="text-[10px] font-bold text-[#4B5563] uppercase tracking-widest mb-5">Your Report</p>
                                             <div className="flex items-center gap-6 mb-6">
                                                 <div className="relative w-28 h-28 shrink-0">
                                                     <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
@@ -118,7 +118,7 @@ export default function HomePage() {
                                                     </svg>
                                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                                                         <span className="text-3xl font-bold text-[#0A0F1C] tabular-nums">74</span>
-                                                        <span className="text-[10px] text-[#6B7280]">/ 100</span>
+                                                        <span className="text-[10px] text-[#4B5563]">/ 100</span>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2 flex-1">
@@ -131,7 +131,7 @@ export default function HomePage() {
                                                         <div key={i}>
                                                             <div className="flex justify-between text-[11px] mb-0.5">
                                                                 <span className="font-semibold text-[#0A0F1C]">{c.label}</span>
-                                                                <span className="text-[#6B7280] tabular-nums">{c.score}/{c.max}</span>
+                                                                <span className="text-[#4B5563] tabular-nums">{c.score}/{c.max}</span>
                                                             </div>
                                                             <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                                 <div className="h-full rounded-full bg-gradient-to-r from-[#0A66C2] to-[#4F46E5]" style={{ width: `${c.pct}%`, transition: 'width 0.7s ease-out' }} />
@@ -145,7 +145,7 @@ export default function HomePage() {
                                                     <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" /></svg>
                                                     Gold
                                                 </span>
-                                                <span className="text-[11px] text-[#6B7280]">Top 30% of analyzed profiles</span>
+                                                <span className="text-[11px] text-[#4B5563]">Top 30% of analyzed profiles</span>
                                             </div>
                                         </div>
                                     )}
@@ -153,7 +153,7 @@ export default function HomePage() {
                                     {/* Slide 2: Recommendation + AI Rewrite */}
                                     {slideIndex === 1 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">AI Recommendations</p>
+                                            <p className="text-[10px] font-bold text-[#4B5563] uppercase tracking-widest mb-4">AI Recommendations</p>
                                             <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-4 mb-4">
                                                 <div className="flex items-start gap-2.5 mb-3">
                                                     <div className="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center shrink-0 mt-0.5">
@@ -161,23 +161,23 @@ export default function HomePage() {
                                                     </div>
                                                     <div>
                                                         <p className="text-xs font-bold text-[#0A0F1C]">Your headline is too generic</p>
-                                                        <p className="text-[11px] text-[#6B7280] mt-0.5">It doesn&apos;t include keywords recruiters search for</p>
+                                                        <p className="text-[11px] text-[#4B5563] mt-0.5">It doesn&apos;t include keywords recruiters search for</p>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2">
                                                     <div className="bg-white border border-gray-200 rounded-lg px-3 py-2">
-                                                        <p className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Before</p>
+                                                        <p className="text-[10px] font-bold text-red-700 uppercase tracking-wider mb-0.5">Before</p>
                                                         <p className="text-xs text-[#4B5563]">Marketing Manager at TechCorp</p>
                                                     </div>
                                                     <div className="bg-white border border-[#DBEAFE] rounded-lg px-3 py-2">
-                                                        <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">After</p>
+                                                        <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider mb-0.5">After</p>
                                                         <p className="text-xs text-[#0A0F1C] font-medium">B2B SaaS Growth Marketer | Demand Gen & Content Strategy | 3x Pipeline Growth</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">+6 pts</span>
-                                                <span className="text-[11px] text-[#6B7280]">Expected score increase from this fix</span>
+                                                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">+6 pts</span>
+                                                <span className="text-[11px] text-[#4B5563]">Expected score increase from this fix</span>
                                             </div>
                                         </div>
                                     )}
@@ -185,7 +185,7 @@ export default function HomePage() {
                                     {/* Slide 3: Improvement Roadmap */}
                                     {slideIndex === 2 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">Improvement Roadmap</p>
+                                            <p className="text-[10px] font-bold text-[#4B5563] uppercase tracking-widest mb-4">Improvement Roadmap</p>
                                             <div className="space-y-2.5">
                                                 {[
                                                     { fix: 'Add metrics to experience bullets', pts: '+5', time: '10 min', done: false },
@@ -203,7 +203,7 @@ export default function HomePage() {
                                                 ))}
                                             </div>
                                             <div className="mt-3 flex items-center justify-between">
-                                                <span className="text-[11px] text-[#6B7280]">Total potential gain</span>
+                                                <span className="text-[11px] text-[#4B5563]">Total potential gain</span>
                                                 <span className="text-sm font-bold text-[#0A66C2]">+18 pts</span>
                                             </div>
                                         </div>
