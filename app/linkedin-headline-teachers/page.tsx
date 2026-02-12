@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Educators & Teachers — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for teachers, professors, instructional designers, education administrators, and EdTech professionals. Headlines that showcase expertise and open doors.',
-    keywords: 'linkedin headline teacher, linkedin headline professor, best linkedin headline for educator, instructional designer linkedin headline, education linkedin profile',
+    title: 'Best LinkedIn Headlines for Educators & Teachers — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for teachers, professors, instructional designers, and EdTech professionals in 2026. Headlines that showcase expertise. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline teacher 2026, linkedin headline professor, best linkedin headline for educator, instructional designer linkedin headline, education linkedin profile, best educator linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-teachers' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Educators & Teachers — 25+ Examples',
+        description: 'Teacher, professor, and EdTech professional headline formulas that showcase expertise.',
+        url: 'https://linkedinrank.com/linkedin-headline-teachers',
+    },
 }
 
 export default function HeadlineTeachersPage() {

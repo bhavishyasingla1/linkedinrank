@@ -4,7 +4,14 @@ import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
     title: 'Terms of Service — LinkedInRank',
-    description: 'Terms of Service for LinkedInRank. Understand the conditions of using our free LinkedIn profile evaluation tool.',
+    description: 'Terms of Service for LinkedInRank. Understand the conditions of using our free LinkedIn profile scoring and analysis tool.',
+    keywords: 'linkedinrank terms of service, linkedinrank terms, linkedin tool terms',
+    alternates: { canonical: 'https://linkedinrank.com/terms' },
+    openGraph: {
+        title: 'Terms of Service — LinkedInRank',
+        description: 'Terms and conditions for using LinkedInRank\'s free LinkedIn profile scoring tool.',
+        url: 'https://linkedinrank.com/terms',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

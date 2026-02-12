@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Best Practices — LinkedInRank',
-    description: 'Proven LinkedIn profile best practices for 2025. Optimize your headline, about section, experience, skills, and more to improve your LinkedInRank score and get noticed by recruiters.',
-    keywords: 'linkedin best practices, linkedin profile tips, linkedin optimization, linkedinrank, linkedin profile score',
+    title: 'LinkedIn Best Practices 2026 — Proven Tips to Boost Your Profile Score',
+    description: 'Proven LinkedIn profile best practices for 2026. Optimize your headline, about section, experience, skills, and more to improve your LinkedInRank score and get noticed by recruiters. Data-backed strategies.',
+    keywords: 'linkedin best practices, linkedin profile tips 2026, linkedin optimization best practices, linkedinrank tips, linkedin profile score tips, linkedin do and dont, linkedin profile optimization checklist',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-best-practices' },
+    openGraph: {
+        title: 'LinkedIn Best Practices 2026 — Proven Tips to Boost Your Profile Score',
+        description: 'Data-backed LinkedIn profile best practices. Optimize every section and get noticed by recruiters.',
+        url: 'https://linkedinrank.com/linkedin-best-practices',
+    },
 }
 
 const PRACTICES = [

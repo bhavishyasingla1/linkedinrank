@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Optimization Guide — LinkedInRank',
-    description: 'The complete guide to optimizing your LinkedIn profile in 2025. Learn what recruiters look for, how the LinkedIn algorithm works, and how to improve your profile with LinkedInRank.',
-    keywords: 'linkedin profile optimization, linkedin tips 2025, linkedin algorithm, linkedin profile guide, linkedinrank, improve linkedin profile',
+    title: 'LinkedIn Profile Optimization — Complete Guide 2026',
+    description: 'The complete guide to optimizing your LinkedIn profile in 2026. Learn what recruiters look for, how the LinkedIn algorithm works, and how to improve your profile score with LinkedInRank — the #1 free LinkedIn scorer.',
+    keywords: 'linkedin profile optimization, linkedin tips 2026, linkedin algorithm, linkedin profile guide, linkedinrank, improve linkedin profile, linkedin optimization tips, linkedin profile makeover, linkedin seo',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin' },
+    openGraph: {
+        title: 'LinkedIn Profile Optimization — Complete Guide 2026',
+        description: 'Everything you need to optimize your LinkedIn profile. Recruiter insights, algorithm tips, and free scoring with LinkedInRank.',
+        url: 'https://linkedinrank.com/linkedin',
+    },
 }
 
 export default function LinkedInPage() {

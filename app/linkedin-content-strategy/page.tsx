@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Content Strategy Guide — What to Post & How Often | LinkedInRank',
-    description: 'Build a LinkedIn content strategy that drives visibility and opportunities. Posting cadence, content types, algorithm tips, and engagement tactics. For professionals at every career stage.',
-    keywords: 'linkedin content strategy, what to post on linkedin, linkedin posting tips, linkedin algorithm, linkedin engagement, linkedin content ideas, how often to post on linkedin',
+    title: 'LinkedIn Content Strategy Guide — What to Post & How Often (2026)',
+    description: 'Build a LinkedIn content strategy that drives visibility and opportunities in 2026. Posting cadence, content types, algorithm tips, and engagement tactics for every career stage. Free profile scoring with LinkedInRank.',
+    keywords: 'linkedin content strategy 2026, what to post on linkedin, linkedin posting tips, linkedin algorithm, linkedin engagement, linkedin content ideas, how often to post on linkedin, linkedin posting strategy, linkedin content calendar',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-content-strategy' },
+    openGraph: {
+        title: 'LinkedIn Content Strategy Guide — What to Post & How Often',
+        description: 'Posting cadence, content types, algorithm tips, and engagement tactics for LinkedIn in 2026.',
+        url: 'https://linkedinrank.com/linkedin-content-strategy',
+    },
 }
 
 const jsonLd = {

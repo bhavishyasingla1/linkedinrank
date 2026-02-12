@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Complete LinkedIn Profile Optimization Guide 2026 | LinkedInRank',
-    description: 'The definitive guide to optimizing your LinkedIn profile. Step-by-step strategies for headline, about section, experience, skills, keywords, and personal branding. Free LinkedIn score checker included.',
-    keywords: 'linkedin optimization, linkedin profile optimization, optimize linkedin profile, linkedin optimization guide, linkedin profile improvement, linkedin optimization tool free, linkedin profile makeover, linkedin profile audit',
+    title: 'Complete LinkedIn Profile Optimization Guide 2026 — Step-by-Step',
+    description: 'The definitive guide to optimizing your LinkedIn profile in 2026. Step-by-step strategies for headline, about section, experience, skills, keywords, and personal branding. Free LinkedIn score checker included. Used by thousands of professionals.',
+    keywords: 'linkedin optimization, linkedin profile optimization, optimize linkedin profile, linkedin optimization guide 2026, linkedin profile improvement, linkedin optimization tool free, linkedin profile makeover, linkedin profile audit, linkedin profile optimization tips, best linkedin optimization guide',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-optimization-guide' },
+    openGraph: {
+        title: 'Complete LinkedIn Profile Optimization Guide 2026',
+        description: 'Step-by-step strategies for every section of your LinkedIn profile. Free score checker included.',
+        url: 'https://linkedinrank.com/linkedin-optimization-guide',
+    },
 }
 
 const jsonLd = {

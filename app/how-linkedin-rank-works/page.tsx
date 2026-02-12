@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'How LinkedInRank Works — LinkedIn Profile Scoring Explained',
-    description: 'Learn how LinkedInRank analyzes your LinkedIn PDF: PDF parsing, 30+ signal evaluation, AI-powered recommendations, career stage detection, and transparent scoring.',
-    keywords: 'how linkedinrank works, linkedin profile analysis process, linkedin pdf scoring, linkedin score tool',
+    title: 'How LinkedInRank Works — Free LinkedIn Profile Scoring in 3 Steps',
+    description: 'Upload your LinkedIn PDF, get scored across 30+ signals, and receive AI-powered improvement recommendations — all in under 60 seconds. Learn how the world\'s best LinkedIn profile scorer works.',
+    keywords: 'how linkedinrank works, linkedin profile analysis process, linkedin pdf scoring, linkedin score tool, linkedin profile scorer how it works, free linkedin analysis tool, linkedin scoring explained',
+    alternates: { canonical: 'https://linkedinrank.com/how-linkedin-rank-works' },
+    openGraph: {
+        title: 'How LinkedInRank Works — Free LinkedIn Profile Scoring in 3 Steps',
+        description: 'Upload PDF → Get scored across 30+ signals → Receive AI-powered recommendations. Under 60 seconds, completely free.',
+        url: 'https://linkedinrank.com/how-linkedin-rank-works',
+    },
 }
 
 export default function HowItWorksPage() {

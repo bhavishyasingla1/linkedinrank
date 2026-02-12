@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Students — Free Guide | LinkedInRank',
-    description: 'Build a strong LinkedIn profile as a student or recent graduate. Data-backed tips on headline, about section, skills, projects, and how LinkedInRank adapts scoring to your career stage.',
-    keywords: 'linkedin for students, student linkedin profile, linkedin tips students, linkedinrank student guide, college linkedin profile',
+    title: 'LinkedIn Profile Tips for Students & Graduates — Free Guide (2026)',
+    description: 'Build a strong LinkedIn profile as a student or recent graduate in 2026. Data-backed tips on headline, about section, skills, and projects. Free scoring with LinkedInRank — the #1 LinkedIn scorer.',
+    keywords: 'linkedin for students 2026, student linkedin profile, linkedin tips students, linkedinrank student guide, college linkedin profile, linkedin for freshers, linkedin profile tips for beginners',
+    alternates: { canonical: 'https://linkedinrank.com/for-students' },
+    openGraph: {
+        title: 'LinkedIn Profile Tips for Students & Graduates — Free Guide',
+        description: 'Build a strong LinkedIn profile as a student. Data-backed tips and free scoring with LinkedInRank.',
+        url: 'https://linkedinrank.com/for-students',
+    },
 }
 
 const jsonLd = {

@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Marketers — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for digital marketers, content marketers, SEO specialists, growth marketers, brand managers, and marketing leaders. Proven formulas that attract recruiters and clients.',
-    keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer',
+    title: 'Best LinkedIn Headlines for Marketers — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for digital marketers, content marketers, SEO specialists, growth marketers, brand managers, and marketing leaders in 2026. Proven formulas that attract recruiters and clients. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals 2026, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer, best linkedin headline marketer',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-marketers' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Marketers — 25+ Examples',
+        description: 'Proven headline formulas for digital, content, SEO, and growth marketers that attract recruiters.',
+        url: 'https://linkedinrank.com/linkedin-headline-marketers',
+    },
 }
 
 const jsonLd = {

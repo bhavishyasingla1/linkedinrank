@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Software Engineers — 30+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples and formulas for software engineers, developers, and tech professionals. Frontend, backend, full-stack, DevOps, data, and mobile engineering headlines that attract recruiters.',
-    keywords: 'linkedin headline software engineer, linkedin headline developer, best linkedin headline for programmers, linkedin headline for tech, software engineer linkedin profile, developer linkedin tips',
+    title: 'Best LinkedIn Headlines for Software Engineers — 30+ Examples (2026)',
+    description: 'LinkedIn headline examples and formulas for software engineers, developers, and tech professionals in 2026. Frontend, backend, full-stack, DevOps, data, and mobile engineering headlines that attract recruiters. Free headline scoring with LinkedInRank.',
+    keywords: 'linkedin headline software engineer, linkedin headline developer, best linkedin headline for programmers, linkedin headline for tech, software engineer linkedin profile, developer linkedin tips, linkedin headline examples tech 2026',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-software-engineers' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Software Engineers — 30+ Examples',
+        description: 'Frontend, backend, full-stack, DevOps headlines that attract recruiters. Free scoring with LinkedInRank.',
+        url: 'https://linkedinrank.com/linkedin-headline-software-engineers',
+    },
 }
 
 const jsonLd = {

@@ -4,7 +4,14 @@ import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
     title: 'Cookie Policy — LinkedInRank',
-    description: 'LinkedInRank cookie policy: we do not use cookies, trackers, or analytics scripts. Learn about our zero-tracking approach.',
+    description: 'LinkedInRank cookie policy: we do not use cookies, trackers, or analytics scripts. Learn about our zero-tracking approach to LinkedIn profile analysis.',
+    keywords: 'linkedinrank cookie policy, linkedinrank cookies, linkedin tool tracking, linkedinrank no cookies',
+    alternates: { canonical: 'https://linkedinrank.com/cookie-policy' },
+    openGraph: {
+        title: 'Cookie Policy — LinkedInRank',
+        description: 'No cookies, no trackers, no analytics scripts. Zero-tracking LinkedIn analysis.',
+        url: 'https://linkedinrank.com/cookie-policy',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

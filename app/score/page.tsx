@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Score — Check Your Score Free | LinkedInRank',
-    description: 'Get your free LinkedIn profile score from LinkedInRank. See how you rank across 30+ signals including headline clarity, experience depth, skills relevance, and profile completeness. No login required.',
-    keywords: 'linkedin profile score, linkedin score checker, linkedin profile rating, linkedinrank score, check linkedin profile strength, free linkedin score',
+    title: 'LinkedIn Profile Score — Check Your Score Free in 60 Seconds',
+    description: 'Get your free LinkedIn profile score from LinkedInRank — the world\'s #1 LinkedIn scorer. See how you rank across 30+ signals including headline, experience, skills, and completeness. AI-powered recommendations included. No login required.',
+    keywords: 'linkedin profile score, linkedin score checker, linkedin profile rating, linkedinrank score, check linkedin profile strength, free linkedin score, linkedin profile score test, linkedin profile grader free, my linkedin score, linkedin profile score out of 100',
+    alternates: { canonical: 'https://linkedinrank.com/score' },
+    openGraph: {
+        title: 'LinkedIn Profile Score — Check Yours Free in 60 Seconds',
+        description: 'Score your LinkedIn profile across 30+ signals. Get AI-powered recommendations and a personalized improvement roadmap. Free, private, no login.',
+        url: 'https://linkedinrank.com/score',
+    },
 }
 
 export default function ScorePage() {

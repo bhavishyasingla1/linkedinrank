@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Designers — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for UX designers, UI designers, product designers, graphic designers, and design leaders. Proven formulas that attract recruiters and clients in the design industry.',
-    keywords: 'linkedin headline designer, linkedin headline ux designer, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer',
+    title: 'Best LinkedIn Headlines for Designers — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for UX, UI, product, and graphic designers in 2026. Proven formulas that attract recruiters and clients. Free headline scoring with LinkedInRank.',
+    keywords: 'linkedin headline designer, linkedin headline ux designer 2026, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer, best linkedin headline designer',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-designers' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Designers — 25+ Examples',
+        description: 'UX, UI, product, and graphic designer headline formulas that attract recruiters and clients.',
+        url: 'https://linkedinrank.com/linkedin-headline-designers',
+    },
 }
 
 const jsonLd = {

@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Profile Summary & Positioning — Full Profile Rewrite | LinkedInRank',
-    description: 'AI prompts to position your entire LinkedIn profile strategically. Full-profile rewrites, personal branding prompts, and positioning frameworks for ChatGPT & Claude.',
-    keywords: 'ai prompts linkedin profile, chatgpt linkedin rewrite, linkedin positioning prompt, linkedin personal brand ai, full linkedin profile prompt',
+    title: 'AI Prompts for LinkedIn Profile Rewrite & Positioning (2026)',
+    description: 'AI prompts to position your entire LinkedIn profile strategically in 2026. Full-profile rewrites, personal branding prompts, and positioning frameworks for ChatGPT & Claude. Free scoring with LinkedInRank.',
+    keywords: 'ai prompts linkedin profile 2026, chatgpt linkedin rewrite, linkedin positioning prompt, linkedin personal brand ai, full linkedin profile prompt, linkedin full rewrite ai template',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-summary' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn Profile Rewrite & Positioning',
+        description: 'Full-profile rewrite prompts and positioning frameworks for ChatGPT & Claude.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin-summary',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

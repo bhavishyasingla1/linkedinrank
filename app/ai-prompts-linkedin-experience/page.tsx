@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Experience Section — Action Verbs & Metrics Templates | LinkedInRank',
-    description: 'Ready-to-use AI prompts to rewrite your LinkedIn experience bullets with action verbs, quantified impact, and recruiter-friendly language.',
-    keywords: 'ai prompts linkedin experience, chatgpt linkedin job description, linkedin experience bullet points ai, linkedin work experience generator',
+    title: 'AI Prompts for LinkedIn Experience Section — Action Verbs & Metrics (2026)',
+    description: 'Ready-to-use AI prompts to rewrite your LinkedIn experience bullets in 2026. Action verbs, quantified impact, and recruiter-friendly language. Free scoring with LinkedInRank.',
+    keywords: 'ai prompts linkedin experience 2026, chatgpt linkedin job description, linkedin experience bullet points ai, linkedin work experience generator, linkedin experience ai rewrite',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-experience' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn Experience Section — Action Verbs & Metrics',
+        description: 'AI prompts to rewrite experience bullets with action verbs and quantified impact.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin-experience',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

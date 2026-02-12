@@ -3,8 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Privacy — LinkedIn Rank Data Handling Policy',
-    description: 'How LinkedIn Rank handles your data: in-memory processing, no storage, no tracking, no accounts required.',
+    title: 'Privacy Policy — How LinkedInRank Handles Your Data',
+    description: 'How LinkedInRank handles your data: in-memory processing, zero storage, no tracking, no accounts required. Your LinkedIn PDF is never stored or shared.',
+    keywords: 'linkedinrank privacy, linkedin profile tool privacy, linkedinrank data policy, is linkedinrank safe, linkedin analysis privacy',
+    alternates: { canonical: 'https://linkedinrank.com/privacy' },
+    openGraph: {
+        title: 'Privacy Policy — LinkedInRank',
+        description: 'In-memory processing, zero storage, no tracking. Your LinkedIn PDF is never stored or shared.',
+        url: 'https://linkedinrank.com/privacy',
+    },
 }
 
 export default function PrivacyPage() {

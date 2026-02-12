@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Viral LinkedIn Post Formulas — 5 Proven Templates That Work | LinkedInRank',
-    description: 'Learn 5 proven LinkedIn post formulas that drive engagement. Includes templates for hard truth posts, mini-stories, breakdowns, steal-this posts, and identity posts. With hook frameworks and real examples.',
-    keywords: 'viral linkedin post, linkedin post formula, linkedin content strategy, linkedin post template, linkedin engagement tips, how to go viral on linkedin, linkedin hook examples',
+    title: 'Viral LinkedIn Post Formulas — 5 Proven Templates That Work (2026)',
+    description: 'Learn 5 proven LinkedIn post formulas that drive engagement in 2026. Templates for hard truth posts, mini-stories, breakdowns, steal-this posts, and identity posts. Hook frameworks and real examples.',
+    keywords: 'viral linkedin post 2026, linkedin post formula, linkedin content strategy, linkedin post template, linkedin engagement tips, how to go viral on linkedin, linkedin hook examples, linkedin viral content',
+    alternates: { canonical: 'https://linkedinrank.com/viral-post-formulas' },
+    openGraph: {
+        title: 'Viral LinkedIn Post Formulas — 5 Proven Templates That Work',
+        description: '5 proven post formulas with hook frameworks and real examples that drive LinkedIn engagement.',
+        url: 'https://linkedinrank.com/viral-post-formulas',
+    },
 }
 
 const jsonLd = {

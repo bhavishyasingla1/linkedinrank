@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn — 25+ Copy-Paste Templates for Every Profile Section | LinkedInRank',
-    description: 'The complete collection of AI prompts for optimizing every section of your LinkedIn profile. Ready-to-use templates for ChatGPT, Claude, and Gemini.',
-    keywords: 'ai prompts linkedin, chatgpt linkedin prompts, claude linkedin prompts, gemini linkedin prompts, linkedin profile ai, linkedin optimization prompts, ai linkedin generator',
+    title: 'AI Prompts for LinkedIn — 26+ Copy-Paste Templates for Every Section (2026)',
+    description: 'The complete collection of AI prompts for optimizing every section of your LinkedIn profile in 2026. Ready-to-use templates for ChatGPT, Claude, and Gemini. Used with LinkedInRank for best results.',
+    keywords: 'ai prompts linkedin 2026, chatgpt linkedin prompts, claude linkedin prompts, gemini linkedin prompts, linkedin profile ai, linkedin optimization prompts, ai linkedin generator, linkedin ai rewrite prompts',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn — 26+ Copy-Paste Templates',
+        description: 'Ready-to-use AI prompts for ChatGPT, Claude, and Gemini to optimize every LinkedIn section.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin',
+    },
 }
 
 const jsonLd = {

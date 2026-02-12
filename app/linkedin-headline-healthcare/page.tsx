@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Healthcare Professionals — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for doctors, nurses, healthcare administrators, public health professionals, and medical researchers. Headlines that build credibility and attract opportunities.',
-    keywords: 'linkedin headline healthcare, linkedin headline doctor, best linkedin headline for nurse, healthcare administrator linkedin profile, medical professional linkedin headline',
+    title: 'Best LinkedIn Headlines for Healthcare Professionals — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for doctors, nurses, healthcare administrators, and medical researchers in 2026. Headlines that build credibility. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline healthcare 2026, linkedin headline doctor, best linkedin headline for nurse, healthcare administrator linkedin profile, medical professional linkedin headline, best healthcare linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-healthcare' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Healthcare Professionals — 25+ Examples',
+        description: 'Doctor, nurse, and healthcare administrator headline formulas that build credibility.',
+        url: 'https://linkedinrank.com/linkedin-headline-healthcare',
+    },
 }
 
 export default function HeadlineHealthcarePage() {

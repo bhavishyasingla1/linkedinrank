@@ -3,8 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Contact — LinkedIn Rank',
-    description: 'Get in touch with the LinkedIn Rank team via LinkedIn.',
+    title: 'Contact LinkedInRank — Get in Touch',
+    description: 'Have questions about LinkedInRank, LinkedIn profile scoring, or need help? Email us at hello@linkedinrank.com or connect via LinkedIn. We respond to every message.',
+    keywords: 'contact linkedinrank, linkedinrank support, linkedin profile help, linkedinrank feedback',
+    alternates: { canonical: 'https://linkedinrank.com/contact' },
+    openGraph: {
+        title: 'Contact LinkedInRank',
+        description: 'Get in touch with the LinkedInRank team. We respond to every message.',
+        url: 'https://linkedinrank.com/contact',
+    },
 }
 
 export default function ContactPage() {
@@ -20,7 +27,7 @@ export default function ContactPage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-4">Get in Touch</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-lg mx-auto leading-relaxed">
-                        For questions, feedback, or partnership inquiries — the best way to reach the LinkedInRank team is through LinkedIn.
+                        For questions, feedback, or partnership inquiries — reach the LinkedInRank team via email or LinkedIn.
                     </p>
                 </div>
             </section>
@@ -45,6 +52,23 @@ export default function ContactPage() {
                     <p className="text-xs text-[#9CA3AF] mt-5">We aim to respond within 48 hours</p>
                 </div>
 
+                {/* Email card */}
+                <div className="bg-white border border-gray-200 rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_16px_rgba(0,0,0,0.06)] mb-10">
+                    <div className="w-16 h-16 rounded-2xl bg-[#0A0F1C] flex items-center justify-center mx-auto mb-5 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                    </div>
+                    <h2 className="text-xl font-bold text-[#0A0F1C] mb-2">Email Us</h2>
+                    <p className="text-sm text-[#6B7280] mb-6">For general inquiries, feedback, or partnerships</p>
+                    <a
+                        href="mailto:hello@linkedinrank.com"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#0A0F1C] hover:bg-[#1a1f2e] px-6 py-3 rounded-lg transition-colors no-underline shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                        hello@linkedinrank.com
+                    </a>
+                    <p className="text-xs text-[#9CA3AF] mt-5">We typically reply within 24 hours</p>
+                </div>
+
                 {/* Helpful links */}
                 <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-6">
                     <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-4">Before reaching out</p>
@@ -65,7 +89,7 @@ export default function ContactPage() {
 
             <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
                 <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
+                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" aria-label="LinkedInRank on Instagram" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="mailto:hello@linkedinrank.com" aria-label="Email LinkedInRank" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg></a></div>
                     <nav className="flex flex-wrap gap-x-6 gap-y-2">
                         <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
                         <Link href="/about" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">About</Link>

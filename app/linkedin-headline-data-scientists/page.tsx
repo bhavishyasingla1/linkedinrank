@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Data Scientists — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples and formulas for data scientists, data analysts, ML engineers, and AI researchers. Headlines that attract recruiters and hiring managers.',
-    keywords: 'linkedin headline data scientist, linkedin headline data analyst, best linkedin headline for ml engineer, linkedin headline ai researcher, data science linkedin profile',
+    title: 'Best LinkedIn Headlines for Data Scientists — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for data scientists, data analysts, ML engineers, and AI researchers in 2026. Headlines that attract recruiters. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline data scientist 2026, linkedin headline data analyst, best linkedin headline for ml engineer, linkedin headline ai researcher, data science linkedin profile, best data scientist linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-data-scientists' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Data Scientists — 25+ Examples',
+        description: 'Data scientist, ML engineer, and AI researcher headline formulas that attract recruiters.',
+        url: 'https://linkedinrank.com/linkedin-headline-data-scientists',
+    },
 }
 
 export default function HeadlineDataScientistsPage() {

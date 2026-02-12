@@ -31,7 +31,7 @@ export default function CategoryScores({ categories }: CategoryScoresProps) {
     return (
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="px-5 pt-5 pb-4">
-                <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-4">Score Breakdown</h3>
+                <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-4">Score Breakdown</h3>
 
                 <div className="space-y-1">
                     {categories.map((cat, i) => {
@@ -63,7 +63,7 @@ export default function CategoryScores({ categories }: CategoryScoresProps) {
                                             />
                                         </div>
                                     </div>
-                                    <svg className={`w-3.5 h-3.5 text-[#C4C9D4] transition-transform duration-200 shrink-0 print:hidden ${isExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-3.5 h-3.5 text-[#9CA3AF] transition-transform duration-200 shrink-0 print:hidden ${isExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
 
                                 {cat.breakdown && cat.breakdown.length > 0 && (
@@ -78,7 +78,7 @@ export default function CategoryScores({ categories }: CategoryScoresProps) {
                                                         {isPositive ? (
                                                             <svg className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                                                         ) : isNegative ? (
-                                                            <svg className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+                                                            <svg className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
                                                         ) : (
                                                             <span className="w-3.5 h-3.5 flex items-center justify-center shrink-0 mt-0.5">
                                                                 <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />

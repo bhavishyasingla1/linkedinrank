@@ -4,8 +4,14 @@ import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
     title: 'Data Security — How LinkedInRank Protects Your Information',
-    description: 'Learn how LinkedInRank ensures your data security: in-memory processing, zero storage, encrypted transfers, and privacy-first architecture.',
-    keywords: 'linkedinrank data security, linkedin profile data protection, linkedin tool privacy, secure linkedin analysis',
+    description: 'Learn how LinkedInRank ensures your data security: in-memory processing, zero storage, encrypted transfers, and privacy-first architecture. Your LinkedIn PDF is never stored.',
+    keywords: 'linkedinrank data security, linkedin profile data protection, linkedin tool privacy, secure linkedin analysis, is linkedinrank safe, linkedinrank encryption',
+    alternates: { canonical: 'https://linkedinrank.com/data-security' },
+    openGraph: {
+        title: 'Data Security — How LinkedInRank Protects Your Information',
+        description: 'In-memory processing, zero storage, encrypted transfers. Your LinkedIn PDF is never stored.',
+        url: 'https://linkedinrank.com/data-security',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

@@ -109,7 +109,7 @@ export default function HomePage() {
                                     {/* Slide 1: Score + Category breakdown */}
                                     {slideIndex === 0 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-5">Your Report</p>
+                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-5">Your Report</p>
                                             <div className="flex items-center gap-6 mb-6">
                                                 <div className="relative w-28 h-28 shrink-0">
                                                     <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
@@ -118,7 +118,7 @@ export default function HomePage() {
                                                     </svg>
                                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                                                         <span className="text-3xl font-bold text-[#0A0F1C] tabular-nums">74</span>
-                                                        <span className="text-[10px] text-[#9CA3AF]">/ 100</span>
+                                                        <span className="text-[10px] text-[#6B7280]">/ 100</span>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-2 flex-1">
@@ -131,7 +131,7 @@ export default function HomePage() {
                                                         <div key={i}>
                                                             <div className="flex justify-between text-[11px] mb-0.5">
                                                                 <span className="font-semibold text-[#0A0F1C]">{c.label}</span>
-                                                                <span className="text-[#9CA3AF] tabular-nums">{c.score}/{c.max}</span>
+                                                                <span className="text-[#6B7280] tabular-nums">{c.score}/{c.max}</span>
                                                             </div>
                                                             <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                                 <div className="h-full rounded-full bg-gradient-to-r from-[#0A66C2] to-[#4F46E5]" style={{ width: `${c.pct}%`, transition: 'width 0.7s ease-out' }} />
@@ -153,7 +153,7 @@ export default function HomePage() {
                                     {/* Slide 2: Recommendation + AI Rewrite */}
                                     {slideIndex === 1 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-4">AI Recommendations</p>
+                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">AI Recommendations</p>
                                             <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-4 mb-4">
                                                 <div className="flex items-start gap-2.5 mb-3">
                                                     <div className="w-6 h-6 rounded-md bg-[#FEF3C7] flex items-center justify-center shrink-0 mt-0.5">
@@ -166,11 +166,11 @@ export default function HomePage() {
                                                 </div>
                                                 <div className="space-y-2">
                                                     <div className="bg-white border border-gray-200 rounded-lg px-3 py-2">
-                                                        <p className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-0.5">Before</p>
+                                                        <p className="text-[10px] font-bold text-red-500 uppercase tracking-wider mb-0.5">Before</p>
                                                         <p className="text-xs text-[#4B5563]">Marketing Manager at TechCorp</p>
                                                     </div>
                                                     <div className="bg-white border border-[#DBEAFE] rounded-lg px-3 py-2">
-                                                        <p className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mb-0.5">After</p>
+                                                        <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-0.5">After</p>
                                                         <p className="text-xs text-[#0A0F1C] font-medium">B2B SaaS Growth Marketer | Demand Gen & Content Strategy | 3x Pipeline Growth</p>
                                                     </div>
                                                 </div>
@@ -185,7 +185,7 @@ export default function HomePage() {
                                     {/* Slide 3: Improvement Roadmap */}
                                     {slideIndex === 2 && (
                                         <div className="p-7">
-                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-4">Improvement Roadmap</p>
+                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">Improvement Roadmap</p>
                                             <div className="space-y-2.5">
                                                 {[
                                                     { fix: 'Add metrics to experience bullets', pts: '+5', time: '10 min', done: false },
@@ -214,12 +214,14 @@ export default function HomePage() {
                                 <div className="border-t border-gray-100 px-5 py-3 flex items-center justify-between">
                                     <div className="flex items-center gap-4">
                                         {['Score', 'AI Rewrite', 'Roadmap'].map((label, i) => (
-                                            <button key={i} onClick={() => setSlideIndex(i)} className={`text-[11px] font-semibold transition-colors cursor-pointer ${i === slideIndex ? 'text-[#0A66C2]' : 'text-[#9CA3AF] hover:text-[#6B7280]'}`}>{label}</button>
+                                            <button key={i} onClick={() => setSlideIndex(i)} className={`text-[11px] font-semibold transition-colors cursor-pointer ${i === slideIndex ? 'text-[#0A66C2]' : 'text-[#6B7280] hover:text-[#0A0F1C]'}`}>{label}</button>
                                         ))}
                                     </div>
-                                    <div className="flex gap-1.5">
+                                    <div className="flex gap-1.5 items-center">
                                         {PREVIEW_SLIDES.map((_, i) => (
-                                            <button key={i} onClick={() => setSlideIndex(i)} className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === slideIndex ? 'bg-[#0A66C2] w-5' : 'bg-gray-200 w-1.5'}`} />
+                                            <button key={i} onClick={() => setSlideIndex(i)} aria-label={`Go to slide ${i + 1}`} className="p-2 -m-2 cursor-pointer">
+                                                <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-[#0A66C2] w-5' : 'bg-gray-200 w-1.5'}`} />
+                                            </button>
                                         ))}
                                     </div>
                                 </div>
@@ -235,7 +237,7 @@ export default function HomePage() {
                     <FileUpload />
                     {/* PDF instructions */}
                     <div className="mt-5 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">How to export your LinkedIn PDF</p>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">How to export your LinkedIn PDF</p>
                         <ol className="space-y-2.5">
                             {[
                                 'Go to your LinkedIn profile page',
@@ -369,7 +371,7 @@ export default function HomePage() {
 
                     <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
-                            <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Ready-to-use prompt</p>
+                            <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">Ready-to-use prompt</p>
                             <button
                                 onClick={copyPrompt}
                                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-3 py-1.5 rounded-lg hover:bg-[#DBEAFE] transition-colors cursor-pointer shrink-0"
@@ -388,7 +390,7 @@ export default function HomePage() {
                             {['ChatGPT', 'Claude', 'Gemini', 'Copilot', 'Perplexity'].map((name) => (
                                 <span key={name} className="text-[11px] font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-2.5 py-1 rounded-full">{name}</span>
                             ))}
-                            <span className="text-[10px] text-[#9CA3AF] ml-1">Works with any AI</span>
+                            <span className="text-[10px] text-[#6B7280] ml-1">Works with any AI</span>
                         </div>
                         <div className="mt-5 pt-4 border-t border-gray-100">
                             <Link href="/ai-prompts-linkedin" className="text-sm font-semibold text-[#0A66C2] no-underline hover:underline inline-flex items-center gap-1">
@@ -435,7 +437,7 @@ export default function HomePage() {
                                     className="w-full flex items-center justify-between py-5 text-left"
                                 >
                                     <span className="text-[15px] font-semibold text-[#0A0F1C] pr-4">{item.q}</span>
-                                    <svg className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                    <svg className={`w-5 h-5 text-gray-500 shrink-0 transition-transform duration-200 ${openFaq === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </button>
                                 {openFaq === i && (
                                     <p className="text-sm text-[#4B5563] pb-5 leading-relaxed animate-fade-in">{item.a}</p>
@@ -485,7 +487,7 @@ export default function HomePage() {
 
                     {/* By role */}
                     <div className="mb-8">
-                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">By Role</p>
+                        <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">By Role</p>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {[
                                 { href: '/for-students', title: 'For Students', desc: 'Build a strong profile as a student or new graduate.', color: '#0A66C2' },
@@ -498,7 +500,7 @@ export default function HomePage() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{guide.title}</p>
-                                        <p className="text-[11px] text-[#9CA3AF]">{guide.desc}</p>
+                                        <p className="text-[11px] text-[#6B7280]">{guide.desc}</p>
                                     </div>
                                 </Link>
                             ))}
@@ -507,7 +509,7 @@ export default function HomePage() {
 
                     {/* By headline */}
                     <div className="mb-8">
-                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Headline By Profession</p>
+                        <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Headline By Profession</p>
                         <div className="flex flex-wrap gap-1.5 sm:gap-2">
                             {[
                                 { href: '/linkedin-headline-software-engineers', title: 'Software Engineers' },
@@ -532,7 +534,7 @@ export default function HomePage() {
 
                     {/* AI Prompts */}
                     <div className="mb-8">
-                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">AI Prompt Guides</p>
+                        <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">AI Prompt Guides</p>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             {[
                                 { href: '/ai-prompts-linkedin', title: 'All AI Prompts', desc: '26 prompts for every section', color: '#0A66C2' },
@@ -548,7 +550,7 @@ export default function HomePage() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{guide.title}</p>
-                                        <p className="text-[11px] text-[#9CA3AF]">{guide.desc}</p>
+                                        <p className="text-[11px] text-[#6B7280]">{guide.desc}</p>
                                     </div>
                                 </Link>
                             ))}
@@ -557,7 +559,7 @@ export default function HomePage() {
 
                     {/* More guides */}
                     <div className="mb-8">
-                        <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">More Guides</p>
+                        <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">More Guides</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                             {[
                                 { href: '/linkedin-keywords-guide', title: 'Keywords & SEO Guide', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' },
@@ -574,7 +576,7 @@ export default function HomePage() {
                             ].map((guide, i) => (
                                 <Link key={i} href={guide.href} className="group flex items-center gap-3 px-3.5 py-3 bg-white border border-gray-100 rounded-xl no-underline hover:border-[#DBEAFE] hover:shadow-sm transition-all">
                                     <div className="w-7 h-7 rounded-lg bg-[#F8FAFC] border border-gray-100 flex items-center justify-center shrink-0 group-hover:bg-[#EFF6FF] group-hover:border-[#DBEAFE] transition-colors">
-                                        <svg className="w-3.5 h-3.5 text-[#9CA3AF] group-hover:text-[#0A66C2] transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={guide.icon} /></svg>
+                                        <svg className="w-3.5 h-3.5 text-[#6B7280] group-hover:text-[#0A66C2] transition-colors" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={guide.icon} /></svg>
                                     </div>
                                     <span className="text-xs font-medium text-[#4B5563] group-hover:text-[#0A66C2] transition-colors">{guide.title}</span>
                                 </Link>
@@ -599,7 +601,7 @@ export default function HomePage() {
                         <div className="relative flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div>
                                 <h3 className="text-lg font-bold text-white mb-1">Ready to improve your LinkedIn?</h3>
-                                <p className="text-sm text-white/70">Get your free score in under 60 seconds. No login required.</p>
+                                <p className="text-sm text-white/90">Get your free score in under 60 seconds. No login required.</p>
                             </div>
                             <button onClick={() => document.getElementById('upload')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-[#0A66C2] font-semibold text-sm px-6 py-2.5 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer shrink-0">
                                 Analyze Profile — It&apos;s Free
@@ -610,7 +612,7 @@ export default function HomePage() {
                     {/* Links grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
                         <div>
-                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Product</p>
+                            <p className="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-4">Product</p>
                             <nav className="flex flex-col gap-2.5">
                                 <Link href="/how-linkedin-rank-works" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">How It Works</Link>
                                 <Link href="/methodology" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Methodology</Link>
@@ -620,7 +622,7 @@ export default function HomePage() {
                             </nav>
                         </div>
                         <div>
-                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Guides</p>
+                            <p className="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-4">Guides</p>
                             <nav className="flex flex-col gap-2.5">
                                 <Link href="/linkedin-profile-checklist" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Profile Checklist</Link>
                                 <Link href="/linkedin-optimization-guide" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Optimization Guide</Link>
@@ -631,7 +633,7 @@ export default function HomePage() {
                             </nav>
                         </div>
                         <div>
-                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">For You</p>
+                            <p className="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-4">For You</p>
                             <nav className="flex flex-col gap-2.5">
                                 <Link href="/for-students" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Students</Link>
                                 <Link href="/for-jobseekers" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Job Seekers</Link>
@@ -641,7 +643,7 @@ export default function HomePage() {
                             </nav>
                         </div>
                         <div>
-                            <p className="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-4">Legal</p>
+                            <p className="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-4">Legal</p>
                             <nav className="flex flex-col gap-2.5">
                                 <Link href="/privacy" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Privacy</Link>
                                 <Link href="/terms" className="text-[13px] text-white/60 hover:text-white no-underline transition-colors">Terms</Link>
@@ -655,9 +657,10 @@ export default function HomePage() {
                     <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             <Link href="/" className="font-bold text-sm text-white no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                            <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                            <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" aria-label="LinkedInRank on Instagram" className="text-white/60 hover:text-white transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                            <a href="mailto:hello@linkedinrank.com" aria-label="Email LinkedInRank" className="text-white/60 hover:text-white transition-colors"><svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg></a>
                         </div>
-                        <p className="text-xs text-white/30">&copy; {new Date().getFullYear()} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">Bhavishya Singla</a></p>
+                        <p className="text-xs text-white/60">&copy; {new Date().getFullYear()} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-white/70 underline decoration-white/30 hover:text-white transition-colors">Bhavishya Singla</a></p>
                     </div>
                 </div>
             </footer>

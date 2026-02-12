@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Skills Section — Keyword Research & Optimization | LinkedInRank',
-    description: 'AI prompts to identify the right skills for your LinkedIn profile, optimize skill order, and match recruiter search terms for maximum visibility.',
-    keywords: 'ai prompts linkedin skills, chatgpt linkedin skills optimization, linkedin skills keywords, linkedin skills section ai, best linkedin skills prompt',
+    title: 'AI Prompts for LinkedIn Skills Section — Keyword Optimization (2026)',
+    description: 'AI prompts to identify the right skills for your LinkedIn profile in 2026. Optimize skill order and match recruiter search terms for maximum visibility. Free scoring with LinkedInRank.',
+    keywords: 'ai prompts linkedin skills 2026, chatgpt linkedin skills optimization, linkedin skills keywords, linkedin skills section ai, best linkedin skills prompt, linkedin skills ai template',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-skills' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn Skills Section — Keyword Optimization',
+        description: 'AI prompts to identify and optimize LinkedIn skills for maximum recruiter visibility.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin-skills',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

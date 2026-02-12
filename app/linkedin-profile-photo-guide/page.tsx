@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Photo Guide — What Works & What Does Not | LinkedInRank',
-    description: 'Complete guide to LinkedIn profile photos. What to wear, background tips, framing, lighting, and common mistakes. Professional photos increase profile views by 21x.',
-    keywords: 'linkedin profile photo, linkedin headshot, linkedin photo tips, linkedin profile picture, best linkedin photo, linkedin photo size, professional linkedin photo',
+    title: 'LinkedIn Profile Photo Guide — What Works & What Doesn\'t (2026)',
+    description: 'Complete guide to LinkedIn profile photos in 2026. What to wear, background tips, framing, lighting, and common mistakes. Professional photos increase profile views by 21x. Free profile scoring with LinkedInRank.',
+    keywords: 'linkedin profile photo, linkedin headshot, linkedin photo tips 2026, linkedin profile picture, best linkedin photo, linkedin photo size, professional linkedin photo, linkedin photo guidelines, linkedin profile photo tips',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-profile-photo-guide' },
+    openGraph: {
+        title: 'LinkedIn Profile Photo Guide — What Works & What Doesn\'t',
+        description: 'Professional photos increase profile views by 21x. Learn what to wear, framing, lighting, and common mistakes.',
+        url: 'https://linkedinrank.com/linkedin-profile-photo-guide',
+    },
 }
 
 const jsonLd = {

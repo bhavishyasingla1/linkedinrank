@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Job Seekers — Free Guide | LinkedInRank',
-    description: 'Optimize your LinkedIn profile for recruiters and hiring managers. Data-backed strategies for headlines, experience descriptions, skills alignment, and keyword optimization. Free LinkedInRank analysis.',
-    keywords: 'linkedin for job seekers, linkedin profile optimization, linkedin recruiter tips, linkedinrank job search, linkedin keywords',
+    title: 'LinkedIn Profile Tips for Job Seekers — Free Guide (2026)',
+    description: 'Optimize your LinkedIn profile for recruiters and hiring managers in 2026. Data-backed strategies for headlines, experience, skills, and keywords. Free scoring with LinkedInRank — the #1 LinkedIn scorer.',
+    keywords: 'linkedin for job seekers 2026, linkedin profile optimization job search, linkedin recruiter tips, linkedinrank job search, linkedin keywords job seekers, linkedin profile for job hunting',
+    alternates: { canonical: 'https://linkedinrank.com/for-jobseekers' },
+    openGraph: {
+        title: 'LinkedIn Profile Tips for Job Seekers — Free Guide',
+        description: 'Optimize your LinkedIn for recruiters. Data-backed strategies and free scoring with LinkedInRank.',
+        url: 'https://linkedinrank.com/for-jobseekers',
+    },
 }
 
 const jsonLd = {

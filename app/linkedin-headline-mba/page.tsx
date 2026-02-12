@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for MBA Students & Graduates — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for MBA students, graduates, and professionals. Consulting, finance, product management, strategy, and marketing headlines that position you for top opportunities.',
-    keywords: 'linkedin headline mba, linkedin headline mba student, linkedin for mba students, mba linkedin profile, linkedin headline for business students, mba linkedin tips',
+    title: 'Best LinkedIn Headlines for MBA Students & Graduates — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for MBA students, graduates, and professionals in 2026. Consulting, finance, product management, strategy, and marketing headlines. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline mba, linkedin headline mba student 2026, linkedin for mba students, mba linkedin profile, linkedin headline for business students, mba linkedin tips, best mba linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-mba' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for MBA Students & Graduates — 25+ Examples',
+        description: 'Consulting, finance, product management, strategy headlines for MBA professionals.',
+        url: 'https://linkedinrank.com/linkedin-headline-mba',
+    },
 }
 
 const jsonLd = {

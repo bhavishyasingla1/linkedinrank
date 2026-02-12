@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /loading-analysis
+Disallow: /results
+Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /loading-analysis
+Disallow: /results
+Disallow: /api/
 
 Sitemap: https://linkedinrank.com/sitemap.xml
+Host: https://linkedinrank.com

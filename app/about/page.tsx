@@ -3,8 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'About LinkedIn Rank — Why This Tool Exists',
-    description: 'LinkedIn Rank is a structured, transparent LinkedIn profile evaluation tool. Learn why it was built and the principles behind it.',
+    title: 'About LinkedInRank — The World\'s Best Free LinkedIn Profile Scorer',
+    description: 'LinkedInRank is a free, privacy-first LinkedIn profile scoring tool built to help professionals optimize their profiles. Learn about our mission, scoring methodology, and why thousands trust us.',
+    keywords: 'about linkedinrank, linkedin profile scorer, linkedin analysis tool, free linkedin profile review, linkedin optimization, who built linkedinrank',
+    alternates: { canonical: 'https://linkedinrank.com/about' },
+    openGraph: {
+        title: 'About LinkedInRank — The World\'s Best Free LinkedIn Profile Scorer',
+        description: 'Learn why LinkedInRank was built and how it helps professionals optimize their LinkedIn profiles with data-driven scoring.',
+        url: 'https://linkedinrank.com/about',
+    },
 }
 
 export default function AboutPage() {

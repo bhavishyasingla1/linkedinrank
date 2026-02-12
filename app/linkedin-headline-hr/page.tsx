@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for HR & Recruiters — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for HR professionals, recruiters, talent acquisition specialists, and people leaders. Headlines that build trust with candidates and employers.',
-    keywords: 'linkedin headline HR, linkedin headline recruiter, best linkedin headline for talent acquisition, HR manager linkedin profile, people operations linkedin headline',
+    title: 'Best LinkedIn Headlines for HR & Recruiters — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for HR professionals, recruiters, talent acquisition specialists, and people leaders in 2026. Headlines that build trust. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline HR 2026, linkedin headline recruiter, best linkedin headline for talent acquisition, HR manager linkedin profile, people operations linkedin headline, best hr linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-hr' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for HR & Recruiters — 25+ Examples',
+        description: 'HR, recruiter, and talent acquisition headline formulas that build trust with candidates.',
+        url: 'https://linkedinrank.com/linkedin-headline-hr',
+    },
 }
 
 export default function HeadlineHRPage() {

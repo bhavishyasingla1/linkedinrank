@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'The Story Behind LinkedInRank',
-    description: 'How LinkedInRank started — a personal account of optimizing LinkedIn profiles, helping friends and family, and turning that knowledge into a free LinkedIn profile scoring tool.',
-    keywords: 'linkedinrank story, linkedin profile tool, linkedin optimization, linkedinrank founder',
+    title: 'The Story Behind LinkedInRank — How the Best LinkedIn Scorer Was Built',
+    description: 'How LinkedInRank started — from optimizing LinkedIn profiles for friends and family to building the world\'s best free LinkedIn profile scoring tool used by thousands of professionals.',
+    keywords: 'linkedinrank story, linkedin profile tool origin, linkedin optimization journey, linkedinrank founder, why linkedinrank was built, linkedin scorer story',
+    alternates: { canonical: 'https://linkedinrank.com/story' },
+    openGraph: {
+        title: 'The Story Behind LinkedInRank',
+        description: 'From helping friends optimize their LinkedIn profiles to building the world\'s best free LinkedIn scorer.',
+        url: 'https://linkedinrank.com/story',
+    },
 }
 
 export default function StoryPage() {

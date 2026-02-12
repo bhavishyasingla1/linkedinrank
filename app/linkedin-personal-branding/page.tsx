@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Personal Branding Guide — Build Authority & Visibility | LinkedInRank',
-    description: 'Build a powerful personal brand on LinkedIn. Niche clarity, positioning headlines, content frameworks, engagement strategy, and creator checklist. For professionals, creators, and founders.',
-    keywords: 'linkedin personal branding, linkedin personal brand, linkedin creator, linkedin thought leadership, linkedin visibility, linkedin authority, linkedin brand building',
+    title: 'LinkedIn Personal Branding Guide — Build Authority & Visibility (2026)',
+    description: 'Build a powerful personal brand on LinkedIn in 2026. Niche clarity, positioning headlines, content frameworks, engagement strategy, and creator checklist. Free scoring with LinkedInRank.',
+    keywords: 'linkedin personal branding 2026, linkedin personal brand, linkedin creator, linkedin thought leadership, linkedin visibility, linkedin authority, linkedin brand building, linkedin personal branding strategy',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-personal-branding' },
+    openGraph: {
+        title: 'LinkedIn Personal Branding Guide — Build Authority & Visibility',
+        description: 'Niche clarity, positioning, content frameworks, and engagement strategy for LinkedIn.',
+        url: 'https://linkedinrank.com/linkedin-personal-branding',
+    },
 }
 
 const jsonLd = {

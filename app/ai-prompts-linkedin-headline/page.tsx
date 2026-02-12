@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates for ChatGPT & Claude | LinkedInRank',
-    description: 'Ready-to-use AI prompts to write powerful LinkedIn headlines. Templates for ChatGPT, Claude, and Gemini organized by career stage, role, and goal.',
-    keywords: 'ai prompts linkedin headline, chatgpt linkedin headline, claude linkedin headline, linkedin headline generator prompt, ai headline writer linkedin',
+    title: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates (2026)',
+    description: 'Ready-to-use AI prompts to write powerful LinkedIn headlines in 2026. Templates for ChatGPT, Claude, and Gemini organized by career stage, role, and goal. Free scoring with LinkedInRank.',
+    keywords: 'ai prompts linkedin headline 2026, chatgpt linkedin headline, claude linkedin headline, linkedin headline generator prompt, ai headline writer linkedin, linkedin headline ai template',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-headline' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates',
+        description: 'Ready-to-use AI prompts for ChatGPT, Claude, and Gemini to write powerful LinkedIn headlines.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin-headline',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

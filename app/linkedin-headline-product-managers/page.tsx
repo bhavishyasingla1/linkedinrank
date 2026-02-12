@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Product Managers — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for product managers, PMs, TPMs, and product leaders. Formulas and examples that attract recruiters and showcase product impact.',
-    keywords: 'linkedin headline product manager, linkedin headline PM, best linkedin headline for product manager, product manager linkedin profile, TPM linkedin headline',
+    title: 'Best LinkedIn Headlines for Product Managers — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for product managers, PMs, TPMs, and product leaders in 2026. Formulas that attract recruiters and showcase impact. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline product manager 2026, linkedin headline PM, best linkedin headline for product manager, product manager linkedin profile, TPM linkedin headline, best pm linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-product-managers' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Product Managers — 25+ Examples',
+        description: 'PM, TPM, and product leader headline formulas that attract recruiters and showcase impact.',
+        url: 'https://linkedinrank.com/linkedin-headline-product-managers',
+    },
 }
 
 export default function HeadlineProductManagersPage() {

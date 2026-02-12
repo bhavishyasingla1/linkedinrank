@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Sales Professionals — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for sales reps, account executives, SDRs, BDRs, and sales leaders. Headlines that build trust and generate inbound leads.',
-    keywords: 'linkedin headline sales, linkedin headline account executive, best linkedin headline for sales, SDR linkedin headline, sales manager linkedin profile',
+    title: 'Best LinkedIn Headlines for Sales Professionals — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for sales reps, AEs, SDRs, BDRs, and sales leaders in 2026. Headlines that build trust and generate inbound leads. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline sales 2026, linkedin headline account executive, best linkedin headline for sales, SDR linkedin headline, sales manager linkedin profile, best sales linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-sales' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Sales Professionals — 25+ Examples',
+        description: 'Sales rep, AE, SDR, and sales leader headline formulas that generate inbound leads.',
+        url: 'https://linkedinrank.com/linkedin-headline-sales',
+    },
 }
 
 export default function HeadlineSalesPage() {

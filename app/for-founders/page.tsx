@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Founders & Entrepreneurs — Free Guide | LinkedInRank',
-    description: 'Position your LinkedIn profile for credibility, fundraising, and talent acquisition. Data-backed strategies for founder headlines, About narratives, and experience framing. Free LinkedInRank analysis.',
-    keywords: 'linkedin for founders, founder linkedin profile, entrepreneur linkedin tips, linkedinrank founder guide, startup linkedin profile',
+    title: 'LinkedIn Profile Tips for Founders & Entrepreneurs — Free Guide (2026)',
+    description: 'Position your LinkedIn profile for credibility, fundraising, and talent acquisition in 2026. Data-backed strategies for founder headlines, About narratives, and experience framing. Free scoring with LinkedInRank.',
+    keywords: 'linkedin for founders 2026, founder linkedin profile, entrepreneur linkedin tips, linkedinrank founder guide, startup linkedin profile, ceo linkedin profile tips, founder personal branding linkedin',
+    alternates: { canonical: 'https://linkedinrank.com/for-founders' },
+    openGraph: {
+        title: 'LinkedIn Profile Tips for Founders & Entrepreneurs',
+        description: 'Position your LinkedIn for credibility, fundraising, and talent acquisition. Free scoring with LinkedInRank.',
+        url: 'https://linkedinrank.com/for-founders',
+    },
 }
 
 const jsonLd = {

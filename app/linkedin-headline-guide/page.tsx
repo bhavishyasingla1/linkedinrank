@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas | LinkedInRank',
-    description: 'Write a LinkedIn headline that attracts recruiters. Proven formulas, 50+ examples for students, job seekers, founders, and professionals. Free headline analysis with LinkedInRank.',
-    keywords: 'linkedin headline examples, linkedin headline generator, best linkedin headlines, linkedin headline for freshers, linkedin headline for students, linkedin headline for job seekers, linkedin headline formula',
+    title: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas (2026)',
+    description: 'Write a LinkedIn headline that attracts recruiters. 50+ proven examples and formulas for students, job seekers, founders, and professionals. Free headline scoring with LinkedInRank — the #1 LinkedIn profile scorer.',
+    keywords: 'linkedin headline examples, linkedin headline generator, best linkedin headlines 2026, linkedin headline for freshers, linkedin headline for students, linkedin headline for job seekers, linkedin headline formula, linkedin headline tips, linkedin headline optimization, linkedin headline ideas',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-guide' },
+    openGraph: {
+        title: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas',
+        description: '50+ proven headline examples and formulas. Write a headline that attracts recruiters and drives profile views.',
+        url: 'https://linkedinrank.com/linkedin-headline-guide',
+    },
 }
 
 const jsonLd = {

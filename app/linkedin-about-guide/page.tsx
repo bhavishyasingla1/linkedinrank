@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn About Section Guide — How to Write a Powerful Summary | LinkedInRank',
-    description: 'Write a LinkedIn About section that converts profile visitors into opportunities. Templates for students, job seekers, founders, and professionals. With real examples and common mistakes to avoid.',
-    keywords: 'linkedin about section, linkedin summary examples, how to write linkedin summary, linkedin bio examples, linkedin about section examples, linkedin summary for freshers, linkedin about section tips',
+    title: 'LinkedIn About Section Guide — How to Write a Powerful Summary (2026)',
+    description: 'Write a LinkedIn About section that converts visitors into opportunities. Templates, real examples, and common mistakes to avoid for students, job seekers, founders, and professionals. Free scoring with LinkedInRank.',
+    keywords: 'linkedin about section, linkedin summary examples, how to write linkedin summary, linkedin bio examples, linkedin about section examples 2026, linkedin summary for freshers, linkedin about section tips, linkedin summary template, linkedin about me examples',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-about-guide' },
+    openGraph: {
+        title: 'LinkedIn About Section Guide — How to Write a Powerful Summary',
+        description: 'Templates, real examples, and tips to write a LinkedIn About section that converts visitors into opportunities.',
+        url: 'https://linkedinrank.com/linkedin-about-guide',
+    },
 }
 
 const jsonLd = {

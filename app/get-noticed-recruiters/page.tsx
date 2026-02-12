@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'How to Get Noticed by Recruiters on LinkedIn — Actionable Guide | LinkedInRank',
-    description: 'Practical strategies to get found and contacted by recruiters on LinkedIn. Keyword optimization, Open to Work settings, networking tactics, and profile signals that drive recruiter outreach.',
-    keywords: 'get noticed by recruiters linkedin, how to attract recruiters on linkedin, linkedin recruiter visibility, linkedin job search tips, how to get recruited on linkedin, linkedin recruiter outreach',
+    title: 'How to Get Noticed by Recruiters on LinkedIn — Actionable Guide (2026)',
+    description: 'Practical strategies to get found and contacted by recruiters on LinkedIn in 2026. Keyword optimization, Open to Work settings, networking tactics, and profile signals. Free scoring with LinkedInRank.',
+    keywords: 'get noticed by recruiters linkedin 2026, how to attract recruiters on linkedin, linkedin recruiter visibility, linkedin job search tips, how to get recruited on linkedin, linkedin recruiter outreach, linkedin visibility tips',
+    alternates: { canonical: 'https://linkedinrank.com/get-noticed-recruiters' },
+    openGraph: {
+        title: 'How to Get Noticed by Recruiters on LinkedIn',
+        description: 'Practical strategies to get found and contacted by recruiters. Keywords, settings, and profile signals.',
+        url: 'https://linkedinrank.com/get-noticed-recruiters',
+    },
 }
 
 const jsonLd = {

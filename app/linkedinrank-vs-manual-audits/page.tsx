@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedInRank vs Manual LinkedIn Profile Audits — Which Is Better?',
-    description: 'Compare LinkedInRank automated profile scoring with manual LinkedIn audits from career coaches. Understand cost, speed, accuracy, and privacy differences.',
-    keywords: 'linkedinrank vs manual audit, linkedin profile review comparison, automated linkedin scoring, linkedin career coach review',
+    title: 'LinkedInRank vs Manual LinkedIn Profile Audits — Which Is Better? (2026)',
+    description: 'Compare LinkedInRank\'s free automated profile scoring with expensive manual LinkedIn audits from career coaches. Cost, speed, accuracy, privacy, and results compared side-by-side.',
+    keywords: 'linkedinrank vs manual audit, linkedin profile review comparison, automated linkedin scoring, linkedin career coach review, linkedin audit free vs paid, linkedin profile coach, best linkedin review method',
+    alternates: { canonical: 'https://linkedinrank.com/linkedinrank-vs-manual-audits' },
+    openGraph: {
+        title: 'LinkedInRank vs Manual LinkedIn Audits — Which Is Better?',
+        description: 'Free automated scoring vs paid career coach audits. Cost, speed, accuracy, and privacy compared.',
+        url: 'https://linkedinrank.com/linkedinrank-vs-manual-audits',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

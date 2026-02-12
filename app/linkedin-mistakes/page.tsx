@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Top 10 LinkedIn Profile Mistakes That Cost You Opportunities | LinkedInRank',
-    description: 'The 10 most common LinkedIn profile mistakes that hurt your visibility and credibility. Each mistake explained with the exact fix. Based on analysis of thousands of profiles.',
-    keywords: 'linkedin mistakes, linkedin profile mistakes, common linkedin errors, linkedin profile tips, linkedin profile problems, what not to do on linkedin, linkedin profile fix',
+    title: 'Top 10 LinkedIn Profile Mistakes That Cost You Opportunities (2026)',
+    description: 'The 10 most common LinkedIn profile mistakes in 2026 that hurt your visibility and credibility. Each mistake explained with the exact fix. Based on analysis of thousands of profiles. Free scoring with LinkedInRank.',
+    keywords: 'linkedin mistakes 2026, linkedin profile mistakes, common linkedin errors, linkedin profile tips, linkedin profile problems, what not to do on linkedin, linkedin profile fix, linkedin profile common mistakes',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-mistakes' },
+    openGraph: {
+        title: 'Top 10 LinkedIn Profile Mistakes That Cost You Opportunities',
+        description: 'Common LinkedIn mistakes explained with exact fixes. Based on analysis of thousands of profiles.',
+        url: 'https://linkedinrank.com/linkedin-mistakes',
+    },
 }
 
 const jsonLd = {

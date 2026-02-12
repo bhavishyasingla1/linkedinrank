@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Top 1% LinkedIn Profiles — What They Do Differently | LinkedInRank',
-    description: 'Breakdown of what top 1% LinkedIn profiles have in common. Clear positioning, metrics everywhere, focused narrative, personal brand consistency, and social proof. With a scoreable checklist.',
-    keywords: 'top linkedin profiles, best linkedin profiles, linkedin profile examples, strong linkedin profile, linkedin profile tips, what makes a good linkedin profile, linkedin profile optimization',
+    title: 'Top 1% LinkedIn Profiles — What They Do Differently (2026)',
+    description: 'What top 1% LinkedIn profiles have in common in 2026. Clear positioning, metrics, focused narrative, personal brand consistency, and social proof. Scoreable checklist included. Free scoring with LinkedInRank.',
+    keywords: 'top linkedin profiles 2026, best linkedin profiles, linkedin profile examples, strong linkedin profile, linkedin profile tips, what makes a good linkedin profile, linkedin profile optimization, top linkedin profile examples',
+    alternates: { canonical: 'https://linkedinrank.com/top-1-percent-profiles' },
+    openGraph: {
+        title: 'Top 1% LinkedIn Profiles — What They Do Differently',
+        description: 'Clear positioning, metrics, narrative, brand consistency, and social proof. Scoreable checklist included.',
+        url: 'https://linkedinrank.com/top-1-percent-profiles',
+    },
 }
 
 const jsonLd = {

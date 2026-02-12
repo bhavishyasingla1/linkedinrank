@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn About Section — Templates for ChatGPT & Claude | LinkedInRank',
-    description: 'Ready-to-use AI prompts to write a compelling LinkedIn About section. Templates for every career stage with before/after examples.',
-    keywords: 'ai prompts linkedin about section, chatgpt linkedin summary, claude linkedin about, linkedin about section generator, ai linkedin bio writer',
+    title: 'AI Prompts for LinkedIn About Section — Templates for ChatGPT & Claude (2026)',
+    description: 'Ready-to-use AI prompts to write a compelling LinkedIn About section in 2026. Templates for every career stage with before/after examples. Free scoring with LinkedInRank.',
+    keywords: 'ai prompts linkedin about section 2026, chatgpt linkedin summary, claude linkedin about, linkedin about section generator, ai linkedin bio writer, linkedin about ai template',
+    alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-about' },
+    openGraph: {
+        title: 'AI Prompts for LinkedIn About Section — Templates',
+        description: 'AI prompts to write a compelling LinkedIn About section. Templates for every career stage.',
+        url: 'https://linkedinrank.com/ai-prompts-linkedin-about',
+    },
 }
 const jsonLd = {
     '@context': 'https://schema.org',

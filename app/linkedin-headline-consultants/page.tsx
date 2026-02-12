@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Consultants — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for management consultants, strategy consultants, freelance consultants, and advisory professionals. Headlines that build credibility and attract clients.',
-    keywords: 'linkedin headline consultant, linkedin headline management consultant, best linkedin headline for consultant, strategy consultant linkedin profile, freelance consultant linkedin',
+    title: 'Best LinkedIn Headlines for Consultants — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for management, strategy, and freelance consultants in 2026. Headlines that build credibility and attract clients. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline consultant 2026, linkedin headline management consultant, best linkedin headline for consultant, strategy consultant linkedin profile, freelance consultant linkedin, best consultant linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-consultants' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Consultants — 25+ Examples',
+        description: 'Management, strategy, and freelance consultant headline formulas that build credibility.',
+        url: 'https://linkedinrank.com/linkedin-headline-consultants',
+    },
 }
 
 export default function HeadlineConsultantsPage() {

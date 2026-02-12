@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile vs Resume — Key Differences & How to Optimize Both | LinkedInRank',
-    description: 'Understand the key differences between a LinkedIn profile and a resume. What to include on each, how they complement each other, and common mistakes professionals make when treating them the same.',
-    keywords: 'linkedin vs resume, linkedin profile vs resume, resume vs linkedin, linkedin resume differences, linkedin profile tips, should my linkedin match my resume',
+    title: 'LinkedIn Profile vs Resume — Key Differences & How to Optimize Both (2026)',
+    description: 'Understand the key differences between a LinkedIn profile and a resume in 2026. What to include on each, how they complement each other, and common mistakes. Free scoring with LinkedInRank.',
+    keywords: 'linkedin vs resume 2026, linkedin profile vs resume, resume vs linkedin, linkedin resume differences, linkedin profile tips, should my linkedin match my resume, linkedin and resume comparison',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-resume-vs-profile' },
+    openGraph: {
+        title: 'LinkedIn Profile vs Resume — Key Differences',
+        description: 'What to include on each, how they complement each other, and common mistakes to avoid.',
+        url: 'https://linkedinrank.com/linkedin-resume-vs-profile',
+    },
 }
 
 const jsonLd = {

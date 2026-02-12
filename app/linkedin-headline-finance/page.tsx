@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Finance & Accounting — 25+ Examples | LinkedInRank',
-    description: 'LinkedIn headline examples for finance professionals, accountants, CFOs, investment bankers, financial analysts, and auditors. Headlines that signal expertise and attract opportunities.',
-    keywords: 'linkedin headline finance, linkedin headline accountant, best linkedin headline for CPA, investment banker linkedin headline, financial analyst linkedin profile',
+    title: 'Best LinkedIn Headlines for Finance & Accounting — 25+ Examples (2026)',
+    description: 'LinkedIn headline examples for finance professionals, accountants, CFOs, investment bankers, and financial analysts in 2026. Headlines that signal expertise. Free scoring with LinkedInRank.',
+    keywords: 'linkedin headline finance 2026, linkedin headline accountant, best linkedin headline for CPA, investment banker linkedin headline, financial analyst linkedin profile, best finance linkedin headline',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-finance' },
+    openGraph: {
+        title: 'Best LinkedIn Headlines for Finance & Accounting — 25+ Examples',
+        description: 'Finance, accounting, and investment banking headline formulas that signal expertise.',
+        url: 'https://linkedinrank.com/linkedin-headline-finance',
+    },
 }
 
 export default function HeadlineFinancePage() {

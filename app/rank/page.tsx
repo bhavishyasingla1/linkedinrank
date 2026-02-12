@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'Rank Your LinkedIn Profile — Free LinkedIn Ranking Tool | LinkedInRank',
-    description: 'Rank your LinkedIn profile against 30+ professional signals. Get a Bronze, Silver, Gold, or Platinum tier with personalized recommendations. Free, no login required. Powered by LinkedInRank.',
-    keywords: 'rank linkedin profile, linkedin ranking tool, linkedin profile rank, linkedinrank, linkedin tier, linkedin profile rating free',
+    title: 'Rank Your LinkedIn Profile — Free LinkedIn Ranking Tool (2026)',
+    description: 'Rank your LinkedIn profile against 30+ professional signals with the world\'s best LinkedIn ranking tool. Get Bronze, Silver, Gold, or Platinum tier with AI-powered recommendations. Free, no login required.',
+    keywords: 'rank linkedin profile, linkedin ranking tool, linkedin profile rank, linkedinrank, linkedin tier, linkedin profile rating free, linkedin profile ranker, linkedin rank checker, best linkedin ranking tool, linkedin profile benchmark',
+    alternates: { canonical: 'https://linkedinrank.com/rank' },
+    openGraph: {
+        title: 'Rank Your LinkedIn Profile — Free LinkedIn Ranking Tool',
+        description: 'Get your LinkedIn tier: Bronze, Silver, Gold, or Platinum. AI-powered recommendations included. Free, no login.',
+        url: 'https://linkedinrank.com/rank',
+    },
 }
 
 export default function RankPage() {

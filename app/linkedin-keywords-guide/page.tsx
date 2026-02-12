@@ -3,9 +3,15 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Keywords Guide — How to Get Found by Recruiters | LinkedInRank',
-    description: 'Master LinkedIn keyword optimization. Learn where to place keywords, which ones matter for your role, and how recruiters search. Includes keyword placement checklist and role-specific examples.',
-    keywords: 'linkedin keywords, linkedin seo, linkedin keyword optimization, linkedin search optimization, linkedin profile keywords, how to get found on linkedin, linkedin recruiter search',
+    title: 'LinkedIn Keywords Guide — How to Get Found by Recruiters (2026)',
+    description: 'Master LinkedIn keyword optimization in 2026. Learn where to place keywords, which ones matter for your role, and how recruiters search. Keyword placement checklist and role-specific examples included.',
+    keywords: 'linkedin keywords, linkedin seo, linkedin keyword optimization 2026, linkedin search optimization, linkedin profile keywords, how to get found on linkedin, linkedin recruiter search, linkedin keyword strategy, linkedin search ranking',
+    alternates: { canonical: 'https://linkedinrank.com/linkedin-keywords-guide' },
+    openGraph: {
+        title: 'LinkedIn Keywords Guide — How to Get Found by Recruiters',
+        description: 'Master keyword placement to get found by recruiters. Checklist and role-specific examples included.',
+        url: 'https://linkedinrank.com/linkedin-keywords-guide',
+    },
 }
 
 const jsonLd = {
