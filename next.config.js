@@ -1,3 +1,5 @@
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -10,6 +12,16 @@ const nextConfig = {
     },
     compiler: {
         removeConsole: process.env.NODE_ENV === 'production',
+    },
+    webpack: (config, { isServer }) => {
+        if (!isServer) {
+            const emptyPolyfill = path.resolve(__dirname, 'lib/empty-polyfill.js')
+            config.resolve.alias = {
+                ...config.resolve.alias,
+                [path.resolve(__dirname, 'node_modules/next/dist/build/polyfills/polyfill-module.js')]: emptyPolyfill,
+            }
+        }
+        return config
     },
     async headers() {
         return [
