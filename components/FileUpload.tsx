@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, DragEvent } from 'react'
+import { useState, useRef, useEffect, DragEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function FileUpload() {
@@ -8,6 +8,14 @@ export default function FileUpload() {
     const [error, setError] = useState('')
     const fileInputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
+
+    useEffect(() => {
+        const savedError = sessionStorage.getItem('analysisError')
+        if (savedError) {
+            setError(savedError)
+            sessionStorage.removeItem('analysisError')
+        }
+    }, [])
 
     const handleDragOver = (e: DragEvent) => {
         e.preventDefault()

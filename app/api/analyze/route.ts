@@ -45,9 +45,22 @@ function isAllowedOrigin(request: NextRequest): boolean {
     if (process.env.NODE_ENV === 'development') return true
     const origin = request.headers.get('origin') || ''
     const referer = request.headers.get('referer') || ''
-    return ALLOWED_ORIGINS.some(allowed =>
+
+    // Allow static list
+    if (ALLOWED_ORIGINS.some(allowed =>
         origin.startsWith(allowed) || referer.startsWith(allowed)
-    )
+    )) return true
+
+    // Allow Vercel preview/production deployments
+    if (process.env.VERCEL_URL) {
+        const vercelOrigin = `https://${process.env.VERCEL_URL}`
+        if (origin.startsWith(vercelOrigin) || referer.startsWith(vercelOrigin)) return true
+    }
+
+    // Allow any *.vercel.app deployment
+    if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) return true
+
+    return false
 }
 
 // ============================================================
