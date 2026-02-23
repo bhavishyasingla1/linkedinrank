@@ -13,8 +13,10 @@ Upload your LinkedIn PDF. Get a score out of 100, see exactly which sections nee
 - **Career Stage Adaptation** — Scoring adjusts for Student, Early-career, Mid-career, and Senior/Founder/Academic profiles
 - **Tier System** — Bronze (0–54), Silver (55–69), Gold (70–84), Platinum (85–100)
 - **Improvement Roadmap** — Prioritized actions ranked by point gain
+- **12 Free LinkedIn Tools** — Headline generator, about writer, experience rewriter, keyword analyzer, post ideas, and more
 - **100% Private** — No login, no data storage, in-memory processing, PDF deleted immediately
-- **Mobile Responsive** — Optimized headers with hamburger navigation on all 50+ pages
+- **65+ SEO Pages** — Pillar guides, role-specific headline pages, keyword cluster pages, 120+ blog articles
+- **Mobile Responsive** — Optimized headers with hamburger navigation on all pages
 
 ## Scoring Categories
 
@@ -35,7 +37,7 @@ Upload your LinkedIn PDF. Get a score out of 100, see exactly which sections nee
 - **AI:** Google Gemini (`@google/generative-ai`)
 - **Image Processing:** sharp
 - **Deploy:** Vercel
-- **SEO:** 53-page sitemap, structured data (JSON-LD), robots.txt, llm.txt
+- **SEO:** 70+ page sitemap, structured data (JSON-LD with FAQ/HowTo/Breadcrumb/Article schemas), robots.txt, llm.txt
 
 ## Quick Start
 
@@ -72,22 +74,29 @@ linkedinrank/
 ├── app/
 │   ├── api/
 │   │   ├── analyze/route.ts        # PDF upload & analysis endpoint
-│   │   ├── debug/route.ts          # Debug extraction endpoint
 │   │   └── health/route.ts         # Health check
-│   ├── page.tsx                     # Homepage
+│   ├── page.tsx                     # Homepage with upload
 │   ├── results/page.tsx             # Results dashboard
 │   ├── loading-analysis/page.tsx    # Analysis loading screen
 │   ├── layout.tsx                   # Root layout with metadata
 │   ├── globals.css                  # Global styles & animations
-│   ├── sitemap.ts                   # Dynamic sitemap (53 URLs)
-│   ├── about/                       # About page
-│   ├── methodology/                 # Scoring methodology
-│   ├── faq/                         # FAQ with schema markup
-│   ├── linkedin-optimization-guide/ # Pillar SEO guide
+│   ├── sitemap.ts                   # Dynamic sitemap (70+ URLs)
+│   ├── tools/page.tsx               # 12 free tools directory
+│   ├── tools/[slug]/page.tsx        # Individual tool pages
+│   ├── blogs/page.tsx               # Blog index (120+ articles)
+│   ├── blogs/[slug]/page.tsx        # Individual blog posts
+│   ├── linkedin-ranking/            # LinkedIn ranking pillar page
+│   ├── linkedin-profile-score/      # Profile score pillar page
+│   ├── linkedin-headline-for-graphic-designer/ # Role-specific headlines
+│   ├── linkedin-profile-for-students/          # Student profile guide
+│   ├── linkedin-optimization-guide/ # Complete optimization guide
 │   ├── linkedin-headline-guide/     # Headline writing guide
-│   └── [40+ more content pages]
+│   ├── faq/                         # FAQ with schema markup
+│   ├── methodology/                 # Scoring methodology
+│   └── [50+ more content pages]
 ├── components/
 │   ├── SiteHeader.tsx               # Reusable header with mobile menu
+│   ├── SiteFooter.tsx               # Shared footer across all pages
 │   ├── FileUpload.tsx               # Drag & drop PDF upload
 │   ├── ScoreHero.tsx                # Score display with tier badge
 │   ├── CategoryScores.tsx           # Category breakdown cards
@@ -95,18 +104,19 @@ linkedinrank/
 │   ├── ImprovementPath.tsx          # Prioritized improvement roadmap
 │   ├── HeadlineRewriter.tsx         # AI headline rewrite tool
 │   ├── AnalysisLoading.tsx          # Loading animation
-│   ├── LoadingScreen.tsx            # Generic loading screen
 │   └── TierBadge.tsx                # Bronze/Silver/Gold/Platinum badge
 ├── lib/
 │   ├── scoringEngine.ts             # Rule-based scoring (30+ signals)
 │   ├── pdfParser.ts                 # LinkedIn PDF text extraction
 │   ├── aiSuggestions.ts             # Google Gemini AI integration
+│   ├── toolsConfig.ts               # 12 tool definitions & SEO metadata
+│   ├── blogData.ts                  # 120+ blog post definitions
 │   ├── types.ts                     # TypeScript definitions
 │   └── constants.ts                 # App constants & tier definitions
 ├── public/
 │   ├── robots.txt                   # Search engine directives
 │   └── llm.txt                      # LLM-readable site description
-├── next.config.js                   # Security headers, server config
+├── next.config.js                   # Security headers, redirects
 ├── tailwind.config.js               # Design system tokens
 └── tsconfig.json                    # TypeScript configuration
 ```
