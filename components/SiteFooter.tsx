@@ -66,7 +66,7 @@ export default function SiteFooter() {
 
                 <div className="border-t border-gray-200 pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <p className="text-[11px] text-[#6B7280]">&copy; {new Date().getFullYear()} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] underline decoration-gray-300 hover:text-[#0A0F1C] transition-colors">Bhavishya Singla</a></p>
-                    <p className="text-[10px] text-[#9CA3AF]">Not affiliated with LinkedIn Corporation.</p>
+                    <p className="text-[10px] text-[#6B7280]">Not affiliated with LinkedIn Corporation.</p>
                 </div>
             </div>
         </footer>
