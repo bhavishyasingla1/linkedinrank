@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -12,18 +13,36 @@ export const metadata: Metadata = {
         default: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool | LinkedInRank',
         template: '%s | LinkedInRank',
     },
-    description: 'Check your LinkedIn rank free. LinkedInRank is the #1 free LinkedIn profile rank checker and ranking tool. Upload your PDF, get a score out of 100 across 30+ signals, AI-powered recommendations, and a personalized improvement roadmap. No login, no data stored.',
+    description:
+        'Check your LinkedIn rank free. LinkedInRank is the #1 free LinkedIn profile rank checker and ranking tool. Upload your PDF, get a score out of 100 across 30+ signals, AI-powered recommendations, and a personalized improvement roadmap. No login, no data stored.',
     keywords: [
-        'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
-        'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
-        'linkedin profile score', 'linkedin profile scorer', 'linkedin profile analyzer',
-        'linkedinrank', 'linkedin score checker', 'linkedin profile rating',
-        'how to rank on linkedin', 'linkedin search ranking', 'linkedin profile visibility',
-        'linkedin seo', 'linkedin algorithm ranking', 'linkedin profile score checker',
-        'linkedin ranking factors', 'improve linkedin profile ranking',
-        'linkedin recruiter search ranking', 'linkedin social selling index',
-        'free linkedin analysis', 'linkedin profile review', 'linkedin optimization tool',
-        'linkedin profile audit', 'linkedin profile grader',
+        'linkedin rank',
+        'linkedin rank checker',
+        'linkedin profile rank',
+        'free linkedin profile checker',
+        'linkedin ranking tool',
+        'linkedin profile ranking',
+        'linkedin profile score',
+        'linkedin profile scorer',
+        'linkedin profile analyzer',
+        'linkedinrank',
+        'linkedin score checker',
+        'linkedin profile rating',
+        'how to rank on linkedin',
+        'linkedin search ranking',
+        'linkedin profile visibility',
+        'linkedin seo',
+        'linkedin algorithm ranking',
+        'linkedin profile score checker',
+        'linkedin ranking factors',
+        'improve linkedin profile ranking',
+        'linkedin recruiter search ranking',
+        'linkedin social selling index',
+        'free linkedin analysis',
+        'linkedin profile review',
+        'linkedin optimization tool',
+        'linkedin profile audit',
+        'linkedin profile grader',
     ],
     authors: [{ name: 'LinkedInRank', url: 'https://linkedinrank.com' }],
     creator: 'LinkedInRank',
@@ -44,7 +63,8 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
-        description: 'Check your LinkedIn rank free. Score your profile across 30+ signals, get AI-powered recommendations, and improve your LinkedIn profile ranking. No login required.',
+        description:
+            'Check your LinkedIn rank free. Score your profile across 30+ signals, get AI-powered recommendations, and improve your LinkedIn profile ranking. No login required.',
         url: 'https://linkedinrank.com',
         siteName: 'LinkedInRank',
         type: 'website',
@@ -53,7 +73,8 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
-        description: 'Check your LinkedIn rank free. Upload your PDF, get a score out of 100, and improve your LinkedIn profile ranking. No login, no data stored.',
+        description:
+            'Check your LinkedIn rank free. Upload your PDF, get a score out of 100, and improve your LinkedIn profile ranking. No login, no data stored.',
         site: '@linkedinrank',
         creator: '@linkedinrank',
     },
@@ -68,15 +89,21 @@ const jsonLd = {
             '@id': 'https://linkedinrank.com/#website',
             url: 'https://linkedinrank.com',
             name: 'LinkedInRank',
-            alternateName: ['LinkedIn Rank', 'LinkedIn Rank Checker', 'LinkedIn Profile Rank Checker'],
-            description: 'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Check your LinkedIn rank, get a score out of 100 across 30+ signals, and improve your LinkedIn profile ranking with AI-powered recommendations.',
+            alternateName: [
+                'LinkedIn Rank',
+                'LinkedIn Rank Checker',
+                'LinkedIn Profile Rank Checker',
+            ],
+            description:
+                'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Check your LinkedIn rank, get a score out of 100 across 30+ signals, and improve your LinkedIn profile ranking with AI-powered recommendations.',
             publisher: { '@id': 'https://linkedinrank.com/#organization' },
             inLanguage: 'en-US',
             potentialAction: {
                 '@type': 'SearchAction',
                 target: {
                     '@type': 'EntryPoint',
-                    urlTemplate: 'https://linkedinrank.com/?q={search_term_string}',
+                    urlTemplate:
+                        'https://linkedinrank.com/?q={search_term_string}',
                 },
                 'query-input': 'required name=search_term_string',
             },
@@ -110,7 +137,8 @@ const jsonLd = {
                 contactType: 'customer support',
                 url: 'https://linkedinrank.com/contact',
             },
-            description: 'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Used by professionals, students, and job seekers worldwide to check their LinkedIn rank and improve their LinkedIn profile visibility.',
+            description:
+                'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Used by professionals, students, and job seekers worldwide to check their LinkedIn rank and improve their LinkedIn profile visibility.',
             knowsAbout: [
                 'LinkedIn profile optimization',
                 'LinkedIn SEO',
@@ -124,7 +152,11 @@ const jsonLd = {
             '@type': 'WebApplication',
             '@id': 'https://linkedinrank.com/#webapp',
             name: 'LinkedInRank - LinkedIn Rank Checker',
-            alternateName: ['LinkedIn Rank Checker', 'LinkedIn Profile Rank Tool', 'Free LinkedIn Profile Checker'],
+            alternateName: [
+                'LinkedIn Rank Checker',
+                'LinkedIn Profile Rank Tool',
+                'Free LinkedIn Profile Checker',
+            ],
             url: 'https://linkedinrank.com',
             applicationCategory: 'BusinessApplication',
             applicationSubCategory: 'LinkedIn Profile Analysis Tool',
@@ -148,7 +180,8 @@ const jsonLd = {
                 'Career stage adaptive scoring',
                 'Privacy-first: no login, no data storage',
             ],
-            description: 'Free LinkedIn rank checker that scores your LinkedIn profile across 30+ ranking signals. Get your LinkedIn profile rank, AI-powered recommendations, and a personalized improvement roadmap. No login required, no data stored.',
+            description:
+                'Free LinkedIn rank checker that scores your LinkedIn profile across 30+ ranking signals. Get your LinkedIn profile rank, AI-powered recommendations, and a personalized improvement roadmap. No login required, no data stored.',
             creator: { '@id': 'https://linkedinrank.com/#organization' },
             aggregateRating: {
                 '@type': 'AggregateRating',
@@ -195,20 +228,23 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             </head>
             <body className={inter.className} suppressHydrationWarning>
-                {/* Skip to content | accessibility */}
                 <a
                     href="#main-content"
                     className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#0A66C2] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
                 >
                     Skip to main content
                 </a>
+
                 <Script
                     id="jsonld-global"
                     type="application/ld+json"
                     strategy="beforeInteractive"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
+
                 {children}
+
+                <Analytics />
                 <SpeedInsights />
             </body>
         </html>
