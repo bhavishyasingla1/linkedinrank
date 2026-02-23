@@ -232,7 +232,7 @@ export default function HomePage() {
             </section>
 
             {/* Free Tools Section | high on page for visibility */}
-            <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+            <section className="below-fold bg-white py-16 sm:py-20 border-t border-gray-100">
                 <div className="max-w-5xl mx-auto px-6">
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
                         <div>
@@ -274,7 +274,7 @@ export default function HomePage() {
             </section>
 
             {/* How It Works */}
-            <section className="bg-white py-24 border-t border-gray-100">
+            <section className="below-fold bg-white py-24 border-t border-gray-100">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">How It Works</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Three steps to a stronger profile</h2>
@@ -296,7 +296,7 @@ export default function HomePage() {
             </section>
 
             {/* Evaluation Framework | Card-based */}
-            <section className="bg-[#F8FAFC] py-24">
+            <section className="below-fold bg-[#F8FAFC] py-24">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Evaluation Framework</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-3">How your profile is evaluated</h2>
@@ -331,7 +331,7 @@ export default function HomePage() {
             </section>
 
             {/* What You Get */}
-            <section className="bg-white py-24 border-t border-gray-100">
+            <section className="below-fold bg-white py-24 border-t border-gray-100">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">What You Get</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Your complete LinkedInRank report includes</h2>
@@ -358,7 +358,7 @@ export default function HomePage() {
             </section>
 
             {/* AI Guidance */}
-            <section className="bg-[#F8FAFC] py-24">
+            <section className="below-fold bg-[#F8FAFC] py-24">
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="text-center mb-10">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
@@ -421,7 +421,7 @@ export default function HomePage() {
             </section>
 
             {/* Privacy */}
-            <section className="bg-[#EFF6FF] py-20">
+            <section className="below-fold bg-[#EFF6FF] py-20">
                 <div className="max-w-3xl mx-auto px-6 text-center">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-[#DBEAFE] mb-5">
                         <svg className="w-6 h-6 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
@@ -435,7 +435,7 @@ export default function HomePage() {
             </section>
 
             {/* FAQ */}
-            <section className="bg-white py-24 border-t border-gray-100">
+            <section className="below-fold bg-white py-24 border-t border-gray-100">
                 <div className="max-w-2xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">FAQ</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-10">Common questions</h2>
@@ -474,7 +474,7 @@ export default function HomePage() {
             </section>
 
             {/* Blog / Latest Articles */}
-            <section className="py-20 bg-white border-t border-gray-100">
+            <section className="below-fold py-20 bg-white border-t border-gray-100">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Blog</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-4">LinkedIn tips and strategies</h2>
@@ -510,7 +510,7 @@ export default function HomePage() {
             </section>
 
             {/* Guides */}
-            <section className="py-20 bg-[#F8FAFC] border-t border-gray-100 border-b border-b-gray-100">
+            <section className="below-fold py-20 bg-[#F8FAFC] border-t border-gray-100 border-b border-b-gray-100">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Guides</p>
                     <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-4">Level up your LinkedIn presence</h2>

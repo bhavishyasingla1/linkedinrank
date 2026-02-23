@@ -347,14 +347,8 @@ img { max-width: 100%; height: auto; }
 
 /* ── Performance ──────────────────────────────── */
 
-/* Optimize paint for fixed/sticky elements */
-header, [class*="sticky"] {
-  will-change: transform;
-  contain: layout style;
-}
-
-/* Content visibility for below-fold sections */
-section {
+/* Content visibility for below-fold sections only — apply .below-fold class */
+.below-fold {
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
 }
