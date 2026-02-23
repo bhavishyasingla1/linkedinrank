@@ -189,10 +189,7 @@ export default function RootLayout({
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
-                <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-                <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
             </head>
             <body className={inter.className} suppressHydrationWarning>
                 {/* Skip to content | accessibility */}
