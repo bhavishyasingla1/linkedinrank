@@ -1,10 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { parseLinkedInPDF } from '@/lib/pdfParser'
+import { parseLinkedInPDF, PARSER_VERSION, ExtendedProfileData } from '@/lib/pdfParser'
 import { analyzeProfile } from '@/lib/scoringEngine'
 import { enhanceWithAI } from '@/lib/aiSuggestions'
+import { computeDeterministicScore, classifyArchetype, SCORING_VERSION } from '@/lib/deterministicScoring'
+import { getCachedAnalysis, setCachedAnalysis, getCacheStats, PIPELINE_VERSION } from '@/lib/cache'
+import { getRewriteSuggestions, getLLMUsageStats } from '@/lib/aiSuggestionsV2'
+
+// Response type matching exact spec
+interface AnalyzeResponse {
+    input_hash: string
+    score: number
+    tier: 'platinum' | 'gold' | 'silver' | 'bronze'
+    breakdown: {
+        headline: { score: number; max: number; checks: Array<{ name: string; ok: boolean }> }
+        about: { score: number; max: number; checks: Array<{ name: string; ok: boolean }> }
+        experience: { score: number; max: number; checks: Array<{ name: string; ok: boolean }> }
+        skills: { score: number; max: number; checks: Array<{ name: string; ok: boolean }> }
+        education: { score: number; max: number; checks: Array<{ name: string; ok: boolean }> }
+        completeness: { score: number; max: number }
+    }
+    fixes: Array<{ section: string; fix: string; impact_pts: number }>
+    diagnostics: {
+        parse_confidence: number
+        missing_fields: string[]
+        layout_type: string
+    }
+    meta: {
+        processed_at: string
+        pipeline_version: string
+        parser_version: string
+        scoring_version: string
+        cached: boolean
+    }
+    profile?: any
+    archetype?: { label: string; description: string }
+    rewrite_suggestions?: any
+}
 
 // ============================================================
-// RATE LIMITING — in-memory sliding window per IP
+// RATE LIMITING | in-memory sliding window per IP
 // ============================================================
 const RATE_LIMIT_WINDOW_MS = 60 * 1000   // 1 minute window
 const RATE_LIMIT_MAX_REQUESTS = 5        // max 5 analyses per minute per IP
@@ -31,7 +65,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 // ============================================================
-// ORIGIN VALIDATION — only allow requests from our own domain
+// ORIGIN VALIDATION | only allow requests from our own domain
 // ============================================================
 const ALLOWED_ORIGINS = [
     'https://linkedinrank.com',
@@ -64,7 +98,7 @@ function isAllowedOrigin(request: NextRequest): boolean {
 }
 
 // ============================================================
-// PDF MAGIC BYTES VALIDATION — verify it's a real PDF
+// PDF MAGIC BYTES VALIDATION | verify it's a real PDF
 // ============================================================
 function isValidPDF(buffer: Buffer): boolean {
     // PDF files start with %PDF
@@ -126,7 +160,7 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // --- Guard: File size (5MB max — LinkedIn PDFs are tiny) ---
+        // --- Guard: File size (5MB max | LinkedIn PDFs are tiny) ---
         const MAX_SIZE = 5 * 1024 * 1024
         if (file.size > MAX_SIZE) {
             return NextResponse.json(
@@ -167,6 +201,13 @@ export async function POST(request: NextRequest) {
             )
         }
 
+        // Debug: log parsed fields to verify extraction
+        console.log('[PARSE DEBUG] Name:', profileData.name)
+        console.log('[PARSE DEBUG] Headline:', profileData.headline)
+        console.log('[PARSE DEBUG] Skills:', profileData.skills)
+        console.log('[PARSE DEBUG] Experience count:', profileData.experience?.length)
+        console.log('[PARSE DEBUG] Education:', profileData.education)
+
         // --- Guard: Sanity check parsed data ---
         if (!profileData.name && !profileData.headline && profileData.experience.length === 0) {
             return NextResponse.json(
@@ -175,50 +216,120 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // PRIMARY: Rule-based scoring (instant, deterministic)
+        // Cast to extended profile data with diagnostics
+        const extendedProfile = profileData as ExtendedProfileData
+        const inputHash = extendedProfile.canonical?.input_hash || 'unknown'
+        
+        // Check cache | but only if same pipeline version (invalidate on code changes)
+        const cacheKey = `${inputHash}:${PIPELINE_VERSION}:${PARSER_VERSION}:${SCORING_VERSION}`
+        const cachedResult = getCachedAnalysis<any>(cacheKey)
+        if (cachedResult && cachedResult.profile?.skills) {
+            // Return cached result with updated meta
+            console.log('[CACHE HIT] Returning cached result for', cacheKey)
+            return NextResponse.json({
+                success: true,
+                data: {
+                    ...cachedResult,
+                    meta: {
+                        ...cachedResult.meta,
+                        cached: true,
+                        processed_at: new Date().toISOString()
+                    }
+                }
+            })
+        }
+        
+        // PRIMARY: Rule-based analysis (single source of truth for score + tier)
         const analysis = analyzeProfile(profileData)
+        
+        // Archetype classification (rule-based, no LLM)
+        const archetype = classifyArchetype(profileData)
 
-        // SECONDARY: AI enhancement (with timeout + graceful fallback)
-        const aiStart = Date.now()
+        // Compute tier from the SAME score the UI will display
+        const score = analysis.linkedInScore
+        const tier = score >= 85 ? 'Platinum' : score >= 70 ? 'Gold' : score >= 55 ? 'Silver' : 'Bronze'
 
-        const aiEnhancement = await enhanceWithAI(profileData, {
-            headline: analysis.categoryScores.find(c => c.category === 'Headline')?.percentage || 50,
-            about: analysis.categoryScores.find(c => c.category === 'About')?.percentage || 50,
-            experience: analysis.categoryScores.find(c => c.category === 'Experience')?.percentage || 50,
-            skills: analysis.categoryScores.find(c => c.category === 'Skills')?.percentage || 50,
-        }).catch(() => {
-            // Graceful fallback — rule-based analysis still works perfectly
-            return { aiEnhanced: false, archetype: null, recommendations: [], headlineRewrites: [] as string[] }
-        })
+        // Build diagnostics
+        const diagnostics = {
+            parse_confidence: extendedProfile.parse_confidence?.overall || 0.8,
+            missing_fields: extendedProfile.diagnostics?.missing_fields || [],
+            layout_type: extendedProfile.diagnostics?.layout_type || 'unknown'
+        }
+        const meta = {
+            processed_at: new Date().toISOString(),
+            pipeline_version: PIPELINE_VERSION,
+            parser_version: PARSER_VERSION,
+            scoring_version: SCORING_VERSION,
+            cached: false
+        }
+        
+        const profile = {
+            name: profileData.name,
+            headline: profileData.headline,
+            about: profileData.about,
+            experience: profileData.experience,
+            skills: profileData.skills,
+            education: profileData.education,
+            certifications: profileData.certifications,
+            honors: profileData.honors
+        }
 
-        const aiDuration = Date.now() - aiStart
+        // Build unified response | ONE score, ONE tier, everywhere
+        const responseData = {
+            // New fields
+            input_hash: inputHash,
+            score,
+            diagnostics,
+            meta,
+            archetype,
+            // Legacy fields used by existing UI components (single source of truth)
+            linkedInScore: score,
+            tier,
+            categoryScores: analysis.categoryScores,
+            recommendations: analysis.recommendations,
+            improvementPath: analysis.improvementPath,
+            peerContext: analysis.peerContext,
+            careerStage: analysis.careerStage,
+            potentialGain: analysis.potentialGain,
+            headlineRewrites: [] as string[],
+            aiEnhanced: false,
+            profile
+        }
 
-        // Merge: prefer AI recommendations if available, else use rule-based
-        const finalRecommendations = aiEnhancement.recommendations.length > 0
-            ? aiEnhancement.recommendations
-            : analysis.recommendations
+        // Cache the result (versioned key to invalidate on code changes)
+        setCachedAnalysis(cacheKey, responseData)
 
-        const finalArchetype = aiEnhancement.archetype || analysis.archetype
+        // OPTIONAL: AI enhancement (async, cached, graceful fallback)
+        if (genAIAvailable()) {
+            try {
+                const aiEnhancement = await enhanceWithAI(profileData, {
+                    headline: analysis.categoryScores.find(c => c.category === 'Headline')?.percentage || 50,
+                    about: analysis.categoryScores.find(c => c.category === 'About')?.percentage || 50,
+                    experience: analysis.categoryScores.find(c => c.category === 'Experience')?.percentage || 50,
+                    skills: analysis.categoryScores.find(c => c.category === 'Skills')?.percentage || 50,
+                }).catch(() => ({ aiEnhanced: false, archetype: null, recommendations: [], headlineRewrites: [] as string[] }))
 
-        // File buffer is automatically garbage collected — zero persistence
+                if (aiEnhancement.aiEnhanced) {
+                    responseData.aiEnhanced = true
+                    if (aiEnhancement.headlineRewrites?.length > 0) {
+                        responseData.headlineRewrites = aiEnhancement.headlineRewrites
+                    }
+                    if (aiEnhancement.recommendations?.length > 0) {
+                        responseData.recommendations = aiEnhancement.recommendations
+                    }
+                    if (aiEnhancement.archetype) {
+                        responseData.archetype = aiEnhancement.archetype
+                    }
+                }
+            } catch {
+                // Graceful fallback | rule-based analysis still works
+            }
+        }
+
+        // File buffer is automatically garbage collected | zero persistence
         return NextResponse.json({
             success: true,
-            data: {
-                ...analysis,
-                profile: {
-                    name: profileData.name,
-                    headline: profileData.headline,
-                    about: profileData.about,
-                    experience: profileData.experience,
-                    skills: profileData.skills,
-                    certifications: profileData.certifications,
-                    honors: profileData.honors
-                },
-                archetype: finalArchetype,
-                recommendations: finalRecommendations,
-                headlineRewrites: aiEnhancement.headlineRewrites || [],
-                aiEnhanced: aiEnhancement.aiEnhanced,
-            }
+            data: responseData
         })
 
     } catch (error: any) {
@@ -228,6 +339,10 @@ export async function POST(request: NextRequest) {
             { status: 500 }
         )
     }
+}
+
+function genAIAvailable(): boolean {
+    return !!process.env.GEMINI_API_KEY
 }
 
 // Block all other HTTP methods

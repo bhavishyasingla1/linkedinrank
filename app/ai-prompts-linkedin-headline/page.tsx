@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates (2026)',
+    title: 'AI Prompts for LinkedIn Headlines | Copy-Paste Templates (2026)',
     description: 'Ready-to-use AI prompts to write powerful LinkedIn headlines in 2026. Templates for ChatGPT, Claude, and Gemini organized by career stage, role, and goal. Free scoring with LinkedInRank.',
     keywords: 'ai prompts linkedin headline 2026, chatgpt linkedin headline, claude linkedin headline, linkedin headline generator prompt, ai headline writer linkedin, linkedin headline ai template',
     alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-headline' },
     openGraph: {
-        title: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates',
+        title: 'AI Prompts for LinkedIn Headlines | Copy-Paste Templates',
         description: 'Ready-to-use AI prompts for ChatGPT, Claude, and Gemini to write powerful LinkedIn headlines.',
         url: 'https://linkedinrank.com/ai-prompts-linkedin-headline',
     },
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'AI Prompts for LinkedIn Headlines — Copy-Paste Templates',
+    headline: 'AI Prompts for LinkedIn Headlines | Copy-Paste Templates',
     description: '6 ready-to-use AI prompts to write powerful LinkedIn headlines for every career stage and goal.',
     author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
@@ -55,7 +56,7 @@ Format: Just the 5 headlines, numbered, nothing else.`,
     {
         id: 'career-stage',
         title: 'Career Stage Adapter',
-        description: 'Adjusts the headline strategy based on where you are in your career — student, early-career, mid-career, or senior/executive.',
+        description: 'Adjusts the headline strategy based on where you are in your career | student, early-career, mid-career, or senior/executive.',
         prompt: `I need a LinkedIn headline optimized for my career stage.
 
 My career stage: [student / early-career / mid-career / senior-executive / career-changer]
@@ -75,7 +76,7 @@ Rules based on career stage:
 
 Write 5 headlines under 120 characters. Each should match my career stage tone. Number them 1-5.`,
         tips: [
-            'Be honest about your career stage — recruiters can tell when a headline oversells',
+            'Be honest about your career stage | recruiters can tell when a headline oversells',
             'Students: "Aspiring" is fine, but pair it with a concrete skill',
             'Career changers: show the bridge, not just the destination',
         ],
@@ -97,14 +98,14 @@ Write 5 LinkedIn headlines under 120 characters each. Requirements:
 1. Front-load the most searchable keyword (job title or skill)
 2. Include at least one tool/technology name
 3. Add a differentiator (metric, niche, or unique angle)
-4. Avoid filler words — every word must earn its place
+4. Avoid filler words | every word must earn its place
 5. Consider how recruiters actually search on LinkedIn
 
 Also explain in one sentence WHY each headline would rank well in LinkedIn search.`,
         tips: [
-            'Check what keywords appear in job descriptions you want — those are recruiter search terms',
+            'Check what keywords appear in job descriptions you want | those are recruiter search terms',
             'Front-loading your job title is the single most impactful SEO move',
-            'LinkedIn search weights headline text heavily — treat every character as prime real estate',
+            'LinkedIn search weights headline text heavily | treat every character as prime real estate',
         ],
     },
     {
@@ -128,7 +129,7 @@ Write 5 LinkedIn headlines under 120 characters each. Each should:
 
 Format: 5 headlines, numbered. Then pick your top recommendation and explain why in 2 sentences.`,
         tips: [
-            'This format works best for people who sell services — consultants, agency owners, freelancers',
+            'This format works best for people who sell services | consultants, agency owners, freelancers',
             'The best value headlines make the reader self-identify: "That\'s exactly my problem"',
             'Combine with a keyword to get both search visibility and conversion',
         ],
@@ -179,12 +180,12 @@ Write 5 LinkedIn headlines under 120 characters. Requirements:
 - Use terminology that professionals in my industry immediately recognize
 - Include industry-specific keywords that recruiters in this field search for
 - Match the tone conventions of my industry (formal for finance/legal, more casual for tech/creative)
-- If I have regulatory/compliance expertise, signal it — it's a differentiator
+- If I have regulatory/compliance expertise, signal it | it's a differentiator
 - Each headline should work specifically for MY industry, not be generic
 
 Also note: which of these headlines would work best if I'm targeting roles at [Fortune 500 / startups / agencies / consulting firms]?`,
         tips: [
-            'Industry insiders can spot generic headlines instantly — specificity builds trust',
+            'Industry insiders can spot generic headlines instantly | specificity builds trust',
             'Compliance and regulatory keywords are massive differentiators in finance, healthcare, and legal',
             'Ask the AI to generate 5 more variations if the first batch feels too generic for your field',
         ],
@@ -195,7 +196,7 @@ export default function AIPromptsHeadlinePage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/ai-prompts-linkedin', label: 'All AI Prompts' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
@@ -246,7 +247,7 @@ export default function AIPromptsHeadlinePage() {
 
                             <div className="bg-[#0A0F1C] rounded-xl p-5 sm:p-6 mb-4 overflow-x-auto">
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt — Copy &amp; Paste</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt | Copy &amp; Paste</span>
                                     <span className="text-[10px] font-medium text-[#4B5563] bg-[#1a1f2e] px-2 py-0.5 rounded">ChatGPT / Claude / Gemini</span>
                                 </div>
                                 <pre className="text-[13px] text-[#E5E7EB] whitespace-pre-wrap font-mono leading-relaxed">{p.prompt}</pre>
@@ -271,7 +272,7 @@ export default function AIPromptsHeadlinePage() {
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Test your new headline</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">After updating your headline, export a new LinkedIn PDF and re-analyze to see your improved score.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 {/* Other prompt guides */}
@@ -294,21 +295,7 @@ export default function AIPromptsHeadlinePage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

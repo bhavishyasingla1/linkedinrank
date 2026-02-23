@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas (2026)',
-    description: 'Write a LinkedIn headline that attracts recruiters. 50+ proven examples and formulas for students, job seekers, founders, and professionals. Free headline scoring with LinkedInRank — the #1 LinkedIn profile scorer.',
+    title: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas (2026)',
+    description: 'Write a LinkedIn headline that attracts recruiters. 50+ proven examples and formulas for students, job seekers, founders, and professionals. Free headline scoring with LinkedInRank | the #1 LinkedIn profile scorer.',
     keywords: 'linkedin headline examples, linkedin headline generator, best linkedin headlines 2026, linkedin headline for freshers, linkedin headline for students, linkedin headline for job seekers, linkedin headline formula, linkedin headline tips, linkedin headline optimization, linkedin headline ideas',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-guide' },
     openGraph: {
-        title: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas',
+        title: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas',
         description: '50+ proven headline examples and formulas. Write a headline that attracts recruiters and drives profile views.',
         url: 'https://linkedinrank.com/linkedin-headline-guide',
     },
@@ -19,7 +20,7 @@ const jsonLd = {
     '@graph': [
         {
             '@type': 'Article',
-            headline: 'LinkedIn Headline Writing Guide — 50+ Examples & Formulas',
+            headline: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas',
             description: 'Learn how to write a LinkedIn headline that gets noticed. 50+ examples by role, 5 proven formulas, common mistakes, and how recruiters search.',
             author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
             publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
@@ -50,7 +51,7 @@ export default function LinkedInHeadlineGuidePage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/linkedin-optimization-guide', label: 'Full Guide' }]} />
+            <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -92,10 +93,10 @@ export default function LinkedInHeadlineGuidePage() {
                         <p className="mb-4">Variations of this formula:</p>
                         <ul className="space-y-2">
                             {[
-                                'Role | Industry | Key Skill — "Data Analyst | FinTech | SQL & Python"',
-                                'Role at Company | Helping [Audience] with [Outcome] — "PM at Stripe | Helping teams ship faster"',
-                                'Aspiring [Role] | [Credential] | Interested in [Field] — "Aspiring UX Designer | HCI @ Stanford | Accessibility"',
-                                'I help [Audience] achieve [Result] using [Method] — "I help SaaS founders get leads using LinkedIn content"',
+                                'Role | Industry | Key Skill | "Data Analyst | FinTech | SQL & Python"',
+                                'Role at Company | Helping [Audience] with [Outcome] | "PM at Stripe | Helping teams ship faster"',
+                                'Aspiring [Role] | [Credential] | Interested in [Field] | "Aspiring UX Designer | HCI @ Stanford | Accessibility"',
+                                'I help [Audience] achieve [Result] using [Method] | "I help SaaS founders get leads using LinkedIn content"',
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2 text-sm">
                                     <span className="w-5 h-5 rounded-md bg-[#0A66C2] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
@@ -172,7 +173,7 @@ export default function LinkedInHeadlineGuidePage() {
                             {[
                                 { bad: 'Student at XYZ University', why: 'Says nothing about skills, direction, or value' },
                                 { bad: 'Seeking Opportunities', why: 'Signals desperation rather than capability' },
-                                { bad: 'Passionate about technology', why: 'Generic — applies to millions of people' },
+                                { bad: 'Passionate about technology', why: 'Generic | applies to millions of people' },
                                 { bad: 'Hardworking professional', why: 'Buzzword with no proof or specificity' },
                                 { bad: 'Open to Work', why: 'Use the LinkedIn Open to Work badge instead' },
                             ].map((item, i) => (
@@ -205,12 +206,12 @@ export default function LinkedInHeadlineGuidePage() {
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
                         <div className="space-y-5">
                             {[
-                                { q: 'How long should my LinkedIn headline be?', a: 'LinkedIn allows 220 characters. The sweet spot is 80–150 characters — long enough to include keywords but short enough to display fully on mobile.' },
+                                { q: 'How long should my LinkedIn headline be?', a: 'LinkedIn allows 220 characters. The sweet spot is 80–150 characters | long enough to include keywords but short enough to display fully on mobile.' },
                                 { q: 'Should I use emojis in my headline?', a: 'Avoid emojis in professional contexts. They can make your profile appear less serious. Use pipe separators (|) instead for visual separation.' },
-                                { q: 'How many keywords should I include?', a: 'Include 2–3 relevant keywords that match your target role. Do not keyword-stuff — it looks unnatural and hurts credibility.' },
+                                { q: 'How many keywords should I include?', a: 'Include 2–3 relevant keywords that match your target role. Do not keyword-stuff | it looks unnatural and hurts credibility.' },
                                 { q: 'Should my headline match my job title?', a: 'Not necessarily. Your headline should communicate your value and direction, not just your current title. A Marketing Coordinator can headline as "Digital Marketing Specialist | SEO & Content Strategy" if that reflects their expertise.' },
                                 { q: 'How often should I update my headline?', a: 'Update it whenever you change roles, shift career direction, learn a significant new skill, or want to target a different type of opportunity.' },
-                                { q: 'Can LinkedInRank check my headline?', a: 'Yes. Upload your LinkedIn PDF and LinkedInRank will score your headline on clarity, keywords, and positioning — plus generate 3 AI-powered headline alternatives.' },
+                                { q: 'Can LinkedInRank check my headline?', a: 'Yes. Upload your LinkedIn PDF and LinkedInRank will score your headline on clarity, keywords, and positioning | plus generate 3 AI-powered headline alternatives.' },
                             ].map((item, i) => (
                                 <div key={i} className="border-b border-gray-100 pb-4">
                                     <h3 className="text-sm font-bold text-[#0A0F1C] mb-1">{item.q}</h3>
@@ -224,7 +225,7 @@ export default function LinkedInHeadlineGuidePage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Get your headline scored instantly</h2>
                         <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and get a free headline score plus 3 AI-generated headline alternatives.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Check Your Headline Score — It&apos;s Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Check Your Headline Score | It&apos;s Free</Link>
                     </div>
 
                     {/* Related Guides */}
@@ -250,17 +251,7 @@ export default function LinkedInHeadlineGuidePage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/linkedin-optimization-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Optimization Guide</Link>
-                        <Link href="/linkedin-about-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">About Section Guide</Link>
-                        <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">FAQ</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

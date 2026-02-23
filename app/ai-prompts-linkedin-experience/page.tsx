@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Experience Section — Action Verbs & Metrics (2026)',
+    title: 'AI Prompts for LinkedIn Experience Section | Action Verbs & Metrics (2026)',
     description: 'Ready-to-use AI prompts to rewrite your LinkedIn experience bullets in 2026. Action verbs, quantified impact, and recruiter-friendly language. Free scoring with LinkedInRank.',
     keywords: 'ai prompts linkedin experience 2026, chatgpt linkedin job description, linkedin experience bullet points ai, linkedin work experience generator, linkedin experience ai rewrite',
     alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-experience' },
     openGraph: {
-        title: 'AI Prompts for LinkedIn Experience Section — Action Verbs & Metrics',
+        title: 'AI Prompts for LinkedIn Experience Section | Action Verbs & Metrics',
         description: 'AI prompts to rewrite experience bullets with action verbs and quantified impact.',
         url: 'https://linkedinrank.com/ai-prompts-linkedin-experience',
     },
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'AI Prompts for LinkedIn Experience — Action Verbs & Metrics Templates',
+    headline: 'AI Prompts for LinkedIn Experience | Action Verbs & Metrics Templates',
     description: '5 ready-to-use AI prompts to rewrite LinkedIn experience bullets with action verbs, quantified impact, and recruiter-friendly language.',
     author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
@@ -38,13 +39,13 @@ Industry: [Your Industry]
 
 My current bullet points (paste as-is):
 """
-[Paste your current experience description here — even if it's just responsibilities]
+[Paste your current experience description here | even if it's just responsibilities]
 """
 
 Rewrite each bullet following these rules:
 1. Start every bullet with a strong ACTION VERB (Led, Built, Designed, Increased, Reduced, Launched, etc.)
 2. Add a METRIC or NUMBER wherever possible (even estimates are better than nothing)
-3. Show IMPACT — not just what you did, but the result it produced
+3. Show IMPACT | not just what you did, but the result it produced
 4. Keep each bullet to 1-2 lines max
 5. Use the format: [Action Verb] + [What you did] + [Scale/Scope] + [Result/Impact]
 6. Include tools, technologies, or methodologies where relevant
@@ -58,8 +59,8 @@ For each rewrite, show:
 If my original description has no numbers, suggest realistic metrics I could add based on the role.`,
         tips: [
             'Even estimates work: "managed a team" → "Led a cross-functional team of ~8 engineers"',
-            'The Experience section is worth 25/100 points on LinkedInRank — the highest-weighted section',
-            'Recruiters scan bullets in 6 seconds — front-load the most impressive part',
+            'The Experience section is worth 25/100 points on LinkedInRank | the highest-weighted section',
+            'Recruiters scan bullets in 6 seconds | front-load the most impressive part',
         ],
     },
     {
@@ -91,7 +92,7 @@ Rules:
 - If I can't provide exact numbers, suggest realistic ranges I could use
 - Use industry-appropriate action verbs
 - Each should be 1-2 sentences max
-- Don't exaggerate — suggest metrics that sound credible for my role level
+- Don't exaggerate | suggest metrics that sound credible for my role level
 
 Show all transformations in a clear BEFORE → AFTER format.`,
         tips: [
@@ -134,9 +135,9 @@ For each role, write 3-5 bullet points that:
 
 Important: I want bullets that I can HONESTLY claim. Flag anything where you're making assumptions so I can verify or adjust.`,
         tips: [
-            'Empty experience entries actively hurt your LinkedIn score — even 2-3 bullets per role makes a difference',
+            'Empty experience entries actively hurt your LinkedIn score | even 2-3 bullets per role makes a difference',
             'When the AI flags assumptions, take 5 minutes to verify them. Accuracy matters more than impressiveness',
-            'Old roles matter less than recent ones — 2 bullets for a role 5+ years ago is perfectly fine',
+            'Old roles matter less than recent ones | 2 bullets for a role 5+ years ago is perfectly fine',
         ],
     },
     {
@@ -171,7 +172,7 @@ Example:
 
 Write 5-7 bullets for this role.`,
         tips: [
-            'Technical recruiters search for specific technologies — name them explicitly',
+            'Technical recruiters search for specific technologies | name them explicitly',
             'The best tech bullets show both the engineering complexity AND business impact',
             'For FAANG-style roles, include scale metrics: QPS, data volume, uptime percentages',
         ],
@@ -196,17 +197,17 @@ Write 3-4 LinkedIn bullets that:
 3. Highlight any INITIATIVE I showed (even small things like suggesting an idea)
 4. Mention specific tools to build keyword density
 5. Show what I LEARNED or skills I developed
-6. Are 1 line each — concise and punchy
+6. Are 1 line each | concise and punchy
 
 Rules:
-- Do NOT use words like "spearheaded" or "orchestrated" for intern work — it's dishonest
+- Do NOT use words like "spearheaded" or "orchestrated" for intern work | it's dishonest
 - Good intern verbs: Assisted, Contributed, Supported, Created, Analyzed, Researched, Drafted, Coordinated
 - Show growth: what could I do at the end that I couldn't do at the start?
-- It's okay to be honest about scope — "Supported a team of 5" is better than "Led cross-functional initiatives"`,
+- It's okay to be honest about scope | "Supported a team of 5" is better than "Led cross-functional initiatives"`,
         tips: [
-            'Honest intern descriptions impress recruiters more than inflated ones — they can tell the difference',
+            'Honest intern descriptions impress recruiters more than inflated ones | they can tell the difference',
             'One genuine project with a real outcome beats five generic "assisted with various tasks" bullets',
-            'Mention what you learned — showing growth mindset is valued at the early-career stage',
+            'Mention what you learned | showing growth mindset is valued at the early-career stage',
         ],
     },
 ]
@@ -215,7 +216,7 @@ export default function AIPromptsExperiencePage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/ai-prompts-linkedin', label: 'All AI Prompts' }]} />
+            <SiteHeader />
 
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
@@ -226,7 +227,7 @@ export default function AIPromptsExperiencePage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-5">AI Prompts for LinkedIn Experience</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-xl mx-auto leading-relaxed">
-                        Transform job descriptions into achievement-driven bullets that make recruiters stop scrolling. The Experience section is worth <strong>25 points</strong> — the highest-weighted on LinkedInRank.
+                        Transform job descriptions into achievement-driven bullets that make recruiters stop scrolling. The Experience section is worth <strong>25 points</strong> | the highest-weighted on LinkedInRank.
                     </p>
                 </div>
             </section>
@@ -244,7 +245,7 @@ export default function AIPromptsExperiencePage() {
                             </div>
                             <div className="bg-[#0A0F1C] rounded-xl p-5 sm:p-6 mb-4 overflow-x-auto">
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt — Copy &amp; Paste</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt | Copy &amp; Paste</span>
                                     <span className="text-[10px] font-medium text-[#4B5563] bg-[#1a1f2e] px-2 py-0.5 rounded">ChatGPT / Claude / Gemini</span>
                                 </div>
                                 <pre className="text-[13px] text-[#E5E7EB] whitespace-pre-wrap font-mono leading-relaxed">{p.prompt}</pre>
@@ -267,7 +268,7 @@ export default function AIPromptsExperiencePage() {
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">See your improved Experience score</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Update your experience bullets, export a new PDF, and watch your score climb.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
@@ -288,21 +289,7 @@ export default function AIPromptsExperiencePage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

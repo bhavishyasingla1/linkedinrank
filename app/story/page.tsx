@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'The Story Behind LinkedInRank — How the Best LinkedIn Scorer Was Built',
-    description: 'How LinkedInRank started — from optimizing LinkedIn profiles for friends and family to building the world\'s best free LinkedIn profile scoring tool used by thousands of professionals.',
+    title: 'The Story Behind LinkedInRank | How the Best LinkedIn Scorer Was Built',
+    description: 'How LinkedInRank started | from optimizing LinkedIn profiles for friends and family to building the world\'s best free LinkedIn profile scoring tool used by thousands of professionals.',
     keywords: 'linkedinrank story, linkedin profile tool origin, linkedin optimization journey, linkedinrank founder, why linkedinrank was built, linkedin scorer story',
     alternates: { canonical: 'https://linkedinrank.com/story' },
     openGraph: {
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function StoryPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/about', label: 'About' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 pb-12 overflow-hidden">
@@ -61,7 +62,7 @@ export default function StoryPage() {
                             <div className="flex-1">
                                 <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Going deep on LinkedIn</h2>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed mb-3">
-                                    My name is Bhavishya Singla. I have been actively using LinkedIn for over two years now. Not casually — actively. Rewriting my headline, restructuring my About section, reworking experience descriptions, testing what gets noticed and what gets ignored. I am interested in marketing, and LinkedIn felt like the most important platform to understand deeply. So I went deep.
+                                    My name is Bhavishya Singla. I have been actively using LinkedIn for over two years now. Not casually | actively. Rewriting my headline, restructuring my About section, reworking experience descriptions, testing what gets noticed and what gets ignored. I am interested in marketing, and LinkedIn felt like the most important platform to understand deeply. So I went deep.
                                 </p>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
                                     {[
@@ -87,7 +88,7 @@ export default function StoryPage() {
                             <div className="flex-1">
                                 <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Learning from everywhere</h2>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed mb-3">
-                                    I watched more YouTube videos about LinkedIn optimization than I can count. I went through courses, read ebooks, followed creators who had built real audiences on the platform, and studied what made certain profiles stand out. Not in an abstract way — I would literally open two profiles side by side and compare them line by line.
+                                    I watched more YouTube videos about LinkedIn optimization than I can count. I went through courses, read ebooks, followed creators who had built real audiences on the platform, and studied what made certain profiles stand out. Not in an abstract way | I would literally open two profiles side by side and compare them line by line.
                                 </p>
                                 <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
                                     <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Patterns that emerged</p>
@@ -126,7 +127,7 @@ export default function StoryPage() {
                                     <p className="text-[15px] text-[#0A0F1C] italic font-medium">&ldquo;Can you just take a look and tell me what to fix?&rdquo;</p>
                                 </div>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed mb-3">
-                                    I would go through their profiles section by section — headline, about, experience, skills — and give them specific feedback. Not vague advice like &ldquo;make it more engaging.&rdquo; Actual rewrites. Before and after. Copy-paste ready suggestions they could use immediately.
+                                    I would go through their profiles section by section | headline, about, experience, skills | and give them specific feedback. Not vague advice like &ldquo;make it more engaging.&rdquo; Actual rewrites. Before and after. Copy-paste ready suggestions they could use immediately.
                                 </p>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed">
                                     It was genuinely satisfying. But it was also clear that doing this manually, one profile at a time, did not scale. The same patterns came up again and again. The same mistakes, the same missed opportunities, the same low-hanging improvements that could make a real difference.
@@ -142,7 +143,7 @@ export default function StoryPage() {
                             <div className="flex-1">
                                 <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Turning it into a tool</h2>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed mb-4">
-                                    The idea was simple: take everything I had learned — from videos, courses, hands-on optimization, and reviewing dozens of profiles — and put it into a tool that could do the same analysis automatically. Not a chatbot. Not a vague score with no explanation. A structured, transparent evaluation.
+                                    The idea was simple: take everything I had learned | from videos, courses, hands-on optimization, and reviewing dozens of profiles | and put it into a tool that could do the same analysis automatically. Not a chatbot. Not a vague score with no explanation. A structured, transparent evaluation.
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                                     {[
@@ -158,7 +159,7 @@ export default function StoryPage() {
                                     ))}
                                 </div>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                    I wanted it to feel like getting honest feedback from someone who knows what they are looking at — not like being sold something.
+                                    I wanted it to feel like getting honest feedback from someone who knows what they are looking at | not like being sold something.
                                 </p>
                             </div>
                         </div>
@@ -179,7 +180,7 @@ export default function StoryPage() {
                                     <p className="text-xs text-gray-400 text-center mt-1">The name said exactly what the tool does</p>
                                 </div>
                                 <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                    At some point during this process, I searched for LinkedInRank.com. It was available. That felt like a sign. The name said exactly what the tool does — it ranks the strength of your LinkedIn profile. No clever wordplay needed. I registered it and started building.
+                                    At some point during this process, I searched for LinkedInRank.com. It was available. That felt like a sign. The name said exactly what the tool does | it ranks the strength of your LinkedIn profile. No clever wordplay needed. I registered it and started building.
                                 </p>
                             </div>
                         </div>
@@ -214,30 +215,19 @@ export default function StoryPage() {
                         If you have used LinkedIn Rank, thank you. Genuinely. Every person who uploads a profile and finds something useful in the results makes the time spent building this worth it.
                     </p>
                     <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-lg mx-auto mb-5">
-                        If you have suggestions — things that could be better, signals I should evaluate differently, recommendations that felt off — I want to hear them. This tool is built for the people who use it, and your feedback directly shapes what comes next.
+                        If you have suggestions | things that could be better, signals I should evaluate differently, recommendations that felt off | I want to hear them. This tool is built for the people who use it, and your feedback directly shapes what comes next.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                         <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors">Connect with me on LinkedIn</a>
                     </div>
                     <div className="mt-6 pt-4 border-t border-[#DBEAFE]">
-                        <p className="text-sm text-[#6B7280] font-medium">— Bhavishya Singla, Founder of LinkedIn Rank</p>
+                        <p className="text-sm text-[#6B7280] font-medium">| Bhavishya Singla, Founder of LinkedIn Rank</p>
                     </div>
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/about" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">About</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Methodology</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

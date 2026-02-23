@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -7,19 +8,21 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
     metadataBase: new URL('https://linkedinrank.com'),
     title: {
-        default: 'LinkedInRank — #1 Free LinkedIn Profile Scorer & Analyzer (2026)',
+        default: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool | LinkedInRank',
         template: '%s | LinkedInRank',
     },
-    description: 'LinkedInRank is the world\'s best free LinkedIn profile scorer. Upload your LinkedIn PDF, get a score out of 100 across 30+ signals, AI-powered rewrites, and a personalized improvement roadmap — all in under 60 seconds. No login required.',
+    description: 'Check your LinkedIn rank free. LinkedInRank is the #1 free LinkedIn profile rank checker and ranking tool. Upload your PDF, get a score out of 100 across 30+ signals, AI-powered recommendations, and a personalized improvement roadmap. No login, no data stored.',
     keywords: [
+        'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
+        'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
         'linkedin profile score', 'linkedin profile scorer', 'linkedin profile analyzer',
-        'linkedin rank', 'linkedinrank', 'linkedin score checker', 'linkedin profile rating',
+        'linkedinrank', 'linkedin score checker', 'linkedin profile rating',
+        'how to rank on linkedin', 'linkedin search ranking', 'linkedin profile visibility',
+        'linkedin seo', 'linkedin algorithm ranking', 'linkedin profile score checker',
+        'linkedin ranking factors', 'improve linkedin profile ranking',
+        'linkedin recruiter search ranking', 'linkedin social selling index',
         'free linkedin analysis', 'linkedin profile review', 'linkedin optimization tool',
-        'linkedin profile strength', 'linkedin profile audit', 'linkedin ranking tool',
-        'best linkedin scorer', 'linkedin profile grader', 'linkedin profile evaluator',
-        'linkedin profile tips', 'linkedin headline optimizer', 'linkedin about section',
-        'linkedin profile improvement', 'linkedin recruiter visibility',
-        'linkedin pdf analyzer', 'linkedin career optimization',
+        'linkedin profile audit', 'linkedin profile grader',
     ],
     authors: [{ name: 'LinkedInRank', url: 'https://linkedinrank.com' }],
     creator: 'LinkedInRank',
@@ -39,8 +42,8 @@ export const metadata: Metadata = {
         canonical: 'https://linkedinrank.com',
     },
     openGraph: {
-        title: 'LinkedInRank — #1 Free LinkedIn Profile Scorer & Analyzer',
-        description: 'Score your LinkedIn profile across 30+ signals. Get AI-powered rewrites, a personalized improvement roadmap, and actionable recommendations — free, private, under 60 seconds.',
+        title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
+        description: 'Check your LinkedIn rank free. Score your profile across 30+ signals, get AI-powered recommendations, and improve your LinkedIn profile ranking. No login required.',
         url: 'https://linkedinrank.com',
         siteName: 'LinkedInRank',
         type: 'website',
@@ -48,8 +51,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LinkedInRank — #1 Free LinkedIn Profile Scorer & Analyzer',
-        description: 'Upload your LinkedIn PDF. Get a score out of 100, AI-powered rewrites, and a clear improvement roadmap. Free, private, no login.',
+        title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
+        description: 'Check your LinkedIn rank free. Upload your PDF, get a score out of 100, and improve your LinkedIn profile ranking. No login, no data stored.',
         site: '@linkedinrank',
         creator: '@linkedinrank',
     },
@@ -64,11 +67,16 @@ const jsonLd = {
             '@id': 'https://linkedinrank.com/#website',
             url: 'https://linkedinrank.com',
             name: 'LinkedInRank',
-            description: 'The world\'s best free LinkedIn profile scorer and analyzer. Score your profile across 30+ signals with AI-powered recommendations.',
+            alternateName: ['LinkedIn Rank', 'LinkedIn Rank Checker', 'LinkedIn Profile Rank Checker'],
+            description: 'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Check your LinkedIn rank, get a score out of 100 across 30+ signals, and improve your LinkedIn profile ranking with AI-powered recommendations.',
             publisher: { '@id': 'https://linkedinrank.com/#organization' },
+            inLanguage: 'en-US',
             potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://linkedinrank.com/?q={search_term_string}',
+                target: {
+                    '@type': 'EntryPoint',
+                    urlTemplate: 'https://linkedinrank.com/?q={search_term_string}',
+                },
                 'query-input': 'required name=search_term_string',
             },
         },
@@ -76,26 +84,93 @@ const jsonLd = {
             '@type': 'Organization',
             '@id': 'https://linkedinrank.com/#organization',
             name: 'LinkedInRank',
+            alternateName: 'LinkedIn Rank',
             url: 'https://linkedinrank.com',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://linkedinrank.com/icon.svg',
+                width: 512,
+                height: 512,
+            },
             email: 'hello@linkedinrank.com',
-            sameAs: ['https://www.instagram.com/linkedinrank/'],
-            contactPoint: { '@type': 'ContactPoint', email: 'hello@linkedinrank.com', contactType: 'customer support', url: 'https://linkedinrank.com/contact' },
-            description: 'LinkedInRank is the #1 free LinkedIn profile scoring and analysis tool used by professionals worldwide.',
+            sameAs: [
+                'https://www.linkedin.com/company/linkedin-rank/',
+                'https://www.instagram.com/linkedinrank/',
+            ],
+            founder: {
+                '@type': 'Person',
+                name: 'Bhavishya Singla',
+                url: 'https://www.linkedin.com/in/bhavishyasingla1/',
+            },
+            foundingDate: '2024',
+            contactPoint: {
+                '@type': 'ContactPoint',
+                email: 'hello@linkedinrank.com',
+                contactType: 'customer support',
+                url: 'https://linkedinrank.com/contact',
+            },
+            description: 'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Used by professionals, students, and job seekers worldwide to check their LinkedIn rank and improve their LinkedIn profile visibility.',
+            knowsAbout: [
+                'LinkedIn profile optimization',
+                'LinkedIn SEO',
+                'LinkedIn profile ranking',
+                'LinkedIn search ranking',
+                'LinkedIn recruiter visibility',
+                'LinkedIn algorithm ranking factors',
+            ],
         },
         {
-            '@type': 'SoftwareApplication',
-            name: 'LinkedInRank',
-            applicationCategory: 'BusinessApplication',
-            operatingSystem: 'Web',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-            description: 'Free LinkedIn profile scorer that analyzes 30+ signals and provides AI-powered improvement recommendations.',
+            '@type': 'WebApplication',
+            '@id': 'https://linkedinrank.com/#webapp',
+            name: 'LinkedInRank - LinkedIn Rank Checker',
+            alternateName: ['LinkedIn Rank Checker', 'LinkedIn Profile Rank Tool', 'Free LinkedIn Profile Checker'],
             url: 'https://linkedinrank.com',
+            applicationCategory: 'BusinessApplication',
+            applicationSubCategory: 'LinkedIn Profile Analysis Tool',
+            operatingSystem: 'Any',
+            browserRequirements: 'Requires a modern web browser',
+            offers: {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+            },
+            featureList: [
+                'LinkedIn profile rank checking',
+                'LinkedIn profile scoring across 30+ signals',
+                'AI-powered profile recommendations',
+                'LinkedIn headline analysis and rewriting',
+                'LinkedIn about section optimization',
+                'Experience description improvement',
+                'LinkedIn keyword optimization',
+                'Personalized improvement roadmap',
+                'Career stage adaptive scoring',
+                'Privacy-first: no login, no data storage',
+            ],
+            description: 'Free LinkedIn rank checker that scores your LinkedIn profile across 30+ ranking signals. Get your LinkedIn profile rank, AI-powered recommendations, and a personalized improvement roadmap. No login required, no data stored.',
+            creator: { '@id': 'https://linkedinrank.com/#organization' },
             aggregateRating: {
                 '@type': 'AggregateRating',
                 ratingValue: '4.9',
                 ratingCount: '500',
                 bestRating: '5',
             },
+        },
+        {
+            '@type': 'SiteNavigationElement',
+            name: 'Main Navigation',
+            url: 'https://linkedinrank.com',
+            hasPart: [
+                { '@type': 'WebPage', name: 'Free LinkedIn Tools', url: 'https://linkedinrank.com/tools' },
+                { '@type': 'WebPage', name: 'Blog', url: 'https://linkedinrank.com/blogs' },
+                { '@type': 'WebPage', name: 'LinkedIn Optimization Guide', url: 'https://linkedinrank.com/linkedin-optimization-guide' },
+                { '@type': 'WebPage', name: 'How It Works', url: 'https://linkedinrank.com/how-linkedin-rank-works' },
+                { '@type': 'WebPage', name: 'FAQ', url: 'https://linkedinrank.com/faq' },
+                { '@type': 'WebPage', name: 'What Is LinkedIn Rank', url: 'https://linkedinrank.com/what-is-linkedin-rank' },
+                { '@type': 'WebPage', name: 'LinkedIn Rank vs SSI', url: 'https://linkedinrank.com/linkedin-rank-vs-ssi' },
+                { '@type': 'WebPage', name: 'About', url: 'https://linkedinrank.com/about' },
+                { '@type': 'WebPage', name: 'Contact', url: 'https://linkedinrank.com/contact' },
+            ],
         },
     ],
 }
@@ -106,11 +181,34 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
+        <html lang="en" dir="ltr">
             <head>
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+                <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+                <meta name="theme-color" content="#0A66C2" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                <meta name="format-detection" content="telephone=no" />
+                <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+                <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             </head>
-            <body className={inter.className} suppressHydrationWarning>{children}</body>
+            <body className={inter.className} suppressHydrationWarning>
+                {/* Skip to content | accessibility */}
+                <a
+                    href="#main-content"
+                    className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#0A66C2] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
+                >
+                    Skip to main content
+                </a>
+                <Script
+                    id="jsonld-global"
+                    type="application/ld+json"
+                    strategy="beforeInteractive"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+                {children}
+            </body>
         </html>
     )
 }

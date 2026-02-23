@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Job Seekers — Free Guide (2026)',
-    description: 'Optimize your LinkedIn profile for recruiters and hiring managers in 2026. Data-backed strategies for headlines, experience, skills, and keywords. Free scoring with LinkedInRank — the #1 LinkedIn scorer.',
+    title: 'LinkedIn Profile Tips for Job Seekers | Free Guide (2026)',
+    description: 'Optimize your LinkedIn profile for recruiters and hiring managers in 2026. Data-backed strategies for headlines, experience, skills, and keywords. Free scoring with LinkedInRank | the #1 LinkedIn scorer.',
     keywords: 'linkedin for job seekers 2026, linkedin profile optimization job search, linkedin recruiter tips, linkedinrank job search, linkedin keywords job seekers, linkedin profile for job hunting',
     alternates: { canonical: 'https://linkedinrank.com/for-jobseekers' },
     openGraph: {
-        title: 'LinkedIn Profile Tips for Job Seekers — Free Guide',
+        title: 'LinkedIn Profile Tips for Job Seekers | Free Guide',
         description: 'Optimize your LinkedIn for recruiters. Data-backed strategies and free scoring with LinkedInRank.',
         url: 'https://linkedinrank.com/for-jobseekers',
     },
@@ -34,7 +35,7 @@ const jsonLd = {
         { '@type': 'FAQPage', mainEntity: [
             { '@type': 'Question', name: 'How long should my LinkedIn profile be for job searching?', acceptedAnswer: { '@type': 'Answer', text: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills.' } },
             { '@type': 'Question', name: 'Should my LinkedIn match my resume exactly?', acceptedAnswer: { '@type': 'Answer', text: 'They should be consistent but not identical. LinkedIn should be more conversational and include elements resumes lack: About narrative, Featured section, recommendations.' } },
-            { '@type': 'Question', name: 'How do I handle a career gap on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively — mention skills you learned, freelance work, or personal development.' } },
+            { '@type': 'Question', name: 'How do I handle a career gap on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively | mention skills you learned, freelance work, or personal development.' } },
             { '@type': 'Question', name: 'Is LinkedIn Premium worth it for job seekers?', acceptedAnswer: { '@type': 'Answer', text: 'Premium gives you InMail credits and shows who viewed your profile. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' } },
             { '@type': 'Question', name: 'How does LinkedInRank help with job searching?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score.' } },
             { '@type': 'Question', name: 'How quickly can I improve my profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough overhaul takes 2–3 hours. Start with headline and About section. Most people see increased profile views within 1–2 weeks of optimization.' } },
@@ -46,7 +47,7 @@ export default function ForJobSeekersPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/for-students', label: 'For Students' }]} />
+            <SiteHeader />
 
             <article className="max-w-2xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -106,7 +107,7 @@ export default function ForJobSeekersPage() {
                                 <p className="text-sm font-bold text-[#0A66C2]">What are you looking for?</p>
                             </div>
                         </div>
-                        <p>Write in first person, mention specific tools and skills, and include keywords from your target job descriptions. The first two lines are visible before "see more" — make them count.</p>
+                        <p>Write in first person, mention specific tools and skills, and include keywords from your target job descriptions. The first two lines are visible before "see more" | make them count.</p>
                     </section>
 
                     <section aria-labelledby="js-skills">
@@ -137,14 +138,14 @@ export default function ForJobSeekersPage() {
 
                     <section aria-labelledby="js-activity">
                         <h2 id="js-activity" className="text-xl font-bold text-[#0A0F1C] mb-3">8. Stay active during your job search</h2>
-                        <p className="mb-3">Recruiters check your recent activity. A completely inactive profile suggests you are not engaged with your industry. You do not need to post daily — even minimal engagement signals that you are current and professional.</p>
+                        <p className="mb-3">Recruiters check your recent activity. A completely inactive profile suggests you are not engaged with your industry. You do not need to post daily | even minimal engagement signals that you are current and professional.</p>
                         <ul className="space-y-2">
                             {[
                                 'Comment thoughtfully on 3–5 industry posts per week',
                                 'Share an article with your perspective once a week',
                                 'Post about your job search learnings (these perform well and build empathy)',
                                 'Engage with posts from recruiters at your target companies',
-                                'Congratulate connections on new roles — it keeps you visible in their feeds',
+                                'Congratulate connections on new roles | it keeps you visible in their feeds',
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2 text-sm">
                                     <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
@@ -161,7 +162,7 @@ export default function ForJobSeekersPage() {
                             {[
                                 { q: 'How long should my LinkedIn profile be for job searching?', a: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills. Completeness directly impacts search visibility.' },
                                 { q: 'Should my LinkedIn match my resume exactly?', a: 'They should be consistent (same job titles and dates) but not identical. LinkedIn should be more conversational, include your full career story, and have elements resumes lack: About narrative, Featured section, recommendations.', },
-                                { q: 'How do I handle a career gap on LinkedIn?', a: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively — mention skills you learned, freelance work you did, or personal development. Recruiters respect transparency.' },
+                                { q: 'How do I handle a career gap on LinkedIn?', a: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively | mention skills you learned, freelance work you did, or personal development. Recruiters respect transparency.' },
                                 { q: 'Is LinkedIn Premium worth it for job seekers?', a: 'Premium gives you InMail credits and shows who viewed your profile. The ROI depends on your industry. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' },
                                 { q: 'How does LinkedInRank help with job searching?', a: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score with specific recommendations to improve each section.' },
                                 { q: 'How quickly can I improve my profile?', a: 'A thorough overhaul takes 2–3 hours. Start with headline and About section, then add metrics to experience. Most people see increased profile views within 1–2 weeks of optimization.' },
@@ -177,7 +178,7 @@ export default function ForJobSeekersPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center mt-4">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See how your profile reads to recruiters</h2>
                         <p className="text-sm text-[#4B5563] mb-4">LinkedInRank evaluates the same signals recruiters look for. Get your free score and improvement roadmap.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
                     <div className="pt-8 border-t border-gray-100 mt-6">
@@ -196,17 +197,7 @@ export default function ForJobSeekersPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
-                        <Link href="/for-founders" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Founders</Link>
-                        <Link href="/linkedin-best-practices" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Best Practices</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

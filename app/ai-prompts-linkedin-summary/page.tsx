@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
     title: 'AI Prompts for LinkedIn Profile Rewrite & Positioning (2026)',
@@ -28,7 +29,7 @@ const PROMPTS = [
     {
         id: 'full-profile',
         title: 'The Full Profile Rewrite Prompt',
-        description: 'One mega-prompt that rewrites your entire LinkedIn profile — headline, About, experience, and skills strategy — in one shot.',
+        description: 'One mega-prompt that rewrites your entire LinkedIn profile | headline, About, experience, and skills strategy | in one shot.',
         prompt: `Rewrite my entire LinkedIn profile for maximum professional impact.
 
 Here is my current LinkedIn profile (paste everything):
@@ -53,7 +54,7 @@ Rewrite the following sections:
 
 1. HEADLINE (under 120 chars, keyword-rich, specific)
 2. ABOUT SECTION (150-300 words, first person, hook + story + proof + CTA)
-3. EXPERIENCE — top 2 roles only (4-6 bullets each, action verb + metric + impact)
+3. EXPERIENCE | top 2 roles only (4-6 bullets each, action verb + metric + impact)
 4. SKILLS RECOMMENDATION (Top 3 pinned + 15 additional, ordered by recruiter search value)
 
 For each section, show:
@@ -63,7 +64,7 @@ For each section, show:
 
 Overall positioning strategy: In 3-4 sentences, explain the strategic narrative tying all sections together. What story does this profile tell?`,
         tips: [
-            'This is the "nuclear option" — use it when you want a complete overhaul, not a tweak',
+            'This is the "nuclear option" | use it when you want a complete overhaul, not a tweak',
             'After implementing, run your new PDF through LinkedInRank to measure the improvement',
             'Ask the AI for a second pass if any section feels inauthentic to your voice',
         ],
@@ -105,7 +106,7 @@ Tasks:
 
 4. If any answer is "no," suggest how to fix it.`,
         tips: [
-            'Your positioning statement is the DNA of your entire profile — get this right and everything else follows',
+            'Your positioning statement is the DNA of your entire profile | get this right and everything else follows',
             'The best positioning is narrow: "I help B2B SaaS startups reduce churn" beats "I help companies grow"',
             'Test your positioning: tell 3 people and ask what they think you do. If they get it right, it works.',
         ],
@@ -113,7 +114,7 @@ Tasks:
     {
         id: 'linkedin-to-resume',
         title: 'The LinkedIn-to-Resume Adapter',
-        description: 'Takes your optimized LinkedIn profile and adapts it for a resume — different format, different rules.',
+        description: 'Takes your optimized LinkedIn profile and adapts it for a resume | different format, different rules.',
         prompt: `Adapt my LinkedIn profile content for a resume.
 
 My LinkedIn profile:
@@ -163,7 +164,7 @@ Format the resume sections as copy-paste ready text.`,
 
 My expertise area: [e.g., "AI in healthcare" or "remote team management"]
 My current role: [Job Title]
-My unique perspective: [What do you believe about your field that others don't? e.g., "Most AI in healthcare is solving the wrong problems — we need to focus on preventive, not diagnostic"]
+My unique perspective: [What do you believe about your field that others don't? e.g., "Most AI in healthcare is solving the wrong problems | we need to focus on preventive, not diagnostic"]
 My credentials in this area: [e.g., "10 years in healthcare tech, 3 published papers, built 2 AI products used by 50+ hospitals"]
 Content I've created (if any): [Blog posts, talks, articles]
 My target audience on LinkedIn: [e.g., "healthcare CTOs and health-tech founders"]
@@ -249,7 +250,7 @@ Tasks:
 
 Give me a numbered action checklist I can follow step by step.`,
         tips: [
-            'Use this prompt AFTER getting your LinkedInRank score — the specificity makes the AI output much better',
+            'Use this prompt AFTER getting your LinkedInRank score | the specificity makes the AI output much better',
             'Focus on the highest-weighted sections first: Experience (25pts), then Headline and About (20pts each)',
             'Re-analyze after implementing changes to track your progress and discover remaining gaps',
         ],
@@ -260,7 +261,7 @@ export default function AIPromptsSummaryPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/ai-prompts-linkedin', label: 'All AI Prompts' }]} />
+            <SiteHeader />
 
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
@@ -289,7 +290,7 @@ export default function AIPromptsSummaryPage() {
                             </div>
                             <div className="bg-[#0A0F1C] rounded-xl p-5 sm:p-6 mb-4 overflow-x-auto">
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt — Copy &amp; Paste</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt | Copy &amp; Paste</span>
                                     <span className="text-[10px] font-medium text-[#4B5563] bg-[#1a1f2e] px-2 py-0.5 rounded">ChatGPT / Claude / Gemini</span>
                                 </div>
                                 <pre className="text-[13px] text-[#E5E7EB] whitespace-pre-wrap font-mono leading-relaxed">{p.prompt}</pre>
@@ -312,7 +313,7 @@ export default function AIPromptsSummaryPage() {
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Get your baseline score first</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">The Complete Audit prompt works best with your actual LinkedInRank scores. Analyze first, then optimize.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
@@ -333,21 +334,7 @@ export default function AIPromptsSummaryPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

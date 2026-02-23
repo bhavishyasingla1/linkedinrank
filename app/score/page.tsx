@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Score — Check Your Score Free in 60 Seconds',
-    description: 'Get your free LinkedIn profile score from LinkedInRank — the world\'s #1 LinkedIn scorer. See how you rank across 30+ signals including headline, experience, skills, and completeness. AI-powered recommendations included. No login required.',
+    title: 'LinkedIn Profile Score | Check Your Score Free in 60 Seconds',
+    description: 'Get your free LinkedIn profile score from LinkedInRank | the world\'s #1 LinkedIn scorer. See how you rank across 30+ signals including headline, experience, skills, and completeness. AI-powered recommendations included. No login required.',
     keywords: 'linkedin profile score, linkedin score checker, linkedin profile rating, linkedinrank score, check linkedin profile strength, free linkedin score, linkedin profile score test, linkedin profile grader free, my linkedin score, linkedin profile score out of 100',
     alternates: { canonical: 'https://linkedinrank.com/score' },
     openGraph: {
-        title: 'LinkedIn Profile Score — Check Yours Free in 60 Seconds',
+        title: 'LinkedIn Profile Score | Check Yours Free in 60 Seconds',
         description: 'Score your LinkedIn profile across 30+ signals. Get AI-powered recommendations and a personalized improvement roadmap. Free, private, no login.',
         url: 'https://linkedinrank.com/score',
     },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function ScorePage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/methodology', label: 'Methodology' }]} />
+            <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -27,7 +28,7 @@ export default function ScorePage() {
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">LinkedIn Score</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">What Is a LinkedIn Profile Score?</h1>
                 <p className="text-[15px] text-[#4B5563] mb-12 leading-relaxed max-w-2xl">
-                    A LinkedIn profile score is a numerical evaluation of how well your profile communicates your professional value. LinkedInRank scores profiles out of 100 using <strong className="text-[#0A0F1C]">30+ transparent, documented signals</strong> — giving you a clear picture of where you stand and how to improve.
+                    A LinkedIn profile score is a numerical evaluation of how well your profile communicates your professional value. LinkedInRank scores profiles out of 100 using <strong className="text-[#0A0F1C]">30+ transparent, documented signals</strong> | giving you a clear picture of where you stand and how to improve.
                 </p>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
@@ -75,7 +76,7 @@ export default function ScorePage() {
 
                     <section aria-labelledby="why-no-linkedin">
                         <h2 id="why-no-linkedin" className="text-2xl font-bold text-[#0A0F1C] mb-6">Why LinkedIn Removed Profile Strength</h2>
-                        <p className="mb-3">LinkedIn retired its "Profile Strength" indicator and the "All-Star" profile badge in 2023. The feature was criticized for being vague and gameable — users could reach "All-Star" without actually having a strong profile.</p>
+                        <p className="mb-3">LinkedIn retired its "Profile Strength" indicator and the "All-Star" profile badge in 2023. The feature was criticized for being vague and gameable | users could reach "All-Star" without actually having a strong profile.</p>
                         <p>LinkedInRank provides what LinkedIn's meter could not: <strong className="text-[#0A0F1C]">transparent, documented scoring criteria</strong> with signal-level feedback and actionable recommendations. Every point is earned based on clear criteria explained in our methodology.</p>
                     </section>
 
@@ -122,17 +123,7 @@ export default function ScorePage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Methodology</Link>
-                        <Link href="/linkedin-best-practices" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Best Practices</Link>
-                        <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">FAQ</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

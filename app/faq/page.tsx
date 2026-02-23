@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 const FAQ_SECTIONS = [
     {
@@ -10,7 +11,7 @@ const FAQ_SECTIONS = [
         faqs: [
             { q: 'What is LinkedInRank?', a: 'LinkedInRank is a free LinkedIn profile evaluation tool. Upload your LinkedIn PDF and get a transparent score out of 100 across 30+ visible profile signals, with personalized recommendations and an improvement roadmap. Learn more on our <a href="/about" class="text-[#0A66C2] hover:underline">About page</a>.' },
             { q: 'Is LinkedInRank really free?', a: 'Yes. LinkedInRank is completely free to use. There are no hidden fees, no premium tiers, and no paywalls. You get the full analysis including AI-powered recommendations at zero cost.' },
-            { q: 'What does LinkedInRank analyze?', a: 'We evaluate your Headline, About section, Experience descriptions, Skills, Education, and overall profile completeness using 30+ signals. We only score what is visible in your LinkedIn PDF — not engagement, followers, or posting activity. See the full breakdown in our <a href="/methodology" class="text-[#0A66C2] hover:underline">Methodology</a>.' },
+            { q: 'What does LinkedInRank analyze?', a: 'We evaluate your Headline, About section, Experience descriptions, Skills, Education, and overall profile completeness using 30+ signals. We only score what is visible in your LinkedIn PDF | not engagement, followers, or posting activity. See the full breakdown in our <a href="/methodology" class="text-[#0A66C2] hover:underline">Methodology</a>.' },
             { q: 'Is LinkedInRank affiliated with LinkedIn?', a: 'No. LinkedInRank is an independent tool and is not affiliated with, endorsed by, or connected to LinkedIn Corporation in any way. We analyze publicly available PDF exports. See our <a href="/disclaimer" class="text-[#0A66C2] hover:underline">Disclaimer</a> for details.' },
             { q: 'Who created LinkedInRank?', a: 'LinkedInRank was created by Bhavishya Singla after years of helping friends, family, and colleagues optimize their LinkedIn profiles. Read the full <a href="/story" class="text-[#0A66C2] hover:underline">founding story</a>.' },
             { q: 'How is LinkedInRank different from hiring a career coach?', a: 'LinkedInRank provides instant, structured, repeatable analysis at zero cost. A career coach offers personalized narrative strategy and emotional context. For most people, the best approach is to start with LinkedInRank and then supplement with coaching if needed. See our detailed <a href="/linkedinrank-vs-manual-audits" class="text-[#0A66C2] hover:underline">LinkedInRank vs Manual Audits</a> comparison.' },
@@ -24,7 +25,7 @@ const FAQ_SECTIONS = [
             { q: 'How do I export my LinkedIn PDF?', a: 'Go to your LinkedIn profile page, click the "More" button (three dots) below your profile photo, then select "Save to PDF." The PDF downloads to your computer and can be uploaded to LinkedInRank.' },
             { q: 'How long does the analysis take?', a: 'The full analysis, including AI-powered recommendations, typically completes in under 60 seconds.' },
             { q: 'What is the scoring scale?', a: 'Profiles are scored out of 100 across six categories: Headline (20 pts), About (20 pts), Experience (25 pts), Skills (15 pts), Education & Certifications (10 pts), and Completeness (10 pts). Tiers: Bronze (0-54), Silver (55-69), Gold (70-84), Platinum (85+). Full details in our <a href="/methodology" class="text-[#0A66C2] hover:underline">Methodology</a>.' },
-            { q: 'What are the scoring tiers?', a: 'Bronze (0-54) means your profile needs work. Silver (55-69) indicates a solid foundation. Gold (70-84) reflects strong professional presence. Platinum (85-100) is exceptionally well-crafted — very few profiles reach this tier.' },
+            { q: 'What are the scoring tiers?', a: 'Bronze (0-54) means your profile needs work. Silver (55-69) indicates a solid foundation. Gold (70-84) reflects strong professional presence. Platinum (85-100) is exceptionally well-crafted | very few profiles reach this tier.' },
             { q: 'How does the AI analysis work?', a: 'After rule-based scoring evaluates structure and completeness, Google Gemini AI analyzes content quality, relevance, and positioning. It generates personalized recommendations with before/after examples tailored to your role and career stage.' },
             { q: 'What does the report include?', a: 'Your report includes: a score out of 100 with tier placement, category-by-category breakdown with signal-level feedback, personalized recommendations with before/after examples, an improvement roadmap showing point gains, and <a href="/linkedin-best-practices" class="text-[#0A66C2] hover:underline">LinkedIn best practices</a>.' },
             { q: 'Can I download the report?', a: 'Yes. Click the "Download Report" button on your results page to save your analysis as a PDF using your browser\'s print function.' },
@@ -64,11 +65,15 @@ const FAQ_SECTIONS = [
             { q: 'How do I write a compelling LinkedIn About section?', a: 'Write in first person, lead with your expertise, mention specific skills and tools, and include a call-to-action. Our <a href="/linkedin-about-guide" class="text-[#0A66C2] hover:underline">About section guide</a> has templates and before/after examples.' },
             { q: 'What are the biggest mistakes people make on LinkedIn?', a: 'Common mistakes include vague headlines, missing About sections, job titles without descriptions, and generic skills. We have documented the <a href="/linkedin-mistakes" class="text-[#0A66C2] hover:underline">top 10 LinkedIn mistakes</a> with fixes for each.' },
             { q: 'How do I use the report with AI tools?', a: 'Download your LinkedInRank report and upload it along with your LinkedIn PDF to ChatGPT, Claude, or Gemini. Ask the AI to rewrite your headline, About section, and experience descriptions based on the scoring feedback.' },
-            { q: 'What are LinkedIn best practices for 2025?', a: 'Best practices include: keyword-rich headlines, first-person About sections, action-verb experience bullets, and pinned relevant skills. See our full <a href="/linkedin-best-practices" class="text-[#0A66C2] hover:underline">LinkedIn best practices</a> guide and <a href="/linkedin-profile-checklist" class="text-[#0A66C2] hover:underline">profile checklist</a>.' },
+            { q: 'What are LinkedIn best practices for 2026?', a: 'Best practices include: keyword-rich headlines, first-person About sections, action-verb experience bullets, and pinned relevant skills. See our full <a href="/linkedin-best-practices" class="text-[#0A66C2] hover:underline">LinkedIn best practices</a> guide and <a href="/linkedin-profile-checklist" class="text-[#0A66C2] hover:underline">profile checklist</a>.' },
             { q: 'How often should I analyze my profile?', a: 'We recommend re-analyzing after making significant profile updates. This helps you track improvement and identify remaining opportunities. Many users analyze quarterly or before a job search.' },
-            { q: 'What is the most impactful section to improve?', a: 'Experience (25 points) has the highest weight, followed by Headline and About (20 each). However, the highest-impact fix depends on your current weakest area — which LinkedInRank identifies for you.' },
+            { q: 'What is the most impactful section to improve?', a: 'Experience (25 points) has the highest weight, followed by Headline and About (20 each). However, the highest-impact fix depends on your current weakest area | which LinkedInRank identifies for you.' },
             { q: 'How do I optimize my LinkedIn profile for recruiters?', a: 'Focus on searchable keywords in your headline, quantified achievements in experience, and a clear About section that signals your expertise. Our <a href="/get-noticed-recruiters" class="text-[#0A66C2] hover:underline">recruiter visibility guide</a> and <a href="/recruiter-psychology" class="text-[#0A66C2] hover:underline">recruiter psychology</a> guide explain exactly what hiring managers look for.' },
             { q: 'What keywords should I use on my LinkedIn profile?', a: 'Use role-specific keywords, tool/technology names, and industry terms that recruiters search for. Our <a href="/linkedin-keywords-guide" class="text-[#0A66C2] hover:underline">LinkedIn keywords guide</a> explains how to research and place keywords effectively.' },
+            { q: 'What is a LinkedIn profile score?', a: 'A LinkedIn profile score is a numerical rating (out of 100) that evaluates how well your profile is optimized for recruiter visibility and professional positioning. LinkedInRank scores across 30+ signals including headline clarity, keyword usage, experience descriptions, and skills alignment. Check your score with our <a href="/linkedin-profile-score" class="text-[#0A66C2] hover:underline">free LinkedIn profile score checker</a>.' },
+            { q: 'How do I improve my LinkedIn ranking?', a: 'Improving your LinkedIn ranking starts with optimizing your headline with searchable keywords, writing a compelling About section, adding quantified achievements to your experience, and ensuring your skills match your target role. Our <a href="/linkedin-ranking" class="text-[#0A66C2] hover:underline">complete LinkedIn ranking guide</a> breaks down every ranking factor with actionable steps.' },
+            { q: 'What LinkedIn headline should a graphic designer use?', a: 'Graphic designers should include their specialty (UI/UX, brand design, freelance), key tools (Figma, Adobe Creative Suite), and a positioning statement. We have <a href="/linkedin-headline-for-graphic-designer" class="text-[#0A66C2] hover:underline">150+ LinkedIn headline examples for graphic designers</a> organized by specialization and career stage.' },
+            { q: 'How should students set up their LinkedIn profile?', a: 'Students should focus on a clear headline with their field of study and career interest, a forward-looking About section, and well-described projects, internships, or coursework. Our <a href="/linkedin-profile-for-students" class="text-[#0A66C2] hover:underline">complete LinkedIn profile guide for students</a> walks through every section step by step.' },
         ]
     },
     {
@@ -90,9 +95,9 @@ const FAQ_SECTIONS = [
             { q: 'What file format does LinkedInRank accept?', a: 'Only PDF files exported directly from LinkedIn. Other formats (Word, images, screenshots) are not supported. The file must be under 10MB.' },
             { q: 'Why does my PDF look different from my profile?', a: 'LinkedIn PDF exports only include text content from your profile. They do not include your profile photo, banner, featured section, post activity, or recommendations from others.' },
             { q: 'What browsers are supported?', a: 'LinkedInRank works on all modern browsers including Chrome, Firefox, Safari, and Edge on both desktop and mobile devices.' },
-            { q: 'Is there a mobile app?', a: 'LinkedInRank is a web application optimized for all screen sizes. There is no separate mobile app — you can use it directly in your mobile browser at linkedinrank.com.' },
+            { q: 'Is there a mobile app?', a: 'LinkedInRank is a web application optimized for all screen sizes. There is no separate mobile app | you can use it directly in your mobile browser at linkedinrank.com.' },
             { q: 'How is LinkedInRank different from other LinkedIn tools?', a: 'LinkedInRank focuses on transparent, signal-based scoring of your actual profile content. See our <a href="/compare-linkedin-review-tools" class="text-[#0A66C2] hover:underline">tool comparison</a> and <a href="/linkedinrank-vs-manual-audits" class="text-[#0A66C2] hover:underline">vs manual audits</a> pages for detailed breakdowns.' },
-            { q: 'Will improving my LinkedInRank score help me get more recruiter views?', a: 'Implementing the recommendations — better keywords, clearer descriptions, stronger headlines — will improve how your profile performs in LinkedIn search. Learn what recruiters look for in our <a href="/recruiter-psychology" class="text-[#0A66C2] hover:underline">recruiter psychology</a> guide.' },
+            { q: 'Will improving my LinkedInRank score help me get more recruiter views?', a: 'Implementing the recommendations | better keywords, clearer descriptions, stronger headlines | will improve how your profile performs in LinkedIn search. Learn what recruiters look for in our <a href="/recruiter-psychology" class="text-[#0A66C2] hover:underline">recruiter psychology</a> guide.' },
             { q: 'How do I build a personal brand on LinkedIn?', a: 'Personal branding starts with a clear headline, authentic About section, and consistent content. Our <a href="/linkedin-personal-branding" class="text-[#0A66C2] hover:underline">personal branding guide</a> and <a href="/linkedin-content-strategy" class="text-[#0A66C2] hover:underline">content strategy guide</a> cover this in depth.' },
             { q: 'What makes the top 1% of LinkedIn profiles different?', a: 'Top profiles have clear positioning, quantified achievements, and complete sections. We analyzed the patterns in our <a href="/top-1-percent-profiles" class="text-[#0A66C2] hover:underline">top 1% profiles</a> guide.' },
             { q: 'Should my LinkedIn profile be different from my resume?', a: 'Yes. LinkedIn profiles should be more conversational, keyword-rich, and narrative-driven than resumes. See our <a href="/linkedin-resume-vs-profile" class="text-[#0A66C2] hover:underline">LinkedIn vs Resume comparison</a>.' },
@@ -125,7 +130,7 @@ export default function FaqPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
-            <SiteHeader navLinks={[{ href: '/methodology', label: 'Methodology' }, { href: '/about', label: 'About' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-14 pb-10 overflow-hidden">
@@ -137,7 +142,7 @@ export default function FaqPage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-3">Frequently Asked Questions</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-lg mx-auto leading-relaxed">
-                        Everything you need to know about LinkedInRank — how it works, what it scores, and how to use your report.
+                        Everything you need to know about LinkedInRank | how it works, what it scores, and how to use your report.
                     </p>
                 </div>
             </section>
@@ -230,9 +235,9 @@ export default function FaqPage() {
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
                     </div>
                     <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Still have questions?</h2>
-                    <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Reach out to the founder or try analyzing your profile — it only takes a minute.</p>
+                    <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Reach out to the founder or try analyzing your profile | it only takes a minute.</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                         <Link href="/contact" className="text-sm font-medium text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors">Contact Us →</Link>
                     </div>
                 </div>
@@ -241,22 +246,22 @@ export default function FaqPage() {
                     <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
                     <div className="flex flex-wrap gap-2">
                         {[
+                            { label: 'LinkedIn Ranking Guide', href: '/linkedin-ranking' },
+                            { label: 'Profile Score Checker', href: '/linkedin-profile-score' },
                             { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
                             { label: 'Headline Guide', href: '/linkedin-headline-guide' },
                             { label: 'About Section Guide', href: '/linkedin-about-guide' },
                             { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
                             { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
                             { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                            { label: 'For Students', href: '/for-students' },
+                            { label: 'Headlines for Designers', href: '/linkedin-headline-for-graphic-designer' },
+                            { label: 'Student Profile Guide', href: '/linkedin-profile-for-students' },
                             { label: 'For Job Seekers', href: '/for-jobseekers' },
                             { label: 'For Founders', href: '/for-founders' },
                             { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
                             { label: 'Personal Branding', href: '/linkedin-personal-branding' },
                             { label: 'Content Strategy', href: '/linkedin-content-strategy' },
-                            { label: 'Viral Post Formulas', href: '/viral-post-formulas' },
                             { label: 'Top 1% Profiles', href: '/top-1-percent-profiles' },
-                            { label: 'Data Security', href: '/data-security' },
-                            { label: 'vs Manual Audits', href: '/linkedinrank-vs-manual-audits' },
                             { label: 'AI Prompts for LinkedIn', href: '/ai-prompts-linkedin' },
                         ].map((item, i) => (
                             <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
@@ -265,22 +270,7 @@ export default function FaqPage() {
                 </div>
             </div>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Methodology</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/terms" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Terms</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Founders & Entrepreneurs — Free Guide (2026)',
+    title: 'LinkedIn Profile Tips for Founders & Entrepreneurs | Free Guide (2026)',
     description: 'Position your LinkedIn profile for credibility, fundraising, and talent acquisition in 2026. Data-backed strategies for founder headlines, About narratives, and experience framing. Free scoring with LinkedInRank.',
     keywords: 'linkedin for founders 2026, founder linkedin profile, entrepreneur linkedin tips, linkedinrank founder guide, startup linkedin profile, ceo linkedin profile tips, founder personal branding linkedin',
     alternates: { canonical: 'https://linkedinrank.com/for-founders' },
@@ -36,7 +37,7 @@ const jsonLd = {
             { '@type': 'Question', name: 'How should founders handle the About section?', acceptedAnswer: { '@type': 'Answer', text: 'Tell your founding story: what problem you noticed, why you decided to solve it, and what traction you have achieved. Include metrics. End with what you are looking for.' } },
             { '@type': 'Question', name: 'How often should founders post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: '3–4 times per week is optimal for growth. Consistency matters more than frequency. Mix between company updates, industry insights, and personal founder stories.' } },
             { '@type': 'Question', name: 'Does LinkedInRank work for founder profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank recognizes founder profiles and adjusts scoring to evaluate positioning clarity, domain credibility, and narrative strength.' } },
-            { '@type': 'Question', name: 'Should I mention funding on my profile?', acceptedAnswer: { '@type': 'Answer', text: 'If you have notable funding, yes — it adds credibility. If bootstrapped, lead with traction metrics instead: users, revenue, customers served.' } },
+            { '@type': 'Question', name: 'Should I mention funding on my profile?', acceptedAnswer: { '@type': 'Answer', text: 'If you have notable funding, yes | it adds credibility. If bootstrapped, lead with traction metrics instead: users, revenue, customers served.' } },
             { '@type': 'Question', name: 'How do I attract investors through LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Build in public consistently. Share traction updates, insights, and lessons. Your profile should make it easy for investors to understand your company in 10 seconds.' } },
         ] },
     ],
@@ -46,7 +47,7 @@ export default function ForFoundersPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/for-jobseekers', label: 'For Job Seekers' }]} />
+            <SiteHeader />
 
             <article className="max-w-2xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -62,7 +63,7 @@ export default function ForFoundersPage() {
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
                     <section aria-labelledby="f-headline">
                         <h2 id="f-headline" className="text-xl font-bold text-[#0A0F1C] mb-3">1. Your headline is your positioning statement</h2>
-                        <p className="mb-4">Investors and potential hires see your headline before anything else. "CEO & Founder" tells them nothing. A strong founder headline communicates what you are building, for whom, and your domain credibility — all in under 120 characters.</p>
+                        <p className="mb-4">Investors and potential hires see your headline before anything else. "CEO & Founder" tells them nothing. A strong founder headline communicates what you are building, for whom, and your domain credibility | all in under 120 characters.</p>
                         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] space-y-3">
                             <div>
                                 <p className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-1">Generic</p>
@@ -100,19 +101,19 @@ export default function ForFoundersPage() {
                         <p className="mb-4">Your experience section should show a logical path to founding your company. Previous roles, relevant industry experience, and domain expertise all build credibility. A clear trajectory answers the investor question: "Why this person for this problem?"</p>
                         <div className="bg-[#EFF6FF] border border-[#DBEAFE] rounded-xl p-5">
                             <p className="text-sm font-bold text-[#0A66C2] mb-2">For your current company entry</p>
-                            <p className="text-sm text-[#4B5563]">Describe what the company does, key milestones achieved (revenue, users, funding, partnerships), and your specific role in building it. This is not a job description — it is a company pitch combined with your leadership contribution.</p>
+                            <p className="text-sm text-[#4B5563]">Describe what the company does, key milestones achieved (revenue, users, funding, partnerships), and your specific role in building it. This is not a job description | it is a company pitch combined with your leadership contribution.</p>
                         </div>
                     </section>
 
                     <section aria-labelledby="f-skills">
                         <h2 id="f-skills" className="text-xl font-bold text-[#0A0F1C] mb-3">4. Skills that signal domain expertise</h2>
-                        <p className="mb-3">List skills that demonstrate you deeply understand the space you are building in. A fintech founder should have skills like "Payment Processing," "Financial Modeling," and "Regulatory Compliance" — not generic terms like "Leadership" or "Strategy."</p>
+                        <p className="mb-3">List skills that demonstrate you deeply understand the space you are building in. A fintech founder should have skills like "Payment Processing," "Financial Modeling," and "Regulatory Compliance" | not generic terms like "Leadership" or "Strategy."</p>
                         <p>Pin the 3 skills most relevant to your company's domain. This signals to both algorithms and humans that you are a domain expert, not just a generalist executive.</p>
                     </section>
 
                     <section aria-labelledby="f-network">
                         <h2 id="f-network" className="text-xl font-bold text-[#0A0F1C] mb-3">5. Leverage LinkedIn for fundraising and hiring</h2>
-                        <p className="mb-3">Your profile is often the first touchpoint for cold outreach — to investors, advisors, and candidates. A profile that clearly communicates what you are building, your background, and your traction makes warm intros more effective and cold outreach more credible.</p>
+                        <p className="mb-3">Your profile is often the first touchpoint for cold outreach | to investors, advisors, and candidates. A profile that clearly communicates what you are building, your background, and your traction makes warm intros more effective and cold outreach more credible.</p>
                         <p>Consider adding certifications, publications, or speaking engagements that demonstrate thought leadership in your vertical.</p>
                     </section>
 
@@ -123,7 +124,7 @@ export default function ForFoundersPage() {
 
                     <section aria-labelledby="f-content">
                         <h2 id="f-content" className="text-xl font-bold text-[#0A0F1C] mb-3">7. Build in public with LinkedIn content</h2>
-                        <p className="mb-3">Content is how founders build trust at scale. Unlike paid advertising, LinkedIn content compounds — every post builds your reputation and your company&apos;s brand simultaneously. The most effective founder content falls into four categories:</p>
+                        <p className="mb-3">Content is how founders build trust at scale. Unlike paid advertising, LinkedIn content compounds | every post builds your reputation and your company&apos;s brand simultaneously. The most effective founder content falls into four categories:</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {[
                                 { type: 'Behind the scenes', desc: 'Share wins, failures, and real decisions. Authenticity builds trust faster than polished marketing.' },
@@ -166,7 +167,7 @@ export default function ForFoundersPage() {
                                 { q: 'How should founders handle the About section?', a: 'Tell your founding story: what problem you noticed, why you decided to solve it, and what traction you have achieved. Include metrics (users, revenue, growth). End with what you are looking for (partners, hires, investors, customers).' },
                                 { q: 'How often should founders post on LinkedIn?', a: '3–4 times per week is optimal for growth. Consistency matters more than frequency. Mix between company updates, industry insights, and personal founder stories.' },
                                 { q: 'Does LinkedInRank work for founder profiles?', a: 'Yes. LinkedInRank recognizes founder profiles and adjusts scoring to evaluate positioning clarity, domain credibility, and narrative strength rather than traditional career progression signals.' },
-                                { q: 'Should I mention funding on my profile?', a: 'If you have notable funding (YC, known investors, significant rounds), yes — it adds credibility. If you are bootstrapped, lead with traction metrics instead: users, revenue, customers served.' },
+                                { q: 'Should I mention funding on my profile?', a: 'If you have notable funding (YC, known investors, significant rounds), yes | it adds credibility. If you are bootstrapped, lead with traction metrics instead: users, revenue, customers served.' },
                                 { q: 'How do I attract investors through LinkedIn?', a: 'Build in public consistently. Share traction updates, insights, and lessons. Investors follow founders who demonstrate clear thinking and market expertise. Your profile should make it easy for them to understand your company in 10 seconds.' },
                             ].map((item, i) => (
                                 <div key={i} className="border-b border-gray-100 pb-4">
@@ -180,7 +181,7 @@ export default function ForFoundersPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center mt-4">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See how your founder profile reads</h2>
                         <p className="text-sm text-[#4B5563] mb-4">Upload your LinkedIn PDF and get a free score with recommendations tailored to founder profiles.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
                     <div className="pt-8 border-t border-gray-100 mt-6">
@@ -199,17 +200,7 @@ export default function ForFoundersPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
-                        <Link href="/for-jobseekers" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Job Seekers</Link>
-                        <Link href="/linkedin-best-practices" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Best Practices</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

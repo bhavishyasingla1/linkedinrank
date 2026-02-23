@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'About LinkedInRank — The World\'s Best Free LinkedIn Profile Scorer',
+    title: 'About LinkedInRank | The World\'s Best Free LinkedIn Profile Scorer',
     description: 'LinkedInRank is a free, privacy-first LinkedIn profile scoring tool built to help professionals optimize their profiles. Learn about our mission, scoring methodology, and why thousands trust us.',
     keywords: 'about linkedinrank, linkedin profile scorer, linkedin analysis tool, free linkedin profile review, linkedin optimization, who built linkedinrank',
     alternates: { canonical: 'https://linkedinrank.com/about' },
     openGraph: {
-        title: 'About LinkedInRank — The World\'s Best Free LinkedIn Profile Scorer',
+        title: 'About LinkedInRank | The World\'s Best Free LinkedIn Profile Scorer',
         description: 'Learn why LinkedInRank was built and how it helps professionals optimize their LinkedIn profiles with data-driven scoring.',
         url: 'https://linkedinrank.com/about',
     },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/methodology', label: 'Methodology' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 pb-12 overflow-hidden">
@@ -29,7 +30,7 @@ export default function AboutPage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Why LinkedIn Rank Exists</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-lg mx-auto leading-relaxed">
-                        Honest, structured feedback on the most important career asset you own — your LinkedIn profile.
+                        Honest, structured feedback on the most important career asset you own | your LinkedIn profile.
                     </p>
                 </div>
             </section>
@@ -44,7 +45,7 @@ export default function AboutPage() {
                         <h2 className="text-xl font-bold text-[#0A0F1C]">The problem</h2>
                     </div>
                     <p className="text-[15px] text-[#4B5563] leading-relaxed mb-4">
-                        LinkedIn is the most important professional platform in the world — over 1 billion members, and recruiters spend an average of just 7.4 seconds scanning a profile before deciding to reach out or move on. Yet most people have no idea how their profile actually reads to recruiters, hiring managers, or potential collaborators.
+                        LinkedIn is the most important professional platform in the world | over 1 billion members, and recruiters spend an average of just 7.4 seconds scanning a profile before deciding to reach out or move on. Yet most people have no idea how their profile actually reads to recruiters, hiring managers, or potential collaborators.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
                         {[
@@ -59,7 +60,7 @@ export default function AboutPage() {
                         ))}
                     </div>
                     <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                        The feedback gap is real. Most professionals either get no feedback on their profile, or they get vague advice like &ldquo;make it more engaging&rdquo; — which is not actionable. LinkedIn itself gives you a profile strength meter, but it rewards completion, not quality. You can have a &ldquo;complete&rdquo; profile that still gets ignored by every recruiter in your industry.
+                        The feedback gap is real. Most professionals either get no feedback on their profile, or they get vague advice like &ldquo;make it more engaging&rdquo; | which is not actionable. LinkedIn itself gives you a profile strength meter, but it rewards completion, not quality. You can have a &ldquo;complete&rdquo; profile that still gets ignored by every recruiter in your industry.
                     </p>
                 </section>
 
@@ -72,7 +73,7 @@ export default function AboutPage() {
                         <h2 className="text-xl font-bold text-[#0A0F1C]">The solution</h2>
                     </div>
                     <p className="text-[15px] text-[#4B5563] leading-relaxed mb-4">
-                        LinkedIn Rank provides a structured, transparent evaluation of your LinkedIn profile based on what is actually visible in your exported PDF — not vanity metrics, not engagement data, not follower counts. It evaluates the same signals that recruiters and hiring managers evaluate when they decide whether to reach out.
+                        LinkedIn Rank provides a structured, transparent evaluation of your LinkedIn profile based on what is actually visible in your exported PDF | not vanity metrics, not engagement data, not follower counts. It evaluates the same signals that recruiters and hiring managers evaluate when they decide whether to reach out.
                     </p>
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-6 mb-4">
                         <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-wider mb-4">What you get</p>
@@ -130,7 +131,7 @@ export default function AboutPage() {
                             { title: 'Transparency over mystery', desc: 'Every scoring criterion is documented. No hidden algorithms, no black boxes. You can read exactly how each point is awarded on our methodology page.', icon: <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg> },
                             { title: 'Fairness across career stages', desc: 'A student is not judged by the same standards as a VP. LinkedInRank detects your career stage and adjusts expectations. Everyone gets a fair score.', icon: <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" /></svg> },
                             { title: 'Privacy by design', desc: 'No accounts, no storage, no tracking, no cookies. Your PDF is processed entirely in memory and discarded immediately. We never see your data after you close the tab.', icon: <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg> },
-                            { title: 'Actionable, not aspirational', desc: 'Every recommendation is specific enough to implement today. Not "improve your headline" — instead, you get 3 ready-to-use headline alternatives generated from your actual profile.', icon: <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg> },
+                            { title: 'Actionable, not aspirational', desc: 'Every recommendation is specific enough to implement today. Not "improve your headline" | instead, you get 3 ready-to-use headline alternatives generated from your actual profile.', icon: <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg> },
                         ].map((item, i) => (
                             <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
                                 <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center mb-3">{item.icon}</div>
@@ -187,7 +188,7 @@ export default function AboutPage() {
                                 <p className="text-lg font-bold text-white mb-1">Bhavishya Singla</p>
                                 <p className="text-sm text-gray-300 mb-3">Founder, LinkedInRank</p>
                                 <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                                    After two years of obsessively studying LinkedIn optimization — watching hundreds of videos, reading courses, reviewing dozens of profiles for friends and family — I built LinkedInRank to make that knowledge accessible to everyone. Not as vague advice, but as structured, actionable scoring anyone can use.
+                                    After two years of obsessively studying LinkedIn optimization | watching hundreds of videos, reading courses, reviewing dozens of profiles for friends and family | I built LinkedInRank to make that knowledge accessible to everyone. Not as vague advice, but as structured, actionable scoring anyone can use.
                                 </p>
                                 <div className="flex gap-3">
                                     <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#0A66C2] bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full no-underline transition-colors">Connect on LinkedIn</a>
@@ -202,7 +203,7 @@ export default function AboutPage() {
                 <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                     <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See how your profile really ranks</h2>
                     <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and get a data-backed score with personalized recommendations. Free, private, and instant.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-gray-100">
@@ -227,17 +228,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Methodology</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

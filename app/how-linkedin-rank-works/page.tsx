@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How LinkedInRank Works — Free LinkedIn Profile Scoring in 3 Steps',
-    description: 'Upload your LinkedIn PDF, get scored across 30+ signals, and receive AI-powered improvement recommendations — all in under 60 seconds. Learn how the world\'s best LinkedIn profile scorer works.',
-    keywords: 'how linkedinrank works, linkedin profile analysis process, linkedin pdf scoring, linkedin score tool, linkedin profile scorer how it works, free linkedin analysis tool, linkedin scoring explained',
+    title: 'How LinkedInRank Works | Free LinkedIn Profile Scoring in 3 Steps',
+    description: 'Upload your LinkedIn PDF, get scored across 30+ signals, and receive AI-powered improvement recommendations | all in under 60 seconds. Learn how the world\'s best LinkedIn profile scorer works.',
+    keywords: 'how linkedinrank works, linkedin profile analysis process, linkedin pdf scoring, linkedin score tool, linkedin profile scorer how it works, free linkedin analysis tool, linkedin scoring explained, linkedin ranking, linkedin profile score, linkedin rank checker',
     alternates: { canonical: 'https://linkedinrank.com/how-linkedin-rank-works' },
     openGraph: {
-        title: 'How LinkedInRank Works — Free LinkedIn Profile Scoring in 3 Steps',
+        title: 'How LinkedInRank Works | Free LinkedIn Profile Scoring in 3 Steps',
         description: 'Upload PDF → Get scored across 30+ signals → Receive AI-powered recommendations. Under 60 seconds, completely free.',
         url: 'https://linkedinrank.com/how-linkedin-rank-works',
     },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function HowItWorksPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/methodology', label: 'Methodology' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
@@ -29,7 +30,7 @@ export default function HowItWorksPage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-5">How LinkedInRank Evaluates Your Profile</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-xl mx-auto leading-relaxed">
-                        A transparent, step-by-step look at what happens when you upload your LinkedIn PDF — from parsing to your personalized report.
+                        A transparent, step-by-step look at what happens when you upload your LinkedIn PDF | from parsing to your personalized report.
                     </p>
                 </div>
             </section>
@@ -54,14 +55,14 @@ export default function HowItWorksPage() {
                         },
                         {
                             step: '03', title: 'AI Content Quality Analysis',
-                            desc: 'Google Gemini AI evaluates content quality in parallel — analyzing headline positioning, about section effectiveness, experience impact, and skills alignment.',
+                            desc: 'Google Gemini AI evaluates content quality in parallel | analyzing headline positioning, about section effectiveness, experience impact, and skills alignment.',
                             detail: 'The AI is instructed to be fair, specific, and non-judgmental. It adapts its evaluation to your career stage and generates personalized recommendations with before/after examples.',
                             icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z',
                             color: '#4F46E5',
                         },
                         {
                             step: '04', title: 'Career Stage Adaptation',
-                            desc: 'The system detects your career stage from headline, job titles, and experience duration — then calibrates expectations accordingly.',
+                            desc: 'The system detects your career stage from headline, job titles, and experience duration | then calibrates expectations accordingly.',
                             detail: 'Students, early-career professionals, mid-career operators, and senior leaders are each evaluated against appropriate benchmarks. A student is never judged by executive standards.',
                             icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z',
                             color: '#7C3AED',
@@ -111,11 +112,37 @@ export default function HowItWorksPage() {
                     ))}
                 </div>
 
+                {/* What to do after */}
+                <div className="mt-16">
+                    <h2 className="text-xl font-bold text-[#0A0F1C] mb-4">What You Can Do After Your Report</h2>
+                    <p className="text-sm text-[#4B5563] mb-6 leading-relaxed">Your LinkedInRank report gives you the diagnosis. These guides give you the prescription:</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                            { title: 'Improve Your LinkedIn Ranking', desc: 'Understand every ranking factor and how to optimize each one for maximum visibility.', href: '/linkedin-ranking', color: '#0A66C2' },
+                            { title: 'Understand Your Profile Score', desc: 'Learn what your score means, how it compares, and which signals matter most.', href: '/linkedin-profile-score', color: '#2563EB' },
+                            { title: 'Student Profile Guide', desc: 'Step-by-step guide for building a strong LinkedIn profile as a student.', href: '/linkedin-profile-for-students', color: '#4F46E5' },
+                            { title: 'Headline for Graphic Designers', desc: '150+ headline examples organized by specialization and career stage.', href: '/linkedin-headline-for-graphic-designer', color: '#7C3AED' },
+                        ].map((item, i) => (
+                            <Link key={i} href={item.href} className="bg-white border border-gray-200 rounded-xl p-4 hover:border-[#0A66C2] hover:shadow-md transition-all group block no-underline">
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: item.color + '12', color: item.color }}>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{item.title}</p>
+                                        <p className="text-xs text-[#6B7280] mt-0.5">{item.desc}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
                 {/* CTA */}
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Ready to see your evaluation?</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and get your personalized score, breakdown, and improvement roadmap in under a minute.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 {/* Related */}
@@ -123,9 +150,12 @@ export default function HowItWorksPage() {
                     <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related</p>
                     <div className="flex flex-wrap gap-2">
                         {[
+                            { label: 'LinkedIn Ranking', href: '/linkedin-ranking' },
+                            { label: 'Profile Score', href: '/linkedin-profile-score' },
                             { label: 'Methodology', href: '/methodology' },
                             { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
                             { label: 'Headline Guide', href: '/linkedin-headline-guide' },
+                            { label: 'Student Guide', href: '/linkedin-profile-for-students' },
                             { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
                             { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
                             { label: 'FAQ', href: '/faq' },
@@ -136,17 +166,7 @@ export default function HowItWorksPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Methodology</Link>
-                        <Link href="/about" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">About</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Privacy</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

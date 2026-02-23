@@ -155,15 +155,19 @@ function scoreHeadline(headline: string | undefined): { total: number; breakdown
     const lower = headline.toLowerCase()
 
     // (a) Role identity: does headline state what you do? (35 pts)
-    const rolePatterns = /(?:engineer|developer|manager|designer|analyst|consultant|director|specialist|coordinator|lead|architect|scientist|researcher|intern|student|professor|teacher|nurse|doctor|attorney|lawyer|accountant|marketer|strategist|executive|officer|founder|entrepreneur|editor|writer|producer|host|creator)/i
-    if (rolePatterns.test(headline)) {
+    const strongRolePatterns = /(?:engineer|developer|manager|designer|analyst|consultant|director|specialist|coordinator|lead|architect|scientist|researcher|professor|teacher|nurse|doctor|attorney|lawyer|accountant|marketer|strategist|executive|officer|founder|entrepreneur|editor|writer|producer|host|creator)/i
+    if (strongRolePatterns.test(headline)) {
         score += 35
         breakdown.push('✓ Clear role identity')
+    } else if (/(?:student|intern|trainee|fresher|apprentice|fellow)/i.test(headline)) {
+        // Weak/vague role | legitimate but not specific enough for a strong headline
+        score += 15
+        breakdown.push('○ Role detected but vague: add your field (e.g., "CS Student | Aspiring Data Scientist")')
     } else {
-        // Check if there's at least a professional-sounding title
+        // No recognizable role at all
         const words = headline.split(/[\s|•·,]+/).filter(w => w.length > 2)
         if (words.length >= 2) {
-            score += 15
+            score += 8
             breakdown.push('○ Role could be clearer: consider adding your job title')
         } else {
             breakdown.push('○ Consider adding your role or title to your headline')
@@ -176,7 +180,6 @@ function scoreHeadline(headline: string | undefined): { total: number; breakdown
         score += 25
         breakdown.push('✓ Industry or niche mentioned')
     } else {
-        score += 5
         breakdown.push('○ Adding your industry/niche would improve discoverability')
     }
 
@@ -193,20 +196,19 @@ function scoreHeadline(headline: string | undefined): { total: number; breakdown
         score += 20
         breakdown.push('✓ Professional wording')
     } else {
-        score += 8
+        score += 5
     }
 
     // (d) Specificity: mentions a specialty, tool, or differentiator (20 pts)
-    const hasSpecificity = headline.includes('|') || headline.includes('·') || headline.includes('—') ||
+    const hasSpecificity = headline.includes('|') || headline.includes('·') || headline.includes('|') ||
         /(?:helping|building|specializ|focus|expert|certified|working on|passionate about)/i.test(headline)
     if (hasSpecificity) {
         score += 20
         breakdown.push('✓ Specific and differentiated')
     } else if (headline.length > 40) {
-        score += 10
+        score += 8
         breakdown.push('○ Could be more specific: add what makes you unique')
     } else {
-        score += 5
         breakdown.push('○ More detail would strengthen your headline')
     }
 
@@ -236,13 +238,19 @@ function scoreAbout(about: string | undefined): { total: number; breakdown: stri
     const wordCount = about.split(/\s+/).length
 
     // (a) Clear professional direction: does it say what you do? (30 pts)
-    const hasDirection = wordCount >= 20 && about.length >= 80
-    if (hasDirection) {
+    // Word count is a strong signal of content depth
+    if (wordCount >= 80) {
         score += 30
+        breakdown.push(`✓ Detailed professional direction (${wordCount} words)`)
+    } else if (wordCount >= 40) {
+        score += 22
         breakdown.push(`✓ Professional direction present (${wordCount} words)`)
+    } else if (wordCount >= 20) {
+        score += 12
+        breakdown.push(`○ Summary is brief (${wordCount} words): expanding to 50+ words would help`)
     } else {
-        score += 15
-        breakdown.push(`○ Summary is brief (${wordCount} words): expanding would help`)
+        score += 5
+        breakdown.push(`○ Summary is very brief (${wordCount} words): aim for at least 50 words`)
     }
 
     // (b) Skills or tools mentioned (25 pts)
@@ -251,10 +259,9 @@ function scoreAbout(about: string | undefined): { total: number; breakdown: stri
         score += 25
         breakdown.push(`✓ ${skillMentions} specific skills/tools mentioned`)
     } else if (skillMentions >= 1) {
-        score += 15
+        score += 12
         breakdown.push(`○ ${skillMentions} skill(s) mentioned: adding more specifics would help`)
     } else {
-        score += 5
         breakdown.push('○ Consider mentioning specific skills or tools you use')
     }
 
@@ -264,10 +271,10 @@ function scoreAbout(about: string | undefined): { total: number; breakdown: stri
         score += 25
         breakdown.push('✓ Specific focus areas mentioned')
     } else if (wordCount >= 30) {
-        score += 12
+        score += 10
         breakdown.push('○ Could mention specific interests or focus areas')
     } else {
-        score += 5
+        breakdown.push('○ Mention specific interests or focus areas to strengthen your summary')
     }
 
     // (d) Authenticity and clarity: first-person voice, clear sentences (20 pts)
@@ -277,10 +284,10 @@ function scoreAbout(about: string | undefined): { total: number; breakdown: stri
         score += 20
         breakdown.push('✓ Authentic voice and clear structure')
     } else if (sentences.length >= 2) {
-        score += 12
+        score += 10
         breakdown.push('○ Good structure: first-person voice tends to resonate better')
     } else {
-        score += 8
+        score += 3
         breakdown.push('○ A few more sentences would make your story clearer')
     }
 
@@ -326,13 +333,12 @@ function scoreExperience(experience: any[]): { total: number; breakdown: string[
         score += 30
         breakdown.push('✓ Detailed role descriptions')
     } else if (avgDescLength > 60) {
-        score += 20
+        score += 18
         breakdown.push('○ Descriptions present: more detail would strengthen them')
     } else if (allDesc.trim().length > 0) {
-        score += 12
+        score += 8
         breakdown.push('○ Brief descriptions: expanding on responsibilities would help')
     } else {
-        score += 5
         breakdown.push('○ Roles listed without descriptions: adding responsibilities would improve your score')
     }
 
@@ -347,13 +353,12 @@ function scoreExperience(experience: any[]): { total: number; breakdown: string[
         score += 25
         breakdown.push(`✓ ${actionVerbCount} strong action verbs used`)
     } else if (actionVerbCount >= 3) {
-        score += 18
+        score += 15
         breakdown.push(`○ ${actionVerbCount} action verbs: more power words would strengthen your descriptions`)
     } else if (actionVerbCount >= 1) {
-        score += 10
+        score += 8
         breakdown.push(`○ ${actionVerbCount} action verb(s): start more bullets with words like "Led", "Built", "Delivered"`)
     } else {
-        score += 3
         breakdown.push('○ Consider starting descriptions with action verbs like "Led", "Built", "Managed"')
     }
 
@@ -366,13 +371,12 @@ function scoreExperience(experience: any[]): { total: number; breakdown: string[
         score += 25
         breakdown.push('✓ Shows ownership and well-structured')
     } else if (hasOwnership) {
-        score += 18
+        score += 15
         breakdown.push('✓ Demonstrates ownership')
     } else if (hasBullets || avgDescLength > 100) {
-        score += 12
+        score += 8
         breakdown.push('○ Structured descriptions: add more ownership language')
     } else {
-        score += 5
         breakdown.push('○ Showing ownership (leading, managing, being responsible for) strengthens credibility')
     }
 
@@ -382,11 +386,10 @@ function scoreExperience(experience: any[]): { total: number; breakdown: string[
     if (hasImpactLanguage) {
         score += 20
         breakdown.push('✓ Impact/contribution described')
-    } else if (experience.length >= 2) {
-        score += 10
+    } else if (experience.length >= 2 && allDesc.trim().length > 50) {
+        score += 8
         breakdown.push('○ Multiple roles shown: describing impact would make them stronger')
     } else {
-        score += 5
         breakdown.push('○ Adding what you contributed or achieved would strengthen this section')
     }
 
@@ -403,13 +406,13 @@ function scoreExperience(experience: any[]): { total: number; breakdown: string[
         breakdown.push('✓ Bonus: quantified achievements present')
     }
 
-    // Fair to students/interns: if only 1 role and it's an internship, don't under-score
+    // Note for early-career profiles: score is based on actual content quality,
+    // not artificially inflated. A well-described internship will still score well.
     if (experience.length === 1) {
         const title = (experience[0].title || '').toLowerCase()
         if (/intern|trainee|student|apprentice|fellow/i.test(title)) {
-            score = Math.max(score, 45)
             if (!breakdown.some(b => b.includes('early career'))) {
-                breakdown.push('✓ Early career: good start building your experience')
+                breakdown.push('○ Early career: add detailed descriptions of your responsibilities to improve your score')
             }
         }
     }
@@ -432,16 +435,21 @@ function scoreSkills(skills: string[], headline: string = ''): { total: number; 
     const breakdown: string[] = []
 
     // (a) Relevance: are skills meaningful and professional? (35 pts)
-    // Even a small number of good skills should score well here
+    // IMPORTANT: LinkedIn PDFs only show "Top Skills" (typically 3-5 skills),
+    // NOT all skills from the profile. Do NOT penalize for low count.
+    // Having 3+ skills in PDF means the user has skills on their profile.
     if (skills.length >= 5) {
         score += 35
         breakdown.push(`✓ ${skills.length} skills listed`)
     } else if (skills.length >= 3) {
         score += 28
-        breakdown.push(`✓ ${skills.length} skills: solid foundation`)
-    } else {
+        breakdown.push(`✓ ${skills.length} top skills shown (LinkedIn PDFs show selected skills only)`)
+    } else if (skills.length >= 1) {
         score += 18
-        breakdown.push(`○ ${skills.length} skill(s): adding a few more relevant skills would help`)
+        breakdown.push(`○ ${skills.length} skill(s) detected from PDF: adding more would help`)
+    } else {
+        score += 5
+        breakdown.push(`○ Few skills detected`)
     }
 
     // (b) Specificity: tools/technologies vs generic words (35 pts)
@@ -454,16 +462,16 @@ function scoreSkills(skills: string[], headline: string = ''): { total: number; 
         score += 35
         breakdown.push('✓ Specific tools and technologies listed')
     } else if (specificSkills.length >= 2) {
-        score += 22
+        score += 20
         breakdown.push(`○ ${specificSkills.length} specific tools: adding more would improve specificity`)
     } else {
         // Check if skills are at least descriptive (not just "Programming")
         const descriptive = skills.filter(s => s.length > 6)
         if (descriptive.length >= 3) {
-            score += 15
+            score += 10
             breakdown.push('○ Skills are somewhat descriptive: more specific tools would help')
         } else {
-            score += 8
+            score += 3
             breakdown.push('○ Skills could be more specific (e.g., "Python" instead of "Programming")')
         }
     }
@@ -480,15 +488,14 @@ function scoreSkills(skills: string[], headline: string = ''): { total: number; 
             score += 30
             breakdown.push('✓ Skills align well with your role')
         } else if (alignedSkills.length >= 1) {
-            score += 18
+            score += 15
             breakdown.push('○ Some alignment with your role: ensure top skills match your headline')
         } else {
-            score += 8
             breakdown.push('○ Skills don\'t clearly connect to your headline: aligning them would improve coherence')
         }
     } else {
         // Can't assess alignment without headline: give partial credit
-        score += 15
+        score += 10
     }
 
     return { total: Math.max(0, Math.min(100, score)), breakdown }
@@ -523,10 +530,10 @@ function scoreEducationAndCerts(education: any[], certifications: string[]): { t
             score += 40
             breakdown.push('✓ Degree and institution listed')
         } else if (hasDegree || hasInstitution) {
-            score += 28
-            breakdown.push('✓ Education present')
+            score += 22
+            breakdown.push('○ Education partially complete: add both degree type and institution name')
         } else {
-            score += 18
+            score += 10
             breakdown.push('○ Education listed: adding degree type and institution name would help')
         }
 
@@ -536,7 +543,8 @@ function scoreEducationAndCerts(education: any[], certifications: string[]): { t
             score += 20
             breakdown.push('✓ Field of study mentioned')
         } else {
-            score += 8
+            score += 3
+            breakdown.push('○ Adding your field of study would strengthen this section')
         }
 
         // Advanced degree bonus
@@ -606,13 +614,13 @@ function scoreCompleteness(profile: ProfileData): { total: number; breakdown: st
         score += 50
         breakdown.push('✓ All major sections present')
     } else if (coverage >= 0.8) {
-        score += 40
+        score += 35
         breakdown.push(`✓ ${sectionsPresent}/${totalSections} sections filled`)
     } else if (coverage >= 0.6) {
-        score += 25
+        score += 20
         breakdown.push(`○ ${sectionsPresent}/${totalSections} sections filled: completing more would strengthen your profile`)
     } else {
-        score += 10
+        score += 5
         breakdown.push(`○ Only ${sectionsPresent}/${totalSections} sections filled: many key sections are missing`)
     }
 
@@ -623,10 +631,9 @@ function scoreCompleteness(profile: ProfileData): { total: number; breakdown: st
         score += 30
         breakdown.push('✓ Good content depth across sections')
     } else if (hasDetailedExp || hasSubstantialAbout) {
-        score += 18
+        score += 15
         breakdown.push('○ Some sections have good depth: aim for detail in all sections')
     } else {
-        score += 5
         breakdown.push('○ Most sections need more detail and substance')
     }
 
@@ -637,10 +644,10 @@ function scoreCompleteness(profile: ProfileData): { total: number; breakdown: st
         score += 20
         breakdown.push('✓ Profile has logical structure')
     } else if (hasName) {
-        score += 10
+        score += 8
         breakdown.push('○ Basic structure present: adding experience strengthens the narrative')
     } else {
-        score += 5
+        score += 2
     }
 
     return { total: Math.max(0, Math.min(100, score)), breakdown }
@@ -657,24 +664,66 @@ function detectCareerStage(profile: ProfileData): string {
     const allDurations = profile.experience?.map(e => (e.duration || '').toLowerCase()).join(' ') || ''
 
     // Student signals: headline or titles contain student/intern keywords
-    const studentKeywords = /(student|fresher|intern|undergraduate|graduate|pursuing|aspiring|trainee|apprentice|fellow)/
-    if (studentKeywords.test(headline) || (expCount <= 1 && studentKeywords.test(allTitles))) {
+    // BUT exclude compound titles: "Student Ambassador", "Student Leader", "Fellow at X"
+    const studentKeywords = /\b(fresher|intern\b|undergraduate|pursuing|aspiring|trainee|apprentice)\b/
+    const studentStandalone = /\bstudent\b/
+    const studentExclusions = /\b(ambassador|leader|mentor|volunteer|fellow|researcher|organizer|chapter)\b/
+    
+    const isStudentHeadline = (studentKeywords.test(headline) || 
+        (studentStandalone.test(headline) && !studentExclusions.test(headline)))
+    const isStudentTitle = expCount <= 1 && (studentKeywords.test(allTitles) ||
+        (studentStandalone.test(allTitles) && !studentExclusions.test(allTitles)))
+    
+    if (isStudentHeadline || isStudentTitle) {
         return 'student'
     }
 
-    // Try to estimate years from duration strings (e.g., "2 years", "Jan 2020 - Present")
+    // Estimate total career span from durations
+    // Use max span (earliest start → latest end) to avoid double-counting overlapping roles
     let estimatedYears = 0
-    const yearMatches = allDurations.match(/(\d+)\s*(?:yr|year)/gi)
-    if (yearMatches) {
-        estimatedYears = yearMatches.reduce((sum, m) => sum + parseInt(m), 0)
+    const allDurationText = allDurations + ' ' + profile.experience?.map(e => (e.duration || '')).join(' ')
+    
+    const yearRangePattern = /(\d{4})\s*[-–|]\s*(present|\d{4})/gi
+    let match
+    let earliestYear = 9999
+    let latestYear = new Date().getFullYear()
+    let foundYearRange = false
+    
+    while ((match = yearRangePattern.exec(allDurationText)) !== null) {
+        const startYear = parseInt(match[1])
+        const endYear = match[2].toLowerCase() === 'present' ? new Date().getFullYear() : parseInt(match[2])
+        if (startYear >= 1970 && startYear <= latestYear) {
+            earliestYear = Math.min(earliestYear, startYear)
+            foundYearRange = true
+        }
+        if (endYear >= 1970) {
+            latestYear = Math.max(latestYear, endYear)
+        }
     }
-    // Fallback: estimate from number of roles
+    
+    if (foundYearRange && earliestYear < 9999) {
+        estimatedYears = latestYear - earliestYear
+    } else {
+        // Fallback: sum year mentions in duration strings but cap at reasonable max
+        const yearMatches = allDurations.match(/(\d+)\s*(?:yr|year)/gi)
+        if (yearMatches) {
+            // Take the largest single duration as a floor, add partial credit for others
+            const years = yearMatches.map(m => parseInt(m)).sort((a, b) => b - a)
+            estimatedYears = years[0] || 0
+            // Add ~30% of remaining durations to account for some overlap
+            for (let i = 1; i < years.length; i++) {
+                estimatedYears += Math.round(years[i] * 0.3)
+            }
+        }
+    }
+    
+    // Fallback: estimate from number of roles (conservative: 1.5 years per role)
     if (estimatedYears === 0) {
-        estimatedYears = expCount * 2
+        estimatedYears = Math.round(expCount * 1.5)
     }
 
     // Senior/Founder/Academic signals
-    const seniorKeywords = /(founder|co-founder|ceo|cto|coo|cfo|vp|vice president|director|head of|principal|professor|associate professor|senior director|managing director|partner|chief)/
+    const seniorKeywords = /\b(founder|co-founder|ceo|cto|coo|cfo|vp|vice president|director|head of|principal|professor|associate professor|senior director|managing director|partner|chief)\b/
     if (seniorKeywords.test(headline) || seniorKeywords.test(allTitles) || estimatedYears >= 12) {
         return 'senior'
     }
@@ -700,21 +749,22 @@ function determineArchetype(profile: ProfileData, score: number, categories: Cat
     const name = profile.name || 'This professional'
     const careerStage = detectCareerStage(profile)
     const headline = (profile.headline || '').toLowerCase()
+    const allTitles = profile.experience?.map(e => (e.title || '').toLowerCase()).join(' ') || ''
     const expCount = profile.experience?.length || 0
     const skillsCount = profile.skills?.length || 0
-    const hasCerts = (profile.certifications?.length || 0) > 0
-    const hasPublications = (profile.honors?.length || 0) > 0
-
     // Founder/Builder: headline or titles suggest entrepreneurship
-    if (/(founder|co-founder|ceo|entrepreneur|building|startup)/i.test(headline)) {
+    // 'building' alone is too broad | require it alongside startup/company context
+    if (/\b(founder|co-founder|ceo|entrepreneur|startup)\b/i.test(headline)) {
         return {
             label: 'Founder / Builder',
             description: `${name} shows an entrepreneurial trajectory. The profile reflects initiative and ownership, which is valuable for building credibility with investors and partners.`
         }
     }
 
-    // Academic/Research: professor, researcher, publications
-    if (/(professor|researcher|phd|doctoral|postdoc|academic|research)/i.test(headline) || hasPublications) {
+    // Academic/Research: professor, researcher | based on headline/title keywords ONLY
+    // Honors/awards are NOT publications | don't use them as academic signal
+    if (/\b(professor|researcher|phd|doctoral|postdoc|academic|research\s+scientist|research\s+fellow|research\s+associate)\b/i.test(headline) ||
+        /\b(professor|researcher|phd|doctoral|postdoc|research\s+scientist)\b/i.test(allTitles)) {
         return {
             label: 'Academic / Research Profile',
             description: `${name}'s profile reflects a research or academic focus. Highlighting publications, grants, and teaching experience will strengthen visibility in this space.`
@@ -825,7 +875,7 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
 
             if (!hasHeadline) {
                 headlineFix = firstJob
-                    ? `No headline detected. Your most recent role is "${firstJob}"${firstCompany ? ` at ${firstCompany}` : ''} — use that as a starting point. A strong headline follows the pattern: [Role] | [What you specialize in] | [Who you help or what you achieve].`
+                    ? `No headline detected. Your most recent role is "${firstJob}"${firstCompany ? ` at ${firstCompany}` : ''} | use that as a starting point. A strong headline follows the pattern: [Role] | [What you specialize in] | [Who you help or what you achieve].`
                     : `No headline detected. Add one that clearly signals what you do. Follow this pattern: [Your Role] | [Your specialization] | [What you achieve or who you help].`
             } else {
                 // Analyze specific weaknesses of the current headline
@@ -837,16 +887,16 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
                 const isTooGeneric = !hasRole && !hasPipe && actualHeadline.length < 60
 
                 if (!hasRole && firstJob) {
-                    issues.push(`It doesn't include a clear role. Your current title is "${firstJob}" — lead with that`)
+                    issues.push(`It doesn't include a clear role. Your current title is "${firstJob}" | lead with that`)
                 }
                 if (isVague) {
-                    issues.push('It uses filler words like "passionate" or "driven" — replace them with specific skills or outcomes')
+                    issues.push('It uses filler words like "passionate" or "driven" | replace them with specific skills or outcomes')
                 }
                 if (!hasPipe && actualHeadline.length > 30) {
-                    issues.push('Use pipe separators (|) to make it scannable — recruiters skim headlines in 2-3 seconds')
+                    issues.push('Use pipe separators (|) to make it scannable | recruiters skim headlines in 2-3 seconds')
                 }
                 if (isTooGeneric) {
-                    issues.push('It reads as a tagline, not a professional headline — add your role and what you specialize in')
+                    issues.push('It reads as a tagline, not a professional headline | add your role and what you specialize in')
                 }
 
                 if (issues.length > 0) {
@@ -904,7 +954,7 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
 
             let skillsFix = ''
             if (skillsCount === 0) {
-                skillsFix = `No skills were detected in your PDF. On LinkedIn, go to your profile and add technical skills relevant to ${userRole} — specific tools, frameworks, and methodologies you actually use.`
+                skillsFix = `No skills were detected in your PDF. On LinkedIn, go to your profile and add technical skills relevant to ${userRole} | specific tools, frameworks, and methodologies you actually use.`
             } else {
                 const currentSkills = userSkills.join(', ')
                 skillsFix = `Your visible skills: ${currentSkills}. LinkedIn PDFs only show your top skills. Best practices: (1) Ensure your top skills directly reflect your current role as ${userRole}. (2) Pin your most relevant skills to the top. (3) Replace generic terms like "Management" with specific ones like "Product Management" or "Agile Project Management". (4) Skills should align with keywords in your headline and experience descriptions.`
@@ -912,7 +962,7 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
 
             return {
                 title: `${name}, refine your skills section`,
-                whyItMatters: 'Your top skills are what recruiters see first. LinkedIn only shows a few in your PDF — make sure they are relevant, specific, and aligned with your role.',
+                whyItMatters: 'Your top skills are what recruiters see first. LinkedIn only shows a few in your PDF | make sure they are relevant, specific, and aligned with your role.',
                 fix: skillsFix,
                 impact: 'Medium' as const
             }
@@ -957,20 +1007,20 @@ function getTier(score: number): 'Bronze' | 'Silver' | 'Gold' | 'Platinum' {
 // Peer context: honest framing, no fake percentiles
 function getPeerContext(score: number, careerStage: string): string {
     const stageLabels: Record<string, string> = {
-        'student': 'student / fresh graduate',
-        'early-career': 'early-career professional',
-        'mid-career': 'mid-career professional',
-        'senior': 'senior professional',
-        'experienced': 'experienced professional'
+        'student': 'a student / fresh graduate',
+        'early-career': 'an early-career professional',
+        'mid-career': 'a mid-career professional',
+        'senior': 'a senior professional',
+        'experienced': 'an experienced professional'
     }
-    const label = stageLabels[careerStage] || 'professional'
+    const label = stageLabels[careerStage] || 'a professional'
 
-    if (score >= 80) return `Exceptionally well-crafted profile for a ${label}`
-    if (score >= 70) return `Strong professional presence — well above average for a ${label}`
-    if (score >= 60) return `Good foundation for a ${label} — a few targeted improvements will make it stand out`
-    if (score >= 50) return `Solid start for a ${label} — completing key sections will boost your visibility`
-    if (score >= 40) return `Your profile has potential — filling in missing sections will help recruiters find you`
-    return `Your profile needs some work — adding detail to key sections will make a big difference`
+    if (score >= 80) return `Exceptionally well-crafted profile for ${label}`
+    if (score >= 70) return `Strong professional presence | well above average for ${label}`
+    if (score >= 60) return `Good foundation for ${label} | a few targeted improvements will make it stand out`
+    if (score >= 50) return `Solid start for ${label} | completing key sections will boost your visibility`
+    if (score >= 40) return `Your profile has potential | filling in missing sections will help recruiters find you`
+    return `Your profile needs some work | adding detail to key sections will make a big difference`
 }
 
 // ──────────────────────────────────────────────

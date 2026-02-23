@@ -3,12 +3,12 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Best Practices 2026 — Proven Tips to Boost Your Profile Score',
+    title: 'LinkedIn Best Practices 2026 | Proven Tips to Boost Your Profile Score',
     description: 'Proven LinkedIn profile best practices for 2026. Optimize your headline, about section, experience, skills, and more to improve your LinkedInRank score and get noticed by recruiters. Data-backed strategies.',
     keywords: 'linkedin best practices, linkedin profile tips 2026, linkedin optimization best practices, linkedinrank tips, linkedin profile score tips, linkedin do and dont, linkedin profile optimization checklist',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-best-practices' },
     openGraph: {
-        title: 'LinkedIn Best Practices 2026 — Proven Tips to Boost Your Profile Score',
+        title: 'LinkedIn Best Practices 2026 | Proven Tips to Boost Your Profile Score',
         description: 'Data-backed LinkedIn profile best practices. Optimize every section and get noticed by recruiters.',
         url: 'https://linkedinrank.com/linkedin-best-practices',
     },
@@ -36,7 +36,7 @@ const PRACTICES = [
     {
         category: 'Experience',
         tips: [
-            { title: 'Start bullets with action verbs', desc: '"Led", "Built", "Delivered", "Scaled" — these signal ownership. Avoid "Responsible for" and "Helped with".' },
+            { title: 'Start bullets with action verbs', desc: '"Led", "Built", "Delivered", "Scaled" | these signal ownership. Avoid "Responsible for" and "Helped with".' },
             { title: 'Show impact, not just duties', desc: '"Grew user base from 10K to 50K in 6 months" beats "Managed user growth initiatives".' },
             { title: 'Add metrics where possible (but don\'t force them)', desc: 'Numbers add credibility, but approximate or contextual metrics work too: "Led a team of 5" or "Launched 3 features".' },
             { title: 'Write 3-5 bullets per role', desc: 'Too few looks thin. Too many dilutes impact. Focus on your strongest contributions.' },
@@ -47,7 +47,7 @@ const PRACTICES = [
         tips: [
             { title: 'Pin your top 3 skills strategically', desc: 'LinkedIn prominently shows your top 3. Make sure they align with your target role and headline.' },
             { title: 'Be specific over generic', desc: '"Product Management" > "Management". "Python" > "Programming". Recruiters search for specific tools.' },
-            { title: 'Align skills with your headline and experience', desc: 'If your headline says "Data Analyst", your top skills should include SQL, Tableau, Python — not generic terms.' },
+            { title: 'Align skills with your headline and experience', desc: 'If your headline says "Data Analyst", your top skills should include SQL, Tableau, Python | not generic terms.' },
             { title: 'Remove irrelevant skills', desc: 'Quality over quantity. Skills from a past career that don\'t serve your current direction add noise.' },
         ]
     },
@@ -72,7 +72,7 @@ const PRACTICES = [
 export default function LinkedInBestPracticesPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/', label: 'Analyze Your Profile' }]} />
+            <SiteHeader />
 
             <div className="max-w-3xl mx-auto px-6 py-16">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">

@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Students & Graduates — Free Guide (2026)',
-    description: 'Build a strong LinkedIn profile as a student or recent graduate in 2026. Data-backed tips on headline, about section, skills, and projects. Free scoring with LinkedInRank — the #1 LinkedIn scorer.',
+    title: 'LinkedIn Profile Tips for Students & Graduates | Free Guide (2026)',
+    description: 'Build a strong LinkedIn profile as a student or recent graduate in 2026. Data-backed tips on headline, about section, skills, and projects. Free scoring with LinkedInRank | the #1 LinkedIn scorer.',
     keywords: 'linkedin for students 2026, student linkedin profile, linkedin tips students, linkedinrank student guide, college linkedin profile, linkedin for freshers, linkedin profile tips for beginners',
     alternates: { canonical: 'https://linkedinrank.com/for-students' },
     openGraph: {
-        title: 'LinkedIn Profile Tips for Students & Graduates — Free Guide',
+        title: 'LinkedIn Profile Tips for Students & Graduates | Free Guide',
         description: 'Build a strong LinkedIn profile as a student. Data-backed tips and free scoring with LinkedInRank.',
         url: 'https://linkedinrank.com/for-students',
     },
@@ -32,9 +33,9 @@ const jsonLd = {
             { '@type': 'ListItem', position: 2, name: 'For Students', item: 'https://linkedinrank.com/for-students' },
         ] },
         { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'When should students create a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'As early as possible — ideally in your first or second year. Even a basic profile with a clear headline, education, and a few skills gets you started.' } },
+            { '@type': 'Question', name: 'When should students create a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'As early as possible | ideally in your first or second year. Even a basic profile with a clear headline, education, and a few skills gets you started.' } },
             { '@type': 'Question', name: 'What if I have no work experience?', acceptedAnswer: { '@type': 'Answer', text: 'Class projects, hackathons, volunteer work, personal projects, campus organizations, and online certifications all count. Focus on what you built, what tools you used, and what you learned.' } },
-            { '@type': 'Question', name: 'Should students use the Open to Work badge?', acceptedAnswer: { '@type': 'Answer', text: 'If you are actively looking for internships, yes. The recruiter-only option is recommended — it signals availability to recruiters without a public badge.' } },
+            { '@type': 'Question', name: 'Should students use the Open to Work badge?', acceptedAnswer: { '@type': 'Answer', text: 'If you are actively looking for internships, yes. The recruiter-only option is recommended | it signals availability to recruiters without a public badge.' } },
             { '@type': 'Question', name: 'How many connections should a student have?', acceptedAnswer: { '@type': 'Answer', text: 'Aim for 200+ to start. Connect with classmates, professors, alumni, and professionals you meet at events.' } },
             { '@type': 'Question', name: 'Does LinkedInRank work for student profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank detects student profiles and adjusts scoring expectations. A well-optimized student profile can score in the Gold tier (70+).' } },
             { '@type': 'Question', name: 'What keywords should students include?', acceptedAnswer: { '@type': 'Answer', text: 'Include your target role title, technical skills, and field of study. These are the terms recruiters search for when sourcing entry-level candidates.' } },
@@ -46,7 +47,7 @@ export default function ForStudentsPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/for-jobseekers', label: 'For Job Seekers' }]} />
+            <SiteHeader />
 
             <article className="max-w-2xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -57,13 +58,13 @@ export default function ForStudentsPage() {
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">How to Build a Strong LinkedIn Profile as a Student</h1>
                 <p className="text-[15px] text-[#4B5563] mb-10 leading-relaxed max-w-xl">
                     You do not need years of experience to have a strong LinkedIn profile. According to LinkedIn's own data,
-                    <strong className="text-[#0A0F1C]"> 70% of employers use LinkedIn to screen candidates</strong> — even for entry-level roles. What matters is clarity, intention, and showcasing what you have done so far.
+                    <strong className="text-[#0A0F1C]"> 70% of employers use LinkedIn to screen candidates</strong> | even for entry-level roles. What matters is clarity, intention, and showcasing what you have done so far.
                 </p>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
                     <section aria-labelledby="headline">
                         <h2 id="headline" className="text-xl font-bold text-[#0A0F1C] mb-3">1. Your headline matters most</h2>
-                        <p className="mb-4">The default "Student at XYZ University" tells recruiters nothing about your skills or interests. LinkedIn headlines are indexed for search — recruiters use keywords like "Python Developer" or "Marketing Intern" to find candidates. A stronger headline includes what you study, what you can do, and what you are looking for.</p>
+                        <p className="mb-4">The default "Student at XYZ University" tells recruiters nothing about your skills or interests. LinkedIn headlines are indexed for search | recruiters use keywords like "Python Developer" or "Marketing Intern" to find candidates. A stronger headline includes what you study, what you can do, and what you are looking for.</p>
                         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)] space-y-3">
                             <div>
                                 <p className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-1">Before</p>
@@ -125,14 +126,14 @@ export default function ForStudentsPage() {
 
                     <section aria-labelledby="student-networking">
                         <h2 id="student-networking" className="text-xl font-bold text-[#0A0F1C] mb-3">7. Networking as a student</h2>
-                        <p className="mb-3">LinkedIn is not just a profile — it is a network. Start building connections intentionally while you are still in school. Alumni from your university are the easiest first connections and often the most willing to help.</p>
+                        <p className="mb-3">LinkedIn is not just a profile | it is a network. Start building connections intentionally while you are still in school. Alumni from your university are the easiest first connections and often the most willing to help.</p>
                         <ul className="space-y-2">
                             {[
                                 'Connect with classmates, professors, and guest speakers after events',
-                                'Search for alumni at companies you admire — send personalized connection requests',
+                                'Search for alumni at companies you admire | send personalized connection requests',
                                 'Follow industry leaders in your target field and engage with their posts',
                                 'Join relevant LinkedIn groups for your university, major, or career interest',
-                                'Write a short post about a project or course learning — even 1 post per month builds visibility',
+                                'Write a short post about a project or course learning | even 1 post per month builds visibility',
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2 text-sm">
                                     <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
@@ -167,9 +168,9 @@ export default function ForStudentsPage() {
                         <h2 id="student-faq" className="text-xl font-bold text-[#0A0F1C] mb-3">Frequently Asked Questions</h2>
                         <div className="space-y-5">
                             {[
-                                { q: 'When should students create a LinkedIn profile?', a: 'As early as possible — ideally in your first or second year. Even a basic profile with a clear headline, education, and a few skills gets you started. You can build on it as you gain experience.' },
+                                { q: 'When should students create a LinkedIn profile?', a: 'As early as possible | ideally in your first or second year. Even a basic profile with a clear headline, education, and a few skills gets you started. You can build on it as you gain experience.' },
                                 { q: 'What if I have no work experience?', a: 'Class projects, hackathons, volunteer work, personal projects, campus organizations, and online certifications all count. Focus on what you built, what tools you used, and what you learned.' },
-                                { q: 'Should students use the "Open to Work" badge?', a: 'If you are actively looking for internships, yes. The recruiter-only option is recommended — it signals availability to recruiters without a public badge. Specify your target role and location.' },
+                                { q: 'Should students use the "Open to Work" badge?', a: 'If you are actively looking for internships, yes. The recruiter-only option is recommended | it signals availability to recruiters without a public badge. Specify your target role and location.' },
                                 { q: 'How many connections should a student have?', a: 'Aim for 200+ to start. Connect with classmates, professors, alumni, and professionals you meet at events. Quality matters more than quantity, but a larger network increases your visibility in search results.' },
                                 { q: 'Does LinkedInRank work for student profiles?', a: 'Yes. LinkedInRank detects student profiles and adjusts scoring expectations. You will not be penalized for limited experience. A well-optimized student profile can score in the Gold tier (70+).' },
                                 { q: 'What keywords should students include?', a: 'Include your target role title (e.g., "Software Engineer Intern"), technical skills (e.g., "Python, React"), and field of study. These are the terms recruiters search for when sourcing entry-level candidates.' },
@@ -185,7 +186,7 @@ export default function ForStudentsPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center mt-4">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See where your student profile stands</h2>
                         <p className="text-sm text-[#4B5563] mb-4">Upload your LinkedIn PDF and get a free score with personalized recommendations in under a minute.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
                     <div className="pt-8 border-t border-gray-100 mt-6">
@@ -204,17 +205,7 @@ export default function ForStudentsPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/for-jobseekers" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Job Seekers</Link>
-                        <Link href="/for-founders" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Founders</Link>
-                        <Link href="/linkedin-best-practices" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Best Practices</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

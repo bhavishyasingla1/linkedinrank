@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const STAGES = [
-    { id: 1, label: 'Reading profile structure', duration: 1500 },
-    { id: 2, label: 'Analyzing headline clarity', duration: 1800 },
-    { id: 3, label: 'Reviewing experience depth', duration: 2000 },
-    { id: 4, label: 'Checking skills relevance', duration: 2200 },
-    { id: 5, label: 'Calculating profile strength', duration: 2500 },
-    { id: 6, label: 'Preparing evaluation report', duration: 1000 }
+    { id: 1, label: 'Reading profile structure', duration: 1200 },
+    { id: 2, label: 'Analyzing headline clarity', duration: 1400 },
+    { id: 3, label: 'Reviewing experience depth', duration: 1600 },
+    { id: 4, label: 'Checking skills relevance', duration: 1800 },
+    { id: 5, label: 'Calculating profile strength', duration: 2000 },
+    { id: 6, label: 'Preparing evaluation report', duration: 700 }
 ]
 
 export default function LoadingAnalysisPage() {

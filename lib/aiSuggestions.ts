@@ -17,7 +17,7 @@ const genAI = process.env.GEMINI_API_KEY
  * - Tone: Professional, calm, credible, helpful, non-judgmental, no emojis, no exaggeration
  */
 
-const SYSTEM_CONTEXT = `You are the analysis engine behind LinkedIn Rank — a profile evaluator, not a chatbot.
+const SYSTEM_CONTEXT = `You are the analysis engine behind LinkedIn Rank | a profile evaluator, not a chatbot.
 
 CONSTRAINTS:
 - Only judge what exists in LinkedIn PDFs (name, headline, summary, experience, education, top skills, certifications, languages, publications, patents, honors-awards)
@@ -25,7 +25,7 @@ CONSTRAINTS:
 - Metrics and numbers are a BONUS, not a requirement
 - Be fair to students and early-career professionals
 - Tone: professional, calm, credible, helpful, non-judgmental. No emojis. No exaggeration.
-- All suggestions must be SPECIFIC and PERSONALIZED — never generic advice
+- All suggestions must be SPECIFIC and PERSONALIZED | never generic advice
 - Use BEFORE/AFTER examples when suggesting improvements`
 
 interface HeadlineAnalysis {
@@ -95,7 +95,7 @@ Score 0-100 on these criteria (20 points total weight in final score):
 Full marks if: role + domain present, not generic, searchable keywords used.
 Low marks if: "Student at XYZ" only, "Seeking opportunities", too vague.
 
-Adapt expectations to ${careerStage} stage — a student headline like "CS Student | React Developer | Open Source Contributor" is strong for their stage.
+Adapt expectations to ${careerStage} stage | a student headline like "CS Student | React Developer | Open Source Contributor" is strong for their stage.
 
 CRITICAL for "improved_version":
 1. Use ${name}'s actual role and context
@@ -158,7 +158,7 @@ Score 0-100 on these criteria (20 points total weight in final score):
 High score if: shows expertise or direction, mentions skills/tools/domains, not copied fluff.
 Low score if: missing, 2-3 lines only, purely emotional language.
 
-For ${careerStage} stage, adjust expectations — a student's About showing clear interests and skills is strong.
+For ${careerStage} stage, adjust expectations | a student's About showing clear interests and skills is strong.
 
 CRITICAL for "better_example":
 1. Reference ${name} BY NAME
@@ -229,7 +229,7 @@ CRITICAL for "better_example":
 1. Keep the same role (${latestRole}) and company (${company})
 2. Use ACTUAL responsibilities from their description
 3. Add quantifiable metrics only IF inferable from context
-4. Write as BEFORE/AFTER — show what they wrote vs what's better
+4. Write as BEFORE/AFTER | show what they wrote vs what's better
 5. NOT a generic template
 
 Return ONLY JSON:
@@ -289,7 +289,7 @@ Low score if: very few skills, generic skills only.
 Note: LinkedIn PDFs only show top skills. Do not over-penalize for a small list.
 
 CRITICAL:
-- "missing_common_skills" must be SPECIFIC to ${role} — not generic
+- "missing_common_skills" must be SPECIFIC to ${role} | not generic
 - "tip" must reference ${name} by name and their specific role
 
 Return ONLY JSON:
@@ -442,15 +442,15 @@ ${experienceContext}
 ## RULES FOR RECOMMENDATIONS:
 1. Address ${name} BY NAME in each recommendation title
 2. Reference their SPECIFIC role as a ${role}
-3. Adapt to ${careerStage} career stage — be fair, do not over-expect
+3. Adapt to ${careerStage} career stage | be fair, do not over-expect
 4. Give ACTIONABLE advice they can implement TODAY
-5. NEVER say "This is bad" — instead say "This could be stronger by..."
-6. Metrics are a BONUS, not a requirement — do NOT penalize for missing numbers
+5. NEVER say "This is bad" | instead say "This could be stronger by..."
+6. Metrics are a BONUS, not a requirement | do NOT penalize for missing numbers
 7. Each "fix" must be a specific action with example text they can copy-paste
 8. Include a "before" (from their actual profile) and "after" (improved rewrite) for each
 9. Focus on LOW-SCORING areas first
-10. Be specific, practical, and non-judgmental — no generic advice
-11. Use professional, calm tone — no emojis, no hype
+10. Be specific, practical, and non-judgmental | no generic advice
+11. Use professional, calm tone | no emojis, no hype
 
 Return EXACTLY 5 recommendations as JSON array:
 [
@@ -626,23 +626,48 @@ export async function enhanceWithAI(profile: ProfileData, ruleBasedScores: any) 
     }
 }
 
-// Career stage inference (mirrors scoringEngine logic)
+// Career stage inference (mirrors scoringEngine detectCareerStage logic)
 function inferCareerStage(profile: ProfileData): string {
     const headline = (profile.headline || '').toLowerCase()
     const expCount = profile.experience?.length || 0
     const allTitles = profile.experience?.map(e => (e.title || '').toLowerCase()).join(' ') || ''
+    const allDurations = profile.experience?.map(e => (e.duration || '').toLowerCase()).join(' ') || ''
 
-    const studentKeywords = /(student|fresher|intern|undergraduate|graduate|pursuing|aspiring|trainee|apprentice|fellow)/
-    if (studentKeywords.test(headline) || (expCount <= 1 && studentKeywords.test(allTitles))) {
-        return 'student'
+    // Student signals | exclude compound titles like "Student Ambassador"
+    const studentKeywords = /\b(fresher|intern\b|undergraduate|pursuing|aspiring|trainee|apprentice)\b/
+    const studentStandalone = /\bstudent\b/
+    const studentExclusions = /\b(ambassador|leader|mentor|volunteer|fellow|researcher|organizer|chapter)\b/
+    
+    const isStudentHeadline = (studentKeywords.test(headline) || 
+        (studentStandalone.test(headline) && !studentExclusions.test(headline)))
+    const isStudentTitle = expCount <= 1 && (studentKeywords.test(allTitles) ||
+        (studentStandalone.test(allTitles) && !studentExclusions.test(allTitles)))
+    
+    if (isStudentHeadline || isStudentTitle) return 'student'
+
+    // Estimate career span from year ranges in durations
+    let estimatedYears = 0
+    const allDurationText = allDurations + ' ' + profile.experience?.map(e => (e.duration || '')).join(' ')
+    const yearRangePattern = /(\d{4})\s*[-–|]\s*(present|\d{4})/gi
+    let match
+    let earliestYear = 9999
+    let latestYear = new Date().getFullYear()
+    let foundYearRange = false
+    while ((match = yearRangePattern.exec(allDurationText)) !== null) {
+        const startYear = parseInt(match[1])
+        const endYear = match[2].toLowerCase() === 'present' ? new Date().getFullYear() : parseInt(match[2])
+        if (startYear >= 1970 && startYear <= latestYear) { earliestYear = Math.min(earliestYear, startYear); foundYearRange = true }
+        if (endYear >= 1970) latestYear = Math.max(latestYear, endYear)
+    }
+    if (foundYearRange && earliestYear < 9999) {
+        estimatedYears = latestYear - earliestYear
+    } else if (estimatedYears === 0) {
+        estimatedYears = Math.round(expCount * 1.5)
     }
 
-    const seniorKeywords = /(founder|co-founder|ceo|cto|coo|cfo|vp|vice president|director|head of|principal|professor|senior director|managing director|partner|chief)/
-    if (seniorKeywords.test(headline) || seniorKeywords.test(allTitles)) {
-        return 'senior'
-    }
-
-    if (expCount >= 4) return 'mid-career'
+    const seniorKeywords = /\b(founder|co-founder|ceo|cto|coo|cfo|vp|vice president|director|head of|principal|professor|senior director|managing director|partner|chief)\b/
+    if (seniorKeywords.test(headline) || seniorKeywords.test(allTitles) || estimatedYears >= 12) return 'senior'
+    if (estimatedYears >= 5 || expCount >= 4) return 'mid-career'
     if (expCount >= 1) return 'early-career'
     return 'student'
 }
@@ -671,7 +696,7 @@ Rules:
 - Include role + niche + value or unique angle
 - No emojis, no hype language
 - Each should take a different angle (authority, value prop, niche)
-- Adapt to ${careerStage} stage — a student headline should reflect growth, not fake seniority
+- Adapt to ${careerStage} stage | a student headline should reflect growth, not fake seniority
 
 Return ONLY a JSON array of 3 strings, nothing else:
 ["headline 1", "headline 2", "headline 3"]`

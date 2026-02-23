@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn About Section — Templates for ChatGPT & Claude (2026)',
+    title: 'AI Prompts for LinkedIn About Section | Templates for ChatGPT & Claude (2026)',
     description: 'Ready-to-use AI prompts to write a compelling LinkedIn About section in 2026. Templates for every career stage with before/after examples. Free scoring with LinkedInRank.',
     keywords: 'ai prompts linkedin about section 2026, chatgpt linkedin summary, claude linkedin about, linkedin about section generator, ai linkedin bio writer, linkedin about ai template',
     alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-about' },
     openGraph: {
-        title: 'AI Prompts for LinkedIn About Section — Templates',
+        title: 'AI Prompts for LinkedIn About Section | Templates',
         description: 'AI prompts to write a compelling LinkedIn About section. Templates for every career stage.',
         url: 'https://linkedinrank.com/ai-prompts-linkedin-about',
     },
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'AI Prompts for LinkedIn About Section — Templates for Every Career Stage',
+    headline: 'AI Prompts for LinkedIn About Section | Templates for Every Career Stage',
     description: '6 ready-to-use AI prompts to write a compelling LinkedIn About section with story, proof, and call-to-action.',
     author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
@@ -47,7 +48,7 @@ Write a LinkedIn About section that:
 3. Tells a brief career story arc (where I started → what I learned → where I am now)
 4. Mentions 3-5 specific skills or tools naturally (not a keyword dump)
 5. Includes one concrete achievement with a number
-6. Ends with a call-to-action (what to do next — connect, message, etc.)
+6. Ends with a call-to-action (what to do next | connect, message, etc.)
 7. Is 150-300 words (LinkedIn sweet spot)
 8. Uses short paragraphs (2-3 sentences max per paragraph)
 9. Sounds human and conversational, not corporate
@@ -58,7 +59,7 @@ Do NOT include:
 - Bullet point lists of skills
 - Emojis or hashtags`,
         tips: [
-            'The first 2 lines are visible before "see more" — make them count',
+            'The first 2 lines are visible before "see more" | make them count',
             'Read it out loud. If it sounds like a robot wrote it, it\'s too formal',
             'Include your name naturally so it reads well when shared',
         ],
@@ -80,8 +81,8 @@ My unique angle: [What makes your approach different from others who do similar 
 Structure the About section as:
 - Paragraph 1 (2-3 sentences): State the problem. Make the reader nod and think "yes, that's my challenge"
 - Paragraph 2 (2-3 sentences): Describe your approach/solution. Be specific, not vague
-- Paragraph 3 (2-3 sentences): Show proof — a result, a metric, a transformation
-- Paragraph 4 (1-2 sentences): Call-to-action — what should someone do if they want to work with you or learn more
+- Paragraph 3 (2-3 sentences): Show proof | a result, a metric, a transformation
+- Paragraph 4 (1-2 sentences): Call-to-action | what should someone do if they want to work with you or learn more
 
 Keep it under 250 words. First person. Conversational tone. No buzzwords.`,
         tips: [
@@ -105,10 +106,10 @@ Target role: [e.g., "Junior UX Designer at a product-led company"]
 Key skills for the new role: [Skill 1, Skill 2, Skill 3]
 
 Write a LinkedIn About section that:
-1. Opens by acknowledging the transition (don't hide it — own it)
+1. Opens by acknowledging the transition (don't hide it | own it)
 2. Shows the BRIDGE between old and new (transferable skills, shared principles)
 3. Demonstrates commitment (courses, projects, certifications you've completed)
-4. Explains the "why" briefly — motivation, not life story
+4. Explains the "why" briefly | motivation, not life story
 5. Ends with clear positioning: what role you want and what you bring
 6. Is 150-250 words, first person, conversational
 7. Makes the reader think "this person brings a unique perspective" not "this person is starting over"
@@ -116,7 +117,7 @@ Write a LinkedIn About section that:
 Avoid: apologetic language, "I know I don't have traditional experience", or over-explaining`,
         tips: [
             'Career changers who own their transition confidently get more responses than those who apologize for it',
-            'Your "bridge" is your superpower — the combination of old + new expertise is rare',
+            'Your "bridge" is your superpower | the combination of old + new expertise is rare',
             'Link to portfolio projects or certifications to back up your claims',
         ],
     },
@@ -143,13 +144,13 @@ Write a LinkedIn About section that:
 5. Ends with openness to connect (mentors, opportunities, conversations)
 6. Is 100-200 words (students don't need 300)
 7. Sounds like a real person, not a resume robot
-8. Uses honest language: "building," "learning," "exploring" — not "expert" or "seasoned"
+8. Uses honest language: "building," "learning," "exploring" | not "expert" or "seasoned"
 
 Do NOT: claim expertise you don't have, use corporate jargon, or write in third person`,
         tips: [
-            'Recruiters expect students to be learning — showing self-awareness is more impressive than faking expertise',
+            'Recruiters expect students to be learning | showing self-awareness is more impressive than faking expertise',
             'One great project described well beats five listed without context',
-            'Mention specific technologies or tools you\'re learning — they\'re searchable keywords',
+            'Mention specific technologies or tools you\'re learning | they\'re searchable keywords',
         ],
     },
     {
@@ -183,7 +184,7 @@ Tasks:
 
 4. Add a "Before → After" comparison showing the 3 biggest improvements you made and why each change matters
 
-Keep the rewrite under 300 words. Maintain my authentic voice — improve the structure, not my personality.`,
+Keep the rewrite under 300 words. Maintain my authentic voice | improve the structure, not my personality.`,
         tips: [
             'This is the best prompt to use right after getting your LinkedInRank About section score',
             'If the AI rewrites it in a voice that doesn\'t feel like you, ask it to "make it more [casual/direct/warm]"',
@@ -212,7 +213,7 @@ Speaking / board / advisory roles (if any): [e.g., "Advisory board member at Tec
 Write a LinkedIn About section that:
 1. Opens with a leadership-level statement (not job description, but VISION)
 2. Demonstrates scope and impact through 2-3 specific achievements
-3. Shows leadership philosophy — what kind of leader are you?
+3. Shows leadership philosophy | what kind of leader are you?
 4. Mentions one thing beyond the day job (mentoring, speaking, community)
 5. Ends with what you're interested in (partnerships, board seats, speaking, talent)
 6. Is 200-300 words
@@ -223,7 +224,7 @@ Tone: authoritative but human. Think "CEO writing a letter" not "resume in parag
         tips: [
             'Executives who share their philosophy attract better talent and partnership opportunities',
             'Numbers at the leadership level should show SCALE: team size, revenue, market impact',
-            'The "beyond the day job" line makes you 3D — people connect with humans, not titles',
+            'The "beyond the day job" line makes you 3D | people connect with humans, not titles',
         ],
     },
 ]
@@ -232,7 +233,7 @@ export default function AIPromptsAboutPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/ai-prompts-linkedin', label: 'All AI Prompts' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
@@ -254,7 +255,7 @@ export default function AIPromptsAboutPage() {
                         <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
                         Why the About section matters
                     </h2>
-                    <p className="text-sm text-[#4B5563] leading-relaxed">Your About section is worth <strong>20 out of 100 points</strong> on LinkedInRank. It&apos;s the first thing people read after your headline — and the section where most profiles fail. The most common mistake? Writing in third person or leaving it completely blank. These prompts fix that. <Link href="/linkedin-about-guide" className="text-[#0A66C2] hover:underline font-medium">Read our full About section guide →</Link></p>
+                    <p className="text-sm text-[#4B5563] leading-relaxed">Your About section is worth <strong>20 out of 100 points</strong> on LinkedInRank. It&apos;s the first thing people read after your headline | and the section where most profiles fail. The most common mistake? Writing in third person or leaving it completely blank. These prompts fix that. <Link href="/linkedin-about-guide" className="text-[#0A66C2] hover:underline font-medium">Read our full About section guide →</Link></p>
                 </div>
 
                 <div className="space-y-10">
@@ -269,7 +270,7 @@ export default function AIPromptsAboutPage() {
                             </div>
                             <div className="bg-[#0A0F1C] rounded-xl p-5 sm:p-6 mb-4 overflow-x-auto">
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt — Copy &amp; Paste</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt | Copy &amp; Paste</span>
                                     <span className="text-[10px] font-medium text-[#4B5563] bg-[#1a1f2e] px-2 py-0.5 rounded">ChatGPT / Claude / Gemini</span>
                                 </div>
                                 <pre className="text-[13px] text-[#E5E7EB] whitespace-pre-wrap font-mono leading-relaxed">{p.prompt}</pre>
@@ -292,7 +293,7 @@ export default function AIPromptsAboutPage() {
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Score your new About section</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Update your LinkedIn profile, export a new PDF, and see how your About section score improves.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
@@ -313,21 +314,7 @@ export default function AIPromptsAboutPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

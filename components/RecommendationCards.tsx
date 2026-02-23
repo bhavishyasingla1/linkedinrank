@@ -35,16 +35,16 @@ function getBestPractices(
     const experience = profile?.experience || []
     const certs = profile?.certifications || []
 
-    // Headline tips — based on actual headline analysis
+    // Headline tips | based on actual headline analysis
     if (headlinePct < 60) {
         tips.push({ title: 'Your headline needs a clear role + industry', desc: `"${headline.slice(0, 50)}${headline.length > 50 ? '...' : ''}" does not clearly signal what you do. Add your role, domain, and a differentiator.`, priority: 10 })
     } else if (headline.length > 120) {
-        tips.push({ title: `Your headline is ${headline.length} characters — trim to 120`, desc: 'Only the first ~120 characters show in search results and connection requests. Front-load the most important keywords.', priority: 7 })
+        tips.push({ title: `Your headline is ${headline.length} characters | trim to 120`, desc: 'Only the first ~120 characters show in search results and connection requests. Front-load the most important keywords.', priority: 7 })
     } else if (headlinePct >= 80) {
-        tips.push({ title: 'Your headline is strong — keep it updated', desc: 'Review it quarterly. As your role or goals change, your headline should reflect your current positioning.', priority: 2 })
+        tips.push({ title: 'Your headline is strong | keep it updated', desc: 'Review it quarterly. As your role or goals change, your headline should reflect your current positioning.', priority: 2 })
     }
 
-    // About tips — personalized based on actual about content and role
+    // About tips | personalized based on actual about content and role
     const topRole = experience[0]?.title || ''
     const topCompany = experience[0]?.company || ''
     const roleContext = topRole ? ` as a ${topRole}${topCompany ? ` at ${topCompany}` : ''}` : ''
@@ -52,12 +52,12 @@ function getBestPractices(
         tips.push({ title: 'You need an About section', desc: topRole ? `As a ${topRole}, write 3-5 paragraphs about what you do, your expertise in ${skills.slice(0, 2).join(' and ') || 'your field'}, and where you're headed professionally.` : 'Your About section is missing or too short. Write 3-5 paragraphs covering what you do, your key skills, and what you are looking for.', priority: 10 })
     } else if (aboutPct < 60) {
         const aboutStart = about.slice(0, 40)
-        tips.push({ title: 'Strengthen your About section', desc: `Your About starts with "${aboutStart}..." — ${about.match(/\b(I|my)\b/i) ? 'good use of first person' : 'consider rewriting in first person'}. Mention specific skills (${skills.slice(0, 2).join(', ') || 'your tools'}) and include a clear professional direction.`, priority: 8 })
+        tips.push({ title: 'Strengthen your About section', desc: `Your About starts with "${aboutStart}..." | ${about.match(/\b(I|my)\b/i) ? 'good use of first person' : 'consider rewriting in first person'}. Mention specific skills (${skills.slice(0, 2).join(', ') || 'your tools'}) and include a clear professional direction.`, priority: 8 })
     } else if (about && !about.match(/\b(I|my|me)\b/i)) {
         tips.push({ title: 'Rewrite your About in first person', desc: `Your About section is written in third person. Switching to first person ("I lead..." instead of "They lead...") feels more authentic and personal${roleContext}.`, priority: 5 })
     }
 
-    // Experience tips — personalized based on actual experience data
+    // Experience tips | personalized based on actual experience data
     if (experience.length === 0) {
         tips.push({ title: 'Add at least one experience entry', desc: careerStage === 'student' ? 'Internships and part-time roles all count as experience. Describe what you did, the tools you used, and any outcomes.' : 'Even brief roles should be listed with clear descriptions of responsibilities and outcomes.', priority: 10 })
     } else {
@@ -71,11 +71,11 @@ function getBestPractices(
         }
     }
 
-    // Skills tips — personalized based on actual skills and role
+    // Skills tips | personalized based on actual skills and role
     const currentRole = experience[0]?.title || ''
     const currentCompany = experience[0]?.company || ''
     if (skills.length === 0) {
-        tips.push({ title: 'Add skills relevant to your role', desc: currentRole ? `As a ${currentRole}${currentCompany ? ` at ${currentCompany}` : ''}, add skills that reflect your day-to-day expertise — specific tools, frameworks, and methods you actually use.` : 'LinkedIn uses skills for search matching. Without skills listed, recruiters searching for your expertise cannot find you.', priority: 9 })
+        tips.push({ title: 'Add skills relevant to your role', desc: currentRole ? `As a ${currentRole}${currentCompany ? ` at ${currentCompany}` : ''}, add skills that reflect your day-to-day expertise | specific tools, frameworks, and methods you actually use.` : 'LinkedIn uses skills for search matching. Without skills listed, recruiters searching for your expertise cannot find you.', priority: 9 })
     } else if (skills.length < 5) {
         // Check if skills match the role
         const roleWords = currentRole.toLowerCase().split(/\s+/)
@@ -85,7 +85,7 @@ function getBestPractices(
         if (!skillsMatchRole && currentRole) {
             tips.push({ title: `Your skills don't clearly match your role as ${currentRole}`, desc: `Your visible skills (${skills.join(', ')}) don't directly reflect your ${currentRole} role. Pin skills that recruiters search for when hiring for this position.`, priority: 8 })
         } else {
-            tips.push({ title: `Your PDF shows ${skills.length} skills — ensure your top ones are pinned`, desc: `LinkedIn PDFs only export your top 3-5 skills. Your visible ones: ${skills.join(', ')}. On LinkedIn, pin the skills most relevant to ${currentRole || 'your target role'} at the top of your skills list.`, priority: 7 })
+            tips.push({ title: `Your PDF shows ${skills.length} skills | ensure your top ones are pinned`, desc: `LinkedIn PDFs only export your top 3-5 skills. Your visible ones: ${skills.join(', ')}. On LinkedIn, pin the skills most relevant to ${currentRole || 'your target role'} at the top of your skills list.`, priority: 7 })
         }
     } else if (skillsPct >= 70) {
         tips.push({ title: 'Your skills are well-aligned', desc: `Your top skills (${skills.slice(0, 3).join(', ')}) are visible in your PDF. Ensure these match the keywords in job descriptions you're targeting${currentRole ? ` as a ${currentRole}` : ''}.`, priority: 3 })
@@ -105,7 +105,7 @@ function getBestPractices(
 
     // Career-stage specific tips
     if (careerStage === 'student') {
-        tips.push({ title: 'Add detailed descriptions to your experience entries', desc: 'LinkedIn PDFs only show Experience and Education. Make each role count — add 2-3 bullet points describing what you did, tools you used, and outcomes you achieved.', priority: 5 })
+        tips.push({ title: 'Add detailed descriptions to your experience entries', desc: 'LinkedIn PDFs only show Experience and Education. Make each role count | add 2-3 bullet points describing what you did, tools you used, and outcomes you achieved.', priority: 5 })
     }
     if (careerStage === 'senior' || archetype?.toLowerCase().includes('founder')) {
         tips.push({ title: 'Show trajectory in your experience', desc: 'Demonstrate a logical path to your current role. Domain credibility builds trust with investors, partners, and senior hires.', priority: 5 })

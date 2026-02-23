@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How to Get Noticed by Recruiters on LinkedIn — Actionable Guide (2026)',
+    title: 'How to Get Noticed by Recruiters on LinkedIn | Actionable Guide (2026)',
     description: 'Practical strategies to get found and contacted by recruiters on LinkedIn in 2026. Keyword optimization, Open to Work settings, networking tactics, and profile signals. Free scoring with LinkedInRank.',
     keywords: 'get noticed by recruiters linkedin 2026, how to attract recruiters on linkedin, linkedin recruiter visibility, linkedin job search tips, how to get recruited on linkedin, linkedin recruiter outreach, linkedin visibility tips',
     alternates: { canonical: 'https://linkedinrank.com/get-noticed-recruiters' },
@@ -43,7 +44,7 @@ export default function GetNoticedRecruitersPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/recruiter-psychology', label: 'Recruiter Psychology' }]} />
+            <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -53,7 +54,7 @@ export default function GetNoticedRecruitersPage() {
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Recruiter Visibility</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">How to Get Noticed by Recruiters on LinkedIn</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Getting recruiter messages on LinkedIn is not luck — it is the result of specific, optimizable profile signals. Over 90% of recruiters use LinkedIn as their primary sourcing tool. This guide covers the exact steps to make your profile recruiter-visible and recruiter-ready.
+                    Getting recruiter messages on LinkedIn is not luck | it is the result of specific, optimizable profile signals. Over 90% of recruiters use LinkedIn as their primary sourcing tool. This guide covers the exact steps to make your profile recruiter-visible and recruiter-ready.
                 </p>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
@@ -167,7 +168,7 @@ export default function GetNoticedRecruitersPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Is your profile recruiter-ready?</h2>
                         <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">LinkedInRank evaluates the exact signals recruiters scan. Get your free score in under a minute.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
                     {/* Related Guides */}
@@ -191,17 +192,7 @@ export default function GetNoticedRecruitersPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/recruiter-psychology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Recruiter Psychology</Link>
-                        <Link href="/linkedin-optimization-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Optimization Guide</Link>
-                        <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">FAQ</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

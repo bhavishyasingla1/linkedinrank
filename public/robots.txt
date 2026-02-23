@@ -1,14 +1,37 @@
 User-agent: *
 Allow: /
+Allow: /tools/
+Allow: /blogs/
+Allow: /linkedin-optimization-guide
+Allow: /what-is-linkedin-rank
+Allow: /linkedin-rank-vs-ssi
+Allow: /how-linkedin-rank-works
+Allow: /faq
+Allow: /about
+Allow: /contact
+Allow: /methodology
+Allow: /for-students
+Allow: /for-jobseekers
+Allow: /for-founders
+Allow: /score
+Allow: /rank
+Allow: /linkedin-ranking
+Allow: /linkedin-profile-score
+Allow: /linkedin-headline-for-graphic-designer
+Allow: /linkedin-profile-for-students
+Allow: /linkedin-headline-*
+Allow: /ai-prompts-linkedin*
 Disallow: /loading-analysis
 Disallow: /results
 Disallow: /api/
+Disallow: /_next/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /loading-analysis
 Disallow: /results
 Disallow: /api/
+Disallow: /_next/
 
 Sitemap: https://linkedinrank.com/sitemap.xml
 Host: https://linkedinrank.com

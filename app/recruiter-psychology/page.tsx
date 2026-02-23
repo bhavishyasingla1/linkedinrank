@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How Recruiters Actually View Your LinkedIn Profile — The 10-Second Scan (2026)',
+    title: 'How Recruiters Actually View Your LinkedIn Profile | The 10-Second Scan (2026)',
     description: 'Understand recruiter psychology on LinkedIn in 2026. What recruiters scan first, how they search, red flags they notice, and how to build trust in 10 seconds. Data-backed insights. Free scoring with LinkedInRank.',
     keywords: 'how recruiters use linkedin 2026, recruiter psychology linkedin, how recruiters search linkedin, what recruiters look for linkedin, linkedin recruiter tips, get noticed by recruiters linkedin, linkedin recruiter scan',
     alternates: { canonical: 'https://linkedinrank.com/recruiter-psychology' },
@@ -50,7 +51,7 @@ export default function RecruiterPsychologyPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/linkedin-optimization-guide', label: 'Full Guide' }]} />
+            <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
@@ -99,7 +100,7 @@ export default function RecruiterPsychologyPage() {
                                 ))}
                             </div>
                         </div>
-                        <p className="mb-4">If those keywords are not in your headline, About section, experience titles, or skills — <strong className="text-[#0A0F1C]">you do not exist</strong> to that recruiter. Your qualifications are irrelevant if you cannot be found. Our <Link href="/linkedin-keywords-guide" className="text-[#0A66C2] hover:underline">LinkedIn Keywords Guide</Link> covers exactly how to optimize for recruiter search.</p>
+                        <p className="mb-4">If those keywords are not in your headline, About section, experience titles, or skills | <strong className="text-[#0A0F1C]">you do not exist</strong> to that recruiter. Your qualifications are irrelevant if you cannot be found. Our <Link href="/linkedin-keywords-guide" className="text-[#0A66C2] hover:underline">LinkedIn Keywords Guide</Link> covers exactly how to optimize for recruiter search.</p>
                     </section>
 
                     <section>
@@ -109,7 +110,7 @@ export default function RecruiterPsychologyPage() {
                                 { rank: '1st', title: 'Headline', desc: 'Signals your positioning. A vague headline like "Student at XYZ" tells the recruiter nothing. A specific headline like "Aspiring Data Analyst | SQL, Excel, Python" immediately communicates value.', link: '/linkedin-headline-guide', linkText: 'Headline Writing Guide' },
                                 { rank: '2nd', title: 'Experience section', desc: 'Recruiters look for action verbs, measurable impact, and relevant skills. "Worked on social media" tells them nothing. "Managed Instagram growth from 2K to 10K in 4 months" tells them everything.', link: '/linkedin-optimization-guide', linkText: 'Full Optimization Guide' },
                                 { rank: '3rd', title: 'Skills section', desc: 'Used as search filters. Your top 3 pinned skills are the most visible. They must match the roles you are targeting.', link: '/linkedin-keywords-guide', linkText: 'Keywords Guide' },
-                                { rank: '4th', title: 'Activity & engagement', desc: 'A dead profile signals low interest. Even minimal activity — a few comments or shares per month — shows the recruiter you are active and engaged.', link: '/linkedin-content-strategy', linkText: 'Content Strategy' },
+                                { rank: '4th', title: 'Activity & engagement', desc: 'A dead profile signals low interest. Even minimal activity | a few comments or shares per month | shows the recruiter you are active and engaged.', link: '/linkedin-content-strategy', linkText: 'Content Strategy' },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4 bg-white border border-gray-200 rounded-xl p-4 shadow-[0_1px_4px_rgba(0,0,0,0.03)]">
                                     <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white text-xs font-bold flex items-center justify-center shrink-0">{item.rank}</span>
@@ -153,7 +154,7 @@ export default function RecruiterPsychologyPage() {
                             {[
                                 { title: 'Specificity over vagueness', desc: 'Every claim is backed by a number, a result, or a concrete example. "Increased organic traffic 60% in 5 months" builds more trust than "improved company performance."' },
                                 { title: 'Consistent narrative', desc: 'Everything on the profile points to one clear theme. If your headline says "Product Marketing" but your experience is scattered across unrelated roles, trust decreases.' },
-                                { title: 'Clear trajectory', desc: 'Recruiters want to see progression — growth in responsibility, skills, or impact over time. Even lateral moves should show intentional direction.' },
+                                { title: 'Clear trajectory', desc: 'Recruiters want to see progression | growth in responsibility, skills, or impact over time. Even lateral moves should show intentional direction.' },
                                 { title: 'Social proof', desc: 'Recommendations, endorsements, and featured work provide third-party validation. Even 2–3 genuine recommendations significantly boost credibility.' },
                             ].map((item, i) => (
                                 <div key={i} className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4">
@@ -192,7 +193,7 @@ export default function RecruiterPsychologyPage() {
                                 { q: 'How long do recruiters spend on a LinkedIn profile?', a: 'Most recruiters spend 10–30 seconds on an initial scan. If your headline, photo, and experience section pass the scan, they may spend 1–2 minutes reading in detail.' },
                                 { q: 'Do recruiters actually use LinkedIn to find candidates?', a: 'Yes. Over 90% of recruiters use LinkedIn as their primary sourcing tool. LinkedIn Recruiter is the most widely used professional recruiting platform globally.' },
                                 { q: 'What keywords should I use to get found by recruiters?', a: 'Use your exact target job title, relevant technical skills, industry terms, and tool names. Place them in your headline, About section, and skills. See our Keywords Guide for details.' },
-                                { q: 'Does the "Open to Work" badge help?', a: 'The recruiter-only visibility option is useful and does not carry stigma. The public green banner is more polarizing — some recruiters view it positively, others are neutral.' },
+                                { q: 'Does the "Open to Work" badge help?', a: 'The recruiter-only visibility option is useful and does not carry stigma. The public green banner is more polarizing | some recruiters view it positively, others are neutral.' },
                                 { q: 'How important is my profile photo for recruiters?', a: 'Very important. Profiles with professional photos get significantly more views. It signals professionalism and approachability. A missing photo is a red flag.' },
                                 { q: 'Can LinkedInRank tell me if my profile is recruiter-ready?', a: 'Yes. LinkedInRank evaluates the same signals recruiters scan: headline clarity, experience depth, skills relevance, and overall completeness. Upload your PDF for a free score.' },
                             ].map((item, i) => (
@@ -208,7 +209,7 @@ export default function RecruiterPsychologyPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See your profile through a recruiter's eyes</h2>
                         <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">LinkedInRank scores the exact signals recruiters scan. Get your free analysis in under a minute.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
                     {/* Related Guides */}
@@ -232,17 +233,7 @@ export default function RecruiterPsychologyPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/linkedin-optimization-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Optimization Guide</Link>
-                        <Link href="/linkedin-headline-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Headline Guide</Link>
-                        <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">FAQ</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

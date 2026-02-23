@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export default function ChecklistPage() {
     const [checked, setChecked] = useState<Record<string, boolean>>({})
@@ -11,7 +12,7 @@ export default function ChecklistPage() {
     return (
         <main className="min-h-screen bg-white">
             <div className="no-print">
-                <SiteHeader navLinks={[{ href: '/linkedin-optimization-guide', label: 'Guides' }]} />
+                <SiteHeader />
             </div>
 
             {/* Hero */}
@@ -24,7 +25,7 @@ export default function ChecklistPage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">The Ultimate LinkedIn Profile Checklist</h1>
                     <p className="text-[16px] text-[#4B5563] max-w-lg mx-auto leading-relaxed mb-6">
-                        A comprehensive, section-by-section checklist to evaluate and optimize your LinkedIn profile. Based on the same 30+ signals LinkedInRank uses — plus expert tips on each item.
+                        A comprehensive, section-by-section checklist to evaluate and optimize your LinkedIn profile. Based on the same 30+ signals LinkedInRank uses | plus expert tips on each item.
                     </p>
                     <div className="flex items-center justify-center gap-3 text-xs text-[#6B7280]">
                         <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg> Interactive checkboxes</span>
@@ -56,12 +57,12 @@ export default function ChecklistPage() {
                             title: 'Profile Photo & Banner',
                             weight: 'First Impression',
                             color: '#059669',
-                            tip: 'Profiles with a professional photo get 14x more views. Your banner is free real estate — use it.',
+                            tip: 'Profiles with a professional photo get 14x more views. Your banner is free real estate | use it.',
                             items: [
                                 'Professional headshot with good lighting and neutral background',
                                 'Face takes up 60-70% of the frame (not too far, not too close)',
                                 'You look approachable and are dressed appropriately for your industry',
-                                'Custom banner image (not the default blue) — shows your brand, company, or tagline',
+                                'Custom banner image (not the default blue) | shows your brand, company, or tagline',
                                 'Photo is recent and recognizable (would someone recognize you at a meeting?)',
                             ]
                         },
@@ -73,7 +74,7 @@ export default function ChecklistPage() {
                             items: [
                                 'States your current role or professional identity clearly',
                                 'Includes industry-relevant keywords recruiters actually search for',
-                                'Is specific — not just "Student" or "Professional" or "Entrepreneur"',
+                                'Is specific | not just "Student" or "Professional" or "Entrepreneur"',
                                 'Uses pipe separators (|) for scannability: Role | Specialty | Value',
                                 'Conveys what you do AND for whom or in what domain',
                                 'Under 120 characters for full visibility in search results',
@@ -86,12 +87,12 @@ export default function ChecklistPage() {
                             color: '#2563EB',
                             tip: 'Only the first 3 lines show before "see more". Your hook must be compelling enough to click.',
                             items: [
-                                'First 2 lines hook the reader — state what you do and why it matters',
+                                'First 2 lines hook the reader | state what you do and why it matters',
                                 'Mentions specific skills, tools, or domains you work with',
                                 'Shows professional direction or area of focus',
                                 'Structured with short paragraphs (not a wall of text)',
                                 'Written in first person ("I build..." not "John builds...")',
-                                'Between 150-300 words — enough to tell your story, short enough to read',
+                                'Between 150-300 words | enough to tell your story, short enough to read',
                                 'Includes a call to action ("Let\'s connect if...", "Reach out for...")',
                                 'Avoids generic filler: "passionate", "hardworking", "team player", "motivated"',
                             ]
@@ -106,7 +107,7 @@ export default function ChecklistPage() {
                                 'Bullets start with strong action verbs: Led, Built, Shipped, Reduced, Grew',
                                 'Describes what you did, how you did it, and the result (Situation → Action → Result)',
                                 'Includes at least one metric or number per role ("Increased X by Y%", "Managed team of Z")',
-                                'Most recent role has the most detail — older roles can be brief',
+                                'Most recent role has the most detail | older roles can be brief',
                                 'No unexplained gaps longer than 6 months',
                                 'Company names include the company page link (not just text)',
                                 'Date ranges are complete (month + year)',
@@ -211,7 +212,7 @@ export default function ChecklistPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Done checking? Get your score</h2>
                         <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and let LinkedInRank score your profile automatically with personalized recommendations for every section.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                     </div>
 
                     <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 flex items-center justify-between no-print">
@@ -241,17 +242,7 @@ export default function ChecklistPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Methodology</Link>
-                        <Link href="/for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">For Students</Link>
-                        <Link href="/for-jobseekers" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">For Job Seekers</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

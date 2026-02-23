@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'AI Prompts for LinkedIn Skills Section — Keyword Optimization (2026)',
+    title: 'AI Prompts for LinkedIn Skills Section | Keyword Optimization (2026)',
     description: 'AI prompts to identify the right skills for your LinkedIn profile in 2026. Optimize skill order and match recruiter search terms for maximum visibility. Free scoring with LinkedInRank.',
     keywords: 'ai prompts linkedin skills 2026, chatgpt linkedin skills optimization, linkedin skills keywords, linkedin skills section ai, best linkedin skills prompt, linkedin skills ai template',
     alternates: { canonical: 'https://linkedinrank.com/ai-prompts-linkedin-skills' },
     openGraph: {
-        title: 'AI Prompts for LinkedIn Skills Section — Keyword Optimization',
+        title: 'AI Prompts for LinkedIn Skills Section | Keyword Optimization',
         description: 'AI prompts to identify and optimize LinkedIn skills for maximum recruiter visibility.',
         url: 'https://linkedinrank.com/ai-prompts-linkedin-skills',
     },
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'AI Prompts for LinkedIn Skills — Keyword Research & Optimization',
+    headline: 'AI Prompts for LinkedIn Skills | Keyword Research & Optimization',
     description: '4 AI prompts to identify the right skills, optimize skill order, and match recruiter search terms.',
     author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
@@ -43,11 +44,11 @@ Tasks:
 1. KEEP: Which of my current skills should I keep? (relevant to my role/target)
 2. REMOVE: Which skills are too generic, outdated, or hurting my positioning? (e.g., "Microsoft Office" for a senior engineer)
 3. ADD: What skills am I missing that recruiters actively search for in my role?
-4. REORDER: What should my Top 3 pinned skills be? (LinkedIn lets you pin 3 — these appear on your profile card)
+4. REORDER: What should my Top 3 pinned skills be? (LinkedIn lets you pin 3 | these appear on your profile card)
 
 For the skills to ADD, categorize them:
 - Hard skills (technologies, tools, frameworks)
-- Soft skills (leadership, communication — but only the ones recruiters actually filter by)
+- Soft skills (leadership, communication | but only the ones recruiters actually filter by)
 - Industry-specific skills (domain knowledge)
 - Certifications that double as skills (e.g., "AWS Certified", "PMP")
 
@@ -55,9 +56,9 @@ Also answer: How many total skills should I have? (LinkedIn allows up to 50, but
 
 Format your response as a clear action plan I can implement in 10 minutes.`,
         tips: [
-            'LinkedIn allows 50 skills but quality beats quantity — 20-30 well-chosen skills outperform 50 generic ones',
+            'LinkedIn allows 50 skills but quality beats quantity | 20-30 well-chosen skills outperform 50 generic ones',
             'Your Top 3 pinned skills appear everywhere: profile card, search results, connection requests',
-            'Skills are searchable keywords — treat them as SEO for your profile',
+            'Skills are searchable keywords | treat them as SEO for your profile',
         ],
     },
     {
@@ -84,9 +85,9 @@ Tasks:
 
 Also: Pull 3-5 actual job descriptions for [target role] and extract the most commonly repeated skills across them. These are the skills I need on my profile.`,
         tips: [
-            'LinkedIn Recruiter has a "Skills" filter — skills listed on your profile directly affect whether you appear in searches',
-            'Emerging skills (e.g., "AI/ML" in 2024-2025) have less competition — adding them early gives you an advantage',
-            'Cross-reference with job descriptions — if a skill appears in 4/5 postings for your target role, it\'s a must-have',
+            'LinkedIn Recruiter has a "Skills" filter | skills listed on your profile directly affect whether you appear in searches',
+            'Emerging skills (e.g., "AI/ML" in 2024-2025) have less competition | adding them early gives you an advantage',
+            'Cross-reference with job descriptions | if a skill appears in 4/5 postings for your target role, it\'s a must-have',
         ],
     },
     {
@@ -114,7 +115,7 @@ Tasks:
    - Whether I should add it now (if I have basic knowledge) or wait until I've built competency
 
 3. BRIDGE SKILLS: Which of my current skills are uniquely valuable in the target role?
-   (These are my differentiators — skills most people in the target role DON'T have)
+   (These are my differentiators | skills most people in the target role DON'T have)
 
 4. UPDATED SKILLS LIST: Write my new recommended skills list (20-30 skills) organized as:
    - Top 3 pinned skills for the target role
@@ -124,9 +125,9 @@ Tasks:
 
 5. TIMELINE: A realistic 30-60-90 day plan to build the missing skills`,
         tips: [
-            'Bridge skills are your superpower — an engineer becoming a PM has technical depth most PMs lack',
-            'Don\'t remove all old skills immediately — they show your journey and provide keyword diversity',
-            'Add skills you\'re actively learning with at least basic competency — don\'t wait for mastery',
+            'Bridge skills are your superpower | an engineer becoming a PM has technical depth most PMs lack',
+            'Don\'t remove all old skills immediately | they show your journey and provide keyword diversity',
+            'Add skills you\'re actively learning with at least basic competency | don\'t wait for mastery',
         ],
     },
     {
@@ -162,8 +163,8 @@ Tasks:
 5. How often should I refresh my endorsement outreach?`,
         tips: [
             'Endorsements from people with the same skill carry more weight in LinkedIn\'s algorithm',
-            'Quality matters more than quantity — 5 endorsements from respected professionals beat 50 from random connections',
-            'Endorse others first — most people reciprocate within a week',
+            'Quality matters more than quantity | 5 endorsements from respected professionals beat 50 from random connections',
+            'Endorse others first | most people reciprocate within a week',
         ],
     },
 ]
@@ -172,7 +173,7 @@ export default function AIPromptsSkillsPage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <SiteHeader navLinks={[{ href: '/ai-prompts-linkedin', label: 'All AI Prompts' }]} />
+            <SiteHeader />
 
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
@@ -201,7 +202,7 @@ export default function AIPromptsSkillsPage() {
                             </div>
                             <div className="bg-[#0A0F1C] rounded-xl p-5 sm:p-6 mb-4 overflow-x-auto">
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt — Copy &amp; Paste</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Prompt | Copy &amp; Paste</span>
                                     <span className="text-[10px] font-medium text-[#4B5563] bg-[#1a1f2e] px-2 py-0.5 rounded">ChatGPT / Claude / Gemini</span>
                                 </div>
                                 <pre className="text-[13px] text-[#E5E7EB] whitespace-pre-wrap font-mono leading-relaxed">{p.prompt}</pre>
@@ -224,7 +225,7 @@ export default function AIPromptsSkillsPage() {
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Check your skills score</h2>
                     <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">LinkedInRank evaluates your skills section across multiple signals. See where you stand.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
@@ -244,21 +245,7 @@ export default function AIPromptsSkillsPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                        <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                        
-                    </div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Home</Link>
-                        <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

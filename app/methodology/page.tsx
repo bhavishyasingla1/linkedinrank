@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How LinkedInRank Scores Your LinkedIn Profile — Methodology & Algorithm',
+    title: 'How LinkedInRank Scores Your LinkedIn Profile | Methodology & Algorithm',
     description: 'Deep dive into the LinkedInRank scoring methodology: 6 categories, 30+ signals, AI + rule-based evaluation, career stage adaptation, and transparent fairness. See exactly how your LinkedIn profile score is calculated.',
     keywords: 'linkedinrank methodology, linkedin profile scoring algorithm, linkedin score calculation, linkedin profile evaluation criteria, linkedin scoring system, how linkedin score works, linkedin profile grading',
     alternates: { canonical: 'https://linkedinrank.com/methodology' },
     openGraph: {
-        title: 'How LinkedInRank Scores Your LinkedIn Profile — Methodology',
+        title: 'How LinkedInRank Scores Your LinkedIn Profile | Methodology',
         description: 'Transparent scoring: 6 categories, 30+ signals, AI + rule-based evaluation. See exactly how your LinkedIn profile score is calculated.',
         url: 'https://linkedinrank.com/methodology',
     },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function MethodologyPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/about', label: 'About' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 pb-12 overflow-hidden">
@@ -146,10 +147,10 @@ export default function MethodologyPage() {
                                     weight: 20,
                                     color: '#0A66C2',
                                     criteria: [
-                                        'Role clarity — does it state what you do?',
-                                        'Keywords — are searchable, industry terms present?',
-                                        'Specificity — is it differentiated from generic titles?',
-                                        'Positioning — does it convey value or expertise?',
+                                        'Role clarity | does it state what you do?',
+                                        'Keywords | are searchable, industry terms present?',
+                                        'Specificity | is it differentiated from generic titles?',
+                                        'Positioning | does it convey value or expertise?',
                                     ],
                                     high: 'Role + domain present, searchable keywords, not generic.',
                                     low: '"Student at XYZ" only, "Seeking opportunities", too vague.',
@@ -159,10 +160,10 @@ export default function MethodologyPage() {
                                     weight: 20,
                                     color: '#2563EB',
                                     criteria: [
-                                        'Clarity — does it explain what you do?',
-                                        'Structure — is it readable and organized?',
-                                        'Skills mention — are specific skills or tools referenced?',
-                                        'Direction — does it show professional focus?',
+                                        'Clarity | does it explain what you do?',
+                                        'Structure | is it readable and organized?',
+                                        'Skills mention | are specific skills or tools referenced?',
+                                        'Direction | does it show professional focus?',
                                     ],
                                     high: 'Shows expertise or direction, mentions skills/tools/domains.',
                                     low: 'Missing, 2-3 lines only, purely emotional language.',
@@ -173,10 +174,10 @@ export default function MethodologyPage() {
                                     color: '#4F46E5',
                                     criteria: [
                                         'Number of roles relative to career stage',
-                                        'Role descriptions — are responsibilities clear?',
-                                        'Action verbs — Led, Built, Managed, Designed',
-                                        'Impact shown — contributions and outcomes described',
-                                        'Quantification — numbers are a bonus, not required',
+                                        'Role descriptions | are responsibilities clear?',
+                                        'Action verbs | Led, Built, Managed, Designed',
+                                        'Impact shown | contributions and outcomes described',
+                                        'Quantification | numbers are a bonus, not required',
                                     ],
                                     high: 'Responsibilities + outcomes shown, some metrics present.',
                                     low: 'Only job titles, no description.',
@@ -188,7 +189,7 @@ export default function MethodologyPage() {
                                     criteria: [
                                         'Enough skills listed for career stage',
                                         'Relevance to stated role',
-                                        'Specificity — tools and platforms vs generic terms',
+                                        'Specificity | tools and platforms vs generic terms',
                                     ],
                                     high: 'Domain-specific skills, tools/platforms included.',
                                     low: 'Very few skills, generic terms only.',
@@ -341,7 +342,7 @@ export default function MethodologyPage() {
                 <div className="mt-12 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                     <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See your score breakdown</h2>
                     <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and get scored across all 6 categories with personalized recommendations.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It's Free</Link>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-gray-100">
@@ -357,17 +358,7 @@ export default function MethodologyPage() {
                 </div>
             </div>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
-                        <Link href="/about" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">About</Link>
-                        <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Privacy</Link>
-                        <Link href="/contact" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Contact</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }

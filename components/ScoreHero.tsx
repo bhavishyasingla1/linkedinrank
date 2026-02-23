@@ -1,15 +1,20 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface ScoreHeroProps {
     score: number
     name: string
-    tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum'
+    tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'bronze' | 'silver' | 'gold' | 'platinum'
     peerContext: string
 }
 
-export default function ScoreHero({ score, name, tier, peerContext }: ScoreHeroProps) {
+export default function ScoreHero({ 
+    score, 
+    name, 
+    tier, 
+    peerContext
+}: ScoreHeroProps) {
     const [displayScore, setDisplayScore] = useState(0)
     const [revealed, setRevealed] = useState(false)
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -76,10 +81,15 @@ export default function ScoreHero({ score, name, tier, peerContext }: ScoreHeroP
         Bronze: { color: '#8B6914', bg: '#FEF3C7' },
         Silver: { color: '#6B7280', bg: '#F3F4F6' },
         Gold: { color: '#92400E', bg: '#FEF3C7' },
-        Platinum: { color: '#5B21B6', bg: '#EDE9FE' }
+        Platinum: { color: '#5B21B6', bg: '#EDE9FE' },
+        bronze: { color: '#8B6914', bg: '#FEF3C7' },
+        silver: { color: '#6B7280', bg: '#F3F4F6' },
+        gold: { color: '#92400E', bg: '#FEF3C7' },
+        platinum: { color: '#5B21B6', bg: '#EDE9FE' }
     }
 
-    const { color, bg } = tierConfig[tier]
+    const { color, bg } = tierConfig[tier] || tierConfig['Bronze']
+    const displayTier = tier.charAt(0).toUpperCase() + tier.slice(1).toLowerCase()
 
     return (
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden animate-fade-in">
@@ -100,7 +110,7 @@ export default function ScoreHero({ score, name, tier, peerContext }: ScoreHeroP
                         style={{ color, backgroundColor: bg }}
                     >
                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" /></svg>
-                        {tier} Tier
+                        {displayTier} Tier
                     </span>
                 </div>
             </div>
@@ -113,6 +123,18 @@ export default function ScoreHero({ score, name, tier, peerContext }: ScoreHeroP
                 ) : (
                     <div className="h-4 bg-gray-100 rounded animate-pulse mx-auto w-3/4" />
                 )}
+            </div>
+            
+            <div className="px-5 py-3.5 border-t border-gray-100 bg-[#F8FAFC]/80">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                    <span className="text-[11px] font-semibold text-[#4B5563]">Evaluated across 30+ signals</span>
+                </div>
+                <p className="text-[10px] text-[#9CA3AF] text-center leading-relaxed">
+                    Headline clarity, keyword density, experience depth, skill alignment, and more.
+                </p>
             </div>
         </div>
     )

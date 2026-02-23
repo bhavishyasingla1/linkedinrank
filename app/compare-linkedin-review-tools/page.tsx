@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Profile Review Tools Compared (2026) — LinkedInRank',
+    title: 'Best LinkedIn Profile Review Tools Compared (2026) | LinkedInRank',
     description: 'Compare the best LinkedIn profile review and optimization tools in 2026. Side-by-side comparison of features, pricing, privacy, methodology, and accuracy. See why LinkedInRank is the #1 free LinkedIn scorer.',
     keywords: 'linkedin profile review tools, best linkedin optimizer, linkedin profile tools comparison, linkedin scorer comparison, linkedinrank vs competitors, free linkedin profile review, linkedin profile audit tools',
     alternates: { canonical: 'https://linkedinrank.com/compare-linkedin-review-tools' },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function CompareToolsPage() {
     return (
         <main className="min-h-screen bg-white">
-            <SiteHeader navLinks={[{ href: '/methodology', label: 'Methodology' }, { href: '/faq', label: 'FAQ' }]} />
+            <SiteHeader />
 
             {/* Hero */}
             <section className="bg-gradient-to-b from-[#F8FAFC] to-white py-16 sm:py-20">
@@ -45,7 +46,7 @@ export default function CompareToolsPage() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {[
-                                { title: 'Profile scorers', desc: 'Analyze your profile and return a score. Quality varies — some use keyword matching, others use AI content analysis. Key differentiators: methodology transparency, privacy, and recommendation depth.', icon: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z' },
+                                { title: 'Profile scorers', desc: 'Analyze your profile and return a score. Quality varies | some use keyword matching, others use AI content analysis. Key differentiators: methodology transparency, privacy, and recommendation depth.', icon: 'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z' },
                                 { title: 'AI rewriters', desc: 'Rewrite your profile sections using AI. Can produce polished text but may lose your authentic voice. Best used as a starting point, not a final draft.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
                                 { title: 'Automation tools', desc: 'Focused on connection requests, messaging, and engagement. Fundamentally different from profile evaluation and often violate LinkedIn terms of service.', icon: 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182' },
                                 { title: 'Professional services', desc: 'Human experts who review your profile manually. Higher cost but potentially more nuanced. Quality depends entirely on the reviewer.', icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
@@ -127,15 +128,15 @@ export default function CompareToolsPage() {
                             </div>
                             <h2 className="text-xl font-bold text-[#0A0F1C]">Our honest position</h2>
                         </div>
-                        <p className="text-[15px] text-[#4B5563] leading-relaxed">No single tool can replace thoughtful, intentional profile building. LinkedInRank aims to provide a structured starting point — showing you what is working, what is not, and what to prioritize. The best results come from combining automated analysis with your own judgment about your career narrative.</p>
+                        <p className="text-[15px] text-[#4B5563] leading-relaxed">No single tool can replace thoughtful, intentional profile building. LinkedInRank aims to provide a structured starting point | showing you what is working, what is not, and what to prioritize. The best results come from combining automated analysis with your own judgment about your career narrative.</p>
                     </section>
                 </div>
 
                 {/* CTA */}
                 <div className="mt-16 bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
                     <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Try the evaluation yourself</h2>
-                    <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and see how your profile scores — free, private, under 60 seconds.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile — It&apos;s Free</Link>
+                    <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and see how your profile scores | free, private, under 60 seconds.</p>
+                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
@@ -154,17 +155,7 @@ export default function CompareToolsPage() {
                 </div>
             </article>
 
-            <footer className="border-t border-gray-100 bg-[#F8FAFC] py-8">
-                <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4"><Link href="/" className="font-bold text-sm text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link><a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div>
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2">
-                        <Link href="/" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Home</Link>
-                        <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Methodology</Link>
-                        <Link href="/linkedin-profile-checklist" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">Profile Checklist</Link>
-                        <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] transition-colors no-underline">FAQ</Link>
-                    </nav>
-                </div>
-            </footer>
+            <SiteFooter />
         </main>
     )
 }
