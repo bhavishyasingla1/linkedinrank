@@ -74,7 +74,7 @@ export default function BulletImproverV2() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Experience Bullet Rewriter</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Paste weak descriptions, get achievement-driven bullets with metrics</p>
+                        <p className="text-[11px] text-[#6B7280]">Paste weak descriptions, get achievement-driven bullets with metrics</p>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@ export default function BulletImproverV2() {
                 {results && results.length > 0 && (
                     <div className="space-y-4 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
                                 {results.length} Versions
                             </p>
                             {isAI && (
@@ -173,7 +173,7 @@ export default function BulletImproverV2() {
                         {results.map((r, i) => (
                             <div key={i} className="group">
                                 <div className="flex items-center justify-between mb-1.5">
-                                    <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">{r.label}</span>
+                                    <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">{r.label}</span>
                                     <button
                                         onClick={() => copyText(r.text, `v-${i}`)}
                                         className="text-[11px] text-[#4F46E5] hover:underline font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
@@ -191,7 +191,7 @@ export default function BulletImproverV2() {
                         {/* Suggestions (rule-based only) */}
                         {!isAI && results[0]?.suggestions && results[0].suggestions.length > 0 && (
                             <div className="bg-[#F8FAFC] rounded-xl p-4">
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">Tips</p>
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Tips</p>
                                 <div className="space-y-1.5">
                                     {results[0].suggestions.map((s: string, i: number) => (
                                         <p key={i} className="text-xs text-[#4B5563] leading-relaxed flex items-start gap-2">

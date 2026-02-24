@@ -254,7 +254,7 @@ export default function LinkedInProfileForStudentsPage() {
                         <div className="space-y-1.5">
                             {STUDENT_HEADLINE_EXAMPLES.map((h, i) => (
                                 <div key={i} className="flex items-start gap-2.5 bg-[#F8FAFC] border border-gray-100 rounded-lg px-3.5 py-2.5">
-                                    <span className="text-xs text-[#9CA3AF] font-mono tabular-nums shrink-0 mt-0.5 w-5 text-right">{i + 1}.</span>
+                                    <span className="text-xs text-[#6B7280] font-mono tabular-nums shrink-0 mt-0.5 w-5 text-right">{i + 1}.</span>
                                     <p className="text-sm text-[#0A0F1C]">{h}</p>
                                 </div>
                             ))}
@@ -297,7 +297,7 @@ export default function LinkedInProfileForStudentsPage() {
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-3">Get your student LinkedIn score</h2>
                         <p className="text-sm text-[#4B5563] mb-2 max-w-md mx-auto">LinkedInRank is calibrated for students — you will not be penalized for limited experience. See exactly where to improve.</p>
-                        <p className="text-xs text-[#9CA3AF] mb-5">Free · No login · Career-stage adaptive · Under 60 seconds</p>
+                        <p className="text-xs text-[#6B7280] mb-5">Free · No login · Career-stage adaptive · Under 60 seconds</p>
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Get Your Free Student Score</Link>
                     </div>
 
@@ -318,7 +318,7 @@ export default function LinkedInProfileForStudentsPage() {
                                 <details key={i} className="group bg-white border border-gray-200 rounded-xl shadow-[0_1px_4px_rgba(0,0,0,0.03)]">
                                     <summary className="flex items-center justify-between cursor-pointer p-4 text-sm font-bold text-[#0A0F1C] list-none">
                                         {item.q}
-                                        <svg className="w-4 h-4 text-[#9CA3AF] group-open:rotate-180 transition-transform shrink-0 ml-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                        <svg className="w-4 h-4 text-[#6B7280] group-open:rotate-180 transition-transform shrink-0 ml-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                                     </summary>
                                     <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
                                 </details>
@@ -328,7 +328,7 @@ export default function LinkedInProfileForStudentsPage() {
 
                     {/* Internal Links */}
                     <div className="pt-8 border-t border-gray-100 mt-6">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             <Link href="/linkedin-ranking" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Improve Your LinkedIn Ranking</Link>
                             <Link href="/linkedin-profile-score" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Check Your Profile Score</Link>

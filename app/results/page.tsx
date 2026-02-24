@@ -295,7 +295,7 @@ export default function ResultsPage() {
                     {archetype && (
                         <p className="text-sm text-[#6B7280]">
                             Profile Archetype: <span className="font-medium text-[#0A66C2]">{archetype}</span>
-                            {careerStage && <span className="text-[#9CA3AF]"> · {careerStage.replace('-', ' ')}</span>}
+                            {careerStage && <span className="text-[#6B7280]"> · {careerStage.replace('-', ' ')}</span>}
                         </p>
                     )}
                 </div>
@@ -312,18 +312,18 @@ export default function ResultsPage() {
                 {(profileHeadline || skillsList.length > 0) && (
                     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mt-5 animate-fade-in">
                         <div className="px-5 pt-5 pb-4">
-                            <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">What We Parsed</h3>
+                            <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">What We Parsed</h3>
 
                             {profileHeadline && (
                                 <div className="mb-3">
-                                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1">Headline</p>
+                                    <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1">Headline</p>
                                     <p className="text-sm text-[#0A0F1C] font-medium leading-relaxed">{profileHeadline}</p>
                                 </div>
                             )}
 
                             {profileAbout && (
                                 <div className="mb-3">
-                                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1">About</p>
+                                    <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1">About</p>
                                     <p className="text-xs text-[#4B5563] leading-relaxed line-clamp-3">
                                         {profileAbout.length > 200 ? profileAbout.slice(0, 200) + '...' : profileAbout}
                                     </p>
@@ -332,7 +332,7 @@ export default function ResultsPage() {
 
                             {analysis.profile?.experience && analysis.profile.experience.length > 0 && (
                                 <div className="mb-3">
-                                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1.5">Experience</p>
+                                    <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1.5">Experience</p>
                                     <div className="space-y-1.5">
                                         {analysis.profile.experience.slice(0, 3).map((exp, i) => (
                                             <div key={i} className="flex items-center gap-2">
@@ -344,7 +344,7 @@ export default function ResultsPage() {
                                             </div>
                                         ))}
                                         {analysis.profile.experience.length > 3 && (
-                                            <p className="text-[11px] text-[#9CA3AF] ml-3.5">+{analysis.profile.experience.length - 3} more roles</p>
+                                            <p className="text-[11px] text-[#6B7280] ml-3.5">+{analysis.profile.experience.length - 3} more roles</p>
                                         )}
                                     </div>
                                 </div>
@@ -352,7 +352,7 @@ export default function ResultsPage() {
 
                             {skillsList.length > 0 && (
                                 <div className="mb-3">
-                                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1.5">Skills</p>
+                                    <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1.5">Skills</p>
                                     <div className="flex flex-wrap gap-1.5">
                                         {skillsList.slice(0, 8).map((skill: string, i: number) => (
                                             <span key={i} className="text-[11px] bg-[#F0F7FF] text-[#0A66C2] px-2 py-0.5 rounded-md font-medium">
@@ -360,7 +360,7 @@ export default function ResultsPage() {
                                             </span>
                                         ))}
                                         {skillsList.length > 8 && (
-                                            <span className="text-[11px] text-[#9CA3AF] px-2 py-0.5">
+                                            <span className="text-[11px] text-[#6B7280] px-2 py-0.5">
                                                 +{skillsList.length - 8} more
                                             </span>
                                         )}
@@ -370,7 +370,7 @@ export default function ResultsPage() {
 
                             {analysis.profile?.education && analysis.profile.education.length > 0 && (
                                 <div>
-                                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1">Education</p>
+                                    <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1">Education</p>
                                     <p className="text-xs text-[#4B5563]">
                                         {analysis.profile.education.slice(0, 2).join(' · ')}
                                     </p>
@@ -383,25 +383,25 @@ export default function ResultsPage() {
                             <div className="flex items-center gap-4">
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-[#0A0F1C]">{analysis.profile?.experience?.length || 0}</p>
-                                    <p className="text-[9px] text-[#9CA3AF] uppercase">Roles</p>
+                                    <p className="text-[9px] text-[#6B7280] uppercase">Roles</p>
                                 </div>
                                 <div className="w-px h-6 bg-gray-100" />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-[#0A0F1C]">{skillsList.length}</p>
-                                    <p className="text-[9px] text-[#9CA3AF] uppercase">Skills</p>
+                                    <p className="text-[9px] text-[#6B7280] uppercase">Skills</p>
                                 </div>
                                 <div className="w-px h-6 bg-gray-100" />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-[#0A0F1C]">{analysis.profile?.education?.length || 0}</p>
-                                    <p className="text-[9px] text-[#9CA3AF] uppercase">Education</p>
+                                    <p className="text-[9px] text-[#6B7280] uppercase">Education</p>
                                 </div>
                                 <div className="w-px h-6 bg-gray-100" />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-[#0A0F1C]">{analysis.profile?.certifications?.length || 0}</p>
-                                    <p className="text-[9px] text-[#9CA3AF] uppercase">Certs</p>
+                                    <p className="text-[9px] text-[#6B7280] uppercase">Certs</p>
                                 </div>
                             </div>
-                            <div className="text-[10px] text-[#9CA3AF]">
+                            <div className="text-[10px] text-[#6B7280]">
                                 {profileAbout ? `${profileAbout.split(/\s+/).length} words in About` : 'No About section'}
                             </div>
                         </div>
@@ -412,7 +412,7 @@ export default function ResultsPage() {
                 <div className="mt-6 mb-2">
                     <div className="flex items-center gap-2">
                         <div className="h-px flex-1 bg-gray-200" />
-                        <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest">Score Analysis</span>
+                        <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest">Score Analysis</span>
                         <div className="h-px flex-1 bg-gray-200" />
                     </div>
                 </div>
@@ -430,7 +430,7 @@ export default function ResultsPage() {
                 <div className="mt-8 mb-2">
                     <div className="flex items-center gap-2">
                         <div className="h-px flex-1 bg-gray-200" />
-                        <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest">What to Fix</span>
+                        <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest">What to Fix</span>
                         <div className="h-px flex-1 bg-gray-200" />
                     </div>
                 </div>
@@ -456,7 +456,7 @@ export default function ResultsPage() {
                 <div className="mt-8 mb-2">
                     <div className="flex items-center gap-2">
                         <div className="h-px flex-1 bg-gray-200" />
-                        <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-widest">Next Steps</span>
+                        <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-widest">Next Steps</span>
                         <div className="h-px flex-1 bg-gray-200" />
                     </div>
                 </div>
@@ -467,7 +467,7 @@ export default function ResultsPage() {
                         <div className="px-5 pt-5 pb-5">
                             <div className="flex items-center gap-2.5 mb-2">
                                 <svg className="w-4 h-4 text-[#7C3AED]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
-                                <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider">Rewrite with AI</h3>
+                                <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider">Rewrite with AI</h3>
                             </div>
 
                             <p className="text-xs text-[#6B7280] mb-4 leading-relaxed">
@@ -480,7 +480,7 @@ export default function ResultsPage() {
                                     <span className="w-5 h-5 rounded-full bg-[#7C3AED] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
                                     <div>
                                         <p className="text-xs font-semibold text-[#0A0F1C]">Copy the prompt below</p>
-                                        <p className="text-[11px] text-[#9CA3AF]">It includes your headline, about, experience, scores, and what to fix</p>
+                                        <p className="text-[11px] text-[#6B7280]">It includes your headline, about, experience, scores, and what to fix</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
@@ -498,7 +498,7 @@ export default function ResultsPage() {
                                     <span className="w-5 h-5 rounded-full bg-[#7C3AED] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
                                     <div>
                                         <p className="text-xs font-semibold text-[#0A0F1C]">Paste and send</p>
-                                        <p className="text-[11px] text-[#9CA3AF]">You'll get rewritten headline, about, experience bullets, and skill suggestions</p>
+                                        <p className="text-[11px] text-[#6B7280]">You'll get rewritten headline, about, experience bullets, and skill suggestions</p>
                                     </div>
                                 </div>
                             </div>
@@ -533,7 +533,7 @@ export default function ResultsPage() {
                             {/* Preview toggle */}
                             <button
                                 onClick={() => setShowFullPrompt(!showFullPrompt)}
-                                className="flex items-center gap-1.5 text-[11px] text-[#9CA3AF] hover:text-[#6B7280] transition-colors mt-3 mx-auto"
+                                className="flex items-center gap-1.5 text-[11px] text-[#6B7280] hover:text-[#6B7280] transition-colors mt-3 mx-auto"
                             >
                                 <svg className={`w-3 h-3 transition-transform ${showFullPrompt ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />

@@ -201,7 +201,7 @@ export default function PostIdeaGenerator() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">LinkedIn Post Idea Engine</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">5 scroll-stopping post ideas built on applied psychology | personalized to your industry</p>
+                        <p className="text-[11px] text-[#6B7280]">5 scroll-stopping post ideas built on applied psychology | personalized to your industry</p>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@ export default function PostIdeaGenerator() {
                 {/* Niche */}
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1">
-                        Your niche or focus area <span className="text-[#9CA3AF] font-normal">(optional, helps AI personalize)</span>
+                        Your niche or focus area <span className="text-[#6B7280] font-normal">(optional, helps AI personalize)</span>
                     </label>
                     <input
                         type="text"
@@ -261,7 +261,7 @@ export default function PostIdeaGenerator() {
                                     }`}
                             >
                                 <p className={`text-[11px] font-semibold ${postType === pt.id ? 'text-[#D97706]' : 'text-[#4B5563]'}`}>{pt.label}</p>
-                                <p className="text-[9px] text-[#9CA3AF]">{pt.desc}</p>
+                                <p className="text-[9px] text-[#6B7280]">{pt.desc}</p>
                             </button>
                         ))}
                     </div>
@@ -290,7 +290,7 @@ export default function PostIdeaGenerator() {
                                     }`}
                             >
                                 <p className={`text-[11px] font-semibold ${goal === g.id ? 'text-[#D97706]' : 'text-[#4B5563]'}`}>{g.label}</p>
-                                <p className="text-[9px] text-[#9CA3AF]">{g.desc}</p>
+                                <p className="text-[9px] text-[#6B7280]">{g.desc}</p>
                             </button>
                         ))}
                     </div>
@@ -336,7 +336,7 @@ export default function PostIdeaGenerator() {
 
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
                                     Idea {activeIdea + 1} of {ideas.length}
                                 </p>
                                 {isAI && (
@@ -389,7 +389,7 @@ export default function PostIdeaGenerator() {
                                         </div>
                                         <h3 className="text-sm font-semibold text-[#0A0F1C] mb-1.5">{idea.title}</h3>
                                         <div className="bg-[#F8FAFC] rounded-lg px-3 py-2 mb-2">
-                                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-0.5">Hook</p>
+                                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-0.5">Hook</p>
                                             <p className="text-[13px] text-[#0A0F1C] italic leading-relaxed">&ldquo;{idea.hook}&rdquo;</p>
                                         </div>
                                         <p className="text-[10px] text-[#6B7280]">

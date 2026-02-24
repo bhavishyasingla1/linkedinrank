@@ -91,7 +91,7 @@ export default function StoryPage() {
                                     I watched more YouTube videos about LinkedIn optimization than I can count. I went through courses, read ebooks, followed creators who had built real audiences on the platform, and studied what made certain profiles stand out. Not in an abstract way | I would literally open two profiles side by side and compare them line by line.
                                 </p>
                                 <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
-                                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Patterns that emerged</p>
+                                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Patterns that emerged</p>
                                     <div className="space-y-2">
                                         {[
                                             'What makes a headline searchable by recruiters',

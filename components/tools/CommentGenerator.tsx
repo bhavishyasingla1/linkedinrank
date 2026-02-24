@@ -133,7 +133,7 @@ export default function CommentGenerator() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Smart Comment Writer</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Paste the actual post → get 3 authority-building comments</p>
+                        <p className="text-[11px] text-[#6B7280]">Paste the actual post → get 3 authority-building comments</p>
                     </div>
                 </div>
             </div>
@@ -152,14 +152,14 @@ export default function CommentGenerator() {
                         className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#0A66C2] focus:ring-1 focus:ring-[#0A66C2]/20 resize-none transition-all"
                     />
                     {postContent.trim() && (
-                        <p className="text-[10px] text-[#9CA3AF] mt-1">{wordCount} words pasted</p>
+                        <p className="text-[10px] text-[#6B7280] mt-1">{wordCount} words pasted</p>
                     )}
                 </div>
 
                 {/* Your expertise | PDF or manual */}
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Your expertise <span className="text-[#9CA3AF] font-normal">(optional | makes comments specific to your background)</span>
+                        Your expertise <span className="text-[#6B7280] font-normal">(optional | makes comments specific to your background)</span>
                     </label>
                     <div className="flex gap-2">
                         <input
@@ -260,7 +260,7 @@ export default function CommentGenerator() {
                 {comments.length > 0 && (
                     <div className="space-y-2.5 pt-4 border-t border-gray-100">
                         <div className="flex items-center justify-between">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Pick your favorite | edit to add personal details</p>
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Pick your favorite | edit to add personal details</p>
                             {isAI && (
                                 <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#0A66C2] to-[#7C3AED] px-2 py-0.5 rounded-full">AI</span>
                             )}

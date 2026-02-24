@@ -117,7 +117,7 @@ export default function BlogsDirectoryPage() {
                                                 </h3>
                                                 <p className="text-xs text-[#6B7280] leading-relaxed line-clamp-2 mb-3">{blog.summary}</p>
                                                 <div className="flex items-center gap-3">
-                                                    <span className="text-[10px] font-medium text-[#9CA3AF]">{blog.targetKeyword}</span>
+                                                    <span className="text-[10px] font-medium text-[#6B7280]">{blog.targetKeyword}</span>
                                                     <span className="text-[10px] text-[#D1D5DB] flex items-center gap-1 ml-auto">
                                                         <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                                         {Math.max(3, Math.ceil((blog.h2Outline.length * 150 + 200) / 200))} min
@@ -148,7 +148,7 @@ export default function BlogsDirectoryPage() {
                             ].map(g => (
                                 <Link key={g.href} href={g.href} className="group bg-white border border-gray-200 rounded-xl p-4 no-underline hover:border-[#DBEAFE] hover:shadow-[0_4px_16px_rgba(10,102,194,0.06)] transition-all">
                                     <p className="text-sm font-semibold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors mb-1">{g.label}</p>
-                                    <p className="text-xs text-[#9CA3AF] leading-relaxed">{g.desc}</p>
+                                    <p className="text-xs text-[#6B7280] leading-relaxed">{g.desc}</p>
                                 </Link>
                             ))}
                         </div>

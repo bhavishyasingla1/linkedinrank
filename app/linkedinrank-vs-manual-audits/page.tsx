@@ -120,7 +120,7 @@ export default function VsManualAuditsPage() {
                                 'Ongoing accountability and mentorship',
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-2 text-sm text-[#4B5563]">
-                                    <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg className="w-4 h-4 text-[#6B7280] shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                                     <span>{item}</span>
                                 </li>
                             ))}
@@ -152,7 +152,7 @@ export default function VsManualAuditsPage() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                     <div className="flex flex-wrap gap-2">
                         {[
                             { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },

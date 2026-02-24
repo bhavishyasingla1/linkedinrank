@@ -66,7 +66,7 @@ export default function LinkedInRankVsSSIPage() {
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0F1C] mb-4 leading-tight">
                         LinkedIn Rank vs Social Selling Index (SSI): Complete Comparison
                     </h1>
-                    <p className="text-sm text-[#9CA3AF] mb-8">Last updated: February 2025 | 8 min read</p>
+                    <p className="text-sm text-[#6B7280] mb-8">Last updated: February 2025 | 8 min read</p>
 
                     <div className="prose prose-sm sm:prose max-w-none text-[#374151] leading-relaxed space-y-5">
                         <p className="text-base leading-relaxed">
@@ -203,7 +203,7 @@ export default function LinkedInRankVsSSIPage() {
                                 <details key={i} className="bg-white border border-gray-200 rounded-xl group" open={i === 0}>
                                     <summary className="px-5 py-4 cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3">
                                         {faq.q}
-                                        <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                        <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                                     </summary>
                                     <div className="px-5 pb-4 text-sm text-[#4B5563] leading-relaxed">{faq.a}</div>
                                 </details>

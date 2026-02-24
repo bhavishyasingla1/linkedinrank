@@ -199,7 +199,7 @@ export default function ChecklistPage() {
                                                 <div className={`w-5 h-5 rounded-md border-2 shrink-0 mt-0.5 flex items-center justify-center transition-colors ${checked[key] ? 'border-transparent' : ''}`} style={{ borderColor: checked[key] ? section.color : section.color + '40', backgroundColor: checked[key] ? section.color : 'transparent' }}>
                                                     {checked[key] && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>}
                                                 </div>
-                                                <span className={`text-sm leading-relaxed transition-colors ${checked[key] ? 'text-[#9CA3AF] line-through' : 'text-[#4B5563] group-hover:text-[#0A0F1C]'}`}>{item}</span>
+                                                <span className={`text-sm leading-relaxed transition-colors ${checked[key] ? 'text-[#6B7280] line-through' : 'text-[#4B5563] group-hover:text-[#0A0F1C]'}`}>{item}</span>
                                             </li>
                                         )
                                     })}
@@ -227,7 +227,7 @@ export default function ChecklistPage() {
                     </div>
 
                     <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             <Link href="/linkedin-optimization-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Full Optimization Guide</Link>
                             <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>

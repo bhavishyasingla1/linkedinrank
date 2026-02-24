@@ -94,14 +94,14 @@ export default function ScoreHero({
     return (
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden animate-fade-in">
             <div className="relative px-6 py-8 text-center">
-                <p className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-5">LinkedInRank Score</p>
+                <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-5">LinkedInRank Score</p>
                 <div className="relative inline-block mb-4">
                     <canvas ref={canvasRef} className="score-ring" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                         <span className="text-5xl font-bold text-[#0A0F1C] tracking-tight tabular-nums">
                             {displayScore}
                         </span>
-                        <span className="text-[11px] font-medium text-[#9CA3AF] mt-1">out of 100</span>
+                        <span className="text-[11px] font-medium text-[#6B7280] mt-1">out of 100</span>
                     </div>
                 </div>
                 <div>
@@ -132,7 +132,7 @@ export default function ScoreHero({
                     </svg>
                     <span className="text-[11px] font-semibold text-[#4B5563]">Evaluated across 30+ signals</span>
                 </div>
-                <p className="text-[10px] text-[#9CA3AF] text-center leading-relaxed">
+                <p className="text-[10px] text-[#6B7280] text-center leading-relaxed">
                     Headline clarity, keyword density, experience depth, skill alignment, and more.
                 </p>
             </div>

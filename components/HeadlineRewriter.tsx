@@ -21,11 +21,11 @@ export default function HeadlineRewriter({ currentHeadline, rewrites }: Headline
     return (
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="px-5 pt-5 pb-4">
-                <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-4">Headline Alternatives</h3>
+                <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-4">Headline Alternatives</h3>
 
                 {currentHeadline && (
                     <div className="px-3.5 py-3 rounded-lg bg-[#F8FAFC] border border-gray-100 mb-3">
-                        <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-1">Current</p>
+                        <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-1">Current</p>
                         <p className="text-sm text-[#4B5563] leading-relaxed">{currentHeadline}</p>
                     </div>
                 )}

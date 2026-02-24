@@ -286,9 +286,9 @@ export default function QRCodeGeneratorTool() {
                     </div>
                     <div className="flex-1">
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">QR Code Generator</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Create beautiful QR codes for your LinkedIn profile</p>
+                        <p className="text-[11px] text-[#6B7280]">Create beautiful QR codes for your LinkedIn profile</p>
                     </div>
-                    <button onClick={handleReset} className="text-[11px] text-[#9CA3AF] hover:text-[#6B7280] transition-colors">Reset</button>
+                    <button onClick={handleReset} className="text-[11px] text-[#6B7280] hover:text-[#6B7280] transition-colors">Reset</button>
                 </div>
             </div>
 
@@ -303,9 +303,9 @@ export default function QRCodeGeneratorTool() {
                             />
                         </div>
                         <div className="flex items-center gap-2 mt-3">
-                            <span className="text-[10px] font-medium text-[#9CA3AF] bg-white px-2 py-0.5 rounded-full border border-gray-100">{patternLabel}</span>
-                            <span className="text-[10px] font-medium text-[#9CA3AF] bg-white px-2 py-0.5 rounded-full border border-gray-100">{frameLabel}</span>
-                            <span className="text-[10px] font-medium text-[#9CA3AF] bg-white px-2 py-0.5 rounded-full border border-gray-100">{logoLabel}</span>
+                            <span className="text-[10px] font-medium text-[#6B7280] bg-white px-2 py-0.5 rounded-full border border-gray-100">{patternLabel}</span>
+                            <span className="text-[10px] font-medium text-[#6B7280] bg-white px-2 py-0.5 rounded-full border border-gray-100">{frameLabel}</span>
+                            <span className="text-[10px] font-medium text-[#6B7280] bg-white px-2 py-0.5 rounded-full border border-gray-100">{logoLabel}</span>
                         </div>
                     </div>
                 </div>
@@ -314,7 +314,7 @@ export default function QRCodeGeneratorTool() {
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">LinkedIn URL</label>
                     <div className="relative">
-                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-2.54a4.5 4.5 0 00-6.364-6.364L4.757 8.25" />
                         </svg>
                         <input
@@ -331,7 +331,7 @@ export default function QRCodeGeneratorTool() {
                 {/* Style Options */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                     <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-gray-200">
-                        <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Style</span>
+                        <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Style</span>
                     </div>
                     <div className="p-4 space-y-4">
                         {/* Pattern */}
@@ -399,7 +399,7 @@ export default function QRCodeGeneratorTool() {
                 {/* Logo Options */}
                 <div className="border border-gray-200 rounded-xl overflow-hidden">
                     <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-gray-200">
-                        <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Logo (Optional)</span>
+                        <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Logo (Optional)</span>
                     </div>
                     <div className="p-4">
                         <div className="flex items-center gap-2">

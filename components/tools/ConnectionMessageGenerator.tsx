@@ -237,7 +237,7 @@ export default function ConnectionMessageGenerator() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Connection Request Crafter</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Personalized messages under 300 chars | for cold outreach, recruiters, alumni</p>
+                        <p className="text-[11px] text-[#6B7280]">Personalized messages under 300 chars | for cold outreach, recruiters, alumni</p>
                     </div>
                 </div>
             </div>
@@ -248,7 +248,7 @@ export default function ConnectionMessageGenerator() {
                     <label className="block text-xs font-medium text-[#4B5563] mb-2">What kind of message?</label>
                     {categories.map(cat => (
                         <div key={cat} className="mb-3">
-                            <p className="text-[9px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-1.5">{cat}</p>
+                            <p className="text-[9px] font-bold text-[#6B7280] uppercase tracking-wider mb-1.5">{cat}</p>
                             <div className="flex flex-wrap gap-1.5">
                                 {CONNECTION_TYPES.filter(t => t.category === cat).map(t => (
                                     <button
@@ -333,7 +333,7 @@ export default function ConnectionMessageGenerator() {
                 {/* Step 3: Context */}
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Step 3: Context <span className="text-[#9CA3AF] font-normal">(the more detail, the better the message)</span>
+                        Step 3: Context <span className="text-[#6B7280] font-normal">(the more detail, the better the message)</span>
                     </label>
                     <textarea
                         value={context}
@@ -347,7 +347,7 @@ export default function ConnectionMessageGenerator() {
                 {/* Step 4: Intent (optional) */}
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        What do you want from this connection? <span className="text-[#9CA3AF] font-normal">(optional but helps a lot)</span>
+                        What do you want from this connection? <span className="text-[#6B7280] font-normal">(optional but helps a lot)</span>
                     </label>
                     <input
                         type="text"
@@ -375,7 +375,7 @@ export default function ConnectionMessageGenerator() {
                 {messages.length > 0 && (
                     <div className="space-y-3 pt-4 border-t border-gray-100">
                         <div className="flex items-center justify-between">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">{messages.length} versions generated</p>
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">{messages.length} versions generated</p>
                             {isAI && (
                                 <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#10B981] to-[#7C3AED] px-2 py-0.5 rounded-full">AI</span>
                             )}
@@ -414,7 +414,7 @@ export default function ConnectionMessageGenerator() {
                                         </button>
                                     </div>
                                     <p className="text-[13px] text-[#0A0F1C] leading-relaxed mb-2">{m.message}</p>
-                                    <p className="text-[10px] text-[#9CA3AF] leading-relaxed">💡 {m.tip}</p>
+                                    <p className="text-[10px] text-[#6B7280] leading-relaxed">💡 {m.tip}</p>
                                 </div>
                             </div>
                         ))}

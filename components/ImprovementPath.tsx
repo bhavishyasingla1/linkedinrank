@@ -17,7 +17,7 @@ export default function ImprovementPath({ steps, currentScore }: ImprovementPath
         <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="px-5 pt-5 pb-4">
                 <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider">Improvement Path</h3>
+                    <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider">Improvement Path</h3>
                     <span className="text-[11px] font-bold text-emerald-600">+{totalGain} pts possible</span>
                 </div>
 

@@ -27,7 +27,7 @@ export default function ContentShareCard({ toolName, outputPreview }: ContentSha
 
     return (
         <div className="mt-6">
-            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">Share This</p>
+            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Share This</p>
 
             {/* Premium Content Share Card */}
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#0A66C2] to-[#004182] p-[1px] shadow-lg shadow-blue-500/10">

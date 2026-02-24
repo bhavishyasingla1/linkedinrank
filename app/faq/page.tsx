@@ -211,7 +211,7 @@ export default function FaqPage() {
                                                                 </span>
                                                                 <span className={`text-[15px] font-semibold transition-colors ${isOpen ? 'text-[#0A66C2]' : 'text-[#0A0F1C] group-hover:text-[#0A66C2]'}`}>{item.q}</span>
                                                             </div>
-                                                            <svg className={`w-4 h-4 shrink-0 transition-all duration-200 ${isOpen ? 'rotate-180 text-[#0A66C2]' : 'text-[#9CA3AF]'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                                            <svg className={`w-4 h-4 shrink-0 transition-all duration-200 ${isOpen ? 'rotate-180 text-[#0A66C2]' : 'text-[#6B7280]'}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                                         </button>
                                                         {isOpen && (
                                                             <div className="px-5 pb-5 pl-14">
@@ -243,7 +243,7 @@ export default function FaqPage() {
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                     <div className="flex flex-wrap gap-2">
                         {[
                             { label: 'LinkedIn Ranking Guide', href: '/linkedin-ranking' },

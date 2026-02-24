@@ -98,7 +98,7 @@ export default function SEOCheckerTool() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Profile Keyword Analyzer</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Upload your PDF or paste your profile | find missing recruiter keywords</p>
+                        <p className="text-[11px] text-[#6B7280]">Upload your PDF or paste your profile | find missing recruiter keywords</p>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@ export default function SEOCheckerTool() {
 
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Skills <span className="text-[#9CA3AF] font-normal">(comma or bullet separated)</span>
+                        Skills <span className="text-[#6B7280] font-normal">(comma or bullet separated)</span>
                     </label>
                     <input
                         type="text"
@@ -203,13 +203,13 @@ export default function SEOCheckerTool() {
 
                         {/* Overall Score */}
                         <div className="text-center">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">Recruiter Visibility Score</p>
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Recruiter Visibility Score</p>
                             <div className="inline-flex items-center gap-3">
                                 <span className={`text-4xl font-bold tabular-nums`} style={{ color: scoreColor(result.recruiter_score) }}>
                                     {result.recruiter_score}
                                 </span>
                                 <div className="text-left">
-                                    <span className="text-sm text-[#9CA3AF]">/100</span>
+                                    <span className="text-sm text-[#6B7280]">/100</span>
                                     <p className="text-[11px] font-semibold" style={{ color: scoreColor(result.recruiter_score) }}>
                                         {scoreLabel(result.recruiter_score)}
                                     </p>
@@ -219,7 +219,7 @@ export default function SEOCheckerTool() {
 
                         {/* Section Breakdown */}
                         <div className="bg-[#F8FAFC] rounded-xl p-4 space-y-3">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Breakdown</p>
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Breakdown</p>
                             <ScoreBar label="Headline" score={result.headline_score} max={30} color={scoreColor(Math.round(result.headline_score / 30 * 100))} />
                             <ScoreBar label="About Section" score={result.about_score} max={30} color={scoreColor(Math.round(result.about_score / 30 * 100))} />
                             <ScoreBar label="Skills" score={result.skills_score} max={20} color={scoreColor(Math.round(result.skills_score / 20 * 100))} />
@@ -229,14 +229,14 @@ export default function SEOCheckerTool() {
                         {/* Industry & Coverage */}
                         <div className="flex items-center gap-3">
                             <div className="flex-1 bg-[#F8FAFC] rounded-xl px-4 py-3">
-                                <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-0.5">Industry</p>
+                                <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-0.5">Industry</p>
                                 <p className="text-sm font-semibold text-[#7C3AED] capitalize">{result.industry_match}</p>
                             </div>
                             <div className="flex-1 bg-[#F8FAFC] rounded-xl px-4 py-3">
-                                <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wider mb-0.5">Keyword Coverage</p>
+                                <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-0.5">Keyword Coverage</p>
                                 <p className="text-sm font-semibold" style={{ color: scoreColor(result.keyword_density) }}>
                                     {result.keyword_density}%
-                                    <span className="text-[#9CA3AF] font-normal text-xs ml-1">
+                                    <span className="text-[#6B7280] font-normal text-xs ml-1">
                                         ({result.found_keywords.length}/{result.found_keywords.length + result.missing_keywords.length})
                                     </span>
                                 </p>
@@ -246,7 +246,7 @@ export default function SEOCheckerTool() {
                         {/* Found Keywords */}
                         {result.found_keywords.length > 0 && (
                             <div>
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">
                                     Keywords Found ({result.found_keywords.length})
                                 </p>
                                 <div className="flex flex-wrap gap-1.5">
@@ -262,7 +262,7 @@ export default function SEOCheckerTool() {
                         {/* Missing Keywords */}
                         {result.missing_keywords.length > 0 && (
                             <div>
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">
                                     Add These Keywords
                                 </p>
                                 <div className="flex flex-wrap gap-1.5">
@@ -278,7 +278,7 @@ export default function SEOCheckerTool() {
                         {/* Recommendations */}
                         {result.recommendations.length > 0 && (
                             <div className="bg-[#F8FAFC] rounded-xl p-4">
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">How to Improve</p>
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">How to Improve</p>
                                 <div className="space-y-2.5">
                                     {result.recommendations.map((rec, i) => (
                                         <div key={i} className="flex items-start gap-2.5">

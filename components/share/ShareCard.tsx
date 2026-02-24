@@ -40,7 +40,7 @@ export default function ShareCard({ toolName, score, resultSummary, badge }: Sha
 
     return (
         <div className="mt-6">
-            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">Share Your Result</p>
+            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Share Your Result</p>
 
             {/* Premium Share Card */}
             <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${colors.gradient} p-[1px] shadow-lg ${colors.glow}`}>

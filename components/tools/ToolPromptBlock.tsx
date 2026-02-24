@@ -38,7 +38,7 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
                     </svg>
                     <div className="min-w-0">
                         <p className="text-[11px] font-semibold text-[#0A0F1C]">Want even better results?</p>
-                        <p className="text-[10px] text-[#9CA3AF] truncate">Copy this prompt → paste into ChatGPT / Claude / Gemini</p>
+                        <p className="text-[10px] text-[#6B7280] truncate">Copy this prompt → paste into ChatGPT / Claude / Gemini</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">

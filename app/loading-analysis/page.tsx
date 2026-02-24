@@ -122,7 +122,7 @@ export default function LoadingAnalysisPage() {
                 {/* Logo */}
                 <div className="text-center mb-10">
                     <Link href="/" className="font-bold text-xl tracking-tight text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                    <p className="text-xs text-[#9CA3AF] mt-1.5 tracking-widest uppercase font-semibold">Evaluating your profile across 30+ signals</p>
+                    <p className="text-xs text-[#6B7280] mt-1.5 tracking-widest uppercase font-semibold">Evaluating your profile across 30+ signals</p>
                 </div>
 
                 {/* Loading card */}
@@ -150,7 +150,7 @@ export default function LoadingAnalysisPage() {
                             <div
                                 key={stage.id}
                                 className={`flex items-center gap-2.5 text-xs transition-all duration-300 ${index < currentStage
-                                    ? 'text-[#9CA3AF]'
+                                    ? 'text-[#6B7280]'
                                     : index === currentStage
                                         ? 'text-[#0A0F1C] font-semibold'
                                         : 'text-gray-300'
@@ -178,7 +178,7 @@ export default function LoadingAnalysisPage() {
                 </div>
 
                 {/* Privacy note */}
-                <p className="text-center text-xs text-[#9CA3AF] mt-5 font-medium">
+                <p className="text-center text-xs text-[#6B7280] mt-5 font-medium">
                     Processed in memory. No data stored.
                 </p>
             </div>

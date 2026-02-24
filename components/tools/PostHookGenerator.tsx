@@ -186,7 +186,7 @@ export default function PostHookGeneratorTool() {
                                     <pre className="text-sm text-[#0A0F1C] whitespace-pre-wrap font-sans leading-relaxed">{hook.text}</pre>
                                     <button
                                         onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
-                                        className="mt-2 text-[11px] text-[#9CA3AF] hover:text-[#6B7280] flex items-center gap-1"
+                                        className="mt-2 text-[11px] text-[#6B7280] hover:text-[#6B7280] flex items-center gap-1"
                                     >
                                         <svg className={`w-3 h-3 transition-transform ${expandedIndex === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />

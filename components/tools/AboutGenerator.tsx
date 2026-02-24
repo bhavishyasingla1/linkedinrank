@@ -204,7 +204,7 @@ export default function AboutGeneratorTool() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">About Section Builder</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Upload your PDF or enter your details | get 3 personalized About sections</p>
+                        <p className="text-[11px] text-[#6B7280]">Upload your PDF or enter your details | get 3 personalized About sections</p>
                     </div>
                 </div>
             </div>
@@ -339,7 +339,7 @@ export default function AboutGeneratorTool() {
                 {currentAbout && (
                     <div className="bg-gray-50 border border-gray-100 rounded-lg p-3">
                         <div className="flex items-center justify-between mb-1.5">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Current About (from PDF)</p>
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Current About (from PDF)</p>
                             <span className="text-[9px] text-[#C4C9D4]">{currentAbout.length} chars</span>
                         </div>
                         <p className="text-[12px] text-[#6B7280] leading-relaxed max-h-20 overflow-y-auto whitespace-pre-wrap">{currentAbout}</p>
@@ -373,7 +373,7 @@ export default function AboutGeneratorTool() {
                 {results.length > 0 && (
                     <div className="space-y-4 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
                                 {results.length} Styles Generated
                             </p>
                             {isAI && (

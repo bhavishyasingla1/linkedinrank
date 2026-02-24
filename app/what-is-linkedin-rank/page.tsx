@@ -82,7 +82,7 @@ export default function WhatIsLinkedInRankPage() {
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0F1C] mb-4 leading-tight">
                         What Is LinkedIn Rank? How LinkedIn Profile Ranking Works
                     </h1>
-                    <p className="text-sm text-[#9CA3AF] mb-8">Last updated: February 2025 | 10 min read</p>
+                    <p className="text-sm text-[#6B7280] mb-8">Last updated: February 2025 | 10 min read</p>
 
                     {/* Intro | primary keyword in first 100 words */}
                     <div className="prose prose-sm sm:prose max-w-none text-[#374151] leading-relaxed space-y-5">
@@ -231,7 +231,7 @@ export default function WhatIsLinkedInRankPage() {
                                 <details key={i} className="bg-white border border-gray-200 rounded-xl group" open={i === 0}>
                                     <summary className="px-5 py-4 cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3">
                                         {faq.q}
-                                        <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                        <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg>
                                     </summary>

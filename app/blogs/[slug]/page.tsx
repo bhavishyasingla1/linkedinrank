@@ -95,7 +95,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                                     {tool.name}
                                 </Link>
                             )}
-                            <span className="text-[11px] text-[#9CA3AF] flex items-center gap-1">
+                            <span className="text-[11px] text-[#6B7280] flex items-center gap-1">
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 {readingTime} min read
                             </span>
@@ -103,7 +103,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
                         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0F1C] mb-4 leading-tight tracking-tight">{blog.title}</h1>
 
-                        <div className="flex items-center gap-3 text-xs text-[#9CA3AF]">
+                        <div className="flex items-center gap-3 text-xs text-[#6B7280]">
                             <time dateTime={blog.datePublished}>
                                 {new Date(blog.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                             </time>
@@ -192,7 +192,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                                             <details key={i} className="group bg-white border border-gray-200 rounded-xl overflow-hidden">
                                                 <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-[#FAFBFC] transition-colors">
                                                     {faq.question}
-                                                    <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                    <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                                     </svg>
                                                 </summary>
@@ -263,7 +263,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                             {/* All posts in cluster */}
                             {allToolBlogs.length > related.length && (
                                 <div className="bg-white border border-gray-200 rounded-xl p-5">
-                                    <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-widest mb-4">All {tool?.name} Articles</h3>
+                                    <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">All {tool?.name} Articles</h3>
                                     <div className="space-y-2.5">
                                         {allToolBlogs.map(b => (
                                             <Link

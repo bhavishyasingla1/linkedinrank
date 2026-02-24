@@ -72,7 +72,7 @@ export default function ToolsPage() {
                         if (tools.length === 0) return null
                         return (
                             <section key={cat.key}>
-                                <h2 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">{cat.label}</h2>
+                                <h2 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">{cat.label}</h2>
                                 <div className="grid gap-3">
                                     {tools.map(tool => {
                                         const color = TOOL_COLORS[tool.id] || '#0A66C2'

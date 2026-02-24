@@ -152,7 +152,7 @@ export default function StoryToPost() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Story-to-Post Writer</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Paste a raw experience | AI structures it into a ready-to-publish post</p>
+                        <p className="text-[11px] text-[#6B7280]">Paste a raw experience | AI structures it into a ready-to-publish post</p>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@ export default function StoryToPost() {
 
                 <div>
                     <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Key lesson or takeaway <span className="text-[#9CA3AF] font-normal">(what did you learn?)</span>
+                        Key lesson or takeaway <span className="text-[#6B7280] font-normal">(what did you learn?)</span>
                     </label>
                     <input
                         type="text"
@@ -201,7 +201,7 @@ export default function StoryToPost() {
                                     }`}
                             >
                                 <p className={`text-[11px] font-semibold ${style === s.id ? 'text-[#0A0F1C]' : 'text-[#6B7280]'}`}>{s.label}</p>
-                                <p className={`text-[9px] ${style === s.id ? 'text-[#9CA3AF]' : 'text-[#C4C9D4]'}`}>{s.desc}</p>
+                                <p className={`text-[9px] ${style === s.id ? 'text-[#6B7280]' : 'text-[#C4C9D4]'}`}>{s.desc}</p>
                             </button>
                         ))}
                     </div>
@@ -234,7 +234,7 @@ export default function StoryToPost() {
                 {posts.length > 0 && (
                     <div className="space-y-3 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
                                 {posts.length} version{posts.length > 1 ? 's' : ''} | pick and personalize
                             </p>
                             {isAI && (
@@ -282,7 +282,7 @@ export default function StoryToPost() {
                                         </button>
                                     </div>
                                     <pre className="text-[13px] text-[#0A0F1C] leading-relaxed whitespace-pre-wrap font-sans mb-2">{p.text}</pre>
-                                    <p className="text-[10px] text-[#9CA3AF] leading-relaxed">💡 {p.tip}</p>
+                                    <p className="text-[10px] text-[#6B7280] leading-relaxed">💡 {p.tip}</p>
                                 </div>
                             </div>
                         ))}

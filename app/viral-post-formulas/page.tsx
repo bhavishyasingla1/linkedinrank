@@ -68,7 +68,7 @@ export default function ViralPostFormulasPage() {
                         </div>
                         <p className="mb-4">This formula triggers curiosity by challenging a common belief. It works because people stop scrolling when they see an opinion that contradicts what they assume is true.</p>
                         <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 mb-4">
-                            <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Structure</p>
+                            <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Structure</p>
                             <ol className="space-y-2 text-sm">
                                 {['Bold contrarian hook', 'Reality check with evidence', 'The real lesson', 'Soft, relatable takeaway'].map((item, i) => (
                                     <li key={i} className="flex items-start gap-2">
@@ -240,7 +240,7 @@ export default function ViralPostFormulasPage() {
 
                     {/* Related Guides */}
                     <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             {[
                                 { label: 'Content Strategy', href: '/linkedin-content-strategy' },

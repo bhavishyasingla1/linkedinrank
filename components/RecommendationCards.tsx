@@ -164,7 +164,7 @@ export default function RecommendationCards({ recommendations, careerStage, arch
             {/* Recommendations */}
             <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
                 <div className="px-5 pt-5 pb-1">
-                    <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-4">Recommendations</h3>
+                    <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-4">Recommendations</h3>
                 </div>
 
                 {recommendations.map((rec, i) => {
@@ -187,7 +187,7 @@ export default function RecommendationCards({ recommendations, careerStage, arch
                                     </div>
 
                                     {whyContent && (
-                                        <p className="text-[11px] text-[#9CA3AF] mb-2 leading-relaxed">{whyContent}</p>
+                                        <p className="text-[11px] text-[#6B7280] mb-2 leading-relaxed">{whyContent}</p>
                                     )}
 
                                     {fixContent.type === 'list' ? (
@@ -234,7 +234,7 @@ export default function RecommendationCards({ recommendations, careerStage, arch
             {/* Tips */}
             <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
                 <div className="px-5 pt-5 pb-1">
-                    <h3 className="text-[11px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Tips For Your Profile</h3>
+                    <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Tips For Your Profile</h3>
                 </div>
                 <div className="px-5 pb-5 space-y-3">
                     {bestPractices.map((bp, i) => (

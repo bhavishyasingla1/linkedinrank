@@ -88,7 +88,7 @@ export default function MethodologyPage() {
                                 <div className="space-y-1.5">
                                     {['Profile picture or banner', 'Engagement metrics', 'Follower / connection count', 'Posting frequency', 'Creator mode status', 'Recommendations from others'].map((item, i) => (
                                         <div key={i} className="flex items-center gap-2 text-xs text-[#4B5563]">
-                                            <svg className="w-3.5 h-3.5 text-[#9CA3AF] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                            <svg className="w-3.5 h-3.5 text-[#6B7280] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                                             <span>{item}</span>
                                         </div>
                                     ))}
@@ -346,7 +346,7 @@ export default function MethodologyPage() {
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                     <div className="flex flex-wrap gap-2">
                         <Link href="/linkedin-optimization-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Full Optimization Guide</Link>
                         <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>

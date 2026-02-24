@@ -150,7 +150,7 @@ export default function ContentPillarPlanner() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Weekly Content Calendar</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Get a full week of posting prompts with hooks | personalized to your role</p>
+                        <p className="text-[11px] text-[#6B7280]">Get a full week of posting prompts with hooks | personalized to your role</p>
                     </div>
                 </div>
             </div>
@@ -243,7 +243,7 @@ export default function ContentPillarPlanner() {
                     <div className="space-y-3 pt-4 border-t border-gray-100">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Your week</p>
+                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Your week</p>
                                 {isAI && (
                                     <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#0A66C2] px-2 py-0.5 rounded-full">AI</span>
                                 )}

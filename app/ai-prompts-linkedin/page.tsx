@@ -145,7 +145,7 @@ export default function AIPromptsLinkedInPage() {
                                             <span className="text-xs text-[#6B7280]">{section.count} prompts</span>
                                         </div>
                                     </div>
-                                    <svg className="w-5 h-5 text-[#9CA3AF] group-hover:text-[#0A66C2] transition-colors shrink-0 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                                    <svg className="w-5 h-5 text-[#6B7280] group-hover:text-[#0A66C2] transition-colors shrink-0 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                                 </div>
                                 <p className="text-sm text-[#4B5563] mb-3">{section.description}</p>
                                 <div className="flex flex-wrap gap-1.5">
@@ -226,7 +226,7 @@ export default function AIPromptsLinkedInPage() {
 
                 {/* Related guides */}
                 <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                     <div className="flex flex-wrap gap-2">
                         {[
                             { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },

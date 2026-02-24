@@ -65,7 +65,7 @@ export default function TermsPage() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related</p>
+                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related</p>
                     <div className="flex flex-wrap gap-2">
                         {[
                             { label: 'Privacy Policy', href: '/privacy' },

@@ -172,7 +172,7 @@ export default function HeadlineGeneratorTool() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Headline Rewriter</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Upload your PDF or enter your role | get 6 recruiter-optimized headlines</p>
+                        <p className="text-[11px] text-[#6B7280]">Upload your PDF or enter your role | get 6 recruiter-optimized headlines</p>
                     </div>
                 </div>
             </div>
@@ -266,7 +266,7 @@ export default function HeadlineGeneratorTool() {
                 </div>
 
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1">Key Skills <span className="text-[#9CA3AF] font-normal">(comma-separated)</span></label>
+                    <label className="block text-xs font-medium text-[#4B5563] mb-1">Key Skills <span className="text-[#6B7280] font-normal">(comma-separated)</span></label>
                     <input
                         type="text"
                         value={skills}
@@ -303,7 +303,7 @@ export default function HeadlineGeneratorTool() {
                 {headlines.length > 0 && (
                     <div className="space-y-3 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2">
-                            <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
+                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
                                 {headlines.length} Headlines Generated
                             </p>
                             {isAI && (
@@ -350,7 +350,7 @@ export default function HeadlineGeneratorTool() {
                                             </div>
                                         </div>
                                         <p className="text-sm font-medium text-[#0A0F1C] leading-relaxed">{h.text}</p>
-                                        <p className="text-[10px] text-[#9CA3AF] mt-1.5">💡 {h.tip}</p>
+                                        <p className="text-[10px] text-[#6B7280] mt-1.5">💡 {h.tip}</p>
                                     </div>
                                     <button
                                         onClick={() => handleCopy(h.text, i)}

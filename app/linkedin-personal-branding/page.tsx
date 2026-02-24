@@ -118,7 +118,7 @@ export default function LinkedInPersonalBrandingPage() {
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 4: Hook Writing</h2>
                         <p className="mb-4">The first two lines of your post determine whether anyone reads the rest. LinkedIn truncates posts early | your hook must create curiosity instantly.</p>
                         <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5">
-                            <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Hooks that work</p>
+                            <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Hooks that work</p>
                             <div className="space-y-2">
                                 {[
                                     'Open with a surprising number or result',
@@ -206,7 +206,7 @@ export default function LinkedInPersonalBrandingPage() {
 
                     {/* Related Guides */}
                     <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             {[
                                 { label: 'Viral Post Formulas', href: '/viral-post-formulas' },

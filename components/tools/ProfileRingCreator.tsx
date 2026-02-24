@@ -204,7 +204,7 @@ export default function ProfileRingCreator() {
                     </div>
                     <div>
                         <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Profile Ring Creator</h2>
-                        <p className="text-[11px] text-[#9CA3AF]">Add #OpenToWork, #Hiring, or custom rings</p>
+                        <p className="text-[11px] text-[#6B7280]">Add #OpenToWork, #Hiring, or custom rings</p>
                     </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@ export default function ProfileRingCreator() {
                         </div>
                         <div className="text-center">
                             <p className="text-sm font-semibold text-[#0A0F1C]">Upload your profile photo</p>
-                            <p className="text-xs text-[#9CA3AF] mt-1">PNG or JPG | square photos work best</p>
+                            <p className="text-xs text-[#6B7280] mt-1">PNG or JPG | square photos work best</p>
                         </div>
                     </button>
                 ) : (
@@ -253,7 +253,7 @@ export default function ProfileRingCreator() {
 
                         {/* Presets */}
                         <div>
-                            <p className="text-[10px] font-semibold text-[#9CA3AF] uppercase tracking-wider mb-2">Quick Presets</p>
+                            <p className="text-[10px] font-semibold text-[#6B7280] uppercase tracking-wider mb-2">Quick Presets</p>
                             <div className="flex flex-wrap items-center gap-1.5">
                                 {RING_PRESETS.filter((_, i) => i < RING_PRESETS.length - 1).map((p, i) => (
                                     <button
@@ -273,7 +273,7 @@ export default function ProfileRingCreator() {
                         {/* Ring Settings */}
                         <div className="border border-gray-200 rounded-xl overflow-hidden">
                             <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-gray-200">
-                                <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Ring</span>
+                                <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Ring</span>
                             </div>
                             <div className="p-4 space-y-3.5">
                                 {/* Color */}
@@ -310,7 +310,7 @@ export default function ProfileRingCreator() {
                                 <div>
                                     <div className="flex justify-between items-center mb-1">
                                         <label className="text-xs font-medium text-[#4B5563]">Thickness</label>
-                                        <span className="text-[11px] text-[#9CA3AF] tabular-nums">{ringThickness}px</span>
+                                        <span className="text-[11px] text-[#6B7280] tabular-nums">{ringThickness}px</span>
                                     </div>
                                     <input type="range" min={10} max={80} value={ringThickness}
                                         onChange={(e) => setRingThickness(Number(e.target.value))}
@@ -321,7 +321,7 @@ export default function ProfileRingCreator() {
                                 <div>
                                     <div className="flex justify-between items-center mb-1">
                                         <label className="text-xs font-medium text-[#4B5563]">Position</label>
-                                        <span className="text-[11px] text-[#9CA3AF] tabular-nums">{ringPosition}&deg;</span>
+                                        <span className="text-[11px] text-[#6B7280] tabular-nums">{ringPosition}&deg;</span>
                                     </div>
                                     <input type="range" min={0} max={360} value={ringPosition}
                                         onChange={(e) => setRingPosition(Number(e.target.value))}
@@ -332,7 +332,7 @@ export default function ProfileRingCreator() {
                                 <div>
                                     <div className="flex justify-between items-center mb-1">
                                         <label className="text-xs font-medium text-[#4B5563]">Arc Length</label>
-                                        <span className="text-[11px] text-[#9CA3AF] tabular-nums">{ringLength}&deg;</span>
+                                        <span className="text-[11px] text-[#6B7280] tabular-nums">{ringLength}&deg;</span>
                                     </div>
                                     <input type="range" min={30} max={360} value={ringLength}
                                         onChange={(e) => setRingLength(Number(e.target.value))}
@@ -344,7 +344,7 @@ export default function ProfileRingCreator() {
                         {/* Text Settings */}
                         <div className="border border-gray-200 rounded-xl overflow-hidden">
                             <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-gray-200 flex items-center justify-between">
-                                <span className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">Text</span>
+                                <span className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Text</span>
                                 <button
                                     onClick={() => setShowText(!showText)}
                                     className={`relative w-9 h-5 rounded-full transition-colors ${showText ? 'bg-[#0A66C2]' : 'bg-gray-300'}`}
@@ -368,7 +368,7 @@ export default function ProfileRingCreator() {
                                     <div>
                                         <div className="flex justify-between items-center mb-1">
                                             <label className="text-xs font-medium text-[#4B5563]">Font Size</label>
-                                            <span className="text-[11px] text-[#9CA3AF] tabular-nums">{textSize}%</span>
+                                            <span className="text-[11px] text-[#6B7280] tabular-nums">{textSize}%</span>
                                         </div>
                                         <input type="range" min={50} max={200} value={textSize}
                                             onChange={(e) => setTextSize(Number(e.target.value))}
@@ -377,7 +377,7 @@ export default function ProfileRingCreator() {
                                     <div>
                                         <div className="flex justify-between items-center mb-1">
                                             <label className="text-xs font-medium text-[#4B5563]">Text Position</label>
-                                            <span className="text-[11px] text-[#9CA3AF] tabular-nums">{textPosition}%</span>
+                                            <span className="text-[11px] text-[#6B7280] tabular-nums">{textPosition}%</span>
                                         </div>
                                         <input type="range" min={0} max={100} value={textPosition}
                                             onChange={(e) => setTextPosition(Number(e.target.value))}
