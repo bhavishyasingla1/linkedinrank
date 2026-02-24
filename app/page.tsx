@@ -7,6 +7,7 @@ import FaqAccordion from '@/components/FaqAccordion'
 import CopyPromptButton from '@/components/CopyPromptButton'
 
 const FileUpload = dynamic(() => import('@/components/FileUpload'), {
+    ssr: false,
     loading: () => (
         <div className="relative rounded-2xl border-2 border-dashed border-[#0A66C2]/30 bg-gradient-to-b from-[#EFF6FF]/60 to-white p-10 text-center">
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] flex items-center justify-center mx-auto mb-4 shadow-[0_4px_12px_rgba(10,102,194,0.3)]">

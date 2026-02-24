@@ -1,4 +1,4 @@
-const path = require('path')
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,21 +15,7 @@ const nextConfig = {
             bodySizeLimit: '10mb',
         },
         serverComponentsExternalPackages: ['pdf-parse'],
-        optimizeCss: true,
         optimizePackageImports: ['@google/generative-ai', 'react-dom', 'qrcode'],
-    },
-    compiler: {
-        removeConsole: process.env.NODE_ENV === 'production',
-    },
-    webpack: (config, { isServer }) => {
-        if (!isServer) {
-            const emptyPolyfill = path.resolve(__dirname, 'lib/empty-polyfill.js')
-            config.resolve.alias = {
-                ...config.resolve.alias,
-                [path.resolve(__dirname, 'node_modules/next/dist/build/polyfills/polyfill-module.js')]: emptyPolyfill,
-            }
-        }
-        return config
     },
     async redirects() {
         return [
