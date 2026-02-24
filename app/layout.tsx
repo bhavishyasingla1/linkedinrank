@@ -9,10 +9,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
     metadataBase: new URL('https://linkedinrank.com'),
     title: {
-        default: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool | LinkedInRank',
+        default: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
         template: '%s | LinkedInRank',
     },
-    description: 'Check your LinkedIn rank free. LinkedInRank is the #1 free LinkedIn profile rank checker and ranking tool. Upload your PDF, get a score out of 100 across 30+ signals, AI-powered recommendations, and a personalized improvement roadmap. No login, no data stored.',
+    description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations, headline rewrites, and a personalized improvement roadmap. No login required.',
     keywords: [
         'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
         'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
         canonical: 'https://linkedinrank.com',
     },
     openGraph: {
-        title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
-        description: 'Check your LinkedIn rank free. Score your profile across 30+ signals, get AI-powered recommendations, and improve your LinkedIn profile ranking. No login required.',
+        title: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
+        description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations, headline rewrites, and a personalized improvement roadmap. No login required.',
         url: 'https://linkedinrank.com',
         siteName: 'LinkedInRank',
         type: 'website',
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LinkedIn Rank Checker | Free LinkedIn Profile Ranking Tool',
-        description: 'Check your LinkedIn rank free. Upload your PDF, get a score out of 100, and improve your LinkedIn profile ranking. No login, no data stored.',
+        title: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
+        description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations and a personalized improvement roadmap. No login required.',
         site: '@linkedinrank',
         creator: '@linkedinrank',
     },
@@ -89,7 +89,7 @@ const jsonLd = {
             url: 'https://linkedinrank.com',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://linkedinrank.com/icon.svg',
+                url: 'https://linkedinrank.com/icon.png',
                 width: 512,
                 height: 512,
             },
@@ -123,8 +123,8 @@ const jsonLd = {
         {
             '@type': 'WebApplication',
             '@id': 'https://linkedinrank.com/#webapp',
-            name: 'LinkedInRank - LinkedIn Rank Checker',
-            alternateName: ['LinkedIn Rank Checker', 'LinkedIn Profile Rank Tool', 'Free LinkedIn Profile Checker'],
+            name: 'LinkedInRank — Free LinkedIn Profile Score Tool',
+            alternateName: ['LinkedIn Rank Checker', 'LinkedIn Profile Score Tool', 'Free LinkedIn Profile Checker'],
             url: 'https://linkedinrank.com',
             applicationCategory: 'BusinessApplication',
             applicationSubCategory: 'LinkedIn Profile Analysis Tool',
@@ -150,12 +150,52 @@ const jsonLd = {
             ],
             description: 'Free LinkedIn rank checker that scores your LinkedIn profile across 30+ ranking signals. Get your LinkedIn profile rank, AI-powered recommendations, and a personalized improvement roadmap. No login required, no data stored.',
             creator: { '@id': 'https://linkedinrank.com/#organization' },
-            aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '4.9',
-                ratingCount: '500',
-                bestRating: '5',
-            },
+        },
+        {
+            '@type': 'FAQPage',
+            '@id': 'https://linkedinrank.com/#faq',
+            mainEntity: [
+                {
+                    '@type': 'Question',
+                    name: 'How does LinkedInRank score my profile?',
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: 'We evaluate 30+ visible profile signals across 6 categories: Headline (20 pts), About (20 pts), Experience (25 pts), Skills (15 pts), Education (10 pts), and Completeness (10 pts). Rule-based analysis handles structure, while Gemini AI evaluates content quality. Your total score is out of 100.',
+                    },
+                },
+                {
+                    '@type': 'Question',
+                    name: 'Is my LinkedIn data stored or shared?',
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: 'Never. Your PDF is processed entirely in memory and discarded immediately after analysis. We don\'t store files, don\'t create accounts, don\'t set cookies, and don\'t track you.',
+                    },
+                },
+                {
+                    '@type': 'Question',
+                    name: 'What file do I need to upload?',
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: 'You need your LinkedIn profile PDF. Go to your LinkedIn profile, click "More", then "Save to PDF." The file is usually under 1MB. We only accept PDF format.',
+                    },
+                },
+                {
+                    '@type': 'Question',
+                    name: 'Who is LinkedInRank for?',
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: 'Anyone with a LinkedIn profile — students, job seekers, founders, and experienced professionals. Scoring adapts to your career stage automatically.',
+                    },
+                },
+                {
+                    '@type': 'Question',
+                    name: 'What is a good LinkedIn score?',
+                    acceptedAnswer: {
+                        '@type': 'Answer',
+                        text: 'Scores are tiered: Bronze (0-54), Silver (55-69), Gold (70-84), and Platinum (85-100). Most profiles score between 40-65. A score above 70 puts you in the top tier of optimized profiles.',
+                    },
+                },
+            ],
         },
         {
             '@type': 'SiteNavigationElement',
@@ -169,6 +209,8 @@ const jsonLd = {
                 { '@type': 'WebPage', name: 'FAQ', url: 'https://linkedinrank.com/faq' },
                 { '@type': 'WebPage', name: 'What Is LinkedIn Rank', url: 'https://linkedinrank.com/what-is-linkedin-rank' },
                 { '@type': 'WebPage', name: 'LinkedIn Rank vs SSI', url: 'https://linkedinrank.com/linkedin-rank-vs-ssi' },
+                { '@type': 'WebPage', name: 'LinkedIn Profile Checklist', url: 'https://linkedinrank.com/linkedin-profile-checklist' },
+                { '@type': 'WebPage', name: 'AI Prompts for LinkedIn', url: 'https://linkedinrank.com/ai-prompts-linkedin' },
                 { '@type': 'WebPage', name: 'About', url: 'https://linkedinrank.com/about' },
                 { '@type': 'WebPage', name: 'Contact', url: 'https://linkedinrank.com/contact' },
             ],
@@ -189,7 +231,9 @@ export default function RootLayout({
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
-
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com" />
             </head>
             <body className={inter.className} suppressHydrationWarning>
                 {/* Skip to content | accessibility */}

@@ -67,6 +67,17 @@ body {
 
 @keyframes progressFill { from { width: 0; } }
 
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -75,6 +86,8 @@ body {
 .animate-fade-in { animation: fadeIn 0.4s ease-out; }
 .animate-slide-up { animation: slideUp 0.5s ease-out; }
 .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-float { animation: subtleFloat 6s ease-in-out infinite; }
+.animate-gradient { background-size: 200% 200%; animation: gradientShift 8s ease infinite; }
 
 /* Cards — with depth */
 .card {

@@ -316,6 +316,20 @@ export default function HeadlineGeneratorTool() {
                             )}
                         </div>
 
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Headline Rewriter"
+                            color="#0A66C2"
+                            promptText={buildHeadlinePrompt({
+                                role: role,
+                                company: company || undefined,
+                                industry: industry || undefined,
+                                skills: skills.trim() ? skills.split(/[,;]+/).map(s => s.trim()).filter(Boolean) : undefined,
+                                currentHeadline: extractedHeadline || undefined,
+                                about: extractedAbout || undefined,
+                            })}
+                        />
+
                         {headlines.map((h, i) => (
                             <div key={i} className="border border-gray-200 rounded-xl p-4 group hover:border-[#0A66C2]/30 hover:shadow-sm transition-all">
                                 <div className="flex items-start justify-between gap-3">
@@ -347,19 +361,6 @@ export default function HeadlineGeneratorTool() {
                                 </div>
                             </div>
                         ))}
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Headline Rewriter"
-                            color="#0A66C2"
-                            promptText={buildHeadlinePrompt({
-                                role: role,
-                                company: company || undefined,
-                                industry: industry || undefined,
-                                skills: skills.trim() ? skills.split(/[,;]+/).map(s => s.trim()).filter(Boolean) : undefined,
-                                currentHeadline: extractedHeadline || undefined,
-                                about: extractedAbout || undefined,
-                            })}
-                        />
                     </div>
                 )}
 

@@ -386,6 +386,17 @@ export default function AboutGeneratorTool() {
                             )}
                         </div>
 
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="About Section Builder"
+                            color="#10B981"
+                            promptText={buildAboutPrompt({
+                                role, experience, passion, achievement, skills, audience,
+                                currentAbout: currentAbout || undefined,
+                                education: education.length ? education : undefined,
+                            })}
+                        />
+
                         {/* Style tabs */}
                         <div className="flex gap-1.5">
                             {results.map((r, i) => (
@@ -430,17 +441,6 @@ export default function AboutGeneratorTool() {
                         <p className="text-[10px] text-center text-[#C4C9D4]">
                             LinkedIn About limit: 2,600 characters. Review, personalize, then paste.
                         </p>
-
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="About Section Builder"
-                            color="#10B981"
-                            promptText={buildAboutPrompt({
-                                role, experience, passion, achievement, skills, audience,
-                                currentAbout: currentAbout || undefined,
-                                education: education.length ? education : undefined,
-                            })}
-                        />
                     </div>
                 )}
             </div>

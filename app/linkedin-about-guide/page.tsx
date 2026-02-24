@@ -54,16 +54,29 @@ export default function LinkedInAboutGuidePage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
-                <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">About Section Guide</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">How to Write a LinkedIn About Section That Converts</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Your About section is where profile visitors decide whether to connect, message, or move on. LinkedIn gives you 2,600 characters | but only the first 300 are visible before the &ldquo;see more&rdquo; fold. This guide covers the exact structure, templates for every career stage, and the mistakes that cost you opportunities.
-                </p>
+            {/* Hero header */}
+            <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
+                <div className="max-w-3xl mx-auto px-6 pt-6 pb-10">
+                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                        <span aria-hidden="true">/</span>
+                        <span className="text-[#0A0F1C] font-medium">About Section Guide</span>
+                    </nav>
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE]">Guide</span>
+                        <span className="text-[11px] text-[#9CA3AF] flex items-center gap-1">
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            10 min read
+                        </span>
+                    </div>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">How to Write a LinkedIn About Section That Converts</h1>
+                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
+                        Your About section is where profile visitors decide whether to connect, message, or move on. LinkedIn gives you 2,600 characters | but only the first 300 are visible before the &ldquo;see more&rdquo; fold. This guide covers the exact structure, templates for every career stage, and the mistakes that cost you opportunities.
+                    </p>
+                </div>
+            </div>
+
+            <article className="max-w-3xl mx-auto px-6 py-10 sm:py-14">
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 
@@ -175,8 +188,9 @@ export default function LinkedInAboutGuidePage() {
 
                     {/* FAQ */}
                     <section>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
-                        <div className="space-y-5">
+                        <div className="space-y-3">
                             {[
                                 { q: 'How long should my LinkedIn About section be?', a: 'Aim for 800–1,500 characters (roughly 150–250 words). Long enough to be substantive, short enough to be read. The maximum is 2,600 characters, but most readers will not read that far.' },
                                 { q: 'Should I include a call to action?', a: 'Yes. End with a clear next step: "Reach out if you are hiring for X" or "Connect with me to discuss Y." It converts passive viewers into active contacts.' },
@@ -184,24 +198,30 @@ export default function LinkedInAboutGuidePage() {
                                 { q: 'How is the About section different from a resume summary?', a: 'A resume summary is formal and backward-looking. Your LinkedIn About should be conversational, forward-looking, and include personality. Think of it as a professional introduction at a networking event.' },
                                 { q: 'What if I have no work experience for the About section?', a: 'Focus on what you are learning, projects you have built, skills you are developing, and where you want to go. Students and career changers can write compelling About sections by emphasizing direction and initiative.' },
                             ].map((item, i) => (
-                                <div key={i} className="border-b border-gray-100 pb-4">
-                                    <h3 className="text-sm font-bold text-[#0A0F1C] mb-1">{item.q}</h3>
-                                    <p className="text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
-                                </div>
+                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
+                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
+                                        {item.q}
+                                        <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                    </summary>
+                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                </details>
                             ))}
                         </div>
                     </section>
 
                     {/* CTA */}
-                    <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
-                        <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Get your About section scored</h2>
-                        <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and see how your About section compares. Free analysis with specific improvement tips.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
+                    <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                        </div>
+                        <h2 className="text-lg font-bold text-white mb-2">Get your About section scored</h2>
+                        <p className="text-sm text-blue-100/80 mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and see how your About section compares. Free analysis with specific improvement tips.</p>
+                        <Link href="/" className="inline-block bg-white text-[#0A66C2] px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm">Analyze Your Profile</Link>
                     </div>
 
                     {/* Related Guides */}
                     <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             {[
                                 { label: 'Headline Guide', href: '/linkedin-headline-guide' },
@@ -213,7 +233,7 @@ export default function LinkedInAboutGuidePage() {
                                 { label: 'Resume vs Profile', href: '/linkedin-resume-vs-profile' },
                                 { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
                             ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
+                                <Link key={i} href={item.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">{item.label}</Link>
                             ))}
                         </div>
                     </div>

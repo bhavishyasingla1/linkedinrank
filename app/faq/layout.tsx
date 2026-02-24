@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Scoring FAQ | Common Questions Answered',
-    description: 'Frequently asked questions about LinkedInRank, LinkedIn profile scoring, data privacy, PDF upload, AI recommendations, and how to improve your LinkedIn profile score to 100.',
+    title: 'LinkedIn Profile Scoring FAQ | Questions Answered (2026)',
+    description: 'FAQs about LinkedIn profile scoring, data privacy, PDF upload, AI recommendations, and how to improve your LinkedIn score. All answers updated for 2026.',
     keywords: 'linkedinrank faq, linkedin profile score questions, linkedin scoring faq, how to improve linkedin score, linkedin profile tips faq, linkedin pdf upload help',
     alternates: { canonical: 'https://linkedinrank.com/faq' },
     openGraph: {

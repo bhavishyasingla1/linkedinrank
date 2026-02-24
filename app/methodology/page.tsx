@@ -4,12 +4,12 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How LinkedInRank Scores Your LinkedIn Profile | Methodology & Algorithm',
+    title: 'LinkedIn Profile Scoring Methodology & Algorithm (2026)',
     description: 'Deep dive into the LinkedInRank scoring methodology: 6 categories, 30+ signals, AI + rule-based evaluation, career stage adaptation, and transparent fairness. See exactly how your LinkedIn profile score is calculated.',
     keywords: 'linkedinrank methodology, linkedin profile scoring algorithm, linkedin score calculation, linkedin profile evaluation criteria, linkedin scoring system, how linkedin score works, linkedin profile grading',
     alternates: { canonical: 'https://linkedinrank.com/methodology' },
     openGraph: {
-        title: 'How LinkedInRank Scores Your LinkedIn Profile | Methodology',
+        title: 'LinkedIn Profile Scoring Methodology & Algorithm (2026)',
         description: 'Transparent scoring: 6 categories, 30+ signals, AI + rule-based evaluation. See exactly how your LinkedIn profile score is calculated.',
         url: 'https://linkedinrank.com/methodology',
     },

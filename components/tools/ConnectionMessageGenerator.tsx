@@ -380,6 +380,19 @@ export default function ConnectionMessageGenerator() {
                                 <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#10B981] to-[#7C3AED] px-2 py-0.5 rounded-full">AI</span>
                             )}
                         </div>
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Connection Crafter"
+                            color="#10B981"
+                            promptText={buildConnectionPrompt({
+                                type,
+                                name: name || 'there',
+                                context: context || undefined,
+                                yourRole: yourRole || undefined,
+                                recipientRole: recipientRole || undefined,
+                                intent: intent || undefined,
+                            })}
+                        />
                         {messages.map((m, i) => (
                             <div key={i} className="border border-gray-200 rounded-xl overflow-hidden hover:border-gray-300 transition-all group">
                                 <div className="px-4 py-3">
@@ -411,19 +424,6 @@ export default function ConnectionMessageGenerator() {
                                 <p className="text-[10px] text-amber-700">⚠️ LinkedIn connection notes have a 300 character limit. Messages over 300 chars may need trimming.</p>
                             </div>
                         )}
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Connection Crafter"
-                            color="#10B981"
-                            promptText={buildConnectionPrompt({
-                                type,
-                                name: name || 'there',
-                                context: context || undefined,
-                                yourRole: yourRole || undefined,
-                                recipientRole: recipientRole || undefined,
-                                intent: intent || undefined,
-                            })}
-                        />
                     </div>
                 )}
             </div>

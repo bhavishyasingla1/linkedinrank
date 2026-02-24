@@ -322,6 +322,18 @@ export default function PostIdeaGenerator() {
                 {/* Results */}
                 {ideas.length > 0 && (
                     <div className="space-y-3 pt-4 border-t border-gray-100">
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Post Idea Engine"
+                            color="#F59E0B"
+                            promptText={buildPostIdeaPrompt({
+                                industry,
+                                goal,
+                                niche: niche || undefined,
+                                postType: postType === 'custom' ? customTopic : postType,
+                            })}
+                        />
+
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider">
@@ -398,17 +410,6 @@ export default function PostIdeaGenerator() {
                                 />
                             ))}
                         </div>
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Post Idea Engine"
-                            color="#F59E0B"
-                            promptText={buildPostIdeaPrompt({
-                                industry,
-                                goal,
-                                niche: niche || undefined,
-                                postType: postType === 'custom' ? customTopic : postType,
-                            })}
-                        />
                     </div>
                 )}
 

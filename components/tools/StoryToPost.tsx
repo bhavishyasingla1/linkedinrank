@@ -247,6 +247,17 @@ export default function StoryToPost() {
                             )}
                         </div>
 
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Story-to-Post Writer"
+                            color="#EC4899"
+                            promptText={buildStoryToPostPrompt({
+                                story: rawStory,
+                                tone: style,
+                                goal: lesson || undefined,
+                            })}
+                        />
+
                         {/* AI hook highlight */}
                         {aiPost && (
                             <div className="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-100 rounded-xl p-3">
@@ -275,16 +286,6 @@ export default function StoryToPost() {
                                 </div>
                             </div>
                         ))}
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Story-to-Post Writer"
-                            color="#EC4899"
-                            promptText={buildStoryToPostPrompt({
-                                story: rawStory,
-                                tone: style,
-                                goal: lesson || undefined,
-                            })}
-                        />
                     </div>
                 )}
 

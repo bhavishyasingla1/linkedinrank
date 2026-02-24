@@ -4,12 +4,12 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'About LinkedInRank | The World\'s Best Free LinkedIn Profile Scorer',
-    description: 'LinkedInRank is a free, privacy-first LinkedIn profile scoring tool built to help professionals optimize their profiles. Learn about our mission, scoring methodology, and why thousands trust us.',
+    title: 'About LinkedInRank | Free LinkedIn Profile Scorer (2026)',
+    description: 'LinkedInRank is a free, privacy-first LinkedIn profile scoring tool. Score your profile across 30+ signals, get AI recommendations, and improve your LinkedIn ranking.',
     keywords: 'about linkedinrank, linkedin profile scorer, linkedin analysis tool, free linkedin profile review, linkedin optimization, who built linkedinrank',
     alternates: { canonical: 'https://linkedinrank.com/about' },
     openGraph: {
-        title: 'About LinkedInRank | The World\'s Best Free LinkedIn Profile Scorer',
+        title: 'About LinkedInRank | Free LinkedIn Profile Scorer (2026)',
         description: 'Learn why LinkedInRank was built and how it helps professionals optimize their LinkedIn profiles with data-driven scoring.',
         url: 'https://linkedinrank.com/about',
     },

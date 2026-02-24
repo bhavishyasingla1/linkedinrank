@@ -256,6 +256,17 @@ export default function ContentPillarPlanner() {
                             </button>
                         </div>
 
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Content Calendar"
+                            color="#7C3AED"
+                            promptText={buildContentPlannerPrompt({
+                                industry,
+                                role,
+                                frequency,
+                            })}
+                        />
+
                         {plan.map((p, i) => {
                             const colors = PILLAR_COLORS[p.pillar] || PILLAR_COLORS.insights
                             return (
@@ -284,17 +295,6 @@ export default function ContentPillarPlanner() {
                         <p className="text-[10px] text-center text-[#C4C9D4] leading-relaxed">
                             Consistency beats perfection. Imperfect posts &gt; no posts.
                         </p>
-
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Content Calendar"
-                            color="#7C3AED"
-                            promptText={buildContentPlannerPrompt({
-                                industry,
-                                role,
-                                frequency,
-                            })}
-                        />
                     </div>
                 )}
             </div>

@@ -148,6 +148,15 @@ export default function BulletImproverV2() {
                             )}
                         </div>
 
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Bullet Rewriter"
+                            color="#4F46E5"
+                            promptText={buildBulletPrompt({
+                                bullet,
+                            })}
+                        />
+
                         {/* Quality checks (rule-based only) */}
                         {!isAI && results[0]?.checks && (
                             <div className="flex flex-wrap gap-2">
@@ -193,14 +202,6 @@ export default function BulletImproverV2() {
                             </div>
                         )}
 
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Bullet Rewriter"
-                            color="#4F46E5"
-                            promptText={buildBulletPrompt({
-                                bullet,
-                            })}
-                        />
                     </div>
                 )}
             </div>

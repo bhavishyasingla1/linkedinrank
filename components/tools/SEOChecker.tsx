@@ -190,6 +190,17 @@ export default function SEOCheckerTool() {
                 {/* Results */}
                 {result && (
                     <div className="space-y-5 pt-5 border-t border-gray-100">
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Keyword Analyzer"
+                            color="#7C3AED"
+                            promptText={buildSEOPrompt({
+                                headline: formData.headline,
+                                about: formData.about,
+                                skills: formData.skills,
+                            })}
+                        />
+
                         {/* Overall Score */}
                         <div className="text-center">
                             <p className="text-[10px] font-bold text-[#9CA3AF] uppercase tracking-wider mb-2">Recruiter Visibility Score</p>
@@ -281,16 +292,6 @@ export default function SEOCheckerTool() {
                             </div>
                         )}
 
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Keyword Analyzer"
-                            color="#7C3AED"
-                            promptText={buildSEOPrompt({
-                                headline: formData.headline,
-                                about: formData.about,
-                                skills: formData.skills,
-                            })}
-                        />
                     </div>
                 )}
 

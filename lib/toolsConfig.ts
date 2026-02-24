@@ -57,7 +57,7 @@ export function getAllToolSlugs(): string[] {
 export const ALL_TOOLS: ToolMeta[] = [
     {
         id: 'headline', slug: 'linkedin-headline-generator', name: 'LinkedIn Headline Generator',
-        seoTitle: 'LinkedIn Headline Generator | AI Headline Examples & Analyzer | LinkedInRank',
+        seoTitle: 'LinkedIn Headline Generator | AI Examples & Templates (2026)',
         metaDescription: 'Generate professional LinkedIn headlines for students, graduates, and professionals. Try AI-powered headline examples, analyzer, and keyword-optimized suggestions free.',
         h1: 'LinkedIn Headline Generator', heroText: 'Your LinkedIn headline is the first thing recruiters see. Generate keyword-optimized, recruiter-ready headlines in seconds with AI-powered suggestions tailored to your role and industry.',
         primaryKeyword: 'LinkedIn headline generator', secondaryKeywords: ['LinkedIn headline examples', 'LinkedIn headline analyzer', 'professional LinkedIn headline', 'LinkedIn headline for students', 'best LinkedIn headlines'],
@@ -82,7 +82,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'about', slug: 'linkedin-about-generator', name: 'LinkedIn About Section Generator',
-        seoTitle: 'LinkedIn About Section Generator | AI Summary Writer | LinkedInRank',
+        seoTitle: 'LinkedIn About Section Generator | AI Summary Writer (2026)',
         metaDescription: 'Generate a compelling LinkedIn About section in 3 styles. AI-powered summary writer creates first-person, keyword-rich About sections from your experience.',
         h1: 'LinkedIn About Section Generator', heroText: 'Your About section is where connections decide to reach out or scroll past. Generate a first-person, keyword-rich summary in three distinct styles tailored to your actual experience.',
         primaryKeyword: 'LinkedIn about section generator', secondaryKeywords: ['LinkedIn summary generator', 'LinkedIn about section examples', 'LinkedIn summary writer', 'AI LinkedIn about section'],
@@ -105,7 +105,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'bullets', slug: 'linkedin-experience-generator', name: 'LinkedIn Experience Description Generator',
-        seoTitle: 'LinkedIn Experience Description Generator | Bullet Point Rewriter | LinkedInRank',
+        seoTitle: 'LinkedIn Experience Generator | Bullet Point Examples (2026)',
         metaDescription: 'Rewrite your LinkedIn experience bullet points with AI. Transform weak descriptions into achievement-focused, keyword-rich bullets that attract recruiters.',
         h1: 'LinkedIn Experience Description Generator', heroText: 'Transform bland job descriptions into achievement-focused, recruiter-optimized bullet points. Paste your current descriptions and get AI-rewritten versions instantly.',
         primaryKeyword: 'LinkedIn experience description generator', secondaryKeywords: ['LinkedIn bullet point rewriter', 'LinkedIn experience examples', 'LinkedIn job description writer'],
@@ -127,7 +127,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'ring', slug: 'linkedin-profile-photo-ring', name: 'LinkedIn Profile Photo Ring Creator',
-        seoTitle: 'LinkedIn Profile Photo Ring Creator | Free Ring Generator | LinkedInRank',
+        seoTitle: 'LinkedIn Profile Photo Ring Creator | Free Templates (2026)',
         metaDescription: 'Add a professional colored ring to your LinkedIn profile photo for free. Choose from branded ring styles to make your profile picture stand out.',
         h1: 'LinkedIn Profile Photo Ring Creator', heroText: 'Make your profile photo stand out in the LinkedIn feed with a professional colored ring. Upload your photo and add a custom ring in seconds.',
         primaryKeyword: 'LinkedIn profile photo ring', secondaryKeywords: ['LinkedIn profile picture ring', 'LinkedIn photo border', 'LinkedIn profile ring creator'],
@@ -149,7 +149,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'seo', slug: 'linkedin-profile-keyword-analyzer', name: 'LinkedIn Profile Keyword Analyzer',
-        seoTitle: 'LinkedIn Profile Keyword Analyzer | SEO Checker | LinkedInRank',
+        seoTitle: 'LinkedIn Keyword Analyzer | Free SEO Checker (2026)',
         metaDescription: 'Analyze your LinkedIn profile keywords and SEO score. Get keyword coverage analysis, missing keywords, and optimization recommendations.',
         h1: 'LinkedIn Profile Keyword Analyzer', heroText: 'Discover which keywords are missing from your LinkedIn profile. Upload your PDF and get a keyword coverage score with specific recommendations.',
         primaryKeyword: 'LinkedIn profile keyword analyzer', secondaryKeywords: ['LinkedIn SEO checker', 'LinkedIn keyword optimization', 'LinkedIn profile SEO', 'LinkedIn keyword tool'],
@@ -171,7 +171,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'postideas', slug: 'linkedin-post-idea-generator', name: 'LinkedIn Post Idea Generator',
-        seoTitle: 'LinkedIn Post Idea Generator | Content Ideas | LinkedInRank',
+        seoTitle: 'LinkedIn Post Idea Generator | Content Ideas & Templates (2026)',
         metaDescription: 'Generate engaging LinkedIn post ideas tailored to your industry. AI-powered content ideas for thought leadership, job search, and audience growth.',
         h1: 'LinkedIn Post Idea Generator', heroText: 'Never stare at a blank screen again. Get AI-generated post ideas tailored to your industry, goals, and audience.',
         primaryKeyword: 'LinkedIn post idea generator', secondaryKeywords: ['LinkedIn content ideas', 'what to post on LinkedIn', 'LinkedIn post topics', 'LinkedIn content generator'],
@@ -193,7 +193,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'storytopost', slug: 'linkedin-story-to-post-converter', name: 'LinkedIn Story to Post Converter',
-        seoTitle: 'LinkedIn Story to Post Converter | Turn Stories Into Posts | LinkedInRank',
+        seoTitle: 'LinkedIn Story to Post Converter | Free AI Tool (2026)',
         metaDescription: 'Convert raw stories into polished LinkedIn posts. AI-powered converter transforms rough ideas into engaging, structured posts ready to publish.',
         h1: 'LinkedIn Story to Post Converter', heroText: 'Turn your raw experiences into polished, engaging LinkedIn posts. Describe what happened and what you learned, get a ready-to-publish post.',
         primaryKeyword: 'LinkedIn story to post converter', secondaryKeywords: ['LinkedIn post writer', 'convert story to LinkedIn post', 'LinkedIn post creator'],
@@ -214,7 +214,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'hooks', slug: 'linkedin-post-hook-generator', name: 'LinkedIn Post Hook Generator',
-        seoTitle: 'LinkedIn Post Hook Generator | Scroll-Stopping Opening Lines | LinkedInRank',
+        seoTitle: 'LinkedIn Post Hook Generator | Opening Line Examples (2026)',
         metaDescription: 'Generate scroll-stopping LinkedIn post hooks. AI-powered hook generator creates attention-grabbing opening lines tailored to your topic and audience.',
         h1: 'LinkedIn Post Hook Generator', heroText: 'Your first line decides if anyone reads the rest. Generate scroll-stopping hooks for your LinkedIn posts that create curiosity and drive engagement.',
         primaryKeyword: 'LinkedIn post hook generator', secondaryKeywords: ['LinkedIn opening line generator', 'LinkedIn hook examples', 'scroll-stopping LinkedIn hooks'],
@@ -235,7 +235,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'pillars', slug: 'linkedin-content-planner', name: 'LinkedIn Content Planner',
-        seoTitle: 'LinkedIn Content Planner | Weekly Posting Calendar | LinkedInRank',
+        seoTitle: 'LinkedIn Content Planner | Weekly Calendar Template (2026)',
         metaDescription: 'Plan your LinkedIn content with a weekly posting calendar. AI-generated content pillars, post prompts, and scheduling for your industry.',
         h1: 'LinkedIn Content Planner', heroText: 'Stop posting randomly. Get a weekly content calendar with post prompts and content pillars tailored to your industry and role.',
         primaryKeyword: 'LinkedIn content planner', secondaryKeywords: ['LinkedIn content calendar', 'LinkedIn posting schedule', 'LinkedIn weekly planner'],
@@ -256,7 +256,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'comments', slug: 'linkedin-comment-generator', name: 'LinkedIn Comment Generator',
-        seoTitle: 'LinkedIn Comment Generator | AI Comment Writer | LinkedInRank',
+        seoTitle: 'LinkedIn Comment Generator | AI Comment Templates (2026)',
         metaDescription: 'Generate thoughtful LinkedIn comments that build connections. AI-powered comment writer creates engaging, authentic replies for any post.',
         h1: 'LinkedIn Comment Generator', heroText: 'Write comments that get noticed and build relationships. Generate thoughtful, engaging replies for LinkedIn posts that showcase your expertise.',
         primaryKeyword: 'LinkedIn comment generator', secondaryKeywords: ['LinkedIn comment writer', 'LinkedIn reply generator', 'LinkedIn engagement tool'],
@@ -277,7 +277,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'messages', slug: 'linkedin-connection-message-generator', name: 'LinkedIn Connection Message Generator',
-        seoTitle: 'LinkedIn Connection Message Generator | Connection Request Notes | LinkedInRank',
+        seoTitle: 'LinkedIn Connection Message Generator | Templates (2026)',
         metaDescription: 'Generate personalized LinkedIn connection request messages. AI-powered message writer creates authentic, effective notes for any networking scenario.',
         h1: 'LinkedIn Connection Message Generator', heroText: 'Stop sending blank connection requests. Generate personalized, authentic connection notes that get accepted for any professional scenario.',
         primaryKeyword: 'LinkedIn connection message generator', secondaryKeywords: ['LinkedIn connection request message', 'LinkedIn networking message', 'LinkedIn connection note'],
@@ -298,7 +298,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'qrcode', slug: 'linkedin-qr-code-generator', name: 'LinkedIn QR Code Generator',
-        seoTitle: 'LinkedIn QR Code Generator | Free Profile QR Code | LinkedInRank',
+        seoTitle: 'LinkedIn QR Code Generator | Free Profile QR Code (2026)',
         metaDescription: 'Generate a free QR code for your LinkedIn profile. Share your profile at events, on business cards, and in presentations with a custom QR code.',
         h1: 'LinkedIn QR Code Generator', heroText: 'Share your LinkedIn profile instantly at events and on business cards. Generate a custom QR code for your profile in seconds.',
         primaryKeyword: 'LinkedIn QR code generator', secondaryKeywords: ['LinkedIn profile QR code', 'LinkedIn QR code free', 'LinkedIn QR code for business card'],

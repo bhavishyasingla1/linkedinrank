@@ -55,38 +55,53 @@ export default function LinkedInOptimizationGuidePage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
-                <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Pillar Guide</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Complete LinkedIn Profile Optimization Guide</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Your LinkedIn profile is a search engine and a trust platform. This guide covers every section of your profile with actionable strategies | whether you are a student, job seeker, founder, or experienced professional. Each recommendation is based on the same <strong className="text-[#0A0F1C]">30+ signals</strong> that <Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link> uses to score profiles.
-                </p>
-
-                {/* Table of Contents */}
-                <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-6 mb-10">
-                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">In This Guide</p>
-                    <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {[
-                            { label: '1. Foundation: Photo, Headline, About', anchor: '#foundation' },
-                            { label: '2. Building Credibility', anchor: '#credibility' },
-                            { label: '3. Discoverability & Keywords', anchor: '#discoverability' },
-                            { label: '4. Networking Strategy', anchor: '#networking' },
-                            { label: '5. Content & Visibility', anchor: '#content' },
-                            { label: '6. Review Cycle', anchor: '#review' },
-                        ].map((item, i) => (
-                            <a key={i} href={item.anchor} className="text-sm text-[#0A66C2] hover:underline no-underline">{item.label}</a>
-                        ))}
+            {/* Hero header */}
+            <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
+                <div className="max-w-3xl mx-auto px-6 pt-6 pb-10">
+                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                        <span aria-hidden="true">/</span>
+                        <span className="text-[#0A0F1C] font-medium">Optimization Guide</span>
                     </nav>
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE]">Pillar Guide</span>
+                        <span className="text-[11px] text-[#9CA3AF] flex items-center gap-1">
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            15 min read
+                        </span>
+                    </div>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">Complete LinkedIn Profile Optimization Guide</h1>
+                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
+                        Your LinkedIn profile is a search engine and a trust platform. This guide covers every section of your profile with actionable strategies | whether you are a student, job seeker, founder, or experienced professional. Each recommendation is based on the same <strong className="text-[#0A0F1C]">30+ signals</strong> that <Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link> uses to score profiles.
+                    </p>
                 </div>
+            </div>
+
+            <article className="max-w-3xl mx-auto px-6 py-10 sm:py-14">
+                {/* Table of Contents */}
+                <nav className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 sm:p-6 mb-12">
+                    <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">In This Guide</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        {[
+                            { label: 'Foundation: Photo, Headline, About', anchor: '#foundation', step: '01' },
+                            { label: 'Building Credibility', anchor: '#credibility', step: '02' },
+                            { label: 'Discoverability & Keywords', anchor: '#discoverability', step: '03' },
+                            { label: 'Networking Strategy', anchor: '#networking', step: '04' },
+                            { label: 'Content & Visibility', anchor: '#content', step: '05' },
+                            { label: 'Review Cycle', anchor: '#review', step: '06' },
+                        ].map((item, i) => (
+                            <a key={i} href={item.anchor} className="flex items-start gap-2.5 text-sm text-[#0A0F1C] hover:text-[#0A66C2] no-underline transition-colors">
+                                <span className="text-[11px] font-bold text-[#D1D5DB] tabular-nums mt-0.5 shrink-0">{item.step}</span>
+                                {item.label}
+                            </a>
+                        ))}
+                    </div>
+                </nav>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 
                     {/* Step 1 */}
-                    <section id="foundation" aria-labelledby="h-foundation">
+                    <section id="foundation" aria-labelledby="h-foundation" className="scroll-mt-24">
                         <h2 id="h-foundation" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 1 | Foundation: Photo, Headline, About, Experience, Skills</h2>
                         <p className="mb-4">These five elements form the core of every LinkedIn profile. Recruiters scan them in under 30 seconds. If any one is weak, the entire profile loses credibility.</p>
 
@@ -107,7 +122,7 @@ export default function LinkedInOptimizationGuidePage() {
                     </section>
 
                     {/* Step 2 */}
-                    <section id="credibility" aria-labelledby="h-credibility">
+                    <section id="credibility" aria-labelledby="h-credibility" className="scroll-mt-24">
                         <h2 id="h-credibility" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 2 | Building Credibility</h2>
                         <p className="mb-4">Credibility separates average profiles from strong ones. Recruiters and hiring managers subconsciously look for proof that you can deliver.</p>
                         <div className="space-y-3">
@@ -127,7 +142,7 @@ export default function LinkedInOptimizationGuidePage() {
                     </section>
 
                     {/* Step 3 */}
-                    <section id="discoverability" aria-labelledby="h-discoverability">
+                    <section id="discoverability" aria-labelledby="h-discoverability" className="scroll-mt-24">
                         <h2 id="h-discoverability" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 3 | Discoverability & Keywords</h2>
                         <p className="mb-4">LinkedIn is a search engine. If the right keywords are not in your profile, recruiters cannot find you | no matter how qualified you are.</p>
                         <p className="mb-4">Place keywords strategically in your headline, About section, job titles, and skills. Use role-specific terms (e.g., &ldquo;Product Manager&rdquo; not &ldquo;PM&rdquo;), industry terms, and tool names. Our <Link href="/linkedin-keywords-guide" className="text-[#0A66C2] hover:underline">LinkedIn Keywords Guide</Link> covers exactly how recruiters search and which keywords matter most for your role.</p>
@@ -143,7 +158,7 @@ export default function LinkedInOptimizationGuidePage() {
                     </section>
 
                     {/* Step 4 */}
-                    <section id="networking" aria-labelledby="h-networking">
+                    <section id="networking" aria-labelledby="h-networking" className="scroll-mt-24">
                         <h2 id="h-networking" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 4 | Networking Strategy</h2>
                         <p className="mb-4">A strong profile without an active network is like a billboard in an empty room. Networking on LinkedIn should be intentional and consistent.</p>
                         <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 mb-4">
@@ -161,7 +176,7 @@ export default function LinkedInOptimizationGuidePage() {
                     </section>
 
                     {/* Step 5 */}
-                    <section id="content" aria-labelledby="h-content">
+                    <section id="content" aria-labelledby="h-content" className="scroll-mt-24">
                         <h2 id="h-content" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 5 | Content & Visibility</h2>
                         <p className="mb-4">Posting content on LinkedIn signals seriousness to recruiters and builds authority in your niche. You do not need to post daily | consistency matters more than frequency.</p>
                         <p className="mb-4">Effective content types:</p>
@@ -177,7 +192,7 @@ export default function LinkedInOptimizationGuidePage() {
                     </section>
 
                     {/* Step 6 */}
-                    <section id="review" aria-labelledby="h-review">
+                    <section id="review" aria-labelledby="h-review" className="scroll-mt-24">
                         <h2 id="h-review" className="text-2xl font-bold text-[#0A0F1C] mb-6">Step 6 | Review Cycle (Every 3 Months)</h2>
                         <p className="mb-4">Your profile is not a set-it-and-forget-it page. The best professionals review and update their LinkedIn every quarter.</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -235,8 +250,9 @@ export default function LinkedInOptimizationGuidePage() {
 
                     {/* FAQ */}
                     <section>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
-                        <div className="space-y-5">
+                        <div className="space-y-3">
                             {[
                                 { q: 'How long does it take to optimize a LinkedIn profile?', a: 'A thorough optimization takes 2–3 hours for the initial setup. After that, quarterly reviews of 30–60 minutes keep your profile current. Focus on headline and About section first | they have the highest impact.' },
                                 { q: 'What is the most important section to optimize?', a: 'The headline. It appears in every search result, connection request, and comment. A clear, keyword-rich headline directly impacts how often recruiters find you.' },
@@ -245,19 +261,25 @@ export default function LinkedInOptimizationGuidePage() {
                                 { q: 'Do keywords really matter on LinkedIn?', a: 'Yes. LinkedIn search works similarly to Google. Recruiters search using job titles, skills, and industry terms. If those keywords are not in your profile, you will not appear in search results regardless of your qualifications.' },
                                 { q: 'How often should I update my LinkedIn profile?', a: 'Every 3 months at minimum. Update after any role change, new certification, major project, or career direction shift. Regular updates signal to the algorithm that your profile is active.' },
                             ].map((item, i) => (
-                                <div key={i} className="border-b border-gray-100 pb-4">
-                                    <h3 className="text-sm font-bold text-[#0A0F1C] mb-1">{item.q}</h3>
-                                    <p className="text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
-                                </div>
+                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
+                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
+                                        {item.q}
+                                        <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                    </summary>
+                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                </details>
                             ))}
                         </div>
                     </section>
 
                     {/* CTA */}
-                    <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
-                        <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">See how optimized your profile is</h2>
-                        <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF and get a free score with personalized recommendations for every section.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Check Your LinkedIn Score | It&apos;s Free</Link>
+                    <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                        </div>
+                        <h2 className="text-lg font-bold text-white mb-2">See how optimized your profile is</h2>
+                        <p className="text-sm text-blue-100/80 mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and get a free score with personalized recommendations for every section.</p>
+                        <Link href="/" className="inline-block bg-white text-[#0A66C2] px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm">Check Your LinkedIn Score</Link>
                     </div>
 
                     {/* Complete Guide Directory */}

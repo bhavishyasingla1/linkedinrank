@@ -46,16 +46,29 @@ export default function LinkedInProfilePhotoGuidePage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
-                <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Profile Photo Guide</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">LinkedIn Profile Photo Guide: What Works and What Does Not</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    LinkedIn profiles with professional photos receive <strong className="text-[#0A0F1C]">up to 21x more profile views</strong> and 36x more messages. Your photo is the first visual impression recruiters, clients, and connections see. This guide covers exactly what makes an effective LinkedIn photo | no professional photographer required.
-                </p>
+            {/* Hero header */}
+            <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
+                <div className="max-w-3xl mx-auto px-6 pt-6 pb-10">
+                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                        <span aria-hidden="true">/</span>
+                        <span className="text-[#0A0F1C] font-medium">Profile Photo Guide</span>
+                    </nav>
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE]">Guide</span>
+                        <span className="text-[11px] text-[#9CA3AF] flex items-center gap-1">
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            8 min read
+                        </span>
+                    </div>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">LinkedIn Profile Photo Guide: What Works and What Does Not</h1>
+                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
+                        LinkedIn profiles with professional photos receive <strong className="text-[#0A0F1C]">up to 21x more profile views</strong> and 36x more messages. Your photo is the first visual impression recruiters, clients, and connections see. This guide covers exactly what makes an effective LinkedIn photo | no professional photographer required.
+                    </p>
+                </div>
+            </div>
+
+            <article className="max-w-3xl mx-auto px-6 py-10 sm:py-14">
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 
@@ -141,8 +154,9 @@ export default function LinkedInProfilePhotoGuidePage() {
 
                     {/* FAQ */}
                     <section>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
-                        <div className="space-y-5">
+                        <div className="space-y-3">
                             {[
                                 { q: 'Does not having a photo hurt my profile?', a: 'Yes, significantly. Profiles without photos receive dramatically fewer views and messages. Recruiters often skip faceless profiles entirely. It is one of the easiest fixes with the biggest impact.' },
                                 { q: 'Can I use the same photo as my resume?', a: 'If your resume has a professional headshot, yes. LinkedIn photos should be consistent with how you present yourself professionally across all platforms.' },
@@ -150,24 +164,30 @@ export default function LinkedInProfilePhotoGuidePage() {
                                 { q: 'How often should I update my photo?', a: 'Every 1–2 years, or whenever your appearance changes significantly. Recruiters and networking contacts should be able to recognize you from your photo.' },
                                 { q: 'Does LinkedInRank check for a profile photo?', a: 'LinkedInRank evaluates profile completeness signals including whether key sections are present. A missing photo impacts your completeness score.' },
                             ].map((item, i) => (
-                                <div key={i} className="border-b border-gray-100 pb-4">
-                                    <h3 className="text-sm font-bold text-[#0A0F1C] mb-1">{item.q}</h3>
-                                    <p className="text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
-                                </div>
+                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
+                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
+                                        {item.q}
+                                        <svg className="w-4 h-4 text-[#9CA3AF] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                    </summary>
+                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                </details>
                             ))}
                         </div>
                     </section>
 
                     {/* CTA */}
-                    <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
-                        <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Check your full profile strength</h2>
-                        <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Your photo is just one signal. LinkedInRank evaluates 30+ signals across your entire profile.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Get Your Free Score</Link>
+                    <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /></svg>
+                        </div>
+                        <h2 className="text-lg font-bold text-white mb-2">Check your full profile strength</h2>
+                        <p className="text-sm text-blue-100/80 mb-5 max-w-md mx-auto">Your photo is just one signal. LinkedInRank evaluates 30+ signals across your entire profile.</p>
+                        <Link href="/" className="inline-block bg-white text-[#0A66C2] px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm">Get Your Free Score</Link>
                     </div>
 
                     {/* Related Guides */}
                     <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-3">Related Guides</p>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
                             {[
                                 { label: 'Headline Guide', href: '/linkedin-headline-guide' },
@@ -178,7 +198,7 @@ export default function LinkedInProfilePhotoGuidePage() {
                                 { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
                                 { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
                             ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
+                                <Link key={i} href={item.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">{item.label}</Link>
                             ))}
                         </div>
                     </div>

@@ -6,20 +6,20 @@ import { ALL_TOOLS, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Free LinkedIn Tools | Profile Optimizer, Content Generator & More | LinkedInRank',
-    description: '12 free LinkedIn tools to optimize your profile, generate content, and grow your network. Headline generator, about section writer, post ideas, comment generator, and more.',
+    title: '12 Free LinkedIn Tools & Templates (2026) | LinkedInRank',
+    description: '12 free AI-powered LinkedIn tools: headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
     alternates: { canonical: `${SITE_URL}/tools` },
     openGraph: {
-        title: 'Free LinkedIn Tools | LinkedInRank',
-        description: '12 free LinkedIn tools for profile optimization, content creation, and networking.',
+        title: '12 Free LinkedIn Tools & Templates (2026) | LinkedInRank',
+        description: '12 free AI-powered LinkedIn tools for profile optimization, content creation, and networking.',
         url: `${SITE_URL}/tools`,
         siteName: SITE_NAME,
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Free LinkedIn Tools | LinkedInRank',
-        description: '12 free LinkedIn tools for profile optimization and content creation.',
+        title: '12 Free LinkedIn Tools & Templates (2026)',
+        description: '12 free AI-powered LinkedIn tools for profile optimization and content creation.',
     },
 }
 

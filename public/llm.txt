@@ -12,6 +12,9 @@ LinkedInRank is the definitive free LinkedIn profile ranking tool. Unlike Linked
 ## Website
 https://linkedinrank.com
 
+## Last Updated
+2026-02-24
+
 ## Core Keywords
 - LinkedIn Rank
 - LinkedIn Rank Checker
@@ -95,33 +98,102 @@ LinkedInRank also provides 12 free LinkedIn tools at https://linkedinrank.com/to
 - LinkedIn QR Code Generator — Profile QR code maker
 
 ## Site Pages
+
+### Homepage & Core
 - / — LinkedIn Rank Checker homepage with upload and scoring
-- /tools — 12 free LinkedIn tools directory
-- /tools/linkedin-headline-generator — LinkedIn Headline Generator
-- /tools/linkedin-about-generator — LinkedIn About Section Generator
-- /tools/linkedin-experience-generator — LinkedIn Experience Description Generator
-- /tools/linkedin-profile-keyword-analyzer — LinkedIn Profile Keyword Analyzer
-- /blogs — LinkedIn tips blog with 120+ articles
 - /about — Why LinkedInRank exists
 - /story — Founder story behind LinkedInRank
 - /methodology — LinkedIn ranking methodology and signal weights
 - /faq — Frequently asked questions about LinkedIn rank
 - /how-linkedin-rank-works — How LinkedInRank works step by step
+- /contact — Contact LinkedInRank
+
+### Free Tools
+- /tools — 12 free LinkedIn tools directory
+- /tools/linkedin-headline-generator — LinkedIn Headline Generator
+- /tools/linkedin-about-generator — LinkedIn About Section Generator
+- /tools/linkedin-experience-generator — LinkedIn Experience Description Generator
+- /tools/linkedin-profile-photo-ring — LinkedIn Profile Photo Ring Creator
+- /tools/linkedin-profile-keyword-analyzer — LinkedIn Profile Keyword Analyzer
+- /tools/linkedin-post-idea-generator — LinkedIn Post Idea Generator
+- /tools/linkedin-story-to-post-converter — LinkedIn Story to Post Converter
+- /tools/linkedin-post-hook-generator — LinkedIn Post Hook Generator
+- /tools/linkedin-content-planner — LinkedIn Content Planner
+- /tools/linkedin-comment-generator — LinkedIn Comment Generator
+- /tools/linkedin-connection-message-generator — LinkedIn Connection Message Generator
+- /tools/linkedin-qr-code-generator — LinkedIn QR Code Generator
+
+### Blog
+- /blogs — LinkedIn tips blog with 120+ articles
+
+### Pillar Pages (High-Priority SEO)
+- /what-is-linkedin-rank — What Is LinkedIn Rank? Comprehensive explainer
+- /linkedin-rank-vs-ssi — LinkedInRank vs LinkedIn Social Selling Index
+- /linkedin-ranking — Complete Guide to LinkedIn Ranking & How to Rank Higher
+- /linkedin-profile-score — LinkedIn Profile Score Checker & Scoring Guide
+
+### Audience Pages
 - /for-students — LinkedIn rank guide for students
 - /for-jobseekers — LinkedIn ranking for job seekers
 - /for-founders — LinkedIn positioning for founders
+
+### Comprehensive Guides
 - /linkedin-optimization-guide — Complete LinkedIn Profile Optimization Guide
 - /linkedin-headline-guide — LinkedIn Headline Writing Guide
 - /linkedin-about-guide — LinkedIn About Section Guide
 - /linkedin-keywords-guide — LinkedIn Keywords & SEO Guide
+- /linkedin-profile-photo-guide — LinkedIn Profile Photo Guide
 - /linkedin-best-practices — LinkedIn Best Practices Guide
+- /linkedin-personal-branding — LinkedIn Personal Branding Guide
+- /linkedin-content-strategy — LinkedIn Content Strategy Guide
+- /viral-post-formulas — Viral Post Formulas for LinkedIn
+
+### Recruiter & Career Guides
 - /recruiter-psychology — How Recruiters View Your LinkedIn Profile
+- /get-noticed-recruiters — How to Get Noticed by Recruiters on LinkedIn
+- /top-1-percent-profiles — Traits of Top 1% LinkedIn Profiles
+- /linkedin-mistakes — Common LinkedIn Mistakes to Avoid
+- /linkedin-resume-vs-profile — LinkedIn Resume vs Profile: Key Differences
+- /linkedin-profile-checklist — LinkedIn Profile Checklist
+
+### Comparison Pages
 - /compare-linkedin-review-tools — LinkedIn Profile Review Tools Comparison
-- /linkedin-ranking — Complete Guide to LinkedIn Ranking & How to Rank Higher
-- /linkedin-profile-score — LinkedIn Profile Score Checker & Scoring Guide
+- /linkedinrank-vs-manual-audits — LinkedInRank vs Manual LinkedIn Audits
+
+### Role-Specific Headline Guides
+- /linkedin-headline-software-engineers — LinkedIn Headlines for Software Engineers
+- /linkedin-headline-mba — LinkedIn Headlines for MBA Graduates
+- /linkedin-headline-marketers — LinkedIn Headlines for Marketers
+- /linkedin-headline-designers — LinkedIn Headlines for Designers
+- /linkedin-headline-data-scientists — LinkedIn Headlines for Data Scientists
+- /linkedin-headline-product-managers — LinkedIn Headlines for Product Managers
+- /linkedin-headline-consultants — LinkedIn Headlines for Consultants
+- /linkedin-headline-sales — LinkedIn Headlines for Sales Professionals
+- /linkedin-headline-hr — LinkedIn Headlines for HR Professionals
+- /linkedin-headline-finance — LinkedIn Headlines for Finance Professionals
+- /linkedin-headline-healthcare — LinkedIn Headlines for Healthcare Professionals
+- /linkedin-headline-teachers — LinkedIn Headlines for Educators
 - /linkedin-headline-for-graphic-designer — 150+ LinkedIn Headline Examples for Graphic Designers
 - /linkedin-profile-for-students — Complete LinkedIn Profile Guide for Students
+
+### AI Prompt Guides
+- /ai-prompts-linkedin — AI Prompts for LinkedIn Profile Optimization (Hub Page)
+- /ai-prompts-linkedin-headline — AI Prompts for LinkedIn Headlines
+- /ai-prompts-linkedin-about — AI Prompts for LinkedIn About Sections
+- /ai-prompts-linkedin-experience — AI Prompts for LinkedIn Experience Descriptions
+- /ai-prompts-linkedin-skills — AI Prompts for LinkedIn Skills Optimization
+- /ai-prompts-linkedin-summary — AI Prompts for LinkedIn Summaries
+
+### SEO Landing Pages
+- /linkedin — LinkedIn Profile Tool
+- /score — LinkedIn Score Checker
+- /rank — LinkedIn Rank Tool
+
+### Legal & Trust Pages
 - /privacy — Privacy policy
+- /terms — Terms of service
+- /disclaimer — Disclaimer
+- /cookie-policy — Cookie policy
 - /data-security — Data security architecture
 
 ## Social Links

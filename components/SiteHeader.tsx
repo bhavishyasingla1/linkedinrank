@@ -47,7 +47,7 @@ export default function SiteHeader() {
 
                     <Link
                         href="/"
-                        className="text-[13px] font-semibold text-white bg-[#0A66C2] hover:bg-[#084E96] px-4 py-2 rounded-lg transition-colors no-underline whitespace-nowrap"
+                        className="text-[13px] font-semibold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] hover:shadow-[0_4px_12px_rgba(10,102,194,0.3)] hover:-translate-y-[1px] px-4 py-2 rounded-lg transition-all duration-200 no-underline whitespace-nowrap"
                     >
                         Analyze Profile
                     </Link>

@@ -265,6 +265,17 @@ export default function CommentGenerator() {
                                 <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#0A66C2] to-[#7C3AED] px-2 py-0.5 rounded-full">AI</span>
                             )}
                         </div>
+                        {/* Copyable AI Prompt */}
+                        <ToolPromptBlock
+                            toolName="Smart Comment Writer"
+                            color="#0A66C2"
+                            promptText={buildCommentPrompt({
+                                postContent: postContent,
+                                style: style,
+                                expertise: expertise || undefined,
+                                length: lengthMap[length],
+                            })}
+                        />
                         {comments.map((c, i) => (
                             <div key={i} className="border border-gray-200 rounded-xl overflow-hidden hover:border-gray-300 transition-all group">
                                 <div className="px-4 py-3">
@@ -284,18 +295,6 @@ export default function CommentGenerator() {
                                 </div>
                             </div>
                         ))}
-
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Smart Comment Writer"
-                            color="#0A66C2"
-                            promptText={buildCommentPrompt({
-                                postContent: postContent,
-                                style: style,
-                                expertise: expertise || undefined,
-                                length: lengthMap[length],
-                            })}
-                        />
                     </div>
                 )}
             </div>
