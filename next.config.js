@@ -4,6 +4,7 @@
 const nextConfig = {
     poweredByHeader: false,
     compress: true,
+    serverExternalPackages: ['pdf-parse'],
     images: {
         formats: ['image/avif', 'image/webp'],
         minimumCacheTTL: 31536000,
@@ -14,7 +15,6 @@ const nextConfig = {
         serverActions: {
             bodySizeLimit: '10mb',
         },
-        serverComponentsExternalPackages: ['pdf-parse'],
         optimizePackageImports: ['@google/generative-ai', 'react-dom', 'qrcode'],
     },
     async redirects() {
