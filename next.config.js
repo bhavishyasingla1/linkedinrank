@@ -16,6 +16,7 @@ const nextConfig = {
             bodySizeLimit: '10mb',
         },
         optimizePackageImports: ['@google/generative-ai', 'react-dom', 'qrcode'],
+        optimizeCss: true,
     },
     async redirects() {
         return [

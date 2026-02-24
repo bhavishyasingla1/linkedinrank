@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -231,8 +230,7 @@ export default function RootLayout({
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
                 <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com" />
             </head>
             <body className={inter.className} suppressHydrationWarning>
@@ -243,10 +241,8 @@ export default function RootLayout({
                 >
                     Skip to main content
                 </a>
-                <Script
-                    id="jsonld-global"
+                <script
                     type="application/ld+json"
-                    strategy="beforeInteractive"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
                 {children}

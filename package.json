@@ -24,13 +24,8 @@
     "sharp": "^0.33.0"
   },
   "browserslist": [
-    "chrome >= 109",
-    "edge >= 109",
-    "firefox >= 115",
-    "safari >= 16",
-    "opera >= 95",
-    "not dead",
-    "not ie 11"
+    "defaults",
+    "not IE 11"
   ],
   "devDependencies": {
     "@types/node": "^22",
