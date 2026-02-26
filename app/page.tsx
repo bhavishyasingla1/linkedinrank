@@ -45,7 +45,7 @@ export default function HomePage() {
                         <ol className="space-y-2.5">
                             {[
                                 'Go to your LinkedIn profile page',
-                                'Click "More" then "Save to PDF"',
+                                'Click "More" or "Resources" → then "Save to PDF"',
                                 'Upload the downloaded file above'
                             ].map((step, i) => (
                                 <li key={i} className="flex items-start gap-3">
@@ -352,6 +352,8 @@ export default function HomePage() {
                             { href: '/linkedin-headline-guide', title: 'Headline Guide' },
                             { href: '/linkedin-about-guide', title: 'About Section Guide' },
                             { href: '/linkedin-profile-checklist', title: 'Profile Checklist' },
+                            { href: '/linkedin-headline-designers', title: 'Designer Headlines' },
+                            { href: '/linkedin-headline-marketers', title: 'Marketer Headlines' },
                             { href: '/recruiter-psychology', title: 'Recruiter Psychology' },
                             { href: '/linkedin-mistakes', title: 'Top 10 Mistakes' },
                         ].map((guide, i) => (
@@ -365,6 +367,7 @@ export default function HomePage() {
                     <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Headlines by profession</p>
                     <div className="flex flex-wrap gap-1.5 mb-8">
                         {[
+                            { href: '/linkedin-headline-for-graphic-designer', title: 'Graphic Designers' },
                             { href: '/linkedin-headline-software-engineers', title: 'Software Engineers' },
                             { href: '/linkedin-headline-marketers', title: 'Marketers' },
                             { href: '/linkedin-headline-designers', title: 'Designers' },

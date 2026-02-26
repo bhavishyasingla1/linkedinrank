@@ -4,13 +4,13 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'Viral LinkedIn Post Formulas | 5 Proven Templates That Work (2026)',
-    description: 'Learn 5 proven LinkedIn post formulas that drive engagement in 2026. Templates for hard truth posts, mini-stories, breakdowns, steal-this posts, and identity posts. Hook frameworks and real examples.',
+    title: 'Viral LinkedIn Post Formulas — 5 Templates That Actually Work (2026) | LinkedInRank',
+    description: '5 copy-paste LinkedIn post formulas that drive engagement: Hard Truth, Mini-Story, Breakdown, Steal-This, and Identity posts. Includes hook frameworks and real examples.',
     keywords: 'viral linkedin post 2026, linkedin post formula, linkedin content strategy, linkedin post template, linkedin engagement tips, how to go viral on linkedin, linkedin hook examples, linkedin viral content',
     alternates: { canonical: 'https://linkedinrank.com/viral-post-formulas' },
     openGraph: {
-        title: 'Viral LinkedIn Post Formulas | 5 Proven Templates That Work',
-        description: '5 proven post formulas with hook frameworks and real examples that drive LinkedIn engagement.',
+        title: 'Viral LinkedIn Post Formulas — 5 Templates That Actually Work',
+        description: '5 proven post formulas with real examples and hook frameworks that drive LinkedIn engagement.',
         url: 'https://linkedinrank.com/viral-post-formulas',
     },
 }
@@ -28,16 +28,20 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Viral Post Formulas', item: 'https://linkedinrank.com/viral-post-formulas' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'How many followers do I need to go viral on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Follower count matters less than content quality on LinkedIn. Posts from accounts with 500 connections can reach 50K+ impressions if the content resonates.' } },
-            { '@type': 'Question', name: 'What is the best time to post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Tuesday through Thursday, 8–10 AM in your target audience timezone. However, consistency matters more than timing.' } },
-            { '@type': 'Question', name: 'Should I use hashtags on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Use 3–5 relevant hashtags at the end of your post. Do not over-hashtag. LinkedIn hashtags help with discoverability but are less important than the content itself.' } },
-            { '@type': 'Question', name: 'What if I have nothing to post about?', acceptedAnswer: { '@type': 'Answer', text: 'Share learnings from your work, summarize articles you read, comment on industry trends, or document your career journey. Everyone has insights worth sharing.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Viral Post Formulas', item: 'https://linkedinrank.com/viral-post-formulas' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'How many followers do I need to go viral on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Follower count matters less than content quality on LinkedIn. Posts from accounts with 500 connections can reach 50K+ impressions if the content resonates.' } },
+                { '@type': 'Question', name: 'What is the best time to post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Tuesday through Thursday, 8–10 AM in your target audience timezone. However, consistency matters more than timing.' } },
+                { '@type': 'Question', name: 'Should I use hashtags on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Use 3–5 relevant hashtags at the end of your post. Do not over-hashtag. LinkedIn hashtags help with discoverability but are less important than the content itself.' } },
+                { '@type': 'Question', name: 'What if I have nothing to post about?', acceptedAnswer: { '@type': 'Answer', text: 'Share learnings from your work, summarize articles you read, comment on industry trends, or document your career journey. Everyone has insights worth sharing.' } },
+            ]
+        },
     ],
 }
 
@@ -85,7 +89,7 @@ export default function ViralPostFormulasPage() {
                                 <p>[Industry belief] is overrated.</p>
                                 <p>I have seen people with [X] fail because of [Y].</p>
                                 <p>What actually works is:</p>
-                                <p>&#8226; A<br/>&#8226; B<br/>&#8226; C</p>
+                                <p>&#8226; A<br />&#8226; B<br />&#8226; C</p>
                                 <p>Learned this the hard way.</p>
                             </div>
                         </div>
@@ -125,7 +129,7 @@ export default function ViralPostFormulasPage() {
                             <div className="text-sm text-[#0A0F1C] space-y-2 italic">
                                 <p>My LinkedIn profile brought me [result].</p>
                                 <p>Here is what I optimized:</p>
-                                <p>1. Headline → [specific tip]<br/>2. About → [specific tip]<br/>3. Experience → [specific tip]</p>
+                                <p>1. Headline → [specific tip]<br />2. About → [specific tip]<br />3. Experience → [specific tip]</p>
                                 <p>Most people ignore these.</p>
                                 <p>Which one are you fixing first?</p>
                             </div>
@@ -164,7 +168,7 @@ export default function ViralPostFormulasPage() {
                             <div className="text-sm text-[#0A0F1C] space-y-2 italic">
                                 <p>You are not behind.</p>
                                 <p>You are just early in your career.</p>
-                                <p>Everyone you admire started with:<br/>&#8226; zero connections<br/>&#8226; weak profiles<br/>&#8226; self-doubt</p>
+                                <p>Everyone you admire started with:<br />&#8226; zero connections<br />&#8226; weak profiles<br />&#8226; self-doubt</p>
                                 <p>Progress &gt; perfection.</p>
                             </div>
                         </div>

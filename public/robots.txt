@@ -2,6 +2,9 @@ User-agent: *
 Disallow: /api/
 Disallow: /loading-analysis
 Disallow: /results
+Disallow: /favicon.ico
+Disallow: /icon.png
+Disallow: /apple-icon.png
 Allow: /llm.txt
 
 Sitemap: https://linkedinrank.com/sitemap.xml

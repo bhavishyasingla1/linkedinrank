@@ -3,15 +3,16 @@ import Link from 'next/link'
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline for Graphic Designer: 150+ Examples (2026)',
-    description: 'Best LinkedIn headlines for graphic designers with 150+ examples categorized by specialization. Entry-level, freelance, branding, UI/UX, and AI designer headlines with formulas and tips.',
+    title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy (2026) | LinkedInRank',
+    description: 'Instantly use 150+ proven LinkedIn headlines for graphic designers. Entry-level, freelance, branding, UI/UX — pick, paste, and get noticed. Free headline generator included.',
     keywords: 'linkedin headline for graphic designer, graphic designer linkedin headline examples, headline for graphic designer, linkedin headline graphic designer, best linkedin headline for graphic designer, graphic designer linkedin headline, linkedin headline examples graphic designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer' },
     openGraph: {
-        title: 'LinkedIn Headline for Graphic Designer: 150+ Examples',
-        description: '150+ LinkedIn headline examples for graphic designers. Categorized by entry-level, freelance, branding, UI/UX, and AI designer.',
+        title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy',
+        description: '150+ copy-paste LinkedIn headlines for graphic designers. Entry-level, freelance, branding, UI/UX. Pick and paste now.',
         url: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer',
     },
 }
@@ -300,9 +301,10 @@ export default function GraphicDesignerHeadlinePage() {
                             <p className="text-sm text-[#6B7280] mb-4">{cat.headlines.length} examples</p>
                             <div className="space-y-1.5">
                                 {cat.headlines.map((h, j) => (
-                                    <div key={j} className="flex items-start gap-2.5 bg-[#F8FAFC] border border-gray-100 rounded-lg px-3.5 py-2.5">
-                                        <span className="text-xs text-[#6B7280] font-mono tabular-nums shrink-0 mt-0.5 w-5 text-right">{j + 1}.</span>
-                                        <p className="text-sm text-[#0A0F1C]">{h}</p>
+                                    <div key={j} className="flex items-center gap-3 bg-[#F8FAFC] border border-gray-100 rounded-lg px-3.5 py-2.5 hover:border-[#DBEAFE] transition-colors">
+                                        <span className="text-xs text-[#6B7280] font-mono tabular-nums shrink-0 w-5 text-right">{j + 1}.</span>
+                                        <p className="flex-1 text-sm text-[#0A0F1C]">{h}</p>
+                                        <CopyHeadlineButton text={h} />
                                     </div>
                                 ))}
                             </div>

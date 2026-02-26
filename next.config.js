@@ -20,6 +20,8 @@ const nextConfig = {
     },
     async redirects() {
         return [
+            // 301 redirect: www → non-www canonical
+            { source: '/:path*', destination: 'https://linkedinrank.com/:path*', permanent: true, has: [{ type: 'host', value: 'www.linkedinrank.com' }] },
             // 301 redirects: root-level tool slugs → canonical /tools/<slug>/
             { source: '/linkedin-headline-generator', destination: '/tools/linkedin-headline-generator', permanent: true },
             { source: '/linkedin-about-generator', destination: '/tools/linkedin-about-generator', permanent: true },

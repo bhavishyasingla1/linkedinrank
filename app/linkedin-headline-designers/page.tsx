@@ -2,15 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Designers | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for UX, UI, product, and graphic designers in 2026. Proven formulas that attract recruiters and clients. Free headline scoring with LinkedInRank.',
+    title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples (2026) | LinkedInRank',
+    description: 'Copy professional LinkedIn headline templates for UX, UI, product, and graphic designers. Short, portfolio-focused, and recruiter-friendly examples you can paste now.',
     keywords: 'linkedin headline designer, linkedin headline ux designer 2026, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer, best linkedin headline designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-designers' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Designers | 25+ Examples',
-        description: 'UX, UI, product, and graphic designer headline formulas that attract recruiters and clients.',
+        title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples',
+        description: 'Copy professional LinkedIn headline templates for UX, UI, product, and graphic designers. Paste-ready for recruiters.',
         url: 'https://linkedinrank.com/linkedin-headline-designers',
     },
 }
@@ -28,17 +29,21 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-            { '@type': 'ListItem', position: 3, name: 'For Designers', item: 'https://linkedinrank.com/linkedin-headline-designers' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'Should I say "UX Designer" or "Product Designer"?', acceptedAnswer: { '@type': 'Answer', text: 'Use the title that matches your target role. "Product Designer" is more common in tech companies, while "UX Designer" is broader. Check job postings at your target companies.' } },
-            { '@type': 'Question', name: 'Should I link my portfolio in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'No | headlines should be text-optimized for search. Put portfolio links in your Featured section, About section, or contact info instead.' } },
-            { '@type': 'Question', name: 'How important is the Featured section for designers?', acceptedAnswer: { '@type': 'Answer', text: 'Critical. Unlike other professions, designers can visually showcase their work. Add 3–5 case studies, top projects, or portfolio links.' } },
-            { '@type': 'Question', name: 'Can LinkedInRank evaluate designer profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank scores headline clarity, About section quality, experience depth, and skills relevance. Designers benefit especially from headline and completeness scoring.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
+                { '@type': 'ListItem', position: 3, name: 'For Designers', item: 'https://linkedinrank.com/linkedin-headline-designers' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'Should I say "UX Designer" or "Product Designer"?', acceptedAnswer: { '@type': 'Answer', text: 'Use the title that matches your target role. "Product Designer" is more common in tech companies, while "UX Designer" is broader. Check job postings at your target companies.' } },
+                { '@type': 'Question', name: 'Should I link my portfolio in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'No | headlines should be text-optimized for search. Put portfolio links in your Featured section, About section, or contact info instead.' } },
+                { '@type': 'Question', name: 'How important is the Featured section for designers?', acceptedAnswer: { '@type': 'Answer', text: 'Critical. Unlike other professions, designers can visually showcase their work. Add 3–5 case studies, top projects, or portfolio links.' } },
+                { '@type': 'Question', name: 'Can LinkedInRank evaluate designer profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank scores headline clarity, About section quality, experience depth, and skills relevance. Designers benefit especially from headline and completeness scoring.' } },
+            ]
+        },
     ],
 }
 
@@ -72,50 +77,65 @@ export default function HeadlineDesignersPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">25+ Designer Headlines by Discipline</h2>
                         {[
-                            { spec: 'UX Design', examples: [
-                                'UX Designer | Conversion-Focused Design for SaaS | Figma & Framer',
-                                'Senior UX Designer | Research-Driven Design | HealthTech & FinTech',
-                                'UX Designer | User Research & Interaction Design | Enterprise Products',
-                                'UX/UI Designer | Mobile-First Design | E-Commerce & Marketplaces',
-                                'UX Researcher | Usability Testing & Journey Mapping | B2B SaaS',
-                            ]},
-                            { spec: 'Product Design', examples: [
-                                'Product Designer | End-to-End Design | Figma & Prototyping | Series B Startup',
-                                'Senior Product Designer | Design Systems & Component Libraries | FinTech',
-                                'Product Designer | 0→1 Product Design | Consumer Apps',
-                                'Lead Product Designer | Cross-Platform Design | Web & Mobile',
-                                'Product Designer | Accessibility & Inclusive Design | Enterprise',
-                            ]},
-                            { spec: 'UI & Visual Design', examples: [
-                                'UI Designer | Design Systems & Visual Identity | Figma & Sketch',
-                                'Visual Designer | Brand & Marketing Design | SaaS & Startups',
-                                'UI Designer | Motion Design & Micro-Interactions | Consumer Tech',
-                                'Interface Designer | Dashboard & Data Visualization | Analytics',
-                            ]},
-                            { spec: 'Graphic & Brand Design', examples: [
-                                'Graphic Designer | Brand Identity & Print | Adobe Creative Suite',
-                                'Brand Designer | Visual Identity & Packaging | FMCG & D2C',
-                                'Creative Director | Brand Strategy & Visual Design | Agency-Side',
-                                'Graphic Designer | Social Media & Campaign Design | Fashion',
-                            ]},
-                            { spec: 'Design Leadership', examples: [
-                                'Head of Design | Building Design Teams | B2B SaaS | Ex-Spotify',
-                                'VP of Design | Product & Brand Design | FinTech Scale-Up',
-                                'Design Manager | Leading 8+ Designers | Enterprise Products',
-                                'Director of UX | Design Strategy & Operations | Healthcare',
-                            ]},
-                            { spec: 'Students & Entry Level', examples: [
-                                'UX Design Student | HCI @ Carnegie Mellon | Figma & User Research',
-                                'Junior Product Designer | Bootcamp Graduate | Portfolio: [link]',
-                                'Aspiring UX Designer | Visual Communication Major | Figma & Sketch',
-                                'Design Intern @ Airbnb | Interaction Design | Stanford HCI 2026',
-                            ]},
+                            {
+                                spec: 'UX Design', examples: [
+                                    'UX Designer | Conversion-Focused Design for SaaS | Figma & Framer',
+                                    'Senior UX Designer | Research-Driven Design | HealthTech & FinTech',
+                                    'UX Designer | User Research & Interaction Design | Enterprise Products',
+                                    'UX/UI Designer | Mobile-First Design | E-Commerce & Marketplaces',
+                                    'UX Researcher | Usability Testing & Journey Mapping | B2B SaaS',
+                                ]
+                            },
+                            {
+                                spec: 'Product Design', examples: [
+                                    'Product Designer | End-to-End Design | Figma & Prototyping | Series B Startup',
+                                    'Senior Product Designer | Design Systems & Component Libraries | FinTech',
+                                    'Product Designer | 0→1 Product Design | Consumer Apps',
+                                    'Lead Product Designer | Cross-Platform Design | Web & Mobile',
+                                    'Product Designer | Accessibility & Inclusive Design | Enterprise',
+                                ]
+                            },
+                            {
+                                spec: 'UI & Visual Design', examples: [
+                                    'UI Designer | Design Systems & Visual Identity | Figma & Sketch',
+                                    'Visual Designer | Brand & Marketing Design | SaaS & Startups',
+                                    'UI Designer | Motion Design & Micro-Interactions | Consumer Tech',
+                                    'Interface Designer | Dashboard & Data Visualization | Analytics',
+                                ]
+                            },
+                            {
+                                spec: 'Graphic & Brand Design', examples: [
+                                    'Graphic Designer | Brand Identity & Print | Adobe Creative Suite',
+                                    'Brand Designer | Visual Identity & Packaging | FMCG & D2C',
+                                    'Creative Director | Brand Strategy & Visual Design | Agency-Side',
+                                    'Graphic Designer | Social Media & Campaign Design | Fashion',
+                                ]
+                            },
+                            {
+                                spec: 'Design Leadership', examples: [
+                                    'Head of Design | Building Design Teams | B2B SaaS | Ex-Spotify',
+                                    'VP of Design | Product & Brand Design | FinTech Scale-Up',
+                                    'Design Manager | Leading 8+ Designers | Enterprise Products',
+                                    'Director of UX | Design Strategy & Operations | Healthcare',
+                                ]
+                            },
+                            {
+                                spec: 'Students & Entry Level', examples: [
+                                    'UX Design Student | HCI @ Carnegie Mellon | Figma & User Research',
+                                    'Junior Product Designer | Bootcamp Graduate | Portfolio: [link]',
+                                    'Aspiring UX Designer | Visual Communication Major | Figma & Sketch',
+                                    'Design Intern @ Airbnb | Interaction Design | Stanford HCI 2026',
+                                ]
+                            },
                         ].map((section, i) => (
                             <div key={i} className="mb-10">
                                 <h3 className="text-lg font-bold text-[#0A0F1C] mb-4">{section.spec}</h3>
                                 <div className="space-y-2">
                                     {section.examples.map((ex, j) => (
-                                        <div key={j} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{ex}</div>
+                                        <div key={j} className="flex items-center gap-3 bg-[#F8FAFC] border border-gray-100 rounded-lg p-3.5 hover:border-[#DBEAFE] transition-colors">
+                                            <p className="flex-1 text-sm text-[#0A0F1C] font-medium">{ex}</p>
+                                            <CopyHeadlineButton text={ex} />
+                                        </div>
                                     ))}
                                 </div>
                             </div>

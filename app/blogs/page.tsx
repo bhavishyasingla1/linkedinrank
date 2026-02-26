@@ -59,14 +59,14 @@ export default function BlogsDirectoryPage() {
                             <span aria-hidden="true">/</span>
                             <span className="text-[#0A0F1C] font-medium">Blog</span>
                         </nav>
-                        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                            <div>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mt-2">
+                            <div className="max-w-2xl">
                                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] mb-3 tracking-tight">LinkedIn Tips Blog</h1>
-                                <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
+                                <p className="text-[15px] sm:text-base text-[#4B5563] leading-relaxed">
                                     {ALL_BLOG_POSTS.length}+ expert articles on headlines, about sections, experience, content strategy, and more. Organized by tool.
                                 </p>
                             </div>
-                            <Link href="/" className="shrink-0 text-sm font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-4 py-2 rounded-lg no-underline hover:bg-[#DBEAFE] transition-colors">
+                            <Link href="/" className="shrink-0 text-sm font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-5 py-2.5 rounded-lg no-underline hover:bg-[#DBEAFE] transition-colors whitespace-nowrap">
                                 Check Your Profile Score
                             </Link>
                         </div>
@@ -75,14 +75,15 @@ export default function BlogsDirectoryPage() {
 
                 {/* Tool filter tags */}
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sticky top-[57px] z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-                    <div className="flex flex-wrap gap-2" role="navigation" aria-label="Filter by tool">
+                    <div className="flex flex-wrap items-center gap-3" role="navigation" aria-label="Filter by tool">
                         {toolGroups.map(({ tool, blogs }) => (
                             <a
                                 key={tool.slug}
                                 href={`#${tool.slug}`}
-                                className="text-xs font-medium px-3.5 py-2 rounded-lg bg-[#F8FAFC] border border-gray-200 text-[#4B5563] hover:border-[#0A66C2] hover:text-[#0A66C2] hover:bg-[#EFF6FF] transition-all"
+                                className="flex items-center gap-1.5 text-xs font-medium px-4 py-2 rounded-full bg-white border border-gray-200 text-[#4B5563] hover:border-[#0A66C2] hover:text-[#0A66C2] hover:bg-[#EFF6FF] hover:shadow-sm transition-all"
                             >
-                                {tool.name.replace('LinkedIn ', '')} <span className="text-[#D1D5DB] ml-1 font-normal">{blogs.length}</span>
+                                <span>{tool.name.replace('LinkedIn ', '')}</span>
+                                <span className="text-[#9CA3AF] text-[10px] bg-gray-50 px-1.5 py-0.5 rounded-full">{blogs.length}</span>
                             </a>
                         ))}
                     </div>

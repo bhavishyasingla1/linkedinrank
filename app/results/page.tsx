@@ -287,6 +287,17 @@ export default function ResultsPage() {
 
             <div className="relative z-10 max-w-xl mx-auto px-6 py-10">
 
+                {/* Back to home */}
+                <Link
+                    href="/"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#6B7280] hover:text-[#0A66C2] transition-colors mb-5 no-underline group"
+                >
+                    <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                    Analyze New Profile
+                </Link>
+
                 {/* Greeting & Profile Context */}
                 <div className="mb-6 animate-fade-in">
                     <h1 className="text-xl font-bold text-[#0A0F1C] mb-1">
@@ -511,11 +522,10 @@ export default function ResultsPage() {
                                     setPromptCopied(true)
                                     setTimeout(() => setPromptCopied(false), 3000)
                                 }}
-                                className={`w-full py-3 rounded-xl font-medium text-sm transition-all flex items-center justify-center gap-2 ${
-                                    promptCopied
+                                className={`w-full py-3 rounded-xl font-medium text-sm transition-all flex items-center justify-center gap-2 ${promptCopied
                                         ? 'bg-emerald-500 text-white'
                                         : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9]'
-                                }`}
+                                    }`}
                             >
                                 {promptCopied ? (
                                     <>

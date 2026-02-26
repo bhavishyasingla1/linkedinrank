@@ -2,15 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Marketers | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for digital marketers, content marketers, SEO specialists, growth marketers, brand managers, and marketing leaders in 2026. Proven formulas that attract recruiters and clients. Free scoring with LinkedInRank.',
+    title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples (2026) | LinkedInRank',
+    description: 'Copy proven LinkedIn headline templates for digital, content, SEO, and growth marketers. Channel-specific, result-focused, and recruiter-ready examples you can use today.',
     keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals 2026, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer, best linkedin headline marketer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-marketers' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Marketers | 25+ Examples',
-        description: 'Proven headline formulas for digital, content, SEO, and growth marketers that attract recruiters.',
+        title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples',
+        description: 'Copy proven headline templates for digital, content, SEO, and growth marketers. Result-focused and recruiter-ready.',
         url: 'https://linkedinrank.com/linkedin-headline-marketers',
     },
 }
@@ -28,16 +29,20 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-            { '@type': 'ListItem', position: 3, name: 'For Marketers', item: 'https://linkedinrank.com/linkedin-headline-marketers' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'Should I include certifications in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if they are widely recognized. "Google Ads Certified" or "HubSpot Certified" adds credibility and matches recruiter searches. Skip less-known certifications.' } },
-            { '@type': 'Question', name: 'Should I mention results in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'If you have a strong metric, absolutely. "Grew Traffic 300%" or "3x ROAS" immediately communicates value. Keep it to one key result to avoid clutter.' } },
-            { '@type': 'Question', name: 'How do I position for a marketing specialization change?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target specialty. If you are moving from social media to growth marketing, headline as "Growth Marketing | Social & Paid Acquisition | [Industry]."' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
+                { '@type': 'ListItem', position: 3, name: 'For Marketers', item: 'https://linkedinrank.com/linkedin-headline-marketers' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'Should I include certifications in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if they are widely recognized. "Google Ads Certified" or "HubSpot Certified" adds credibility and matches recruiter searches. Skip less-known certifications.' } },
+                { '@type': 'Question', name: 'Should I mention results in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'If you have a strong metric, absolutely. "Grew Traffic 300%" or "3x ROAS" immediately communicates value. Keep it to one key result to avoid clutter.' } },
+                { '@type': 'Question', name: 'How do I position for a marketing specialization change?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target specialty. If you are moving from social media to growth marketing, headline as "Growth Marketing | Social & Paid Acquisition | [Industry]."' } },
+            ]
+        },
     ],
 }
 
@@ -71,52 +76,69 @@ export default function HeadlineMarketersPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">25+ Marketing Headlines by Specialization</h2>
                         {[
-                            { spec: 'Digital & Performance Marketing', examples: [
-                                'Digital Marketer | SEO & Performance Marketing | Google Ads Certified',
-                                'Performance Marketing Manager | Meta Ads & Google Ads | E-Commerce',
-                                'Paid Media Specialist | PPC & Programmatic | 3x ROAS Average',
-                                'Digital Marketing Lead | SEM, Display & Social | B2B SaaS',
-                            ]},
-                            { spec: 'Content & SEO', examples: [
-                                'Content Marketing Manager | SEO & Editorial Strategy | B2B SaaS',
-                                'SEO Specialist | Technical SEO & Content Strategy | Grew Traffic 300%',
-                                'Content Strategist | Blog, Email & Social | FinTech & Startups',
-                                'Copywriter & Content Marketer | Conversion-Focused Copy | SaaS',
-                            ]},
-                            { spec: 'Growth & Product Marketing', examples: [
-                                'Growth Marketing Manager | PLG & Lifecycle Marketing | Series B SaaS',
-                                'Product Marketing Manager | Go-to-Market Strategy | Enterprise Software',
-                                'Growth Lead | Experimentation & CRO | Scaled User Base 10x',
-                                'PMM | Competitive Intelligence & Positioning | Cloud Infrastructure',
-                            ]},
-                            { spec: 'Brand & Communications', examples: [
-                                'Brand Manager | FMCG | Consumer Insights & Category Strategy',
-                                'Brand Strategist | Visual Identity & Positioning | Agency-Side',
-                                'Communications Manager | PR & Corporate Comms | Tech & Healthcare',
-                                'Marketing Director | Brand Building & Team Leadership | D2C',
-                            ]},
-                            { spec: 'Social Media & Community', examples: [
-                                'Social Media Manager | Instagram & LinkedIn | Community Building',
-                                'Community Manager | Developer Communities | DevRel & Content',
-                                'Social Media Strategist | Short-Form Video & Engagement | 500K+ Reach',
-                                'Influencer Marketing Manager | Creator Partnerships | Fashion & Beauty',
-                            ]},
-                            { spec: 'Email & CRM', examples: [
-                                'Email Marketing Specialist | Klaviyo & HubSpot | E-Commerce',
-                                'CRM Manager | Lifecycle Marketing & Segmentation | SaaS',
-                                'Marketing Automation Specialist | Marketo & Salesforce | B2B',
-                            ]},
-                            { spec: 'Students & Entry Level', examples: [
-                                'Marketing Intern @ HubSpot | Digital Strategy | SEO & Content',
-                                'Aspiring Digital Marketer | Google Ads Certified | Marketing Major 2026',
-                                'Marketing Associate | Social Media & Analytics | Ex-Agency Intern',
-                            ]},
+                            {
+                                spec: 'Digital & Performance Marketing', examples: [
+                                    'Digital Marketer | SEO & Performance Marketing | Google Ads Certified',
+                                    'Performance Marketing Manager | Meta Ads & Google Ads | E-Commerce',
+                                    'Paid Media Specialist | PPC & Programmatic | 3x ROAS Average',
+                                    'Digital Marketing Lead | SEM, Display & Social | B2B SaaS',
+                                ]
+                            },
+                            {
+                                spec: 'Content & SEO', examples: [
+                                    'Content Marketing Manager | SEO & Editorial Strategy | B2B SaaS',
+                                    'SEO Specialist | Technical SEO & Content Strategy | Grew Traffic 300%',
+                                    'Content Strategist | Blog, Email & Social | FinTech & Startups',
+                                    'Copywriter & Content Marketer | Conversion-Focused Copy | SaaS',
+                                ]
+                            },
+                            {
+                                spec: 'Growth & Product Marketing', examples: [
+                                    'Growth Marketing Manager | PLG & Lifecycle Marketing | Series B SaaS',
+                                    'Product Marketing Manager | Go-to-Market Strategy | Enterprise Software',
+                                    'Growth Lead | Experimentation & CRO | Scaled User Base 10x',
+                                    'PMM | Competitive Intelligence & Positioning | Cloud Infrastructure',
+                                ]
+                            },
+                            {
+                                spec: 'Brand & Communications', examples: [
+                                    'Brand Manager | FMCG | Consumer Insights & Category Strategy',
+                                    'Brand Strategist | Visual Identity & Positioning | Agency-Side',
+                                    'Communications Manager | PR & Corporate Comms | Tech & Healthcare',
+                                    'Marketing Director | Brand Building & Team Leadership | D2C',
+                                ]
+                            },
+                            {
+                                spec: 'Social Media & Community', examples: [
+                                    'Social Media Manager | Instagram & LinkedIn | Community Building',
+                                    'Community Manager | Developer Communities | DevRel & Content',
+                                    'Social Media Strategist | Short-Form Video & Engagement | 500K+ Reach',
+                                    'Influencer Marketing Manager | Creator Partnerships | Fashion & Beauty',
+                                ]
+                            },
+                            {
+                                spec: 'Email & CRM', examples: [
+                                    'Email Marketing Specialist | Klaviyo & HubSpot | E-Commerce',
+                                    'CRM Manager | Lifecycle Marketing & Segmentation | SaaS',
+                                    'Marketing Automation Specialist | Marketo & Salesforce | B2B',
+                                ]
+                            },
+                            {
+                                spec: 'Students & Entry Level', examples: [
+                                    'Marketing Intern @ HubSpot | Digital Strategy | SEO & Content',
+                                    'Aspiring Digital Marketer | Google Ads Certified | Marketing Major 2026',
+                                    'Marketing Associate | Social Media & Analytics | Ex-Agency Intern',
+                                ]
+                            },
                         ].map((section, i) => (
                             <div key={i} className="mb-10">
                                 <h3 className="text-lg font-bold text-[#0A0F1C] mb-4">{section.spec}</h3>
                                 <div className="space-y-2">
                                     {section.examples.map((ex, j) => (
-                                        <div key={j} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{ex}</div>
+                                        <div key={j} className="flex items-center gap-3 bg-[#F8FAFC] border border-gray-100 rounded-lg p-3.5 hover:border-[#DBEAFE] transition-colors">
+                                            <p className="flex-1 text-sm text-[#0A0F1C] font-medium">{ex}</p>
+                                            <CopyHeadlineButton text={ex} />
+                                        </div>
                                     ))}
                                 </div>
                             </div>

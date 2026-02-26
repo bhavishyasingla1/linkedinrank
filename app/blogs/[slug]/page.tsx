@@ -11,8 +11,9 @@ export function generateStaticParams() {
     return getAllBlogSlugs().map(slug => ({ slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const blog = getBlogBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params
+    const blog = getBlogBySlug(slug)
     if (!blog) return { title: 'Article Not Found' }
 
     const canonical = `${SITE_URL}/blogs/${blog.slug}`
@@ -40,8 +41,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-    const blog = getBlogBySlug(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    const blog = getBlogBySlug(slug)
     if (!blog) notFound()
 
     const canonical = `${SITE_URL}/blogs/${blog.slug}`
@@ -148,24 +150,41 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                                     )}
                                 </p>
 
-                                {/* H2 sections with SEO-optimized content */}
+                                {/* H2 sections with real content */}
                                 {blog.h2Outline.map((h2, i) => (
                                     <section key={i} id={`section-${i}`} className="scroll-mt-24">
                                         <h2 className="text-xl font-bold text-[#0A0F1C] mt-10 mb-4">{h2}</h2>
-                                        <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                            This section covers key insights about {h2.toLowerCase()} as it relates to {blog.targetKeyword}.
-                                            Understanding this aspect is crucial for anyone looking to optimize their LinkedIn presence and stand out to recruiters and connections.
-                                            {i === 0 && tool && (
-                                                <> Our <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] hover:underline">{tool.name.toLowerCase()}</Link> can help you apply these principles directly to your profile.</>
-                                            )}
-                                        </p>
-                                        <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
-                                            The most effective approach combines strategic thinking with practical execution.
-                                            Focus on specificity over generality, and always tailor your content to your target audience and industry.
-                                            {i === 1 && <> For deeper strategies, explore our <Link href="/linkedin-optimization-guide" className="text-[#0A66C2] hover:underline">complete LinkedIn optimization guide</Link>.</>}
-                                            {i === 2 && <> Learn what <Link href="/what-is-linkedin-rank" className="text-[#0A66C2] hover:underline">LinkedIn rank</Link> means and how it impacts your visibility.</>}
-                                            {i === 3 && <> Check your current profile strength with our free <Link href="/" className="text-[#0A66C2] hover:underline">LinkedIn rank checker</Link>.</>}
-                                        </p>
+                                        {blog.sections?.[i] ? (
+                                            <>
+                                                <p className="text-[15px] text-[#4B5563] leading-relaxed">
+                                                    {blog.sections[i]}
+                                                </p>
+                                                {i === 0 && tool && (
+                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
+                                                        Our free <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] font-medium hover:underline">{tool.name}</Link> can help you apply these principles directly to your own profile in seconds.
+                                                    </p>
+                                                )}
+                                                {i === 1 && (
+                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
+                                                        For a broader view, explore our <Link href="/linkedin-optimization-guide" className="text-[#0A66C2] hover:underline">complete LinkedIn optimization guide</Link> covering every profile section.
+                                                    </p>
+                                                )}
+                                                {i === 2 && (
+                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
+                                                        Learn how <Link href="/what-is-linkedin-rank" className="text-[#0A66C2] hover:underline">LinkedIn rank</Link> is calculated and which signals move the needle most.
+                                                    </p>
+                                                )}
+                                                {i === 3 && (
+                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
+                                                        Check your current profile strength for free with our <Link href="/" className="text-[#0A66C2] hover:underline">LinkedIn rank checker</Link>.
+                                                    </p>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <p className="text-[15px] text-[#4B5563] leading-relaxed">
+                                                {blog.summary}
+                                            </p>
+                                        )}
                                     </section>
                                 ))}
 

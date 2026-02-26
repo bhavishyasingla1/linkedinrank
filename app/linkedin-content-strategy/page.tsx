@@ -4,12 +4,12 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Content Strategy Guide | What to Post & How Often (2026)',
-    description: 'Build a LinkedIn content strategy that drives visibility and opportunities in 2026. Posting cadence, content types, algorithm tips, and engagement tactics for every career stage. Free profile scoring with LinkedInRank.',
+    title: 'LinkedIn Content Strategy — What to Post, When & How Often (2026) | LinkedInRank',
+    description: 'Practical LinkedIn content strategy for 2026: posting cadence, content types that get reach, algorithm tips, and hooks that stop the scroll. Works for any career stage.',
     keywords: 'linkedin content strategy 2026, what to post on linkedin, linkedin posting tips, linkedin algorithm, linkedin engagement, linkedin content ideas, how often to post on linkedin, linkedin posting strategy, linkedin content calendar',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-content-strategy' },
     openGraph: {
-        title: 'LinkedIn Content Strategy Guide | What to Post & How Often',
+        title: 'LinkedIn Content Strategy — What to Post, When & How Often',
         description: 'Posting cadence, content types, algorithm tips, and engagement tactics for LinkedIn in 2026.',
         url: 'https://linkedinrank.com/linkedin-content-strategy',
     },
@@ -28,15 +28,19 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Content Strategy', item: 'https://linkedinrank.com/linkedin-content-strategy' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'How often should I post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: '3–4 times per week is optimal. Consistency matters more than volume. Even 2 quality posts per week will compound over time.' } },
-            { '@type': 'Question', name: 'What type of content performs best on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Personal stories with professional insights, contrarian takes, how-to breakdowns, and data-driven posts consistently outperform promotional content.' } },
-            { '@type': 'Question', name: 'Should I use LinkedIn articles or posts?', acceptedAnswer: { '@type': 'Answer', text: 'Posts get significantly more reach than articles. Use posts for regular content (under 3,000 characters). Save articles for deep-dive, evergreen content you want to be searchable.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Content Strategy', item: 'https://linkedinrank.com/linkedin-content-strategy' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'How often should I post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: '3–4 times per week is optimal. Consistency matters more than volume. Even 2 quality posts per week will compound over time.' } },
+                { '@type': 'Question', name: 'What type of content performs best on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Personal stories with professional insights, contrarian takes, how-to breakdowns, and data-driven posts consistently outperform promotional content.' } },
+                { '@type': 'Question', name: 'Should I use LinkedIn articles or posts?', acceptedAnswer: { '@type': 'Answer', text: 'Posts get significantly more reach than articles. Use posts for regular content (under 3,000 characters). Save articles for deep-dive, evergreen content you want to be searchable.' } },
+            ]
+        },
     ],
 }
 
