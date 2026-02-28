@@ -39,6 +39,37 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
     }
 }
 
+export interface HowToStep {
+    name: string
+    text: string
+    directions?: string[]
+}
+
+export function howToJsonLd(params: {
+    name: string
+    description: string
+    totalTime?: string
+    steps: HowToStep[]
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: params.name,
+        description: params.description,
+        totalTime: params.totalTime || 'PT2H',
+        step: params.steps.map((step, i) => ({
+            '@type': 'HowToStep',
+            position: i + 1,
+            name: step.name,
+            text: step.text,
+            itemListElement: step.directions?.map(dir => ({
+                '@type': 'HowToDirection',
+                text: dir,
+            })),
+        })),
+    }
+}
+
 export function faqJsonLd(faqs: ToolFAQ[]) {
     return {
         '@context': 'https://schema.org',
@@ -78,7 +109,7 @@ export function softwareApplicationJsonLd(tool: ToolMeta) {
     }
 }
 
-export function howToJsonLd(tool: ToolMeta) {
+export function howToToolJsonLd(tool: ToolMeta) {
     return {
         '@context': 'https://schema.org',
         '@type': 'HowTo',

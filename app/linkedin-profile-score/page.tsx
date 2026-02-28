@@ -5,8 +5,8 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Score: Check Your Score Free in 2026 (30+ Signals)',
-    description: 'Get your free LinkedIn profile score from LinkedInRank. Score your profile across 30+ signals including headline, experience, skills, and completeness. AI-powered recommendations and improvement roadmap included.',
+    title: 'LinkedIn Profile Score Explained: The 30-Signal Scoring System (2026)',
+    description: 'How LinkedIn Profile Score works: 30 signals analyzed, Bronze to Platinum tiers, what each score means. Free instant check.',
     keywords: 'linkedin profile score, linkedin score, linkedin rating, linkedin rater, rate your linkedin profile, linkedin profile score checker, linkedin score test, linkedin profile grader, check linkedin score free, linkedin profile rating',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-profile-score' },
     openGraph: {

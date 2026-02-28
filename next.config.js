@@ -35,6 +35,9 @@ const nextConfig = {
             { source: '/linkedin-comment-generator', destination: '/tools/linkedin-comment-generator', permanent: true },
             { source: '/linkedin-connection-message-generator', destination: '/tools/linkedin-connection-message-generator', permanent: true },
             { source: '/linkedin-qr-code-generator', destination: '/tools/linkedin-qr-code-generator', permanent: true },
+            // SEO cannibalization fixes
+            { source: '/linkedin', destination: '/linkedin-optimization-guide', permanent: true },
+            { source: '/for-students', destination: '/linkedin-profile-for-students', permanent: true },
         ]
     },
     async headers() {

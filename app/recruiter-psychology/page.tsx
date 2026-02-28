@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How Recruiters Actually View Your LinkedIn Profile | The 10-Second Scan (2026)',
+    title: 'How Recruiters Actually View Your LinkedIn Profile (2026 Data)',
     description: 'Understand recruiter psychology on LinkedIn in 2026. What recruiters scan first, how they search, red flags they notice, and how to build trust in 10 seconds. Data-backed insights. Free scoring with LinkedInRank.',
     keywords: 'how recruiters use linkedin 2026, recruiter psychology linkedin, how recruiters search linkedin, what recruiters look for linkedin, linkedin recruiter tips, get noticed by recruiters linkedin, linkedin recruiter scan',
     alternates: { canonical: 'https://linkedinrank.com/recruiter-psychology' },

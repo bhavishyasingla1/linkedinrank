@@ -5,13 +5,13 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Ranking Explained: How to Rank Higher in 2026 (Free Tool)',
-    description: 'Learn how LinkedIn ranking works and how to improve your LinkedIn profile ranking. Understand the algorithm, ranking factors, and get a free LinkedIn rank score with LinkedInRank.',
+    title: 'LinkedIn Ranking Algorithm: The Complete Search Visibility Guide (2026)',
+    description: 'Rank higher in LinkedIn search: Algorithm breakdown, 30+ ranking factors, proven tactics. Get found by recruiters.',
     keywords: 'linkedin ranking, linkedin rank, linkedin ranking profile, linkedin profile ranking, how to rank on linkedin, linkedin ranking factors, linkedin algorithm ranking, linkedin search ranking, improve linkedin ranking',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-ranking' },
     openGraph: {
-        title: 'LinkedIn Ranking Explained: How to Rank Higher in 2026',
-        description: 'Master LinkedIn ranking factors, understand the algorithm, and improve your LinkedIn profile ranking with a free tool. No login required.',
+        title: 'LinkedIn Ranking Algorithm: The Complete Search Visibility Guide (2026)',
+        description: 'Rank higher in LinkedIn search: Algorithm breakdown, 30+ ranking factors, proven tactics. Get found by recruiters.',
         url: 'https://linkedinrank.com/linkedin-ranking',
     },
 }

@@ -151,52 +151,6 @@ const jsonLd = {
             creator: { '@id': 'https://linkedinrank.com/#organization' },
         },
         {
-            '@type': 'FAQPage',
-            '@id': 'https://linkedinrank.com/#faq',
-            mainEntity: [
-                {
-                    '@type': 'Question',
-                    name: 'How does LinkedInRank score my profile?',
-                    acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: 'We evaluate 30+ visible profile signals across 6 categories: Headline (20 pts), About (20 pts), Experience (25 pts), Skills (15 pts), Education (10 pts), and Completeness (10 pts). Rule-based analysis handles structure, while Gemini AI evaluates content quality. Your total score is out of 100.',
-                    },
-                },
-                {
-                    '@type': 'Question',
-                    name: 'Is my LinkedIn data stored or shared?',
-                    acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: 'Never. Your PDF is processed entirely in memory and discarded immediately after analysis. We don\'t store files, don\'t create accounts, don\'t set cookies, and don\'t track you.',
-                    },
-                },
-                {
-                    '@type': 'Question',
-                    name: 'What file do I need to upload?',
-                    acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: 'You need your LinkedIn profile PDF. Go to your LinkedIn profile, click "More", then "Save to PDF." The file is usually under 1MB. We only accept PDF format.',
-                    },
-                },
-                {
-                    '@type': 'Question',
-                    name: 'Who is LinkedInRank for?',
-                    acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: 'Anyone with a LinkedIn profile — students, job seekers, founders, and experienced professionals. Scoring adapts to your career stage automatically.',
-                    },
-                },
-                {
-                    '@type': 'Question',
-                    name: 'What is a good LinkedIn score?',
-                    acceptedAnswer: {
-                        '@type': 'Answer',
-                        text: 'Scores are tiered: Bronze (0-54), Silver (55-69), Gold (70-84), and Platinum (85-100). Most profiles score between 40-65. A score above 70 puts you in the top tier of optimized profiles.',
-                    },
-                },
-            ],
-        },
-        {
             '@type': 'SiteNavigationElement',
             name: 'Main Navigation',
             url: 'https://linkedinrank.com',

@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import { howToJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Complete LinkedIn Profile Optimization Guide 2026 | Step-by-Step',
-    description: 'The definitive guide to optimizing your LinkedIn profile in 2026. Step-by-step strategies for headline, about section, experience, skills, keywords, and personal branding. Free LinkedIn score checker included. Used by thousands of professionals.',
+    title: 'LinkedIn Profile Optimization (2026): 47 Expert Tips That Get Interviews',
+    description: 'Score 85+ on LinkedIn: 47 optimization tips from headline to skills. Get recruiter messages in 7 days. Free score checker included.',
     keywords: 'linkedin optimization, linkedin profile optimization, optimize linkedin profile, linkedin optimization guide 2026, linkedin profile improvement, linkedin optimization tool free, linkedin profile makeover, linkedin profile audit, linkedin profile optimization tips, best linkedin optimization guide',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-optimization-guide' },
     openGraph: {
@@ -14,6 +15,74 @@ export const metadata: Metadata = {
         url: 'https://linkedinrank.com/linkedin-optimization-guide',
     },
 }
+
+const howToSchema = howToJsonLd({
+    name: 'How to Optimize Your LinkedIn Profile',
+    description: 'Step-by-step guide to optimizing your LinkedIn profile for maximum recruiter visibility and job opportunities',
+    totalTime: 'PT2H',
+    steps: [
+        {
+            name: 'Optimize Your Headline',
+            text: 'Write a keyword-rich headline under 120 characters that includes your role, value proposition, and 2-3 searchable keywords.',
+            directions: [
+                'Open your LinkedIn profile and click the edit icon on your headline',
+                'Use the formula: [Role] | [Value Proposition] | [Key Skills]',
+                'Include 2-3 keywords recruiters search for in your industry',
+                'Keep it under 120 characters for full visibility in search results',
+            ],
+        },
+        {
+            name: 'Craft Your About Section',
+            text: 'Write a compelling 150-300 word About section in first person with a hook, proof points, and clear CTA.',
+            directions: [
+                'Start with a hook that creates curiosity or establishes credibility',
+                'Share 2-3 specific achievements with numbers',
+                'Include 3-5 keywords naturally throughout',
+                'End with a clear call-to-action for recruiters or connections',
+            ],
+        },
+        {
+            name: 'Rewrite Experience Descriptions',
+            text: 'Transform job descriptions into achievement-focused bullet points using the XYZ formula.',
+            directions: [
+                'Edit each role to include 3-5 bullet points',
+                'Use the XYZ formula: Accomplished [X] as measured by [Y] by doing [Z]',
+                'Start each bullet with a strong action verb',
+                'Include specific metrics and results',
+            ],
+        },
+        {
+            name: 'Optimize Skills Section',
+            text: 'Add and prioritize 15-25 relevant skills, pinning your top 3 most important skills.',
+            directions: [
+                'Add skills recruiters search for in your industry',
+                'Pin your top 3 most valuable skills to the top',
+                'Ensure skills match your headline and experience descriptions',
+                'Request endorsements from colleagues for key skills',
+            ],
+        },
+        {
+            name: 'Complete All Profile Sections',
+            text: 'Fill out education, certifications, volunteering, and additional sections for 100% profile completeness.',
+            directions: [
+                'Add all degrees, certifications, and relevant courses',
+                'Include volunteering and projects if applicable',
+                'Add a professional profile photo and background image',
+                'Enable Creator mode if you post content regularly',
+            ],
+        },
+        {
+            name: 'Test and Iterate',
+            text: 'Upload your LinkedIn PDF to LinkedInRank to get your score and specific improvement recommendations.',
+            directions: [
+                'Export your LinkedIn profile as PDF',
+                'Upload to LinkedInRank for instant scoring',
+                'Review the 30+ signal analysis and recommendations',
+                'Make improvements and re-test to track score increase',
+            ],
+        },
+    ],
+})
 
 const jsonLd = {
     '@context': 'https://schema.org',
@@ -53,6 +122,7 @@ export default function LinkedInOptimizationGuidePage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
             <SiteHeader />
 
             {/* Hero header */}

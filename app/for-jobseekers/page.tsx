@@ -20,8 +20,8 @@ const jsonLd = {
     '@graph': [
         {
             '@type': 'Article',
-            headline: 'LinkedIn Profile Optimization for Job Seekers',
-            description: 'Optimize your LinkedIn profile for job searching. Headline formulas, keyword strategy, experience metrics, recruiter visibility, and Open to Work settings.',
+            headline: 'LinkedIn for Job Seekers (2026): The Complete Optimization Checklist',
+            description: 'Job seekers: Optimize your LinkedIn in 30 minutes. Recruiter-focused checklist for headline, keywords, visibility. Get interviews faster.',
             author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
             publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
             mainEntityOfPage: 'https://linkedinrank.com/for-jobseekers',

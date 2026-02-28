@@ -4,13 +4,13 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Founders & Entrepreneurs | Free Guide (2026)',
-    description: 'Position your LinkedIn profile for credibility, fundraising, and talent acquisition in 2026. Data-backed strategies for founder headlines, About narratives, and experience framing. Free scoring with LinkedInRank.',
+    title: 'LinkedIn for Founders (2026): 23 Profile Examples From Funded Startups',
+    description: 'Turn LinkedIn into your #1 customer channel. 23 founder profile examples, pipeline tactics. Free optimization tools.',
     keywords: 'linkedin for founders 2026, founder linkedin profile, entrepreneur linkedin tips, linkedinrank founder guide, startup linkedin profile, ceo linkedin profile tips, founder personal branding linkedin',
     alternates: { canonical: 'https://linkedinrank.com/for-founders' },
     openGraph: {
-        title: 'LinkedIn Profile Tips for Founders & Entrepreneurs',
-        description: 'Position your LinkedIn for credibility, fundraising, and talent acquisition. Free scoring with LinkedInRank.',
+        title: 'LinkedIn for Founders (2026): 23 Profile Examples From Funded Startups',
+        description: 'Turn LinkedIn into your #1 customer channel. 23 founder profile examples, pipeline tactics. Free optimization tools.',
         url: 'https://linkedinrank.com/for-founders',
     },
 }

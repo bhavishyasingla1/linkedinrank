@@ -67,7 +67,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         keywords: blog.targetKeyword,
     })
 
-    const faqSchema = tool && tool.faqs.length > 0 ? faqJsonLd(tool.faqs.slice(0, 3)) : null
+    const faqSchema = null
 
     return (
         <main id="main-content" className="min-h-screen bg-[#F8FAFC] flex flex-col">

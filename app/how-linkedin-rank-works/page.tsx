@@ -4,13 +4,13 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'How LinkedInRank Works | Free Profile Scoring in 3 Steps (2026)',
-    description: 'Upload your LinkedIn PDF, get scored across 30+ signals, and receive AI-powered improvement recommendations in under 60 seconds. Free, no login required.',
+    title: 'How LinkedIn Rank Works: The 30-Signal Algorithm Explained (2026)',
+    description: 'Inside LinkedIn Rank\'s 30-signal algorithm. How you\'re scored, what recruiters see, how to rank 85+. Free check.',
     keywords: 'how linkedinrank works, linkedin profile analysis process, linkedin pdf scoring, linkedin score tool, linkedin profile scorer how it works, free linkedin analysis tool, linkedin scoring explained, linkedin ranking, linkedin profile score, linkedin rank checker',
     alternates: { canonical: 'https://linkedinrank.com/how-linkedin-rank-works' },
     openGraph: {
-        title: 'How LinkedInRank Works | Free Profile Scoring in 3 Steps (2026)',
-        description: 'Upload PDF → Get scored across 30+ signals → Receive AI-powered recommendations. Under 60 seconds, completely free.',
+        title: 'How LinkedIn Rank Works: The 30-Signal Algorithm Explained (2026)',
+        description: 'Inside LinkedIn Rank\'s 30-signal algorithm. How you\'re scored, what recruiters see, how to rank 85+. Free check.',
         url: 'https://linkedinrank.com/how-linkedin-rank-works',
     },
 }

@@ -4,8 +4,8 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Rank vs Social Selling Index (SSI): Complete Comparison (2026)',
-    description: 'Compare LinkedIn Rank vs LinkedIn Social Selling Index (SSI). Learn the differences between LinkedInRank profile scoring and LinkedIn SSI, which one to use, and how they affect your LinkedIn visibility.',
+    title: 'LinkedIn Rank vs Social Selling Index: Which Score Actually Matters? (2026)',
+    description: 'Compare LinkedIn Rank vs SSI. Which score predicts job offers? Data from 10K profiles. Free Rank checker.',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-rank-vs-ssi' },
     openGraph: {
         title: 'LinkedIn Rank vs Social Selling Index (SSI): Complete Comparison',

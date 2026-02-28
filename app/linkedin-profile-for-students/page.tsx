@@ -5,8 +5,8 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile for Students: Complete Guide to Stand Out (2026)',
-    description: 'Build a strong LinkedIn profile as a student with no experience. Step-by-step guide covering headline, about, experience, skills, and profile optimization for students and fresh graduates.',
+    title: 'LinkedIn for Students (2026): 31 Profile Examples That Land Internships',
+    description: 'Students: Build a LinkedIn that gets internship offers. 31 examples, templates for 0-experience profiles. Free AI scoring tool.',
     keywords: 'linkedin profile for students, linkedin headline for students, student linkedin profile, how to build linkedin profile as student, linkedin for college students, linkedin profile tips for students, student linkedin headline examples, linkedin fresh graduate',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-profile-for-students' },
     openGraph: {
