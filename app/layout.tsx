@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
     metadataBase: new URL('https://linkedinrank.com'),
     title: {
-        default: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
+        default: 'LinkedIn Rank — See Why Recruiters Skip Your Profile',
         template: '%s | LinkedInRank',
     },
-    description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations, headline rewrites, and a personalized improvement roadmap. No login required.',
+    description: 'Recruiters decide in 7 seconds if your LinkedIn profile is worth contacting. Get your free score, see what\'s costing you opportunities, and fix it with AI-powered recommendations.',
     keywords: [
         'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
         'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
         canonical: 'https://linkedinrank.com',
     },
     openGraph: {
-        title: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
-        description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations, headline rewrites, and a personalized improvement roadmap. No login required.',
+        title: 'LinkedIn Rank — See Why Recruiters Skip Your Profile',
+        description: 'Recruiters decide in 7 seconds if your LinkedIn profile is worth contacting. Get your free score, see what\'s costing you opportunities, and fix it with AI-powered recommendations.',
         url: 'https://linkedinrank.com',
         siteName: 'LinkedInRank',
         type: 'website',

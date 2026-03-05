@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'Viral LinkedIn Post Formulas — 5 Templates That Actually Work (2026) | LinkedInRank',
+    title: 'Viral LinkedIn Post Formulas — 5 Templates That Actually Work (2026)',
     description: '5 copy-paste LinkedIn post formulas that drive engagement: Hard Truth, Mini-Story, Breakdown, Steal-This, and Identity posts. Includes hook frameworks and real examples.',
     keywords: 'viral linkedin post 2026, linkedin post formula, linkedin content strategy, linkedin post template, linkedin engagement tips, how to go viral on linkedin, linkedin hook examples, linkedin viral content',
     alternates: { canonical: 'https://linkedinrank.com/viral-post-formulas' },

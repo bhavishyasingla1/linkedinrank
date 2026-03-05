@@ -111,7 +111,7 @@ export default function LinkedInAboutGuidePage() {
                                 <p><strong className="text-[#0A0F1C]">Paragraph 3 | Direction:</strong> I am looking for opportunities in [target role/industry] where I can apply my skills in [specific area] and contribute to [type of work].</p>
                             </div>
                         </div>
-                        <p className="text-sm mb-6">More student-specific strategies in our <Link href="/for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link>.</p>
+                        <p className="text-sm mb-6">More student-specific strategies in our <Link href="/linkedin-profile-for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link>.</p>
 
                         <h3 className="text-lg font-bold text-[#0A0F1C] mb-4">For Job Seekers</h3>
                         <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_1px_4px_rgba(0,0,0,0.03)] mb-6">

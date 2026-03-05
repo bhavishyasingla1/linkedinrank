@@ -48,7 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${baseUrl}/cookie-policy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
         { url: `${baseUrl}/data-security`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
         // Audience pages
-        { url: `${baseUrl}/for-students`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
         { url: `${baseUrl}/for-jobseekers`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
         { url: `${baseUrl}/for-founders`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
         // Comparison pages
@@ -57,7 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${baseUrl}/linkedinrank-vs-manual-audits`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
         // SEO landing pages
         { url: `${baseUrl}/linkedin-best-practices`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-        { url: `${baseUrl}/linkedin`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
         { url: `${baseUrl}/score`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
         { url: `${baseUrl}/rank`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
         // Core SEO pillar pages (SOP keyword clusters)

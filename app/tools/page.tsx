@@ -6,11 +6,11 @@ import { ALL_TOOLS, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '12 Free LinkedIn Tools & Templates (2026) | LinkedInRank',
+    title: '12 Free LinkedIn Tools & Templates (2026)',
     description: '12 free AI-powered LinkedIn tools: headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
     alternates: { canonical: `${SITE_URL}/tools` },
     openGraph: {
-        title: '12 Free LinkedIn Tools & Templates (2026) | LinkedInRank',
+        title: '12 Free LinkedIn Tools & Templates (2026)',
         description: '12 free AI-powered LinkedIn tools for profile optimization, content creation, and networking.',
         url: `${SITE_URL}/tools`,
         siteName: SITE_NAME,
@@ -59,9 +59,9 @@ export default function ToolsPage() {
 
                 {/* Hero */}
                 <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-8">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Free LinkedIn Tools</h1>
+                    <h1 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Everything you need to improve your LinkedIn profile</h1>
                     <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed max-w-2xl">
-                        12 free tools to optimize your LinkedIn profile, create engaging content, and grow your professional network. Each tool uses AI to deliver personalized, recruiter-ready results.
+                        These tools help you fix the exact sections recruiters scan first. AI-powered, free, no signup required.
                     </p>
                 </section>
 
@@ -126,7 +126,7 @@ export default function ToolsPage() {
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                             {[
                                 { stat: '30+', label: 'Signals Evaluated', desc: 'Proven methodology' },
-                                { stat: '10K+', label: 'Profiles Analyzed', desc: 'Trusted globally' },
+                                { stat: '6', label: 'Profile Categories', desc: 'Comprehensive coverage' },
                                 { stat: '0', label: 'Login Required', desc: 'Instant access' },
                                 { stat: 'AI+Rules', label: 'Hybrid Engine', desc: 'Not a black box' },
                             ].map((item, i) => (

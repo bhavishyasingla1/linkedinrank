@@ -94,7 +94,7 @@ export default function FileUpload() {
                     </svg>
                 </div>
                 <p className="text-[16px] font-bold text-[#0A0F1C] mb-1">
-                    Upload your LinkedIn PDF
+                    Upload your LinkedIn PDF export
                 </p>
                 <p className="text-sm text-[#6B7280] mb-4">
                     Drop file here or click to browse
@@ -113,6 +113,7 @@ export default function FileUpload() {
                         Under 1 min
                     </span>
                 </div>
+                <p className="text-[10px] text-[#9CA3AF] mt-3">Your PDF is processed instantly • No login required • File deleted after analysis</p>
 
                 <input
                     ref={fileInputRef}

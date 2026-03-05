@@ -28,18 +28,22 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'For Job Seekers', item: 'https://linkedinrank.com/for-jobseekers' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'How long should my LinkedIn profile be for job searching?', acceptedAnswer: { '@type': 'Answer', text: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills.' } },
-            { '@type': 'Question', name: 'Should my LinkedIn match my resume exactly?', acceptedAnswer: { '@type': 'Answer', text: 'They should be consistent but not identical. LinkedIn should be more conversational and include elements resumes lack: About narrative, Featured section, recommendations.' } },
-            { '@type': 'Question', name: 'How do I handle a career gap on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively | mention skills you learned, freelance work, or personal development.' } },
-            { '@type': 'Question', name: 'Is LinkedIn Premium worth it for job seekers?', acceptedAnswer: { '@type': 'Answer', text: 'Premium gives you InMail credits and shows who viewed your profile. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' } },
-            { '@type': 'Question', name: 'How does LinkedInRank help with job searching?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score.' } },
-            { '@type': 'Question', name: 'How quickly can I improve my profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough overhaul takes 2–3 hours. Start with headline and About section. Most people see increased profile views within 1–2 weeks of optimization.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'For Job Seekers', item: 'https://linkedinrank.com/for-jobseekers' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'How long should my LinkedIn profile be for job searching?', acceptedAnswer: { '@type': 'Answer', text: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills.' } },
+                { '@type': 'Question', name: 'Should my LinkedIn match my resume exactly?', acceptedAnswer: { '@type': 'Answer', text: 'They should be consistent but not identical. LinkedIn should be more conversational and include elements resumes lack: About narrative, Featured section, recommendations.' } },
+                { '@type': 'Question', name: 'How do I handle a career gap on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively | mention skills you learned, freelance work, or personal development.' } },
+                { '@type': 'Question', name: 'Is LinkedIn Premium worth it for job seekers?', acceptedAnswer: { '@type': 'Answer', text: 'Premium gives you InMail credits and shows who viewed your profile. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' } },
+                { '@type': 'Question', name: 'How does LinkedInRank help with job searching?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score.' } },
+                { '@type': 'Question', name: 'How quickly can I improve my profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough overhaul takes 2–3 hours. Start with headline and About section. Most people see increased profile views within 1–2 weeks of optimization.' } },
+            ]
+        },
     ],
 }
 
@@ -184,7 +188,7 @@ export default function ForJobSeekersPage() {
                     <div className="pt-8 border-t border-gray-100 mt-6">
                         <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Students</Link>
+                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Students</Link>
                             <Link href="/for-founders" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Founders</Link>
                             <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>
                             <Link href="/recruiter-psychology" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Recruiter Psychology</Link>

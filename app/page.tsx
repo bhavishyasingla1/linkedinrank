@@ -20,17 +20,120 @@ export default function HomePage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div>
                             <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#0A0F1C] leading-[1.15] mb-5 tracking-tight">
-                                Free LinkedIn <span className="text-gradient-brand">Profile Score</span> Tool
+                                Most LinkedIn profiles look fine.<br />
+                                But recruiters <span className="text-gradient-brand">skip them in seconds.</span>
                             </h1>
                             <p className="text-[17px] text-[#4B5563] max-w-md mb-10 leading-relaxed">
-                                Upload your LinkedIn PDF and get a score out of 100 with AI-powered recommendations to improve every section.
+                                LinkedInRank analyzes your profile and shows exactly what recruiters see — with a score and specific fixes.
                             </p>
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                                <a href="#upload" className="btn-primary text-sm cursor-pointer">Analyze My Profile</a>
-                                <span className="text-xs text-[#6B7280]">No login &middot; Under 60s &middot; Files auto-deleted</span>
+                                <a href="#upload" className="btn-primary text-sm cursor-pointer">Analyze My Profile (Free)</a>
+                                <span className="text-xs text-[#6B7280]">No login • PDF only • Results in under a minute</span>
                             </div>
                         </div>
                         <HeroSlideshow />
+                    </div>
+                </div>
+            </section>
+
+            {/* Social Proof Bar */}
+            <section className="bg-[#F8FAFC] border-y border-gray-100 py-4">
+                <div className="max-w-5xl mx-auto px-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+                        {[
+                            { value: 'Multi-Stage', label: 'Career Profiles Analyzed' },
+                            { value: '120+', label: 'Free Guides' },
+                            { value: '12', label: 'Free LinkedIn Tools' },
+                        ].map((stat, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                                <span className="text-lg font-bold text-[#0A66C2]">{stat.value}</span>
+                                <span className="text-xs text-[#6B7280] font-medium">{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Recognition Section — Why profiles get ignored */}
+            <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+                <div className="max-w-3xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Sound Familiar?</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-4">Why LinkedIn profiles get ignored</h2>
+                    <p className="text-[15px] text-[#4B5563] mb-8 leading-relaxed max-w-2xl">You might have:</p>
+                    <div className="space-y-3 mb-8">
+                        {[
+                            'A headline that says what you are — but not why you\'re valuable',
+                            'Experience that lists tasks instead of results',
+                            'Skills that don\'t match what recruiters actually search for',
+                            'An About section that doesn\'t explain your direction',
+                            'A profile that looks complete — but isn\'t convincing',
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-start gap-3 bg-[#FEF2F2] border border-red-100 rounded-xl px-5 py-3.5">
+                                <svg className="w-4 h-4 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                                <span className="text-sm text-[#4B5563] leading-relaxed">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="text-[15px] text-[#0A0F1C] font-semibold">LinkedInRank shows exactly where your profile breaks.</p>
+                </div>
+            </section>
+
+            {/* Before vs After Profile Breakdown */}
+            <section className="bg-[#F8FAFC] py-16 sm:py-20 border-t border-gray-100">
+                <div className="max-w-3xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Real Example</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-8">See what a profile improvement looks like</h2>
+
+                    <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                        {/* Score change */}
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="text-center">
+                                <span className="text-3xl font-bold text-red-400">42</span>
+                                <p className="text-[10px] text-[#6B7280] uppercase font-bold mt-1">Before</p>
+                            </div>
+                            <div className="flex-1 h-2 bg-gray-100 rounded-full relative overflow-hidden">
+                                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-red-300 via-amber-300 to-emerald-400 rounded-full" style={{ width: '71%' }} />
+                            </div>
+                            <div className="text-center">
+                                <span className="text-3xl font-bold text-emerald-500">71</span>
+                                <p className="text-[10px] text-[#6B7280] uppercase font-bold mt-1">After</p>
+                            </div>
+                        </div>
+
+                        {/* Headline comparison */}
+                        <div className="space-y-4">
+                            <div>
+                                <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Headline</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div className="bg-red-50 border border-red-100 rounded-xl p-4">
+                                        <p className="text-[10px] font-bold text-red-400 uppercase mb-1.5">Before</p>
+                                        <p className="text-sm text-[#4B5563]">Student at XYZ University</p>
+                                    </div>
+                                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
+                                        <p className="text-[10px] font-bold text-emerald-500 uppercase mb-1.5">After</p>
+                                        <p className="text-sm text-[#0A0F1C] font-medium">Computer Engineering Student | ML Projects | Python &amp; Data Analysis</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-4">
+                                <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider mb-2">Why the score improved</p>
+                                <ul className="space-y-1.5">
+                                    {[
+                                        'Clearer role positioning',
+                                        'Added searchable keywords recruiters actually filter by',
+                                        'Removed vague, generic wording',
+                                    ].map((reason, i) => (
+                                        <li key={i} className="flex items-start gap-2 text-sm text-[#4B5563]">
+                                            <svg className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            {reason}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-6 text-center">
+                        <a href="#upload" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] transition-colors inline-flex items-center gap-1.5">See your own score <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg></a>
                     </div>
                 </div>
             </section>
@@ -95,8 +198,8 @@ export default function HomePage() {
                     <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
                         <div>
                             <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Free Tools</p>
-                            <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">12 Free LinkedIn Tools</h2>
-                            <p className="text-sm text-[#6B7280] max-w-lg">AI-powered tools to optimize your profile, create content, and grow your network. No signup required.</p>
+                            <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Everything you need to improve your LinkedIn profile</h2>
+                            <p className="text-sm text-[#6B7280] max-w-lg">These tools help you fix the exact sections recruiters scan first. Free, no signup required.</p>
                         </div>
                         <Link href="/tools" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors inline-flex items-center gap-1.5 shrink-0">
                             View all tools <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -135,13 +238,13 @@ export default function HomePage() {
             <section className="bg-white py-24 border-t border-gray-100">
                 <div className="max-w-4xl mx-auto px-6">
                     <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">How It Works</p>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Three steps to a stronger LinkedIn profile</h2>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-12">Three steps to get recruiter-ready</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
                         {[
-                            { step: '01', title: 'Paste Your LinkedIn Profile', desc: 'Export your LinkedIn profile as a PDF and upload it. No login, no signup, no data stored.', icon: 'M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5' },
-                            { step: '02', title: 'AI + Rule Engine Analyzes', desc: 'Hybrid AI evaluates keywords, clarity, structure, and completeness across 30+ ranking signals.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
-                            { step: '03', title: 'Get Optimized Suggestions', desc: 'Receive your score, AI-powered rewrites, and a prioritized improvement roadmap instantly.', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
+                            { step: '01', title: 'Upload your LinkedIn profile', desc: 'Export your LinkedIn profile as a PDF and upload it. No login, no signup, no data stored.', icon: 'M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5' },
+                            { step: '02', title: 'Profile signals evaluated', desc: 'Your profile is evaluated across 30+ signals that recruiters scan — keywords, clarity, structure, and completeness.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
+                            { step: '03', title: 'Get your score and fixes', desc: 'Receive your score, specific improvements you can apply immediately, and a prioritized roadmap.', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
                         ].map((item, i) => (
                             <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300">
                                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white flex items-center justify-center mb-4 shadow-[0_4px_12px_rgba(10,102,194,0.25)]">
@@ -177,6 +280,24 @@ export default function HomePage() {
                             </div>
                         ))}
                     </div>
+                    {/* Score Tiers */}
+                    <div className="mt-10 bg-white border border-gray-200 rounded-xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                        <h3 className="text-sm font-bold text-[#0A0F1C] mb-4">What your score means</h3>
+                        <div className="space-y-3">
+                            {[
+                                { range: '85–100', tier: 'Platinum', desc: 'Top 5% — recruiter magnet', color: '#7C3AED', bg: '#F5F3FF' },
+                                { range: '70–84', tier: 'Gold', desc: 'Strong profile — visible in searches', color: '#D97706', bg: '#FFFBEB' },
+                                { range: '55–69', tier: 'Silver', desc: 'Average — being overlooked', color: '#6B7280', bg: '#F9FAFB' },
+                                { range: '0–54', tier: 'Bronze', desc: 'Weak — invisible to recruiters', color: '#DC2626', bg: '#FEF2F2' },
+                            ].map((t, i) => (
+                                <div key={i} className="flex items-center gap-3 rounded-lg px-4 py-2.5" style={{ backgroundColor: t.bg }}>
+                                    <span className="text-xs font-bold tabular-nums w-12" style={{ color: t.color }}>{t.range}</span>
+                                    <span className="text-xs font-bold w-16" style={{ color: t.color }}>{t.tier}</span>
+                                    <span className="text-xs text-[#4B5563]">{t.desc}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     <div className="mt-6 text-center">
                         <Link href="/methodology" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors inline-flex items-center gap-1.5">
                             See full scoring methodology <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -211,7 +332,7 @@ export default function HomePage() {
                     <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-gray-100">
                         {[
                             { title: 'For Job Seekers', href: '/for-jobseekers' },
-                            { title: 'For Students', href: '/for-students' },
+                            { title: 'For Students', href: '/linkedin-profile-for-students' },
                             { title: 'For Founders', href: '/for-founders' },
                             { title: 'Why We Are Different', href: '/about' },
                         ].map((item, i) => (
@@ -219,6 +340,56 @@ export default function HomePage() {
                                 {item.title}
                             </Link>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Who This Is For */}
+            <section className="bg-[#F8FAFC] py-16 sm:py-20 border-t border-gray-100">
+                <div className="max-w-4xl mx-auto px-6">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Who This Is For</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-8">LinkedInRank is useful for</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[
+                            { audience: 'Students', desc: 'Building their first professional profile', icon: 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5' },
+                            { audience: 'Job Seekers', desc: 'Improving recruiter visibility', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' },
+                            { audience: 'Early-Career Professionals', desc: 'Clarifying professional positioning', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
+                            { audience: 'Founders', desc: 'Strengthening personal brand', icon: 'M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418' },
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white border border-gray-200 rounded-xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                                <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center mb-3">
+                                    <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                                </div>
+                                <p className="text-sm font-bold text-[#0A0F1C] mb-1">{item.audience}</p>
+                                <p className="text-xs text-[#6B7280] leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* What LinkedInRank Does NOT Analyze */}
+            <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+                <div className="max-w-3xl mx-auto px-6">
+                    <div className="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 sm:p-8">
+                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Transparency</p>
+                        <h3 className="text-lg font-bold text-[#0A0F1C] mb-2">What LinkedInRank does NOT analyze</h3>
+                        <p className="text-sm text-[#4B5563] mb-5 leading-relaxed">LinkedInRank only evaluates information visible in your LinkedIn PDF. It does NOT evaluate:</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {[
+                                'Follower count',
+                                'Engagement metrics',
+                                'Posting frequency',
+                                'Connection count',
+                                'Profile or banner photo',
+                                'Recommendations from others',
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-2.5">
+                                    <svg className="w-4 h-4 text-[#D1D5DB] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                                    <span className="text-sm text-[#4B5563]">{item}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -7,4 +7,5 @@ Disallow: /icon.png
 Disallow: /apple-icon.png
 Allow: /llm.txt
 
+Host: https://linkedinrank.com
 Sitemap: https://linkedinrank.com/sitemap.xml

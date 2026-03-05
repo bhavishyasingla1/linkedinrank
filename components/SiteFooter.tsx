@@ -12,7 +12,7 @@ export default function SiteFooter() {
                         <Link href="/" className="font-bold text-base text-[#0A0F1C] no-underline inline-block mb-3">
                             LinkedIn<span className="text-gradient-brand">Rank</span>
                         </Link>
-                        <p className="text-xs text-[#6B7280] mb-3 leading-relaxed">Free LinkedIn rank checker and profile optimization tool.</p>
+                        <p className="text-xs text-[#6B7280] mb-3 leading-relaxed">See why recruiters skip your profile. Free LinkedIn score and AI-powered fixes.</p>
                         <div className="flex items-center gap-3">
                             <a href="https://www.linkedin.com/company/linkedin-rank/" target="_blank" rel="noopener noreferrer" aria-label="LinkedInRank on LinkedIn" className="text-[#6B7280] hover:text-[#0A66C2] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
                                 <svg className="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
@@ -46,7 +46,7 @@ export default function SiteFooter() {
                             <Link href="/linkedin-headline-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Headline Guide</Link>
                             <Link href="/what-is-linkedin-rank" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">What Is LinkedIn Rank?</Link>
                             <Link href="/linkedin-rank-vs-ssi" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">LinkedIn Rank vs SSI</Link>
-                            <Link href="/for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
+                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
                             <Link href="/linkedin-ranking" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">LinkedIn Ranking</Link>
                             <Link href="/linkedin-profile-score" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Profile Score</Link>
                         </div>

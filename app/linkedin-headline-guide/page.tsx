@@ -135,7 +135,7 @@ export default function LinkedInHeadlineGuidePage() {
                                 <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{item}</div>
                             ))}
                         </div>
-                        <p className="text-sm mb-4">More student-specific strategies in our <Link href="/for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link> and <Link href="/linkedin-headline-software-engineers" className="text-[#0A66C2] hover:underline">headline examples for software engineers</Link>.</p>
+                        <p className="text-sm mb-4">More student-specific strategies in our <Link href="/linkedin-profile-for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link> and <Link href="/linkedin-headline-software-engineers" className="text-[#0A66C2] hover:underline">headline examples for software engineers</Link>.</p>
 
                         <h3 className="text-lg font-bold text-[#0A0F1C] mb-4 mt-6">For Job Seekers</h3>
                         <div className="space-y-2 mb-6">

@@ -5,7 +5,7 @@ import SiteFooter from '@/components/SiteFooter'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples (2026) | LinkedInRank',
+    title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples (2026)',
     description: 'Copy proven LinkedIn headline templates for digital, content, SEO, and growth marketers. Channel-specific, result-focused, and recruiter-ready examples you can use today.',
     keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals 2026, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer, best linkedin headline marketer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-marketers' },

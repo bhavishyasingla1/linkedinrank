@@ -4,12 +4,12 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'Disclaimer | LinkedInRank',
+    title: 'Disclaimer',
     description: 'Important disclaimers about LinkedInRank scoring, AI recommendations, and the limitations of automated LinkedIn profile analysis.',
     keywords: 'linkedinrank disclaimer, linkedin tool disclaimer, linkedin scoring limitations',
     alternates: { canonical: 'https://linkedinrank.com/disclaimer' },
     openGraph: {
-        title: 'Disclaimer | LinkedInRank',
+        title: 'Disclaimer',
         description: 'Disclaimers about LinkedInRank scoring and AI recommendations.',
         url: 'https://linkedinrank.com/disclaimer',
     },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Disclaimer | LinkedInRank',
+    name: 'Disclaimer',
     description: 'LinkedInRank disclaimer. Our tool provides guidance, not guarantees.',
     url: 'https://linkedinrank.com/disclaimer',
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },

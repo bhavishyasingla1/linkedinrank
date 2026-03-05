@@ -6,7 +6,7 @@ import SiteFooter from '@/components/SiteFooter'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy (2026) | LinkedInRank',
+    title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy (2026)',
     description: 'Instantly use 150+ proven LinkedIn headlines for graphic designers. Entry-level, freelance, branding, UI/UX — pick, paste, and get noticed. Free headline generator included.',
     keywords: 'linkedin headline for graphic designer, graphic designer linkedin headline examples, headline for graphic designer, linkedin headline graphic designer, best linkedin headline for graphic designer, graphic designer linkedin headline, linkedin headline examples graphic designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer' },

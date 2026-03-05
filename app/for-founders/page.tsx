@@ -28,18 +28,22 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'For Founders', item: 'https://linkedinrank.com/for-founders' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'Should founders use their personal profile or company page?', acceptedAnswer: { '@type': 'Answer', text: 'Both, but your personal profile is more important. LinkedIn algorithm favors personal content over company page posts. Most founder-led brands grow through personal presence.' } },
-            { '@type': 'Question', name: 'How should founders handle the About section?', acceptedAnswer: { '@type': 'Answer', text: 'Tell your founding story: what problem you noticed, why you decided to solve it, and what traction you have achieved. Include metrics. End with what you are looking for.' } },
-            { '@type': 'Question', name: 'How often should founders post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: '3–4 times per week is optimal for growth. Consistency matters more than frequency. Mix between company updates, industry insights, and personal founder stories.' } },
-            { '@type': 'Question', name: 'Does LinkedInRank work for founder profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank recognizes founder profiles and adjusts scoring to evaluate positioning clarity, domain credibility, and narrative strength.' } },
-            { '@type': 'Question', name: 'Should I mention funding on my profile?', acceptedAnswer: { '@type': 'Answer', text: 'If you have notable funding, yes | it adds credibility. If bootstrapped, lead with traction metrics instead: users, revenue, customers served.' } },
-            { '@type': 'Question', name: 'How do I attract investors through LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Build in public consistently. Share traction updates, insights, and lessons. Your profile should make it easy for investors to understand your company in 10 seconds.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'For Founders', item: 'https://linkedinrank.com/for-founders' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'Should founders use their personal profile or company page?', acceptedAnswer: { '@type': 'Answer', text: 'Both, but your personal profile is more important. LinkedIn algorithm favors personal content over company page posts. Most founder-led brands grow through personal presence.' } },
+                { '@type': 'Question', name: 'How should founders handle the About section?', acceptedAnswer: { '@type': 'Answer', text: 'Tell your founding story: what problem you noticed, why you decided to solve it, and what traction you have achieved. Include metrics. End with what you are looking for.' } },
+                { '@type': 'Question', name: 'How often should founders post on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: '3–4 times per week is optimal for growth. Consistency matters more than frequency. Mix between company updates, industry insights, and personal founder stories.' } },
+                { '@type': 'Question', name: 'Does LinkedInRank work for founder profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank recognizes founder profiles and adjusts scoring to evaluate positioning clarity, domain credibility, and narrative strength.' } },
+                { '@type': 'Question', name: 'Should I mention funding on my profile?', acceptedAnswer: { '@type': 'Answer', text: 'If you have notable funding, yes | it adds credibility. If bootstrapped, lead with traction metrics instead: users, revenue, customers served.' } },
+                { '@type': 'Question', name: 'How do I attract investors through LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Build in public consistently. Share traction updates, insights, and lessons. Your profile should make it easy for investors to understand your company in 10 seconds.' } },
+            ]
+        },
     ],
 }
 
@@ -187,7 +191,7 @@ export default function ForFoundersPage() {
                     <div className="pt-8 border-t border-gray-100 mt-6">
                         <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
                         <div className="flex flex-wrap gap-2">
-                            <Link href="/for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Students</Link>
+                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Students</Link>
                             <Link href="/for-jobseekers" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Job Seekers</Link>
                             <Link href="/linkedin-personal-branding" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Personal Branding</Link>
                             <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>

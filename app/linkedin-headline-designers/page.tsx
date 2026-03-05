@@ -5,7 +5,7 @@ import SiteFooter from '@/components/SiteFooter'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples (2026) | LinkedInRank',
+    title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples (2026)',
     description: 'Copy professional LinkedIn headline templates for UX, UI, product, and graphic designers. Short, portfolio-focused, and recruiter-friendly examples you can paste now.',
     keywords: 'linkedin headline designer, linkedin headline ux designer 2026, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer, best linkedin headline designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-designers' },

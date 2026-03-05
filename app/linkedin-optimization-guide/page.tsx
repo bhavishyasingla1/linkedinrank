@@ -142,7 +142,10 @@ export default function LinkedInOptimizationGuidePage() {
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">Complete LinkedIn Profile Optimization Guide</h1>
                     <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
-                        Your LinkedIn profile is a search engine and a trust platform. This guide covers every section of your profile with actionable strategies | whether you are a student, job seeker, founder, or experienced professional. Each recommendation is based on the same <strong className="text-[#0A0F1C]">30+ signals</strong> that <Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link> uses to score profiles.
+                        A recruiter opens your LinkedIn profile. They scan it for about 7 seconds. If they can&apos;t immediately see your value, they move on.
+                    </p>
+                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl mt-3">
+                        This guide covers every section of your profile with actionable strategies — whether you are a student, job seeker, founder, or experienced professional. Each recommendation is based on the same <strong className="text-[#0A0F1C]">30+ signals</strong> that <Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link> uses to score profiles.
                     </p>
                 </div>
             </div>

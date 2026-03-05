@@ -9,7 +9,7 @@ const FAQ_SECTIONS = [
     {
         title: 'About LinkedInRank',
         faqs: [
-            { q: 'What is LinkedInRank?', a: 'LinkedInRank is a free LinkedIn profile evaluation tool. Upload your LinkedIn PDF and get a transparent score out of 100 across 30+ visible profile signals, with personalized recommendations and an improvement roadmap. Learn more on our <a href="/about" class="text-[#0A66C2] hover:underline">About page</a>.' },
+            { q: 'What is LinkedInRank?', a: 'LinkedInRank shows you how your LinkedIn profile actually reads to recruiters — with a score out of 100 and specific fixes for each section. It\'s free, private, and takes under a minute. Learn more on our <a href="/about" class="text-[#0A66C2] hover:underline">About page</a>.' },
             { q: 'Is LinkedInRank really free?', a: 'Yes. LinkedInRank is completely free to use. There are no hidden fees, no premium tiers, and no paywalls. You get the full analysis including AI-powered recommendations at zero cost.' },
             { q: 'What does LinkedInRank analyze?', a: 'We evaluate your Headline, About section, Experience descriptions, Skills, Education, and overall profile completeness using 30+ signals. We only score what is visible in your LinkedIn PDF | not engagement, followers, or posting activity. See the full breakdown in our <a href="/methodology" class="text-[#0A66C2] hover:underline">Methodology</a>.' },
             { q: 'Is LinkedInRank affiliated with LinkedIn?', a: 'No. LinkedInRank is an independent tool and is not affiliated with, endorsed by, or connected to LinkedIn Corporation in any way. We analyze publicly available PDF exports. See our <a href="/disclaimer" class="text-[#0A66C2] hover:underline">Disclaimer</a> for details.' },
@@ -79,7 +79,7 @@ const FAQ_SECTIONS = [
     {
         title: 'For Specific Users',
         faqs: [
-            { q: 'Is LinkedInRank good for students?', a: 'Yes. The scoring adapts to student profiles. A student with a clear headline, relevant skills, and well-described internships or projects can score in the Gold tier. Read our <a href="/for-students" class="text-[#0A66C2] hover:underline">guide for students</a>.' },
+            { q: 'Is LinkedInRank good for students?', a: 'Yes. The scoring adapts to student profiles. A student with a clear headline, relevant skills, and well-described internships or projects can score in the Gold tier. Read our <a href="/linkedin-profile-for-students" class="text-[#0A66C2] hover:underline">guide for students</a>.' },
             { q: 'Can job seekers use LinkedInRank?', a: 'Absolutely. Job seekers benefit the most from optimized profiles. LinkedInRank helps ensure your headline contains searchable keywords, your experience shows impact, and your skills align with target roles. See our <a href="/for-jobseekers" class="text-[#0A66C2] hover:underline">job seeker guide</a>.' },
             { q: 'Is it useful for founders and entrepreneurs?', a: 'Yes. Founders need profiles that position them as credible leaders. LinkedInRank evaluates how well your headline, About section, and experience convey your entrepreneurial journey. Read our <a href="/for-founders" class="text-[#0A66C2] hover:underline">founder guide</a>.' },
             { q: 'Can career changers use LinkedInRank?', a: 'Yes. Career changers often have misaligned headlines and skills. LinkedInRank identifies these gaps and provides specific recommendations to position your profile for your target direction.' },

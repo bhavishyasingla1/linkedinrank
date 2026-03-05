@@ -188,7 +188,7 @@ export default function AboutPage() {
                                 <p className="text-lg font-bold text-white mb-1">Bhavishya Singla</p>
                                 <p className="text-sm text-gray-300 mb-3">Founder, LinkedInRank</p>
                                 <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                                    After two years of obsessively studying LinkedIn optimization | watching hundreds of videos, reading courses, reviewing dozens of profiles for friends and family | I built LinkedInRank to make that knowledge accessible to everyone. Not as vague advice, but as structured, actionable scoring anyone can use.
+                                    A few years ago I started reviewing LinkedIn profiles for friends and colleagues. Most of them had the same problem: the profile looked complete, but it wasn&apos;t convincing. After reviewing dozens of profiles and obsessively studying how recruiters actually read them, I decided to build a tool that could surface those issues instantly — not as vague advice, but as structured, actionable scoring anyone can use.
                                 </p>
                                 <div className="flex gap-3">
                                     <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#0A66C2] bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full no-underline transition-colors">Connect on LinkedIn</a>

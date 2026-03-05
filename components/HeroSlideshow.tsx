@@ -100,6 +100,7 @@ export default function HeroSlideshow() {
                                     <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">+6 pts</span>
                                     <span className="text-[11px] text-[#4B5563]">Expected score increase from this fix</span>
                                 </div>
+                                <p className="text-[11px] font-medium text-[#0A0F1C] mt-3 italic">&ldquo;This headline change increased recruiter messages by 3x.&rdquo;</p>
                             </div>
                         )}
 

@@ -28,15 +28,19 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-            { '@type': 'ListItem', position: 3, name: 'For MBA Students', item: 'https://linkedinrank.com/linkedin-headline-mba' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'Should MBA students include their school in their headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if the school is well-known. "MBA Candidate @ Wharton" immediately signals credibility. Include your target function or industry alongside the school.' } },
-            { '@type': 'Question', name: 'How should career switchers write their MBA headline?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target role, not your past. "MBA Candidate | Transitioning to Product Management | Ex-Mechanical Engineer" shows clear intent while leveraging your background.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList', itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
+                { '@type': 'ListItem', position: 3, name: 'For MBA Students', item: 'https://linkedinrank.com/linkedin-headline-mba' },
+            ]
+        },
+        {
+            '@type': 'FAQPage', mainEntity: [
+                { '@type': 'Question', name: 'Should MBA students include their school in their headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if the school is well-known. "MBA Candidate @ Wharton" immediately signals credibility. Include your target function or industry alongside the school.' } },
+                { '@type': 'Question', name: 'How should career switchers write their MBA headline?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target role, not your past. "MBA Candidate | Transitioning to Product Management | Ex-Mechanical Engineer" shows clear intent while leveraging your background.' } },
+            ]
+        },
     ],
 }
 
@@ -70,41 +74,53 @@ export default function HeadlineMBAPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">25+ MBA Headlines by Function</h2>
                         {[
-                            { func: 'Consulting', examples: [
-                                'MBA @ Kellogg | Strategy & Operations Consulting | Ex-Deloitte',
-                                'Aspiring Management Consultant | MBA @ ISB | 5 Years in IT Services',
-                                'Strategy Consultant | MBA @ IIMA | Data-Driven Problem Solving',
-                                'MBA Candidate @ Wharton | Consulting & Corporate Strategy | Ex-EY',
-                            ]},
-                            { func: 'Product Management', examples: [
-                                'Product Manager | MBA @ Stanford GSB | Building AI-First Products',
-                                'Aspiring PM | MBA @ IIM Bangalore | Ex-Software Engineer at Flipkart',
-                                'Product Strategy | MBA 2026 @ Booth | Marketplace & Platform Design',
-                                'Senior PM | MBA @ Columbia | FinTech & Payments | Ex-Goldman Sachs',
-                            ]},
-                            { func: 'Finance & Investment Banking', examples: [
-                                'Investment Banking | MBA @ Columbia | M&A and Capital Markets',
-                                'Private Equity Associate | MBA @ HBS | Healthcare & Life Sciences',
-                                'Corporate Finance | MBA @ IIM Ahmedabad | FP&A & Strategic Planning',
-                                'Venture Capital | MBA @ INSEAD | Early-Stage SaaS Investing',
-                            ]},
-                            { func: 'Marketing & Brand Management', examples: [
-                                'Brand Manager | MBA @ Kellogg | FMCG & Consumer Insights',
-                                'Marketing Strategy | MBA @ ISB | Digital-First Brand Building',
-                                'Growth Marketing | MBA @ Haas | B2B SaaS & Product-Led Growth',
-                                'CMO Track | MBA @ IIM Lucknow | Ex-Unilever Brand Marketing',
-                            ]},
-                            { func: 'Entrepreneurship', examples: [
-                                'Founder & MBA @ Stanford GSB | Building [Company] | EdTech',
-                                'MBA @ IIM Kozhikode | Building a D2C Brand in Wellness',
-                                'Serial Entrepreneur | MBA @ Babson | Marketplace & Logistics',
-                                'Social Impact | MBA @ Oxford Said | Sustainable Business Models',
-                            ]},
-                            { func: 'Career Switchers', examples: [
-                                'Career Pivot: Engineering → Product | MBA @ Ross | Ex-Amazon SDE',
-                                'From Military to Business | MBA @ Darden | Operations & Leadership',
-                                'Transitioning to Tech | MBA @ Tepper | Supply Chain → Product Ops',
-                            ]},
+                            {
+                                func: 'Consulting', examples: [
+                                    'MBA @ Kellogg | Strategy & Operations Consulting | Ex-Deloitte',
+                                    'Aspiring Management Consultant | MBA @ ISB | 5 Years in IT Services',
+                                    'Strategy Consultant | MBA @ IIMA | Data-Driven Problem Solving',
+                                    'MBA Candidate @ Wharton | Consulting & Corporate Strategy | Ex-EY',
+                                ]
+                            },
+                            {
+                                func: 'Product Management', examples: [
+                                    'Product Manager | MBA @ Stanford GSB | Building AI-First Products',
+                                    'Aspiring PM | MBA @ IIM Bangalore | Ex-Software Engineer at Flipkart',
+                                    'Product Strategy | MBA 2026 @ Booth | Marketplace & Platform Design',
+                                    'Senior PM | MBA @ Columbia | FinTech & Payments | Ex-Goldman Sachs',
+                                ]
+                            },
+                            {
+                                func: 'Finance & Investment Banking', examples: [
+                                    'Investment Banking | MBA @ Columbia | M&A and Capital Markets',
+                                    'Private Equity Associate | MBA @ HBS | Healthcare & Life Sciences',
+                                    'Corporate Finance | MBA @ IIM Ahmedabad | FP&A & Strategic Planning',
+                                    'Venture Capital | MBA @ INSEAD | Early-Stage SaaS Investing',
+                                ]
+                            },
+                            {
+                                func: 'Marketing & Brand Management', examples: [
+                                    'Brand Manager | MBA @ Kellogg | FMCG & Consumer Insights',
+                                    'Marketing Strategy | MBA @ ISB | Digital-First Brand Building',
+                                    'Growth Marketing | MBA @ Haas | B2B SaaS & Product-Led Growth',
+                                    'CMO Track | MBA @ IIM Lucknow | Ex-Unilever Brand Marketing',
+                                ]
+                            },
+                            {
+                                func: 'Entrepreneurship', examples: [
+                                    'Founder & MBA @ Stanford GSB | Building [Company] | EdTech',
+                                    'MBA @ IIM Kozhikode | Building a D2C Brand in Wellness',
+                                    'Serial Entrepreneur | MBA @ Babson | Marketplace & Logistics',
+                                    'Social Impact | MBA @ Oxford Said | Sustainable Business Models',
+                                ]
+                            },
+                            {
+                                func: 'Career Switchers', examples: [
+                                    'Career Pivot: Engineering → Product | MBA @ Ross | Ex-Amazon SDE',
+                                    'From Military to Business | MBA @ Darden | Operations & Leadership',
+                                    'Transitioning to Tech | MBA @ Tepper | Supply Chain → Product Ops',
+                                ]
+                            },
                         ].map((section, i) => (
                             <div key={i} className="mb-10">
                                 <h3 className="text-lg font-bold text-[#0A0F1C] mb-4">{section.func}</h3>
@@ -153,7 +169,7 @@ export default function HeadlineMBAPage() {
                                 </li>
                             ))}
                         </ul>
-                        <p className="mt-4">For a complete student guide, read our <Link href="/for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link>. For career stage optimization, see our <Link href="/linkedin-optimization-guide" className="text-[#0A66C2] hover:underline">Complete Optimization Guide</Link>.</p>
+                        <p className="mt-4">For a complete student guide, read our <Link href="/linkedin-profile-for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link>. For career stage optimization, see our <Link href="/linkedin-optimization-guide" className="text-[#0A66C2] hover:underline">Complete Optimization Guide</Link>.</p>
                     </section>
 
                     {/* FAQ */}
@@ -188,7 +204,7 @@ export default function HeadlineMBAPage() {
                                 { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
                                 { label: 'For Marketers', href: '/linkedin-headline-marketers' },
                                 { label: 'For Designers', href: '/linkedin-headline-designers' },
-                                { label: 'For Students', href: '/for-students' },
+                                { label: 'For Students', href: '/linkedin-profile-for-students' },
                                 { label: 'About Section Guide', href: '/linkedin-about-guide' },
                                 { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
                                 { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },

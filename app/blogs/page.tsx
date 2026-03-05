@@ -61,9 +61,9 @@ export default function BlogsDirectoryPage() {
                         </nav>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mt-2">
                             <div className="max-w-2xl">
-                                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] mb-3 tracking-tight">LinkedIn Tips Blog</h1>
+                                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] mb-3 tracking-tight">Everything we&apos;ve learned about how LinkedIn profiles get noticed</h1>
                                 <p className="text-[15px] sm:text-base text-[#4B5563] leading-relaxed">
-                                    {ALL_BLOG_POSTS.length}+ expert articles on headlines, about sections, experience, content strategy, and more. Organized by tool.
+                                    Organized by the exact sections recruiters scan first. {ALL_BLOG_POSTS.length}+ expert articles, all free.
                                 </p>
                             </div>
                             <Link href="/" className="shrink-0 text-sm font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-5 py-2.5 rounded-lg no-underline hover:bg-[#DBEAFE] transition-colors whitespace-nowrap">
@@ -72,6 +72,23 @@ export default function BlogsDirectoryPage() {
                         </div>
                     </div>
                 </section>
+
+                {/* Start Here */}
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Start Here</p>
+                    <div className="grid sm:grid-cols-3 gap-3">
+                        {[
+                            { href: '/linkedin-profile-score', title: 'LinkedIn Profile Score Explained', desc: 'What your score means and how to improve it' },
+                            { href: '/linkedin-keywords-guide', title: 'LinkedIn SEO Guide', desc: 'How recruiters search and which keywords matter' },
+                            { href: '/recruiter-psychology', title: 'How Recruiters Actually Read Profiles', desc: 'What they look for in the first 7 seconds' },
+                        ].map((guide, i) => (
+                            <Link key={i} href={guide.href} className="group bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 no-underline hover:shadow-md transition-all">
+                                <p className="text-sm font-bold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors mb-1">{guide.title}</p>
+                                <p className="text-xs text-[#6B7280] leading-relaxed">{guide.desc}</p>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Tool filter tags */}
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sticky top-[57px] z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100">

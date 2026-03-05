@@ -187,7 +187,7 @@ export default function LinkedInProfileForStudentsPage() {
                 <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-[#6B7280] mb-8">
                     <Link href="/" className="hover:text-[#0A66C2] no-underline transition-colors">Home</Link>
                     <span>›</span>
-                    <Link href="/for-students" className="hover:text-[#0A66C2] no-underline transition-colors">For Students</Link>
+                    <Link href="/linkedin-profile-for-students" className="hover:text-[#0A66C2] no-underline transition-colors">For Students</Link>
                     <span>›</span>
                     <span className="text-[#0A0F1C] font-medium">Student Profile Guide</span>
                 </nav>
@@ -332,7 +332,7 @@ export default function LinkedInProfileForStudentsPage() {
                         <div className="flex flex-wrap gap-2">
                             <Link href="/linkedin-ranking" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Improve Your LinkedIn Ranking</Link>
                             <Link href="/linkedin-profile-score" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Check Your Profile Score</Link>
-                            <Link href="/for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Student Overview</Link>
+                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Student Overview</Link>
                             <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>
                             <Link href="/tools/linkedin-headline-generator" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Generator</Link>
                             <Link href="/tools" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">All Free Tools</Link>

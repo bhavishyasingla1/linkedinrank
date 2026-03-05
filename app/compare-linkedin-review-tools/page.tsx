@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Profile Review Tools Compared (2026) | LinkedInRank',
+    title: 'Best LinkedIn Profile Review Tools Compared (2026)',
     description: 'Compare the best LinkedIn profile review and optimization tools in 2026. Side-by-side comparison of features, pricing, privacy, methodology, and accuracy. See why LinkedInRank is the #1 free LinkedIn scorer.',
     keywords: 'linkedin profile review tools, best linkedin optimizer, linkedin profile tools comparison, linkedin scorer comparison, linkedinrank vs competitors, free linkedin profile review, linkedin profile audit tools',
     alternates: { canonical: 'https://linkedinrank.com/compare-linkedin-review-tools' },

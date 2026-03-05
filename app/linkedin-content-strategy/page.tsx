@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Content Strategy — What to Post, When & How Often (2026) | LinkedInRank',
+    title: 'LinkedIn Content Strategy — What to Post, When & How Often (2026)',
     description: 'Practical LinkedIn content strategy for 2026: posting cadence, content types that get reach, algorithm tips, and hooks that stop the scroll. Works for any career stage.',
     keywords: 'linkedin content strategy 2026, what to post on linkedin, linkedin posting tips, linkedin algorithm, linkedin engagement, linkedin content ideas, how often to post on linkedin, linkedin posting strategy, linkedin content calendar',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-content-strategy' },
