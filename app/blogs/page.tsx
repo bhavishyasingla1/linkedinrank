@@ -4,7 +4,7 @@ import { ALL_BLOG_POSTS } from '@/lib/blogData'
 import { ALL_TOOLS, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Tips Blog | 120+ Guides, Examples & Templates (2026)',
@@ -174,7 +174,7 @@ export default function BlogsDirectoryPage() {
                 </section>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

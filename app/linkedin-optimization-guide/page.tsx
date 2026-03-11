@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 import { howToJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
@@ -104,17 +104,19 @@ const jsonLd = {
                 { '@type': 'ListItem', position: 2, name: 'LinkedIn Optimization Guide', item: 'https://linkedinrank.com/linkedin-optimization-guide' },
             ],
         },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'How long does it take to optimize a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough optimization takes 2–3 hours for the initial setup. After that, quarterly reviews of 30–60 minutes keep your profile current. Focus on headline and About section first | they have the highest impact.' } },
-                { '@type': 'Question', name: 'What is the most important section to optimize?', acceptedAnswer: { '@type': 'Answer', text: 'The headline. It appears in every search result, connection request, and comment. A clear, keyword-rich headline directly impacts how often recruiters find you.' } },
-                { '@type': 'Question', name: 'Should I use LinkedIn Premium for optimization?', acceptedAnswer: { '@type': 'Answer', text: 'Premium is not required. The most impactful optimizations | headline, About, experience, skills | are available on free accounts.' } },
-                { '@type': 'Question', name: 'How do I know if my profile is optimized?', acceptedAnswer: { '@type': 'Answer', text: 'Upload your LinkedIn PDF to LinkedInRank for a free score across 30+ signals. You will get a score out of 100 with specific recommendations for each section.' } },
-                { '@type': 'Question', name: 'Do keywords really matter on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedIn search works similarly to Google. Recruiters search using job titles, skills, and industry terms. If those keywords are not in your profile, you will not appear in search results.' } },
-                { '@type': 'Question', name: 'How often should I update my LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'Every 3 months at minimum. Update after any role change, new certification, major project, or career direction shift.' } },
-            ],
-        },
+    ],
+}
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        { '@type': 'Question', name: 'How long does it take to optimize a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough optimization takes 2–3 hours for the initial setup. After that, quarterly reviews of 30–60 minutes keep your profile current. Focus on headline and About section first | they have the highest impact.' } },
+        { '@type': 'Question', name: 'What is the most important section to optimize?', acceptedAnswer: { '@type': 'Answer', text: 'The headline. It appears in every search result, connection request, and comment. A clear, keyword-rich headline directly impacts how often recruiters find you.' } },
+        { '@type': 'Question', name: 'Should I use LinkedIn Premium for optimization?', acceptedAnswer: { '@type': 'Answer', text: 'Premium is not required. The most impactful optimizations | headline, About, experience, skills | are available on free accounts.' } },
+        { '@type': 'Question', name: 'How do I know if my profile is optimized?', acceptedAnswer: { '@type': 'Answer', text: 'Upload your LinkedIn PDF to LinkedInRank for a free score across 30+ signals. You will get a score out of 100 with specific recommendations for each section.' } },
+        { '@type': 'Question', name: 'Do keywords really matter on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedIn search works similarly to Google. Recruiters search using job titles, skills, and industry terms. If those keywords are not in your profile, you will not appear in search results.' } },
+        { '@type': 'Question', name: 'How often should I update my LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'Every 3 months at minimum. Update after any role change, new certification, major project, or career direction shift.' } },
     ],
 }
 
@@ -122,6 +124,7 @@ export default function LinkedInOptimizationGuidePage() {
     return (
         <main className="min-h-screen bg-white">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
             <SiteHeader />
 
@@ -424,7 +427,7 @@ export default function LinkedInOptimizationGuidePage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

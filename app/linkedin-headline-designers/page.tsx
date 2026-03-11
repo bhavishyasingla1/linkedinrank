@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
@@ -214,7 +214,7 @@ export default function HeadlineDesignersPage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
 
 export const metadata: Metadata = {
@@ -48,17 +48,19 @@ const jsonLd = {
                 { '@type': 'HowToStep', position: 4, name: 'Stay under 120 characters', text: 'Only the first 120 characters are visible in search results. Keep your headline concise and front-load the most important information.' },
             ],
         },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'What is a good LinkedIn headline for a graphic designer?', acceptedAnswer: { '@type': 'Answer', text: 'A good headline includes your specific design specialization, value proposition, and 2-3 searchable keywords. Example: "Brand Identity Designer | Helping Startups Build Visual Systems That Scale | Figma, Illustrator"' } },
-                { '@type': 'Question', name: 'Should I use "Graphic Designer" in my LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, but be more specific. Instead of just "Graphic Designer", use your specialization: "UI/UX Designer", "Brand Designer", "Motion Graphics Designer". Recruiters search for specific terms, and specificity helps you rank higher.' } },
-                { '@type': 'Question', name: 'How long should my LinkedIn headline be?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn allows 220 characters, but only the first 120 are visible in search results. Keep your headline under 120 characters to ensure full visibility. Use | separators for readability.' } },
-                { '@type': 'Question', name: 'Should I mention tools like Figma or Adobe in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if space allows. Recruiters often search by tool name. Including Figma, Adobe Creative Suite, or specific tools helps your profile appear in those searches. Place them at the end of your headline.' } },
-                { '@type': 'Question', name: 'Can I use AI to write my graphic designer headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank\'s free headline generator creates keyword-optimized headlines for designers. Use AI as a starting point, then personalize with your specific achievements and style.' } },
-                { '@type': 'Question', name: 'What headline should a freelance graphic designer use?', acceptedAnswer: { '@type': 'Answer', text: 'Freelance designers should lead with their niche and client type. Example: "Freelance Brand Designer for Tech Startups | Logo, Visual Identity & Packaging | Available for Projects"' } },
-            ],
-        },
+    ],
+}
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        { '@type': 'Question', name: 'What is a good LinkedIn headline for a graphic designer?', acceptedAnswer: { '@type': 'Answer', text: 'A good headline includes your specific design specialization, value proposition, and 2-3 searchable keywords. Example: "Brand Identity Designer | Helping Startups Build Visual Systems That Scale | Figma, Illustrator"' } },
+        { '@type': 'Question', name: 'Should I use "Graphic Designer" in my LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, but be more specific. Instead of just "Graphic Designer", use your specialization: "UI/UX Designer", "Brand Designer", "Motion Graphics Designer". Recruiters search for specific terms, and specificity helps you rank higher.' } },
+        { '@type': 'Question', name: 'How long should my LinkedIn headline be?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn allows 220 characters, but only the first 120 are visible in search results. Keep your headline under 120 characters to ensure full visibility. Use | separators for readability.' } },
+        { '@type': 'Question', name: 'Should I mention tools like Figma or Adobe in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if space allows. Recruiters often search by tool name. Including Figma, Adobe Creative Suite, or specific tools helps your profile appear in those searches. Place them at the end of your headline.' } },
+        { '@type': 'Question', name: 'Can I use AI to write my graphic designer headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank\'s free headline generator creates keyword-optimized headlines for designers. Use AI as a starting point, then personalize with your specific achievements and style.' } },
+        { '@type': 'Question', name: 'What headline should a freelance graphic designer use?', acceptedAnswer: { '@type': 'Answer', text: 'Freelance designers should lead with their niche and client type. Example: "Freelance Brand Designer for Tech Startups | Logo, Visual Identity & Packaging | Available for Projects"' } },
     ],
 }
 
@@ -273,6 +275,7 @@ export default function GraphicDesignerHeadlinePage() {
         <main className="min-h-screen bg-white">
             <SiteHeader />
             <Script id="jsonld-gd-headline" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <Script id="jsonld-gd-headline-faq" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 {/* Breadcrumb */}
@@ -389,7 +392,7 @@ export default function GraphicDesignerHeadlinePage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

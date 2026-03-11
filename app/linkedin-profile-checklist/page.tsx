@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export default function ChecklistPage() {
     const [checked, setChecked] = useState<Record<string, boolean>>({})
@@ -242,7 +242,7 @@ export default function ChecklistPage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

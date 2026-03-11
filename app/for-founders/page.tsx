@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn for Founders (2026): 23 Profile Examples From Funded Startups',
@@ -204,7 +204,7 @@ export default function ForFoundersPage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

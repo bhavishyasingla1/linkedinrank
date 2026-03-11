@@ -10,7 +10,7 @@ import ImprovementPath from '@/components/ImprovementPath'
 import HeadlineRewriter from '@/components/HeadlineRewriter'
 import { AnalysisResult } from '@/lib/types'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 function buildAIPrompt(analysis: AnalysisResult): string {
     const profile = analysis.profile
@@ -594,7 +594,7 @@ export default function ResultsPage() {
                 </div>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

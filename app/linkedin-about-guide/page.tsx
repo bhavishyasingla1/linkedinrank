@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn About Section Guide | How to Write a Powerful Summary (2026)',
@@ -240,7 +240,7 @@ export default function LinkedInAboutGuidePage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

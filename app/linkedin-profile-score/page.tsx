@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Profile Score Explained: The 30-Signal Scoring System (2026)',
@@ -44,19 +44,21 @@ const jsonLd = {
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
             aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', ratingCount: '500', bestRating: '5' },
         },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'What is a LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'A LinkedIn profile score is a numerical rating of how effectively your profile communicates your professional value. LinkedInRank scores profiles out of 100 across 30+ signals including headline optimization, about section quality, experience impact, skills alignment, and overall completeness.' } },
-                { '@type': 'Question', name: 'How is the LinkedIn profile score calculated?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates six categories: Headline (20 points), About/Summary (20 points), Experience (25 points), Skills (15 points), Education (10 points), and Completeness (10 points). Each category has multiple sub-signals that are individually scored and combined for your total score out of 100.' } },
-                { '@type': 'Question', name: 'What is a good LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'Most professionals score 55-75 on their first analysis. Scores above 70 indicate a strong professional presence (Gold tier). Scores above 85 are rare and represent exceptionally well-crafted profiles (Platinum tier). A score below 55 (Bronze tier) means the profile needs significant work.' } },
-                { '@type': 'Question', name: 'Why did LinkedIn remove its profile strength meter?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn retired the Profile Strength indicator and All-Star badge in 2023. The feature was criticized for being vague and gameable — users could reach All-Star without actually having a strong profile. LinkedInRank provides what that meter could not: transparent, documented scoring with signal-level feedback.' } },
-                { '@type': 'Question', name: 'Is the LinkedIn profile score free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank is completely free with no premium tiers, paywalls, or upsells. You get your full score, tier placement, category breakdown, and AI-powered recommendations without creating an account or providing any personal information.' } },
-                { '@type': 'Question', name: 'How do I improve my LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'Focus on the highest-impact areas first: (1) Optimize your headline with role title and keywords, (2) Write a compelling first-person About section, (3) Add achievement-focused experience bullets, (4) Add 15-25 relevant skills, (5) Complete all profile sections. LinkedInRank provides a prioritized improvement roadmap showing exact point gains per action.' } },
-                { '@type': 'Question', name: 'Does a higher score mean more recruiter views?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Higher-scoring profiles are better optimized for LinkedIn search, meaning they appear more frequently in recruiter searches. Profiles in our Gold and Platinum tiers consistently report 3-5x more profile views and inbound opportunities compared to Bronze tier profiles.' } },
-                { '@type': 'Question', name: 'How often should I check my LinkedIn score?', acceptedAnswer: { '@type': 'Answer', text: 'Check your score after making significant profile changes — updating your headline, rewriting your About section, or adding new experience. We recommend re-analyzing monthly to track improvement and identify new optimization opportunities.' } },
-            ],
-        },
+    ],
+}
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        { '@type': 'Question', name: 'What is a LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'A LinkedIn profile score is a numerical rating of how effectively your profile communicates your professional value. LinkedInRank scores profiles out of 100 across 30+ signals including headline optimization, about section quality, experience impact, skills alignment, and overall completeness.' } },
+        { '@type': 'Question', name: 'How is the LinkedIn profile score calculated?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates six categories: Headline (20 points), About/Summary (20 points), Experience (25 points), Skills (15 points), Education (10 points), and Completeness (10 points). Each category has multiple sub-signals that are individually scored and combined for your total score out of 100.' } },
+        { '@type': 'Question', name: 'What is a good LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'Most professionals score 55-75 on their first analysis. Scores above 70 indicate a strong professional presence (Gold tier). Scores above 85 are rare and represent exceptionally well-crafted profiles (Platinum tier). A score below 55 (Bronze tier) means the profile needs significant work.' } },
+        { '@type': 'Question', name: 'Why did LinkedIn remove its profile strength meter?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn retired the Profile Strength indicator and All-Star badge in 2023. The feature was criticized for being vague and gameable — users could reach All-Star without actually having a strong profile. LinkedInRank provides what that meter could not: transparent, documented scoring with signal-level feedback.' } },
+        { '@type': 'Question', name: 'Is the LinkedIn profile score free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank is completely free with no premium tiers, paywalls, or upsells. You get your full score, tier placement, category breakdown, and AI-powered recommendations without creating an account or providing any personal information.' } },
+        { '@type': 'Question', name: 'How do I improve my LinkedIn profile score?', acceptedAnswer: { '@type': 'Answer', text: 'Focus on the highest-impact areas first: (1) Optimize your headline with role title and keywords, (2) Write a compelling first-person About section, (3) Add achievement-focused experience bullets, (4) Add 15-25 relevant skills, (5) Complete all profile sections. LinkedInRank provides a prioritized improvement roadmap showing exact point gains per action.' } },
+        { '@type': 'Question', name: 'Does a higher score mean more recruiter views?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Higher-scoring profiles are better optimized for LinkedIn search, meaning they appear more frequently in recruiter searches. Profiles in our Gold and Platinum tiers consistently report 3-5x more profile views and inbound opportunities compared to Bronze tier profiles.' } },
+        { '@type': 'Question', name: 'How often should I check my LinkedIn score?', acceptedAnswer: { '@type': 'Answer', text: 'Check your score after making significant profile changes — updating your headline, rewriting your About section, or adding new experience. We recommend re-analyzing monthly to track improvement and identify new optimization opportunities.' } },
     ],
 }
 
@@ -95,6 +97,7 @@ export default function LinkedInProfileScorePage() {
         <main className="min-h-screen bg-white">
             <SiteHeader />
             <Script id="jsonld-profile-score" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <Script id="jsonld-profile-score-faq" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 {/* Breadcrumb */}
@@ -280,7 +283,7 @@ export default function LinkedInProfileScorePage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

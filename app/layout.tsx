@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
     metadataBase: new URL('https://linkedinrank.com'),
     title: {
-        default: 'LinkedIn Rank — See Why Recruiters Skip Your Profile',
+        default: 'LinkedIn Rank Checker — Free LinkedIn Profile Score Tool (2026)',
         template: '%s | LinkedInRank',
     },
-    description: 'Recruiters decide in 7 seconds if your LinkedIn profile is worth contacting. Get your free score, see what\'s costing you opportunities, and fix it with AI-powered recommendations.',
+    description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required — results in under 60 seconds.',
     keywords: [
         'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
         'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
         canonical: 'https://linkedinrank.com',
     },
     openGraph: {
-        title: 'LinkedIn Rank — See Why Recruiters Skip Your Profile',
-        description: 'Recruiters decide in 7 seconds if your LinkedIn profile is worth contacting. Get your free score, see what\'s costing you opportunities, and fix it with AI-powered recommendations.',
+        title: 'LinkedIn Rank Checker — Free LinkedIn Profile Score Tool (2026)',
+        description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required.',
         url: 'https://linkedinrank.com',
         siteName: 'LinkedInRank',
         type: 'website',
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LinkedIn Rank — Free LinkedIn Profile Score Tool',
-        description: 'Score your LinkedIn profile across 30+ signals for free. Get AI-powered recommendations and a personalized improvement roadmap. No login required.',
+        title: 'LinkedIn Rank Checker — Free LinkedIn Profile Score (2026)',
+        description: 'Check your LinkedIn rank for free. Score your profile across 30+ signals, get AI-powered fixes, and see what recruiters see. No login required.',
         site: '@linkedinrank',
         creator: '@linkedinrank',
     },

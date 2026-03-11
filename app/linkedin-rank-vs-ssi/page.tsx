@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Rank vs Social Selling Index: Which Score Actually Matters? (2026)',
@@ -226,7 +226,7 @@ export default function LinkedInRankVsSSIPage() {
                 </article>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

@@ -5,7 +5,7 @@ import { getAllBlogSlugs, getBlogBySlug, getRelatedBlogs, getBlogsByToolSlug } f
 import { getToolBySlug, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd, articleJsonLd, faqJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export function generateStaticParams() {
     return getAllBlogSlugs().map(slug => ({ slug }))
@@ -309,7 +309,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

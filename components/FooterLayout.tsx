@@ -1,12 +1,13 @@
 'use client'
+// SiteFooter v2 — expanded 5-column layout
 
 import Link from 'next/link'
 
-export default function SiteFooter() {
+export default function FooterLayout() {
     return (
-        <footer className="border-t border-gray-100 bg-[#F8FAFC] py-10">
+        <footer suppressHydrationWarning className="border-t border-gray-100 bg-[#F8FAFC] py-10">
             <div className="max-w-6xl mx-auto px-6">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
+                <div suppressHydrationWarning className="grid grid-cols-2 sm:grid-cols-5 gap-8 mb-8">
                     {/* Brand + socials */}
                     <div className="col-span-2 sm:col-span-1">
                         <Link href="/" className="font-bold text-base text-[#0A0F1C] no-underline inline-block mb-3">
@@ -34,6 +35,23 @@ export default function SiteFooter() {
                             <Link href="/how-linkedin-rank-works" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">How It Works</Link>
                             <Link href="/methodology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Methodology</Link>
                             <Link href="/faq" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">FAQ</Link>
+                            <Link href="/compare-linkedin-review-tools" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Compare Tools</Link>
+                            <Link href="/linkedinrank-vs-manual-audits" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">vs Manual Audits</Link>
+                        </div>
+                    </div>
+
+                    {/* Guides */}
+                    <div>
+                        <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Guides</p>
+                        <div className="flex flex-col gap-2">
+                            <Link href="/linkedin-optimization-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Optimization Guide</Link>
+                            <Link href="/linkedin-headline-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Headline Guide</Link>
+                            <Link href="/linkedin-about-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">About Section Guide</Link>
+                            <Link href="/linkedin-keywords-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Keywords Guide</Link>
+                            <Link href="/linkedin-profile-checklist" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Profile Checklist</Link>
+                            <Link href="/recruiter-psychology" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Recruiter Psychology</Link>
+                            <Link href="/get-noticed-recruiters" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Get Noticed</Link>
+                            <Link href="/linkedin-mistakes" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Top 10 Mistakes</Link>
                         </div>
                     </div>
 
@@ -42,13 +60,13 @@ export default function SiteFooter() {
                         <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">Resources</p>
                         <div className="flex flex-col gap-2">
                             <Link href="/blogs" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Blog</Link>
-                            <Link href="/linkedin-optimization-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Optimization Guide</Link>
-                            <Link href="/linkedin-headline-guide" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Headline Guide</Link>
+                            <Link href="/for-jobseekers" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Job Seekers</Link>
+                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
+                            <Link href="/for-founders" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Founders</Link>
+                            <Link href="/ai-prompts-linkedin" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">AI Prompts</Link>
                             <Link href="/what-is-linkedin-rank" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">What Is LinkedIn Rank?</Link>
                             <Link href="/linkedin-rank-vs-ssi" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">LinkedIn Rank vs SSI</Link>
-                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">For Students</Link>
-                            <Link href="/linkedin-ranking" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">LinkedIn Ranking</Link>
-                            <Link href="/linkedin-profile-score" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Profile Score</Link>
+                            <Link href="/linkedin-content-strategy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Content Strategy</Link>
                         </div>
                     </div>
 
@@ -61,6 +79,25 @@ export default function SiteFooter() {
                             <Link href="/privacy" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Privacy</Link>
                             <Link href="/terms" className="text-xs text-[#6B7280] hover:text-[#0A0F1C] no-underline transition-colors">Terms</Link>
                         </div>
+                    </div>
+                </div>
+
+                {/* Tools row */}
+                <div className="border-t border-gray-200 pt-5 mb-5">
+                    <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2.5">Free LinkedIn Tools</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                        <Link href="/tools/linkedin-headline-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Headline Generator</Link>
+                        <Link href="/tools/linkedin-about-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">About Generator</Link>
+                        <Link href="/tools/linkedin-experience-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Experience Generator</Link>
+                        <Link href="/tools/linkedin-profile-keyword-analyzer" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Keyword Analyzer</Link>
+                        <Link href="/tools/linkedin-post-idea-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Post Idea Generator</Link>
+                        <Link href="/tools/linkedin-post-hook-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Post Hook Generator</Link>
+                        <Link href="/tools/linkedin-comment-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Comment Generator</Link>
+                        <Link href="/tools/linkedin-content-planner" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Content Planner</Link>
+                        <Link href="/tools/linkedin-connection-message-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Connection Messages</Link>
+                        <Link href="/tools/linkedin-story-to-post-converter" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Story to Post</Link>
+                        <Link href="/tools/linkedin-profile-photo-ring" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">Profile Photo Ring</Link>
+                        <Link href="/tools/linkedin-qr-code-generator" className="text-[11px] text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors">QR Code Generator</Link>
                     </div>
                 </div>
 

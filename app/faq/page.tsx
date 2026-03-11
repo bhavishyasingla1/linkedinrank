@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 const FAQ_SECTIONS = [
     {
@@ -270,7 +270,7 @@ export default function FaqPage() {
                 </div>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

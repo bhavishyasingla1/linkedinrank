@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'About LinkedInRank | Free LinkedIn Profile Scorer (2026)',
@@ -228,7 +228,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

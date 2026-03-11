@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Ranking Algorithm: The Complete Search Visibility Guide (2026)',
@@ -48,19 +48,21 @@ const jsonLd = {
                 { '@type': 'HowToStep', position: 5, name: 'Analyze Your Profile', text: 'Upload your LinkedIn PDF to LinkedInRank for a free score across 30+ signals with personalized recommendations.' },
             ],
         },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'What is LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn ranking refers to how your profile appears in LinkedIn search results when recruiters, hiring managers, or connections search for people with your skills and experience. A higher-ranking profile appears closer to the top of search results, increasing visibility and opportunities.' } },
-                { '@type': 'Question', name: 'How does the LinkedIn algorithm rank profiles?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn uses multiple ranking signals including keyword relevance in your headline and about section, profile completeness, connection proximity to the searcher, engagement activity, skills endorsements, and content quality. Profiles that match more of these signals rank higher in search results.' } },
-                { '@type': 'Question', name: 'What is the difference between LinkedIn Rank and SSI?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn SSI (Social Selling Index) measures social selling behavior — posting, engaging, connecting. LinkedInRank measures your actual profile quality across 30+ ranking signals that determine how you appear in search results. LinkedInRank is free, requires no login, and provides actionable profile-level recommendations.' } },
-                { '@type': 'Question', name: 'How can I check my LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'You can check your LinkedIn ranking by uploading your LinkedIn PDF export to LinkedInRank. You will receive a score out of 100, tier placement (Bronze/Silver/Gold/Platinum), and personalized recommendations to improve your profile ranking. It is free and requires no login.' } },
-                { '@type': 'Question', name: 'What are the most important LinkedIn ranking factors?', acceptedAnswer: { '@type': 'Answer', text: 'The most important ranking factors are: (1) Headline keywords matching search queries, (2) About section with relevant industry terms, (3) Experience descriptions with action verbs and outcomes, (4) Skills that align with your target role, and (5) Overall profile completeness and depth.' } },
-                { '@type': 'Question', name: 'How long does it take to improve LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'Profile optimization changes can start affecting search visibility within 1-2 weeks. However, sustained improvement requires consistent activity — posting, engaging, and updating your profile regularly. Most users see measurable ranking improvement within 30-60 days of implementing LinkedInRank recommendations.' } },
-                { '@type': 'Question', name: 'Does posting on LinkedIn affect my ranking?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedIn considers activity signals when ranking profiles. Regular posting, commenting, and engaging with content signals to the algorithm that you are an active, credible professional. However, profile quality (headline, about, experience) has a much larger impact than posting alone.' } },
-                { '@type': 'Question', name: 'Is LinkedIn ranking the same for everyone?', acceptedAnswer: { '@type': 'Answer', text: 'No. LinkedIn search results are personalized based on the searcher\'s network, location, industry, and connection proximity to you. Two recruiters searching the same keywords may see different rankings. However, strong profile optimization improves your ranking across all searchers.' } },
-            ],
-        },
+    ],
+}
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        { '@type': 'Question', name: 'What is LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn ranking refers to how your profile appears in LinkedIn search results when recruiters, hiring managers, or connections search for people with your skills and experience. A higher-ranking profile appears closer to the top of search results, increasing visibility and opportunities.' } },
+        { '@type': 'Question', name: 'How does the LinkedIn algorithm rank profiles?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn uses multiple ranking signals including keyword relevance in your headline and about section, profile completeness, connection proximity to the searcher, engagement activity, skills endorsements, and content quality. Profiles that match more of these signals rank higher in search results.' } },
+        { '@type': 'Question', name: 'What is the difference between LinkedIn Rank and SSI?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn SSI (Social Selling Index) measures social selling behavior — posting, engaging, connecting. LinkedInRank measures your actual profile quality across 30+ ranking signals that determine how you appear in search results. LinkedInRank is free, requires no login, and provides actionable profile-level recommendations.' } },
+        { '@type': 'Question', name: 'How can I check my LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'You can check your LinkedIn ranking by uploading your LinkedIn PDF export to LinkedInRank. You will receive a score out of 100, tier placement (Bronze/Silver/Gold/Platinum), and personalized recommendations to improve your profile ranking. It is free and requires no login.' } },
+        { '@type': 'Question', name: 'What are the most important LinkedIn ranking factors?', acceptedAnswer: { '@type': 'Answer', text: 'The most important ranking factors are: (1) Headline keywords matching search queries, (2) About section with relevant industry terms, (3) Experience descriptions with action verbs and outcomes, (4) Skills that align with your target role, and (5) Overall profile completeness and depth.' } },
+        { '@type': 'Question', name: 'How long does it take to improve LinkedIn ranking?', acceptedAnswer: { '@type': 'Answer', text: 'Profile optimization changes can start affecting search visibility within 1-2 weeks. However, sustained improvement requires consistent activity — posting, engaging, and updating your profile regularly. Most users see measurable ranking improvement within 30-60 days of implementing LinkedInRank recommendations.' } },
+        { '@type': 'Question', name: 'Does posting on LinkedIn affect my ranking?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedIn considers activity signals when ranking profiles. Regular posting, commenting, and engaging with content signals to the algorithm that you are an active, credible professional. However, profile quality (headline, about, experience) has a much larger impact than posting alone.' } },
+        { '@type': 'Question', name: 'Is LinkedIn ranking the same for everyone?', acceptedAnswer: { '@type': 'Answer', text: 'No. LinkedIn search results are personalized based on the searcher\'s network, location, industry, and connection proximity to you. Two recruiters searching the same keywords may see different rankings. However, strong profile optimization improves your ranking across all searchers.' } },
     ],
 }
 
@@ -102,6 +104,7 @@ export default function LinkedInRankingPage() {
         <main className="min-h-screen bg-white">
             <SiteHeader />
             <Script id="jsonld-linkedin-ranking" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <Script id="jsonld-linkedin-ranking-faq" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 {/* Breadcrumb */}
@@ -298,7 +301,7 @@ export default function LinkedInRankingPage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

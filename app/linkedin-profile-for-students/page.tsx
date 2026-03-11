@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'LinkedIn for Students (2026): 31 Profile Examples That Land Internships',
@@ -48,19 +48,21 @@ const jsonLd = {
                 { '@type': 'HowToStep', position: 5, name: 'Get your LinkedIn score', text: 'Upload your LinkedIn PDF to LinkedInRank for a free score out of 100 with personalized recommendations adapted to student career stage.' },
             ],
         },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'Should students have a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. LinkedIn is the primary platform where recruiters search for interns and entry-level candidates. Having a strong profile before graduation positions you ahead of most peers. Start building your LinkedIn during your sophomore year at the latest.' } },
-                { '@type': 'Question', name: 'What should a student put in their LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Use: [Major] Student at [University] | [Skill Area or Career Interest]. Example: "Marketing Student at NYU | Digital Strategy & Content Creation | Seeking Summer 2026 Internship". Avoid just putting "Student" — be specific about your field and goals.' } },
-                { '@type': 'Question', name: 'How do I fill my LinkedIn profile with no work experience?', acceptedAnswer: { '@type': 'Answer', text: 'Use academic projects, volunteer work, student organizations, hackathons, competitions, and coursework. These all demonstrate skills and initiative. Frame each entry with action verbs and outcomes just like professional experience.' } },
-                { '@type': 'Question', name: 'What skills should students add on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Add 10-20 skills including: technical skills from coursework (programming languages, design tools), research skills, and transferable skills (teamwork, public speaking, project management). Prioritize skills relevant to your target career.' } },
-                { '@type': 'Question', name: 'Should students connect with recruiters on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Send personalized connection requests mentioning shared interests, their company, or a specific job posting. Keep messages concise — 2-3 sentences maximum. Most recruiters on LinkedIn are open to connecting with engaged students.' } },
-                { '@type': 'Question', name: 'When should students start building their LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Start by sophomore year. This gives you time to build connections, share content, and develop a presence before internship recruiting begins. However, even starting as a senior or fresh graduate is valuable — it is never too late.' } },
-                { '@type': 'Question', name: 'How is LinkedInRank different for students?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank automatically detects student career stage and calibrates scoring expectations accordingly. Students are not penalized for limited experience — instead, the tool evaluates how well students leverage their coursework, projects, and extracurriculars.' } },
-                { '@type': 'Question', name: 'Do I need a professional photo for LinkedIn as a student?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Profiles with photos get 21x more views. You do not need a studio headshot — a well-lit photo against a clean background taken on your phone is sufficient. Dress in what you would wear to an internship interview.' } },
-            ],
-        },
+    ],
+}
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        { '@type': 'Question', name: 'Should students have a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. LinkedIn is the primary platform where recruiters search for interns and entry-level candidates. Having a strong profile before graduation positions you ahead of most peers. Start building your LinkedIn during your sophomore year at the latest.' } },
+        { '@type': 'Question', name: 'What should a student put in their LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Use: [Major] Student at [University] | [Skill Area or Career Interest]. Example: "Marketing Student at NYU | Digital Strategy & Content Creation | Seeking Summer 2026 Internship". Avoid just putting "Student" — be specific about your field and goals.' } },
+        { '@type': 'Question', name: 'How do I fill my LinkedIn profile with no work experience?', acceptedAnswer: { '@type': 'Answer', text: 'Use academic projects, volunteer work, student organizations, hackathons, competitions, and coursework. These all demonstrate skills and initiative. Frame each entry with action verbs and outcomes just like professional experience.' } },
+        { '@type': 'Question', name: 'What skills should students add on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Add 10-20 skills including: technical skills from coursework (programming languages, design tools), research skills, and transferable skills (teamwork, public speaking, project management). Prioritize skills relevant to your target career.' } },
+        { '@type': 'Question', name: 'Should students connect with recruiters on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Send personalized connection requests mentioning shared interests, their company, or a specific job posting. Keep messages concise — 2-3 sentences maximum. Most recruiters on LinkedIn are open to connecting with engaged students.' } },
+        { '@type': 'Question', name: 'When should students start building their LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Start by sophomore year. This gives you time to build connections, share content, and develop a presence before internship recruiting begins. However, even starting as a senior or fresh graduate is valuable — it is never too late.' } },
+        { '@type': 'Question', name: 'How is LinkedInRank different for students?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank automatically detects student career stage and calibrates scoring expectations accordingly. Students are not penalized for limited experience — instead, the tool evaluates how well students leverage their coursework, projects, and extracurriculars.' } },
+        { '@type': 'Question', name: 'Do I need a professional photo for LinkedIn as a student?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Profiles with photos get 21x more views. You do not need a studio headshot — a well-lit photo against a clean background taken on your phone is sufficient. Dress in what you would wear to an internship interview.' } },
     ],
 }
 
@@ -181,6 +183,7 @@ export default function LinkedInProfileForStudentsPage() {
         <main className="min-h-screen bg-white">
             <SiteHeader />
             <Script id="jsonld-students" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <Script id="jsonld-students-faq" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 {/* Breadcrumb */}
@@ -342,7 +345,7 @@ export default function LinkedInProfileForStudentsPage() {
                 </div>
             </article>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

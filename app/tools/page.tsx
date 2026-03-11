@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 import { ALL_TOOLS, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd } from '@/lib/jsonLd'
 
@@ -178,7 +178,7 @@ export default function ToolsPage() {
                 </div>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

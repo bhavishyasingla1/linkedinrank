@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 
 export const metadata: Metadata = {
     title: 'What Is LinkedIn Rank? How LinkedIn Profile Ranking Works (2026 Guide)',
@@ -258,7 +258,7 @@ export default function WhatIsLinkedInRankPage() {
                 </article>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }

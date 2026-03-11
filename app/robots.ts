@@ -1,0 +1,14 @@
+import type { MetadataRoute } from 'next'
+
+export default function robots(): MetadataRoute.Robots {
+    return {
+        rules: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: ['/loading-analysis', '/results', '/api/'],
+            },
+        ],
+        sitemap: 'https://linkedinrank.com/sitemap.xml',
+    }
+}

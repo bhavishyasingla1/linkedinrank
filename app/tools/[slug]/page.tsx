@@ -5,7 +5,7 @@ import { ALL_TOOLS, SITE_URL, SITE_NAME, getToolBySlug, getAllToolSlugs } from '
 import { getBlogsByToolSlug } from '@/lib/blogData'
 import { breadcrumbJsonLd, faqJsonLd, softwareApplicationJsonLd, howToToolJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
-import SiteFooter from '@/components/SiteFooter'
+import FooterLayout from '@/components/FooterLayout'
 import ToolPageClient from '@/components/tools/ToolPageClient'
 
 // ── SSG: prerender all tool pages ──────────────────────────
@@ -303,7 +303,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
                 </section>
             </div>
 
-            <SiteFooter />
+            <FooterLayout />
         </main>
     )
 }
