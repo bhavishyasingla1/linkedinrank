@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Rank vs Social Selling Index: Which Score Actually Matters? (2026)',
@@ -212,17 +213,7 @@ export default function LinkedInRankVsSSIPage() {
                     </section>
 
                     {/* Internal links */}
-                    <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6">
-                        <h2 className="text-base font-bold text-[#0A0F1C] mb-4">Related Guides</h2>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                            <Link href="/what-is-linkedin-rank" className="text-sm text-[#0A66C2] hover:underline font-medium">What Is LinkedIn Rank?</Link>
-                            <Link href="/linkedin-optimization-guide" className="text-sm text-[#0A66C2] hover:underline font-medium">Complete LinkedIn Profile Optimization Guide</Link>
-                            <Link href="/compare-linkedin-review-tools" className="text-sm text-[#0A66C2] hover:underline font-medium">Compare LinkedIn Review Tools</Link>
-                            <Link href="/linkedin-keywords-guide" className="text-sm text-[#0A66C2] hover:underline font-medium">LinkedIn Keywords and SEO Guide</Link>
-                            <Link href="/recruiter-psychology" className="text-sm text-[#0A66C2] hover:underline font-medium">How Recruiters View Your Profile</Link>
-                            <Link href="/tools" className="text-sm text-[#0A66C2] hover:underline font-medium">Free LinkedIn Tools</Link>
-                        </div>
-                    </section>
+                    <RelatedPages currentSlug="linkedin-rank-vs-ssi" />
                 </article>
             </div>
 

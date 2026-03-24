@@ -2,33 +2,57 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Sales Professionals | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for sales reps, AEs, SDRs, BDRs, and sales leaders in 2026. Headlines that build trust and generate inbound leads. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for Sales Reps That Win Deals (2026)',
+    description: 'Stop sounding like every other SDR. Copy 25+ LinkedIn headlines that build trust and generate inbound leads.',
     keywords: 'linkedin headline sales 2026, linkedin headline account executive, best linkedin headline for sales, SDR linkedin headline, sales manager linkedin profile, best sales linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-sales' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Sales Professionals | 25+ Examples',
+        title: '25+ LinkedIn Headlines for Sales Reps That Win Deals (2026)',
         description: 'Sales rep, AE, SDR, and sales leader headline formulas that generate inbound leads.',
         url: 'https://linkedinrank.com/linkedin-headline-sales',
     },
 }
 
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Sales Professionals',
+    description: 'LinkedIn headline examples for sales reps, AEs, SDRs, BDRs, and sales leaders that build trust and generate inbound leads.',
+    url: 'https://linkedinrank.com/linkedin-headline-sales',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Sales Professionals', url: 'https://linkedinrank.com/linkedin-headline-sales' },
+    ],
+    faqs: [
+        { question: 'Should sales reps lead with their company name in the headline?', answer: 'Only if your company is well-known to your target buyers. Otherwise, lead with the value you create for prospects — "Helping CTOs reduce cloud costs by 40%" is more compelling than "AE at [Unknown Startup]."' },
+        { question: 'What is the best headline format for SDRs?', answer: 'Lead with the outcome you help prospects achieve, not your quota. Format: "Helping [Target Audience] achieve [Outcome] | SDR @ [Company]". This builds trust instead of signalling a sales pitch.' },
+        { question: 'Should I mention quota achievements in my headline?', answer: 'Only if you are job hunting and targeting sales hiring managers. For prospect-facing profiles, lead with value you create for buyers, not internal metrics.' },
+        { question: 'How does LinkedInRank evaluate sales headlines?', answer: 'LinkedInRank scores your headline on clarity, keyword presence, positioning strength, and audience targeting. Upload your LinkedIn PDF for a free analysis plus 3 AI-generated alternatives.' },
+    ],
+})
+
 export default function HeadlineSalesPage() {
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href="/linkedin-headline-guide" className="hover:text-[#0A66C2] transition-colors no-underline">Headline Guide</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Sales Professionals</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Sales Professionals</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    In sales, your LinkedIn headline is your first cold outreach | it determines whether prospects open your message or ignore it. A headline that screams &ldquo;I&apos;m selling to you&rdquo; gets blocked. One that signals expertise and value gets conversations. Here are <strong className="text-[#0A0F1C]">25+ proven examples</strong>.
+                    In sales, your LinkedIn headline is your first cold outreach — it determines whether prospects open your message or ignore it. A headline that screams &ldquo;I&apos;m selling to you&rdquo; gets blocked. One that signals expertise and value gets conversations. Here are <strong className="text-[#0A0F1C]">25+ proven examples</strong>.
                 </p>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
@@ -106,26 +130,50 @@ export default function HeadlineSalesPage() {
                         </div>
                     </section>
 
+                    {/* Quick Templates */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Quick-Copy Sales Headline Templates</h2>
+                        <div className="space-y-2">
+                            {[
+                                'Helping [Target Audience] achieve [Outcome] | [Role] @ [Company]',
+                                '[Role] | [Industry You Sell To] | [Metric or Proof Point]',
+                                'I help [Who] solve [Problem] using [Solution Type]',
+                                '[Role] | [GTM Motion: PLG / Enterprise / SMB] | [Company or Industry]',
+                            ].map((t, i) => (
+                                <div key={i} className="bg-gradient-to-r from-[#EFF6FF] to-white border border-[#DBEAFE] rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{t}</div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* FAQ */}
+                    <section>
+                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
+                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
+                        <div className="space-y-3">
+                            {[
+                                { q: 'Should sales reps lead with their company name?', a: 'Only if your company is well-known to your target buyers. Otherwise, lead with the value you create for prospects — "Helping CTOs reduce cloud costs by 40%" is more compelling.' },
+                                { q: 'What is the best headline format for SDRs?', a: 'Lead with the outcome you help prospects achieve. "Helping [Target Audience] achieve [Outcome] | SDR @ [Company]" builds trust instead of signalling a sales pitch.' },
+                                { q: 'Should I mention quota achievements?', a: 'Only if targeting sales hiring managers. For prospect-facing profiles, lead with value you create for buyers, not internal metrics.' },
+                                { q: 'Can LinkedInRank score my sales headline?', a: 'Yes. Upload your LinkedIn PDF to LinkedInRank for a free headline analysis plus 3 AI-generated alternatives optimised for your role.' },
+                            ].map((item, i) => (
+                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
+                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
+                                        {item.q}
+                                        <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                    </summary>
+                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                </details>
+                            ))}
+                        </div>
+                    </section>
+
                     <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-8 sm:p-10 text-center">
                         <h2 className="text-lg font-bold text-[#0A0F1C] mb-4">Get your headline scored</h2>
                         <p className="text-sm text-[#4B5563] mb-4 max-w-md mx-auto">Upload your LinkedIn PDF for a free headline analysis plus 3 AI-generated alternatives.</p>
-                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It's Free</Link>
+                        <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It&apos;s Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Marketers', href: '/linkedin-headline-marketers' },
-                                { label: 'For Consultants', href: '/linkedin-headline-consultants' },
-                                { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-sales" />
                 </div>
             </article>
 

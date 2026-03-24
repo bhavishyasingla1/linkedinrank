@@ -1,68 +1,42 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Script from 'next/script'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy (2026)',
-    description: 'Instantly use 150+ proven LinkedIn headlines for graphic designers. Entry-level, freelance, branding, UI/UX — pick, paste, and get noticed. Free headline generator included.',
+    title: '150+ LinkedIn Headlines for Graphic Designers (2026)',
+    description: 'Entry-level, freelance, or brand design? Pick from 150+ LinkedIn headlines and formulas. Free headline generator inside.',
     keywords: 'linkedin headline for graphic designer, graphic designer linkedin headline examples, headline for graphic designer, linkedin headline graphic designer, best linkedin headline for graphic designer, graphic designer linkedin headline, linkedin headline examples graphic designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer' },
     openGraph: {
-        title: 'LinkedIn Headline for Graphic Designer — 150+ Examples to Copy',
-        description: '150+ copy-paste LinkedIn headlines for graphic designers. Entry-level, freelance, branding, UI/UX. Pick and paste now.',
+        title: '150+ LinkedIn Headlines for Graphic Designers (2026)',
+        description: 'Entry-level, freelance, or brand design? Pick from 150+ LinkedIn headlines and formulas.',
         url: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'LinkedIn Headline for Graphic Designer: 150+ Examples',
-            description: 'Comprehensive collection of LinkedIn headline examples for graphic designers across all specializations.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer',
-            datePublished: '2026-02-01',
-            dateModified: '2026-02-23',
-        },
-        {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-                { '@type': 'ListItem', position: 3, name: 'Graphic Designer Headlines', item: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer' },
-            ],
-        },
-        {
-            '@type': 'HowTo',
-            name: 'How to Write a LinkedIn Headline as a Graphic Designer',
-            step: [
-                { '@type': 'HowToStep', position: 1, name: 'Lead with your specialization', text: 'Start with your specific design discipline — "UI/UX Designer", "Brand Identity Designer", or "Motion Graphics Designer" instead of just "Graphic Designer".' },
-                { '@type': 'HowToStep', position: 2, name: 'Add your value proposition', text: 'Include what you help clients or companies achieve — "Building Visual Systems That Scale" or "Turning Complex Ideas Into Clear Visuals".' },
-                { '@type': 'HowToStep', position: 3, name: 'Include searchable keywords', text: 'Add 2-3 keywords recruiters search for: tools (Figma, Adobe), styles (Minimalist, Brand Identity), or industries (SaaS, E-commerce).' },
-                { '@type': 'HowToStep', position: 4, name: 'Stay under 120 characters', text: 'Only the first 120 characters are visible in search results. Keep your headline concise and front-load the most important information.' },
-            ],
-        },
+const jsonLd = guidePageJsonLd({
+    title: '150+ LinkedIn Headlines for Graphic Designers',
+    description: 'Comprehensive collection of LinkedIn headline examples for graphic designers across all specializations.',
+    url: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'Graphic Designer Headlines', url: 'https://linkedinrank.com/linkedin-headline-for-graphic-designer' },
     ],
-}
-
-const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-        { '@type': 'Question', name: 'What is a good LinkedIn headline for a graphic designer?', acceptedAnswer: { '@type': 'Answer', text: 'A good headline includes your specific design specialization, value proposition, and 2-3 searchable keywords. Example: "Brand Identity Designer | Helping Startups Build Visual Systems That Scale | Figma, Illustrator"' } },
-        { '@type': 'Question', name: 'Should I use "Graphic Designer" in my LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, but be more specific. Instead of just "Graphic Designer", use your specialization: "UI/UX Designer", "Brand Designer", "Motion Graphics Designer". Recruiters search for specific terms, and specificity helps you rank higher.' } },
-        { '@type': 'Question', name: 'How long should my LinkedIn headline be?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn allows 220 characters, but only the first 120 are visible in search results. Keep your headline under 120 characters to ensure full visibility. Use | separators for readability.' } },
-        { '@type': 'Question', name: 'Should I mention tools like Figma or Adobe in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if space allows. Recruiters often search by tool name. Including Figma, Adobe Creative Suite, or specific tools helps your profile appear in those searches. Place them at the end of your headline.' } },
-        { '@type': 'Question', name: 'Can I use AI to write my graphic designer headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank\'s free headline generator creates keyword-optimized headlines for designers. Use AI as a starting point, then personalize with your specific achievements and style.' } },
-        { '@type': 'Question', name: 'What headline should a freelance graphic designer use?', acceptedAnswer: { '@type': 'Answer', text: 'Freelance designers should lead with their niche and client type. Example: "Freelance Brand Designer for Tech Startups | Logo, Visual Identity & Packaging | Available for Projects"' } },
+    faqs: [
+        { question: 'What is a good LinkedIn headline for a graphic designer?', answer: 'A good headline includes your specific design specialization, value proposition, and 2-3 searchable keywords. Example: "Brand Identity Designer | Helping Startups Build Visual Systems That Scale | Figma, Illustrator"' },
+        { question: 'Should I use "Graphic Designer" in my LinkedIn headline?', answer: 'Yes, but be more specific. Instead of just "Graphic Designer", use your specialization: "UI/UX Designer", "Brand Designer", "Motion Graphics Designer". Recruiters search for specific terms.' },
+        { question: 'How long should my LinkedIn headline be?', answer: 'LinkedIn allows 220 characters, but only the first 120 are visible in search results. Keep your headline under 120 characters to ensure full visibility. Use | separators for readability.' },
+        { question: 'Should I mention tools like Figma or Adobe in my headline?', answer: 'Yes, if space allows. Recruiters often search by tool name. Including Figma, Adobe Creative Suite, or specific tools helps your profile appear in those searches.' },
+        { question: 'Can I use AI to write my graphic designer headline?', answer: "Yes. LinkedInRank's free headline generator creates keyword-optimized headlines for designers. Use AI as a starting point, then personalize with your specific achievements and style." },
+        { question: 'What headline should a freelance graphic designer use?', answer: 'Freelance designers should lead with their niche and client type. Example: "Freelance Brand Designer for Tech Startups | Logo, Visual Identity & Packaging | Available for Projects"' },
     ],
-}
+})
 
 const HEADLINE_CATEGORIES = [
     {
@@ -274,8 +248,7 @@ export default function GraphicDesignerHeadlinePage() {
     return (
         <main className="min-h-screen bg-white">
             <SiteHeader />
-            <Script id="jsonld-gd-headline" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <Script id="jsonld-gd-headline-faq" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
                 {/* Breadcrumb */}
@@ -378,17 +351,7 @@ export default function GraphicDesignerHeadlinePage() {
                     </section>
 
                     {/* Internal Links */}
-                    <div className="pt-8 border-t border-gray-100 mt-6">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/linkedin-ranking" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Improve Your LinkedIn Ranking</Link>
-                            <Link href="/linkedin-profile-score" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Check Your Profile Score</Link>
-                            <Link href="/linkedin-headline-designers" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Designer Headlines Guide</Link>
-                            <Link href="/tools/linkedin-headline-generator" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Generator Tool</Link>
-                            <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Complete Headline Guide</Link>
-                            <Link href="/tools" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">All Free Tools</Link>
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-for-graphic-designer" />
                 </div>
             </article>
 

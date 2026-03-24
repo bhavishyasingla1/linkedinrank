@@ -2,50 +2,37 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas (2026)',
-    description: 'Write a LinkedIn headline that attracts recruiters. 50+ proven examples and formulas for students, job seekers, founders, and professionals. Free headline scoring with LinkedInRank | the #1 LinkedIn profile scorer.',
+    title: '50+ LinkedIn Headline Examples & Formulas (2026 Guide)',
+    description: 'Write a LinkedIn headline recruiters actually click. 50+ examples, 5 formulas, and common mistakes to avoid.',
     keywords: 'linkedin headline examples, linkedin headline generator, best linkedin headlines 2026, linkedin headline for freshers, linkedin headline for students, linkedin headline for job seekers, linkedin headline formula, linkedin headline tips, linkedin headline optimization, linkedin headline ideas',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-guide' },
     openGraph: {
-        title: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas',
-        description: '50+ proven headline examples and formulas. Write a headline that attracts recruiters and drives profile views.',
+        title: '50+ LinkedIn Headline Examples & Formulas (2026 Guide)',
+        description: 'Write a LinkedIn headline recruiters actually click. 50+ examples and 5 proven formulas.',
         url: 'https://linkedinrank.com/linkedin-headline-guide',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'LinkedIn Headline Writing Guide | 50+ Examples & Formulas',
-            description: 'Learn how to write a LinkedIn headline that gets noticed. 50+ examples by role, 5 proven formulas, common mistakes, and how recruiters search.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-headline-guide',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-            ],
-        },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'How long should my LinkedIn headline be?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedIn allows 220 characters, but only ~60 show in search results. Front-load your strongest keywords in the first 60 characters. Use the remaining space for secondary positioning.' } },
-                { '@type': 'Question', name: 'Should I include my company name in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Only if your company is well-known and adds credibility. Otherwise, use that space for skills and value statements that help recruiters find you.' } },
-                { '@type': 'Question', name: 'Can I use emojis in my LinkedIn headline?', acceptedAnswer: { '@type': 'Answer', text: 'Sparingly. One or two relevant emojis can add visual distinction, but overuse looks unprofessional. Many recruiters and hiring managers prefer clean, text-only headlines.' } },
-                { '@type': 'Question', name: 'How does LinkedInRank score my headline?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates headline clarity, keyword presence, role specificity, and positioning strength. It also generates 3 AI-powered headline alternatives based on your profile.' } },
-            ],
-        },
+const jsonLd = guidePageJsonLd({
+    title: '50+ LinkedIn Headline Examples & Formulas',
+    description: 'Learn how to write a LinkedIn headline that gets noticed. 50+ examples by role, 5 proven formulas, common mistakes, and how recruiters search.',
+    url: 'https://linkedinrank.com/linkedin-headline-guide',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
     ],
-}
+    faqs: [
+        { question: 'How long should my LinkedIn headline be?', answer: 'LinkedIn allows 220 characters, but only ~60 show in search results. Front-load your strongest keywords in the first 60 characters.' },
+        { question: 'Should I include my company name in my headline?', answer: 'Only if your company is well-known and adds credibility. Otherwise, use that space for skills and value statements.' },
+        { question: 'Can I use emojis in my LinkedIn headline?', answer: 'Sparingly. One or two relevant emojis can add visual distinction, but overuse looks unprofessional.' },
+        { question: 'How does LinkedInRank score my headline?', answer: 'LinkedInRank evaluates headline clarity, keyword presence, role specificity, and positioning strength. It also generates 3 AI-powered alternatives.' },
+    ],
+})
 
 export default function LinkedInHeadlineGuidePage() {
     return (
@@ -249,25 +236,7 @@ export default function LinkedInHeadlineGuidePage() {
                     </div>
 
                     {/* Related Guides */}
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'For Students', href: '/for-students' },
-                                { label: 'For Job Seekers', href: '/for-jobseekers' },
-                                { label: 'For Founders', href: '/for-founders' },
-                                { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                                { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                                { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
-                                { label: 'For MBA Students', href: '/linkedin-headline-mba' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-guide" />
                 </div>
             </article>
 

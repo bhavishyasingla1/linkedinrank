@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 const FAQ_SECTIONS = [
     {
@@ -242,32 +243,7 @@ export default function FaqPage() {
                     </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                    <div className="flex flex-wrap gap-2">
-                        {[
-                            { label: 'LinkedIn Ranking Guide', href: '/linkedin-ranking' },
-                            { label: 'Profile Score Checker', href: '/linkedin-profile-score' },
-                            { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                            { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                            { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                            { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                            { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                            { label: 'Headlines for Designers', href: '/linkedin-headline-for-graphic-designer' },
-                            { label: 'Student Profile Guide', href: '/linkedin-profile-for-students' },
-                            { label: 'For Job Seekers', href: '/for-jobseekers' },
-                            { label: 'For Founders', href: '/for-founders' },
-                            { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
-                            { label: 'Personal Branding', href: '/linkedin-personal-branding' },
-                            { label: 'Content Strategy', href: '/linkedin-content-strategy' },
-                            { label: 'Top 1% Profiles', href: '/top-1-percent-profiles' },
-                            { label: 'AI Prompts for LinkedIn', href: '/ai-prompts-linkedin' },
-                        ].map((item, i) => (
-                            <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                        ))}
-                    </div>
-                </div>
+                <RelatedPages currentSlug="faq" />
             </div>
 
             <FooterLayout />

@@ -194,3 +194,60 @@ export function itemListJsonLd(items: { name: string; url: string; description: 
         })),
     }
 }
+
+/**
+ * Combined JSON-LD for guide/profession pages:
+ * Produces a single @graph with Article + BreadcrumbList + FAQPage.
+ * This ensures exactly one schema block per page.
+ */
+export function guidePageJsonLd(params: {
+    title: string
+    description: string
+    url: string
+    datePublished?: string
+    dateModified?: string
+    breadcrumbs: { name: string; url: string }[]
+    faqs: { question: string; answer: string }[]
+}) {
+    const graph: Record<string, unknown>[] = [
+        {
+            '@type': 'Article',
+            headline: params.title,
+            description: params.description,
+            author: ORGANIZATION_REF,
+            publisher: ORGANIZATION_REF,
+            mainEntityOfPage: params.url,
+            datePublished: params.datePublished || '2025-01-01',
+            dateModified: params.dateModified || '2026-03-24',
+            inLanguage: 'en-US',
+        },
+        {
+            '@type': 'BreadcrumbList',
+            itemListElement: params.breadcrumbs.map((item, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                name: item.name,
+                item: item.url,
+            })),
+        },
+    ]
+
+    if (params.faqs.length > 0) {
+        graph.push({
+            '@type': 'FAQPage',
+            mainEntity: params.faqs.map(faq => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: faq.answer,
+                },
+            })),
+        })
+    }
+
+    return {
+        '@context': 'https://schema.org',
+        '@graph': graph,
+    }
+}

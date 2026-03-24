@@ -15,19 +15,19 @@ export default function SiteHeader() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
-        <header className="border-b border-gray-100 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+        <header className="bg-white/90 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]" style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
                 <Link href="/" className="font-bold text-base sm:text-lg tracking-tight text-[#0A0F1C] no-underline shrink-0">
                     LinkedIn<span className="text-gradient-brand">Rank</span>
                 </Link>
 
                 {/* Desktop nav */}
-                <nav className="hidden md:flex items-center gap-1">
+                <nav className="hidden md:flex items-center gap-0.5">
                     {NAV_LINKS.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-[13px] font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50 px-3 py-2 rounded-lg transition-colors no-underline"
+                            className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50/80 px-3.5 py-2 rounded-lg transition-all duration-200 no-underline"
                         >
                             {link.label}
                         </Link>
@@ -39,7 +39,7 @@ export default function SiteHeader() {
                     <a
                         href="/#upload"
                         suppressHydrationWarning
-                        className="text-[13px] font-semibold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] hover:shadow-[0_4px_12px_rgba(10,102,194,0.3)] hover:-translate-y-[1px] px-4 py-2 rounded-lg transition-all duration-200 no-underline whitespace-nowrap"
+                        className="text-[13px] font-semibold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] shadow-[0_2px_8px_rgba(10,102,194,0.25)] hover:shadow-[0_4px_16px_rgba(10,102,194,0.35)] hover:-translate-y-[1px] px-5 py-2.5 rounded-xl transition-all duration-200 no-underline whitespace-nowrap"
                     >
                         Analyze Profile
                     </a>

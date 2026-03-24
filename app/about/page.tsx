@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'About LinkedInRank | Free LinkedIn Profile Scorer (2026)',
@@ -206,26 +207,7 @@ export default function AboutPage() {
                     <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                    <div className="flex flex-wrap gap-2">
-                        {[
-                            { label: 'Our Story', href: '/story' },
-                            { label: 'Methodology', href: '/methodology' },
-                            { label: 'How It Works', href: '/how-linkedin-rank-works' },
-                            { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            { label: 'For Students', href: '/for-students' },
-                            { label: 'For Job Seekers', href: '/for-jobseekers' },
-                            { label: 'For Founders', href: '/for-founders' },
-                            { label: 'Privacy Policy', href: '/privacy' },
-                            { label: 'Data Security', href: '/data-security' },
-                            { label: 'Terms', href: '/terms' },
-                            { label: 'FAQ', href: '/faq' },
-                        ].map((item, i) => (
-                            <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                        ))}
-                    </div>
-                </div>
+                <RelatedPages currentSlug="about" />
             </div>
 
             <FooterLayout />

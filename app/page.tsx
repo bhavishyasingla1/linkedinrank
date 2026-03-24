@@ -33,27 +33,29 @@ export default function HomePage() {
             />
 
             {/* Hero */}
-            <section className="hero-glow bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-24 pb-16 sm:pb-20 overflow-hidden">
+            <section className="hero-glow relative overflow-hidden pt-24 sm:pt-32 pb-24 sm:pb-32" style={{ background: 'linear-gradient(180deg, #F0F4FA 0%, #F8FAFC 40%, #FFFFFF 100%)' }}>
+                {/* Dot pattern overlay */}
+                <div className="absolute inset-0 opacity-[0.35]" style={{ backgroundImage: "radial-gradient(circle, #CBD5E1 1px, transparent 1px)", backgroundSize: '24px 24px' }} />
                 <div className="max-w-6xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
                         <div>
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                <span className="text-xs font-semibold text-[#4B5563]">Free • No signup required</span>
+                            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-8">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.4)]" />
+                                <span className="text-xs font-semibold text-[#374151]">Free • No signup • Under 60 seconds</span>
                             </div>
-                            <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#0A0F1C] leading-[1.15] mb-5 tracking-tight">
+                            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#0A0F1C] leading-[1.15] mb-8 tracking-tight">
                                 Most LinkedIn profiles look fine.<br />
                                 But recruiters <span className="text-gradient-brand">skip them in seconds.</span>
                             </h1>
-                            <p className="text-[17px] text-[#4B5563] max-w-md mb-8 leading-relaxed">
-                                LinkedInRank analyzes your profile and shows exactly what recruiters see — with a score and specific fixes.
+                            <p className="text-[17px] text-[#4B5563] max-w-md mb-10 leading-[1.75]">
+                                LinkedInRank analyzes your profile across 30+ recruiter signals and shows exactly what to fix — with a score out of 100.
                             </p>
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
                                 <a href="#upload" className="btn-primary text-sm cursor-pointer">Analyze My Profile (Free)</a>
-                                <div className="flex items-center gap-3 text-xs text-[#6B7280]">
-                                    <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>No login</span>
-                                    <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>PDF only</span>
-                                    <span className="flex items-center gap-1"><svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Under 60s</span>
+                                <div className="flex items-center gap-4 text-xs text-[#6B7280]">
+                                    <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>No login</span>
+                                    <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>PDF only</span>
+                                    <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Under 60s</span>
                                 </div>
                             </div>
                         </div>
@@ -63,32 +65,38 @@ export default function HomePage() {
             </section>
 
             {/* Social Proof Bar */}
-            <section className="bg-white border-y border-gray-100 py-5">
-                <div className="max-w-5xl mx-auto px-6">
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+            <section className="bg-white py-8">
+                <div className="max-w-4xl mx-auto px-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0 sm:divide-x sm:divide-gray-200">
                         {[
-                            { value: '30+', label: 'Ranking Signals Evaluated', color: '#0A66C2' },
+                            { value: '30+', label: 'Ranking Signals', color: '#0A66C2' },
                             { value: '120+', label: 'Free Guides', color: '#7C3AED' },
-                            { value: '12', label: 'Free LinkedIn Tools', color: '#059669' },
+                            { value: '12', label: 'Free Tools', color: '#059669' },
                         ].map((stat, i) => (
-                            <div key={i} className="flex items-center gap-3">
-                                <span className="text-xl font-extrabold tabular-nums" style={{ color: stat.color }}>{stat.value}</span>
-                                <span className="text-xs text-[#6B7280] font-medium">{stat.label}</span>
+                            <div key={i} className="flex items-center gap-3 sm:px-12">
+                                <div className="min-w-[44px] h-11 rounded-xl flex items-center justify-center px-2" style={{ backgroundColor: stat.color + '0D' }}>
+                                    <span className="text-lg font-extrabold tabular-nums whitespace-nowrap" style={{ color: stat.color }}>{stat.value}</span>
+                                </div>
+                                <span className="text-sm text-[#374151] font-medium whitespace-nowrap">{stat.label}</span>
                             </div>
                         ))}
                     </div>
                 </div>
+                <div className="section-divider max-w-5xl mx-auto mt-8" />
             </section>
 
             {/* Recognition Section — Why profiles get ignored */}
-            <section className="bg-white py-14 sm:py-16 border-t border-gray-100">
-                <div className="max-w-4xl mx-auto px-6">
-                    <div className="text-center mb-8">
-                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Sound Familiar?</p>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-3">Why LinkedIn profiles get ignored</h2>
-                        <p className="text-[15px] text-[#4B5563] leading-relaxed">You might have one of these issues — and not even know it:</p>
+            <section className="bg-white py-20 sm:py-24">
+                <div className="max-w-3xl mx-auto px-6">
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 mb-6">
+                            <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" /></svg>
+                            <span className="text-xs font-semibold text-red-500">Sound Familiar?</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C] mb-4">Why LinkedIn profiles get ignored</h2>
+                        <p className="text-[15px] text-[#6B7280] leading-relaxed max-w-lg mx-auto">You might have one of these issues — and not even know it.</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
                         {[
                             { num: '01', text: 'A headline that says what you are — but not why you\'re valuable' },
                             { num: '02', text: 'Experience that lists tasks instead of results' },
@@ -96,70 +104,82 @@ export default function HomePage() {
                             { num: '04', text: 'An About section that doesn\'t explain your direction' },
                             { num: '05', text: 'A profile that looks complete — but isn\'t convincing', full: true },
                         ].map((item, i) => (
-                            <div key={i} className={`flex items-start gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3.5 border-l-[3px] border-l-red-300 hover:border-l-red-400 hover:shadow-sm transition-all ${item.full ? 'sm:col-span-2 sm:max-w-[50%]' : ''}`}>
-                                <span className="text-[10px] font-bold text-red-400 tabular-nums mt-0.5 shrink-0">{item.num}</span>
+                            <div key={i} className={`flex items-start gap-4 bg-white border border-gray-200 rounded-xl px-5 py-5 border-l-[3px] border-l-red-300 hover:border-l-red-500 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-200 ${item.full ? 'sm:col-span-2 sm:max-w-[50%]' : ''}`}>
+                                <span className="w-7 h-7 rounded-lg bg-red-50 text-red-400 text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{item.num}</span>
                                 <span className="text-sm text-[#4B5563] leading-relaxed">{item.text}</span>
                             </div>
                         ))}
                     </div>
-                    <p className="text-center text-[15px] text-[#0A0F1C] font-semibold">LinkedInRank shows exactly where your profile breaks.</p>
+                    <div className="text-center">
+                        <p className="text-[15px] text-[#0A0F1C] font-semibold mb-4">LinkedInRank shows exactly where your profile breaks.</p>
+                        <a href="#upload" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] inline-flex items-center gap-1.5 transition-colors cursor-pointer">
+                            Check yours free <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </a>
+                    </div>
                 </div>
             </section>
 
             {/* Before vs After Profile Breakdown */}
-            <section className="bg-[#F8FAFC] py-14 sm:py-16 border-t border-gray-100">
+            <section className="py-20 sm:py-28" style={{ background: 'linear-gradient(180deg, #F0F4FA 0%, #F8FAFC 100%)' }}>
                 <div className="max-w-3xl mx-auto px-6">
-                    <div className="text-center mb-8">
-                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Real Example</p>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C]">See what a profile improvement looks like</h2>
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
+                            <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                            <span className="text-xs font-semibold text-[#374151]">Real Example</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C]">See what a profile improvement looks like</h2>
                     </div>
 
-                    <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+                    <div className="bg-white border border-gray-200/80 rounded-2xl p-8 sm:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.06),0_12px_48px_rgba(0,0,0,0.04)]">
                         {/* Score change */}
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="text-center px-3">
-                                <span className="text-4xl font-extrabold text-red-400 tabular-nums">42</span>
-                                <p className="text-[10px] text-[#6B7280] uppercase font-bold mt-1">Before</p>
+                        <div className="flex items-center gap-4 sm:gap-6 mb-8">
+                            <div className="text-center shrink-0">
+                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-2">
+                                    <span className="text-2xl sm:text-3xl font-extrabold text-red-400 tabular-nums">42</span>
+                                </div>
+                                <p className="text-[10px] text-[#6B7280] uppercase font-bold tracking-wide">Before</p>
                             </div>
-                            <div className="flex-1 relative">
-                                <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="flex-1 flex flex-col items-center gap-3">
+                                <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
                                     <div className="h-full bg-gradient-to-r from-red-300 via-amber-300 to-emerald-400 rounded-full" style={{ width: '71%' }} />
                                 </div>
-                                <div className="absolute top-4 left-1/2 -translate-x-1/2">
-                                    <span className="text-[10px] font-bold text-[#0A66C2] bg-[#EFF6FF] px-2 py-0.5 rounded-full">+29 points</span>
-                                </div>
+                                <span className="text-[11px] font-bold text-white bg-gradient-to-r from-[#0A66C2] to-[#4F46E5] px-4 py-1.5 rounded-full shadow-[0_2px_8px_rgba(10,102,194,0.3)]">+29 points</span>
                             </div>
-                            <div className="text-center px-3">
-                                <span className="text-4xl font-extrabold text-emerald-500 tabular-nums">71</span>
-                                <p className="text-[10px] text-[#6B7280] uppercase font-bold mt-1">After</p>
+                            <div className="text-center shrink-0">
+                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-2">
+                                    <span className="text-2xl sm:text-3xl font-extrabold text-emerald-500 tabular-nums">71</span>
+                                </div>
+                                <p className="text-[10px] text-[#6B7280] uppercase font-bold tracking-wide">After</p>
                             </div>
                         </div>
 
                         {/* Headline comparison */}
-                        <div className="space-y-4">
+                        <div className="space-y-5">
                             <div>
-                                <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Headline</p>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div className="bg-red-50 border border-red-100 rounded-xl p-4 border-l-[3px] border-l-red-300">
-                                        <p className="text-[10px] font-bold text-red-400 uppercase mb-1.5">Before</p>
-                                        <p className="text-sm text-[#4B5563]">Student at XYZ University</p>
+                                <p className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-4">Headline</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="bg-red-50/50 border border-red-100 rounded-xl p-5 border-l-[3px] border-l-red-300">
+                                        <p className="text-[10px] font-bold text-red-400 uppercase mb-2">Before</p>
+                                        <p className="text-sm text-[#6B7280]">Student at XYZ University</p>
                                     </div>
-                                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 border-l-[3px] border-l-emerald-400">
-                                        <p className="text-[10px] font-bold text-emerald-500 uppercase mb-1.5">After</p>
-                                        <p className="text-sm text-[#0A0F1C] font-medium">Computer Engineering Student | ML Projects | Python &amp; Data Analysis</p>
+                                    <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-5 border-l-[3px] border-l-emerald-400">
+                                        <p className="text-[10px] font-bold text-emerald-500 uppercase mb-2">After</p>
+                                        <p className="text-sm text-[#0A0F1C] font-semibold">Computer Engineering Student | ML Projects | Python &amp; Data Analysis</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-4">
-                                <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider mb-2">Why the score improved</p>
-                                <ul className="space-y-1.5">
+                            <div className="bg-gradient-to-br from-[#F8FAFC] to-[#EFF6FF] border border-blue-100 rounded-xl p-6">
+                                <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider mb-4">Why the score improved</p>
+                                <ul className="space-y-3">
                                     {[
                                         'Clearer role positioning',
                                         'Added searchable keywords recruiters actually filter by',
                                         'Removed vague, generic wording',
                                     ].map((reason, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-sm text-[#4B5563]">
-                                            <svg className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                        <li key={i} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                                            <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                                                <svg className="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            </div>
                                             {reason}
                                         </li>
                                     ))}
@@ -167,35 +187,39 @@ export default function HomePage() {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-5 text-center">
+                    <div className="mt-10 text-center">
                         <a href="#upload" className="btn-primary text-sm cursor-pointer">See your own score</a>
                     </div>
                 </div>
             </section>
 
             {/* Upload */}
-            <section id="upload" className="bg-gradient-to-b from-[#F8FAFC] to-white py-14 scroll-mt-20">
-                <div className="max-w-xl mx-auto px-6">
+            <section id="upload" className="bg-white py-16 sm:py-20 scroll-mt-20">
+                <div className="max-w-lg mx-auto px-6">
+                    <div className="text-center mb-8">
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C]">Upload your LinkedIn PDF</h2>
+                        <p className="text-sm text-[#6B7280] mt-2">Get your score in under 60 seconds</p>
+                    </div>
                     <div className="gradient-border p-[2px] rounded-2xl">
                         <div className="bg-white rounded-[14px]">
                             <FileUploadWrapper />
                         </div>
                     </div>
-                    <div className="flex items-center justify-center gap-2 mt-4 text-xs text-[#6B7280]">
-                        <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
-                        <span>Your data is never stored — processed in memory only</span>
+                    <div className="flex items-center justify-center gap-2 mt-5 text-xs text-[#6B7280]">
+                        <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                        <span className="font-medium">Your data is never stored — processed in memory only</span>
                     </div>
                     {/* PDF instructions */}
-                    <div className="mt-5 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">How to export your LinkedIn PDF</p>
-                        <ol className="space-y-2.5">
+                    <div className="mt-8 bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">How to export your LinkedIn PDF</p>
+                        <ol className="space-y-3">
                             {[
                                 'Go to your LinkedIn profile page',
                                 'Click "More" or "Resources" → then "Save to PDF"',
                                 'Upload the downloaded file above'
                             ].map((step, i) => (
                                 <li key={i} className="flex items-start gap-3">
-                                    <span className="w-5 h-5 rounded-md bg-[#0A66C2] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                                    <span className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5 shadow-[0_2px_6px_rgba(10,102,194,0.25)]">{i + 1}</span>
                                     <span className="text-sm text-[#4B5563] font-medium">{step}</span>
                                 </li>
                             ))}
@@ -205,11 +229,11 @@ export default function HomePage() {
             </section>
 
             {/* Popular LinkedIn Guides - SEO Internal Links */}
-            <section className="bg-gradient-to-b from-white to-gray-50 py-16 border-t border-gray-100">
+            <section className="bg-gradient-to-b from-white to-gray-50 py-20 sm:py-24 border-t border-gray-100">
                 <div className="max-w-5xl mx-auto px-6">
-                    <div className="text-center mb-10">
-                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Popular Guides</p>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-3">Master LinkedIn Optimization</h2>
+                    <div className="text-center mb-12">
+                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Popular Guides</p>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-4">Master LinkedIn Optimization</h2>
                         <p className="text-sm text-[#6B7280] max-w-2xl mx-auto">Expert guides covering everything from profile optimization to recruiter psychology. All free, actionable advice.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -236,9 +260,9 @@ export default function HomePage() {
             </section>
 
             {/* Free Tools Section | high on page for visibility */}
-            <section className="below-fold bg-gradient-to-b from-[#F8FAFC] to-white py-14 sm:py-16 border-t border-gray-100">
+            <section className="below-fold bg-gradient-to-b from-[#F8FAFC] to-white py-20 sm:py-24 border-t border-gray-100">
                 <div className="max-w-5xl mx-auto px-6">
-                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
                         <div>
                             <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Free Tools</p>
                             <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Everything you need to improve your LinkedIn profile</h2>
@@ -248,10 +272,10 @@ export default function HomePage() {
                             View all tools <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
                         </Link>
                     </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         {[
                             { name: 'Headline Generator', slug: 'linkedin-headline-generator', color: '#0A66C2', tag: 'Most Popular' },
-                            { name: 'About Section Generator', slug: 'linkedin-about-generator', color: '#10B981', tag: 'AI Powered' },
+                            { name: 'About Generator', slug: 'linkedin-about-generator', color: '#10B981', tag: 'AI Powered' },
                             { name: 'Experience Generator', slug: 'linkedin-experience-generator', color: '#F59E0B', tag: 'AI Powered' },
                             { name: 'Keyword Analyzer', slug: 'linkedin-profile-keyword-analyzer', color: '#8B5CF6', tag: 'Beginner Friendly' },
                             { name: 'Post Idea Generator', slug: 'linkedin-post-idea-generator', color: '#F97316', tag: 'AI Powered' },
@@ -266,13 +290,13 @@ export default function HomePage() {
                             <Link
                                 key={tool.slug}
                                 href={`/tools/${tool.slug}`}
-                                className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3.5 hover:border-[#0A66C2] hover:shadow-[0_4px_16px_rgba(10,102,194,0.08)] hover:-translate-y-0.5 transition-all duration-200 group"
+                                className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3.5 hover:border-[#0A66C2] hover:shadow-[0_4px_16px_rgba(10,102,194,0.08)] hover:-translate-y-0.5 transition-all duration-200 group min-w-0"
                             >
                                 <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: tool.color + '14' }}>
                                     <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: tool.color }} />
                                 </div>
-                                <span className="text-[13px] font-medium text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors">{tool.name}</span>
-                                {tool.tag && <span className="text-[10px] font-semibold ml-auto whitespace-nowrap px-2 py-0.5 rounded-full" style={{ color: tool.color, backgroundColor: tool.color + '10' }}>{tool.tag}</span>}
+                                <span className="text-[13px] font-medium text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors truncate">{tool.name}</span>
+                                {tool.tag && <span className="text-[10px] font-semibold ml-auto whitespace-nowrap shrink-0 px-2 py-0.5 rounded-full" style={{ color: tool.color, backgroundColor: tool.color + '10' }}>{tool.tag}</span>}
                             </Link>
                         ))}
                     </div>
@@ -280,11 +304,14 @@ export default function HomePage() {
             </section>
 
             {/* How It Works */}
-            <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+            <section className="bg-[#F8FAFC] py-20 sm:py-24">
                 <div className="max-w-4xl mx-auto px-6">
-                    <div className="text-center mb-10">
-                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">How It Works</p>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C]">Three steps to get recruiter-ready</h2>
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
+                            <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+                            <span className="text-xs font-semibold text-[#374151]">How It Works</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C]">Three steps to get recruiter-ready</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
@@ -293,13 +320,13 @@ export default function HomePage() {
                             { step: '02', title: 'Profile signals evaluated', desc: 'Your profile is evaluated across 30+ signals that recruiters scan — keywords, clarity, structure, and completeness.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
                             { step: '03', title: 'Get your score and fixes', desc: 'Receive your score, specific improvements you can apply immediately, and a prioritized roadmap.', icon: 'M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6' },
                         ].map((item, i) => (
-                            <div key={i} className="step-connector bg-white border border-gray-200 rounded-xl p-6 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300">
-                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white flex items-center justify-center mb-4 shadow-[0_4px_12px_rgba(10,102,194,0.25)]">
+                            <div key={i} className="step-connector bg-white border border-gray-200 rounded-2xl p-7 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white flex items-center justify-center mb-5 shadow-[0_4px_16px_rgba(10,102,194,0.3)]">
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
                                 </div>
                                 <span className="text-[10px] font-bold text-[#0A66C2] uppercase tracking-widest">Step {item.step}</span>
-                                <h3 className="text-base font-bold text-[#0A0F1C] mb-2 mt-1">{item.title}</h3>
-                                <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
+                                <h3 className="text-base font-bold text-[#0A0F1C] mb-2 mt-1.5">{item.title}</h3>
+                                <p className="text-sm text-[#6B7280] leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -307,23 +334,28 @@ export default function HomePage() {
             </section>
 
             {/* What You Get */}
-            <section className="below-fold bg-[#F8FAFC] py-20">
+            <section className="below-fold bg-white py-20 sm:py-24">
                 <div className="max-w-4xl mx-auto px-6">
-                    <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">What You Get</p>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-10">Your LinkedInRank report</h2>
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] mb-5">
+                            <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
+                            <span className="text-xs font-semibold text-[#0A66C2]">What You Get</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C]">Your LinkedInRank report</h2>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                         {[
-                            { title: 'Score & Tier', desc: 'A score out of 100 across 6 categories: Headline, About, Experience, Skills, Education, and Completeness.', icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z' },
-                            { title: 'What to Fix', desc: 'Signal-level feedback showing exactly which parts of each section passed and which need work.', icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-                            { title: 'How to Fix It', desc: 'Specific rewrites and a prioritized roadmap showing how many points each improvement adds.', icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10' },
+                            { title: 'Score & Tier', desc: 'A score out of 100 across 6 categories: Headline, About, Experience, Skills, Education, and Completeness.', icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z', color: '#D97706' },
+                            { title: 'What to Fix', desc: 'Signal-level feedback showing exactly which parts of each section passed and which need work.', icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z', color: '#059669' },
+                            { title: 'How to Fix It', desc: 'Specific rewrites and a prioritized roadmap showing how many points each improvement adds.', icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10', color: '#0A66C2' },
                         ].map((item, i) => (
-                            <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                                <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] flex items-center justify-center mb-4">
-                                    <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                            <div key={i} className="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 hover:bg-white hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300">
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: item.color + '12' }}>
+                                    <svg className="w-5.5 h-5.5" style={{ color: item.color }} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
                                 </div>
-                                <h3 className="text-base font-bold text-[#0A0F1C] mb-1.5">{item.title}</h3>
-                                <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
+                                <h3 className="text-base font-bold text-[#0A0F1C] mb-2">{item.title}</h3>
+                                <p className="text-sm text-[#6B7280] leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -411,11 +443,14 @@ export default function HomePage() {
             </section>
 
             {/* Who This Is For */}
-            <section className="bg-[#F8FAFC] py-14 sm:py-16 border-t border-gray-100">
+            <section className="py-16 sm:py-20" style={{ background: 'linear-gradient(180deg, #F8FAFC 0%, #F0F4FA 100%)' }}>
                 <div className="max-w-4xl mx-auto px-6">
-                    <div className="text-center mb-8">
-                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">Who This Is For</p>
-                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C]">LinkedInRank is useful for</h2>
+                    <div className="text-center mb-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
+                            <svg className="w-3.5 h-3.5 text-[#7C3AED]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>
+                            <span className="text-xs font-semibold text-[#374151]">Who This Is For</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0F1C]">LinkedInRank adapts to your career stage</h2>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {[

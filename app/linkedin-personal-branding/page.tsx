@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Personal Branding Guide | Build Authority & Visibility (2026)',
@@ -205,23 +206,7 @@ export default function LinkedInPersonalBrandingPage() {
                     </div>
 
                     {/* Related Guides */}
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Viral Post Formulas', href: '/viral-post-formulas' },
-                                { label: 'Content Strategy', href: '/linkedin-content-strategy' },
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                                { label: 'Top 1% Profiles', href: '/top-1-percent-profiles' },
-                                { label: 'For Founders', href: '/for-founders' },
-                                { label: 'Profile Photo Guide', href: '/linkedin-profile-photo-guide' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-personal-branding" />
                 </div>
             </article>
 

@@ -2,29 +2,53 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Consultants | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for management, strategy, and freelance consultants in 2026. Headlines that build credibility and attract clients. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for Consultants (2026 Guide)',
+    description: 'Build credibility before the first call. 25+ LinkedIn headlines for strategy, management, and tech consultants.',
     keywords: 'linkedin headline consultant 2026, linkedin headline management consultant, best linkedin headline for consultant, strategy consultant linkedin profile, freelance consultant linkedin, best consultant linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-consultants' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Consultants | 25+ Examples',
-        description: 'Management, strategy, and freelance consultant headline formulas that build credibility.',
+        title: '25+ LinkedIn Headlines for Consultants (2026 Guide)',
+        description: 'Build credibility before the first call. 25+ LinkedIn headlines for strategy, management, and tech consultants.',
         url: 'https://linkedinrank.com/linkedin-headline-consultants',
     },
 }
 
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Consultants',
+    description: 'LinkedIn headline examples for management, strategy, technology, and freelance consultants.',
+    url: 'https://linkedinrank.com/linkedin-headline-consultants',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Consultants', url: 'https://linkedinrank.com/linkedin-headline-consultants' },
+    ],
+    faqs: [
+        { question: 'Should consultants lead with their firm name or their specialty?', answer: 'Lead with specialty unless your firm is in the top 3 (McKinsey, BCG, Bain). For most consultants, "Strategy Consultant | Growth & M&A" is more effective than "Consultant at [Firm]."' },
+        { question: 'How should freelance consultants position their headline?', answer: 'Lead with the outcome you deliver, not your status. "Helping SaaS Startups Hit $1M ARR" is better than "Freelance Business Consultant." Specificity attracts clients.' },
+        { question: 'Should I include Big 4 or MBB alumni status?', answer: 'Yes, if recent and relevant. "Ex-McKinsey" or "EY Alum" adds credibility. Place it as a suffix, not the main headline focus.' },
+        { question: 'Can LinkedInRank help consultants improve their profile?', answer: 'Yes. Upload your LinkedIn PDF for a free headline and profile analysis. You will get positioning recommendations and AI-generated headline alternatives.' },
+    ],
+})
+
 export default function HeadlineConsultantsPage() {
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href="/linkedin-headline-guide" className="hover:text-[#0A66C2] transition-colors no-underline">Headline Guide</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Consultants</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Consultants</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
@@ -111,20 +135,7 @@ export default function HeadlineConsultantsPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For MBA Students', href: '/linkedin-headline-mba' },
-                                { label: 'For Finance', href: '/linkedin-headline-finance' },
-                                { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-consultants" />
                 </div>
             </article>
 

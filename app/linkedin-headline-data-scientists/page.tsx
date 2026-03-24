@@ -2,29 +2,53 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Data Scientists | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for data scientists, data analysts, ML engineers, and AI researchers in 2026. Headlines that attract recruiters. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for Data Scientists (2026 Guide)',
+    description: 'ML, NLP, or analytics? Copy 25+ LinkedIn headlines data science recruiters actually search for.',
     keywords: 'linkedin headline data scientist 2026, linkedin headline data analyst, best linkedin headline for ml engineer, linkedin headline ai researcher, data science linkedin profile, best data scientist linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-data-scientists' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Data Scientists | 25+ Examples',
-        description: 'Data scientist, ML engineer, and AI researcher headline formulas that attract recruiters.',
+        title: '25+ LinkedIn Headlines for Data Scientists (2026 Guide)',
+        description: 'ML, NLP, or analytics? Copy 25+ LinkedIn headlines data science recruiters actually search for.',
         url: 'https://linkedinrank.com/linkedin-headline-data-scientists',
     },
 }
 
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Data Scientists',
+    description: 'LinkedIn headline examples for data scientists, data analysts, ML engineers, and AI researchers.',
+    url: 'https://linkedinrank.com/linkedin-headline-data-scientists',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Data Scientists', url: 'https://linkedinrank.com/linkedin-headline-data-scientists' },
+    ],
+    faqs: [
+        { question: 'Should data scientists list all tools in their headline?', answer: 'No. Pick 2-3 core tools and pair them with your domain. "Data Scientist | Python & NLP | FinTech" is more effective than listing 10 tools.' },
+        { question: 'How should ML engineers differentiate from data scientists?', answer: 'ML engineers should emphasise production systems and deployment. Mention MLOps, model serving, and system design rather than EDA and analysis.' },
+        { question: 'Should I mention "PhD" in my headline?', answer: 'Yes, if in research-oriented roles. For industry, only if the PhD is in a directly relevant field and you are early career.' },
+        { question: 'Can LinkedInRank evaluate data science profiles?', answer: 'Yes. Upload your LinkedIn PDF for a free headline analysis with keyword scoring and 3 AI-generated alternatives tailored to data science roles.' },
+    ],
+})
+
 export default function HeadlineDataScientistsPage() {
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href="/linkedin-headline-guide" className="hover:text-[#0A66C2] transition-colors no-underline">Headline Guide</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Data Scientists</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Data Scientists</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
@@ -127,20 +151,7 @@ export default function HeadlineDataScientistsPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
-                                { label: 'For Product Managers', href: '/linkedin-headline-product-managers' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-data-scientists" />
                 </div>
             </article>
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'AI Prompts for LinkedIn | 26+ Copy-Paste Templates for Every Section (2026)',
@@ -225,26 +226,7 @@ export default function AIPromptsLinkedInPage() {
                 </div>
 
                 {/* Related guides */}
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                    <div className="flex flex-wrap gap-2">
-                        {[
-                            { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                            { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                            { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                            { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
-                            { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                            { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                            { label: 'Personal Branding', href: '/linkedin-personal-branding' },
-                            { label: 'Content Strategy', href: '/linkedin-content-strategy' },
-                            { label: 'For Students', href: '/for-students' },
-                            { label: 'For Job Seekers', href: '/for-jobseekers' },
-                        ].map((item, i) => (
-                            <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                        ))}
-                    </div>
-                </div>
+                <RelatedPages currentSlug="ai-prompts-linkedin" />
             </article>
 
             <FooterLayout />

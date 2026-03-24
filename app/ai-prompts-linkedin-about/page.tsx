@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'AI Prompts for LinkedIn About Section | Templates for ChatGPT & Claude (2026)',
@@ -314,6 +315,7 @@ export default function AIPromptsAboutPage() {
                 </div>
             </article>
 
+            <RelatedPages currentSlug="ai-prompts-linkedin-about" />
             <FooterLayout />
         </main>
     )

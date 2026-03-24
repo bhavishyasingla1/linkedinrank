@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'Best LinkedIn Profile Review Tools Compared (2026)',
@@ -155,6 +156,7 @@ export default function CompareToolsPage() {
                 </div>
             </article>
 
+            <RelatedPages currentSlug="compare-linkedin-review-tools" />
             <FooterLayout />
         </main>
     )

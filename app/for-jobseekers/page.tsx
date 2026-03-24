@@ -2,50 +2,39 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Tips for Job Seekers | Free Guide (2026)',
-    description: 'Optimize your LinkedIn profile for recruiters and hiring managers in 2026. Data-backed strategies for headlines, experience, skills, and keywords. Free scoring with LinkedInRank | the #1 LinkedIn scorer.',
+    title: 'LinkedIn for Job Seekers: Recruiter-Ready Guide (2026)',
+    description: 'Optimise your profile for recruiter searches in 30 minutes. Data-backed headline, keywords, and skills strategies.',
     keywords: 'linkedin for job seekers 2026, linkedin profile optimization job search, linkedin recruiter tips, linkedinrank job search, linkedin keywords job seekers, linkedin profile for job hunting',
     alternates: { canonical: 'https://linkedinrank.com/for-jobseekers' },
     openGraph: {
-        title: 'LinkedIn Profile Tips for Job Seekers | Free Guide',
-        description: 'Optimize your LinkedIn for recruiters. Data-backed strategies and free scoring with LinkedInRank.',
+        title: 'LinkedIn for Job Seekers: Recruiter-Ready Guide (2026)',
+        description: 'Optimise your profile for recruiter searches in 30 minutes. Data-backed strategies.',
         url: 'https://linkedinrank.com/for-jobseekers',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'LinkedIn for Job Seekers (2026): The Complete Optimization Checklist',
-            description: 'Job seekers: Optimize your LinkedIn in 30 minutes. Recruiter-focused checklist for headline, keywords, visibility. Get interviews faster.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/for-jobseekers',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList', itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'For Job Seekers', item: 'https://linkedinrank.com/for-jobseekers' },
-            ]
-        },
-        {
-            '@type': 'FAQPage', mainEntity: [
-                { '@type': 'Question', name: 'How long should my LinkedIn profile be for job searching?', acceptedAnswer: { '@type': 'Answer', text: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills.' } },
-                { '@type': 'Question', name: 'Should my LinkedIn match my resume exactly?', acceptedAnswer: { '@type': 'Answer', text: 'They should be consistent but not identical. LinkedIn should be more conversational and include elements resumes lack: About narrative, Featured section, recommendations.' } },
-                { '@type': 'Question', name: 'How do I handle a career gap on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively | mention skills you learned, freelance work, or personal development.' } },
-                { '@type': 'Question', name: 'Is LinkedIn Premium worth it for job seekers?', acceptedAnswer: { '@type': 'Answer', text: 'Premium gives you InMail credits and shows who viewed your profile. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' } },
-                { '@type': 'Question', name: 'How does LinkedInRank help with job searching?', acceptedAnswer: { '@type': 'Answer', text: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score.' } },
-                { '@type': 'Question', name: 'How quickly can I improve my profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough overhaul takes 2–3 hours. Start with headline and About section. Most people see increased profile views within 1–2 weeks of optimization.' } },
-            ]
-        },
+const jsonLd = guidePageJsonLd({
+    title: 'LinkedIn for Job Seekers: The Complete Optimization Checklist',
+    description: 'Optimize your LinkedIn profile for recruiter searches. Headline, keywords, experience, skills — the complete checklist.',
+    url: 'https://linkedinrank.com/for-jobseekers',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'For Job Seekers', url: 'https://linkedinrank.com/for-jobseekers' },
     ],
-}
+    faqs: [
+        { question: 'How long should my LinkedIn profile be for job searching?', answer: 'Every section should be filled. Aim for 800–1,500 characters in your About section, 3–5 bullet points per experience role with metrics, and 15–25 skills.' },
+        { question: 'Should my LinkedIn match my resume exactly?', answer: 'They should be consistent but not identical. LinkedIn should be more conversational and include elements resumes lack: About narrative, Featured section, recommendations.' },
+        { question: 'How do I handle a career gap on LinkedIn?', answer: 'Be honest. LinkedIn now supports career breaks as a section. Frame the gap positively — mention skills you learned, freelance work, or personal development.' },
+        { question: 'Is LinkedIn Premium worth it for job seekers?', answer: 'Premium gives you InMail credits and shows who viewed your profile. However, the most impactful improvements (headline, keywords, experience, skills) are completely free.' },
+        { question: 'How does LinkedInRank help with job searching?', answer: 'LinkedInRank evaluates the same signals recruiters scan: headline clarity, keyword presence, experience depth, and profile completeness. Upload your PDF for a free score.' },
+        { question: 'How quickly can I improve my profile?', answer: 'A thorough overhaul takes 2–3 hours. Start with headline and About section. Most people see increased profile views within 1–2 weeks of optimization.' },
+    ],
+})
 
 export default function ForJobSeekersPage() {
     return (
@@ -54,10 +43,11 @@ export default function ForJobSeekersPage() {
             <SiteHeader />
 
             <article className="max-w-2xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Job Seekers</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">For Job Seekers</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">How to Optimize Your LinkedIn Profile for Recruiters</h1>
                 <p className="text-[15px] text-[#4B5563] mb-10 leading-relaxed max-w-xl">
@@ -185,19 +175,7 @@ export default function ForJobSeekersPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100 mt-6">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/linkedin-profile-for-students" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Students</Link>
-                            <Link href="/for-founders" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">For Founders</Link>
-                            <Link href="/linkedin-headline-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Headline Guide</Link>
-                            <Link href="/recruiter-psychology" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Recruiter Psychology</Link>
-                            <Link href="/get-noticed-recruiters" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Get Noticed by Recruiters</Link>
-                            <Link href="/linkedin-keywords-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Keywords Guide</Link>
-                            <Link href="/linkedin-resume-vs-profile" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Resume vs Profile</Link>
-                            <Link href="/linkedin-optimization-guide" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Full Optimization Guide</Link>
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="for-jobseekers" />
                 </div>
             </article>
 

@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
-import { howToJsonLd } from '@/lib/jsonLd'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd, howToJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Profile Optimization (2026): 47 Expert Tips That Get Interviews',
@@ -84,47 +85,30 @@ const howToSchema = howToJsonLd({
     ],
 })
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'Complete LinkedIn Profile Optimization Guide 2026',
-            description: 'The definitive guide to optimizing your LinkedIn profile. Step-by-step strategies for headline, about section, experience, skills, keywords, and personal branding.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-optimization-guide',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'LinkedIn Optimization Guide', item: 'https://linkedinrank.com/linkedin-optimization-guide' },
-            ],
-        },
+const pageSchema = guidePageJsonLd({
+    title: 'Complete LinkedIn Profile Optimization Guide 2026',
+    description: 'The definitive guide to optimizing your LinkedIn profile. Step-by-step strategies for headline, about section, experience, skills, keywords, and personal branding.',
+    url: 'https://linkedinrank.com/linkedin-optimization-guide',
+    datePublished: '2025-01-01',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'LinkedIn Optimization Guide', url: 'https://linkedinrank.com/linkedin-optimization-guide' },
     ],
-}
-
-const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-        { '@type': 'Question', name: 'How long does it take to optimize a LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'A thorough optimization takes 2–3 hours for the initial setup. After that, quarterly reviews of 30–60 minutes keep your profile current. Focus on headline and About section first | they have the highest impact.' } },
-        { '@type': 'Question', name: 'What is the most important section to optimize?', acceptedAnswer: { '@type': 'Answer', text: 'The headline. It appears in every search result, connection request, and comment. A clear, keyword-rich headline directly impacts how often recruiters find you.' } },
-        { '@type': 'Question', name: 'Should I use LinkedIn Premium for optimization?', acceptedAnswer: { '@type': 'Answer', text: 'Premium is not required. The most impactful optimizations | headline, About, experience, skills | are available on free accounts.' } },
-        { '@type': 'Question', name: 'How do I know if my profile is optimized?', acceptedAnswer: { '@type': 'Answer', text: 'Upload your LinkedIn PDF to LinkedInRank for a free score across 30+ signals. You will get a score out of 100 with specific recommendations for each section.' } },
-        { '@type': 'Question', name: 'Do keywords really matter on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedIn search works similarly to Google. Recruiters search using job titles, skills, and industry terms. If those keywords are not in your profile, you will not appear in search results.' } },
-        { '@type': 'Question', name: 'How often should I update my LinkedIn profile?', acceptedAnswer: { '@type': 'Answer', text: 'Every 3 months at minimum. Update after any role change, new certification, major project, or career direction shift.' } },
+    faqs: [
+        { question: 'How long does it take to optimize a LinkedIn profile?', answer: 'A thorough optimization takes 2–3 hours for the initial setup. After that, quarterly reviews of 30–60 minutes keep your profile current. Focus on headline and About section first — they have the highest impact.' },
+        { question: 'What is the most important section to optimize?', answer: 'The headline. It appears in every search result, connection request, and comment. A clear, keyword-rich headline directly impacts how often recruiters find you.' },
+        { question: 'Should I use LinkedIn Premium for optimization?', answer: 'Premium is not required. The most impactful optimizations — headline, About, experience, skills — are available on free accounts. Premium adds InMail and profile viewer insights, which help with networking but not profile quality.' },
+        { question: 'How do I know if my profile is optimized?', answer: 'Upload your LinkedIn PDF to LinkedInRank for a free score across 30+ signals. You will get a score out of 100 with specific recommendations for each section.' },
+        { question: 'Do keywords really matter on LinkedIn?', answer: 'Yes. LinkedIn search works similarly to Google. Recruiters search using job titles, skills, and industry terms. If those keywords are not in your profile, you will not appear in search results regardless of your qualifications.' },
+        { question: 'How often should I update my LinkedIn profile?', answer: 'Every 3 months at minimum. Update after any role change, new certification, major project, or career direction shift. Regular updates signal to the algorithm that your profile is active.' },
     ],
-}
+})
 
 export default function LinkedInOptimizationGuidePage() {
     return (
         <main className="min-h-screen bg-white">
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
             <SiteHeader />
 
@@ -348,6 +332,29 @@ export default function LinkedInOptimizationGuidePage() {
                         </div>
                     </section>
 
+                    {/* Common Mistakes */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Common LinkedIn Profile Mistakes to Avoid</h2>
+                        <p className="mb-4">After analyzing thousands of profiles, these are the most frequent optimization mistakes we see:</p>
+                        <div className="space-y-3 mb-6">
+                            {[
+                                { mistake: 'Generic headline like "Open to Work" or "Student"', fix: 'Use Role + Niche + Value formula. Example: "Frontend Developer | React & Performance | Building Fast UIs"' },
+                                { mistake: 'Empty or one-sentence About section', fix: 'Write 150–300 words: Hook → Background → Achievements → CTA. Include 3–5 keywords naturally.' },
+                                { mistake: 'Job descriptions instead of achievements', fix: 'Replace "Managed team" with "Led 8-person team to deliver 3 product launches, reducing time-to-market by 40%."' },
+                                { mistake: 'No profile photo or casual selfie', fix: 'Use a professional headshot with neutral background. Face should fill 60–70% of the frame.' },
+                                { mistake: 'Too few or irrelevant skills listed', fix: 'Add 15–25 role-relevant skills. Pin top 3 most searchable skills. Remove outdated tools.' },
+                                { mistake: 'Ignoring the Featured section', fix: 'Add 2–3 portfolio pieces, case studies, or published articles. Visual proof builds instant credibility.' },
+                                { mistake: 'No keywords in headline or About', fix: 'Include exact terms recruiters search for: job titles, tools, certifications, and industry terms.' },
+                            ].map((item, i) => (
+                                <div key={i} className="bg-[#FEF2F2] border border-red-100 rounded-xl p-4">
+                                    <p className="text-sm font-bold text-red-700 mb-1">❌ {item.mistake}</p>
+                                    <p className="text-sm text-[#4B5563]">✅ <strong>Fix:</strong> {item.fix}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <p>For a complete deep dive, read our <Link href="/linkedin-mistakes" className="text-[#0A66C2] hover:underline">10 LinkedIn Mistakes Costing You Interviews</Link> guide.</p>
+                    </section>
+
                     {/* CTA */}
                     <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
@@ -425,6 +432,9 @@ export default function LinkedInOptimizationGuidePage() {
                         </div>
                     </div>
                 </div>
+
+                {/* RelatedPages for programmatic internal linking */}
+                <RelatedPages currentSlug="linkedin-optimization-guide" />
             </article>
 
             <FooterLayout />

@@ -2,29 +2,53 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Educators & Teachers | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for teachers, professors, instructional designers, and EdTech professionals in 2026. Headlines that showcase expertise. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for Educators & Teachers (2026)',
+    description: 'EdTech, curriculum design, or classroom teaching? 25+ LinkedIn headlines that attract the right opportunities.',
     keywords: 'linkedin headline teacher 2026, linkedin headline professor, best linkedin headline for educator, instructional designer linkedin headline, education linkedin profile, best educator linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-teachers' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Educators & Teachers | 25+ Examples',
-        description: 'Teacher, professor, and EdTech professional headline formulas that showcase expertise.',
+        title: '25+ LinkedIn Headlines for Educators & Teachers (2026)',
+        description: 'EdTech, curriculum design, or classroom teaching? 25+ LinkedIn headlines that attract the right opportunities.',
         url: 'https://linkedinrank.com/linkedin-headline-teachers',
     },
 }
 
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Educators & Teachers',
+    description: 'LinkedIn headline examples for K-12 teachers, professors, instructional designers, and EdTech professionals.',
+    url: 'https://linkedinrank.com/linkedin-headline-teachers',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Educators', url: 'https://linkedinrank.com/linkedin-headline-teachers' },
+    ],
+    faqs: [
+        { question: 'Should teachers include their subject in their LinkedIn headline?', answer: 'Yes. "High School Math Teacher" is far more searchable than "Teacher." Include your subject, level, and any certifications like National Board.' },
+        { question: 'How can educators use LinkedIn for career growth?', answer: 'LinkedIn helps educators find consulting, speaking, EdTech, instructional design, and curriculum development opportunities beyond the classroom.' },
+        { question: 'What makes a strong professor headline?', answer: 'Include your research focus, publications, and field. "Associate Professor | AI & Machine Learning | 40+ Publications" signals academic credibility.' },
+        { question: 'Can LinkedInRank help educators?', answer: 'Yes. Upload your LinkedIn PDF for a free headline and profile analysis. LinkedInRank provides keyword scoring and AI-generated headline alternatives.' },
+    ],
+})
+
 export default function HeadlineTeachersPage() {
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href="/linkedin-headline-guide" className="hover:text-[#0A66C2] transition-colors no-underline">Headline Guide</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Educators</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Educators & Teachers</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
@@ -113,19 +137,7 @@ export default function HeadlineTeachersPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Students', href: '/for-students' },
-                                { label: 'For Healthcare', href: '/linkedin-headline-healthcare' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-teachers" />
                 </div>
             </article>
 

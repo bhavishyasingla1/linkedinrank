@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'What Is LinkedIn Rank? How LinkedIn Profile Ranking Works (2026 Guide)',
@@ -242,19 +243,7 @@ export default function WhatIsLinkedInRankPage() {
                     </section>
 
                     {/* Related pages for internal linking */}
-                    <section className="mt-12 bg-white border border-gray-200 rounded-xl p-6">
-                        <h2 className="text-base font-bold text-[#0A0F1C] mb-4">Related Guides</h2>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                            <Link href="/linkedin-optimization-guide" className="text-sm text-[#0A66C2] hover:underline font-medium">Complete LinkedIn Profile Optimization Guide</Link>
-                            <Link href="/how-linkedin-rank-works" className="text-sm text-[#0A66C2] hover:underline font-medium">How LinkedInRank Works</Link>
-                            <Link href="/methodology" className="text-sm text-[#0A66C2] hover:underline font-medium">LinkedIn Ranking Methodology</Link>
-                            <Link href="/compare-linkedin-review-tools" className="text-sm text-[#0A66C2] hover:underline font-medium">Compare LinkedIn Profile Review Tools</Link>
-                            <Link href="/linkedin-keywords-guide" className="text-sm text-[#0A66C2] hover:underline font-medium">LinkedIn Keywords and SEO Guide</Link>
-                            <Link href="/recruiter-psychology" className="text-sm text-[#0A66C2] hover:underline font-medium">How Recruiters View Your Profile</Link>
-                            <Link href="/linkedin-headline-guide" className="text-sm text-[#0A66C2] hover:underline font-medium">LinkedIn Headline Writing Guide</Link>
-                            <Link href="/tools" className="text-sm text-[#0A66C2] hover:underline font-medium">Free LinkedIn Tools</Link>
-                        </div>
-                    </section>
+                    <RelatedPages currentSlug="what-is-linkedin-rank" />
                 </article>
             </div>
 

@@ -2,51 +2,38 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn About Section Guide | How to Write a Powerful Summary (2026)',
-    description: 'Write a LinkedIn About section that converts visitors into opportunities. Templates, real examples, and common mistakes to avoid for students, job seekers, founders, and professionals. Free scoring with LinkedInRank.',
+    title: 'LinkedIn About Section: Templates & Examples (2026)',
+    description: 'Write a LinkedIn About section that converts. Templates for students, founders, and professionals. Free profile scoring.',
     keywords: 'linkedin about section, linkedin summary examples, how to write linkedin summary, linkedin bio examples, linkedin about section examples 2026, linkedin summary for freshers, linkedin about section tips, linkedin summary template, linkedin about me examples',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-about-guide' },
     openGraph: {
-        title: 'LinkedIn About Section Guide | How to Write a Powerful Summary',
-        description: 'Templates, real examples, and tips to write a LinkedIn About section that converts visitors into opportunities.',
+        title: 'LinkedIn About Section: Templates & Examples (2026)',
+        description: 'Write a LinkedIn About section that converts. Templates and real examples.',
         url: 'https://linkedinrank.com/linkedin-about-guide',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'How to Write a LinkedIn About Section That Converts',
-            description: 'Write a LinkedIn About section that converts profile visitors into opportunities. Templates for students, job seekers, founders, and professionals.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-about-guide',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'About Section Guide', item: 'https://linkedinrank.com/linkedin-about-guide' },
-            ],
-        },
-        {
-            '@type': 'FAQPage',
-            mainEntity: [
-                { '@type': 'Question', name: 'How long should my LinkedIn About section be?', acceptedAnswer: { '@type': 'Answer', text: 'Aim for 800–1,500 characters (roughly 150–250 words). Long enough to be substantive, short enough to be read. The maximum is 2,600 characters.' } },
-                { '@type': 'Question', name: 'Should I include a call to action?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. End with a clear next step: "Reach out if you are hiring for X" or "Connect with me to discuss Y." It converts passive viewers into active contacts.' } },
-                { '@type': 'Question', name: 'Can I use bullet points in the About section?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, but sparingly. Use them for listing key skills or achievements. The main body should be conversational paragraphs.' } },
-                { '@type': 'Question', name: 'How is the About section different from a resume summary?', acceptedAnswer: { '@type': 'Answer', text: 'A resume summary is formal and backward-looking. Your LinkedIn About should be conversational, forward-looking, and include personality.' } },
-                { '@type': 'Question', name: 'What if I have no work experience for the About section?', acceptedAnswer: { '@type': 'Answer', text: 'Focus on what you are learning, projects you have built, skills you are developing, and where you want to go.' } },
-            ],
-        },
+const jsonLd = guidePageJsonLd({
+    title: 'How to Write a LinkedIn About Section That Converts',
+    description: 'Write a LinkedIn About section that converts profile visitors into opportunities. Templates for students, job seekers, founders, and professionals.',
+    url: 'https://linkedinrank.com/linkedin-about-guide',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'About Section Guide', url: 'https://linkedinrank.com/linkedin-about-guide' },
     ],
-}
+    faqs: [
+        { question: 'How long should my LinkedIn About section be?', answer: 'Aim for 800–1,500 characters (roughly 150–250 words). Long enough to be substantive, short enough to be read.' },
+        { question: 'Should I include a call to action?', answer: 'Yes. End with a clear next step: "Reach out if you are hiring for X" or "Connect with me to discuss Y."' },
+        { question: 'Can I use bullet points in the About section?', answer: 'Yes, but sparingly. Use them for listing key skills or achievements. The main body should be conversational.' },
+        { question: 'How is the About section different from a resume summary?', answer: 'A resume summary is formal and backward-looking. Your LinkedIn About should be conversational, forward-looking, and include personality.' },
+        { question: 'What if I have no work experience for the About section?', answer: 'Focus on what you are learning, projects you have built, skills you are developing, and where you want to go.' },
+    ],
+})
 
 export default function LinkedInAboutGuidePage() {
     return (
@@ -220,23 +207,7 @@ export default function LinkedInAboutGuidePage() {
                     </div>
 
                     {/* Related Guides */}
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'For Students', href: '/for-students' },
-                                { label: 'For Job Seekers', href: '/for-jobseekers' },
-                                { label: 'For Founders', href: '/for-founders' },
-                                { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                                { label: 'Resume vs Profile', href: '/linkedin-resume-vs-profile' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-about-guide" />
                 </div>
             </article>
 

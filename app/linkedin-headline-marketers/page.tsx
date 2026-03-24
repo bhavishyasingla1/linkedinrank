@@ -3,48 +3,37 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples (2026)',
-    description: 'Copy proven LinkedIn headline templates for digital, content, SEO, and growth marketers. Channel-specific, result-focused, and recruiter-ready examples you can use today.',
+    title: '25+ LinkedIn Headlines for Marketers That Get Clicks (2026)',
+    description: 'SEO, growth, or content marketing? Grab 25+ LinkedIn headline examples that position you as an expert.',
     keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals 2026, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer, best linkedin headline marketer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-marketers' },
     openGraph: {
-        title: 'LinkedIn Headlines for Marketers — 25+ Templates & Examples',
-        description: 'Copy proven headline templates for digital, content, SEO, and growth marketers. Result-focused and recruiter-ready.',
+        title: '25+ LinkedIn Headlines for Marketers That Get Clicks (2026)',
+        description: 'SEO, growth, or content marketing? Grab 25+ LinkedIn headline examples that position you as an expert.',
         url: 'https://linkedinrank.com/linkedin-headline-marketers',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'Best LinkedIn Headlines for Marketers | 25+ Examples',
-            description: 'LinkedIn headline examples for digital marketers, content marketers, SEO specialists, growth marketers, brand managers, and marketing leaders.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-headline-marketers',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList', itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-                { '@type': 'ListItem', position: 3, name: 'For Marketers', item: 'https://linkedinrank.com/linkedin-headline-marketers' },
-            ]
-        },
-        {
-            '@type': 'FAQPage', mainEntity: [
-                { '@type': 'Question', name: 'Should I include certifications in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if they are widely recognized. "Google Ads Certified" or "HubSpot Certified" adds credibility and matches recruiter searches. Skip less-known certifications.' } },
-                { '@type': 'Question', name: 'Should I mention results in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'If you have a strong metric, absolutely. "Grew Traffic 300%" or "3x ROAS" immediately communicates value. Keep it to one key result to avoid clutter.' } },
-                { '@type': 'Question', name: 'How do I position for a marketing specialization change?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target specialty. If you are moving from social media to growth marketing, headline as "Growth Marketing | Social & Paid Acquisition | [Industry]."' } },
-            ]
-        },
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Marketers',
+    description: 'LinkedIn headline examples for digital, content, SEO, growth, and brand marketers.',
+    url: 'https://linkedinrank.com/linkedin-headline-marketers',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Marketers', url: 'https://linkedinrank.com/linkedin-headline-marketers' },
     ],
-}
+    faqs: [
+        { question: 'Should I include certifications in my headline?', answer: 'Yes, if widely recognised. "Google Ads Certified" or "HubSpot Certified" adds credibility and matches recruiter searches. Skip less-known certifications.' },
+        { question: 'Should I mention results in my headline?', answer: 'If you have a strong metric, absolutely. "Grew Traffic 300%" or "3x ROAS" immediately communicates value. Keep it to one key result to avoid clutter.' },
+        { question: 'How do I position for a marketing specialisation change?', answer: 'Lead with your target specialty. If moving from social media to growth marketing, headline as "Growth Marketing | Social & Paid Acquisition | [Industry]."' },
+    ],
+})
 
 export default function HeadlineMarketersPage() {
     return (
@@ -178,23 +167,7 @@ export default function HeadlineMarketersPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
-                                { label: 'For MBA Students', href: '/linkedin-headline-mba' },
-                                { label: 'For Designers', href: '/linkedin-headline-designers' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'For Job Seekers', href: '/for-jobseekers' },
-                                { label: 'Content Strategy', href: '/linkedin-content-strategy' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-marketers" />
                 </div>
             </article>
 

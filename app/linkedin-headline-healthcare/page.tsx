@@ -2,29 +2,53 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for Healthcare Professionals | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for doctors, nurses, healthcare administrators, and medical researchers in 2026. Headlines that build credibility. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for Healthcare Workers (2026)',
+    description: 'Doctors, nurses, and health tech? Copy 25+ LinkedIn headlines that signal clinical expertise.',
     keywords: 'linkedin headline healthcare 2026, linkedin headline doctor, best linkedin headline for nurse, healthcare administrator linkedin profile, medical professional linkedin headline, best healthcare linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-healthcare' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for Healthcare Professionals | 25+ Examples',
-        description: 'Doctor, nurse, and healthcare administrator headline formulas that build credibility.',
+        title: '25+ LinkedIn Headlines for Healthcare Workers (2026)',
+        description: 'Doctors, nurses, and health tech? Copy 25+ LinkedIn headlines that signal clinical expertise.',
         url: 'https://linkedinrank.com/linkedin-headline-healthcare',
     },
 }
 
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Healthcare Professionals',
+    description: 'LinkedIn headline examples for doctors, nurses, healthcare administrators, and medical researchers.',
+    url: 'https://linkedinrank.com/linkedin-headline-healthcare',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Healthcare', url: 'https://linkedinrank.com/linkedin-headline-healthcare' },
+    ],
+    faqs: [
+        { question: 'Should healthcare professionals include credentials in their headline?', answer: 'Absolutely. MD, RN, BSN, MPH, DNP and other credentials are critical trust signals in healthcare. Always include your most relevant certification.' },
+        { question: 'Is LinkedIn useful for doctors?', answer: 'Yes. LinkedIn is increasingly used for speaking opportunities, research collaboration, health tech advisory roles, and thought leadership in medicine.' },
+        { question: 'How should nurses write their LinkedIn headline?', answer: 'Specify your specialty (ICU, OR, oncology), certifications (CCRN, BSN), and focus area. "ICU Nurse | BSN, CCRN | Critical Care Education" is far better than just "Nurse."' },
+        { question: 'Can LinkedInRank analyse healthcare profiles?', answer: 'Yes. Upload your LinkedIn PDF for a free headline analysis and profile score. You will get recommendations tailored to healthcare professional profiles.' },
+    ],
+})
+
 export default function HeadlineHealthcarePage() {
     return (
         <main className="min-h-screen bg-white">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
             <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <Link href="/" className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A66C2] no-underline transition-colors mb-8">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    Back
-                </Link>
+                <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span aria-hidden="true">/</span>
+                    <Link href="/linkedin-headline-guide" className="hover:text-[#0A66C2] transition-colors no-underline">Headline Guide</Link>
+                    <span aria-hidden="true">/</span>
+                    <span className="text-[#0A0F1C] font-medium">For Healthcare</span>
+                </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Healthcare Professionals</h1>
                 <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
@@ -113,19 +137,7 @@ export default function HeadlineHealthcarePage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Headline | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Educators', href: '/linkedin-headline-teachers' },
-                                { label: 'For Consultants', href: '/linkedin-headline-consultants' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-healthcare" />
                 </div>
             </article>
 

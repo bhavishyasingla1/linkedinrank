@@ -2,47 +2,38 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'Best LinkedIn Headlines for MBA Students & Graduates | 25+ Examples (2026)',
-    description: 'LinkedIn headline examples for MBA students, graduates, and professionals in 2026. Consulting, finance, product management, strategy, and marketing headlines. Free scoring with LinkedInRank.',
+    title: '25+ LinkedIn Headlines for MBA Students & Grads (2026)',
+    description: 'Leverage your MBA on LinkedIn. 25+ headline examples for career switchers, consultants, and aspiring leaders.',
     keywords: 'linkedin headline mba, linkedin headline mba student 2026, linkedin for mba students, mba linkedin profile, linkedin headline for business students, mba linkedin tips, best mba linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-mba' },
     openGraph: {
-        title: 'Best LinkedIn Headlines for MBA Students & Graduates | 25+ Examples',
-        description: 'Consulting, finance, product management, strategy headlines for MBA professionals.',
+        title: '25+ LinkedIn Headlines for MBA Students & Grads (2026)',
+        description: 'Leverage your MBA on LinkedIn. 25+ headline examples for career switchers, consultants, and aspiring leaders.',
         url: 'https://linkedinrank.com/linkedin-headline-mba',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'Best LinkedIn Headlines for MBA Students & Graduates',
-            description: 'LinkedIn headline examples for MBA students, graduates, career switchers, and MBA alumni. By specialization: consulting, finance, tech, marketing, and entrepreneurship.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-headline-mba',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList', itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-                { '@type': 'ListItem', position: 3, name: 'For MBA Students', item: 'https://linkedinrank.com/linkedin-headline-mba' },
-            ]
-        },
-        {
-            '@type': 'FAQPage', mainEntity: [
-                { '@type': 'Question', name: 'Should MBA students include their school in their headline?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, if the school is well-known. "MBA Candidate @ Wharton" immediately signals credibility. Include your target function or industry alongside the school.' } },
-                { '@type': 'Question', name: 'How should career switchers write their MBA headline?', acceptedAnswer: { '@type': 'Answer', text: 'Lead with your target role, not your past. "MBA Candidate | Transitioning to Product Management | Ex-Mechanical Engineer" shows clear intent while leveraging your background.' } },
-            ]
-        },
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for MBA Students & Graduates',
+    description: 'LinkedIn headline examples for MBA students, graduates, career switchers, and MBA alumni by function.',
+    url: 'https://linkedinrank.com/linkedin-headline-mba',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For MBA Students', url: 'https://linkedinrank.com/linkedin-headline-mba' },
     ],
-}
+    faqs: [
+        { question: 'Should MBA students include their school in their headline?', answer: 'Yes, if the school is well-known. "MBA Candidate @ Wharton" immediately signals credibility. Include your target function or industry alongside the school.' },
+        { question: 'How should career switchers write their MBA headline?', answer: 'Lead with your target role, not your past. "MBA Candidate | Transitioning to Product Management | Ex-Mechanical Engineer" shows clear intent while leveraging your background.' },
+        { question: 'When should I update my headline during the MBA?', answer: 'Update 3 times: when you start (add MBA and target role), after summer internship (add the internship), and before graduation (position for full-time role).' },
+        { question: 'Can LinkedInRank help MBA students?', answer: 'Yes. LinkedInRank detects student profiles and adjusts scoring expectations. You will get career-stage-appropriate recommendations.' },
+    ],
+})
 
 export default function HeadlineMBAPage() {
     return (
@@ -196,23 +187,7 @@ export default function HeadlineMBAPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
-                                { label: 'For Marketers', href: '/linkedin-headline-marketers' },
-                                { label: 'For Designers', href: '/linkedin-headline-designers' },
-                                { label: 'For Students', href: '/linkedin-profile-for-students' },
-                                { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-mba" />
                 </div>
             </article>
 

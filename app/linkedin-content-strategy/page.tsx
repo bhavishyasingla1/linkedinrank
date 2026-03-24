@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Content Strategy — What to Post, When & How Often (2026)',
@@ -177,23 +178,7 @@ export default function LinkedInContentStrategyPage() {
                     </div>
 
                     {/* Related Guides */}
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Viral Post Formulas', href: '/viral-post-formulas' },
-                                { label: 'Personal Branding', href: '/linkedin-personal-branding' },
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Students', href: '/for-students' },
-                                { label: 'For Job Seekers', href: '/for-jobseekers' },
-                                { label: 'For Founders', href: '/for-founders' },
-                                { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-content-strategy" />
                 </div>
             </article>
 

@@ -3,49 +3,38 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import CopyHeadlineButton from '@/components/CopyHeadlineButton'
+import RelatedPages from '@/components/RelatedPages'
+import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples (2026)',
-    description: 'Copy professional LinkedIn headline templates for UX, UI, product, and graphic designers. Short, portfolio-focused, and recruiter-friendly examples you can paste now.',
+    title: '25+ LinkedIn Headlines for Designers That Stand Out (2026)',
+    description: 'UX, UI, or graphic design? Copy 25+ LinkedIn headlines that showcase your portfolio and attract recruiters.',
     keywords: 'linkedin headline designer, linkedin headline ux designer 2026, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer, best linkedin headline designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-designers' },
     openGraph: {
-        title: 'LinkedIn Headlines for Designers — 25+ Copy-Paste Examples',
-        description: 'Copy professional LinkedIn headline templates for UX, UI, product, and graphic designers. Paste-ready for recruiters.',
+        title: '25+ LinkedIn Headlines for Designers That Stand Out (2026)',
+        description: 'UX, UI, or graphic design? Copy 25+ LinkedIn headlines that showcase your portfolio and attract recruiters.',
         url: 'https://linkedinrank.com/linkedin-headline-designers',
     },
 }
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Article',
-            headline: 'Best LinkedIn Headlines for Designers | 25+ Examples',
-            description: 'LinkedIn headline examples for UX designers, UI designers, product designers, graphic designers, and design leaders. Proven formulas that attract recruiters and clients.',
-            author: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
-            mainEntityOfPage: 'https://linkedinrank.com/linkedin-headline-designers',
-            datePublished: '2025-01-01',
-            dateModified: '2026-02-01',
-        },
-        {
-            '@type': 'BreadcrumbList', itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-                { '@type': 'ListItem', position: 2, name: 'Headline Guide', item: 'https://linkedinrank.com/linkedin-headline-guide' },
-                { '@type': 'ListItem', position: 3, name: 'For Designers', item: 'https://linkedinrank.com/linkedin-headline-designers' },
-            ]
-        },
-        {
-            '@type': 'FAQPage', mainEntity: [
-                { '@type': 'Question', name: 'Should I say "UX Designer" or "Product Designer"?', acceptedAnswer: { '@type': 'Answer', text: 'Use the title that matches your target role. "Product Designer" is more common in tech companies, while "UX Designer" is broader. Check job postings at your target companies.' } },
-                { '@type': 'Question', name: 'Should I link my portfolio in my headline?', acceptedAnswer: { '@type': 'Answer', text: 'No | headlines should be text-optimized for search. Put portfolio links in your Featured section, About section, or contact info instead.' } },
-                { '@type': 'Question', name: 'How important is the Featured section for designers?', acceptedAnswer: { '@type': 'Answer', text: 'Critical. Unlike other professions, designers can visually showcase their work. Add 3–5 case studies, top projects, or portfolio links.' } },
-                { '@type': 'Question', name: 'Can LinkedInRank evaluate designer profiles?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. LinkedInRank scores headline clarity, About section quality, experience depth, and skills relevance. Designers benefit especially from headline and completeness scoring.' } },
-            ]
-        },
+const jsonLd = guidePageJsonLd({
+    title: '25+ LinkedIn Headlines for Designers',
+    description: 'LinkedIn headline examples for UX designers, UI designers, product designers, graphic designers, and design leaders.',
+    url: 'https://linkedinrank.com/linkedin-headline-designers',
+    dateModified: '2026-03-24',
+    breadcrumbs: [
+        { name: 'Home', url: 'https://linkedinrank.com' },
+        { name: 'Headline Guide', url: 'https://linkedinrank.com/linkedin-headline-guide' },
+        { name: 'For Designers', url: 'https://linkedinrank.com/linkedin-headline-designers' },
     ],
-}
+    faqs: [
+        { question: 'Should I say "UX Designer" or "Product Designer"?', answer: 'Use the title that matches your target role. "Product Designer" is more common in tech companies, while "UX Designer" is broader. Check job postings at your target companies.' },
+        { question: 'Should I link my portfolio in my headline?', answer: 'No. Headlines should be text-optimised for search. Put portfolio links in your Featured section, About section, or contact info instead.' },
+        { question: 'How important is the Featured section for designers?', answer: 'Critical. Unlike other professions, designers can visually showcase their work. Add 3-5 case studies, top projects, or portfolio links.' },
+        { question: 'Can LinkedInRank evaluate designer profiles?', answer: 'Yes. LinkedInRank scores headline clarity, About section quality, experience depth, and skills relevance. Designers benefit especially from headline and completeness scoring.' },
+    ],
+})
 
 export default function HeadlineDesignersPage() {
     return (
@@ -194,23 +183,7 @@ export default function HeadlineDesignersPage() {
                         <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It's Free</Link>
                     </div>
 
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'For Software Engineers', href: '/linkedin-headline-software-engineers' },
-                                { label: 'For MBA Students', href: '/linkedin-headline-mba' },
-                                { label: 'For Marketers', href: '/linkedin-headline-marketers' },
-                                { label: 'Personal Branding', href: '/linkedin-personal-branding' },
-                                { label: 'Profile Photo Guide', href: '/linkedin-profile-photo-guide' },
-                                { label: 'Keywords Guide', href: '/linkedin-keywords-guide' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-headline-designers" />
                 </div>
             </article>
 

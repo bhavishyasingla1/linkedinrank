@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import RelatedPages from '@/components/RelatedPages'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Keywords Guide | How to Get Found by Recruiters (2026)',
@@ -207,23 +208,7 @@ export default function LinkedInKeywordsGuidePage() {
                     </div>
 
                     {/* Related Guides */}
-                    <div className="pt-8 border-t border-gray-100">
-                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
-                        <div className="flex flex-wrap gap-2">
-                            {[
-                                { label: 'Headline Guide', href: '/linkedin-headline-guide' },
-                                { label: 'About Section Guide', href: '/linkedin-about-guide' },
-                                { label: 'Recruiter Psychology', href: '/recruiter-psychology' },
-                                { label: 'Get Noticed by Recruiters', href: '/get-noticed-recruiters' },
-                                { label: 'For Job Seekers', href: '/for-jobseekers' },
-                                { label: 'Top 10 Mistakes', href: '/linkedin-mistakes' },
-                                { label: 'Profile Checklist', href: '/linkedin-profile-checklist' },
-                                { label: 'Full Optimization Guide', href: '/linkedin-optimization-guide' },
-                            ].map((item, i) => (
-                                <Link key={i} href={item.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">{item.label}</Link>
-                            ))}
-                        </div>
-                    </div>
+                    <RelatedPages currentSlug="linkedin-keywords-guide" />
                 </div>
             </article>
 
