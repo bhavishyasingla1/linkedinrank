@@ -7,8 +7,8 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '25+ LinkedIn Headlines for Designers That Stand Out (2026)',
-    description: 'UX, UI, or graphic design? Copy 25+ LinkedIn headlines that showcase your portfolio and attract recruiters.',
+    title: 'LinkedIn Headlines for Designers (40+ Examples for UX, UI & Graphic Design)',
+    description: 'Copy-paste LinkedIn headline templates for UX designers, UI designers, product designers, and graphic designers. 40+ proven examples with portfolio tips. Free analyzer included.',
     keywords: 'linkedin headline designer, linkedin headline ux designer 2026, linkedin headline ui designer, linkedin headline product designer, designer linkedin profile, linkedin headline graphic designer, best linkedin headline designer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-designers' },
     openGraph: {
@@ -48,10 +48,14 @@ export default function HeadlineDesignersPage() {
                     Back
                 </Link>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Designers</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Design is a visual field, but your LinkedIn headline is pure text. The strongest designer headlines communicate your specialization, tools, and the type of problems you solve. &ldquo;Designer&rdquo; alone is too broad | recruiters search for specific design roles and tools. Here are <strong className="text-[#0A0F1C]">25+ proven examples</strong> by design discipline.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">40+ LinkedIn Headline Examples for Designers</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    Design is a visual field, but your LinkedIn headline is pure text. The strongest designer headlines communicate your specialization, tools, and the type of problems you solve. &ldquo;Designer&rdquo; alone is too broad | recruiters search for specific design roles and tools. Here are <strong className="text-[#0A0F1C]">40+ proven examples</strong> by design discipline.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (software engineers, marketers, finance, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 

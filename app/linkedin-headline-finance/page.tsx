@@ -6,13 +6,13 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '25+ LinkedIn Headlines for Finance Pros (2026 Guide)',
-    description: 'CPA, CFA, or investment banking? Copy these 25+ LinkedIn headlines built for finance professionals. Free scoring.',
+    title: '40+ LinkedIn Headline Examples for Finance Professionals (Copy-Paste Templates)',
+    description: 'Copy-paste LinkedIn headline templates for CPAs, CFAs, investment bankers, and financial analysts. 40+ proven examples with keywords recruiters search. Free headline analyzer included.',
     keywords: 'linkedin headline finance 2026, linkedin headline accountant, best linkedin headline for CPA, investment banker linkedin headline, financial analyst linkedin profile, best finance linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-finance' },
     openGraph: {
-        title: '25+ LinkedIn Headlines for Finance Pros (2026 Guide)',
-        description: 'Finance, accounting, and investment banking headline formulas that signal expertise.',
+        title: '40+ LinkedIn Headline Examples for Finance Professionals (Copy-Paste Templates)',
+        description: 'Copy-paste LinkedIn headline templates for CPAs, CFAs, investment bankers, and financial analysts. 40+ proven examples with keywords recruiters search.',
         url: 'https://linkedinrank.com/linkedin-headline-finance',
     },
 }
@@ -50,10 +50,14 @@ export default function HeadlineFinancePage() {
                     <span className="text-[#0A0F1C] font-medium">For Finance Professionals</span>
                 </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Finance & Accounting</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Finance and accounting professionals need headlines that convey trust, precision, and domain expertise. Whether you&apos;re in corporate finance, investment banking, audit, or FP&A, your headline should signal your specialty clearly. Here are <strong className="text-[#0A0F1C]">25+ proven examples</strong>.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">40+ LinkedIn Headline Examples for Finance & Accounting Professionals</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    Finance and accounting professionals need headlines that convey trust, precision, and domain expertise. Whether you&apos;re in corporate finance, investment banking, audit, or FP&A, your headline should signal your specialty clearly. Here are <strong className="text-[#0A0F1C]">40+ proven examples</strong>.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (software engineers, marketers, HR, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
                     <section>

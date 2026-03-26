@@ -259,6 +259,41 @@ export default function HomePage() {
                 </div>
             </section>
 
+            {/* Popular Guides Section */}
+            <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+                <div className="max-w-5xl mx-auto px-6">
+                    <div className="text-center mb-10">
+                        <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Most Popular Guides</p>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Step-by-step guides for every section</h2>
+                        <p className="text-sm text-[#6B7280] max-w-2xl mx-auto">Complete optimization guides with copy-paste examples, formulas, and recruiter-approved templates.</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            { title: '100+ Headline Examples', desc: 'Copy-paste templates for all roles and industries', href: '/linkedin-headline-examples', tag: 'Pillar Guide', color: '#0A66C2' },
+                            { title: 'Complete Optimization Guide', desc: 'Step-by-step guide for every profile section', href: '/linkedin-optimization-guide', tag: 'Most Popular', color: '#10B981' },
+                            { title: 'LinkedIn Keywords Guide', desc: 'Get found by recruiters with keyword placement strategy', href: '/linkedin-keywords-guide', tag: 'SEO', color: '#8B5CF6' },
+                            { title: 'Content Strategy Guide', desc: 'What to post, when, and how to get 10x reach', href: '/linkedin-content-strategy', tag: 'New', color: '#F59E0B' },
+                            { title: 'Headlines for Software Engineers', desc: '50+ examples for developers and tech professionals', href: '/linkedin-headline-software-engineers', tag: 'Role-Specific', color: '#06B6D4' },
+                            { title: 'Headlines for Marketers', desc: '50+ examples for digital marketers and growth pros', href: '/linkedin-headline-marketers', tag: 'Role-Specific', color: '#EC4899' },
+                        ].map((guide, i) => (
+                            <Link key={i} href={guide.href} className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#0A66C2] hover:shadow-[0_8px_24px_rgba(10,102,194,0.12)] hover:-translate-y-1 transition-all duration-200 no-underline">
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ color: guide.color, backgroundColor: guide.color + '14' }}>{guide.tag}</span>
+                                    <svg className="w-4 h-4 text-gray-400 group-hover:text-[#0A66C2] transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                                </div>
+                                <h3 className="text-base font-bold text-[#0A0F1C] mb-2 group-hover:text-[#0A66C2] transition-colors">{guide.title}</h3>
+                                <p className="text-sm text-[#6B7280] leading-relaxed">{guide.desc}</p>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="text-center mt-10">
+                        <Link href="/blogs" className="text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] no-underline transition-colors inline-flex items-center gap-1.5">
+                            View all 120+ guides <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             {/* Free Tools Section | high on page for visibility */}
             <section className="below-fold bg-gradient-to-b from-[#F8FAFC] to-white py-20 sm:py-24 border-t border-gray-100">
                 <div className="max-w-5xl mx-auto px-6">

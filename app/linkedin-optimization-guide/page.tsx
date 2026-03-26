@@ -6,8 +6,8 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd, howToJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Profile Optimization (2026): 47 Expert Tips That Get Interviews',
-    description: 'Score 85+ on LinkedIn: 47 optimization tips from headline to skills. Get recruiter messages in 7 days. Free score checker included.',
+    title: 'How to Optimize Your LinkedIn Profile: Complete Step-by-Step Guide (2026)',
+    description: 'Complete guide to optimize your LinkedIn profile for maximum recruiter visibility. Step-by-step strategies for headline, about section, experience, keywords, and SEO. Increase profile views by 40%. Free analyzer included.',
     keywords: 'linkedin optimization, linkedin profile optimization, optimize linkedin profile, linkedin optimization guide 2026, linkedin profile improvement, linkedin optimization tool free, linkedin profile makeover, linkedin profile audit, linkedin profile optimization tips, best linkedin optimization guide',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-optimization-guide' },
     openGraph: {

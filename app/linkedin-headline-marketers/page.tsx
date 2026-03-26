@@ -7,13 +7,13 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '25+ LinkedIn Headlines for Marketers That Get Clicks (2026)',
-    description: 'SEO, growth, or content marketing? Grab 25+ LinkedIn headline examples that position you as an expert.',
+    title: 'LinkedIn Headlines for Marketing Professionals (50+ Examples & Templates)',
+    description: 'Copy-paste LinkedIn headline templates for digital marketers, SEO specialists, content marketers, and growth professionals. 50+ proven examples with keywords recruiters search for.',
     keywords: 'linkedin headline marketer, linkedin headline digital marketing, linkedin headline for marketing professionals 2026, marketing linkedin profile, linkedin headline seo specialist, linkedin headline content marketer, best linkedin headline marketer',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-marketers' },
     openGraph: {
-        title: '25+ LinkedIn Headlines for Marketers That Get Clicks (2026)',
-        description: 'SEO, growth, or content marketing? Grab 25+ LinkedIn headline examples that position you as an expert.',
+        title: 'LinkedIn Headlines for Marketing Professionals (50+ Examples & Templates)',
+        description: 'Copy-paste LinkedIn headline templates for digital marketers, SEO specialists, content marketers, and growth professionals. 50+ proven examples with keywords recruiters search for.',
         url: 'https://linkedinrank.com/linkedin-headline-marketers',
     },
 }
@@ -47,10 +47,14 @@ export default function HeadlineMarketersPage() {
                     Back
                 </Link>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Marketers</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Marketing is a broad field | &ldquo;Marketer&rdquo; alone tells recruiters nothing about your specialization. The best marketing headlines specify your channel expertise, industry focus, and measurable impact. Here are <strong className="text-[#0A0F1C]">25+ proven examples</strong> by marketing specialization.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">50+ LinkedIn Headline Examples for Marketing Professionals</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    Marketing is a broad field | &ldquo;Marketer&rdquo; alone tells recruiters nothing about your specialization. The best marketing headlines specify your channel expertise, industry focus, and measurable impact. Here are <strong className="text-[#0A0F1C]">50+ proven examples</strong> by marketing specialization.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (software engineers, finance, HR, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 

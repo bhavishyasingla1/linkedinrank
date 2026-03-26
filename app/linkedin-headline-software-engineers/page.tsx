@@ -6,13 +6,13 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '30+ LinkedIn Headlines for Software Engineers (2026 Guide)',
-    description: 'Frontend, backend, DevOps, or full-stack? 30+ LinkedIn headline examples that recruiters actually search for.',
+    title: 'Best LinkedIn Headlines for Software Engineers (50+ Examples & Templates)',
+    description: 'Copy-paste LinkedIn headline templates for software engineers, developers, and programmers. 50+ proven examples for frontend, backend, full-stack, DevOps, and mobile engineers that recruiters search for.',
     keywords: 'linkedin headline software engineer, linkedin headline developer, best linkedin headline for programmers, linkedin headline for tech, software engineer linkedin profile, developer linkedin tips, linkedin headline examples tech 2026',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-software-engineers' },
     openGraph: {
-        title: '30+ LinkedIn Headlines for Software Engineers (2026 Guide)',
-        description: 'Frontend, backend, DevOps, or full-stack? 30+ LinkedIn headline examples that recruiters actually search for.',
+        title: 'Best LinkedIn Headlines for Software Engineers (50+ Examples & Templates)',
+        description: 'Copy-paste LinkedIn headline templates for software engineers, developers, and programmers. 50+ proven examples for frontend, backend, full-stack, DevOps, and mobile engineers that recruiters search for.',
         url: 'https://linkedinrank.com/linkedin-headline-software-engineers',
     },
 }
@@ -50,10 +50,14 @@ export default function HeadlineSoftwareEngineersPage() {
                     <span className="text-[#0A0F1C] font-medium">For Software Engineers</span>
                 </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Software Engineers</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Software engineering is one of the most competitive fields on LinkedIn. Recruiters search for specific technologies, frameworks, and specializations. A generic headline like &ldquo;Software Engineer&rdquo; gets lost in millions of similar profiles. This guide provides <strong className="text-[#0A0F1C]">30+ proven headline examples</strong> organized by specialization, plus the formula to write your own.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">50+ LinkedIn Headline Examples for Software Engineers</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    Software engineering is one of the most competitive fields on LinkedIn. Recruiters search for specific technologies, frameworks, and specializations. A generic headline like &ldquo;Software Engineer&rdquo; gets lost in millions of similar profiles. This guide provides <strong className="text-[#0A0F1C]">50+ proven headline examples</strong> organized by specialization, plus the formula to write your own.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (marketers, finance, HR, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
 

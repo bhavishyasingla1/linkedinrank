@@ -6,13 +6,13 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '25+ LinkedIn Headlines for HR & Recruiters (2026 Guide)',
-    description: 'Write a headline candidates actually trust. 25+ proven examples for recruiters, HRBPs, and talent acquisition leaders.',
+    title: 'LinkedIn Headline Examples for HR Professionals (40+ Copy-Paste Templates)',
+    description: 'Copy-paste LinkedIn headline templates for HR managers, recruiters, and talent acquisition specialists. 40+ proven examples that build trust with candidates. Free analyzer tool included.',
     keywords: 'linkedin headline HR 2026, linkedin headline recruiter, best linkedin headline for talent acquisition, HR manager linkedin profile, people operations linkedin headline, best hr linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-hr' },
     openGraph: {
-        title: '25+ LinkedIn Headlines for HR & Recruiters (2026 Guide)',
-        description: 'HR, recruiter, and talent acquisition headline formulas that build trust with candidates.',
+        title: 'LinkedIn Headline Examples for HR Professionals (40+ Copy-Paste Templates)',
+        description: 'Copy-paste LinkedIn headline templates for HR managers, recruiters, and talent acquisition specialists. 40+ proven examples that build trust with candidates.',
         url: 'https://linkedinrank.com/linkedin-headline-hr',
     },
 }
@@ -50,10 +50,14 @@ export default function HeadlineHRPage() {
                     <span className="text-[#0A0F1C] font-medium">For HR & Recruiters</span>
                 </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for HR & Recruiters</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    For HR professionals and recruiters, your LinkedIn headline is how candidates judge whether to respond to your outreach. A clear, trustworthy headline gets higher response rates and better talent. Here are <strong className="text-[#0A0F1C]">25+ proven headline examples</strong> for every HR role.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">40+ LinkedIn Headline Examples for HR & Recruiters</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    For HR professionals and recruiters, your LinkedIn headline is how candidates judge whether to respond to your outreach. A clear, trustworthy headline gets higher response rates and better talent. Here are <strong className="text-[#0A0F1C]">40+ proven headline examples</strong> for every HR role.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (software engineers, marketers, finance, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
                     <section>

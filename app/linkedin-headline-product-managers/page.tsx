@@ -6,8 +6,8 @@ import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
-    title: '25+ LinkedIn Headlines for Product Managers (2026 Guide)',
-    description: 'From APM to VP Product — 25+ LinkedIn headline examples that signal strategic thinking. Free headline scoring.',
+    title: 'LinkedIn Headlines for Product Managers (40+ Examples & Templates)',
+    description: 'Copy-paste LinkedIn headline templates for product managers, TPMs, and product leaders. 40+ proven examples from APM to VP Product that signal strategic thinking. Free analyzer included.',
     keywords: 'linkedin headline product manager 2026, linkedin headline PM, best linkedin headline for product manager, product manager linkedin profile, TPM linkedin headline, best pm linkedin headline',
     alternates: { canonical: 'https://linkedinrank.com/linkedin-headline-product-managers' },
     openGraph: {
@@ -50,10 +50,14 @@ export default function HeadlineProductManagersPage() {
                     <span className="text-[#0A0F1C] font-medium">For Product Managers</span>
                 </nav>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Role-Specific Headlines</p>
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">Best LinkedIn Headlines for Product Managers</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
-                    Product management is one of the most sought-after roles on LinkedIn. Recruiters look for domain expertise, product sense, and leadership experience. This guide provides <strong className="text-[#0A0F1C]">25+ proven headline examples</strong> for every PM level and specialization.
+                <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">40+ LinkedIn Headline Examples for Product Managers</h1>
+                <p className="text-[15px] text-[#4B5563] mb-6 leading-relaxed max-w-2xl">
+                    Product management is one of the most sought-after roles on LinkedIn. Recruiters look for domain expertise, product sense, and leadership experience. This guide provides <strong className="text-[#0A0F1C]">40+ proven headline examples</strong> for every PM level and specialization.
                 </p>
+                <div className="bg-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-4 mb-14">
+                    <p className="text-sm text-[#4B5563] mb-2">Looking for examples from other industries?</p>
+                    <Link href="/linkedin-headline-examples" className="text-sm font-semibold text-[#0A66C2] hover:underline">→ View 100+ headline examples for all roles (software engineers, marketers, finance, students, and more)</Link>
+                </div>
 
                 <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
                     <section>
