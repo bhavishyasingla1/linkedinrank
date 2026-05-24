@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { parseLinkedInPDF, PARSER_VERSION, ExtendedProfileData } from '@/lib/pdfParser'
+
+export const maxDuration = 60 // Prevent Vercel timeout on production
 import { analyzeProfile } from '@/lib/scoringEngine'
 import { enhanceWithAI } from '@/lib/aiSuggestions'
 import { computeDeterministicScore, classifyArchetype, SCORING_VERSION } from '@/lib/deterministicScoring'

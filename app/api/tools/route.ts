@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
+export const maxDuration = 60 // Prevent Vercel timeout on production
+
 const genAI = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here'
     ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
     : null
