@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { generateAbout, AboutInput } from '@/lib/tools'
-import ToolPromptBlock, { buildAboutPrompt } from './ToolPromptBlock'
+import { generateAbout } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildAboutPrompt } from './ToolPromptBlock'
 
 interface AIAbout {
     text: string
@@ -31,6 +31,7 @@ export default function AboutGeneratorTool() {
     const [loading, setLoading] = useState(false)
     const [isAI, setIsAI] = useState(false)
     const [activeStyle, setActiveStyle] = useState<number>(0)
+    const [error, setError] = useState('')
 
     const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -133,6 +134,7 @@ export default function AboutGeneratorTool() {
         if (!role.trim()) return
         setLoading(true)
         setResults([])
+        setError('')
 
         try {
             const res = await fetch('/api/tools', {
@@ -160,27 +162,28 @@ export default function AboutGeneratorTool() {
                 return
             }
         } catch {
-            // Fall through to rule-based
+            // AI failed
         }
 
-        // Fallback: rule-based generation
-        const input: AboutInput = {
-            role: role.trim(),
-            experience: experience.trim(),
-            passion: passion.trim(),
-            achievement: achievement.trim(),
-            skills: skills.trim(),
-            audience: audience.trim(),
-            cta: ''
-        }
-        const generated = generateAbout(input)
-        setResults(generated.map(g => ({
-            text: g.text,
-            style: g.style,
-            word_count: g.text.split(/\s+/).length,
-            char_count: g.text.length
-        })))
-        setIsAI(false)
+        // Fallback: use rule-based generator
+        try {
+            const fallbackResults = generateAbout({
+                role: role.trim(),
+                experience_summary: experience.trim() || undefined,
+                passion: passion.trim() || undefined,
+                achievement: achievement.trim() || undefined,
+                skills: skills.trim() || undefined,
+                audience: audience.trim() || undefined,
+            })
+            if (fallbackResults.length > 0) {
+                setResults(fallbackResults)
+                setIsAI(false)
+                setLoading(false)
+                return
+            }
+        } catch {}
+
+        setError('ai_failed')
         setLoading(false)
     }
 
@@ -368,6 +371,19 @@ export default function AboutGeneratorTool() {
                         </>
                     )}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="About Section Builder"
+                        color="#10B981"
+                        promptText={buildAboutPrompt({
+                            role, experience, passion, achievement, skills, audience,
+                            currentAbout: currentAbout || undefined,
+                            education: education.length ? education : undefined,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {results.length > 0 && (

@@ -1106,3 +1106,207 @@ export function generatePostHooks(input: PostHookInput): GeneratedHook[] {
 
 export { classifyArchetype } from './deterministicScoring'
 export type { ProfileArchetype } from './deterministicScoring'
+
+// ============================================================
+// 8. POST IDEA GENERATOR (Rule-based fallback)
+// ============================================================
+
+export interface PostIdeaInput {
+    industry: string
+    goal: string
+    niche?: string
+    postType?: string
+}
+
+export function generatePostIdeas(input: PostIdeaInput) {
+    const { industry, goal, niche } = input
+    const focus = niche || industry
+
+    const pillars = ['growth', 'insights', 'engagement', 'growth', 'insights']
+    const formats = ['Text post', 'Carousel', 'Poll', 'Storytelling', 'How-to']
+    const templates = [
+        {
+            title: `The #1 mistake most ${industry} professionals make`,
+            hook: `I've been in ${industry} for years. The biggest mistake I see? Confusing activity with progress.`,
+            angle: 'Contrarian insight that challenges conventional wisdom',
+        },
+        {
+            title: `3 ${focus} lessons I learned the hard way`,
+            hook: `Nobody told me these three things when I started in ${focus}. I wish they had.`,
+            angle: 'Personal experience turned into actionable advice',
+        },
+        {
+            title: `Why ${industry} is about to change completely`,
+            hook: `The ${industry} landscape in 2025 looks nothing like 2023. Here is what is shifting and why it matters for your career.`,
+            angle: 'Industry trend analysis with career implications',
+        },
+        {
+            title: `My unpopular opinion about ${focus}`,
+            hook: `I will probably get pushback for this, but the most common advice about ${focus} is actively hurting people.`,
+            angle: 'Provocative take that sparks meaningful debate',
+        },
+        {
+            title: `How I would build a ${industry} career from scratch today`,
+            hook: `If I were starting over in ${industry} today, here is exactly what I would do differently.`,
+            angle: 'Practical roadmap based on hindsight and experience',
+        },
+    ]
+
+    return templates.map((t, i) => ({
+        pillar: pillars[i],
+        title: t.title,
+        hook: t.hook,
+        angle: t.angle,
+        format: formats[i],
+    }))
+}
+
+// ============================================================
+// 9. STORY TO POST (Rule-based fallback)
+// ============================================================
+
+export interface StoryToPostInput {
+    story: string
+    tone?: string
+    goal?: string
+}
+
+export function convertStoryToPost(input: StoryToPostInput) {
+    const { story, goal } = input
+    const sentences = story.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 5)
+    const firstSentence = sentences[0] || story.slice(0, 80)
+    const lesson = goal || 'Sometimes the best lessons come from unexpected places.'
+
+    const hook = `${firstSentence.slice(0, 60)}...`
+    const body = `${firstSentence}.\n\nBut here is the thing nobody talks about:\n\n${sentences.slice(1, 3).join('. ')}.\n\nThe lesson?\n\n${lesson}\n\nIf you have been through something similar, you know exactly what I mean.\n\nThe experience taught me that growth does not come from comfort. It comes from the moments that challenge everything you thought you knew.`
+    const hashtags = ['careers', 'growth', 'lessons', 'linkedin', 'professionaldevelopment']
+
+    return {
+        hook,
+        body,
+        takeaway: lesson,
+        hashtags,
+        word_count: body.split(/\s+/).length,
+        tone_used: 'Reflective and authentic',
+    }
+}
+
+// ============================================================
+// 10. COMMENT GENERATOR (Rule-based fallback)
+// ============================================================
+
+export interface CommentInput {
+    postContent: string
+    style: string
+    expertise?: string
+}
+
+export function generateComments(input: CommentInput) {
+    const { postContent, style, expertise } = input
+    const words = postContent.split(/\s+/).filter(Boolean)
+    const topicWords = words.filter(w => w.length > 5).slice(0, 3).join(' ')
+    const expertiseNote = expertise ? ` From my experience in ${expertise},` : ''
+
+    const comments = [
+        {
+            text: `This resonates.${expertiseNote} the point about ${topicWords || 'this topic'} is especially relevant right now. What I have found is that the people who understand this early gain a significant edge. Thanks for sharing this perspective.`,
+            label: 'Thoughtful Agreement',
+        },
+        {
+            text: `${expertiseNote ? expertiseNote.trim() : 'Interesting perspective.'} I would add one nuance: the challenge most people face is not understanding the concept, it is implementing it consistently. Have you found any specific approach that makes this easier to sustain long-term?`,
+            label: 'Adds Nuance + Question',
+        },
+        {
+            text: `This reminded me of a similar situation I encountered.${expertiseNote} The insight about ${topicWords || 'this'} mirrors exactly what I saw play out. The key difference was in the execution. Great framing of a complex topic.`,
+            label: 'Personal Experience',
+        },
+    ]
+
+    return comments
+}
+
+// ============================================================
+// 11. CONNECTION MESSAGE GENERATOR (Rule-based fallback)
+// ============================================================
+
+export interface ConnectionMessageInput {
+    type: string
+    name: string
+    context?: string
+    yourRole?: string
+    recipientRole?: string
+    intent?: string
+}
+
+export function generateConnectionMessages(input: ConnectionMessageInput) {
+    const { type, name, context, yourRole, recipientRole } = input
+    const firstName = name.split(' ')[0] || 'there'
+
+    const templates: Record<string, { tone: string; message: string; tip: string }[]> = {
+        default: [
+            {
+                tone: 'Direct',
+                message: `Hi ${firstName}, I came across your profile${recipientRole ? ` (${recipientRole.slice(0, 30)})` : ''} and your work caught my attention.${context ? ` ${context.slice(0, 80)}.` : ''} Would love to connect${yourRole ? ` (I'm a ${yourRole.split(' ').slice(0, 4).join(' ')})` : ''}.`,
+                tip: 'Short, specific, and gives them a reason to accept.',
+            },
+            {
+                tone: 'Warm',
+                message: `Hey ${firstName}! Really enjoyed seeing your perspective${context ? ` on ${context.slice(0, 50)}` : ''}. I think we have a lot of shared interests${recipientRole ? ` in the ${recipientRole.split(' ').slice(0, 3).join(' ')} space` : ''}. Would be great to be connected!`,
+                tip: 'Warm tone builds rapport and feels personal.',
+            },
+            {
+                tone: 'Value-First',
+                message: `Hi ${firstName}, ${yourRole ? `I'm a ${yourRole.split(' ').slice(0, 4).join(' ')} and ` : ''}I think we could learn a lot from each other's experiences${context ? ` around ${context.slice(0, 50)}` : ''}. Happy to share what I've been working on too.`,
+                tip: 'Offering value upfront increases acceptance rate.',
+            },
+        ],
+    }
+
+    const messages = templates[type] || templates.default
+    return messages.map(m => ({
+        ...m,
+        charCount: m.message.length,
+    }))
+}
+
+// ============================================================
+// 12. CONTENT PLANNER (Rule-based fallback)
+// ============================================================
+
+export interface ContentPlannerInput {
+    industry: string
+    role: string
+    frequency: string
+}
+
+export function generateWeeklyPlan(input: ContentPlannerInput) {
+    const { industry, role, frequency } = input
+    const freq = parseInt(frequency) || 3
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].slice(0, freq)
+    const pillars = ['growth', 'insights', 'engagement', 'growth', 'insights']
+    const formats = ['Storytelling', 'How-to/Carousel', 'Poll/Question', 'Case Study', 'Listicle']
+
+    const prompts = [
+        `Share a lesson from your journey as a ${role} in ${industry}. What did you learn the hard way that you wish someone told you earlier?`,
+        `Break down a process or framework from your ${industry} experience. What does a day/week look like for a ${role}? Share behind-the-scenes.`,
+        `Ask your network a thought-provoking question about ${industry}. Something that sparks genuine discussion, not just "agree/disagree."`,
+        `Share a specific result or outcome from your work as a ${role}. What was the challenge, what did you do, and what happened?`,
+        `List 3-5 tools, books, or resources that have made a real difference in your ${industry} career. Explain why each matters.`,
+    ]
+
+    const examples = [
+        `"After ${Math.floor(Math.random() * 5 + 3)} years as a ${role}, here is the one thing I would change if I started over..."`,
+        `"Most ${industry} professionals overcomplicate this. Here is my simple ${Math.floor(Math.random() * 3 + 3)}-step framework..."`,
+        `"Honest question for ${industry} professionals: Is [common practice] actually worth the effort? Here is what I have seen..."`,
+        `"We went from [before] to [after] in ${Math.floor(Math.random() * 6 + 3)} months. Here is exactly how we did it..."`,
+        `"${Math.floor(Math.random() * 3 + 3)} ${industry} tools I cannot live without in 2025. Number ${Math.floor(Math.random() * 2 + 2)} changed everything..."`,
+    ]
+
+    return days.map((day, i) => ({
+        day,
+        pillar: pillars[i],
+        format: formats[i],
+        prompt: prompts[i],
+        example: examples[i],
+    }))
+}

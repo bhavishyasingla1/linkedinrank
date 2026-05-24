@@ -240,4 +240,4 @@ export const llmQueue = new LLMRequestQueue()
 /**
  * Pipeline version for tracking
  */
-export const PIPELINE_VERSION = 'v2.0.0'
+export const PIPELINE_VERSION = 'v2.0.1'

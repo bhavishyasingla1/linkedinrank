@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import ToolPromptBlock, { buildConnectionPrompt } from './ToolPromptBlock'
+import { generateConnectionMessages as generateFallbackMessages } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildConnectionPrompt } from './ToolPromptBlock'
 
 type ConnectionType = 
     | 'cold' | 'same-industry' | 'alumni' | 'recruiter' | 'founder' 
@@ -30,54 +31,6 @@ interface MessageResult {
     message: string
     charCount: number
     tip: string
-}
-
-// ── Helper: extract usable first name ──────────────────────
-function extractFirstName(fullName: string): string {
-    const parts = fullName.trim().split(/\s+/)
-    if (parts.length === 0) return 'there'
-    const prefixes = ['dr', 'dr.', 'mr', 'mr.', 'mrs', 'mrs.', 'ms', 'ms.', 'prof', 'prof.', 'sir', 'shri']
-    if (parts.length > 1 && prefixes.includes(parts[0].toLowerCase())) return parts[1]
-    return parts[0]
-}
-
-// ── Helper: shorten a headline to its core role ──────────────
-function shortenHeadline(headline: string): string {
-    if (!headline) return ''
-    const firstPart = headline.split(/[|,·•]/)[0].trim()
-    return firstPart.length > 50 ? firstPart.slice(0, 47) + '...' : firstPart
-}
-
-// ── Template fallback ──────────────────────────────────────
-function fallbackMessages(type: ConnectionType, name: string, context: string, yourRole: string, recipientRole: string, intent: string): MessageResult[] {
-    const firstName = extractFirstName(name) || 'there'
-    const ctx = context.trim()
-    const role = shortenHeadline(yourRole)
-    const recRole = shortenHeadline(recipientRole)
-    const int = intent.trim()
-
-    const templates: { tone: string; message: string; tip: string }[] = [
-        {
-            tone: 'Direct and Specific',
-            message: `Hi ${firstName}, ${role ? `I work in ${role}` : 'your profile caught my eye'}${recRole ? ` and your work in ${recRole} is impressive` : ''}. ${int ? int : ctx ? `Our shared interest in ${ctx} stood out` : 'Would love to connect and exchange ideas'}.`,
-            tip: 'Being specific about WHY you want to connect doubles acceptance rates.'
-        },
-        {
-            tone: 'Warm and Personal',
-            message: `${firstName}, ${ctx ? `noticed your work in ${ctx} and` : ''} had to reach out. ${role ? `I work in ${role} and ` : ''}think we could have some great conversations. ${int ? `Keen to discuss ${int}.` : 'Looking forward to connecting.'}`,
-            tip: 'Short, warm messages feel human. Keep it under 200 chars when possible.'
-        },
-        {
-            tone: 'Value-First',
-            message: `Hi ${firstName}! ${role ? `${role} here. ` : ''}${ctx ? `Been thinking about ${ctx} and` : 'I'} would love to exchange ideas${recRole ? ` on ${recRole}` : ''}. ${int || 'Happy to share what I have learned so far.'}`,
-            tip: 'Offering value before asking gives the recipient a reason to accept.'
-        },
-    ]
-
-    return templates.map(t => ({
-        ...t,
-        charCount: t.message.length,
-    }))
 }
 
 // ── Context hints per type ──────────────────────────────────
@@ -198,10 +151,28 @@ export default function ConnectionMessageGenerator() {
                 setMessages(data.data.map((m: MessageResult) => ({ ...m, charCount: m.charCount || m.message?.length || 0 })))
                 setIsAI(true)
             } else {
-                setMessages(fallbackMessages(type, name || 'there', context, yourRole, recipientRole, intent))
+                throw new Error('AI returned no data')
             }
         } catch {
-            setMessages(fallbackMessages(type, name || 'there', context, yourRole, recipientRole, intent))
+            // Fallback: use rule-based generator
+            try {
+                const fallback = generateFallbackMessages({
+                    type,
+                    name: name || 'there',
+                    context: context || undefined,
+                    yourRole: yourRole || undefined,
+                    recipientRole: recipientRole || undefined,
+                    intent: intent || undefined,
+                })
+                if (fallback.length > 0) {
+                    setMessages(fallback)
+                    setIsAI(false)
+                } else {
+                    setError('ai_failed')
+                }
+            } catch {
+                setError('ai_failed')
+            }
         } finally {
             setLoading(false)
         }
@@ -370,6 +341,22 @@ export default function ConnectionMessageGenerator() {
                         </span>
                     ) : 'Generate Messages'}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Connection Crafter"
+                        color="#10B981"
+                        promptText={buildConnectionPrompt({
+                            type,
+                            name: name || 'there',
+                            context: context || undefined,
+                            yourRole: yourRole || undefined,
+                            recipientRole: recipientRole || undefined,
+                            intent: intent || undefined,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {messages.length > 0 && (

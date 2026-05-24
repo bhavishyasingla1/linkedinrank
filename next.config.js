@@ -16,7 +16,20 @@ const nextConfig = {
             bodySizeLimit: '10mb',
         },
         optimizePackageImports: ['@google/generative-ai', 'react-dom', 'qrcode'],
-        optimizeCss: true,
+    },
+    async rewrites() {
+        return {
+            fallback: [
+                {
+                    source: '/linkedin-headline-for-:profession',
+                    destination: '/headline/for/:profession',
+                },
+                {
+                    source: '/linkedin-headline-:slug',
+                    destination: '/headline/:slug',
+                },
+            ]
+        }
     },
     async redirects() {
         return [

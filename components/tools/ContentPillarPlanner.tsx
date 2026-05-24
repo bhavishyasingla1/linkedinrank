@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import ToolPromptBlock, { buildContentPlannerPrompt } from './ToolPromptBlock'
+import { generateWeeklyPlan } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildContentPlannerPrompt } from './ToolPromptBlock'
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
@@ -21,47 +22,6 @@ interface DayPlan {
     example: string
 }
 
-// ── Template fallback ──────────────────────────────────────
-function fallbackFormatOptions(industry: string, role: string) {
-    const ind = industry || 'your field'
-    const r = role || 'professional'
-    return {
-        growth: [
-            { format: 'Personal Story', prompt: `Share a career lesson you learned the hard way as a ${r} in ${ind}`, example: `The worst advice I ever received about ${ind} | and why I'm glad I ignored it.` },
-            { format: 'Skill Update', prompt: `Talk about a new skill you're building that's relevant to ${ind}`, example: `I've been learning a new skill for my ${ind} work. 30 days in | here's what surprised me.` },
-            { format: 'Before/After', prompt: `Show how you've grown as a ${r} | pick one specific transformation`, example: `2 years ago I was struggling as a ${r}. Today everything is different. Here's what changed.` },
-        ],
-        insights: [
-            { format: 'Industry Take', prompt: `Share a strong opinion about ${ind} that others might disagree with`, example: `Unpopular opinion: the biggest problem in ${ind} right now is one nobody wants to address.` },
-            { format: 'Framework Share', prompt: `Teach a framework you use as a ${r}`, example: `The simple framework I use for every major ${ind} decision.` },
-            { format: 'Trend Analysis', prompt: `Break down a current ${ind} trend with your unique ${r} perspective`, example: `3 things changing in ${ind} right now that most ${r}s aren't talking about.` },
-        ],
-        engagement: [
-            { format: 'Question Post', prompt: `Ask your ${ind} network a thought-provoking question`, example: `What's the best ${ind} advice you've ever received? I'll go first.` },
-            { format: 'Shoutout', prompt: `Celebrate someone in your ${ind} network doing great work`, example: `Shoutout to a fellow ${r} who taught me something invaluable about ${ind}.` },
-        ],
-    }
-}
-
-function fallbackWeeklyPlan(frequency: Frequency, industry: string, role: string): DayPlan[] {
-    const freq = parseInt(frequency)
-    const selectedDays = DAYS.slice(0, freq)
-    const formatOptions = fallbackFormatOptions(industry, role)
-    type PillarKey = 'growth' | 'insights' | 'engagement'
-
-    const pillarAssignment: PillarKey[] = []
-    if (freq === 3) pillarAssignment.push('growth', 'insights', 'engagement')
-    else if (freq === 4) pillarAssignment.push('growth', 'insights', 'insights', 'engagement')
-    else pillarAssignment.push('growth', 'insights', 'growth', 'insights', 'engagement')
-
-    return selectedDays.map((day, i) => {
-        const pillar = pillarAssignment[i]
-        const options = formatOptions[pillar]
-        const selected = options[Math.floor(Math.random() * options.length)]
-        return { day, pillar, format: selected.format, prompt: selected.prompt, example: selected.example }
-    })
-}
-
 // ── Component ──────────────────────────────────────────────
 export default function ContentPillarPlanner() {
     const [industry, setIndustry] = useState('')
@@ -73,6 +33,7 @@ export default function ContentPillarPlanner() {
     const [isAI, setIsAI] = useState(false)
     const [pdfUploading, setPdfUploading] = useState(false)
     const [pdfExtracted, setPdfExtracted] = useState(false)
+    const [error, setError] = useState('')
 
     const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -104,6 +65,7 @@ export default function ContentPillarPlanner() {
         setLoading(true)
         setIsAI(false)
         setPlan([])
+        setError('')
 
         try {
             const res = await fetch('/api/tools', {
@@ -120,10 +82,25 @@ export default function ContentPillarPlanner() {
                 setPlan(data.data)
                 setIsAI(true)
             } else {
-                setPlan(fallbackWeeklyPlan(frequency, industry, role))
+                throw new Error('AI returned no data')
             }
         } catch {
-            setPlan(fallbackWeeklyPlan(frequency, industry, role))
+            // Fallback: use rule-based generator
+            try {
+                const fallback = generateWeeklyPlan({
+                    industry: industry || 'general',
+                    role: role || 'professional',
+                    frequency,
+                })
+                if (fallback.length > 0) {
+                    setPlan(fallback)
+                    setIsAI(false)
+                } else {
+                    setError('ai_failed')
+                }
+            } catch {
+                setError('ai_failed')
+            }
         } finally {
             setLoading(false)
         }
@@ -237,6 +214,19 @@ export default function ContentPillarPlanner() {
                         </span>
                     ) : 'Generate Weekly Plan'}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Content Calendar"
+                        color="#7C3AED"
+                        promptText={buildContentPlannerPrompt({
+                            industry,
+                            role,
+                            frequency,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {plan.length > 0 && (

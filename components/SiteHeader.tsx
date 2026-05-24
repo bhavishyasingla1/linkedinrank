@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 const NAV_LINKS = [
@@ -13,9 +13,21 @@ const NAV_LINKS = [
 
 export default function SiteHeader() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const headerRef = useRef<HTMLElement>(null)
+
+    // Re-apply correct styles after mount to fix browser extension modifications
+    useEffect(() => {
+        if (headerRef.current) {
+            headerRef.current.className = 'bg-white/90 backdrop-blur-xl sticky top-0 z-50 border-b border-black/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]'
+        }
+    }, [])
 
     return (
-        <header className="bg-white/90 backdrop-blur-xl sticky top-0 z-50 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]" style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+        <header
+            ref={headerRef}
+            suppressHydrationWarning
+            className="bg-white/90 backdrop-blur-xl sticky top-0 z-50 border-b border-black/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]"
+        >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
                 <Link href="/" className="font-bold text-base sm:text-lg tracking-tight text-[#0A0F1C] no-underline shrink-0">
                     LinkedIn<span className="text-gradient-brand">Rank</span>
@@ -34,11 +46,10 @@ export default function SiteHeader() {
                     ))}
                 </nav>
 
-                <div className="flex items-center gap-2.5" suppressHydrationWarning>
+                <div className="flex items-center gap-2.5">
 
                     <a
                         href="/#upload"
-                        suppressHydrationWarning
                         className="text-[13px] font-semibold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] shadow-[0_2px_8px_rgba(10,102,194,0.25)] hover:shadow-[0_4px_16px_rgba(10,102,194,0.35)] hover:-translate-y-[1px] px-5 py-2.5 rounded-xl transition-all duration-200 no-underline whitespace-nowrap"
                     >
                         Analyze Profile

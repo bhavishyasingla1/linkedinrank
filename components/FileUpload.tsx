@@ -47,8 +47,8 @@ export default function FileUpload() {
             return
         }
 
-        if (file.size > 10 * 1024 * 1024) {
-            setError('File must be under 10MB.')
+        if (file.size > 5 * 1024 * 1024) {
+            setError('File must be under 5MB. LinkedIn PDFs are usually under 1MB.')
             return
         }
 
@@ -59,12 +59,19 @@ export default function FileUpload() {
                 const base64 = e.target?.result as string
                 const base64Data = base64.split(',')[1]
 
-                sessionStorage.setItem('uploadingFile', JSON.stringify({
-                    fileName: file.name,
-                    fileContent: base64Data
-                }))
-
-                router.push('/loading-analysis')
+                try {
+                    sessionStorage.setItem('uploadingFile', JSON.stringify({
+                        fileName: file.name,
+                        fileContent: base64Data
+                    }))
+                    router.push('/loading-analysis')
+                } catch (storageErr: any) {
+                    // Handle QuotaExceededError for large files
+                    setError('File is too large to process in browser storage. Try a smaller PDF (LinkedIn PDFs are usually under 500KB).')
+                }
+            }
+            reader.onerror = () => {
+                setError('Failed to read file. Please try again.')
             }
             reader.readAsDataURL(file)
         } catch (err: any) {

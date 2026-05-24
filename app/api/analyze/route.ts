@@ -247,7 +247,7 @@ export async function POST(request: NextRequest) {
 
         // Compute tier from the SAME score the UI will display
         const score = analysis.linkedInScore
-        const tier = score >= 85 ? 'Platinum' : score >= 70 ? 'Gold' : score >= 55 ? 'Silver' : 'Bronze'
+        const tier = score >= 85 ? 'platinum' : score >= 70 ? 'gold' : score >= 55 ? 'silver' : 'bronze'
 
         // Build diagnostics
         const diagnostics = {

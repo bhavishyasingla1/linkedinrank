@@ -5,6 +5,82 @@ const genAI = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your
     ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
     : null
 
+// Models to try in order — lite has higher free-tier limits
+const MODELS = ['gemini-3.1-flash-lite', 'gemini-2.0-flash', 'gemini-2.0-flash-lite']
+const MAX_RETRIES = 1
+const RETRY_DELAY_MS = 1000
+
+async function callGeminiWithRetry(
+    prompt: string,
+    config: { temperature: number; maxOutputTokens: number; responseMimeType?: string }
+): Promise<string | null> {
+    if (!genAI) return null
+
+    // Force JSON mode for all tool prompts
+    const enhancedConfig = {
+        ...config,
+        responseMimeType: config.responseMimeType || 'application/json'
+    }
+
+    for (const modelName of MODELS) {
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName })
+                const result = await model.generateContent({
+                    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                    generationConfig: enhancedConfig,
+                })
+                return result.response.text()
+            } catch (err: any) {
+                const status = err?.status || err?.httpErrorCode || 0
+                const msg = err?.message || ''
+                const is429 = status === 429 || msg.includes('429') || msg.includes('quota') || msg.includes('RESOURCE_EXHAUSTED')
+                
+                console.warn(`[AI] ${modelName} attempt ${attempt + 1} failed:`, is429 ? '429 quota' : msg.slice(0, 120))
+                
+                if (is429 && attempt < MAX_RETRIES) {
+                    // Wait before retry with exponential backoff
+                    await new Promise(r => setTimeout(r, RETRY_DELAY_MS * (attempt + 1)))
+                    continue
+                }
+                
+                if (is429) {
+                    // Exhausted retries for this model, try next model
+                    break
+                }
+                
+                // Non-rate-limit error, don't retry
+                throw err
+            }
+        }
+    }
+    return null // All models exhausted
+}
+
+function parseJsonArray(text: string): any[] | null {
+    try {
+        // First try parsing it directly (in case model natively returns pure JSON)
+        return JSON.parse(text)
+    } catch {
+        // Strip markdown backticks if present
+        const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
+        const m = cleaned.match(/\[[\s\S]*\]/)
+        if (m) { try { return JSON.parse(m[0]) } catch { return null } }
+        return null
+    }
+}
+
+function parseJsonObject(text: string): any | null {
+    try {
+        return JSON.parse(text)
+    } catch {
+        const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
+        const m = cleaned.match(/\{[\s\S]*\}/)
+        if (m) { try { return JSON.parse(m[0]) } catch { return null } }
+        return null
+    }
+}
+
 // ============================================================
 // AI TOOL PROMPTS
 // ============================================================
@@ -19,8 +95,6 @@ async function aiGenerateHeadlines(input: {
     about?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
     const skillsText = input.skills?.slice(0, 8).join(', ') || ''
 
     const prompt = `You are an elite LinkedIn headline strategist. You don't write headlines | you engineer first impressions. Every headline must make a recruiter stop scrolling and click.
@@ -40,20 +114,21 @@ CORE PRINCIPLES:
 - Front-load with exact keywords recruiters type into LinkedIn search.
 - Create a curiosity gap | make them want to click the profile.
 - Concrete > abstract. "Scaled 3 products to $10M ARR" beats "Experienced product leader."
-- No clichés: zero tolerance for "passionate", "results-driven", "team player", "go-getter".
+- BANNED WORDS (Do NOT use these): "passionate", "results-driven", "team player", "go-getter", "delve", "unlock", "supercharge", "transformative", "innovative".
 - Sound precise, deliberate, and human. Never sound like AI wrote it.
 
 RULES:
-1. Each headline MUST be under 120 characters
-2. Each must use a DIFFERENT style/angle (see styles below)
-3. Include 2-3 keywords recruiters actually search for in this industry
-4. Be hyper-specific to THIS person's actual context and experience
-5. Use separators like | · | for readability
-6. No emojis, no hype language
-7. Score each headline 75-98 based on: keyword density (30%), specificity (30%), positioning clarity (20%), curiosity factor (20%)
-8. NEVER use em dashes (|) or en dashes (–). Use | or commas instead. Em dashes signal AI-generated text.
+1. Generate EXACTLY 6 headlines. Do not generate 5, do not generate 7. Exactly 6.
+2. Each headline MUST be under 120 characters.
+3. Each must use a DIFFERENT style/angle from the list below.
+4. Include 2-3 keywords recruiters actually search for in this industry.
+5. Be hyper-specific to THIS person's actual context and experience.
+6. Use separators like | or · for readability.
+7. No emojis, no hype language.
+8. Score each headline 75-98 based on: keyword density (30%), specificity (30%), positioning clarity (20%), curiosity factor (20%).
+9. NEVER use em dashes (|) or en dashes (–). Use | or commas instead. Em dashes signal AI-generated text.
 
-STYLES (use one per headline):
+STYLES TO USE (Use exactly one per headline):
 - "Value Proposition": "I help [specific audience] achieve [specific outcome]", makes the reader the hero
 - "Authority": Role + Company + Domain expertise, positions as the go-to expert
 - "Outcome-Focused": Lead with the measurable result you deliver, not your title
@@ -61,21 +136,11 @@ STYLES (use one per headline):
 - "Mission-Driven": Who you serve + why it matters, signals purpose
 - "Builder": "Building [what] | [Role] | [Differentiator]", signals momentum and agency
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"text": "headline", "score": number, "style": "style name", "tip": "1-line explanation of the psychology behind why this works"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1200 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.7, maxOutputTokens: 1200 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiGenerateAbout(input: {
@@ -89,8 +154,6 @@ async function aiGenerateAbout(input: {
     cta?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     // Detect if this is a student/early-career profile
     const isStudent = /\b(student|intern|fresher|graduate|undergraduate|freshman|sophomore|junior|senior)\b/i.test(input.role || '') || /\b(university|institute|college|school|bachelor|master|phd|pursuing|studying)\b/i.test(input.experience_summary || '')
@@ -121,36 +184,27 @@ CORE PRINCIPLES:
 - The reader should finish thinking "I want to connect with this person."
 
 RULES:
-1. Each About section must be 100-250 words
+1. Generate EXACTLY 3 variations of the About section. Do not generate 2, do not generate 4. Exactly 3.
 2. Write in FIRST PERSON ("I")
-3. Each must use a DIFFERENT tone (see below)
+3. Each variation MUST use a DIFFERENT tone from the list below.
 4. Be hyper-specific to THIS person's actual skills and experience. Do not invent achievements.
 5. If skills are listed, mention them naturally in the text (not as a raw comma list)
 6. End with a clear, direct call-to-action
 7. Use short paragraphs (2-3 sentences max) with blank lines between for mobile readability
-8. Stay under 2,000 characters
+8. Stay under 2,000 characters per variation.
 9. If an achievement is provided, reference it properly with full context. Do not truncate names or add random commas.
+10. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative", "passionate", "results-driven", "team player", "go-getter".
 
-TONES:
+TONES TO USE (Use exactly one per variation):
 1. "Narrative Arc" | Hook with a surprising insight, weave in background, demonstrate expertise with proof, close with vision.
 2. "Bold Opener" | Direct, confident. Lead with what makes them unique. No filler, no fluff, just impact.
 3. "Conversational" | Warm, approachable, relatable. Sound like explaining what you do to a smart friend over coffee.
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"text": "full about section text with \\n for line breaks between paragraphs", "style": "tone name", "word_count": number, "char_count": number}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 3000 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.7, maxOutputTokens: 3000 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiGeneratePostIdeas(input: {
@@ -160,8 +214,6 @@ async function aiGeneratePostIdeas(input: {
     expertise?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const goalMap: Record<string, string> = {
         'thought-leadership': 'establishing themselves as a thought leader',
@@ -188,35 +240,26 @@ CORE PRINCIPLES:
 - Avoid over-explaining. Leave space for comments.
 
 RULES:
-1. Each idea must include a SPECIFIC hook (first line of the post) that creates instant curiosity or tension
-2. Each idea must target a DIFFERENT content pillar: growth, insights, or engagement
-3. Hooks must stop the scroll | use pattern interrupts, contrarian takes, or curiosity gaps
-4. Ideas must be DEEPLY SPECIFIC to ${input.industry}, referencing real trends, tools, challenges
-5. Include the FORMAT (text, carousel, poll, list, storytelling)
-6. Include a specific ANGLE that makes the post unique | no one else could write this
-7. Reference specific trends, tools, or concepts in ${input.industry}
-8. NEVER use em dashes (|) or en dashes (–). Use commas or periods instead.
+1. Generate EXACTLY 5 post ideas. Do not generate 4, do not generate 6. Exactly 5.
+2. Each idea must include a SPECIFIC hook (first line of the post) that creates instant curiosity or tension
+3. The 5 ideas must cover DIFFERENT content pillars: ensure at least one 'growth', one 'insights', and one 'engagement'.
+4. Hooks must stop the scroll | use pattern interrupts, contrarian takes, or curiosity gaps
+5. Ideas must be DEEPLY SPECIFIC to ${input.industry}, referencing real trends, tools, challenges
+6. Include the FORMAT (text, carousel, poll, list, storytelling)
+7. Include a specific ANGLE that makes the post unique | no one else could write this
+8. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative", "in today's digital landscape".
+9. NEVER use em dashes (|) or en dashes (–). Use commas or periods instead.
 
 CONTENT PILLARS:
 - "growth" | Personal development, lessons learned, career reflections
 - "insights" | Industry expertise, frameworks, analysis, predictions
 - "engagement" | Questions, debates, community building, shoutouts
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"pillar": "growth|insights|engagement", "title": "post title", "hook": "exact first line of the post", "angle": "what makes this post unique", "format": "post format"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.8, maxOutputTokens: 1500 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.8, maxOutputTokens: 1500 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiStoryToPost(input: {
@@ -226,8 +269,6 @@ async function aiStoryToPost(input: {
     goal?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const prompt = `You are an elite LinkedIn ghostwriter who engineers posts for perception and influence. You don't write to inform | you write to capture attention, shape perception, and create engagement.
 
@@ -259,9 +300,10 @@ RULES:
 8. NO emoji overuse (max 2-3 if any)
 9. Write in first person
 10. Make it SPECIFIC, reference real details from their story
-11. NEVER use em dashes (|) or en dashes (–). Use commas or periods. Em dashes signal AI text.
+11. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative", "in today's world".
+12. NEVER use em dashes (|) or en dashes (–). Use commas or periods. Em dashes signal AI text.
 
-Return ONLY valid JSON:
+Return ONLY valid JSON object (no markdown, no backticks). Schema:
 {
     "hook": "the first line of the post",
     "body": "the full post text including hook",
@@ -271,18 +313,8 @@ Return ONLY valid JSON:
     "tone_used": "description of tone"
 }`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1500 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.7, maxOutputTokens: 1500 })
+    return text ? parseJsonObject(text) : null
 }
 
 // ============================================================
@@ -296,8 +328,6 @@ async function aiGenerateComments(input: {
     length?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const styleGuide: Record<string, string> = {
         'insightful': 'Add a deeper layer of insight the author didn\'t cover. Build on their argument with a new dimension | connect it to a broader trend, share a framework, or introduce an adjacent concept. Don\'t just agree or paraphrase.',
@@ -337,22 +367,13 @@ CRITICAL RULES:
 9. Give each a label (2-5 words) describing the angle taken
 10. Vary sentence structure, mix short punchy sentences with longer ones. No formulaic patterns.
 11. NEVER use em dashes (|) or en dashes (–). Use commas or periods instead.
+12. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative", "in today's world".
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"text": "comment text", "label": "approach label"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.8, maxOutputTokens: 1500 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.8, maxOutputTokens: 1500 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiGenerateConnectionMessages(input: {
@@ -364,8 +385,6 @@ async function aiGenerateConnectionMessages(input: {
     recipientRole?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const typeGuide: Record<string, string> = {
         'cold': 'Cold outreach to someone you have never interacted with. Must feel warm, genuine, and specific. Give them a concrete reason to accept. Reference something specific about them.',
@@ -418,10 +437,10 @@ ${input.yourRole ? `- Sender's full headline (for context only, do NOT copy this
 ${input.context ? `- Specific context: ${input.context}` : ''}
 ${input.intent ? `- Sender's goal/intent: ${input.intent}` : ''}
 
-WRITE 3 CONNECTION MESSAGES. Each must be a different approach.
+WRITE EXACTLY 3 CONNECTION MESSAGES. Each must be a different approach.
 
 CRITICAL RULES:
-1. HARD LIMIT: Each message MUST be under 300 characters. LinkedIn cuts off at 300. Count carefully.
+1. HARD LIMIT: Each message MUST be STRICTLY under 300 characters. LinkedIn cuts off at 300. Count carefully. Do not exceed 290 characters to be safe.
 2. These are "Add a note" messages, NOT emails. They should feel like a quick, genuine note, not a formal letter.
 3. Use their FIRST NAME "${firstName}" once, naturally. Do NOT use their full headline or full name in the message.
 4. NEVER copy-paste the sender's or recipient's full headline into the message. Paraphrase their role in 3-5 words max. e.g., "structural engineering researcher" not the full headline.
@@ -434,22 +453,13 @@ CRITICAL RULES:
 11. NEVER use em dashes, en dashes, semicolons, or ellipsis. Use commas and periods only. These punctuation marks signal AI text.
 12. No exclamation marks in every sentence. Max 1 per message.
 13. Include a practical tip explaining WHY this approach works for this specific scenario.
+14. BANNED WORDS: "delve", "unlock", "supercharge", "transformative", "innovative".
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"tone": "2-3 word tone label", "message": "the connection note text", "charCount": number, "tip": "1-line tip on why this works for this scenario"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.75, maxOutputTokens: 1400 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.75, maxOutputTokens: 1400 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiGeneratePostHooks(input: {
@@ -458,8 +468,6 @@ async function aiGeneratePostHooks(input: {
     audience?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const prompt = `You are a scroll-psychology expert who engineers LinkedIn opening lines that hijack attention. Your hooks are built on applied psychology | pattern interrupts, curiosity gaps, and cognitive dissonance.
 
@@ -477,17 +485,19 @@ CORE PRINCIPLES:
 - Concrete > abstract: real numbers, timeframes, specific scenarios beat vague claims.
 
 CRITICAL RULES:
-1. Each hook must be 1-3 lines that create INSTANT curiosity, tension, or surprise
-2. Each must use a DIFFERENT psychological technique (see styles below)
-3. Be hyper-SPECIFIC to "${input.topic}" | every hook should only work for this exact topic
-4. Use concrete details: real numbers, timeframes, specific scenarios, named tools/concepts
-5. No clickbait that doesn't deliver | the hook must be defensible and honest
-6. Sound like a real LinkedIn creator, NOT AI-generated
-7. VARY the emotional register: analytical, vulnerable, provocative, warm
-8. Include a 1-2 sentence explanation of the psychology behind each hook
-9. Work for any professional background: student, executive, freelancer, teacher, etc.
-10. Mix up formatting: some single-line, some multi-line with line breaks
-11. NEVER use em dashes (|) or en dashes (–). Use commas or periods instead.
+1. Generate EXACTLY 5 hooks. Do not generate 4, do not generate 6. Exactly 5.
+2. Each hook must be 1-3 lines that create INSTANT curiosity, tension, or surprise
+3. Each must use a DIFFERENT psychological technique (see styles below)
+4. Be hyper-SPECIFIC to "${input.topic}" | every hook should only work for this exact topic
+5. Use concrete details: real numbers, timeframes, specific scenarios, named tools/concepts
+6. No clickbait that doesn't deliver | the hook must be defensible and honest
+7. Sound like a real LinkedIn creator, NOT AI-generated
+8. VARY the emotional register: analytical, vulnerable, provocative, warm
+9. Include a 1-2 sentence explanation of the psychology behind each hook
+10. Work for any professional background: student, executive, freelancer, teacher, etc.
+11. Mix up formatting: some single-line, some multi-line with line breaks
+12. NEVER use em dashes (|) or en dashes (–). Use commas or periods instead.
+13. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative".
 
 STYLES (use one per hook):
 - "Pattern Interrupt" | break expectations, say something the reader wouldn't expect on this topic
@@ -497,21 +507,11 @@ STYLES (use one per hook):
 - "Data-Led" | lead with a surprising, specific statistic or number that reframes the topic
 - "Confession" | a vulnerable, honest admission that builds trust and relatability
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"text": "hook text (use \\n for line breaks)", "style": "style name", "why_it_works": "1-2 sentence psychology explanation"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.9, maxOutputTokens: 1800 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.9, maxOutputTokens: 1800 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiGenerateWeeklyPlan(input: {
@@ -520,8 +520,6 @@ async function aiGenerateWeeklyPlan(input: {
     frequency: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const freq = parseInt(input.frequency) || 3
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].slice(0, freq)
@@ -549,22 +547,13 @@ CRITICAL RULES:
 8. Vary formats across the week, no two days should have the same format
 9. The plan should work whether the person is early-career or senior, in a big company or freelancing
 10. NEVER use em dashes (|) or en dashes (–). Use commas or periods.
+11. BANNED WORDS (Do NOT use these): "delve", "unlock", "supercharge", "transformative", "innovative".
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"day": "Monday", "pillar": "growth|insights|engagement", "format": "post format", "prompt": "detailed writing prompt", "example": "example hook/first line"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.85, maxOutputTokens: 2000 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.85, maxOutputTokens: 2000 })
+    return text ? parseJsonArray(text) : null
 }
 
 async function aiImproveBullets(input: {
@@ -572,8 +561,6 @@ async function aiImproveBullets(input: {
     style?: string
 }) {
     if (!genAI) return null
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
     const styleGuide: Record<string, string> = {
         'concise': 'Short, punchy, achievement-focused. Each bullet should be 1 sentence with a power verb + action + measurable result.',
@@ -597,23 +584,14 @@ RULES:
 6. Each bullet must make a recruiter think "I need to interview this person"
 7. Keep each bullet under 150 characters for readability
 8. Do NOT add generic filler. Every word must earn its place.
-9. Generate exactly 3 rewritten versions with different angles
+9. Generate EXACTLY 3 rewritten versions with different angles. Do not generate 2, do not generate 4.
+10. BANNED WORDS: "delve", "unlock", "supercharge", "transformative", "innovative".
 
-Return ONLY valid JSON array:
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
 [{"label": "style label (e.g. Metrics-Heavy, Impact-Focused, Leadership)", "text": "rewritten bullet text"}]`
 
-    const result = await model.generateContent({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1200 },
-    })
-
-    const text = result.response.text()
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
-    if (jsonMatch) {
-        try { return JSON.parse(jsonMatch[0]) }
-        catch { return null }
-    }
-    return null
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.7, maxOutputTokens: 1200 })
+    return text ? parseJsonArray(text) : null
 }
 
 // ============================================================
@@ -680,9 +658,10 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ success: true, data: result })
     } catch (error: any) {
-        console.error('[AI Tools Error]', error?.message || error)
+        console.error('[AI Tools Error]', error?.message || error, error?.stack)
         return NextResponse.json({
             error: 'AI generation failed',
+            message: error?.message || 'Unknown error',
             fallback: true
         }, { status: 200 })
     }
@@ -691,6 +670,6 @@ export async function POST(request: NextRequest) {
 export async function GET() {
     return NextResponse.json({
         available: !!genAI,
-        tools: ['headline', 'about', 'post-ideas', 'story-to-post', 'comment', 'connection-message', 'post-hooks', 'content-planner']
+        tools: ['headline', 'about', 'post-ideas', 'story-to-post', 'comment', 'connection-message', 'post-hooks', 'content-planner', 'bullet-improve']
     })
 }

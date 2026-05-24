@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import ToolPromptBlock, { buildPostIdeaPrompt } from './ToolPromptBlock'
+import { generatePostIdeas } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildPostIdeaPrompt } from './ToolPromptBlock'
 
 const INDUSTRIES = [
     'Technology', 'Finance', 'Healthcare', 'Marketing', 'Education',
@@ -23,41 +24,6 @@ interface AIPostIdea {
     hook: string
     angle: string
     format: string
-}
-
-// Fallback rule-based ideas
-function buildFallbackIdeas(industry: string, goal: string): AIPostIdea[] {
-    const goalTemplates: Record<string, AIPostIdea[]> = {
-        'thought-leadership': [
-            { pillar: 'insights', title: `${industry} trend most people are ignoring`, hook: `Everyone in ${industry} is talking about AI. But nobody's talking about this.`, angle: 'Contrarian take on industry trends', format: 'Text post' },
-            { pillar: 'insights', title: `Framework for ${industry} success`, hook: `After working with 50+ ${industry} teams, here's the framework that works every time:`, angle: 'Actionable framework', format: 'Carousel / List' },
-            { pillar: 'growth', title: `Biggest lesson from ${industry}`, hook: `I spent 3 years in ${industry} before I realized this one thing.`, angle: 'Personal growth reflection', format: 'Text post' },
-            { pillar: 'engagement', title: `Unpopular opinion about ${industry}`, hook: `Unpopular opinion: The biggest problem in ${industry} isn't what you think.`, angle: 'Debate starter', format: 'Text post' },
-            { pillar: 'growth', title: `Career mistake in ${industry}`, hook: `My worst career mistake? Saying yes to everything in my first ${industry} role.`, angle: 'Vulnerability + lesson', format: 'Storytelling' },
-        ],
-        'job-search': [
-            { pillar: 'growth', title: `What I wish I knew before entering ${industry}`, hook: `If I could restart my ${industry} career, here's what I'd do differently.`, angle: 'Career pivot reflection', format: 'Storytelling' },
-            { pillar: 'insights', title: `Skills that actually matter in ${industry}`, hook: `I've interviewed 100+ ${industry} candidates. These 3 skills matter more than your degree.`, angle: 'Hiring perspective', format: 'Carousel / List' },
-            { pillar: 'engagement', title: `Is ${industry} still a good career bet?`, hook: `"${industry} is dead." I hear this weekly. Here's what the data actually says:`, angle: 'Myth-busting', format: 'Text post' },
-            { pillar: 'growth', title: `How I landed my ${industry} role`, hook: `I got rejected 47 times before landing my dream ${industry} role. Here's what changed.`, angle: 'Personal story + tactics', format: 'Storytelling' },
-            { pillar: 'insights', title: `${industry} resume mistakes`, hook: `Your ${industry} resume is probably doing this wrong. Here's a quick fix:`, angle: 'Practical advice', format: 'Text post' },
-        ],
-        'build-audience': [
-            { pillar: 'engagement', title: `Ask me about ${industry}`, hook: `I've been in ${industry} for years. Ask me anything | no gatekeeping.`, angle: 'AMA / community builder', format: 'Text post' },
-            { pillar: 'insights', title: `${industry} tools nobody talks about`, hook: `These 5 ${industry} tools saved me 10+ hours a week. And none of them are ChatGPT.`, angle: 'Curated resource list', format: 'Carousel / List' },
-            { pillar: 'growth', title: `Day in the life: ${industry}`, hook: `Here's what a typical day looks like in ${industry}. Spoiler: it's not glamorous.`, angle: 'Behind-the-scenes', format: 'Storytelling' },
-            { pillar: 'engagement', title: `${industry} hot take`, hook: `Hot take: Most people in ${industry} are solving the wrong problem.`, angle: 'Contrarian conversation starter', format: 'Text post' },
-            { pillar: 'insights', title: `${industry} predictions`, hook: `3 predictions for ${industry} in the next 12 months (and one that's already happening):`, angle: 'Future-focused insights', format: 'Carousel / List' },
-        ],
-        'networking': [
-            { pillar: 'engagement', title: `Shoutout to ${industry} professionals`, hook: `Let's build a thread: Drop your biggest ${industry} win from this year 👇`, angle: 'Community spotlight', format: 'Text post' },
-            { pillar: 'growth', title: `Best ${industry} advice I received`, hook: `The best advice I ever got about ${industry} came from someone outside the field entirely.`, angle: 'Unexpected mentor story', format: 'Storytelling' },
-            { pillar: 'insights', title: `${industry} networking mistakes`, hook: `I used to network wrong. Here are 3 things I stopped doing in ${industry}:`, angle: 'Anti-patterns', format: 'Text post' },
-            { pillar: 'engagement', title: `Who should I follow in ${industry}?`, hook: `I'm looking for the best voices in ${industry}. Who are you learning from?`, angle: 'Recommendation crowdsource', format: 'Text post' },
-            { pillar: 'growth', title: `Collaboration over competition in ${industry}`, hook: `My biggest ${industry} opportunity came from helping a competitor. Here's what happened:`, angle: 'Giving-first mindset', format: 'Storytelling' },
-        ],
-    }
-    return goalTemplates[goal] || goalTemplates['thought-leadership']
 }
 
 const POST_TYPES = [
@@ -148,12 +114,25 @@ export default function PostIdeaGenerator() {
                 return
             }
         } catch {
-            // Fall through to rule-based
+            // AI failed
         }
 
-        // Fallback
-        setIdeas(buildFallbackIdeas(industry, goal))
-        setIsAI(false)
+        // Fallback: use rule-based generator
+        try {
+            const fallbackResults = generatePostIdeas({
+                industry: industry.trim(),
+                goal,
+                niche: niche.trim() || undefined,
+                postType: postType === 'custom' ? customTopic : postType,
+            })
+            if (fallbackResults.length > 0) {
+                setIdeas(fallbackResults)
+                setIsAI(false)
+                return
+            }
+        } catch {}
+
+        setError('ai_failed')
     }
 
     const handleGenerate = async () => {
@@ -318,6 +297,20 @@ export default function PostIdeaGenerator() {
                         </>
                     )}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Post Idea Engine"
+                        color="#F59E0B"
+                        promptText={buildPostIdeaPrompt({
+                            industry,
+                            goal,
+                            niche: niche || undefined,
+                            postType: postType === 'custom' ? customTopic : postType,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {ideas.length > 0 && (

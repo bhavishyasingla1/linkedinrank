@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { generatePostHooks } from '@/lib/tools'
-import ToolPromptBlock, { buildHookPrompt } from './ToolPromptBlock'
+import ToolPromptBlock, { AIFailedPromptBlock, buildHookPrompt } from './ToolPromptBlock'
 
 interface GeneratedHook {
     text: string
@@ -49,20 +49,25 @@ export default function PostHookGeneratorTool() {
                 setResults(data.data)
                 setIsAI(true)
             } else {
-                const generated = generatePostHooks({
-                    topic: formData.topic,
-                    angle: formData.angle || undefined,
-                    audience: formData.audience || undefined
-                })
-                setResults(generated)
+                throw new Error('AI returned no data')
             }
         } catch {
-            const generated = generatePostHooks({
-                topic: formData.topic,
-                angle: formData.angle || undefined,
-                audience: formData.audience || undefined
-            })
-            setResults(generated)
+            // Fallback: use rule-based generator
+            try {
+                const fallbackResults = generatePostHooks({
+                    topic: formData.topic,
+                    angle: formData.angle || undefined,
+                    audience: formData.audience || undefined,
+                })
+                if (fallbackResults.length > 0) {
+                    setResults(fallbackResults)
+                    setIsAI(false)
+                } else {
+                    setError('ai_failed')
+                }
+            } catch {
+                setError('ai_failed')
+            }
         } finally {
             setLoading(false)
         }
@@ -143,11 +148,17 @@ export default function PostHookGeneratorTool() {
                     ) : 'Generate Hooks'}
                 </button>
 
-                {/* Error */}
-                {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 text-xs text-red-600">
-                        {error}
-                    </div>
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Hook Writer"
+                        color="#F59E0B"
+                        promptText={buildHookPrompt({
+                            topic: formData.topic,
+                            angle: formData.angle || undefined,
+                            audience: formData.audience || undefined,
+                        })}
+                    />
                 )}
 
                 {/* Results */}

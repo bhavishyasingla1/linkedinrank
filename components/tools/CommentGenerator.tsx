@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import ToolPromptBlock, { buildCommentPrompt } from './ToolPromptBlock'
+import { generateComments as generateFallbackComments } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildCommentPrompt } from './ToolPromptBlock'
 
 type CommentStyle = 'insightful' | 'supportive' | 'question' | 'story' | 'contrarian'
 type CommentLength = 'short' | 'medium' | 'detailed'
@@ -94,10 +95,25 @@ export default function CommentGenerator() {
                 setComments(data.data)
                 setIsAI(true)
             } else {
-                setError(data.error === 'AI not configured' ? 'AI is not configured. Please set GEMINI_API_KEY in your .env file.' : 'AI generation failed. Please try again with a different post or style.')
+                throw new Error('AI returned no data')
             }
         } catch {
-            setError('Connection failed. Please check your internet and try again.')
+            // Fallback: use rule-based generator
+            try {
+                const fallback = generateFallbackComments({
+                    postContent: postContent,
+                    style,
+                    expertise: expertise || undefined,
+                })
+                if (fallback.length > 0) {
+                    setComments(fallback)
+                    setIsAI(false)
+                } else {
+                    setError('ai_failed')
+                }
+            } catch {
+                setError('ai_failed')
+            }
         } finally {
             setLoading(false)
         }
@@ -249,11 +265,18 @@ export default function CommentGenerator() {
                     ) : 'Generate Comments'}
                 </button>
 
-                {/* Error */}
-                {error && !loading && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                        <p className="text-xs text-red-600">{error}</p>
-                    </div>
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Smart Comment Writer"
+                        color="#0A66C2"
+                        promptText={buildCommentPrompt({
+                            postContent: postContent,
+                            style: style,
+                            expertise: expertise || undefined,
+                            length: lengthMap[length],
+                        })}
+                    />
                 )}
 
                 {/* Results */}

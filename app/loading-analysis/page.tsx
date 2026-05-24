@@ -30,12 +30,13 @@ export default function LoadingAnalysisPage() {
         let stageIndex = 0
         const totalStages = STAGES.length
 
+        let isAnalysisComplete = false
+
         const analyzeFile = async () => {
             try {
                 const fileDataStr = sessionStorage.getItem('uploadingFile')
                 if (!fileDataStr) {
-                    router.push('/')
-                    return
+                    throw new Error("No file data")
                 }
 
                 const { fileName, fileContent } = JSON.parse(fileDataStr)
@@ -68,48 +69,71 @@ export default function LoadingAnalysisPage() {
 
                 sessionStorage.setItem('analysisResult', JSON.stringify(analysisData))
                 sessionStorage.removeItem('uploadingFile')
-                router.push('/results')
+                isAnalysisComplete = true
+                return true
             } catch (error: any) {
                 console.error('Analysis error:', error)
                 sessionStorage.setItem('analysisError', error.message)
                 sessionStorage.removeItem('uploadingFile')
-                router.push('/')
+                isAnalysisComplete = true
+                if (mounted) router.push('/')
+                return false
             }
         }
 
-        const runStage = async () => {
-            if (!mounted || stageIndex >= totalStages) return
-
-            setCurrentStage(stageIndex)
-            const stage = STAGES[stageIndex]
-
-            // Animate progress for this stage
-            const progressIncrement = 100 / totalStages
-            const startProgress = stageIndex * progressIncrement
-            const endProgress = (stageIndex + 1) * progressIncrement
-
-            const steps = 20
-            const stepDuration = stage.duration / steps
-            const progressStep = (endProgress - startProgress) / steps
-
-            for (let i = 0; i <= steps; i++) {
+        const runAllStages = async () => {
+            for (let i = 0; i < totalStages; i++) {
                 if (!mounted) return
-                setProgress(startProgress + (progressStep * i))
-                await new Promise(resolve => setTimeout(resolve, stepDuration))
-            }
+                setCurrentStage(i)
+                const stage = STAGES[i]
 
-            stageIndex++
-            if (stageIndex < totalStages) {
-                runStage()
-            } else {
-                // All stages complete, now actually analyze
-                if (mounted) {
-                    await analyzeFile()
+                const progressIncrement = 100 / totalStages
+                const startProgress = i * progressIncrement
+                // Max out at 99% for the final stage to prevent hitting 100% before analysis finishes
+                const endProgress = (i === totalStages - 1) ? 99 : (i + 1) * progressIncrement
+
+                const steps = 20
+                const stepDuration = stage.duration / steps
+                const progressStep = (endProgress - startProgress) / steps
+
+                for (let j = 0; j <= steps; j++) {
+                    if (!mounted) return
+                    
+                    if (isAnalysisComplete) {
+                        setProgress(100)
+                        setCurrentStage(totalStages - 1)
+                        return
+                    }
+
+                    setProgress(startProgress + (progressStep * j))
+                    await new Promise(resolve => setTimeout(resolve, stepDuration))
                 }
             }
+
+            // Animation hit 99% but analysis is still pending. Stall here.
+            while (!isAnalysisComplete && mounted) {
+                setProgress(prev => Math.min(prev + 0.1, 99.9))
+                await new Promise(resolve => setTimeout(resolve, 200))
+            }
+
+            if (mounted) {
+                setProgress(100)
+                setCurrentStage(totalStages - 1)
+                await new Promise(resolve => setTimeout(resolve, 100))
+            }
         }
 
-        runStage()
+        const executeConcurrent = async () => {
+            const analysisPromise = analyzeFile()
+            await runAllStages()
+            const analysisSuccess = await analysisPromise
+
+            if (mounted && analysisSuccess) {
+                router.push('/results')
+            }
+        }
+
+        executeConcurrent()
 
         return () => {
             mounted = false

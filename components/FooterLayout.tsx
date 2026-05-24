@@ -1,13 +1,41 @@
 'use client'
-// SiteFooter v3 — dark premium footer
+// SiteFooter v4 — dark premium footer (hydration-safe)
 
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 
+const CURRENT_YEAR = 2026
+
+const TOOL_LINKS = [
+    { href: '/tools/linkedin-headline-generator', name: 'Headline Generator' },
+    { href: '/tools/linkedin-about-generator', name: 'About Generator' },
+    { href: '/tools/linkedin-experience-generator', name: 'Experience Generator' },
+    { href: '/tools/linkedin-profile-keyword-analyzer', name: 'Keyword Analyzer' },
+    { href: '/tools/linkedin-post-idea-generator', name: 'Post Idea Generator' },
+    { href: '/tools/linkedin-post-hook-generator', name: 'Post Hook Generator' },
+    { href: '/tools/linkedin-comment-generator', name: 'Comment Generator' },
+    { href: '/tools/linkedin-content-planner', name: 'Content Planner' },
+    { href: '/tools/linkedin-connection-message-generator', name: 'Connection Messages' },
+    { href: '/tools/linkedin-story-to-post-converter', name: 'Story to Post' },
+    { href: '/tools/linkedin-profile-photo-ring', name: 'Profile Photo Ring' },
+    { href: '/tools/linkedin-qr-code-generator', name: 'QR Code Generator' },
+]
+
 export default function FooterLayout() {
+    const footerRef = useRef<HTMLElement>(null)
+
+    // Re-apply footer styles after mount to fix any hydration recovery issues
+    useEffect(() => {
+        if (footerRef.current) {
+            footerRef.current.style.backgroundColor = '#0f172a'
+            footerRef.current.style.color = '#ffffff'
+        }
+    }, [])
+
     return (
-        <footer suppressHydrationWarning className="bg-[#0F172A] text-white py-12">
+        <footer ref={footerRef} suppressHydrationWarning className="bg-slate-900 text-white py-12" style={{ backgroundColor: '#0f172a', color: '#ffffff' }}>
             <div className="max-w-6xl mx-auto px-6">
-                <div suppressHydrationWarning className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
                     {/* Brand + socials */}
                     <div className="sm:col-span-2 lg:col-span-1">
                         <Link href="/" className="font-bold text-base text-white no-underline inline-block mb-3">
@@ -85,31 +113,18 @@ export default function FooterLayout() {
                 {/* Tools row */}
                 <div className="border-t border-white/10 pt-6 mb-6">
                     <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-4">Free LinkedIn Tools</p>
-                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
-                        {[
-                            { href: '/tools/linkedin-headline-generator', name: 'Headline Generator' },
-                            { href: '/tools/linkedin-about-generator', name: 'About Generator' },
-                            { href: '/tools/linkedin-experience-generator', name: 'Experience Generator' },
-                            { href: '/tools/linkedin-profile-keyword-analyzer', name: 'Keyword Analyzer' },
-                            { href: '/tools/linkedin-post-idea-generator', name: 'Post Idea Generator' },
-                            { href: '/tools/linkedin-post-hook-generator', name: 'Post Hook Generator' },
-                            { href: '/tools/linkedin-comment-generator', name: 'Comment Generator' },
-                            { href: '/tools/linkedin-content-planner', name: 'Content Planner' },
-                            { href: '/tools/linkedin-connection-message-generator', name: 'Connection Messages' },
-                            { href: '/tools/linkedin-story-to-post-converter', name: 'Story to Post' },
-                            { href: '/tools/linkedin-profile-photo-ring', name: 'Profile Photo Ring' },
-                            { href: '/tools/linkedin-qr-code-generator', name: 'QR Code Generator' },
-                        ].map((tool, i) => (
-                            <span key={tool.href} className="flex items-center gap-5">
+                    <div className="flex flex-wrap items-center gap-y-2">
+                        {TOOL_LINKS.map((tool, i) => (
+                            <span key={tool.href} className="flex items-center">
                                 <Link href={tool.href} className="text-[12px] text-gray-500 hover:text-gray-300 no-underline transition-colors whitespace-nowrap">{tool.name}</Link>
-                                {i < 11 && <span className="text-gray-700 text-[8px]">•</span>}
+                                {i < TOOL_LINKS.length - 1 && <span className="text-gray-700 text-[8px] mx-2.5" aria-hidden="true">•</span>}
                             </span>
                         ))}
                     </div>
                 </div>
 
                 <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-gray-600 hover:text-white transition-colors">Bhavishya Singla</a></p>
+                    <p className="text-[11px] text-gray-500">&copy; {CURRENT_YEAR} LinkedInRank. Made by <a href="https://www.linkedin.com/in/bhavishyasingla1/" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline decoration-gray-600 hover:text-white transition-colors">Bhavishya Singla</a></p>
                     <p className="text-[10px] text-gray-600">Not affiliated with LinkedIn Corporation.</p>
                 </div>
             </div>

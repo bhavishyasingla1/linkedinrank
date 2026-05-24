@@ -77,7 +77,7 @@ async function analyzeHeadline(name: string, headline: string, role: string, car
     if (!genAI || !headline) return null
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         const prompt = `${SYSTEM_CONTEXT}
 
@@ -137,7 +137,7 @@ async function analyzeAbout(name: string, about: string, headline: string, caree
     if (!genAI || !about) return null
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         const prompt = `${SYSTEM_CONTEXT}
 
@@ -173,7 +173,8 @@ Return ONLY JSON:
  "strengths": ["what ${name} does well"],
  "issues": ["specific issues in THEIR about section"],
  "improvement_tip": "personalized advice for ${name}",
- "better_example": "improved version using ${name}'s ACTUAL content"
+ "weak_sentence": "One weak or generic sentence from their current about section",
+ "better_example": "A short, punchy rewrite of that specific sentence"
 }`
 
         const result = await model.generateContent({
@@ -202,7 +203,7 @@ async function analyzeExperience(name: string, latestRole: string, company: stri
     if (!genAI || !description) return null
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         const prompt = `${SYSTEM_CONTEXT}
 
@@ -228,8 +229,8 @@ IMPORTANT: Do NOT expect metrics from ${careerStage} professionals unless realis
 CRITICAL for "better_example":
 1. Keep the same role (${latestRole}) and company (${company})
 2. Use ACTUAL responsibilities from their description
-3. Add quantifiable metrics only IF inferable from context
-4. Write as BEFORE/AFTER | show what they wrote vs what's better
+3. Rewrite ONE specific bullet point or sentence, NOT the entire description. Keep it short and high-value!
+4. Add quantifiable metrics only IF inferable from context
 5. NOT a generic template
 
 Return ONLY JSON:
@@ -238,7 +239,8 @@ Return ONLY JSON:
  "has_metrics": true/false,
  "issues": ["specific issues in THIS description"],
  "improvement_tip": "advice specific to ${name}'s ${latestRole} role",
- "better_example": "improved version using ${name}'s ACTUAL work at ${company}"
+ "weak_sentence": "One specific sentence from their description that needs work",
+ "better_example": "A single short, punchy bullet point replacing that weak sentence"
 }`
 
         const result = await model.generateContent({
@@ -267,7 +269,7 @@ async function analyzeSkills(name: string, role: string, skills: string[], caree
     if (!genAI || skills.length === 0) return null
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         const prompt = `${SYSTEM_CONTEXT}
 
@@ -332,7 +334,7 @@ async function detectArchetype(
     if (!genAI) return null
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         const prompt = `${SYSTEM_CONTEXT}
 
@@ -407,7 +409,7 @@ async function generateRecommendations(
     if (!genAI) return []
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
 
         // Build rich profile context
         const experienceContext = profileData?.experience?.slice(0, 3).map(e =>
@@ -446,8 +448,8 @@ ${experienceContext}
 4. Give ACTIONABLE advice they can implement TODAY
 5. NEVER say "This is bad" | instead say "This could be stronger by..."
 6. Metrics are a BONUS, not a requirement | do NOT penalize for missing numbers
-7. Each "fix" must be a specific action with example text they can copy-paste
-8. Include a "before" (from their actual profile) and "after" (improved rewrite) for each
+7. "fix" MUST be concise (1-2 sentences max). Explain what to change. Do NOT include before/after examples inside the "fix" field!
+8. ALWAYS use the separate "before" and "after" JSON fields for examples. The "after" should be a short, punchy rewrite of just one sentence or bullet point, NOT the entire profile section! Keep it small and valuable.
 9. Focus on LOW-SCORING areas first
 10. Be specific, practical, and non-judgmental | no generic advice
 11. Use professional, calm tone | no emojis, no hype
@@ -456,11 +458,11 @@ Return EXACTLY 5 recommendations as JSON array:
 [
  {
    "title": "Specific improvement for ${name}",
-   "why_it_matters": "Why this matters for a ${role} at ${careerStage} stage",
-   "fix": "Exact action step with copy-paste example",
+   "why_it_matters": "Why this matters for a ${role} at ${careerStage} stage (1 sentence max)",
+   "fix": "Concise action step (1-2 sentences max). NO examples here.",
    "impact": "High" | "Medium" | "Low",
-   "before": "Current text from their profile",
-   "after": "Improved rewrite ${name} can copy-paste"
+   "before": "One specific weak sentence from their profile",
+   "after": "A short, punchy, high-value rewrite of that specific sentence"
  }
 ]`
 
@@ -576,7 +578,9 @@ export async function enhanceWithAI(profile: ProfileData, ruleBasedScores: any) 
             aiRecommendations.push({
                 title: aboutAnalysis.issues[0] || `${name}, strengthen your About section`,
                 whyItMatters: aboutAnalysis.improvement_tip,
-                fix: aboutAnalysis.better_example,
+                fix: `Here is a stronger way to frame your experience.`,
+                before: aboutAnalysis.weak_sentence || undefined,
+                after: aboutAnalysis.better_example || undefined,
                 impact: 'High' as const
             })
         }
@@ -585,7 +589,9 @@ export async function enhanceWithAI(profile: ProfileData, ruleBasedScores: any) 
             aiRecommendations.push({
                 title: `${name}, add specifics to your experience`,
                 whyItMatters: experienceAnalysis.improvement_tip,
-                fix: `For your ${latestExperience?.title || role} role: ${experienceAnalysis.better_example}`,
+                fix: `For your ${latestExperience?.title || role} role, replace general responsibilities with specific, quantifiable achievements.`,
+                before: experienceAnalysis.weak_sentence || undefined,
+                after: experienceAnalysis.better_example || undefined,
                 impact: 'High' as const
             })
         }
@@ -679,7 +685,7 @@ async function generateHeadlineRewrites(
     if (!genAI || !currentHeadline) return []
 
     try {
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' })
         const topSkills = skills.slice(0, 5).join(', ')
 
         const prompt = `${SYSTEM_CONTEXT}

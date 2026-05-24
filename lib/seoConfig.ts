@@ -594,6 +594,16 @@ export const TOPIC_CLUSTERS: TopicCluster[] = [
       'linkedin-headline-healthcare',
       'linkedin-headline-teachers',
       'linkedin-headline-for-graphic-designer',
+      // Programmatic Pages
+      'linkedin-headline-for-data-analyst',
+      'linkedin-headline-for-product-manager',
+      'linkedin-headline-for-fresher',
+      'linkedin-headline-for-sales-manager',
+      'linkedin-headline-for-digital-marketer',
+      'linkedin-headline-for-software-tester',
+      'linkedin-headline-for-project-manager',
+      'linkedin-headline-for-content-writer',
+      'linkedin-headline-for-teacher'
     ],
   },
   {

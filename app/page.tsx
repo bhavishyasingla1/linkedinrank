@@ -51,7 +51,7 @@ export default function HomePage() {
                                 LinkedInRank analyzes your profile across 30+ recruiter signals and shows exactly what to fix — with a score out of 100.
                             </p>
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-                                <a href="#upload" className="btn-primary text-sm cursor-pointer">Analyze My Profile (Free)</a>
+                                <a href="#upload" className="btn-primary text-sm cursor-pointer whitespace-nowrap">Analyze My Profile — It&apos;s Free</a>
                                 <div className="flex items-center gap-4 text-xs text-[#6B7280]">
                                     <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>No login</span>
                                     <span className="flex items-center gap-1.5"><svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>PDF only</span>

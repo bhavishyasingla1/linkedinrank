@@ -1,62 +1,67 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { getDynamicHomepageTitle } from '@/lib/titleExperiment'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-    metadataBase: new URL('https://linkedinrank.com'),
-    title: {
-        default: 'LinkedIn Rank Checker — Free LinkedIn Profile Score Tool (2026)',
-        template: '%s | LinkedInRank',
-    },
-    description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required — results in under 60 seconds.',
-    keywords: [
-        'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
-        'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
-        'linkedin profile score', 'linkedin profile scorer', 'linkedin profile analyzer',
-        'linkedinrank', 'linkedin score checker', 'linkedin profile rating',
-        'how to rank on linkedin', 'linkedin search ranking', 'linkedin profile visibility',
-        'linkedin seo', 'linkedin algorithm ranking', 'linkedin profile score checker',
-        'linkedin ranking factors', 'improve linkedin profile ranking',
-        'linkedin recruiter search ranking', 'linkedin social selling index',
-        'free linkedin analysis', 'linkedin profile review', 'linkedin optimization tool',
-        'linkedin profile audit', 'linkedin profile grader',
-    ],
-    authors: [{ name: 'LinkedInRank', url: 'https://linkedinrank.com' }],
-    creator: 'LinkedInRank',
-    publisher: 'LinkedInRank',
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+    const dynamicTitle = getDynamicHomepageTitle();
+    
+    return {
+        metadataBase: new URL('https://linkedinrank.com'),
+        title: {
+            default: dynamicTitle,
+            template: '%s | LinkedInRank',
+        },
+        description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required — results in under 60 seconds.',
+        keywords: [
+            'linkedin rank', 'linkedin rank checker', 'linkedin profile rank',
+            'free linkedin profile checker', 'linkedin ranking tool', 'linkedin profile ranking',
+            'linkedin profile score', 'linkedin profile scorer', 'linkedin profile analyzer',
+            'linkedinrank', 'linkedin score checker', 'linkedin profile rating',
+            'how to rank on linkedin', 'linkedin search ranking', 'linkedin profile visibility',
+            'linkedin seo', 'linkedin algorithm ranking', 'linkedin profile score checker',
+            'linkedin ranking factors', 'improve linkedin profile ranking',
+            'linkedin recruiter search ranking', 'linkedin social selling index',
+            'free linkedin analysis', 'linkedin profile review', 'linkedin optimization tool',
+            'linkedin profile audit', 'linkedin profile grader',
+        ],
+        authors: [{ name: 'LinkedInRank', url: 'https://linkedinrank.com' }],
+        creator: 'LinkedInRank',
+        publisher: 'LinkedInRank',
+        robots: {
             index: true,
             follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
+            googleBot: {
+                index: true,
+                follow: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
         },
-    },
-    alternates: {
-        canonical: 'https://linkedinrank.com',
-    },
-    openGraph: {
-        title: 'LinkedIn Rank Checker — Free LinkedIn Profile Score Tool (2026)',
-        description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required.',
-        url: 'https://linkedinrank.com',
-        siteName: 'LinkedInRank',
-        type: 'website',
-        locale: 'en_US',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'LinkedIn Rank Checker — Free LinkedIn Profile Score (2026)',
-        description: 'Check your LinkedIn rank for free. Score your profile across 30+ signals, get AI-powered fixes, and see what recruiters see. No login required.',
-        site: '@linkedinrank',
-        creator: '@linkedinrank',
-    },
-    category: 'technology',
+        alternates: {
+            canonical: 'https://linkedinrank.com',
+        },
+        openGraph: {
+            title: dynamicTitle,
+            description: 'Check your LinkedIn profile rank for free. Score your profile out of 100 across 30+ signals, get AI-powered recommendations, and see exactly what recruiters see. No login required.',
+            url: 'https://linkedinrank.com',
+            siteName: 'LinkedInRank',
+            type: 'website',
+            locale: 'en_US',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: dynamicTitle,
+            description: 'Check your LinkedIn rank for free. Score your profile across 30+ signals, get AI-powered fixes, and see what recruiters see. No login required.',
+            site: '@linkedinrank',
+            creator: '@linkedinrank',
+        },
+        category: 'technology',
+    }
 }
 
 const jsonLd = {
@@ -181,7 +186,7 @@ export default function RootLayout({
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
                 <meta name="theme-color" content="#0A66C2" />
-                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
 

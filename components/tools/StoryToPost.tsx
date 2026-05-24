@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import ToolPromptBlock, { buildStoryToPostPrompt } from './ToolPromptBlock'
+import { convertStoryToPost } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildStoryToPostPrompt } from './ToolPromptBlock'
 
 type PostStyle = 'classic' | 'listicle' | 'micro'
 
@@ -10,40 +11,6 @@ const STYLES: { id: PostStyle; label: string; desc: string }[] = [
     { id: 'listicle', label: 'Numbered Lessons', desc: 'Hook → 3-5 takeaways → CTA' },
     { id: 'micro', label: 'Micro Post', desc: 'Hook → One punch → CTA' },
 ]
-
-// Fallback rule-based conversion
-function convertStoryFallback(rawStory: string, style: PostStyle, lesson: string): { text: string; wordCount: number; label: string; tip: string }[] {
-    const story = rawStory.trim()
-    if (story.length < 10) return [{ text: story, wordCount: story.split(/\s+/).length, label: 'Raw Story', tip: 'Try adding more detail to your story for better results.' }]
-    const takeaway = lesson.trim() || 'it changed my perspective completely'
-    const sentences = story.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 5)
-    const firstSentence = sentences[0] || story.slice(0, 80)
-    const midContent = sentences.slice(1, -1).join('. ')
-    const lastSentence = sentences.length > 1 ? sentences[sentences.length - 1] : ''
-    const shortSummary = firstSentence.length > 50 ? firstSentence.slice(0, 47) + '...' : firstSentence
-
-    const results: { text: string; wordCount: number; label: string; tip: string }[] = []
-
-    if (style === 'classic') {
-        const post = [
-            `${shortSummary}.\n\nBut that's not the full story.`,
-            '', midContent ? midContent + '.' : '', lastSentence ? lastSentence + '.' : '',
-            '', `The lesson? ${takeaway}.`, '', `If you've experienced something similar, I'd love to hear your story.`, '', '♻️ Repost if this resonates.',
-        ].filter(l => l.length > 0).join('\n')
-        results.push({ text: post.trim(), wordCount: post.split(/\s+/).length, label: 'Classic Story Post', tip: 'Stories with a clear arc get 2x more engagement.' })
-    }
-    if (style === 'listicle') {
-        const points = sentences.slice(0, 5)
-        const numbered = points.map((s, i) => `${i + 1}. ${s}.`).join('\n')
-        const post = [`Here's what ${takeaway} actually looks like in practice:`, '', numbered, '', `The biggest takeaway? ${takeaway}.`, '', `Which one resonates most with you?`].join('\n')
-        results.push({ text: post.trim(), wordCount: post.split(/\s+/).length, label: 'Numbered Lessons', tip: 'Numbered posts are easy to scan and share.' })
-    }
-    if (style === 'micro') {
-        const post = [`I didn't expect this to happen:\n\n${firstSentence}.`, '', `Lesson: ${takeaway}.`, '', `That's it. Sometimes the simplest lessons hit the hardest.`].join('\n')
-        results.push({ text: post.trim(), wordCount: post.split(/\s+/).length, label: 'Micro Post', tip: 'Short posts (<100 words) often outperform long ones.' })
-    }
-    return results
-}
 
 interface AIPost {
     hook: string
@@ -104,13 +71,30 @@ export default function StoryToPost() {
                 return
             }
         } catch {
-            // Fall through to rule-based
+            // AI failed
         }
 
-        // Fallback
-        const results = convertStoryFallback(rawStory, style, lesson)
-        setPosts(results)
-        setIsAI(false)
+        // Fallback: use rule-based converter
+        try {
+            const fallback = convertStoryToPost({
+                story: rawStory.trim(),
+                tone: style,
+                goal: lesson.trim() || undefined,
+            })
+            if (fallback && fallback.body) {
+                setAiPost(fallback)
+                setPosts([{
+                    text: fallback.body + (fallback.hashtags?.length ? '\n\n' + fallback.hashtags.map((t: string) => `#${t.replace(/^#/, '')}`).join(' ') : ''),
+                    wordCount: fallback.word_count || fallback.body.split(/\s+/).length,
+                    label: `Post · ${fallback.tone_used || style}`,
+                    tip: `Core takeaway: ${fallback.takeaway}`
+                }])
+                setIsAI(false)
+                return
+            }
+        } catch {}
+
+        setError('ai_failed')
     }
 
     const handleConvert = async () => {
@@ -229,6 +213,19 @@ export default function StoryToPost() {
                         </>
                     )}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Story-to-Post Writer"
+                        color="#EC4899"
+                        promptText={buildStoryToPostPrompt({
+                            story: rawStory,
+                            tone: style,
+                            goal: lesson || undefined,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {posts.length > 0 && (

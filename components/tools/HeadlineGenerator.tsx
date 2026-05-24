@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { generateHeadlines, HeadlineInput } from '@/lib/tools'
-import ToolPromptBlock, { buildHeadlinePrompt } from './ToolPromptBlock'
+import { generateHeadlines } from '@/lib/tools'
+import ToolPromptBlock, { AIFailedPromptBlock, buildHeadlinePrompt } from './ToolPromptBlock'
 
 interface AIHeadline {
     text: string
@@ -87,7 +87,6 @@ export default function HeadlineGeneratorTool() {
         setError('')
 
         try {
-            // Try AI generation first
             const res = await fetch('/api/tools', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -113,24 +112,26 @@ export default function HeadlineGeneratorTool() {
                 return
             }
         } catch {
-            // AI failed, fall through to rule-based
+            // AI failed
         }
 
-        // Fallback: rule-based generation
-        const input: HeadlineInput = {
-            role: role.trim(),
-            company: company.trim(),
-            industry: industry.trim(),
-            skills: skills.split(',').map(s => s.trim()).filter(Boolean)
-        }
-        const generated = generateHeadlines(input)
-        setHeadlines(generated.map(h => ({
-            text: h.text,
-            score: h.score,
-            style: h.style,
-            tip: h.tip
-        })))
-        setIsAI(false)
+        // Fallback: use rule-based generator
+        try {
+            const fallbackResults = generateHeadlines({
+                role: role.trim(),
+                company: company.trim() || undefined,
+                industry: industry.trim() || undefined,
+                specialty: specialty.trim() || undefined,
+                skills: skills.split(',').map(s => s.trim()).filter(Boolean),
+            })
+            if (fallbackResults.length > 0) {
+                setHeadlines(fallbackResults)
+                setIsAI(false)
+                return
+            }
+        } catch {}
+
+        setError('ai_failed')
     }
 
     const handleGenerate = async () => {
@@ -298,6 +299,22 @@ export default function HeadlineGeneratorTool() {
                         </>
                     )}
                 </button>
+
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Headline Rewriter"
+                        color="#0A66C2"
+                        promptText={buildHeadlinePrompt({
+                            role: role,
+                            company: company || undefined,
+                            industry: industry || undefined,
+                            skills: skills.trim() ? skills.split(/[,;]+/).map(s => s.trim()).filter(Boolean) : undefined,
+                            currentHeadline: extractedHeadline || undefined,
+                            about: extractedAbout || undefined,
+                        })}
+                    />
+                )}
 
                 {/* Results */}
                 {headlines.length > 0 && (

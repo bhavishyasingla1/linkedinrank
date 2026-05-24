@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import HeadlineGeneratorTool from '@/components/tools/HeadlineGenerator'
 import AboutGeneratorTool from '@/components/tools/AboutGenerator'
 import BulletImproverV2 from '@/components/tools/BulletImproverV2'

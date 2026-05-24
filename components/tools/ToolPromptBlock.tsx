@@ -8,6 +8,56 @@ interface ToolPromptBlockProps {
     color?: string
 }
 
+export function AIFailedPromptBlock({ toolName, promptText, color = '#0A66C2' }: ToolPromptBlockProps) {
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = () => {
+        try {
+            navigator.clipboard.writeText(promptText)
+        } catch {
+            const ta = document.createElement('textarea')
+            ta.value = promptText
+            ta.style.position = 'fixed'
+            ta.style.opacity = '0'
+            document.body.appendChild(ta)
+            ta.select()
+            document.execCommand('copy')
+            document.body.removeChild(ta)
+        }
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2500)
+    }
+
+    return (
+        <div className="mt-2 border border-amber-200 rounded-xl bg-amber-50 overflow-hidden">
+            <div className="px-4 py-3">
+                <div className="flex items-center gap-2 mb-2">
+                    <svg className="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                    </svg>
+                    <p className="text-sm font-semibold text-amber-800">AI is not available right now</p>
+                </div>
+                <p className="text-xs text-amber-700 mb-3 leading-relaxed">
+                    Copy the prompt below and paste it into <strong>ChatGPT</strong>, <strong>Claude</strong>, or <strong>Gemini</strong> to get your results.
+                </p>
+                <div className="bg-white border border-amber-100 rounded-lg p-3 mb-3 max-h-48 overflow-y-auto">
+                    <pre className="text-[10px] text-[#4B5563] whitespace-pre-wrap font-sans leading-relaxed">{promptText}</pre>
+                </div>
+                <button
+                    onClick={handleCopy}
+                    className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all"
+                    style={{
+                        backgroundColor: copied ? '#ECFDF5' : color,
+                        color: copied ? '#059669' : '#fff',
+                    }}
+                >
+                    {copied ? '✓ Prompt Copied! Paste it in any AI chatbot' : 'Copy Prompt'}
+                </button>
+            </div>
+        </div>
+    )
+}
+
 export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2' }: ToolPromptBlockProps) {
     const [copied, setCopied] = useState(false)
     const [expanded, setExpanded] = useState(false)

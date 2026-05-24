@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { improveBullet } from '@/lib/tools'
-import ToolPromptBlock, { buildBulletPrompt } from './ToolPromptBlock'
+import ToolPromptBlock, { AIFailedPromptBlock, buildBulletPrompt } from './ToolPromptBlock'
 
 type OutputStyle = 'concise' | 'storytelling' | 'ats'
 
@@ -20,12 +20,14 @@ export default function BulletImproverV2() {
     const [copiedIdx, setCopiedIdx] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [isAI, setIsAI] = useState(false)
+    const [error, setError] = useState('')
 
     const handleAnalyze = async () => {
         if (!bullet.trim()) return
         setLoading(true)
         setIsAI(false)
         setResults(null)
+        setError('')
 
         try {
             const res = await fetch('/api/tools', {
@@ -44,13 +46,28 @@ export default function BulletImproverV2() {
                 return
             }
         } catch {
-            // Fall through to rule-based
+            // AI failed
         }
 
-        // Fallback: rule-based
-        const base = improveBullet(bullet)
-        const variants = generateVariants(bullet.trim(), base, style)
-        setResults(variants)
+        // Fallback: use rule-based improver
+        try {
+            const fallback = improveBullet(bullet.trim())
+            if (fallback && fallback.improved?.length > 0) {
+                const improvedList = [fallback.improved, ...(fallback.alternatives || [])]
+                const mapped = improvedList.map((text: string, i: number) => ({
+                    label: i === 0 ? 'Rewritten' : `Version ${i + 1}`,
+                    text,
+                    checks: (fallback as any).checks,
+                    suggestions: fallback.suggestions,
+                }))
+                setResults(mapped)
+                setIsAI(false)
+                setLoading(false)
+                return
+            }
+        } catch {}
+
+        setError('ai_failed')
         setLoading(false)
     }
 
@@ -132,6 +149,15 @@ export default function BulletImproverV2() {
                     ) : 'Rewrite Bullet'}
                 </button>
 
+                {/* AI Failed - show prompt */}
+                {error === 'ai_failed' && !loading && (
+                    <AIFailedPromptBlock
+                        toolName="Bullet Rewriter"
+                        color="#4F46E5"
+                        promptText={buildBulletPrompt({ bullet })}
+                    />
+                )}
+
                 {results && results.length > 0 && (
                     <div className="space-y-4 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2">
@@ -209,43 +235,3 @@ export default function BulletImproverV2() {
     )
 }
 
-function generateVariants(original: string, base: any, style: OutputStyle) {
-    const checks = [
-        { label: 'Action Verb', pass: base.has_action_verb },
-        { label: 'Metrics', pass: base.has_metric },
-        { label: 'Shows Result', pass: base.has_result },
-    ]
-
-    const improved = base.improved !== original ? base.improved : base.alternatives[0] || original
-    const alts = base.alternatives || []
-
-    if (style === 'concise') {
-        return [
-            { label: 'Best Version', text: improved, checks, suggestions: base.suggestions },
-            ...(alts[0] ? [{ label: 'Alternative 1', text: alts[0] }] : []),
-            ...(alts[1] ? [{ label: 'Alternative 2', text: alts[1] }] : []),
-        ]
-    }
-
-    if (style === 'storytelling') {
-        const needsResultClause = !base.has_result && !/\b(resulting in|leading to|which led|which drove|saving|generating|achieving|enabling)\b/i.test(improved)
-        const improvedClean = improved.replace(/[\s,;:.-]+$/g, '').trim()
-        const story = needsResultClause
-            ? `${improvedClean}, resulting in measurable improvement to team outcomes and stakeholder satisfaction`
-            : improvedClean
-        const story2 = alts[0]
-            ? `${alts[0].replace(/[\s,;:.-]+$/g, '').trim()} | driving tangible results across the organization`
-            : null
-        return [
-            { label: 'With Context + Result', text: story, checks, suggestions: [...base.suggestions, 'Replace placeholder metrics with your actual numbers for maximum impact'] },
-            ...(story2 ? [{ label: 'Narrative Alternative', text: story2 }] : []),
-        ]
-    }
-
-    // ATS style | keyword dense
-    const atsVersion = improved.replace(/\.$/, '') + (base.has_metric ? '' : ' [add metric]')
-    return [
-        { label: 'ATS-Optimized', text: atsVersion, checks, suggestions: [...base.suggestions, 'ATS systems scan for exact job title keywords | mirror the job posting language'] },
-        ...(alts[0] ? [{ label: 'Keyword Variant', text: alts[0] }] : []),
-    ]
-}

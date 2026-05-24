@@ -36,7 +36,7 @@ const LLM_CONFIG = {
     maxOutputTokens: 400
 }
 
-const MODEL_NAME = 'gemini-1.5-flash'
+const MODEL_NAME = 'gemini-3.1-flash-lite'
 
 // ============================================================
 // PROMPT TEMPLATES
