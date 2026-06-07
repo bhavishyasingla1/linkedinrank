@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/loading-analysis', '/results', '/api/'],
+                disallow: ['/api/'],
             },
         ],
         sitemap: 'https://linkedinrank.com/sitemap.xml',

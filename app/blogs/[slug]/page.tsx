@@ -156,9 +156,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                         <h2 className="text-xl font-bold text-[#0A0F1C] mt-10 mb-4">{h2}</h2>
                                         {blog.sections?.[i] ? (
                                             <>
-                                                <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                                    {blog.sections[i]}
-                                                </p>
+                                                <p 
+                                                    className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline"
+                                                    dangerouslySetInnerHTML={{ __html: blog.sections[i] }}
+                                                />
                                                 {i === 0 && tool && (
                                                     <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
                                                         Our free <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] font-medium hover:underline">{tool.name}</Link> can help you apply these principles directly to your own profile in seconds.
@@ -181,9 +182,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                                 )}
                                             </>
                                         ) : (
-                                            <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                                {blog.summary}
-                                            </p>
+                                            <p 
+                                                className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline"
+                                                dangerouslySetInnerHTML={{ __html: blog.summary }}
+                                            />
                                         )}
                                     </section>
                                 ))}

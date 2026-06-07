@@ -51,6 +51,11 @@ const nextConfig = {
             // SEO cannibalization fixes
             { source: '/linkedin', destination: '/linkedin-optimization-guide', permanent: true },
             { source: '/for-students', destination: '/linkedin-profile-for-students', permanent: true },
+            // 404 fixes from Google Search Console
+            { source: '/blogs/what-to-post-on-linkedin-2025', destination: '/blogs/what-to-post-on-linkedin-2026', permanent: true },
+            { source: '/blogs/linkedin-post-templates-2025', destination: '/blogs/linkedin-post-templates-2026', permanent: true },
+            { source: '/blogs/linkedin-engagement-tips-2025', destination: '/blogs/linkedin-engagement-tips-2026', permanent: true },
+            { source: '/100', destination: '/', permanent: true },
         ]
     },
     async headers() {

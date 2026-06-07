@@ -31,7 +31,7 @@ export default function BlogsDirectoryPage() {
     ])
 
     const blogList = itemListJsonLd(
-        ALL_BLOG_POSTS.slice(0, 50).map(b => ({
+        ALL_BLOG_POSTS.map(b => ({
             name: b.title,
             url: `${SITE_URL}/blogs/${b.slug}`,
             description: b.metaDescription,
