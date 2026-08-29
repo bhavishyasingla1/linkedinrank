@@ -48,6 +48,7 @@ export default function SiteHeader() {
     return (
         <header
             ref={headerRef}
+            suppressHydrationWarning
             className={`
                 sticky top-0 z-50 w-full transition-all duration-150 ease-out
                 bg-white/95 backdrop-blur-md
