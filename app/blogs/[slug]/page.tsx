@@ -67,7 +67,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         keywords: blog.targetKeyword,
     })
 
-    const faqSchema = null
+    const faqsToUse = (blog.faqs && blog.faqs.length > 0) ? blog.faqs : (tool?.faqs || [])
+    const faqSchema = faqsToUse.length > 0 ? faqJsonLd(faqsToUse.slice(0, 5)) : null
 
     return (
         <main id="main-content" className="min-h-screen bg-[#F8FAFC] flex flex-col">
@@ -156,8 +157,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                         <h2 className="text-xl font-bold text-[#0A0F1C] mt-10 mb-4">{h2}</h2>
                                         {blog.sections?.[i] ? (
                                             <>
-                                                <p 
-                                                    className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline"
+                                                <div 
+                                                    className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline space-y-4"
                                                     dangerouslySetInnerHTML={{ __html: blog.sections[i] }}
                                                 />
                                                 {i === 0 && tool && (
@@ -182,8 +183,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                                 )}
                                             </>
                                         ) : (
-                                            <p 
-                                                className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline"
+                                            <div 
+                                                className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline space-y-4"
                                                 dangerouslySetInnerHTML={{ __html: blog.summary }}
                                             />
                                         )}
@@ -204,13 +205,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             </div>
 
                             {/* FAQ snippet */}
-                            {tool && tool.faqs.length > 0 && (
+                            {faqsToUse.length > 0 && (
                                 <section className="mt-12 bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 sm:p-8">
                                     <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
                                     <h2 className="text-lg font-bold text-[#0A0F1C] mb-5">Frequently Asked Questions</h2>
                                     <div className="space-y-4">
-                                        {tool.faqs.slice(0, 3).map((faq, i) => (
-                                            <details key={i} className="group bg-white border border-gray-200 rounded-xl overflow-hidden">
+                                        {faqsToUse.slice(0, 5).map((faq, i) => (
+                                            <details key={i} className="group bg-white border border-gray-200 rounded-xl overflow-hidden" open={i === 0}>
                                                 <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-[#FAFBFC] transition-colors">
                                                     {faq.question}
                                                     <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -298,6 +299,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                     </div>
                                 </div>
                             )}
+
+                            {/* Preferred Sources CTA */}
+                            <div className="bg-white border border-gray-200 rounded-xl p-5 text-center flex flex-col items-center">
+                                <h3 className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Google News</h3>
+                                <p className="text-xs text-gray-500 mb-3.5 leading-relaxed">Add LinkedInRank as a preferred source to see our guides and tools in your Google Feed.</p>
+                                <div {...({ 'google-add-preferred-source-btn': '', 'data-theme': 'light' } as any)} />
+                            </div>
 
                             {/* Full analysis CTA */}
                             <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 text-center">

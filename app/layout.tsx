@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { getDynamicHomepageTitle } from '@/lib/titleExperiment'
 import './globals.css'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -208,6 +209,10 @@ export default function RootLayout({
                 {children}
                 <Analytics />
                 <SpeedInsights />
+                <script
+                    src="https://news.google.com/swg/js/v1/publisher.js"
+                    async
+                />
             </body>
         </html>
     )
