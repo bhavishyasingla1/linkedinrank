@@ -6,9 +6,12 @@ import { getToolBySlug, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd, articleJsonLd, faqJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
+import { ArrowRightIcon, ChevronDownIcon, ClockIcon, SparklesIcon, ShieldCheckIcon } from '@/components/ui/Icons'
 
 export function generateStaticParams() {
-    return getAllBlogSlugs().map(slug => ({ slug }))
+    return getAllBlogSlugs().map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -67,259 +70,261 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         keywords: blog.targetKeyword,
     })
 
-    const faqsToUse = (blog.faqs && blog.faqs.length > 0) ? blog.faqs : (tool?.faqs || [])
+    const faqsToUse = blog.faqs && blog.faqs.length > 0 ? blog.faqs : tool?.faqs || []
     const faqSchema = faqsToUse.length > 0 ? faqJsonLd(faqsToUse.slice(0, 5)) : null
 
     return (
-        <main id="main-content" className="min-h-screen bg-[#F8FAFC] flex flex-col">
+        <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
             <SiteHeader />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }} />
             {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
-            <div className="flex-1 w-full">
-                {/* Hero header */}
-                <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-10">
-                        <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
-                            <Link href="/" className="hover:text-[#0A66C2] transition-colors">Home</Link>
-                            <span aria-hidden="true">/</span>
-                            <Link href="/blogs" className="hover:text-[#0A66C2] transition-colors">Blog</Link>
-                            <span aria-hidden="true">/</span>
-                            <span className="text-[#0A0F1C] font-medium truncate max-w-xs">{blog.title}</span>
-                        </nav>
+            <main id="main-content" className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+                {/* ── Breadcrumb ────────────────────────────────── */}
+                <nav aria-label="Breadcrumb" className="text-[13px] text-[#64748B] flex items-center gap-1.5 flex-wrap">
+                    <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                    <span>/</span>
+                    <Link href="/blogs" className="hover:text-[#0A66C2] transition-colors no-underline">Articles</Link>
+                    <span>/</span>
+                    <span className="text-[#0F172A] font-medium truncate max-w-md">{blog.title}</span>
+                </nav>
 
-                        <div className="flex items-center gap-3 flex-wrap mb-4">
-                            {tool && (
-                                <Link
-                                    href={`/tools/${tool.slug}`}
-                                    className="inline-block text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE] hover:bg-[#DBEAFE] transition-colors no-underline"
-                                >
-                                    {tool.name}
-                                </Link>
-                            )}
-                            <span className="text-[11px] text-[#6B7280] flex items-center gap-1">
-                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                {readingTime} min read
-                            </span>
-                        </div>
-
-                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0F1C] mb-4 leading-tight tracking-tight">{blog.title}</h1>
-
-                        <div className="flex items-center gap-3 text-xs text-[#6B7280]">
-                            <time dateTime={blog.datePublished}>
-                                {new Date(blog.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                            </time>
-                            <span className="w-1 h-1 rounded-full bg-[#D1D5DB]" />
-                            <span>Updated {new Date(blog.dateModified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
-                        </div>
+                {/* ── Article Header ───────────────────────────── */}
+                <header className="max-w-3xl space-y-3 pb-6 border-b border-[#E2E8F0]">
+                    <div className="flex items-center gap-3 flex-wrap">
+                        {tool && (
+                            <Link
+                                href={`/tools/${tool.slug}`}
+                                className="inline-block text-[12px] font-semibold text-[#0A66C2] bg-[#F0F7FF] border border-[#BAE0FD] px-2.5 py-0.5 rounded-md hover:bg-[#E0F2FE] transition-colors no-underline"
+                            >
+                                {tool.name}
+                            </Link>
+                        )}
+                        <span className="text-[12px] text-[#64748B] flex items-center gap-1">
+                            <ClockIcon size={13} />
+                            {readingTime} min read
+                        </span>
                     </div>
-                </div>
 
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
-                    <div className="flex flex-col lg:flex-row gap-10 pt-8">
-                        {/* Main content */}
-                        <article className="flex-1 min-w-0">
+                    <h1 className="text-[26px] sm:text-[34px] lg:text-[38px] font-bold text-[#0F172A] tracking-tight leading-tight">
+                        {blog.title}
+                    </h1>
 
-                            {/* Table of Contents */}
-                            {blog.h2Outline.length > 2 && (
-                                <nav className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 sm:p-6 mb-10" aria-label="Table of contents">
-                                    <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">In This Article</p>
-                                    <ol className="space-y-2">
-                                        {blog.h2Outline.map((h2, i) => (
-                                            <li key={i} className="flex items-start gap-2.5">
-                                                <span className="text-[11px] font-bold text-[#D1D5DB] tabular-nums mt-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                                                <a href={`#section-${i}`} className="text-sm text-[#0A0F1C] hover:text-[#0A66C2] no-underline transition-colors">
-                                                    {h2}
-                                                </a>
-                                            </li>
-                                        ))}
-                                        <li className="flex items-start gap-2.5">
-                                            <span className="text-[11px] font-bold text-[#D1D5DB] tabular-nums mt-0.5 shrink-0">{String(blog.h2Outline.length + 1).padStart(2, '0')}</span>
-                                            <a href="#conclusion" className="text-sm text-[#0A0F1C] hover:text-[#0A66C2] no-underline transition-colors">Conclusion</a>
-                                        </li>
-                                    </ol>
-                                </nav>
-                            )}
+                    <div className="flex items-center gap-3 text-[13px] text-[#64748B] pt-1">
+                        <time dateTime={blog.datePublished}>
+                            {new Date(blog.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </time>
+                        <span>•</span>
+                        <span>Updated {new Date(blog.dateModified).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1 text-[#16A34A] font-medium">
+                            <ShieldCheckIcon size={14} /> Verified Strategy
+                        </span>
+                    </div>
+                </header>
 
-                            {/* Intro paragraph with primary keyword and internal link to tool */}
-                            <div className="prose prose-sm max-w-none text-[#374151] leading-relaxed space-y-6">
-                                <p className="text-base leading-relaxed">
-                                    {blog.summary}
-                                    {tool && (
-                                        <> Use our free <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] font-medium hover:underline">{tool.name}</Link> to put these tips into practice instantly.</>
-                                    )}
+                {/* ── Two-Column Layout: Article Body + Sidebar ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    {/* Left/Main Column: Editorial Content */}
+                    <article className="lg:col-span-8 space-y-8">
+                        {/* Table of Contents */}
+                        {blog.h2Outline.length > 2 && (
+                            <nav
+                                className="p-5 sm:p-6 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-3"
+                                aria-label="Table of contents"
+                            >
+                                <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                                    Table of Contents
                                 </p>
+                                <ol className="space-y-2">
+                                    {blog.h2Outline.map((h2, i) => (
+                                        <li key={i} className="flex items-start gap-2 text-[14px]">
+                                            <span className="text-[12px] font-bold text-[#94A3B8] tabular-nums mt-0.5 shrink-0">
+                                                {String(i + 1).padStart(2, '0')}.
+                                            </span>
+                                            <a
+                                                href={`#section-${i}`}
+                                                className="text-[#0F172A] hover:text-[#0A66C2] transition-colors no-underline font-medium"
+                                            >
+                                                {h2}
+                                            </a>
+                                        </li>
+                                    ))}
+                                    <li className="flex items-start gap-2 text-[14px]">
+                                        <span className="text-[12px] font-bold text-[#94A3B8] tabular-nums mt-0.5 shrink-0">
+                                            {String(blog.h2Outline.length + 1).padStart(2, '0')}.
+                                        </span>
+                                        <a
+                                            href="#conclusion"
+                                            className="text-[#0F172A] hover:text-[#0A66C2] transition-colors no-underline font-medium"
+                                        >
+                                            Conclusion
+                                        </a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        )}
 
-                                {/* H2 sections with real content */}
-                                {blog.h2Outline.map((h2, i) => (
-                                    <section key={i} id={`section-${i}`} className="scroll-mt-24">
-                                        <h2 className="text-xl font-bold text-[#0A0F1C] mt-10 mb-4">{h2}</h2>
-                                        {blog.sections?.[i] ? (
-                                            <>
-                                                <div 
-                                                    className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline space-y-4"
-                                                    dangerouslySetInnerHTML={{ __html: blog.sections[i] }}
+                        {/* Article Lead & Summary Callout */}
+                        <div className="p-5 rounded-xl bg-[#F0F7FF] border border-[#BAE0FD] space-y-2">
+                            <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider flex items-center gap-1">
+                                <SparklesIcon size={13} /> Executive Takeaway
+                            </p>
+                            <p className="text-[14px] sm:text-[15px] text-[#0F172A] font-medium leading-relaxed">
+                                {blog.summary}
+                            </p>
+                        </div>
+
+                        {/* H2 Editorial Sections */}
+                        <div className="space-y-10 text-[15px] sm:text-[16px] text-[#334155] leading-relaxed">
+                            {blog.h2Outline.map((h2, i) => (
+                                <section key={i} id={`section-${i}`} className="scroll-mt-24 space-y-4">
+                                    <h2 className="text-[20px] sm:text-[22px] font-bold text-[#0F172A] tracking-tight">
+                                        {h2}
+                                    </h2>
+
+                                    {blog.sections?.[i] ? (
+                                        <div
+                                            className="space-y-4 leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-semibold [&_a]:hover:underline"
+                                            dangerouslySetInnerHTML={{ __html: blog.sections[i] }}
+                                        />
+                                    ) : (
+                                        <p>{blog.summary}</p>
+                                    )}
+
+                                    {/* Inline contextual tool recommendation at section 0 */}
+                                    {i === 0 && tool && (
+                                        <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-between gap-4 mt-4">
+                                            <div>
+                                                <h4 className="text-[13px] font-bold text-[#0F172A]">
+                                                    Generate your {tool.name} with AI
+                                                </h4>
+                                                <p className="text-[12px] text-[#64748B]">
+                                                    Use our free generator to apply these techniques directly.
+                                                </p>
+                                            </div>
+                                            <Button
+                                                href={`/tools/${tool.slug}`}
+                                                variant="secondary"
+                                                size="sm"
+                                            >
+                                                Open Tool
+                                            </Button>
+                                        </div>
+                                    )}
+                                </section>
+                            ))}
+
+                            {/* Conclusion Section */}
+                            <section id="conclusion" className="scroll-mt-24 space-y-3 pt-4 border-t border-[#E2E8F0]">
+                                <h2 className="text-[20px] sm:text-[22px] font-bold text-[#0F172A] tracking-tight">
+                                    Conclusion &amp; Next Steps
+                                </h2>
+                                <p className="leading-relaxed">
+                                    Optimizing your {blog.targetKeyword} directly influences how recruiter search algorithms rank your profile. Use structured data, clear keywords, and tangible proof of competence.
+                                </p>
+                            </section>
+                        </div>
+
+                        {/* Frequently Asked Questions */}
+                        {faqsToUse.length > 0 && (
+                            <section className="space-y-4 pt-6 border-t border-[#E2E8F0]">
+                                <h2 className="text-[20px] font-bold text-[#0F172A] tracking-tight">
+                                    Frequently Asked Questions
+                                </h2>
+                                <div className="bg-white border border-[#E2E8F0] rounded-xl divide-y divide-[#F1F5F9] shadow-xs">
+                                    {faqsToUse.slice(0, 5).map((faq, i) => (
+                                        <details key={i} className="group p-5" open={i === 0}>
+                                            <summary className="cursor-pointer text-[15px] font-semibold text-[#0F172A] list-none flex items-center justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] rounded-md">
+                                                <span>{faq.question}</span>
+                                                <ChevronDownIcon
+                                                    size={16}
+                                                    className="text-[#64748B] shrink-0 transition-transform group-open:rotate-180"
                                                 />
-                                                {i === 0 && tool && (
-                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
-                                                        Our free <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] font-medium hover:underline">{tool.name}</Link> can help you apply these principles directly to your own profile in seconds.
-                                                    </p>
-                                                )}
-                                                {i === 1 && (
-                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
-                                                        For a broader view, explore our <Link href="/linkedin-optimization-guide" className="text-[#0A66C2] hover:underline">complete LinkedIn optimization guide</Link> covering every profile section.
-                                                    </p>
-                                                )}
-                                                {i === 2 && (
-                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
-                                                        Learn how <Link href="/what-is-linkedin-rank" className="text-[#0A66C2] hover:underline">LinkedIn rank</Link> is calculated and which signals move the needle most.
-                                                    </p>
-                                                )}
-                                                {i === 3 && (
-                                                    <p className="text-[15px] text-[#4B5563] leading-relaxed mt-3">
-                                                        Check your current profile strength for free with our <Link href="/" className="text-[#0A66C2] hover:underline">LinkedIn rank checker</Link>.
-                                                    </p>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <div 
-                                                className="text-[15px] text-[#4B5563] leading-relaxed [&_a]:text-[#0A66C2] [&_a]:font-medium [&_a]:hover:underline space-y-4"
-                                                dangerouslySetInnerHTML={{ __html: blog.summary }}
-                                            />
-                                        )}
-                                    </section>
-                                ))}
-
-                                {/* Conclusion with CTA linking back to tool */}
-                                <section id="conclusion" className="scroll-mt-24">
-                                    <h2 className="text-xl font-bold text-[#0A0F1C] mt-10 mb-4">Conclusion</h2>
-                                    <p className="text-[15px] text-[#4B5563] leading-relaxed">
-                                        Mastering {blog.targetKeyword} takes practice, but the strategies outlined above give you a clear framework to follow.
-                                        Start with the fundamentals, test different approaches, and refine based on results.
-                                        {tool && (
-                                            <> Ready to apply these insights? Try our free <Link href={`/tools/${tool.slug}`} className="text-[#0A66C2] font-medium hover:underline">{tool.name}</Link> and see the difference it makes for your LinkedIn profile.</>
-                                        )}
-                                    </p>
-                                </section>
-                            </div>
-
-                            {/* FAQ snippet */}
-                            {faqsToUse.length > 0 && (
-                                <section className="mt-12 bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 sm:p-8">
-                                    <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
-                                    <h2 className="text-lg font-bold text-[#0A0F1C] mb-5">Frequently Asked Questions</h2>
-                                    <div className="space-y-4">
-                                        {faqsToUse.slice(0, 5).map((faq, i) => (
-                                            <details key={i} className="group bg-white border border-gray-200 rounded-xl overflow-hidden" open={i === 0}>
-                                                <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-[#FAFBFC] transition-colors">
-                                                    {faq.question}
-                                                    <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                                    </svg>
-                                                </summary>
-                                                <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{faq.answer}</p>
-                                            </details>
-                                        ))}
-                                    </div>
-                                </section>
-                            )}
-
-                            {/* Guide links | internal linking boost */}
-                            <section className="mt-8 border-t border-gray-100 pt-8">
-                                <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Continue Learning</p>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                                    {[
-                                        { href: '/linkedin-optimization-guide', label: 'Full Optimization Guide' },
-                                        { href: '/linkedin-headline-guide', label: 'Headline Guide' },
-                                        { href: '/linkedin-about-guide', label: 'About Section Guide' },
-                                        { href: '/linkedin-keywords-guide', label: 'Keywords Guide' },
-                                        { href: '/recruiter-psychology', label: 'Recruiter Psychology' },
-                                        { href: '/what-is-linkedin-rank', label: 'What Is LinkedIn Rank?' },
-                                    ].map(g => (
-                                        <Link key={g.href} href={g.href} className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-2 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors">
-                                            {g.label}
-                                        </Link>
+                                            </summary>
+                                            <div className="pt-3 text-[13px] text-[#475569] leading-relaxed">
+                                                {faq.answer}
+                                            </div>
+                                        </details>
                                     ))}
                                 </div>
                             </section>
-                        </article>
+                        )}
+                    </article>
 
-                        {/* Sidebar */}
-                        <aside className="lg:w-72 shrink-0 space-y-5">
-                            {/* Tool CTA */}
-                            {tool && (
-                                <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-6 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
-                                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-3">
-                                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
-                                    </div>
-                                    <h3 className="text-white font-bold text-sm mb-1.5">Try {tool.name}</h3>
-                                    <p className="text-blue-100/80 text-xs mb-4 leading-relaxed">{tool.heroText.slice(0, 80)}...</p>
-                                    <Link
-                                        href={`/tools/${tool.slug}`}
-                                        className="inline-block bg-white text-[#0A66C2] px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm"
-                                    >
-                                        Use Free Tool
-                                    </Link>
-                                </div>
-                            )}
-
-                            {/* Related posts */}
-                            {related.length > 0 && (
-                                <div className="bg-white border border-gray-200 rounded-xl p-5">
-                                    <h3 className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Articles</h3>
-                                    <div className="space-y-3">
-                                        {related.map(r => (
-                                            <Link
-                                                key={r.slug}
-                                                href={`/blogs/${r.slug}`}
-                                                className="block text-sm font-medium text-[#0A0F1C] hover:text-[#0A66C2] transition-colors leading-snug no-underline"
-                                            >
-                                                {r.title}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* All posts in cluster */}
-                            {allToolBlogs.length > related.length && (
-                                <div className="bg-white border border-gray-200 rounded-xl p-5">
-                                    <h3 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-widest mb-4">All {tool?.name} Articles</h3>
-                                    <div className="space-y-2.5">
-                                        {allToolBlogs.map(b => (
-                                            <Link
-                                                key={b.slug}
-                                                href={`/blogs/${b.slug}`}
-                                                className={`block text-xs transition-colors leading-snug no-underline ${b.slug === blog.slug ? 'text-[#0A66C2] font-bold' : 'text-[#6B7280] hover:text-[#0A66C2]'}`}
-                                            >
-                                                {b.title}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Preferred Sources CTA */}
-                            <div className="bg-white border border-gray-200 rounded-xl p-5 text-center flex flex-col items-center">
-                                <h3 className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-2">Google News</h3>
-                                <p className="text-xs text-gray-500 mb-3.5 leading-relaxed">Add LinkedInRank as a preferred source to see our guides and tools in your Google Feed.</p>
-                                <div {...({ 'google-add-preferred-source-btn': '', 'data-theme': 'light' } as any)} />
+                    {/* Right Column: Contextual Sidebar */}
+                    <aside className="lg:col-span-4 space-y-6">
+                        {/* 1. Contextual Tool Card */}
+                        {tool && (
+                            <div className="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
+                                <span className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider">
+                                    Recommended Free Tool
+                                </span>
+                                <h3 className="text-[16px] font-bold text-[#0F172A]">
+                                    {tool.name}
+                                </h3>
+                                <p className="text-[13px] text-[#475569] leading-relaxed">
+                                    {tool.heroText.slice(0, 100)}...
+                                </p>
+                                <Button
+                                    href={`/tools/${tool.slug}`}
+                                    variant="primary"
+                                    size="sm"
+                                    fullWidth
+                                    rightIcon={<ArrowRightIcon size={14} />}
+                                >
+                                    Try {tool.name}
+                                </Button>
                             </div>
+                        )}
 
-                            {/* Full analysis CTA */}
-                            <div className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-5 text-center">
-                                <p className="text-xs font-medium text-[#4B5563] mb-3">Check your LinkedIn profile</p>
-                                <Link href="/" className="inline-block text-xs font-bold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] px-5 py-2.5 rounded-lg hover:shadow-[0_4px_12px_rgba(10,102,194,0.3)] transition-all no-underline">
-                                    Get Your LinkedIn Rank
-                                </Link>
+                        {/* 2. Full Profile Score CTA (Solid Navy Card) */}
+                        <div className="p-5 rounded-xl bg-[#0F172A] text-white border border-[#1E293B] shadow-sm space-y-3">
+                            <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider">
+                                Free LinkedIn Audit
+                            </span>
+                            <h3 className="text-[16px] font-semibold text-white tracking-tight">
+                                Score Your Entire Profile
+                            </h3>
+                            <p className="text-[13px] text-[#94A3B8] leading-relaxed">
+                                Get your personalized score out of 100 and prioritized section improvements.
+                            </p>
+                            <Button
+                                href="/#upload"
+                                variant="primary"
+                                size="sm"
+                                fullWidth
+                                rightIcon={<ArrowRightIcon size={14} />}
+                            >
+                                Analyze Profile
+                            </Button>
+                        </div>
+
+                        {/* 3. Related Articles in Cluster */}
+                        {related.length > 0 && (
+                            <div className="bg-white border border-[#E2E8F0] rounded-xl p-5 shadow-xs space-y-3">
+                                <h4 className="text-[13px] font-bold text-[#0F172A] uppercase tracking-wider">
+                                    Related Guides
+                                </h4>
+                                <div className="space-y-2.5">
+                                    {related.map((r) => (
+                                        <Link
+                                            key={r.slug}
+                                            href={`/blogs/${r.slug}`}
+                                            className="block text-[13px] text-[#475569] hover:text-[#0A66C2] transition-colors no-underline font-medium leading-snug"
+                                        >
+                                            {r.title}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
-                        </aside>
-                    </div>
+                        )}
+                    </aside>
                 </div>
-            </div>
+            </main>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }

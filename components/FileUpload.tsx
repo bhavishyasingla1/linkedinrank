@@ -2,10 +2,12 @@
 
 import { useState, useRef, useEffect, DragEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { UploadIcon, ShieldCheckIcon, ClockIcon, AlertCircleIcon } from '@/components/ui/Icons'
 
 export default function FileUpload() {
     const [isDragging, setIsDragging] = useState(false)
     const [error, setError] = useState('')
+    const [isProcessing, setIsProcessing] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
@@ -43,84 +45,101 @@ export default function FileUpload() {
         setError('')
 
         if (file.type !== 'application/pdf') {
-            setError('Please upload a PDF file.')
+            setError('Please upload a PDF file. LinkedIn exports are in PDF format.')
             return
         }
 
         if (file.size > 5 * 1024 * 1024) {
-            setError('File must be under 5MB. LinkedIn PDFs are usually under 1MB.')
+            setError('File must be under 5MB. Standard LinkedIn PDFs are usually under 1MB.')
             return
         }
 
+        setIsProcessing(true)
+
         try {
-            // Convert file to base64 for storage
             const reader = new FileReader()
             reader.onload = (e) => {
                 const base64 = e.target?.result as string
                 const base64Data = base64.split(',')[1]
 
                 try {
-                    sessionStorage.setItem('uploadingFile', JSON.stringify({
-                        fileName: file.name,
-                        fileContent: base64Data
-                    }))
+                    sessionStorage.setItem(
+                        'uploadingFile',
+                        JSON.stringify({
+                            fileName: file.name,
+                            fileContent: base64Data,
+                        })
+                    )
                     router.push('/loading-analysis')
                 } catch (storageErr: any) {
-                    // Handle QuotaExceededError for large files
-                    setError('File is too large to process in browser storage. Try a smaller PDF (LinkedIn PDFs are usually under 500KB).')
+                    setIsProcessing(false)
+                    setError(
+                        'File is too large for temporary browser memory. Try re-exporting a fresh PDF from your LinkedIn profile.'
+                    )
                 }
             }
             reader.onerror = () => {
-                setError('Failed to read file. Please try again.')
+                setIsProcessing(false)
+                setError('Failed to read file. Please try selecting the file again.')
             }
             reader.readAsDataURL(file)
         } catch (err: any) {
+            setIsProcessing(false)
             setError(err.message || 'Failed to read file. Please try again.')
         }
     }
 
     return (
-        <div>
+        <div className="w-full">
             <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        fileInputRef.current?.click()
+                    }
+                }}
                 className={`
-                    relative cursor-pointer rounded-2xl border-2 border-dashed p-10 text-center
-                    transition-all duration-300
+                    relative cursor-pointer rounded-xl border-2 border-dashed p-8 sm:p-10 text-center
+                    transition-colors duration-150 ease-out select-none
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] focus-visible:ring-offset-2
                     ${isDragging
-                        ? 'border-[#0A66C2] bg-[#EFF6FF] shadow-[0_0_0_4px_rgba(10,102,194,0.12)] scale-[1.01]'
-                        : 'border-[#0A66C2]/30 bg-gradient-to-b from-[#EFF6FF]/60 to-white hover:border-[#0A66C2]/60 hover:shadow-[0_8px_30px_rgba(10,102,194,0.1)] hover:scale-[1.005]'
+                        ? 'border-[#0A66C2] bg-[#F0F7FF]'
+                        : 'border-[#CBD5E1] bg-[#FAFAFA] hover:border-[#0A66C2] hover:bg-[#F0F7FF]/50'
                     }
                 `}
             >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] flex items-center justify-center mx-auto mb-4 shadow-[0_4px_12px_rgba(10,102,194,0.3)]">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                    </svg>
+                <div className="w-12 h-12 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-center mx-auto mb-3.5 text-[#0A66C2]">
+                    <UploadIcon size={22} />
                 </div>
-                <p className="text-[16px] font-bold text-[#0A0F1C] mb-1">
-                    Upload your LinkedIn PDF export
+
+                <p className="text-[16px] font-semibold text-[#0F172A] mb-1">
+                    {isProcessing ? 'Processing your profile...' : 'Drop your LinkedIn PDF export here'}
                 </p>
-                <p className="text-sm text-[#6B7280] mb-4">
-                    Drop file here or click to browse
+                <p className="text-[13px] text-[#64748B] mb-5">
+                    or <span className="text-[#0A66C2] font-semibold hover:underline">choose file</span> to browse
                 </p>
-                <div className="flex items-center justify-center gap-4 text-[11px] text-[#6B7280]">
-                    <span className="flex items-center gap-1">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                        Private &amp; secure
+
+                <div className="flex flex-wrap items-center justify-center gap-4 text-[12px] text-[#64748B] pt-3 border-t border-[#E2E8F0]">
+                    <span className="flex items-center gap-1.5">
+                        <ShieldCheckIcon size={14} className="text-[#16A34A]" />
+                        Private &amp; Secure
                     </span>
-                    <span className="flex items-center gap-1">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                        PDF only
+                    <span className="text-[#CBD5E1]" aria-hidden="true">•</span>
+                    <span className="flex items-center gap-1.5">
+                        PDF Format Only
                     </span>
-                    <span className="flex items-center gap-1">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        Under 1 min
+                    <span className="text-[#CBD5E1]" aria-hidden="true">•</span>
+                    <span className="flex items-center gap-1.5">
+                        <ClockIcon size={14} className="text-[#0A66C2]" />
+                        Under 60 Seconds
                     </span>
                 </div>
-                <p className="text-[10px] text-[#9CA3AF] mt-3">Your PDF is processed instantly • No login required • File deleted after analysis</p>
 
                 <input
                     ref={fileInputRef}
@@ -128,12 +147,14 @@ export default function FileUpload() {
                     accept=".pdf"
                     onChange={handleFileSelect}
                     className="hidden"
+                    aria-label="Upload LinkedIn profile PDF"
                 />
             </div>
 
             {error && (
-                <div className="mt-3 p-3.5 rounded-xl bg-red-50 border border-red-200 animate-fade-in">
-                    <p className="text-sm font-medium text-red-600 text-center">{error}</p>
+                <div className="mt-3.5 p-3.5 rounded-lg bg-[#FEF2F2] border border-[#FECACA] animate-fade-in flex items-start gap-2.5">
+                    <AlertCircleIcon size={18} className="text-[#DC2626] shrink-0 mt-0.5" />
+                    <p className="text-[13px] font-medium text-[#DC2626]">{error}</p>
                 </div>
             )}
         </div>

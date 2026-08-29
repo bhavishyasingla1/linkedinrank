@@ -1,37 +1,54 @@
-// Inline Tool CTA - Conversion Component
-import Link from 'next/link'
+import React from 'react'
+import { Button } from '@/components/ui/Button'
+import { ArrowRightIcon } from '@/components/ui/Icons'
 
-interface InlineToolCTAProps {
+export interface InlineToolCTAProps {
     toolHref: string
     toolName: string
     description: string
     ctaText?: string
-    variant?: 'primary' | 'secondary' | 'gradient'
+    variant?: 'primary' | 'secondary' | 'gradient' | 'subtle' | 'editorial'
 }
 
 export default function InlineToolCTA({
     toolHref,
     toolName,
     description,
-    ctaText = 'Try it free →',
-    variant = 'primary'
+    ctaText = 'Try it free',
+    variant = 'primary',
 }: InlineToolCTAProps) {
-    const variants = {
-        primary: 'bg-blue-50 border-l-4 border-blue-600',
-        secondary: 'bg-purple-50 border-l-4 border-purple-600',
-        gradient: 'bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-600'
+    const variantStyles: Record<string, string> = {
+        primary: 'bg-[#F0F7FF] border-[#BAE0FD] border-l-4 border-l-[#0A66C2]',
+        secondary: 'bg-[#F8FAFC] border-[#E2E8F0] border-l-4 border-l-[#475569]',
+        gradient: 'bg-[#F0F7FF] border-[#BAE0FD] border-l-4 border-l-[#0A66C2]',
+        subtle: 'bg-[#F8FAFC] border-[#E2E8F0] border-l-4 border-l-[#475569]',
+        editorial: 'bg-white border-[#E2E8F0] shadow-xs border-l-4 border-l-[#0A66C2]',
     }
 
+    const appliedStyle = variantStyles[variant] || variantStyles.primary
+
     return (
-        <div className={`inline-cta ${variants[variant]} p-6 rounded-lg my-8`}>
-            <p className="font-semibold text-[#0A0F1C] mb-2">{toolName}</p>
-            <p className="text-sm text-[#4B5563] mb-4">{description}</p>
-            <Link
-                href={toolHref}
-                className="inline-flex items-center gap-2 bg-[#0A66C2] text-white px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-[#084E96] transition-colors"
-            >
-                {ctaText}
-            </Link>
+        <div className={`p-5 sm:p-6 rounded-xl border my-8 transition-all ${appliedStyle}`}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="max-w-xl">
+                    <p className="text-[15px] font-semibold text-[#0F172A] mb-1">
+                        {toolName}
+                    </p>
+                    <p className="text-[13px] text-[#475569] leading-relaxed">
+                        {description}
+                    </p>
+                </div>
+                <div className="shrink-0">
+                    <Button
+                        href={toolHref}
+                        variant="primary"
+                        size="sm"
+                        rightIcon={<ArrowRightIcon size={14} />}
+                    >
+                        {ctaText}
+                    </Button>
+                </div>
+            </div>
         </div>
     )
 }

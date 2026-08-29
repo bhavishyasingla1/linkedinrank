@@ -3,14 +3,15 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ShieldCheckIcon, CheckCircleIcon } from '@/components/ui/Icons'
 
 const STAGES = [
-    { id: 1, label: 'Reading profile structure', duration: 1200 },
-    { id: 2, label: 'Analyzing headline clarity', duration: 1400 },
-    { id: 3, label: 'Reviewing experience depth', duration: 1600 },
-    { id: 4, label: 'Checking skills relevance', duration: 1800 },
-    { id: 5, label: 'Calculating profile strength', duration: 2000 },
-    { id: 6, label: 'Preparing evaluation report', duration: 700 }
+    { id: 1, label: 'Reading LinkedIn PDF structure', duration: 1200 },
+    { id: 2, label: 'Evaluating headline & search positioning', duration: 1400 },
+    { id: 3, label: 'Auditing experience depth & metrics', duration: 1600 },
+    { id: 4, label: 'Checking keyword discoverability & skills', duration: 1800 },
+    { id: 5, label: 'Calculating section scores and tier', duration: 2000 },
+    { id: 6, label: 'Generating personalized roadmap', duration: 700 },
 ]
 
 export default function LoadingAnalysisPage() {
@@ -19,7 +20,6 @@ export default function LoadingAnalysisPage() {
     const router = useRouter()
 
     useEffect(() => {
-        // Check if we have data to process
         const fileData = sessionStorage.getItem('uploadingFile')
         if (!fileData) {
             router.push('/')
@@ -29,19 +29,15 @@ export default function LoadingAnalysisPage() {
         let mounted = true
         let stageIndex = 0
         const totalStages = STAGES.length
-
         let isAnalysisComplete = false
 
         const analyzeFile = async () => {
             try {
                 const fileDataStr = sessionStorage.getItem('uploadingFile')
-                if (!fileDataStr) {
-                    throw new Error("No file data")
-                }
+                if (!fileDataStr) throw new Error('No file data found')
 
                 const { fileName, fileContent } = JSON.parse(fileDataStr)
 
-                // Convert base64 back to blob
                 const byteCharacters = atob(fileContent)
                 const byteNumbers = new Array(byteCharacters.length)
                 for (let i = 0; i < byteCharacters.length; i++) {
@@ -89,8 +85,7 @@ export default function LoadingAnalysisPage() {
 
                 const progressIncrement = 100 / totalStages
                 const startProgress = i * progressIncrement
-                // Max out at 99% for the final stage to prevent hitting 100% before analysis finishes
-                const endProgress = (i === totalStages - 1) ? 99 : (i + 1) * progressIncrement
+                const endProgress = i === totalStages - 1 ? 99 : (i + 1) * progressIncrement
 
                 const steps = 20
                 const stepDuration = stage.duration / steps
@@ -98,28 +93,25 @@ export default function LoadingAnalysisPage() {
 
                 for (let j = 0; j <= steps; j++) {
                     if (!mounted) return
-                    
                     if (isAnalysisComplete) {
                         setProgress(100)
                         setCurrentStage(totalStages - 1)
                         return
                     }
-
-                    setProgress(startProgress + (progressStep * j))
-                    await new Promise(resolve => setTimeout(resolve, stepDuration))
+                    setProgress(startProgress + progressStep * j)
+                    await new Promise((resolve) => setTimeout(resolve, stepDuration))
                 }
             }
 
-            // Animation hit 99% but analysis is still pending. Stall here.
             while (!isAnalysisComplete && mounted) {
-                setProgress(prev => Math.min(prev + 0.1, 99.9))
-                await new Promise(resolve => setTimeout(resolve, 200))
+                setProgress((prev) => Math.min(prev + 0.1, 99.9))
+                await new Promise((resolve) => setTimeout(resolve, 200))
             }
 
             if (mounted) {
                 setProgress(100)
                 setCurrentStage(totalStages - 1)
-                await new Promise(resolve => setTimeout(resolve, 100))
+                await new Promise((resolve) => setTimeout(resolve, 100))
             }
         }
 
@@ -141,70 +133,82 @@ export default function LoadingAnalysisPage() {
     }, [router])
 
     return (
-        <main className="min-h-screen bg-white flex items-center justify-center p-6">
-            <div className="max-w-sm w-full">
-                {/* Logo */}
-                <div className="text-center mb-10">
-                    <Link href="/" className="font-bold text-xl tracking-tight text-[#0A0F1C] no-underline">LinkedIn<span className="text-gradient-brand">Rank</span></Link>
-                    <p className="text-xs text-[#6B7280] mt-1.5 tracking-widest uppercase font-semibold">Evaluating your profile across 30+ signals</p>
+        <main className="min-h-screen bg-[#FAFAFA] flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-md w-full">
+                {/* Brand Logo */}
+                <div className="text-center mb-8">
+                    <Link
+                        href="/"
+                        className="font-bold text-[20px] tracking-tight text-[#0F172A] no-underline inline-block"
+                    >
+                        <span>LinkedIn</span>
+                        <span className="text-[#0A66C2]">Rank</span>
+                    </Link>
+                    <p className="text-[12px] font-medium text-[#64748B] mt-1">
+                        Evaluating profile against 30+ recruiter search signals
+                    </p>
                 </div>
 
-                {/* Loading card */}
-                <div className="bg-white border border-gray-200 rounded-xl p-7 shadow-[0_10px_40px_rgba(0,0,0,0.06)]">
-                    {/* Progress percentage */}
-                    <div className="text-center mb-5">
-                        <span className="text-4xl font-bold text-[#0A0F1C] tabular-nums">{Math.round(progress)}%</span>
-                    </div>
-
-                    {/* Progress bar */}
-                    <div className="progress-bar mb-5">
-                        <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                    </div>
-
-                    {/* Current stage */}
+                {/* Progress Card */}
+                <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 sm:p-8 shadow-xs">
                     <div className="text-center mb-6">
-                        <p className="text-sm font-medium text-[#4B5563] animate-fade-in" key={currentStage}>
+                        <span className="text-[38px] font-bold text-[#0F172A] tabular-nums tracking-tight">
+                            {Math.round(progress)}%
+                        </span>
+                        <p className="text-[13px] font-medium text-[#0A66C2] mt-1 animate-fade-in" key={currentStage}>
                             {STAGES[currentStage]?.label}
                         </p>
                     </div>
 
-                    {/* All stages list */}
-                    <div className="space-y-3 border-t border-gray-100 pt-5">
-                        {STAGES.map((stage, index) => (
-                            <div
-                                key={stage.id}
-                                className={`flex items-center gap-2.5 text-xs transition-all duration-300 ${index < currentStage
-                                    ? 'text-[#6B7280]'
-                                    : index === currentStage
-                                        ? 'text-[#0A0F1C] font-semibold'
-                                        : 'text-gray-300'
+                    {/* Progress Track */}
+                    <div className="h-2 bg-[#F1F5F9] rounded-full overflow-hidden mb-6">
+                        <div
+                            className="h-full bg-[#0A66C2] rounded-full transition-all duration-150 ease-out"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+
+                    {/* Stage Checklist */}
+                    <div className="space-y-3 pt-4 border-t border-[#F1F5F9]">
+                        {STAGES.map((stage, index) => {
+                            const isDone = index < currentStage
+                            const isCurrent = index === currentStage
+
+                            return (
+                                <div
+                                    key={stage.id}
+                                    className={`flex items-center gap-2.5 text-[12px] transition-colors ${
+                                        isDone
+                                            ? 'text-[#64748B]'
+                                            : isCurrent
+                                            ? 'text-[#0F172A] font-semibold'
+                                            : 'text-[#94A3B8]'
                                     }`}
-                            >
-                                <div className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${index < currentStage
-                                    ? 'border-emerald-200 bg-emerald-50'
-                                    : index === currentStage
-                                        ? 'border-[#0A66C2] bg-[#0A66C2]'
-                                        : 'border-gray-200'
-                                    }`}>
-                                    {index < currentStage && (
-                                        <svg className="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                        </svg>
-                                    )}
-                                    {index === currentStage && (
-                                        <div className="w-1.5 h-1.5 rounded-sm bg-white"></div>
-                                    )}
+                                >
+                                    <div
+                                        className={`w-4 h-4 rounded-md flex items-center justify-center shrink-0 border ${
+                                            isDone
+                                                ? 'bg-[#F0FDF4] border-[#BBF7D0] text-[#16A34A]'
+                                                : isCurrent
+                                                ? 'bg-[#0A66C2] border-[#0A66C2] text-white'
+                                                : 'bg-white border-[#E2E8F0]'
+                                        }`}
+                                    >
+                                        {isDone && <CheckCircleIcon size={11} />}
+                                        {isCurrent && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
+                                    </div>
+                                    <span>{stage.label}</span>
                                 </div>
-                                <span>{stage.label}</span>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </div>
 
-                {/* Privacy note */}
-                <p className="text-center text-xs text-[#6B7280] mt-5 font-medium">
-                    Processed in memory. No data stored.
-                </p>
+                {/* Privacy Badge */}
+                <div className="flex items-center justify-center gap-1.5 mt-6 text-[12px] text-[#64748B]">
+                    <ShieldCheckIcon size={14} className="text-[#16A34A]" />
+                    <span>Processed in temporary memory • Deleted after analysis</span>
+                </div>
             </div>
         </main>
     )

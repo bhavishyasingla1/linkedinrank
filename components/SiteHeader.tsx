@@ -2,71 +2,127 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Button } from '@/components/ui/Button'
+import { ArrowRightIcon } from '@/components/ui/Icons'
 
 const NAV_LINKS = [
-    { href: '/tools', label: 'Free Tools' },
-    { href: '/blogs', label: 'Blog' },
-    { href: '/linkedin-optimization-guide', label: 'Guides' },
+    { href: '/#upload', label: 'Analyze' },
+    { href: '/tools', label: 'Tools' },
+    { href: '/blogs', label: 'Articles' },
     { href: '/how-linkedin-rank-works', label: 'How It Works' },
     { href: '/faq', label: 'FAQ' },
 ]
 
 export default function SiteHeader() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [scrolled, setScrolled] = useState(false)
+    const pathname = usePathname()
     const headerRef = useRef<HTMLElement>(null)
 
-    // Re-apply correct styles after mount to fix browser extension modifications
     useEffect(() => {
-        if (headerRef.current) {
-            headerRef.current.className = 'bg-white/90 backdrop-blur-xl sticky top-0 z-50 border-b border-black/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]'
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10)
         }
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && mobileMenuOpen) {
+                setMobileMenuOpen(false)
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [mobileMenuOpen])
+
+    const isActive = (href: string) => {
+        if (href === '/#upload') return false
+        if (href === '/blogs' && pathname?.startsWith('/blogs')) return true
+        if (href === '/tools' && pathname?.startsWith('/tools')) return true
+        return pathname === href
+    }
 
     return (
         <header
             ref={headerRef}
-            suppressHydrationWarning
-            className="bg-white/90 backdrop-blur-xl sticky top-0 z-50 border-b border-black/[0.06] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)]"
+            className={`
+                sticky top-0 z-50 w-full transition-all duration-150 ease-out
+                bg-white/95 backdrop-blur-md
+                border-b ${scrolled ? 'border-[#E2E8F0] shadow-[0_1px_3px_0_rgba(15,23,42,0.04)]' : 'border-[#F1F5F9]'}
+            `}
         >
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
-                <Link href="/" className="font-bold text-base sm:text-lg tracking-tight text-[#0A0F1C] no-underline shrink-0">
-                    LinkedIn<span className="text-gradient-brand">Rank</span>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+                {/* Brand Logo */}
+                <Link
+                    href="/"
+                    className="font-bold text-[17px] sm:text-[18px] tracking-tight text-[#0F172A] no-underline shrink-0 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] focus-visible:ring-offset-2 rounded-md"
+                >
+                    <span>LinkedIn</span>
+                    <span className="text-[#0A66C2]">Rank</span>
                 </Link>
 
-                {/* Desktop nav */}
-                <nav className="hidden md:flex items-center gap-0.5">
-                    {NAV_LINKS.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50/80 px-3.5 py-2 rounded-lg transition-all duration-200 no-underline"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex items-center gap-1">
+                    {NAV_LINKS.map((link) => {
+                        const active = isActive(link.href)
+                        return (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`
+                                    text-[14px] font-medium px-3.5 py-2 rounded-md transition-colors duration-150 no-underline
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2]
+                                    ${active
+                                        ? 'text-[#0F172A] bg-[#F1F5F9] font-semibold'
+                                        : 'text-[#475569] hover:text-[#0F172A] hover:bg-[#F8FAFC]'
+                                    }
+                                `}
+                            >
+                                {link.label}
+                            </Link>
+                        )
+                    })}
                 </nav>
 
-                <div className="flex items-center gap-2.5">
-
-                    <a
+                {/* Right Action Area */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <Button
                         href="/#upload"
-                        className="text-[13px] font-semibold text-white bg-gradient-to-r from-[#0A66C2] to-[#084E96] shadow-[0_2px_8px_rgba(10,102,194,0.25)] hover:shadow-[0_4px_16px_rgba(10,102,194,0.35)] hover:-translate-y-[1px] px-5 py-2.5 rounded-xl transition-all duration-200 no-underline whitespace-nowrap"
+                        variant="primary"
+                        size="md"
+                        className="hidden sm:inline-flex"
+                        rightIcon={<ArrowRightIcon size={14} />}
                     >
                         Analyze Profile
-                    </a>
+                    </Button>
 
-                    {/* Mobile hamburger */}
+                    {/* Mobile Compact CTA */}
+                    <Button
+                        href="/#upload"
+                        variant="primary"
+                        size="sm"
+                        className="sm:hidden text-[13px]"
+                    >
+                        Analyze
+                    </Button>
+
+                    {/* Mobile Hamburger Toggle */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                        aria-label="Toggle menu"
+                        aria-expanded={mobileMenuOpen}
+                        aria-controls="mobile-menu"
+                        aria-label="Toggle navigation menu"
+                        className="md:hidden p-2 rounded-lg text-[#334155] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2]"
                     >
                         {mobileMenuOpen ? (
-                            <svg className="w-5 h-5 text-[#0A0F1C]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         ) : (
-                            <svg className="w-5 h-5 text-[#0A0F1C]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         )}
@@ -74,33 +130,57 @@ export default function SiteHeader() {
                 </div>
             </div>
 
-            {/* Mobile menu */}
+            {/* Mobile Menu Dropdown */}
             {mobileMenuOpen && (
-                <div className="md:hidden border-t border-gray-100 bg-white">
-                    <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
-                        {NAV_LINKS.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="text-sm font-medium text-[#6B7280] hover:text-[#0A0F1C] hover:bg-gray-50 rounded-lg px-3 py-2.5 transition-colors no-underline"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        {/* Mobile social links */}
-                        <div className="flex items-center gap-3 px-3 pt-3 mt-2 border-t border-gray-100">
-                            <a href="https://www.linkedin.com/company/linkedin-rank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#0A66C2] transition-colors">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-                            </a>
-                            <a href="https://www.instagram.com/linkedinrank/" target="_blank" rel="noopener noreferrer" className="text-[#6B7280] hover:text-[#E4405F] transition-colors">
-                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
-                            </a>
-                            <a href="mailto:hello@linkedinrank.com" className="text-[#6B7280] hover:text-[#0A0F1C] transition-colors">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
-                            </a>
-                        </div>
+                <div
+                    id="mobile-menu"
+                    className="md:hidden border-t border-[#E2E8F0] bg-white px-4 py-4 animate-fade-in shadow-[0_10px_20px_-5px_rgba(15,23,42,0.08)]"
+                >
+                    <nav className="flex flex-col gap-1">
+                        {NAV_LINKS.map((link) => {
+                            const active = isActive(link.href)
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className={`
+                                        text-[15px] font-medium px-3 py-2.5 rounded-lg transition-colors no-underline
+                                        ${active
+                                            ? 'text-[#0A66C2] bg-[#F0F7FF] font-semibold'
+                                            : 'text-[#334155] hover:text-[#0F172A] hover:bg-[#F8FAFC]'
+                                        }
+                                    `}
+                                >
+                                    {link.label}
+                                </Link>
+                            )
+                        })}
                     </nav>
+
+                    <div className="mt-4 pt-4 border-t border-[#F1F5F9] flex flex-col gap-3">
+                        <Button
+                            href="/#upload"
+                            variant="primary"
+                            size="md"
+                            fullWidth
+                            onClick={() => setMobileMenuOpen(false)}
+                            rightIcon={<ArrowRightIcon size={15} />}
+                        >
+                            Analyze LinkedIn Profile
+                        </Button>
+
+                        <div className="flex items-center justify-between pt-2 px-1 text-[12px] text-[#64748B]">
+                            <span>Free • No login • PDF-based</span>
+                            <Link
+                                href="/contact"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="text-[#0A66C2] hover:underline"
+                            >
+                                Contact support
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             )}
         </header>

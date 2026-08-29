@@ -4,37 +4,34 @@ import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import { ALL_TOOLS, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd } from '@/lib/jsonLd'
+import { Badge } from '@/components/ui/Badge'
+import { Button } from '@/components/ui/Button'
+import { ArrowRightIcon, ChevronRightIcon, SparklesIcon, ShieldCheckIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
-    title: '12 Free LinkedIn Tools & Templates (2026)',
-    description: '12 free AI-powered LinkedIn tools: headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
+    title: '12 Free LinkedIn Tools & Generators (2026)',
+    description: 'Free AI-powered LinkedIn tools: headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
     alternates: { canonical: `${SITE_URL}/tools` },
     openGraph: {
-        title: '12 Free LinkedIn Tools & Templates (2026)',
-        description: '12 free AI-powered LinkedIn tools for profile optimization, content creation, and networking.',
+        title: '12 Free LinkedIn Tools & Generators (2026)',
+        description: 'Free AI-powered LinkedIn tools for profile optimization, content creation, and networking.',
         url: `${SITE_URL}/tools`,
         siteName: SITE_NAME,
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: '12 Free LinkedIn Tools & Templates (2026)',
-        description: '12 free AI-powered LinkedIn tools for profile optimization and content creation.',
+        title: '12 Free LinkedIn Tools & Generators (2026)',
+        description: 'Free AI-powered LinkedIn tools for profile optimization and content creation.',
     },
 }
 
 const CATEGORIES = [
-    { key: 'profile-optimization', label: 'Profile Optimization' },
-    { key: 'content-creation', label: 'Content Creation' },
-    { key: 'networking', label: 'Networking & Engagement' },
-    { key: 'analytics', label: 'Analytics & Optimization' },
+    { key: 'profile-optimization', label: 'Profile Optimization', desc: 'Craft high-converting headlines, summaries, and experience descriptions.' },
+    { key: 'content-creation', label: 'Content Creation', desc: 'Generate high-reach hooks, post ideas, and structured pillars.' },
+    { key: 'networking', label: 'Networking & Engagement', desc: 'Personalized connection messages, comment formulas, and QR codes.' },
+    { key: 'analytics', label: 'Keywords & Analytics', desc: 'Audit keyword search density and profile discoverability.' },
 ]
-
-const TOOL_COLORS: Record<string, string> = {
-    headline: '#0A66C2', about: '#10B981', bullets: '#F59E0B', ring: '#EC4899',
-    seo: '#8B5CF6', postideas: '#F97316', storytopost: '#06B6D4', hooks: '#EF4444',
-    pillars: '#6366F1', comments: '#14B8A6', messages: '#0EA5E9', qrcode: '#0A0F1C',
-}
 
 export default function ToolsPage() {
     const breadcrumbs = breadcrumbJsonLd([
@@ -43,142 +40,144 @@ export default function ToolsPage() {
     ])
 
     return (
-        <main className="min-h-screen bg-[#F8FAFC] flex flex-col">
+        <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
             <SiteHeader />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-            <div className="flex-1 w-full">
-                {/* Breadcrumbs */}
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6">
-                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5">
-                        <Link href="/" className="hover:text-[#0A66C2] transition-colors">Home</Link>
+            <main id="main-content" className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
+                {/* ── Breadcrumb & Page Intro ───────────────────── */}
+                <div className="space-y-3">
+                    <nav aria-label="Breadcrumb" className="text-[13px] text-[#64748B] flex items-center gap-1.5">
+                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
                         <span>/</span>
-                        <span className="text-[#0A0F1C] font-medium">Tools</span>
+                        <span className="text-[#0F172A] font-medium">Tools</span>
                     </nav>
+
+                    <div className="max-w-2xl pt-2 space-y-2">
+                        <Badge variant="brand" size="sm">
+                            100% Free Tools
+                        </Badge>
+                        <h1 className="text-[28px] sm:text-[36px] font-bold text-[#0F172A] tracking-tight">
+                            Free LinkedIn Tools &amp; Generators
+                        </h1>
+                        <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
+                            Focused utilities to optimize individual profile sections, generate searchable copy, and craft high-performing content. No login required.
+                        </p>
+                    </div>
                 </div>
 
-                {/* Hero */}
-                <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-8">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-[#0A0F1C] mb-2">Everything you need to improve your LinkedIn profile</h1>
-                    <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed max-w-2xl">
-                        These tools help you fix the exact sections recruiters scan first. AI-powered, free, no signup required.
-                    </p>
-                </section>
-
-                {/* Tool grid by category */}
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-12 space-y-8">
-                    {CATEGORIES.map(cat => {
-                        const tools = ALL_TOOLS.filter(t => t.category === cat.key)
+                {/* ── Categories & Tool Cards ───────────────────── */}
+                <div className="space-y-10">
+                    {CATEGORIES.map((cat) => {
+                        const tools = ALL_TOOLS.filter((t) => t.category === cat.key)
                         if (tools.length === 0) return null
+
                         return (
-                            <section key={cat.key}>
-                                <h2 className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">{cat.label}</h2>
-                                <div className="grid gap-3">
-                                    {tools.map(tool => {
-                                        const color = TOOL_COLORS[tool.id] || '#0A66C2'
-                                        return (
-                                            <Link
-                                                key={tool.slug}
-                                                href={`/tools/${tool.slug}`}
-                                                className="bg-white border border-gray-200 rounded-xl p-4 hover:border-[#0A66C2] hover:shadow-md transition-all group block"
-                                            >
-                                                <div className="flex items-start gap-3.5">
-                                                    <div
-                                                        className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                                                        style={{ backgroundColor: color + '12', color }}
-                                                    >
-                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="flex items-center gap-2">
-                                                            <h3 className="font-semibold text-[#0A0F1C] group-hover:text-[#0A66C2] transition-colors text-sm">
-                                                                {tool.name}
-                                                            </h3>
-                                                            {tool.tag && (
-                                                                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${tool.tag === 'Most Popular' ? 'bg-blue-50 text-[#0A66C2]' : 'bg-emerald-50 text-emerald-600'
-                                                                    }`}>
-                                                                    {tool.tag}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                        <p className="text-xs text-[#6B7280] mt-0.5 leading-relaxed">{tool.heroText.slice(0, 120)}...</p>
-                                                    </div>
-                                                    <svg className="w-4 h-4 text-[#D1D5DB] group-hover:text-[#0A66C2] transition-colors shrink-0 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                                    </svg>
+                            <section key={cat.key} className="space-y-4">
+                                <div>
+                                    <h2 className="text-[18px] font-bold text-[#0F172A] tracking-tight">
+                                        {cat.label}
+                                    </h2>
+                                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                                        {cat.desc}
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {tools.map((tool) => (
+                                        <Link
+                                            key={tool.slug}
+                                            href={`/tools/${tool.slug}`}
+                                            className="p-5 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#0A66C2] shadow-xs hover:shadow-md transition-all duration-150 flex flex-col justify-between no-underline group"
+                                        >
+                                            <div className="space-y-2">
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <h3 className="text-[15px] font-semibold text-[#0F172A] group-hover:text-[#0A66C2] transition-colors leading-snug">
+                                                        {tool.name}
+                                                    </h3>
+                                                    {tool.tag && (
+                                                        <Badge
+                                                            variant={tool.tag === 'Most Popular' ? 'brand' : 'neutral'}
+                                                            size="sm"
+                                                        >
+                                                            {tool.tag}
+                                                        </Badge>
+                                                    )}
                                                 </div>
-                                            </Link>
-                                        )
-                                    })}
+                                                <p className="text-[13px] text-[#475569] leading-relaxed line-clamp-2">
+                                                    {tool.heroText}
+                                                </p>
+                                            </div>
+
+                                            <div className="pt-4 flex items-center text-[12px] font-semibold text-[#0A66C2]">
+                                                <span>Open tool</span>
+                                                <ChevronRightIcon size={14} className="ml-1 group-hover:translate-x-0.5 transition-transform" />
+                                            </div>
+                                        </Link>
+                                    ))}
                                 </div>
                             </section>
                         )
                     })}
+                </div>
 
-                    {/* Trust Section */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8">
-                        <h2 className="text-base font-bold text-[#0A0F1C] mb-2">Why Trust These Tools?</h2>
-                        <p className="text-sm text-[#4B5563] mb-6 leading-relaxed">
-                            Every tool in this suite is built on the same <strong className="text-[#0A0F1C]">30+ signal methodology</strong> that powers LinkedInRank&apos;s profile ranking engine. Our recommendations are grounded in real LinkedIn ranking factors — not guesswork or generic templates.
+                {/* ── Methodology / Trust Strip ─────────────────── */}
+                <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 sm:p-8 shadow-xs space-y-6">
+                    <div>
+                        <span className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider">
+                            Methodology &amp; Standards
+                        </span>
+                        <h2 className="text-[18px] sm:text-[20px] font-bold text-[#0F172A] tracking-tight mt-1">
+                            Why Trust These LinkedIn Generators?
+                        </h2>
+                        <p className="text-[14px] text-[#475569] mt-2 leading-relaxed">
+                            Every generator is built directly on LinkedInRank&apos;s <strong className="text-[#0F172A]">30+ signal scoring methodology</strong>. Outputs are engineered to pass recruiter search filters and keyword indexers.
                         </p>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                            {[
-                                { stat: '30+', label: 'Signals Evaluated', desc: 'Proven methodology' },
-                                { stat: '6', label: 'Profile Categories', desc: 'Comprehensive coverage' },
-                                { stat: '0', label: 'Login Required', desc: 'Instant access' },
-                                { stat: 'AI+Rules', label: 'Hybrid Engine', desc: 'Not a black box' },
-                            ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-3 text-center">
-                                    <p className="text-lg font-bold text-[#0A66C2]">{item.stat}</p>
-                                    <p className="text-xs font-semibold text-[#0A0F1C] mt-0.5">{item.label}</p>
-                                    <p className="text-[10px] text-[#6B7280] mt-0.5">{item.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                            <Link href="/linkedin-ranking" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">LinkedIn Ranking Guide →</Link>
-                            <Link href="/linkedin-profile-score" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Profile Score Checker →</Link>
-                            <Link href="/methodology" className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">Our Methodology →</Link>
-                        </div>
                     </div>
 
-                    {/* Blog directory link */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-5">
-                        <h2 className="text-base font-bold text-[#0A0F1C] mb-2">LinkedIn Tips Blog</h2>
-                        <p className="text-sm text-[#4B5563] mb-3">
-                            Expert guides, examples, and strategies for every tool. 120+ articles covering headline optimization, about section writing, content creation, and more.
-                        </p>
-                        <Link
-                            href="/blogs"
-                            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0A66C2] hover:text-[#084E96] transition-colors"
-                        >
-                            Browse All Articles
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </Link>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="bg-gradient-to-r from-[#0A66C2] to-[#004182] rounded-xl p-6 text-center">
-                        <h3 className="text-white font-semibold mb-2">Want a complete profile analysis?</h3>
-                        <p className="text-blue-100 text-sm mb-4">Upload your LinkedIn PDF and get your score with personalized recommendations</p>
-                        <Link
-                            href="/"
-                            className="inline-flex items-center gap-2 bg-white text-[#0A66C2] px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-blue-50 transition-colors"
-                        >
-                            Analyze My Profile
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </Link>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        {[
+                            { stat: '30+', label: 'Scoring Signals', desc: 'Algorithmic alignment' },
+                            { stat: '0', label: 'Login Required', desc: 'Instant browser access' },
+                            { stat: '100%', label: 'Free Forever', desc: 'No paywalls or upsells' },
+                            { stat: 'In-Memory', label: 'Privacy Safe', desc: 'Zero data retention' },
+                        ].map((item, i) => (
+                            <div key={i} className="p-4 rounded-lg bg-[#FAFAFA] border border-[#E2E8F0] text-center space-y-0.5">
+                                <p className="text-[20px] font-bold text-[#0A66C2] tabular-nums">{item.stat}</p>
+                                <p className="text-[13px] font-semibold text-[#0F172A]">{item.label}</p>
+                                <p className="text-[11px] text-[#64748B]">{item.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </div>
+
+                {/* ── Full Profile Analysis CTA ─────────────────── */}
+                <div className="bg-[#0F172A] border border-[#1E293B] rounded-xl p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
+                    <div className="space-y-1 max-w-xl">
+                        <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider">
+                            Complete Profile Audit
+                        </span>
+                        <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight">
+                            Want a holistic evaluation of your entire profile?
+                        </h3>
+                        <p className="text-[13px] text-[#94A3B8] leading-relaxed">
+                            Upload your LinkedIn PDF export to score your profile across 30+ signals and get prioritized recommendations.
+                        </p>
+                    </div>
+                    <div className="shrink-0">
+                        <Button
+                            href="/#upload"
+                            variant="primary"
+                            size="md"
+                            rightIcon={<ArrowRightIcon size={14} />}
+                        >
+                            Analyze Full Profile
+                        </Button>
+                    </div>
+                </div>
+            </main>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }
