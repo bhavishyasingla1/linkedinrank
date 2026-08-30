@@ -793,6 +793,89 @@ export const LINKEDIN_FAQ_ARTICLES: BlogPost[] = [
         ],
         datePublished: DATE_PUBLISHED,
         dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'how-to-increase-linkedin-ssi-score',
+        title: 'How to Increase Your LinkedIn SSI Score: 30-Day Step-by-Step Playbook',
+        targetKeyword: 'how can I increase my LinkedIn SSI score',
+        metaDescription: 'Step-by-step 30-day playbook to boost your LinkedIn SSI score to 80+. Actionable tactics for each of the 4 Social Selling Index pillars.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'Why Increasing Your SSI Score Drives 45% More Inbound Opportunities',
+            'Pillar 1: How to Maximize "Establish Your Professional Brand" (25/25)',
+            'Pillar 2: How to Maximize "Find the Right People" (25/25)',
+            'Pillar 3: How to Maximize "Engage with Insights" (25/25)',
+            'Pillar 4: How to Maximize "Build Relationships" (25/25)',
+            '30-Day Daily Action Checklist to Reach Top 1% SSI'
+        ],
+        summary: 'A structured 30-day action plan to increase your LinkedIn Social Selling Index (SSI) score from 40 to 80+ across all 4 algorithmic pillars.',
+        sections: [
+            `<p>According to LinkedIn data, professionals and leaders with a <strong>high Social Selling Index (SSI score of 75+) generate 45% more sales and consulting opportunities</strong>, are 51% more likely to reach quota, and experience significantly greater organic reach on their posts. Because the SSI algorithm updates daily, you can actively boost your score by executing specific high-signal activities across each pillar.</p>`,
+
+            `<p><strong>Pillar 1: Establish Your Professional Brand (Target: 22–25 pts)</strong><br/>
+            Complete every section of your profile to 100%. Add a customer-focused <a href="/tools/linkedin-headline-generator">Headline</a> that explains who you help and what results you deliver. Publish at least 1 rich-media document or native article weekly, upload a professional banner, and request 2+ recommendations. Run a diagnostic on <a href="/#upload">LinkedInRank</a> to ensure zero missing keyword gaps.</p>`,
+
+            `<p><strong>Pillar 2: Find the Right People (Target: 20–25 pts)</strong><br/>
+            Use LinkedIn\'s advanced search filters daily. Search for target titles (e.g. "VP of Engineering", "Head of Talent"), view 10 to 15 relevant profiles per day, and check your "Who Viewed Your Profile" dashboard. Regularly researching prospect profiles directly feeds this metric.</p>`,
+
+            `<p><strong>Pillar 3: Engage with Insights (Target: 20–25 pts)</strong><br/>
+            Share high-signal industry posts 3x per week using proven <a href="/blogs/linkedin-hooks">engagement hooks</a>. More importantly: leave 5 insightful comments (at least 2–3 sentences) on influential creators\' posts daily, and reply to every comment left on your own updates within the first 60 minutes (<a href="/blogs/linkedin-golden-hour-rule">the Golden Hour</a>).</p>`,
+
+            `<p><strong>Pillar 4: Build Relationships (Target: 22–25 pts)</strong><br/>
+            Send 5 to 10 personalized connection requests daily to decision-makers and 2nd-degree contacts. Keep your acceptance rate above 60% by writing short contextual notes. Maintain multi-turn conversations in direct messaging and promptly reply to incoming messages.</p>`,
+
+            `<p><strong>The 15-Minute Daily Routine:</strong><br/>
+            • <em>Minutes 1–5:</em> View 10 target profiles and send 3 personalized connection requests.<br/>
+            • <em>Minutes 6–10:</em> Leave 3 value-packed comments on trending industry posts.<br/>
+            • <em>Minutes 11–15:</em> Reply to your direct messages and check your latest analytics dashboard.</p>`
+        ],
+        faqs: [
+            { question: 'How quickly does the LinkedIn SSI score update?', answer: 'The SSI score updates once every 24 hours based on your rolling account activity over the past 30 to 90 days.' },
+            { question: 'Do I need LinkedIn Sales Navigator to increase my SSI score?', answer: 'No. You can easily reach an 80+ SSI score on a standard free LinkedIn account by following the 15-minute daily routine.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'how-to-check-linkedin-ssi-score-for-free',
+        title: 'How to Check Your LinkedIn SSI Score for Free: Official Direct Link',
+        targetKeyword: 'how do I check my LinkedIn SSI score for free',
+        metaDescription: 'Step-by-step guide to finding your free LinkedIn Social Selling Index (SSI) score. Direct official link, score interpretation, and acronym disambiguation.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'Direct Official Link to Check Your LinkedIn SSI Score for Free',
+            'How to Read Your SSI Dashboard: Industry vs. Network Rank',
+            'What Does Your SSI Score Mean? (0 to 100 Breakdown)',
+            'Disambiguation: LinkedIn SSI vs. Social Security SSI Benefits',
+            'Next Steps: How to Audit Your Full Profile SEO Rank'
+        ],
+        summary: 'Find and interpret your LinkedIn Social Selling Index (SSI) score using the official free URL, with guidance on reading each pillar and understanding your industry percentile.',
+        sections: [
+            `<p>Many professionals mistakenly believe that you need a paid LinkedIn Sales Navigator subscription ($80+/month) to view your Social Selling Index score. In reality, LinkedIn provides a direct public dashboard where any registered member can check their score completely free in under 5 seconds.</p>
+            <p><strong>Direct Official Link:</strong> Open your browser, ensure you are logged into LinkedIn, and navigate to <a href="https://www.linkedin.com/sales/ssi" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/sales/ssi</a>.</p>`,
+
+            `<p>When your dashboard loads, you will see three key metrics:</p>
+            <ul>
+                <li><strong>Current Social Selling Index:</strong> Your total score out of 100, broken into the 4 pillars (25 pts each).</li>
+                <li><strong>Industry SSI Rank:</strong> Where you stand in percentage terms compared to other professionals in your specific industry.</li>
+                <li><strong>Network SSI Rank:</strong> How your score compares against everyone in your 1st-degree connection network.</li>
+            </ul>`,
+
+            `<p>If your score is in the <strong>Top 10% of your industry</strong>, your profile and content are receiving optimal algorithmic distribution. If your score is below 50, executing our <a href="/blogs/how-to-increase-linkedin-ssi-score">30-day SSI improvement playbook</a> will quickly elevate your discoverability.</p>`,
+
+            `<p><strong>Important Disambiguation:</strong> In search engines, the term "SSI score" occasionally overlaps with United States government <em>Supplemental Security Income (SSI)</em> or Social Security retirement calculations (such as queries regarding Social Security benefits at $70k or $120k annual earnings). On business platforms and Google Career search, however, <strong>SSI specifically refers to LinkedIn\'s Social Selling Index</strong>—the gold standard metric for B2B personal branding and networking efficacy.</p>`,
+
+            `<p>While the SSI score measures your networking activity, it does not analyze whether your headline has the right ATS search keywords or if your experience bullets have quantifiable impact. For a complete technical evaluation of your profile, run a scan on our <a href="/#upload">Free LinkedInRank Profile Auditor</a>.</p>`
+        ],
+        faqs: [
+            { question: 'Where do I find my LinkedIn SSI score?', answer: 'Visit linkedin.com/sales/ssi in your web browser while logged into your LinkedIn account.' },
+            { question: 'Why is my LinkedIn SSI score not loading?', answer: 'Make sure you are logged into your LinkedIn account on the same browser tab, or try opening the link in a desktop browser window.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
     }
 ]
+
 
