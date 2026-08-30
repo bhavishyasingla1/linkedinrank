@@ -593,55 +593,55 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 8. TRENDING ARTICLES CLUSTER (Soft Lavender Wash) ─ */}
-                <section className="py-12 sm:py-16 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-8 relative z-10">
-                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                            <div className="space-y-2">
+                <section className="py-10 sm:py-14 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6 relative z-10">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                            <div className="space-y-1.5">
                                 <Link
                                     href="/blogs"
-                                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[13px] font-extrabold shadow-sm hover:shadow-md transition-all duration-200 group no-underline leading-none"
+                                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[12.5px] font-extrabold shadow-sm transition-all group no-underline leading-none"
                                 >
-                                    <span className="relative flex h-2 w-2">
+                                    <span className="relative flex h-2 w-2 shrink-0">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
                                     </span>
                                     <span>Editorial Strategy</span>
                                     <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
                                 </Link>
-                                <h2 className="text-[26px] sm:text-[34px] font-extrabold text-[#050315] tracking-tight">
-                                    Trending LinkedIn Hooks &amp; Strategy Guides
+                                <h2 className="text-[24px] sm:text-[30px] font-extrabold text-[#050315] tracking-tight">
+                                    Trending LinkedIn Hooks &amp; Strategy
                                 </h2>
-                                <p className="text-[14.5px] text-[#050315]/75 max-w-2xl leading-relaxed">
-                                    Psychological frameworks, scroll-stopping opening lines, and algorithm-tested playbooks.
+                                <p className="text-[14px] text-[#050315]/75 max-w-2xl leading-normal">
+                                    Psychological writing formulas and algorithm-tested growth playbooks.
                                 </p>
                             </div>
 
                             <Link
                                 href="/blogs"
-                                className="inline-flex items-center gap-1.5 text-[13.5px] font-bold text-[#2f27ce] hover:text-[#433bff] transition-colors no-underline shrink-0"
+                                className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#2f27ce] hover:text-[#433bff] transition-colors no-underline shrink-0"
                             >
                                 <span>Browse all articles</span>
-                                <ArrowRightIcon size={14} />
+                                <ArrowRightIcon size={13} />
                             </Link>
                         </div>
 
                         {/* Top 4 Curated Article Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
                             {HOOK_CLUSTER_ARTICLES.slice(0, 4).map((art, idx) => {
                                 const readTime = Math.max(4, Math.ceil((art.h2Outline.length * 150 + 200) / 200))
 
                                 return (
                                     <div
                                         key={art.slug}
-                                        className="p-5 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-300 shimmer-container"
+                                        className="p-4 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-200"
                                     >
-                                        <div className="space-y-2.5">
+                                        <div className="space-y-2">
                                             <div className="flex items-center justify-between gap-2">
-                                                <span className="inline-flex items-center justify-center text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full text-center leading-none shadow-2xs">
-                                                    {idx === 0 ? '★ Pillar Guide' : art.targetKeyword}
+                                                <span className="inline-flex items-center justify-center text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff]/70 px-2.5 py-0.5 rounded-full text-center leading-none">
+                                                    {idx === 0 ? 'Pillar Guide' : art.targetKeyword}
                                                 </span>
                                                 <span className="text-[11px] text-[#050315]/60 flex items-center gap-1 shrink-0 font-medium">
-                                                    <ClockIcon size={11} /> {readTime} min
+                                                    <ClockIcon size={11} /> {readTime}m
                                                 </span>
                                             </div>
 
@@ -649,22 +649,22 @@ export default function HomePage() {
                                                 href={`/blogs/${art.slug}`}
                                                 className="block no-underline pt-0.5"
                                             >
-                                                <h3 className="text-[14.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
+                                                <h3 className="text-[14px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
                                                     {art.title}
                                                 </h3>
                                             </Link>
 
-                                            <p className="text-[12.5px] text-[#050315]/70 leading-relaxed line-clamp-3">
+                                            <p className="text-[12px] text-[#050315]/65 leading-normal line-clamp-1">
                                                 {art.summary}
                                             </p>
                                         </div>
 
-                                        <div className="pt-3 border-t border-[#dedcff]/70 mt-3 flex items-center justify-between text-[12.5px]">
+                                        <div className="pt-2.5 border-t border-[#dedcff]/50 mt-2.5 flex items-center justify-between text-[11.5px]">
                                             <Link
                                                 href={`/blogs/${art.slug}`}
                                                 className="font-bold text-[#2f27ce] group-hover:text-[#433bff] transition-colors no-underline inline-flex items-center gap-1"
                                             >
-                                                <span>Continue reading</span>
+                                                <span>Read Guide</span>
                                                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                                             </Link>
                                         </div>
