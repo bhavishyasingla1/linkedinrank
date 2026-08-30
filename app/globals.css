@@ -443,13 +443,22 @@ img {
   }
 }
 
-@keyframes marquee {
+@keyframes marqueeTrack {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-100%, 0, 0);
   }
+}
+
+.animate-marquee-track {
+  animation: marqueeTrack 32s linear infinite;
+  will-change: transform;
+}
+
+.group:hover .animate-marquee-track {
+  animation-play-state: paused;
 }
 
 @keyframes shimmer {
@@ -487,36 +496,6 @@ img {
     transform: scale(2.2);
     opacity: 0;
   }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.2s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
-}
-
-.animate-float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: floatDelayed 7s ease-in-out infinite 1.5s;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 35s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
 }
 
 .animate-scan-beam {
