@@ -4,6 +4,8 @@ import FooterLayout from '@/components/FooterLayout'
 import FaqAccordion from '@/components/FaqAccordion'
 import HeroUploaderStudio from '@/components/HeroUploaderStudio'
 import BenchmarkComparison from '@/components/BenchmarkComparison'
+import LiveRecruiterSignalsMarquee from '@/components/LiveRecruiterSignalsMarquee'
+import InteractiveAlgorithmPreview from '@/components/InteractiveAlgorithmPreview'
 import { HOOK_CLUSTER_ARTICLES } from '@/lib/hookArticlesData'
 import {
     ArrowRightIcon,
@@ -194,11 +196,20 @@ export default function HomePage() {
                     id="hero-section"
                     className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 overflow-hidden scroll-mt-20 aside-hero-glow"
                 >
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">
+                    {/* Ambient Floating Glow Elements */}
+                    <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-[#dedcff]/70 via-[#433bff]/10 to-transparent rounded-full blur-3xl pointer-events-none animate-pulse-glow -z-10" />
+                    <div className="absolute top-12 left-8 w-72 h-72 bg-[#dedcff]/40 rounded-full blur-2xl pointer-events-none animate-float-slow -z-10 hidden md:block" />
+                    <div className="absolute bottom-16 right-8 w-80 h-80 bg-[#433bff]/8 rounded-full blur-2xl pointer-events-none animate-float-delayed -z-10 hidden md:block" />
+
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12 relative">
                         {/* Centered Hero Header */}
                         <div className="text-center max-w-3xl mx-auto space-y-4">
-                            {/* Floating Pill Badge in Soft Lavender */}
-                            <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#dedcff]/70 border border-[#dedcff] shadow-xs leading-none">
+                            {/* Floating Pill Badge in Soft Lavender with Ping Animation */}
+                            <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#dedcff]/80 border border-[#dedcff] shadow-xs leading-none">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
+                                </span>
                                 <span className="text-[13px] font-bold text-[#2f27ce] inline-flex items-center justify-center gap-1.5">
                                     <SparklesIcon size={14} /> Instant Recruiter-Grade Audit
                                 </span>
@@ -220,9 +231,12 @@ export default function HomePage() {
                     </div>
                 </section>
 
+                {/* ── LIVE RECRUITER ALGORITHM SIGNALS MARQUEE ─── */}
+                <LiveRecruiterSignalsMarquee />
+
                 {/* ── 2. PROBLEM STATEMENT & PHILOSOPHY SECTION (Soft Lavender Wash) ─── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 text-center">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 text-center relative z-10">
                         {/* Centered Pill Badge */}
                         <div>
                             <Link
@@ -248,7 +262,7 @@ export default function HomePage() {
                         {/* Centered Comparison Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-left pt-2">
                             {/* Generic Advice */}
-                            <div className="p-7 rounded-3xl bg-white/80 border border-[#dedcff] space-y-3.5 shadow-xs flex flex-col justify-between">
+                            <div className="p-7 rounded-3xl bg-white/80 border border-[#dedcff] space-y-3.5 shadow-xs flex flex-col justify-between aside-card-hover hover:scale-[1.01] transition-all">
                                 <div className="flex items-center justify-between">
                                     <p className="text-[11.5px] font-extrabold text-[#050315]/50 uppercase tracking-wider">
                                         Generic Advice
@@ -263,7 +277,7 @@ export default function HomePage() {
                             </div>
 
                             {/* LinkedInRank Exact Metrics */}
-                            <div className="p-7 rounded-3xl bg-white border-2 border-[#2f27ce] shadow-xl shadow-[#2f27ce]/10 space-y-3.5 flex flex-col justify-between">
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#2f27ce] shadow-xl shadow-[#2f27ce]/10 space-y-3.5 flex flex-col justify-between aside-card-hover hover:scale-[1.01] transition-all relative overflow-hidden group">
                                 <div className="flex items-center justify-between">
                                     <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider flex items-center gap-1.5">
                                         <SparklesIcon size={14} /> LinkedInRank Algorithm
@@ -281,8 +295,8 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 3. INTERACTIVE CAPABILITIES & VISUAL CARDS ──── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         {/* Section Header */}
                         <div className="space-y-2">
                             <Link
@@ -297,10 +311,10 @@ export default function HomePage() {
                             </h2>
                         </div>
 
-                        {/* 3 Visual Cards with Floating UI Elements */}
+                        {/* 3 Visual Cards with Floating UI Elements & Shimmer Hover */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             {/* Card 1: Headline Rewriter */}
-                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between shimmer-container transition-all duration-300">
                                 <div className="space-y-3">
                                     <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
                                         <WandIcon size={20} />
@@ -326,7 +340,7 @@ export default function HomePage() {
                             </div>
 
                             {/* Card 2: Experience Metric Injection */}
-                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between shimmer-container transition-all duration-300">
                                 <div className="space-y-3">
                                     <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
                                         <FlameIcon size={20} />
@@ -340,20 +354,20 @@ export default function HomePage() {
                                 </div>
 
                                 <div className="flex flex-wrap gap-2 pt-2">
-                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce]">
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce] shadow-2xs">
                                         +42% Pipeline
                                     </span>
-                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce]">
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce] shadow-2xs">
                                         14.2x Scale
                                     </span>
-                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#050315]">
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#050315] shadow-2xs">
                                         $2.4M ARR
                                     </span>
                                 </div>
                             </div>
 
                             {/* Card 3: ATS & Keyword Matcher */}
-                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between shimmer-container transition-all duration-300">
                                 <div className="space-y-3">
                                     <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
                                         <LayersIcon size={20} />
@@ -370,7 +384,7 @@ export default function HomePage() {
                                     {['Distributed Systems', 'Go / Golang', 'Kubernetes', 'System Design'].map((tag, idx) => (
                                         <span
                                             key={idx}
-                                            className="px-3 py-1 rounded-full bg-[#dedcff]/50 border border-[#dedcff] text-[11.5px] font-bold text-[#050315]"
+                                            className="px-3 py-1 rounded-full bg-[#dedcff]/50 border border-[#dedcff] text-[11.5px] font-bold text-[#050315] shadow-2xs"
                                         >
                                             ✓ {tag}
                                         </span>
@@ -382,8 +396,8 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 4. BENCHMARK & SCORE COMPARISON SECTION (Soft Lavender Wash) ─────── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-3">
                             <Link
                                 href="/how-linkedin-rank-works"
@@ -407,9 +421,9 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 5. WORKFLOW & ALGORITHMIC REASONING SHOWCASE ── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                {/* ── 5. WORKFLOW & ALGORITHMIC REASONING SHOWCASE (Interactive Simulator) ── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-2">
                             <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs">
                                 <span>Algorithmic Reasoning</span>
@@ -419,78 +433,18 @@ export default function HomePage() {
                                 See the before, after, and reasoning.
                             </h2>
                             <p className="text-[15.5px] text-[#050315]/75">
-                                A score only matters if you know what caused it. Here is how our engine reconstructs a low-performing headline.
+                                A score only matters if you know what caused it. Interact with live role transformations below to see how algorithms index high-scoring profiles.
                             </p>
                         </div>
 
-                        {/* Split Card UI */}
-                        <div className="rounded-3xl bg-white border-2 border-[#dedcff] shadow-xl shadow-[#2f27ce]/5 overflow-hidden">
-                            <div className="p-6 sm:p-7 border-b border-[#dedcff] bg-[#dedcff]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div>
-                                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                                        Live Rewrite Transformation
-                                    </span>
-                                    <h3 className="text-[19px] font-extrabold text-[#050315] mt-0.5">
-                                        Software Engineer &rarr; Staff Platform Engineer
-                                    </h3>
-                                </div>
-                                <span className="px-4 py-1 rounded-full bg-[#2f27ce] text-[#fbfbfe] text-[12.5px] font-extrabold shadow-sm shrink-0 self-start sm:self-auto">
-                                    +14 Points Expected Gain
-                                </span>
-                            </div>
-
-                            <div className="p-6 sm:p-8 space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {/* Original Headline */}
-                                    <div className="p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] space-y-1.5">
-                                        <p className="text-[11px] font-extrabold text-[#050315]/50 uppercase tracking-wider">
-                                            Original Headline (Low Search Reach)
-                                        </p>
-                                        <p className="text-[14px] text-[#050315]/70 line-through">
-                                            Software Engineer at Stripe | Building stuff | Tech enthusiast
-                                        </p>
-                                    </div>
-
-                                    {/* LinkedInRank Recommended Rewrite */}
-                                    <div className="p-4 rounded-2xl bg-white border-2 border-[#2f27ce] space-y-1.5 shadow-sm">
-                                        <p className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider flex items-center gap-1">
-                                            <SparklesIcon size={12} />
-                                            LinkedInRank Recommended Rewrite
-                                        </p>
-                                        <p className="text-[14px] font-bold text-[#050315]">
-                                            Staff Platform Engineer | Distributed Systems • Go • Kubernetes • High-Scale Infrastructure
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Reasoning Box in Electric Accent Border */}
-                                <div className="p-6 rounded-2xl bg-[#dedcff]/40 border-2 border-[#433bff] space-y-2.5">
-                                    <p className="text-[12.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                                        Algorithmic Reasoning Breakdown
-                                    </p>
-                                    <ul className="space-y-2 text-[14px] text-[#050315]">
-                                        <li className="flex items-center gap-2.5">
-                                            <span className="text-[#2f27ce] font-black">✓</span>
-                                            <span>Transitions generic terms to high-demand technical job titles.</span>
-                                        </li>
-                                        <li className="flex items-center gap-2.5">
-                                            <span className="text-[#2f27ce] font-black">✓</span>
-                                            <span>Front-loads top 4 technologies queried in recruiter filters.</span>
-                                        </li>
-                                        <li className="flex items-center gap-2.5">
-                                            <span className="text-[#2f27ce] font-black">✓</span>
-                                            <span>Fits strictly within the 120-character mobile snippet cutoff.</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {/* Live Interactive Algorithm Previewer */}
+                        <InteractiveAlgorithmPreview />
                     </div>
                 </section>
 
                 {/* ── 6. FEATURE GRID (Sub-features & Privacy) ─────── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-2">
                             <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs">
                                 <span>Core Guarantees</span>
@@ -527,7 +481,7 @@ export default function HomePage() {
                             ].map((card, idx) => (
                                 <div
                                     key={idx}
-                                    className="p-6 rounded-2xl bg-white border border-[#dedcff] aside-card-shadow aside-card-hover space-y-3 flex flex-col justify-between"
+                                    className="p-6 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover space-y-3 flex flex-col justify-between shimmer-container transition-all duration-300"
                                 >
                                     <div className="space-y-3">
                                         <div className="w-11 h-11 rounded-2xl bg-[#dedcff] flex items-center justify-center shadow-xs">
@@ -550,8 +504,8 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 7. ALL 12 FREE TOOLS SUITE ──────────────────── */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div>
                                 <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs mb-2">
@@ -580,14 +534,14 @@ export default function HomePage() {
                                 <Link
                                     key={tool.slug}
                                     href={`/tools/${tool.slug}`}
-                                    className="p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between no-underline group"
+                                    className="p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between no-underline group shimmer-container transition-all duration-300"
                                 >
                                     <div className="space-y-2.5">
                                         <div className="flex items-center justify-between">
                                             <span className="inline-flex items-center justify-center text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full text-center leading-none shadow-2xs">
                                                 {tool.tag}
                                             </span>
-                                            <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center">
+                                            <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center group-hover:scale-110 transition-transform">
                                                 {tool.icon}
                                             </div>
                                         </div>
@@ -610,8 +564,8 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 8. TRENDING ARTICLES CLUSTER (Soft Lavender Wash) ─ */}
-                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div className="space-y-2">
                                 <Link
@@ -648,7 +602,7 @@ export default function HomePage() {
                                 return (
                                     <div
                                         key={art.slug}
-                                        className="p-6 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-200"
+                                        className="p-6 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-300 shimmer-container"
                                     >
                                         <div className="space-y-3">
                                             <div className="flex items-center justify-between gap-2">
@@ -728,7 +682,10 @@ export default function HomePage() {
 
                 {/* ── 10. BOTTOM CTA HERO SECTION ────────────────── */}
                 <section className="relative py-24 sm:py-32 overflow-hidden bg-[#fbfbfe] border-t border-[#dedcff] aside-bottom-glow">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+                    {/* Ambient Glow Orbs */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-gradient-to-tr from-[#dedcff]/80 via-[#433bff]/12 to-transparent rounded-full blur-3xl pointer-events-none animate-pulse-glow -z-10" />
+
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6 relative z-10">
                         <div className="space-y-3">
                             <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-xs">
                                 <SparklesIcon size={13} /> Built for Ambitious Professionals
