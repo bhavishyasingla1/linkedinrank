@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import { SparklesIcon, ShieldCheckIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
     title: 'Disclaimer',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
         url: 'https://linkedinrank.com/disclaimer',
     },
 }
+
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -22,78 +24,92 @@ const jsonLd = {
     url: 'https://linkedinrank.com/disclaimer',
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
 }
+
 export default function DisclaimerPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            <section className="bg-[#EFF6FF] py-16 sm:py-20">
-                <div className="max-w-3xl mx-auto px-6 text-center">
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white border border-[#DBEAFE] shadow-sm mb-6">
-                        <svg className="w-7 h-7 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+            {/* Hero */}
+            <section className="relative pt-16 pb-14 sm:pt-20 sm:pb-16 overflow-hidden aside-hero-glow">
+                <div className="max-w-3xl mx-auto px-6 text-center space-y-4">
+                    <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-extrabold text-[#2f27ce] shadow-2xs leading-none">
+                        <SparklesIcon size={13} />
+                        <span>Scope &amp; Limitations</span>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-4">Disclaimer</h1>
-                    <p className="text-[16px] text-[#4B5563] max-w-lg mx-auto leading-relaxed">
-                        Important information about the scope and limitations of LinkedInRank&apos;s profile analysis service.
+                    <h1 className="text-[32px] sm:text-[44px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                        Platform Disclaimer
+                    </h1>
+                    <p className="text-[15px] sm:text-[16.5px] text-[#050315]/75 max-w-lg mx-auto leading-relaxed">
+                        Important details regarding the scope, algorithmic assumptions, and diagnostic boundaries of LinkedInRank.
                     </p>
                 </div>
             </section>
 
-            <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+            <main id="main-content" className="flex-1 max-w-3xl mx-auto px-6 py-12 sm:py-20 space-y-12 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     {[
-                        { icon: 'M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z', title: 'Not Professional Advice', desc: 'LinkedInRank is an automated analysis tool. It is not a substitute for professional career coaching, resume writing services, or recruiting expertise. Always use your own judgment when implementing changes.' },
-                        { icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z', title: 'AI-Generated Content', desc: 'Recommendations are partially generated using Google Gemini AI. While designed to be helpful and specific, AI outputs may occasionally be inaccurate, incomplete, or not perfectly suited to your situation. Review all suggestions critically.' },
-                        { icon: 'M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6z', title: 'PDF-Only Analysis', desc: 'We only evaluate data present in your LinkedIn PDF export. Profile photos, featured posts, recommendations from others, engagement metrics, and follower counts are not included in PDFs and therefore not scored. See our Methodology for full details.' },
-                        { icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z', title: 'No Guarantees', desc: 'A higher LinkedInRank score does not guarantee increased recruiter interest, job offers, or professional outcomes. LinkedIn search algorithms and recruiter preferences are outside our control and may change.' },
-                        { icon: 'M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5', title: 'No LinkedIn Affiliation', desc: 'LinkedInRank is an independent project and is not affiliated with, endorsed by, or connected to LinkedIn Corporation, Microsoft, or any of their subsidiaries. "LinkedIn" is a trademark of LinkedIn Corporation.' },
-                        { icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z', title: 'Score Variability', desc: 'Scores may vary slightly between analyses due to the AI component. Rule-based scoring is deterministic, but AI-powered content assessment may produce minor variations. This is normal and expected behavior.' },
+                        { title: 'Diagnostic Guidance, Not Professional Career Advice', desc: 'LinkedInRank is an automated algorithmic analysis engine. It provides heuristic benchmarking, not certified executive resume coaching or legal counsel.' },
+                        { title: 'AI-Assisted Suggestions', desc: 'Rewrites and recommendations are synthesized using Google Gemini AI. Users should review and personalize suggestions to accurately reflect their real-world experience.' },
+                        { title: 'Textual PDF Scope', desc: 'Calculations evaluate the textual signals contained in your exported LinkedIn PDF. It does not measure profile photos, endorsements, or real-time recruiter search intent.' },
+                        { title: 'No Outcome Guarantees', desc: 'Higher algorithmic scores improve structural discoverability and readability, but cannot guarantee interviews, job placements, or hiring outcomes.' },
+                        { title: 'Independent Project', desc: 'LinkedInRank is independent and is not affiliated with, endorsed by, or operated by LinkedIn Corporation or Microsoft Corporation.' },
+                        { title: 'Algorithmic Calibration', desc: 'Rule-based scoring formulas are deterministic, while semantic analyses may reflect slight heuristic variations.' },
                     ].map((item, i) => (
-                        <div key={i} className="bg-white border border-gray-200 rounded-xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                            <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center mb-4">
-                                <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
+                        <div key={i} className="bg-white border border-[#dedcff] rounded-2xl p-6 shadow-xs space-y-2 transition-all hover:border-[#2f27ce]/50">
+                            <div className="flex items-center gap-2.5">
+                                <span className="w-7 h-7 rounded-lg bg-[#dedcff] text-[#2f27ce] flex items-center justify-center text-[12px] font-extrabold shrink-0">
+                                    i
+                                </span>
+                                <h2 className="text-[15.5px] font-bold text-[#050315] tracking-tight">
+                                    {item.title}
+                                </h2>
                             </div>
-                            <h3 className="text-sm font-bold text-[#0A0F1C] mb-2">{item.title}</h3>
-                            <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
+                            <p className="text-[13px] text-[#050315]/75 leading-relaxed pl-9">
+                                {item.desc}
+                            </p>
                         </div>
                     ))}
                 </div>
 
-                <div className="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-8 sm:p-10 mb-16">
-                    <h2 className="text-xl font-bold text-[#0A0F1C] mb-4">Limitation of Liability</h2>
-                    <p className="text-sm text-[#4B5563] leading-relaxed mb-4">
-                        LinkedInRank and its creator shall not be held liable for any direct, indirect, incidental, consequential, or special damages arising from the use of this service. This includes, but is not limited to, damages related to career decisions, profile changes, or reliance on AI-generated recommendations.
-                    </p>
-                    <p className="text-sm text-[#4B5563] leading-relaxed">
-                        The service is provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.
+                {/* Liability Box */}
+                <div className="bg-[#dedcff]/30 border border-[#dedcff] rounded-3xl p-7 sm:p-8 space-y-3">
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
+                        Limitation of Liability
+                    </h2>
+                    <p className="text-[14px] text-[#050315]/80 leading-relaxed">
+                        LinkedInRank and its developers assume no liability for career decisions, job applications, or profile alterations made in reliance upon scores or generated suggestions.
                     </p>
                 </div>
 
-                <div className="text-center">
-                    <p className="text-sm text-[#6B7280] mb-3">Have questions about this disclaimer?</p>
-                    <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A66C2] bg-[#EFF6FF] border border-[#DBEAFE] px-5 py-2.5 rounded-lg hover:bg-[#DBEAFE] transition-colors no-underline">Contact Us →</Link>
-                </div>
-
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related</p>
-                    <div className="flex flex-wrap gap-2">
+                {/* Related Legal Links */}
+                <div className="pt-8 border-t border-[#dedcff] space-y-3">
+                    <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                        Related Resources
+                    </p>
+                    <div className="flex flex-wrap gap-2.5">
                         {[
                             { label: 'Terms of Service', href: '/terms' },
                             { label: 'Privacy Policy', href: '/privacy' },
                             { label: 'Data Security', href: '/data-security' },
                             { label: 'Cookie Policy', href: '/cookie-policy' },
                             { label: 'Methodology', href: '/methodology' },
-                            { label: 'How It Works', href: '/how-linkedin-rank-works' },
                             { label: 'FAQ', href: '/faq' },
                         ].map((item, i) => (
-                            <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
+                            <Link
+                                key={i}
+                                href={item.href}
+                                className="text-[12.5px] font-semibold text-[#2f27ce] bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:bg-[#dedcff]/40 px-3.5 py-1.5 rounded-full no-underline transition-all shadow-2xs leading-none"
+                            >
+                                {item.label}
+                            </Link>
                         ))}
                     </div>
                 </div>
-            </article>
+            </main>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }

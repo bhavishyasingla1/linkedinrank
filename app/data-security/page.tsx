@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import { SparklesIcon, ShieldCheckIcon, ArrowRightIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
     title: 'Data Security | How LinkedInRank Protects Your Information',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
         url: 'https://linkedinrank.com/data-security',
     },
 }
+
 const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -22,98 +24,118 @@ const jsonLd = {
     url: 'https://linkedinrank.com/data-security',
     publisher: { '@type': 'Organization', name: 'LinkedInRank', url: 'https://linkedinrank.com' },
 }
+
 export default function DataSecurityPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            <section className="relative bg-gradient-to-b from-[#F8FAFC] to-white pt-16 sm:pt-20 pb-12 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23E5E7EB%22%2F%3E%3C%2Fsvg%3E')] opacity-40" />
-                <div className="max-w-3xl mx-auto px-6 text-center relative">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
-                        <svg className="w-3.5 h-3.5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                        <span className="text-xs font-semibold text-[#0A66C2]">Security</span>
+            {/* Hero */}
+            <section className="relative pt-16 pb-14 sm:pt-20 sm:pb-16 overflow-hidden aside-hero-glow">
+                <div className="max-w-3xl mx-auto px-6 text-center space-y-4">
+                    <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-extrabold text-[#2f27ce] shadow-2xs leading-none">
+                        <ShieldCheckIcon size={13} />
+                        <span>Security Architecture</span>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-5">How We Protect Your Data</h1>
-                    <p className="text-[16px] text-[#4B5563] max-w-xl mx-auto leading-relaxed">
-                        A detailed look at the security architecture behind LinkedInRank | from upload to analysis to results delivery.
+                    <h1 className="text-[32px] sm:text-[44px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                        How We Protect Your Data
+                    </h1>
+                    <p className="text-[15px] sm:text-[16.5px] text-[#050315]/75 max-w-lg mx-auto leading-relaxed">
+                        A detailed breakdown of our security posture from upload to diagnostic delivery.
                     </p>
                 </div>
             </section>
 
-            <article className="max-w-3xl mx-auto px-6 py-16 sm:py-24">
-                {/* Security flow */}
-                <div className="space-y-6 mb-16">
+            <main id="main-content" className="flex-1 max-w-3xl mx-auto px-6 py-12 sm:py-20 space-y-12 w-full">
+                {/* 5-Step Security Flow */}
+                <div className="space-y-4">
                     {[
-                        { step: '01', title: 'Encrypted Upload', desc: 'Your LinkedIn PDF is uploaded over HTTPS (TLS 1.2+), ensuring the file is encrypted in transit. No unencrypted connections are accepted.', icon: 'M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5' },
-                        { step: '02', title: 'In-Memory Processing', desc: 'Your PDF is processed entirely in server RAM. It is never written to disk, never stored in a database, and never logged. The file exists only for the duration of analysis.', icon: 'M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z' },
-                        { step: '03', title: 'AI Analysis via Secure API', desc: 'Profile content is sent to Google Gemini API over encrypted channels. Google processes data per their enterprise API terms and does not use it for model training. No identifiable data is retained post-call.', icon: 'M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z' },
-                        { step: '04', title: 'Immediate Disposal', desc: 'Once your results are generated and sent to your browser, all server-side data is automatically garbage collected. We have no mechanism to retrieve your file or results after the fact.', icon: 'M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0' },
-                        { step: '05', title: 'Browser-Only Results', desc: 'Your analysis results exist only in your browser session. Close the tab and they are gone. We cannot access, recover, or share your results because we never store them.', icon: 'M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25' },
+                        { step: '01', title: 'TLS Encrypted Upload', desc: 'Your LinkedIn PDF is uploaded exclusively over HTTPS (TLS 1.2+), ensuring complete encryption in transit.' },
+                        { step: '02', title: 'In-Memory Runtime', desc: 'Your PDF exists solely in ephemeral server RAM during calculation. It is never written to disk or stored in any database.' },
+                        { step: '03', title: 'Stateless Evaluation Pipeline', desc: 'Profile content is evaluated against standardized ranking rules and secure enterprise API channels with zero data retention.' },
+                        { step: '04', title: 'Instant Memory Garbage Collection', desc: 'The moment your diagnostic audit is returned, server memory is immediately freed and all runtime traces are purged.' },
+                        { step: '05', title: 'Browser-Only Persistence', desc: 'Your score and recommendations live only in your active browser tab. Once closed, they cannot be recovered by anyone.' },
                     ].map((item, i) => (
-                        <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow">
-                            <div className="flex items-start gap-5">
-                                <div className="shrink-0">
-                                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0A66C2] to-[#4F46E5] text-white text-sm font-bold flex items-center justify-center shadow-[0_2px_8px_rgba(10,102,194,0.3)]">{item.step}</div>
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-8 h-8 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
-                                        </div>
-                                        <h2 className="text-lg font-bold text-[#0A0F1C]">{item.title}</h2>
-                                    </div>
-                                    <p className="text-[15px] text-[#4B5563] leading-relaxed">{item.desc}</p>
-                                </div>
+                        <div key={i} className="bg-white border border-[#dedcff] rounded-2xl p-5 sm:p-6 shadow-xs flex items-start gap-4 transition-all hover:border-[#2f27ce]/50">
+                            <span className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-white text-[13px] font-extrabold flex items-center justify-center shrink-0 shadow-xs shadow-[#2f27ce]/20">
+                                {item.step}
+                            </span>
+                            <div className="space-y-1 min-w-0">
+                                <h2 className="text-[16px] font-bold text-[#050315] tracking-tight">
+                                    {item.title}
+                                </h2>
+                                <p className="text-[13.5px] text-[#050315]/75 leading-relaxed">
+                                    {item.desc}
+                                </p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Trust signals */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+                {/* 3 Pillar Summary */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                     {[
-                        { icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z', title: 'Zero Storage', desc: 'No files, no databases, no logs' },
-                        { icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z', title: 'No Accounts', desc: 'No login, no signup, no email' },
-                        { icon: 'M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88', title: 'Zero Tracking', desc: 'No cookies, no analytics, no ads' },
+                        { title: 'Zero Storage', desc: 'No databases, no file logs, no server disks' },
+                        { title: 'Zero Accounts', desc: 'No signup, no emails, no passwords' },
+                        { title: 'Zero Tracking', desc: 'No third-party trackers, pixels, or ad cookies' },
                     ].map((item, i) => (
-                        <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-xl p-5 text-center">
-                            <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center mx-auto mb-3">
-                                <svg className="w-5 h-5 text-[#0A66C2]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d={item.icon} /></svg>
-                            </div>
-                            <p className="text-sm font-bold text-[#0A0F1C] mb-1">{item.title}</p>
-                            <p className="text-xs text-[#6B7280]">{item.desc}</p>
+                        <div key={i} className="bg-white border border-[#dedcff] rounded-2xl p-5 text-center shadow-xs space-y-1">
+                            <span className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center mx-auto text-[11px] font-extrabold mb-2">
+                                ✓
+                            </span>
+                            <h3 className="text-[14px] font-bold text-[#050315]">{item.title}</h3>
+                            <p className="text-[12px] text-[#050315]/70 leading-normal">{item.desc}</p>
                         </div>
                     ))}
                 </div>
 
-                {/* CTA */}
-                <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-2xl p-8 sm:p-10 text-center">
-                    <h2 className="text-xl font-bold text-[#0A0F1C] mb-3">Analyze your profile with confidence</h2>
-                    <p className="text-sm text-[#4B5563] mb-5 max-w-md mx-auto">Your data is processed securely and never stored. Try LinkedInRank | free, private, and under 60 seconds.</p>
-                    <Link href="/" className="btn-primary inline-block no-underline text-sm">Analyze Your Profile | It&apos;s Free</Link>
+                {/* CTA Box */}
+                <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border border-[#dedcff] rounded-2xl p-7 sm:p-9 text-center space-y-3 shadow-xs">
+                    <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#050315] tracking-tight">
+                        Analyze your profile with confidence
+                    </h2>
+                    <p className="text-[14px] text-[#050315]/75 max-w-md mx-auto leading-relaxed">
+                        Your profile is processed securely and never saved. Try LinkedInRank—free, private, and instant.
+                    </p>
+                    <div className="pt-2">
+                        <Link
+                            href="/#upload"
+                            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14px] font-bold shadow-md shadow-[#2f27ce]/25 transition-all no-underline cursor-pointer active:scale-95 leading-none"
+                        >
+                            <span>Analyze Profile Free</span>
+                            <ArrowRightIcon size={14} />
+                        </Link>
+                    </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-xs font-bold text-[#6B7280] uppercase tracking-wider mb-3">Related</p>
-                    <div className="flex flex-wrap gap-2">
+                {/* Related Legal Links */}
+                <div className="pt-8 border-t border-[#dedcff] space-y-3">
+                    <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                        Related Resources
+                    </p>
+                    <div className="flex flex-wrap gap-2.5">
                         {[
                             { label: 'Privacy Policy', href: '/privacy' },
                             { label: 'Cookie Policy', href: '/cookie-policy' },
                             { label: 'Terms of Service', href: '/terms' },
                             { label: 'Disclaimer', href: '/disclaimer' },
-                            { label: 'How It Works', href: '/how-linkedin-rank-works' },
                             { label: 'Methodology', href: '/methodology' },
                             { label: 'FAQ', href: '/faq' },
                         ].map((item, i) => (
-                            <Link key={i} href={item.href} className="text-xs text-[#0A66C2] bg-[#EFF6FF] px-3 py-1.5 rounded-full no-underline hover:bg-[#DBEAFE] transition-colors">{item.label}</Link>
+                            <Link
+                                key={i}
+                                href={item.href}
+                                className="text-[12.5px] font-semibold text-[#2f27ce] bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:bg-[#dedcff]/40 px-3.5 py-1.5 rounded-full no-underline transition-all shadow-2xs leading-none"
+                            >
+                                {item.label}
+                            </Link>
                         ))}
                     </div>
                 </div>
-            </article>
+            </main>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }
