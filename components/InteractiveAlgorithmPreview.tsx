@@ -1,11 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckIcon, ArrowRightIcon, ZapIcon, FlameIcon, SearchIcon } from '@/components/ui/Icons'
+import { CheckIcon } from '@/components/ui/Icons'
 
 interface Scenario {
     id: string
-    role: string
     category: string
     gain: number
     before: {
@@ -16,88 +15,75 @@ interface Scenario {
     after: {
         headline: string
         score: number
-        highlights: string[]
         mobileSnippet: string
-        rationale: string[]
+        improvements: string[]
     }
 }
 
 const SCENARIOS: Scenario[] = [
     {
         id: 'engineering',
-        role: 'Staff Platform Engineer',
         category: 'Engineering & Systems',
         gain: 36,
         before: {
             headline: 'Software Engineer at Tech Corp | Passionate coder | Building stuff with cool tech',
             score: 58,
             flaws: [
-                'Generic buzzwords ("passionate coder", "cool tech") ignored by recruiter filters',
-                'Lacks exact searchable backend infrastructure technologies',
-                'No scope or seniority differentiation'
+                'Generic buzzwords ("passionate coder", "cool tech") ignored by search filters',
+                'Missing high-intent technologies (Go, Kubernetes, Distributed Systems)'
             ]
         },
         after: {
-            headline: 'Staff Platform Engineer | Distributed Systems · Go · Kubernetes · High-Scale Cloud Architecture',
+            headline: 'Staff Platform Engineer | Distributed Systems · Go · Kubernetes · Cloud Scale Architecture',
             score: 94,
-            highlights: ['Staff Platform Engineer', 'Distributed Systems', 'Go', 'Kubernetes', 'High-Scale Cloud Architecture'],
             mobileSnippet: 'Staff Platform Engineer | Distributed Systems · Go...',
-            rationale: [
-                'Front-loads verified top-tier job titles queried in recruiter talent search filters.',
-                'Injects 4 standardized high-frequency keywords required for boolean candidate searches.',
-                'Formatted specifically to retain core positioning within the 120-char mobile cutoff.'
+            improvements: [
+                'Front-loads verified job titles queried in recruiter talent searches',
+                'Injects 4 standardized keywords required for boolean recruiter queries'
             ]
         }
     },
     {
         id: 'product',
-        role: 'Lead Growth Product Manager',
         category: 'Product & Strategy',
         gain: 32,
         before: {
             headline: 'Product Manager | Helping users solve problems | Innovator & Problem Solver',
             score: 62,
             flaws: [
-                'Vague non-quantifiable value proposition without domain specialization',
-                'Zero mentions of product metrics, B2B/B2C segment, or monetization',
-                'Contains banned cliché filler ("Innovator & Problem Solver")'
+                'Vague non-quantifiable proposition without domain specialization',
+                'Zero metrics, B2B/B2C segment differentiation, or monetization proof'
             ]
         },
         after: {
-            headline: 'Lead Growth Product Manager | B2B SaaS · PLG · Monetization & Funnel Conversion ($25M+ ARR)',
+            headline: 'Lead Growth Product Manager | B2B SaaS · PLG · Funnel Monetization ($25M+ ARR)',
             score: 94,
-            highlights: ['Lead Growth Product Manager', 'B2B SaaS', 'PLG', 'Monetization & Funnel Conversion', '$25M+ ARR'],
             mobileSnippet: 'Lead Growth Product Manager | B2B SaaS · PLG...',
-            rationale: [
-                'Clear domain focus (B2B SaaS, PLG) instantly matches recruiter job specs.',
-                'Injects quantifiable business revenue metrics ($25M+ ARR) to establish credibility.',
-                'Eliminates all AI clichés in favor of hard functional specialties.'
+            improvements: [
+                'Specific domain specialization (B2B SaaS, PLG) matches recruiter job specs',
+                'Injects hard revenue metrics ($25M+ ARR) for instant credibility'
             ]
         }
     },
     {
         id: 'data',
-        role: 'Senior Analytics & ML Engineer',
         category: 'Data & AI',
         gain: 34,
         before: {
             headline: 'Data Enthusiast & Analyst | SQL, Python, Excel | Looking for new opportunities',
             score: 60,
             flaws: [
-                '"Looking for new opportunities" lowers perceived authority and search ranking',
-                'Lists basic spreadsheet tools rather than high-leverage data stack keywords',
-                'Missing domain outcomes (data modeling, pipeline scale, predictive AI)'
+                '"Looking for new opportunities" lowers perceived authority in ranking algorithms',
+                'Lacks production-grade stack keywords (dbt, Snowflake, Real-Time ETL)'
             ]
         },
         after: {
             headline: 'Senior Analytics & ML Engineer | dbt · Snowflake · Python · Predictive Modeling & Real-Time ETL',
             score: 94,
-            highlights: ['Senior Analytics & ML Engineer', 'dbt', 'Snowflake', 'Python', 'Predictive Modeling & Real-Time ETL'],
             mobileSnippet: 'Senior Analytics & ML Engineer | dbt · Snowflake...',
-            rationale: [
-                'Removes passive status phrases that diminish algorithmic authority.',
-                'Features modern data stack tools (dbt, Snowflake) targeted by high-budget teams.',
-                'Highlights high-leverage production impact (Real-Time ETL, Predictive Modeling).'
+            improvements: [
+                'Features modern data stack tools (dbt, Snowflake) targeted by hiring teams',
+                'Highlights high-leverage production impact (Real-Time ETL, Predictive Modeling)'
             ]
         }
     }
@@ -108,20 +94,21 @@ export default function InteractiveAlgorithmPreview() {
     const scenario = SCENARIOS.find(s => s.id === activeScenarioId) || SCENARIOS[0]
 
     return (
-        <div className="rounded-3xl bg-white border-2 border-[#dedcff] shadow-lg shadow-[#2f27ce]/5 overflow-hidden">
-            {/* ── Compact Scenario Selection Tabs ────────────────── */}
-            <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-[#dedcff] bg-[#dedcff]/30 flex flex-wrap items-center justify-between gap-2.5">
-                <div className="inline-flex items-center gap-2">
+        <div className="rounded-2xl bg-white border border-[#dedcff] shadow-sm shadow-[#2f27ce]/5 overflow-hidden">
+            {/* ── Compact Top Controls ───────────────────────────── */}
+            <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 border-b border-[#dedcff] bg-[#dedcff]/20 flex flex-wrap items-center justify-between gap-2">
+                <div className="inline-flex items-center gap-1.5">
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
                     </span>
-                    <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                        Interactive Algorithm Simulator
+                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                        Interactive Simulation
                     </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-1 p-1 rounded-xl bg-white border border-[#dedcff] shadow-2xs">
+                {/* Segmented Category Filter */}
+                <div className="flex items-center gap-1 p-0.5 rounded-lg bg-white border border-[#dedcff] shadow-2xs">
                     {SCENARIOS.map((s) => {
                         const isActive = s.id === activeScenarioId
                         return (
@@ -129,10 +116,10 @@ export default function InteractiveAlgorithmPreview() {
                                 key={s.id}
                                 onClick={() => setActiveScenarioId(s.id)}
                                 className={`
-                                    px-3 py-1 rounded-lg text-[11.5px] font-bold transition-all cursor-pointer select-none leading-none
+                                    px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer select-none leading-none
                                     ${isActive
                                         ? 'bg-[#2f27ce] text-white shadow-xs'
-                                        : 'text-[#050315]/70 hover:text-[#2f27ce] hover:bg-[#dedcff]/50'
+                                        : 'text-[#050315]/70 hover:text-[#2f27ce] hover:bg-[#dedcff]/40'
                                     }
                                 `}
                             >
@@ -143,100 +130,81 @@ export default function InteractiveAlgorithmPreview() {
                 </div>
             </div>
 
-            {/* ── Compact Comparison Workspace ───────────────────── */}
-            <div className="p-4 sm:p-6 space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    {/* Left: Before Transformation */}
-                    <div className="p-4 sm:p-5 rounded-2xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col justify-between space-y-3.5 transition-all">
-                        <div className="space-y-2">
+            {/* ── Compact 2-Column Comparison ────────────────────── */}
+            <div className="p-3.5 sm:p-5 space-y-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                    {/* Before Card */}
+                    <div className="p-3.5 sm:p-4 rounded-xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col justify-between space-y-2.5">
+                        <div className="space-y-1.5">
                             <div className="flex items-center justify-between">
-                                <span className="text-[10.5px] font-extrabold text-[#DC2626] uppercase tracking-wider bg-[#FEF2F2] border border-[#FECACA] px-2.5 py-0.5 rounded-full leading-none">
-                                    Before · Low Recruiter Visibility
+                                <span className="text-[10px] font-extrabold text-[#DC2626] uppercase tracking-wider bg-[#FEF2F2] border border-[#FECACA] px-2 py-0.5 rounded-full leading-none">
+                                    Before
                                 </span>
-                                <span className="text-[11.5px] font-bold text-[#DC2626]">
+                                <span className="text-[11px] font-bold text-[#DC2626]">
                                     Score: {scenario.before.score}/100
                                 </span>
                             </div>
 
-                            <p className="text-[13.5px] text-[#050315]/75 font-medium leading-relaxed line-through decoration-[#DC2626]/50">
+                            <p className="text-[12.5px] text-[#050315]/75 font-medium leading-snug line-through decoration-[#DC2626]/40">
                                 {scenario.before.headline}
                             </p>
                         </div>
 
-                        <div className="pt-2.5 border-t border-[#dedcff]/60 space-y-1.5">
-                            <p className="text-[10.5px] font-extrabold text-[#050315]/50 uppercase tracking-wider">
-                                Algorithmic Penalties
-                            </p>
-                            <ul className="space-y-1 text-[12px] text-[#050315]/75">
-                                {scenario.before.flaws.map((flaw, idx) => (
-                                    <li key={idx} className="flex items-start gap-1.5">
-                                        <span className="text-[#DC2626] font-bold shrink-0">✕</span>
-                                        <span>{flaw}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        <div className="pt-2 border-t border-[#dedcff]/50 space-y-1 text-[11.5px] text-[#050315]/75">
+                            {scenario.before.flaws.map((flaw, idx) => (
+                                <div key={idx} className="flex items-start gap-1.5 leading-snug">
+                                    <span className="text-[#DC2626] font-bold shrink-0">✕</span>
+                                    <span>{flaw}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Right: After Transformation */}
-                    <div className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#2f27ce] shadow-sm shadow-[#2f27ce]/10 flex flex-col justify-between space-y-3.5 relative overflow-hidden group">
-                        {/* Subtle Scanner Line Animation */}
+                    {/* After Card */}
+                    <div className="p-3.5 sm:p-4 rounded-xl bg-white border-2 border-[#2f27ce] shadow-xs flex flex-col justify-between space-y-2.5 relative overflow-hidden group">
+                        {/* Subtle Scanner Line */}
                         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#2f27ce] to-transparent animate-scan-beam pointer-events-none" />
 
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                             <div className="flex items-center justify-between">
-                                <span className="inline-flex items-center justify-center gap-1.5 text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] border border-[#dedcff] px-2.5 py-0.5 rounded-full leading-none shadow-2xs">
+                                <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2 py-0.5 rounded-full leading-none">
                                     <span className="relative flex h-1.5 w-1.5">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2f27ce]" />
                                     </span>
                                     <span>Optimized · Top 1%</span>
                                 </span>
-                                <span className="inline-flex items-center gap-1 text-[11.5px] font-extrabold text-[#16A34A] bg-[#F0FDF4] border border-[#BBF7D0] px-2 py-0.5 rounded-full leading-none">
+                                <span className="text-[11px] font-extrabold text-[#16A34A] bg-[#F0FDF4] border border-[#BBF7D0] px-2 py-0.5 rounded-full leading-none">
                                     Score: {scenario.after.score}/100 (+{scenario.gain} pts)
                                 </span>
                             </div>
 
-                            <p className="text-[14px] font-bold text-[#050315] leading-relaxed">
+                            <p className="text-[13px] font-bold text-[#050315] leading-snug">
                                 {scenario.after.headline}
                             </p>
                         </div>
 
-                        <div className="pt-2.5 border-t border-[#dedcff] space-y-1.5">
-                            <p className="text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                                Algorithmic Improvements Applied
-                            </p>
-                            <ul className="space-y-1 text-[12px] text-[#050315]">
-                                {scenario.after.rationale.map((point, idx) => (
-                                    <li key={idx} className="flex items-start gap-1.5">
-                                        <span className="text-[#2f27ce] font-extrabold shrink-0">✓</span>
-                                        <span>{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        <div className="pt-2 border-t border-[#dedcff] space-y-1 text-[11.5px] text-[#050315]">
+                            {scenario.after.improvements.map((point, idx) => (
+                                <div key={idx} className="flex items-start gap-1.5 leading-snug">
+                                    <span className="text-[#2f27ce] font-extrabold shrink-0">✓</span>
+                                    <span>{point}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* ── Compact Mobile Simulation Bar ──────────────────── */}
-                <div className="px-4 py-2.5 rounded-xl bg-[#dedcff]/20 border border-[#dedcff] flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-6 h-6 rounded-full bg-[#2f27ce] text-white flex items-center justify-center font-bold text-[11px] shrink-0">
-                            in
-                        </div>
-                        <div>
-                            <span className="text-[10px] font-extrabold text-[#050315]/60 uppercase tracking-wider mr-2">
-                                Mobile Cutoff Check:
-                            </span>
-                            <span className="text-[12.5px] font-bold text-[#050315]">
-                                {scenario.after.mobileSnippet}
-                            </span>
-                        </div>
+                {/* ── Compact Mobile Snippet Footer Bar ──────────────── */}
+                <div className="px-3 py-1.5 rounded-lg bg-[#dedcff]/20 border border-[#dedcff] flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                    <div className="flex items-center gap-1.5 text-[#050315]/80">
+                        <span className="font-bold text-[#2f27ce]">Mobile Preview:</span>
+                        <span className="font-semibold text-[#050315]">&ldquo;{scenario.after.mobileSnippet}&rdquo;</span>
                     </div>
 
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#dedcff] text-[11px] font-extrabold text-[#2f27ce] shadow-2xs whitespace-nowrap leading-none">
-                        <span>Zero Cutoff Risk</span>
-                        <CheckIcon size={12} />
+                    <div className="inline-flex items-center gap-1 font-bold text-[#2f27ce] bg-white px-2 py-0.5 rounded-full border border-[#dedcff] shadow-2xs leading-none">
+                        <CheckIcon size={10} />
+                        <span>Fits 120-Char Cutoff</span>
                     </div>
                 </div>
             </div>

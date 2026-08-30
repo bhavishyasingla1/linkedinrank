@@ -436,10 +436,10 @@ export default function HomePage() {
                 </section>
 
                 {/* ── 5. WORKFLOW & ALGORITHMIC REASONING SHOWCASE (Interactive Simulator) ── */}
-                <section className="py-12 sm:py-16 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-8 relative z-10">
-                        <div className="text-center max-w-2xl mx-auto space-y-2">
-                            <span className="inline-flex items-center gap-2 text-[13px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs leading-none">
+                <section className="py-10 sm:py-12 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6 relative z-10">
+                        <div className="text-center max-w-2xl mx-auto space-y-1.5">
+                            <span className="inline-flex items-center gap-2 text-[12.5px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs leading-none">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
@@ -447,11 +447,11 @@ export default function HomePage() {
                                 <span>Algorithmic Reasoning</span>
                                 <span>&rarr;</span>
                             </span>
-                            <h2 className="text-[26px] sm:text-[34px] font-extrabold text-[#050315] tracking-tight">
+                            <h2 className="text-[24px] sm:text-[30px] font-extrabold text-[#050315] tracking-tight">
                                 See the before, after, and reasoning.
                             </h2>
-                            <p className="text-[15px] text-[#050315]/75">
-                                A score only matters if you know what caused it. Interact with live role transformations below to see how algorithms index high-scoring profiles.
+                            <p className="text-[14px] text-[#050315]/75">
+                                A score only matters if you know what caused it. Toggle roles below to inspect exact algorithmic fixes.
                             </p>
                         </div>
 
