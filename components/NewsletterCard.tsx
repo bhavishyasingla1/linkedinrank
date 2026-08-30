@@ -44,7 +44,7 @@ export default function NewsletterCard({ variant = 'card', className = '' }: New
                     href={NEWSLETTER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#0A66C2] hover:bg-[#004182] text-white text-[12.5px] font-bold shadow-xs hover:shadow-md transition-all no-underline shrink-0 cursor-pointer active:scale-95"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[13px] font-bold shadow-sm shadow-[#2f27ce]/20 hover:shadow-md hover:shadow-[#433bff]/25 transition-all no-underline shrink-0 cursor-pointer active:scale-95 leading-none"
                 >
                     <LinkedInIcon size={14} className="text-white" />
                     <span>Subscribe on LinkedIn</span>
@@ -83,7 +83,7 @@ export default function NewsletterCard({ variant = 'card', className = '' }: New
                     href={NEWSLETTER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#0A66C2] hover:bg-[#004182] text-white text-[13px] font-bold shadow-xs hover:shadow-md transition-all no-underline shrink-0 cursor-pointer active:scale-95"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[13.5px] font-bold shadow-md shadow-[#2f27ce]/25 hover:shadow-lg hover:shadow-[#433bff]/25 transition-all no-underline shrink-0 cursor-pointer active:scale-95 leading-none"
                 >
                     <LinkedInIcon size={15} className="text-white" />
                     <span>Subscribe on LinkedIn</span>
@@ -123,7 +123,7 @@ export default function NewsletterCard({ variant = 'card', className = '' }: New
                 href={NEWSLETTER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#0A66C2] hover:bg-[#004182] text-white text-[12.5px] font-bold shadow-2xs hover:shadow-xs transition-all no-underline cursor-pointer active:scale-95 leading-none"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[12.5px] font-bold shadow-sm shadow-[#2f27ce]/20 hover:shadow-md hover:shadow-[#433bff]/25 transition-all no-underline cursor-pointer active:scale-95 leading-none"
             >
                 <LinkedInIcon size={14} className="text-white" />
                 <span>Subscribe on LinkedIn</span>
