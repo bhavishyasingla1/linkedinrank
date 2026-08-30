@@ -42,7 +42,7 @@ export default function FaqAccordion() {
     }
 
     return (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
             {FAQ_ITEMS.map((item, i) => {
                 const isOpen = openIndex === i
                 return (
@@ -59,9 +59,9 @@ export default function FaqAccordion() {
                         <button
                             onClick={() => toggle(i)}
                             aria-expanded={isOpen}
-                            className="w-full flex items-center justify-between p-5 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-2xl"
+                            className="w-full flex items-center justify-between p-5 sm:p-6 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-2xl"
                         >
-                            <span className="text-[15.5px] sm:text-[16.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors pr-4">
+                            <span className="text-base sm:text-lg font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors pr-4 leading-snug">
                                 {item.q}
                             </span>
                             <div className={`
@@ -75,7 +75,7 @@ export default function FaqAccordion() {
                             </div>
                         </button>
                         {isOpen && (
-                            <div className="px-5 pb-5 pt-1 text-[14px] text-[#050315]/80 leading-relaxed animate-fade-in border-t border-[#dedcff]/70 mt-1">
+                            <div className="px-5 pb-6 sm:px-6 pt-1 text-sm sm:text-base text-[#050315]/80 leading-relaxed animate-fade-in border-t border-[#dedcff]/70 mt-1">
                                 {item.a}
                             </div>
                         )}
