@@ -256,19 +256,57 @@ export default function HeroUploaderStudio() {
                 </div>
             </div>
 
-            {/* ── 3-Step Microbar Below Window in Lavender Pill Fills ── */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-                <div className="flex items-center sm:flex-col justify-between sm:justify-center p-3.5 rounded-2xl bg-[#dedcff]/40 border border-[#dedcff] hover:bg-[#dedcff]/70 transition-colors">
-                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">Step 1</span>
-                    <span className="text-[13.5px] font-bold text-[#050315]">Export LinkedIn PDF</span>
-                </div>
-                <div className="flex items-center sm:flex-col justify-between sm:justify-center p-3.5 rounded-2xl bg-[#dedcff]/40 border border-[#dedcff] hover:bg-[#dedcff]/70 transition-colors">
-                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">Step 2</span>
-                    <span className="text-[13.5px] font-bold text-[#050315]">Drop File Here</span>
-                </div>
-                <div className="flex items-center sm:flex-col justify-between sm:justify-center p-3.5 rounded-2xl bg-[#dedcff]/40 border border-[#dedcff] hover:bg-[#dedcff]/70 transition-colors">
-                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">Step 3</span>
-                    <span className="text-[13.5px] font-bold text-[#050315]">Instant Recruiter Audit</span>
+            {/* ── 3-Step Workflow Pipeline Connected Bar ── */}
+            <div className="mt-6 p-2 sm:p-2.5 rounded-2xl bg-white/90 border border-[#dedcff] shadow-sm shadow-[#2f27ce]/5 backdrop-blur-md">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 relative">
+                    {/* Step 1 */}
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-[#fbfbfe] border border-[#dedcff]/60 hover:border-[#2f27ce]/40 transition-all group">
+                        <div className="w-8 h-8 rounded-lg bg-[#dedcff] text-[#2f27ce] font-extrabold text-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                            01
+                        </div>
+                        <div className="text-left min-w-0">
+                            <span className="block text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider leading-none">
+                                Step 1
+                            </span>
+                            <span className="block text-[13px] font-bold text-[#050315] truncate mt-0.5">
+                                Export LinkedIn PDF
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-[#fbfbfe] border border-[#dedcff]/60 hover:border-[#2f27ce]/40 transition-all group">
+                        <div className="w-8 h-8 rounded-lg bg-[#dedcff] text-[#2f27ce] font-extrabold text-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                            02
+                        </div>
+                        <div className="text-left min-w-0">
+                            <span className="block text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider leading-none">
+                                Step 2
+                            </span>
+                            <span className="block text-[13px] font-bold text-[#050315] truncate mt-0.5">
+                                Drop File Here
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-white via-white to-[#dedcff]/30 border border-[#2f27ce]/40 hover:border-[#2f27ce] transition-all group relative overflow-hidden">
+                        <div className="w-8 h-8 rounded-lg bg-[#2f27ce] text-white font-extrabold text-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                            03
+                        </div>
+                        <div className="text-left min-w-0">
+                            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider leading-none">
+                                <span className="relative flex h-1.5 w-1.5 shrink-0">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2f27ce]" />
+                                </span>
+                                Step 3
+                            </span>
+                            <span className="block text-[13px] font-bold text-[#050315] truncate mt-0.5">
+                                Instant Recruiter Audit
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
