@@ -89,42 +89,42 @@ export default function BlogIndexClient({ allPosts, categories }: BlogIndexClien
                                         }
                                     `}
                                 >
-                                    <div className="space-y-3.5">
-                                        <div className="flex items-center justify-between gap-2">
-                                            <span className="text-[11px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3 py-0.5 rounded-full">
-                                                {isPillar ? '★ Pillar Guide' : 'Editor Spotlight'}
-                                            </span>
-                                            <span className="text-[12px] text-[#050315]/60 flex items-center gap-1">
-                                                <ClockIcon size={13} /> {readTime} min read
-                                            </span>
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <span className="text-[11px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3 py-0.5 rounded-full">
+                                                    {isPillar ? 'Pillar Guide' : 'Editor Spotlight'}
+                                                </span>
+                                                <span className="text-[12px] text-[#050315]/60 flex items-center gap-1">
+                                                    <ClockIcon size={13} /> {readTime} min read
+                                                </span>
+                                            </div>
+
+                                            <Link
+                                                href={`/blogs/${spotlight.slug}`}
+                                                className="block no-underline group"
+                                            >
+                                                <h3 className="text-[18px] sm:text-[21px] font-extrabold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug tracking-tight">
+                                                    {spotlight.title}
+                                                </h3>
+                                            </Link>
+
+                                            <p className="text-[13.5px] text-[#050315]/75 leading-relaxed line-clamp-2">
+                                                {spotlight.summary}
+                                            </p>
                                         </div>
 
-                                        <Link
-                                            href={`/blogs/${spotlight.slug}`}
-                                            className="block no-underline group"
-                                        >
-                                            <h3 className="text-[18px] sm:text-[21px] font-extrabold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug tracking-tight">
-                                                {spotlight.title}
-                                            </h3>
-                                        </Link>
-
-                                        <p className="text-[14px] text-[#050315]/75 leading-relaxed line-clamp-3">
-                                            {spotlight.summary}
-                                        </p>
-                                    </div>
-
-                                    <div className="pt-4 border-t border-[#dedcff] mt-5 flex items-center justify-between text-[13px]">
-                                        <span className="flex items-center gap-1 text-[#2f27ce] font-bold text-[12px]">
-                                            <ShieldCheckIcon size={14} /> Complete Framework
-                                        </span>
-                                        <Link
-                                            href={`/blogs/${spotlight.slug}`}
-                                            className="font-bold text-[#2f27ce] hover:text-[#433bff] inline-flex items-center gap-1 transition-colors no-underline group"
-                                        >
-                                            <span>Read Guide</span>
-                                            <ArrowRightIcon size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                                        </Link>
-                                    </div>
+                                        <div className="pt-3.5 border-t border-[#dedcff] mt-4 flex items-center justify-between text-[13px]">
+                                            <span className="flex items-center gap-1 text-[#2f27ce] font-bold text-[12px]">
+                                                <ShieldCheckIcon size={14} /> Complete Framework
+                                            </span>
+                                            <Link
+                                                href={`/blogs/${spotlight.slug}`}
+                                                className="font-bold text-[#2f27ce] hover:text-[#433bff] inline-flex items-center gap-1 transition-colors no-underline group"
+                                            >
+                                                <span>Read Guide</span>
+                                                <ArrowRightIcon size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                                            </Link>
+                                        </div>
                                 </div>
                             )
                         })}
@@ -227,7 +227,7 @@ export default function BlogIndexClient({ allPosts, categories }: BlogIndexClien
                                             {post.title}
                                         </h3>
 
-                                        <p className="text-[13px] text-[#050315]/70 leading-relaxed line-clamp-3">
+                                        <p className="text-[12.5px] text-[#050315]/70 leading-normal line-clamp-2">
                                             {post.summary}
                                         </p>
                                     </div>

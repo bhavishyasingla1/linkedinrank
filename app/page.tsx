@@ -594,7 +594,7 @@ export default function HomePage() {
 
                 {/* ── 8. TRENDING ARTICLES CLUSTER (Soft Lavender Wash) ─ */}
                 <section className="py-10 sm:py-14 border-t border-[#dedcff] bg-[#dedcff]/30 relative overflow-hidden">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6 relative z-10">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-5 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                             <div className="space-y-1.5">
                                 <Link
@@ -609,10 +609,10 @@ export default function HomePage() {
                                     <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
                                 </Link>
                                 <h2 className="text-[24px] sm:text-[30px] font-extrabold text-[#050315] tracking-tight">
-                                    Trending LinkedIn Hooks &amp; Strategy
+                                    Trending Strategy Guides
                                 </h2>
-                                <p className="text-[14px] text-[#050315]/75 max-w-2xl leading-normal">
-                                    Psychological writing formulas and algorithm-tested growth playbooks.
+                                <p className="text-[14px] text-[#050315]/75 max-w-xl leading-normal">
+                                    Algorithm-tested copywriting playbooks and growth teardowns.
                                 </p>
                             </div>
 
@@ -631,9 +631,10 @@ export default function HomePage() {
                                 const readTime = Math.max(4, Math.ceil((art.h2Outline.length * 150 + 200) / 200))
 
                                 return (
-                                    <div
+                                    <Link
                                         key={art.slug}
-                                        className="p-4 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-200"
+                                        href={`/blogs/${art.slug}`}
+                                        className="p-4 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-200 no-underline"
                                     >
                                         <div className="space-y-2">
                                             <div className="flex items-center justify-between gap-2">
@@ -645,30 +646,16 @@ export default function HomePage() {
                                                 </span>
                                             </div>
 
-                                            <Link
-                                                href={`/blogs/${art.slug}`}
-                                                className="block no-underline pt-0.5"
-                                            >
-                                                <h3 className="text-[14px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
-                                                    {art.title}
-                                                </h3>
-                                            </Link>
-
-                                            <p className="text-[12px] text-[#050315]/65 leading-normal line-clamp-1">
-                                                {art.summary}
-                                            </p>
+                                            <h3 className="text-[13.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug pt-0.5">
+                                                {art.title}
+                                            </h3>
                                         </div>
 
-                                        <div className="pt-2.5 border-t border-[#dedcff]/50 mt-2.5 flex items-center justify-between text-[11.5px]">
-                                            <Link
-                                                href={`/blogs/${art.slug}`}
-                                                className="font-bold text-[#2f27ce] group-hover:text-[#433bff] transition-colors no-underline inline-flex items-center gap-1"
-                                            >
-                                                <span>Read Guide</span>
-                                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-                                            </Link>
+                                        <div className="pt-2.5 border-t border-[#dedcff]/50 mt-3 flex items-center justify-between text-[11.5px] font-bold text-[#2f27ce]">
+                                            <span>Read Guide</span>
+                                            <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                                         </div>
-                                    </div>
+                                    </Link>
                                 )
                             })}
                         </div>

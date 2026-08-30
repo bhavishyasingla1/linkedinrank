@@ -66,21 +66,25 @@ export default function BlogsDirectoryPage() {
                         <span className="text-[#050315] font-semibold">Articles</span>
                     </nav>
 
-                    <div className="max-w-3xl space-y-3">
-                        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-extrabold text-[#2f27ce]">
-                            <SparklesIcon size={13} /> Editorial Library • {ALL_BLOG_POSTS.length}+ Guides
+                    <div className="max-w-3xl space-y-2.5">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-extrabold text-[#2f27ce] leading-none">
+                            <span className="relative flex h-1.5 w-1.5 shrink-0">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2f27ce]" />
+                            </span>
+                            <span>Editorial Library • {ALL_BLOG_POSTS.length}+ Guides</span>
                         </div>
-                        <h1 className="text-[32px] sm:text-[44px] font-extrabold text-[#050315] tracking-tight leading-tight">
-                            LinkedIn Optimization &amp; Strategy Guides
+                        <h1 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                            LinkedIn Strategy &amp; Profile Guides
                         </h1>
-                        <p className="text-[16px] sm:text-[17.5px] text-[#050315]/75 leading-relaxed">
-                            Tested advice on recruiter algorithms, keyword positioning, headline psychology, and career storytelling.
+                        <p className="text-[15px] sm:text-[16px] text-[#050315]/75 leading-relaxed">
+                            Recruiter algorithm insights, keyword positioning, headline psychology, and career frameworks.
                         </p>
                     </div>
                 </div>
 
                 {/* ── Curated Core Guides Strip ─────────────────── */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                     {[
                         { href: '/linkedin-profile-score', title: 'LinkedIn Profile Score Guide', desc: 'How profile scoring works and what moves your score.' },
                         { href: '/linkedin-keywords-guide', title: 'Recruiter Keyword SEO', desc: 'How LinkedIn algorithms match search terms with profiles.' },
@@ -89,12 +93,12 @@ export default function BlogsDirectoryPage() {
                         <Link
                             key={i}
                             href={guide.href}
-                            className="p-5 rounded-3xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover transition-all no-underline group space-y-1.5"
+                            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover transition-all no-underline group space-y-1"
                         >
-                            <h2 className="text-[15px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
+                            <h2 className="text-[14.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
                                 {guide.title}
                             </h2>
-                            <p className="text-[12.5px] text-[#050315]/70 leading-relaxed">
+                            <p className="text-[12px] text-[#050315]/70 leading-normal line-clamp-2">
                                 {guide.desc}
                             </p>
                         </Link>
@@ -108,26 +112,26 @@ export default function BlogsDirectoryPage() {
                 <GooglePreferredSource
                     variant="banner"
                     title="Follow LinkedInRank on Google Search"
-                    description="Stay up to date with new recruiter algorithms, keyword positioning blueprints, and profile hooks. Add LinkedInRank to your preferred sources in Google Search."
+                    description="Stay up to date with new recruiter algorithms, keyword blueprints, and profile hooks directly in Google Search."
                 />
 
                 {/* ── Bottom Conversion Banner (Aside Radiant Box) ── */}
-                <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-md shadow-[#2f27ce]/5">
-                    <div className="space-y-2 max-w-xl">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2.5 py-0.5 rounded-full">
+                <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border border-[#dedcff] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-xs">
+                    <div className="space-y-1.5 max-w-xl">
+                        <span className="inline-flex items-center gap-1 text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2.5 py-0.5 rounded-full leading-none">
                             Ready to test your profile?
                         </span>
-                        <h3 className="text-[20px] sm:text-[24px] font-extrabold text-[#050315] tracking-tight">
+                        <h3 className="text-[18px] sm:text-[22px] font-extrabold text-[#050315] tracking-tight">
                             Evaluate your LinkedIn profile against 30+ signals
                         </h3>
-                        <p className="text-[14px] text-[#050315]/75 leading-relaxed">
+                        <p className="text-[13.5px] text-[#050315]/75 leading-normal">
                             Upload your LinkedIn export to uncover hidden gaps in keywords, experience, and completeness.
                         </p>
                     </div>
                     <div className="shrink-0">
                         <Link
                             href="/#upload"
-                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14.5px] font-bold shadow-lg shadow-[#2f27ce]/25 transition-all duration-150 no-underline cursor-pointer active:scale-95"
+                            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14px] font-bold shadow-md shadow-[#2f27ce]/25 transition-all no-underline cursor-pointer active:scale-95"
                         >
                             <span>Analyze Profile Free</span>
                             <ArrowRightIcon size={14} />
