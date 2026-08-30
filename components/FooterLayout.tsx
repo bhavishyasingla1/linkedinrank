@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { LinkedInIcon, SparklesIcon } from '@/components/ui/Icons'
+import { LinkedInIcon } from '@/components/ui/Icons'
 import GooglePreferredSource from '@/components/GooglePreferredSource'
 import NewsletterCard from '@/components/NewsletterCard'
 
@@ -62,14 +62,9 @@ export default function FooterLayout() {
                     <div className="col-span-2 space-y-4 pr-4">
                         <Link
                             href="/"
-                            className="font-bold text-[19px] tracking-tight text-[#050315] inline-flex items-center gap-2 no-underline"
+                            className="font-extrabold text-[21px] sm:text-[22px] tracking-tight text-[#050315] inline-flex items-center no-underline"
                         >
-                            <span className="w-7 h-7 rounded-full bg-[#2f27ce] text-[#fbfbfe] flex items-center justify-center shadow-xs">
-                                <SparklesIcon size={14} />
-                            </span>
-                            <span className="font-extrabold tracking-tight">
-                                LinkedIn<span className="text-[#2f27ce]">Rank</span>
-                            </span>
+                            <span>LinkedIn</span><span className="text-[#2f27ce]">Rank</span>
                         </Link>
                         <p className="text-[13.5px] text-[#050315]/70 leading-relaxed max-w-sm">
                             The intelligent profile evaluator. Discover missing keywords, fix weak experience bullets, and calibrate your profile against 30+ recruiter search signals.

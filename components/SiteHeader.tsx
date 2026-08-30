@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ArrowRightIcon, SparklesIcon } from '@/components/ui/Icons'
+import { ArrowRightIcon } from '@/components/ui/Icons'
 
 const NAV_LINKS = [
     { href: '/tools', label: 'Tools' },
@@ -81,18 +81,13 @@ export default function SiteHeader() {
             `}
         >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 sm:h-14 flex items-center justify-between gap-4">
-                {/* Brand Logo: Always clearly visible */}
+                {/* Brand Logo: Clean text-only */}
                 <div className="flex items-center">
                     <Link
                         href="/"
-                        className="font-bold text-[18px] sm:text-[19px] tracking-tight text-[#050315] no-underline shrink-0 flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-full px-1"
+                        className="text-[20px] sm:text-[22px] font-extrabold tracking-tight text-[#050315] no-underline shrink-0 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-lg"
                     >
-                        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-[#fbfbfe] flex items-center justify-center shadow-sm shadow-[#2f27ce]/30">
-                            <SparklesIcon size={14} />
-                        </span>
-                        <span className="font-extrabold tracking-tight">
-                            LinkedIn<span className="text-[#2f27ce]">Rank</span>
-                        </span>
+                        <span>LinkedIn</span><span className="text-[#2f27ce]">Rank</span>
                     </Link>
                 </div>
 
