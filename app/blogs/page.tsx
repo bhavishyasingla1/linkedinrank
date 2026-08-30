@@ -32,8 +32,10 @@ const CATEGORIES = [
     { slug: 'headline', name: 'Headlines' },
     { slug: 'about', name: 'About Section' },
     { slug: 'experience', name: 'Experience & Bullets' },
+    { slug: 'faq', name: 'LinkedIn Basics & FAQ' },
+    { slug: 'privacy', name: 'Privacy & Safety' },
+    { slug: 'students', name: 'Students & Internships' },
     { slug: 'seo', name: 'Keywords & SEO' },
-    { slug: 'linkedin-post-ideas-generator', name: 'Content & Posts' },
     { slug: 'linkedin-connection-message-generator', name: 'Networking & Outreach' },
 ]
 

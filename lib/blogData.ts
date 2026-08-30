@@ -1,4 +1,5 @@
 import { HOOK_CLUSTER_ARTICLES } from './hookArticlesData'
+import { LINKEDIN_FAQ_ARTICLES } from './linkedinFaqArticlesData'
 
 export interface BlogPost {
     slug: string
@@ -16,9 +17,13 @@ export interface BlogPost {
 }
 
 const DATE_PUBLISHED = '2026-02-01'
-const DATE_MODIFIED = '2026-06-07'
+const DATE_MODIFIED = '2026-08-31'
 
 export const ALL_BLOG_POSTS: BlogPost[] = [
+    // ═══════════════════════════════════════════════════════════
+    // LINKEDIN FAQ, SAFETY, ETIQUETTE, & STUDENT GUIDES
+    // ═══════════════════════════════════════════════════════════
+    ...LINKEDIN_FAQ_ARTICLES,
     // ═══════════════════════════════════════════════════════════
     // LINKEDIN HOOKS SEO CONTENT CLUSTER (6 FLAGSHIP PILLARS)
     // ═══════════════════════════════════════════════════════════
@@ -374,8 +379,59 @@ export function getAllBlogSlugs(): string[] {
     return ALL_BLOG_POSTS.map(b => b.slug)
 }
 
-export function getRelatedBlogs(slug: string, limit = 5): BlogPost[] {
+/**
+ * Returns intelligent related articles for high-signal internal linking:
+ * 1. Shares the same toolSlug/topic
+ * 2. Backfills with complementary high-authority pillar articles
+ */
+export function getRelatedBlogs(slug: string, limit = 6): BlogPost[] {
     const blog = getBlogBySlug(slug)
-    if (!blog) return []
-    return ALL_BLOG_POSTS.filter(b => b.toolSlug === blog.toolSlug && b.slug !== slug).slice(0, limit)
+    if (!blog) return ALL_BLOG_POSTS.slice(0, limit)
+
+    const sameTopic = ALL_BLOG_POSTS.filter(b => b.toolSlug === blog.toolSlug && b.slug !== slug)
+    if (sameTopic.length >= limit) {
+        return sameTopic.slice(0, limit)
+    }
+
+    // Complementary backfill from pillars & diverse topics
+    const backfill = ALL_BLOG_POSTS.filter(
+        b => b.slug !== slug && !sameTopic.some(st => st.slug === b.slug)
+    )
+
+    return [...sameTopic, ...backfill].slice(0, limit)
 }
+
+/**
+ * Returns previous and next articles for bidirectional reading continuity
+ */
+export function getAdjacentBlogs(slug: string): { previous: BlogPost | null; next: BlogPost | null } {
+    const index = ALL_BLOG_POSTS.findIndex(b => b.slug === slug)
+    if (index === -1) return { previous: null, next: null }
+
+    const previous = index > 0 ? ALL_BLOG_POSTS[index - 1] : ALL_BLOG_POSTS[ALL_BLOG_POSTS.length - 1]
+    const next = index < ALL_BLOG_POSTS.length - 1 ? ALL_BLOG_POSTS[index + 1] : ALL_BLOG_POSTS[0]
+
+    return { previous, next }
+}
+
+/**
+ * Returns curated core pillar guides for global internal cross-linking hubs
+ */
+export function getCorePillarGuides(): BlogPost[] {
+    const pillarSlugs = [
+        'linkedin-hooks',
+        'how-to-write-linkedin-headline',
+        'how-to-write-linkedin-about-section',
+        'linkedin-experience-bullet-points-formula',
+        'what-kind-of-people-use-linkedin',
+        'how-much-does-linkedin-cost-free-vs-premium',
+        'can-i-search-someone-on-linkedin-without-them-knowing',
+        'linkedin-golden-hour-rule',
+        'how-to-make-linkedin-profile-with-no-experience'
+    ]
+
+    return pillarSlugs
+        .map(slug => getBlogBySlug(slug))
+        .filter((b): b is BlogPost => Boolean(b))
+}
+

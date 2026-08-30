@@ -36,6 +36,9 @@ export default function BlogIndexClient({ allPosts, categories }: BlogIndexClien
                 (selectedCategory === 'headline' && post.toolSlug.includes('headline')) ||
                 (selectedCategory === 'about' && post.toolSlug.includes('about')) ||
                 (selectedCategory === 'experience' && post.toolSlug.includes('experience')) ||
+                (selectedCategory === 'faq' && (post.slug.includes('what-') || post.slug.includes('how-much-') || post.slug.includes('golden-hour') || post.slug.includes('4-1-1') || post.slug.includes('500-connections') || post.slug.includes('etiquette') || post.slug.includes('benefits'))) ||
+                (selectedCategory === 'privacy' && (post.slug.includes('private') || post.slug.includes('safe') || post.slug.includes('hide') || post.slug.includes('search-someone') || post.slug.includes('without-account'))) ||
+                (selectedCategory === 'students' && (post.slug.includes('student') || post.slug.includes('intern') || post.slug.includes('no-experience') || post.slug.includes('fresh-graduate') || post.slug.includes('resume-cv'))) ||
                 (selectedCategory === 'seo' && (post.toolSlug.includes('seo') || post.toolSlug.includes('keyword')))
 
             const q = searchQuery.toLowerCase().trim()
