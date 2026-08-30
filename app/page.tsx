@@ -191,7 +191,7 @@ export default function HomePage() {
             <main id="main-content" className="flex-1">
                 {/* ── 1. HERO SECTION ────────────────────────────── */}
                 <section
-                    id="upload"
+                    id="hero-section"
                     className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 overflow-hidden scroll-mt-20 aside-hero-glow"
                 >
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">

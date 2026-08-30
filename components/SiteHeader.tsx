@@ -47,6 +47,27 @@ export default function SiteHeader() {
         return pathname === href
     }
 
+    const handleAnalyzeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (pathname === '/') {
+            e.preventDefault()
+            const uploadEl = document.getElementById('upload')
+            if (uploadEl) {
+                uploadEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            }
+        }
+    }
+
+    const handleMobileAnalyzeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        setMobileMenuOpen(false)
+        if (pathname === '/') {
+            e.preventDefault()
+            const uploadEl = document.getElementById('upload')
+            if (uploadEl) {
+                uploadEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            }
+        }
+    }
+
     return (
         <header
             ref={headerRef}
@@ -110,6 +131,7 @@ export default function SiteHeader() {
                 <div className={`hidden md:flex items-center gap-3 transition-all duration-300 ${scrolled ? 'opacity-0 translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}>
                     <Link
                         href="/#upload"
+                        onClick={handleAnalyzeClick}
                         className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] px-5 py-2 rounded-full text-[13.5px] font-bold transition-all duration-150 shadow-md shadow-[#2f27ce]/20 hover:shadow-lg hover:shadow-[#433bff]/25 no-underline cursor-pointer group active:scale-95"
                     >
                         <span>Analyze Profile</span>
@@ -170,7 +192,7 @@ export default function SiteHeader() {
                     <div className="mt-4 pt-4 border-t border-[#dedcff] flex flex-col gap-3">
                         <Link
                             href="/#upload"
-                            onClick={() => setMobileMenuOpen(false)}
+                            onClick={handleMobileAnalyzeClick}
                             className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2f27ce] to-[#433bff] text-[#fbfbfe] px-5 py-2.5 rounded-full text-[14px] font-bold transition-all no-underline cursor-pointer shadow-md shadow-[#2f27ce]/20"
                         >
                             <span>Analyze Profile</span>

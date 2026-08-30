@@ -25,6 +25,16 @@ export default function HeroUploaderStudio() {
             setError(savedError)
             sessionStorage.removeItem('analysisError')
         }
+
+        if (typeof window !== 'undefined' && window.location.hash === '#upload') {
+            const timer = setTimeout(() => {
+                const el = document.getElementById('upload')
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                }
+            }, 100)
+            return () => clearTimeout(timer)
+        }
     }, [])
 
     const handleDragOver = (e: DragEvent) => {
@@ -123,7 +133,7 @@ export default function HeroUploaderStudio() {
     }
 
     return (
-        <div className="w-full max-w-3xl mx-auto">
+        <div id="upload" className="w-full max-w-3xl mx-auto scroll-mt-24 sm:scroll-mt-28">
             {/* Hidden File Input */}
             <input
                 id="hero-pdf-file-input"
