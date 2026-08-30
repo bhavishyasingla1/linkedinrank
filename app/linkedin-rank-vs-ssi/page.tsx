@@ -3,6 +3,8 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import RelatedPages from '@/components/RelatedPages'
+import FactCheckCard from '@/components/FactCheckCard'
+import { claimReviewJsonLd } from '@/lib/jsonLd'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Rank vs Social Selling Index: Which Score Actually Matters? (2026)',
@@ -38,6 +40,16 @@ const faqJsonLd = {
     })),
 }
 
+const claimReviewJsonLdData = claimReviewJsonLd({
+    url: 'https://linkedinrank.com/linkedin-rank-vs-ssi',
+    claimReviewed: 'A high LinkedIn SSI score guarantees recruiter search discoverability.',
+    ratingValue: 1,
+    alternateName: 'False',
+    claimAuthorName: 'Common LinkedIn Myth',
+    claimDatePublished: '2024-01-01',
+    appearanceHeadline: 'Why Social Selling Index Does Not Guarantee Job Recruiter Reach',
+})
+
 const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -51,6 +63,7 @@ export default function LinkedInRankVsSSIPage() {
     return (
         <main className="min-h-screen bg-[#F8FAFC] flex flex-col">
             <SiteHeader />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(claimReviewJsonLdData) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
@@ -68,6 +81,14 @@ export default function LinkedInRankVsSSIPage() {
                         LinkedIn Rank vs Social Selling Index (SSI): Complete Comparison
                     </h1>
                     <p className="text-sm text-[#6B7280] mb-8">Last updated: February 2025 | 8 min read</p>
+
+                    <FactCheckCard
+                        claim="A high LinkedIn SSI score guarantees recruiter search discoverability."
+                        claimant="Common Social Selling Myth"
+                        rating="False"
+                        explanation="LinkedIn SSI measures outbound sales activity, connection outreach, and news feed engagement. Candidate search engines (LinkedIn Recruiter) rank profiles based on structural keyword indexing in headlines, current job titles, skills tags, and profile completeness — not your SSI score."
+                        keyTakeaway="Focus on keyword optimization, quantifiable bullet points, and complete profile sections if your goal is inbound recruiter views."
+                    />
 
                     <div className="prose prose-sm sm:prose max-w-none text-[#374151] leading-relaxed space-y-5">
                         <p className="text-base leading-relaxed">

@@ -21,7 +21,8 @@ const ORGANIZATION_REF = {
 const AUTHOR_PERSON = {
     '@type': 'Person' as const,
     name: 'Bhavishya Singla',
-    url: 'https://www.linkedin.com/in/bhavishyasingla1/',
+    url: `${SITE_URL}/about`,
+    sameAs: 'https://www.linkedin.com/in/bhavishyasingla1/',
     jobTitle: 'Founder',
     worksFor: { '@type': 'Organization' as const, name: SITE_NAME },
 }
@@ -157,8 +158,8 @@ export function articleJsonLd(blog: {
             '@id': `${SITE_URL}/#website`,
             name: SITE_NAME,
         },
+        image: blog.image || `${SITE_URL}/opengraph-image`,
         ...(blog.keywords ? { keywords: blog.keywords } : {}),
-        ...(blog.image ? { image: blog.image } : {}),
     }
 }
 
@@ -251,3 +252,71 @@ export function guidePageJsonLd(params: {
         '@graph': graph,
     }
 }
+
+export interface ClaimReviewParams {
+    url: string
+    claimReviewed: string
+    ratingValue: number
+    alternateName: 'False' | 'Mostly false' | 'Half true' | 'Mostly true' | 'True' | string
+    bestRating?: number
+    worstRating?: number
+    authorName?: string
+    authorUrl?: string
+    claimAuthorName?: string
+    claimAuthorSameAs?: string
+    claimDatePublished?: string
+    appearanceUrl?: string
+    appearanceHeadline?: string
+}
+
+export function claimReviewJsonLd(params: ClaimReviewParams) {
+    const claimReview: Record<string, unknown> = {
+        '@context': 'https://schema.org',
+        '@type': 'ClaimReview',
+        url: params.url,
+        claimReviewed: params.claimReviewed,
+        author: {
+            '@type': 'Organization',
+            name: params.authorName || SITE_NAME,
+            url: params.authorUrl || SITE_URL,
+        },
+        reviewRating: {
+            '@type': 'Rating',
+            ratingValue: params.ratingValue,
+            bestRating: params.bestRating || 5,
+            worstRating: params.worstRating || 1,
+            alternateName: params.alternateName,
+        },
+    }
+
+    if (params.claimAuthorName || params.appearanceUrl || params.claimDatePublished) {
+        const itemReviewed: Record<string, unknown> = {
+            '@type': 'Claim',
+        }
+
+        if (params.claimAuthorName) {
+            itemReviewed.author = {
+                '@type': 'Organization',
+                name: params.claimAuthorName,
+                ...(params.claimAuthorSameAs ? { sameAs: params.claimAuthorSameAs } : {}),
+            }
+        }
+
+        if (params.claimDatePublished) {
+            itemReviewed.datePublished = params.claimDatePublished
+        }
+
+        if (params.appearanceUrl) {
+            itemReviewed.appearance = {
+                '@type': 'CreativeWork',
+                url: params.appearanceUrl,
+                ...(params.appearanceHeadline ? { headline: params.appearanceHeadline } : {}),
+            }
+        }
+
+        claimReview.itemReviewed = itemReviewed
+    }
+
+    return claimReview
+}
+

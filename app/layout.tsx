@@ -36,9 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
         robots: {
             index: true,
             follow: true,
+            nocache: false,
             googleBot: {
                 index: true,
                 follow: true,
+                noimageindex: false,
                 'max-video-preview': -1,
                 'max-image-preview': 'large',
                 'max-snippet': -1,
@@ -74,7 +76,7 @@ const jsonLd = {
             '@id': 'https://linkedinrank.com/#website',
             url: 'https://linkedinrank.com',
             name: 'LinkedInRank',
-            alternateName: ['LinkedIn Rank', 'LinkedIn Rank Checker', 'LinkedIn Profile Rank Checker'],
+            alternateName: ['LinkedIn Rank', 'LinkedIn Rank Checker', 'LinkedIn Profile Rank Checker', 'linkedinrank.com'],
             description: 'LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. Check your LinkedIn rank, get a score out of 100 across 30+ signals, and improve your LinkedIn profile ranking with AI-powered recommendations.',
             publisher: { '@id': 'https://linkedinrank.com/#organization' },
             inLanguage: 'en-US',
@@ -209,12 +211,10 @@ export default function RootLayout({
                 {children}
                 <Analytics />
                 <SpeedInsights />
-                {process.env.NODE_ENV === 'production' && (
-                    <Script
-                        src="https://news.google.com/swg/js/v1/publisher.js"
-                        strategy="lazyOnload"
-                    />
-                )}
+                <Script
+                    src="https://news.google.com/swg/js/v1/publisher.js"
+                    strategy="afterInteractive"
+                />
             </body>
         </html>
     )

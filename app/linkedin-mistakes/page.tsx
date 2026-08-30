@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import RelatedPages from '@/components/RelatedPages'
+import FactCheckCard from '@/components/FactCheckCard'
 
 export const metadata: Metadata = {
     title: 'Top 10 LinkedIn Profile Mistakes That Cost You Opportunities (2026)',
@@ -20,6 +21,31 @@ const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
         {
+            '@type': 'ClaimReview',
+            url: 'https://linkedinrank.com/linkedin-mistakes',
+            claimReviewed: 'Default auto-generated headlines are sufficient for recruiter discoverability.',
+            author: {
+                '@type': 'Organization',
+                name: 'LinkedInRank',
+                url: 'https://linkedinrank.com',
+            },
+            reviewRating: {
+                '@type': 'Rating',
+                ratingValue: 1,
+                bestRating: 5,
+                worstRating: 1,
+                alternateName: 'False',
+            },
+            itemReviewed: {
+                '@type': 'Claim',
+                author: {
+                    '@type': 'Organization',
+                    name: 'Common Profile Myth',
+                },
+                datePublished: '2024-01-01',
+            },
+        },
+        {
             '@type': 'Article',
             headline: 'Top 10 LinkedIn Profile Mistakes That Cost You Opportunities',
             description: 'The 10 most common LinkedIn profile mistakes and how to fix them. From vague headlines to missing keywords, learn what is holding your profile back.',
@@ -29,15 +55,21 @@ const jsonLd = {
             datePublished: '2025-01-01',
             dateModified: '2026-02-01',
         },
-        { '@type': 'BreadcrumbList', itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
-            { '@type': 'ListItem', position: 2, name: 'Top 10 Mistakes', item: 'https://linkedinrank.com/linkedin-mistakes' },
-        ] },
-        { '@type': 'FAQPage', mainEntity: [
-            { '@type': 'Question', name: 'What is the biggest mistake on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Using the default headline. Your headline is the most visible element on LinkedIn | it appears in every search result, comment, and connection request. A vague headline means recruiters skip your profile.' } },
-            { '@type': 'Question', name: 'How do I know if my profile has mistakes?', acceptedAnswer: { '@type': 'Answer', text: 'Upload your LinkedIn PDF to LinkedInRank for a free audit. It evaluates 30+ signals and flags specific issues with actionable fixes for each section.' } },
-            { '@type': 'Question', name: 'Can LinkedIn mistakes hurt my job search?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Missing keywords mean you do not appear in recruiter searches. A vague headline means recruiters skip you. No About section means you miss the chance to tell your story.' } },
-        ] },
+        {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://linkedinrank.com' },
+                { '@type': 'ListItem', position: 2, name: 'Top 10 Mistakes', item: 'https://linkedinrank.com/linkedin-mistakes' },
+            ],
+        },
+        {
+            '@type': 'FAQPage',
+            mainEntity: [
+                { '@type': 'Question', name: 'What is the biggest mistake on LinkedIn?', acceptedAnswer: { '@type': 'Answer', text: 'Using the default headline. Your headline is the most visible element on LinkedIn | it appears in every search result, comment, and connection request. A vague headline means recruiters skip your profile.' } },
+                { '@type': 'Question', name: 'How do I know if my profile has mistakes?', acceptedAnswer: { '@type': 'Answer', text: 'Upload your LinkedIn PDF to LinkedInRank for a free audit. It evaluates 30+ signals and flags specific issues with actionable fixes for each section.' } },
+                { '@type': 'Question', name: 'Can LinkedIn mistakes hurt my job search?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Missing keywords mean you do not appear in recruiter searches. A vague headline means recruiters skip you. No About section means you miss the chance to tell your story.' } },
+            ],
+        },
     ],
 }
 
@@ -54,9 +86,17 @@ export default function LinkedInMistakesPage() {
                 </Link>
                 <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Profile Mistakes</p>
                 <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight mb-6">10 LinkedIn Profile Mistakes That Are Costing You Opportunities</h1>
-                <p className="text-[15px] text-[#4B5563] mb-14 leading-relaxed max-w-2xl">
+                <p className="text-[15px] text-[#4B5563] mb-8 leading-relaxed max-w-2xl">
                     Most LinkedIn profiles have the same fixable problems. After scoring thousands of profiles through <Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link>, these 10 mistakes appear repeatedly. Each one reduces your visibility, credibility, or both. The good news: every mistake has a clear, actionable fix.
                 </p>
+
+                <FactCheckCard
+                    claim="Default auto-generated headlines are sufficient for recruiter discoverability."
+                    claimant="Passive Candidate Assumption"
+                    rating="False"
+                    explanation="LinkedIn's default headline only mirrors your latest job title. Recruiter search algorithms prioritize profiles containing specialized skill keywords, domain niches, and targeted search queries."
+                    keyTakeaway="Replace your default title with: Role + Specialized Skills + Target Impact to 3x your search appearances."
+                />
 
                 <div className="space-y-6 text-[15px] text-[#4B5563] leading-relaxed">
                     {[

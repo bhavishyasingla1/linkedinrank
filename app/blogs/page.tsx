@@ -6,6 +6,7 @@ import { breadcrumbJsonLd, itemListJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import BlogIndexClient from '@/components/BlogIndexClient'
+import GooglePreferredSource from '@/components/GooglePreferredSource'
 import { ArrowRightIcon, SparklesIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
@@ -102,6 +103,13 @@ export default function BlogsDirectoryPage() {
 
                 {/* ── Interactive Blog Client (Carousel, Spotlight, Search, Filters, Grid) */}
                 <BlogIndexClient allPosts={ALL_BLOG_POSTS} categories={CATEGORIES} />
+
+                {/* ── Google Preferred Source Banner ── */}
+                <GooglePreferredSource
+                    variant="banner"
+                    title="Follow LinkedInRank on Google Search"
+                    description="Stay up to date with new recruiter algorithms, keyword positioning blueprints, and profile hooks. Add LinkedInRank to your preferred sources in Google Search."
+                />
 
                 {/* ── Bottom Conversion Banner (Aside Radiant Box) ── */}
                 <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-md shadow-[#2f27ce]/5">

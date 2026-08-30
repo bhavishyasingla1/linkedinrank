@@ -6,6 +6,7 @@ import { getToolBySlug, SITE_URL, SITE_NAME } from '@/lib/toolsConfig'
 import { breadcrumbJsonLd, articleJsonLd, faqJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
+import GooglePreferredSource from '@/components/GooglePreferredSource'
 import { ArrowRightIcon, ChevronDownIcon, ClockIcon, SparklesIcon, ShieldCheckIcon, ToolIcon } from '@/components/ui/Icons'
 
 export function generateStaticParams() {
@@ -109,7 +110,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         {blog.title}
                     </h1>
 
-                    <div className="flex items-center gap-3 text-[13px] text-[#050315]/60 pt-1">
+                    <div className="flex items-center gap-3 text-[13px] text-[#050315]/60 pt-1 flex-wrap">
+                        <Link href="/about" className="font-semibold text-[#050315] hover:text-[#2f27ce] transition-colors no-underline">
+                            By Bhavishya Singla
+                        </Link>
+                        <span>•</span>
                         <time dateTime={blog.datePublished} className="font-medium">
                             {new Date(blog.datePublished).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                         </time>
@@ -248,6 +253,41 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                 </div>
                             </section>
                         )}
+
+                        {/* Author & Editorial Standards Box (E-E-A-T) */}
+                        <div className="p-6 sm:p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                            <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-white flex items-center justify-center font-extrabold text-[18px] shrink-0 shadow-sm">
+                                BS
+                            </div>
+                            <div className="space-y-1.5 flex-1">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                    <h4 className="text-[16px] font-extrabold text-[#050315]">
+                                        Written by Bhavishya Singla
+                                    </h4>
+                                    <span className="text-[11px] font-bold text-[#2f27ce] bg-[#dedcff] px-2 py-0.5 rounded-full">
+                                        Founder &amp; Author
+                                    </span>
+                                </div>
+                                <p className="text-[13px] text-[#050315]/75 leading-relaxed">
+                                    Creator of LinkedInRank. Specializes in ATS keyword calibration, recruiter search psychology, and data-backed profile optimization.
+                                </p>
+                                <div className="flex items-center gap-4 text-[12px] pt-1 flex-wrap">
+                                    <Link href="/about" className="text-[#2f27ce] hover:underline font-bold no-underline">
+                                        About the Author →
+                                    </Link>
+                                    <Link href="/methodology" className="text-[#050315]/60 hover:text-[#2f27ce] hover:underline no-underline">
+                                        Methodology &amp; Scoring Criteria →
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Google Preferred Source Banner */}
+                        <GooglePreferredSource
+                            variant="banner"
+                            title="Add LinkedInRank as a Preferred Source on Google"
+                            description="Never miss new LinkedIn algorithm shifts, recruiter search changes, and headline frameworks. Add LinkedInRank to your Google Search preferences."
+                        />
                     </article>
 
                     {/* Right Column: Contextual Sidebar */}
@@ -274,7 +314,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             </div>
                         )}
 
-                        {/* 2. Full Profile Score CTA (Radiant Card) */}
+                        {/* 2. Google Preferred Source Card */}
+                        <GooglePreferredSource variant="card" />
+
+                        {/* 3. Full Profile Score CTA (Radiant Card) */}
                         <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#dedcff]/60 via-white to-[#dedcff]/40 border-2 border-[#dedcff] shadow-md shadow-[#2f27ce]/5 space-y-4">
                             <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2.5 py-0.5 rounded-full">
                                 Free LinkedIn Audit
@@ -294,7 +337,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             </Link>
                         </div>
 
-                        {/* 3. Related Articles in Cluster */}
+                        {/* 4. Related Articles in Cluster */}
                         {related.length > 0 && (
                             <div className="bg-white border border-[#dedcff] rounded-3xl p-6 aside-card-shadow space-y-3.5">
                                 <h4 className="text-[12.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
