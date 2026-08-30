@@ -519,5 +519,280 @@ export const LINKEDIN_FAQ_ARTICLES: BlogPost[] = [
         ],
         datePublished: DATE_PUBLISHED,
         dateModified: DATE_MODIFIED
+    },
+
+    // ═══════════════════════════════════════════════════════════
+    // 5. SSI SCORE, GOLDEN TICK, & PROFILE EVALUATION CLUSTER
+    // ═══════════════════════════════════════════════════════════
+    {
+        slug: 'what-is-a-good-linkedin-ssi-score',
+        title: 'What Is a Good LinkedIn SSI Score? How to Check & Improve It',
+        targetKeyword: 'what is a good LinkedIn SSI score',
+        metaDescription: 'Learn what a good LinkedIn SSI score is in 2026. How to check your Social Selling Index score for free, understand the 4 pillars, and reach 75+.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'What Is the LinkedIn SSI (Social Selling Index) Score?',
+            'Where and How to Check Your LinkedIn SSI Score for Free',
+            'What Is Considered a Good SSI Score on LinkedIn?',
+            'The 4 Core Pillars of Your SSI Score Explained',
+            'LinkedIn SSI vs. LinkedInRank Profile Audit Score'
+        ],
+        summary: 'A definitive guide to the LinkedIn Social Selling Index (SSI): how to find your score, what 75+ means, and how to optimize each of the 4 pillars.',
+        sections: [
+            `<p>The <strong>LinkedIn SSI (Social Selling Index)</strong> is a proprietary metric developed by LinkedIn that scores your sales and networking effectiveness on a scale from 0 to 100. Originally created for sales professionals using Sales Navigator, the SSI score is now widely tracked by founders, executives, consultants, and job seekers to measure their platform engagement, personal brand strength, and outreach effectiveness.</p>`,
+
+            `<p>You can check your official LinkedIn SSI score completely free without needing a Sales Navigator subscription: simply visit <a href="https://www.linkedin.com/sales/ssi" target="_blank" rel="noopener noreferrer">linkedin.com/sales/ssi</a> while logged into your LinkedIn account. The dashboard instantly reveals your overall score out of 100, your Industry SSI Rank, your Network SSI Rank, and a 25-point breakdown across four key pillars.</p>`,
+
+            `<p><strong>SSI Score Benchmarks:</strong></p>
+            <ul>
+                <li><strong>Below 45 (Low):</strong> Inactive or unoptimized profile; minimal feed reach and search visibility.</li>
+                <li><strong>45 to 65 (Average):</strong> Standard active user; consistent engagement but missing advanced keyword and content optimization.</li>
+                <li><strong>66 to 75 (Good):</strong> Strong personal brand; regular content creation and steady inbound connection requests.</li>
+                <li><strong>76 to 100 (Top 1% Elite):</strong> Industry authority; maximum algorithmic distribution, high inbound recruiter and client lead volume.</li>
+            </ul>`,
+
+            `<p>Your SSI is calculated across four pillars (each worth 25 points):</p>
+            <ol>
+                <li><strong>Establish your professional brand:</strong> Complete profile, customer-centric headline, rich media, and published articles.</li>
+                <li><strong>Find the right people:</strong> Identifying prospects, using search filters, and viewing relevant profiles.</li>
+                <li><strong>Engage with insights:</strong> Sharing industry content, commenting thoughtfully, and tracking discussion metrics.</li>
+                <li><strong>Build relationships:</strong> Connecting with decision-makers and maintaining a high response rate to incoming messages.</li>
+            </ol>`,
+
+            `<p>While the SSI score measures <em>social selling activity and network engagement</em>, it does not analyze whether your profile passes applicant tracking systems (ATS) or recruiter keyword searches. For a technical audit of your profile\'s recruiter search ranking, keyword density, and headline formatting, run a free diagnostic on our <a href="/#upload">LinkedInRank Profile Auditor</a>.</p>`
+        ],
+        faqs: [
+            { question: 'Where can I find my LinkedIn SSI score?', answer: 'Go to linkedin.com/sales/ssi while logged into your LinkedIn account to view your live score and 4-pillar breakdown.' },
+            { question: 'Does a high SSI score guarantee higher LinkedIn post reach?', answer: 'Yes. LinkedIn\'s distribution algorithms prioritize content and search appearances from accounts with higher overall SSI and engagement health.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'how-to-check-if-a-linkedin-profile-is-good',
+        title: 'How to Check If a LinkedIn Profile Is Good: 10-Point Audit Checklist',
+        targetKeyword: 'how to check if a LinkedIn profile is good',
+        metaDescription: 'Step-by-step audit checklist to evaluate if your LinkedIn profile is optimized. Test keyword density, headline clarity, experience bullets, and ranking.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'What Defines a Top-Tier LinkedIn Profile in 2026?',
+            'The 10-Point LinkedIn Profile Audit Checklist',
+            'Recruiter Search Ranking: What Is Rank in LinkedIn?',
+            'Common Warning Signs of a Low-Performing Profile',
+            'Automated vs. Manual Profile Auditing: Getting Instant Feedback'
+        ],
+        summary: 'A 10-point diagnostic framework used by executive recruiters to evaluate headline strength, ATS keyword calibration, and social proof.',
+        sections: [
+            `<p>A "good" LinkedIn profile is not just one that looks clean—it is a profile that actively generates inbound recruiter inquiries, job interview requests, and business opportunities. In modern talent acquisition, profiles are scored by automated recruiter search engines that index keyword frequency, headline relevance, skill verifications, and experience metrics.</p>`,
+
+            `<p><strong>The 10-Point Profile Checklist:</strong></p>
+            <ol>
+                <li>High-resolution, well-lit headshot (occupying 60% of frame).</li>
+                <li>Custom background banner reinforcing your domain or value proposition.</li>
+                <li>Keyword-optimized <a href="/tools/linkedin-headline-generator">Headline</a> with job title, top 3 skills, and outcome.</li>
+                <li>Comprehensive <a href="/tools/linkedin-about-generator">About section</a> formatted with proof points and a clear CTA.</li>
+                <li>Quantified <a href="/tools/linkedin-experience-generator">Experience bullets</a> using the XYZ formula (Action + Tool + Number).</li>
+                <li>At least 5 standardized skill badges aligned with target job postings.</li>
+                <li>500+ strategic industry connections.</li>
+                <li>Customized public profile URL (e.g., linkedin.com/in/yourname).</li>
+                <li>At least 2 written recommendations from managers or colleagues.</li>
+                <li>Featured section showcasing top portfolio projects, articles, or certificates.</li>
+            </ol>`,
+
+            `<p>On LinkedIn, <strong>"Rank"</strong> refers to your algorithmic position in recruiter candidate searches. When a recruiter filters for "Staff Software Engineer, Kubernetes, Go", profiles with high keyword synergy and profile completeness appear on page 1 of results. Understanding your rank allows you to adjust keywords before applying for competitive positions.</p>`,
+
+            `<p>Red flags that hurt your visibility: using only your company job title as a headline, writing the About section in third person, leaving experience descriptions empty, or having zero measurable metrics in your job bullets.</p>`,
+
+            `<p>To evaluate your profile against thousands of verified top 1% profiles in seconds, upload your profile PDF to our <a href="/#upload">Free LinkedIn SEO Checker</a> and get a prioritized breakdown of improvements.</p>`
+        ],
+        faqs: [
+            { question: 'What is a passing score for a LinkedIn profile?', answer: 'On LinkedInRank, a score above 80/100 indicates your profile is well-optimized for recruiter search algorithms and human hiring managers.' },
+            { question: 'How often should I review and update my LinkedIn profile?', answer: 'We recommend running an audit every 3 to 6 months or whenever you complete a major project, earn a certification, or switch career directions.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'how-to-get-golden-tick-on-linkedin',
+        title: 'How to Get the Golden Tick on LinkedIn: Premium & Verified Badges',
+        targetKeyword: 'how to get golden tick on LinkedIn',
+        metaDescription: 'Learn how to get the golden LinkedIn badge and blue verified checkmark. Verification requirements, workplace identity, and benefits explained.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'What Is the Golden Tick on LinkedIn?',
+            'LinkedIn Premium Gold Badge vs. Identity Verification Checkmark',
+            'How to Get the LinkedIn Premium Gold Badge',
+            'How to Get the Free LinkedIn Verified Profile Checkmark',
+            'Does Having a Golden Badge Boost Your Profile Ranking?'
+        ],
+        summary: 'Demystifying LinkedIn\'s profile badges: how to obtain the gold Premium badge, workplace email verification, and CLEAR government ID verification.',
+        sections: [
+            `<p>Many users refer to the <strong>"Golden Tick"</strong> on LinkedIn when describing either the prestigious gold LinkedIn logo badge (displayed by LinkedIn Premium members) or the official verified profile checkmark. Having a recognized badge establishes instant credibility, proves authenticity, and deters impersonation across the platform.</p>`,
+
+            `<p>There are two primary badges on LinkedIn:</p>
+            <ul>
+                <li><strong>Golden LinkedIn Premium Badge:</strong> A distinctive gold LinkedIn square icon next to your name indicating an active LinkedIn Premium Career, Business, or Sales Navigator subscription.</li>
+                <li><strong>Verified Identity Checkmark (Shield Badge):</strong> A free verification checkmark displayed on your profile that proves your identity via government ID (CLEAR/Persona) or workplace corporate email.</li>
+            </ul>`,
+
+            `<p>To display the <strong>Golden Premium Badge</strong>: Subscribe to any LinkedIn Premium tier. Then navigate to Settings &gt; Account preferences &gt; Subscriptions &gt; Premium features, and toggle <strong>"Show Premium badge on profile"</strong> to ON.</p>`,
+
+            `<p>To get the <strong>Free Verified Profile Checkmark</strong>: (1) Open the LinkedIn mobile app on iOS or Android. (2) Tap your profile &gt; <strong>Verify now</strong>. (3) Verify using your official work email address (for supported employers) or scan your government passport/NFC chip via LinkedIn\'s identity partner (CLEAR in the US, Persona globally). Verification is 100% free and does not require Premium.</p>`,
+
+            `<p>While the gold badge signals investment in professional tools, the identity verification badge provides a direct algorithmic trust boost. Verified accounts experience up to 60% higher connection acceptance rates and reduced spam filtering.</p>`
+        ],
+        faqs: [
+            { question: 'Do you have to pay for the LinkedIn verification checkmark?', answer: 'No. Identity and workplace verification on LinkedIn is completely free.' },
+            { question: 'Why is the gold LinkedIn logo showing on some profiles?', answer: 'The gold icon indicates that the member has an active paid LinkedIn Premium subscription and chose to display the badge.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'what-does-1st-2nd-3rd-mean-on-linkedin',
+        title: 'What Does 1st, 2nd, and 3rd Mean on LinkedIn? Network Degrees Explained',
+        targetKeyword: 'what does 1st 2nd 3rd mean on LinkedIn',
+        metaDescription: 'Understand 1st, 2nd, and 3rd degree connections on LinkedIn. Learn how network degrees control messaging access, search visibility, and warm intros.',
+        toolSlug: 'linkedin-connection-message-generator',
+        toolName: 'LinkedIn Connection Message Generator',
+        h2Outline: [
+            'Understanding LinkedIn Network Degrees: 1st, 2nd, and 3rd',
+            '1st-Degree Connections: Direct Relationships and Free Messaging',
+            '2nd-Degree Connections: Mutual Contacts and Warm Introductions',
+            '3rd-Degree Connections: Extended Network and Outreach Rules',
+            'How Network Depth Influences Recruiter Search Visibility'
+        ],
+        summary: 'A clear guide to LinkedIn network degrees: how 1st, 2nd, and 3rd degree relationships determine messaging rights and search discoverability.',
+        sections: [
+            `<p>Next to every name on LinkedIn, you will see a small tag: <strong>1st</strong>, <strong>2nd</strong>, or <strong>3rd</strong>. These numbers indicate your <em>degree of connection</em>—how closely linked you are to that specific member in LinkedIn\'s global social graph. Understanding these degrees is essential for navigating outreach, messaging, and search algorithms effectively.</p>`,
+
+            `<p><strong>1st-Degree Connections:</strong> People you are directly connected with because one of you sent a connection request and the other accepted. You can send unlimited direct messages to 1st-degree connections for free, view their full contact info, and see their posts directly in your daily feed.</p>`,
+
+            `<p><strong>2nd-Degree Connections:</strong> People who are connected to your 1st-degree connections (friends of friends). You share mutual connections with them. You cannot send free standard messages to 2nd-degree members unless you send a connection request with a personalized note or use LinkedIn InMail. 2nd-degree contacts are the highest-converting target for warm referrals.</p>`,
+
+            `<p><strong>3rd-Degree Connections:</strong> People connected to your 2nd-degree connections. They are further out in your extended network. If their full first and last name is displayed, you can send a connection request. If only their first name is shown, you must connect through mutual groups or use InMail.</p>`,
+
+            `<p>Recruiter search algorithms prioritize candidates within the recruiter\'s 1st, 2nd, and 3rd-degree network. When you expand your 1st-degree network to 500+ relevant industry professionals, your extended network encompasses millions of searchable nodes, ensuring you surface in recruiter searches.</p>`
+        ],
+        faqs: [
+            { question: 'Can I message a 2nd-degree connection for free?', answer: 'You can send a free connection request with a personalized note of up to 200 characters, or use free InMail if they have Open Profile enabled.' },
+            { question: 'What does "Out of Network" mean on LinkedIn?', answer: '"Out of Network" refers to members who fall outside your 3rd-degree network. You can only view limited profile details unless you upgrade or expand your mutual connections.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+
+    // ═══════════════════════════════════════════════════════════
+    // 6. FOLLOWER MILESTONES, ANALYTICS, & FAMOUS PROFILES
+    // ═══════════════════════════════════════════════════════════
+    {
+        slug: 'what-happens-after-1000-and-5000-followers-on-linkedin',
+        title: 'What Happens After 1,000 and 5,000 Followers on LinkedIn?',
+        targetKeyword: 'what happens after 5000 followers on LinkedIn',
+        metaDescription: 'Explore what happens after reaching 1,000, 5,000, and 10,000 followers on LinkedIn. Features unlocked, viral distribution thresholds, and creator perks.',
+        toolSlug: 'linkedin-post-hook-generator',
+        toolName: 'LinkedIn Post Hook Generator',
+        h2Outline: [
+            'The Journey from 0 to 10,000 Followers on LinkedIn',
+            'Milestone 1: What Happens at 1,000 Followers (The Trust Threshold)',
+            'Milestone 2: What Happens at 5,000 Followers (Algorithmic Flywheel)',
+            'Is 10,000 LinkedIn Followers a Lot in 2026?',
+            'Creator Tools and Newsletter Features Unlocked with Growth'
+        ],
+        summary: 'Discover how LinkedIn profile dynamics change at 1k, 5k, and 10k follower thresholds: newsletter creation, Top Voice invitations, and inbound lead generation.',
+        sections: [
+            `<p>Building a following on LinkedIn is fundamentally different from growing an audience on consumer social media. On LinkedIn, followers represent high-intent industry practitioners, hiring managers, and enterprise buyers. Reaching key follower milestones—such as 1,000, 5,000, and 10,000 followers—triggers tangible algorithmic and feature upgrades that compound your personal brand.</p>`,
+
+            `<p><strong>At 1,000 Followers:</strong> You cross the foundational social proof threshold. Your posts consistently receive 500 to 2,000+ organic impressions. LinkedIn\'s recommendation algorithms begin indexing your profile as a reliable creator within your niche. You qualify for LinkedIn Newsletter authoring tools, allowing you to broadcast weekly articles directly to subscribers\' email inboxes.</p>`,
+
+            `<p><strong>At 5,000 Followers:</strong> You achieve what creators call the <em>algorithmic flywheel</em>. Your content generates enough initial dwell time and expansion velocity during the <a href="/blogs/linkedin-golden-hour-rule">Golden Hour</a> to regularly spill over into 2nd and 3rd-degree feeds. Inbound job inquiries and partnership proposals become predictable weekly occurrences.</p>`,
+
+            `<p><strong>Is 10,000 Followers a Lot on LinkedIn?</strong> Yes. Fewer than 0.5% of LinkedIn\'s 1 billion users have over 10,000 followers. Having 10k followers positions you in the top tier of industry voices, frequently qualifying you for LinkedIn Community Top Voice badges and paid consulting or advisory engagements.</p>`,
+
+            `<p>To scale past 1,000 followers: (1) Publish 3 to 4 high-value framework posts weekly using structured <a href="/blogs/linkedin-hooks">psychological hooks</a>. (2) Leave 5 thoughtful, insightful comments daily on posts by prominent voices in your domain. (3) Convert profile visitors into followers by optimizing your headline and featured section.</p>`
+        ],
+        faqs: [
+            { question: 'What is the difference between connections and followers on LinkedIn?', answer: 'Connections are a two-way mutual relationship (capped at 30,000). Followers are a one-way subscription to your public posts and articles (unlimited).' },
+            { question: 'How do you turn on Creator Mode on LinkedIn?', answer: 'Creator Mode features are now built directly into all LinkedIn profiles. You can add topic hashtags, feature a primary website link, and launch newsletters from your profile dashboard.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'where-to-see-linkedin-stats-and-analytics',
+        title: 'Where Can I See My LinkedIn Stats? Profile Views & Analytics Guide',
+        targetKeyword: 'where can I see my LinkedIn stats',
+        metaDescription: 'Learn where to find your LinkedIn stats, search appearances, profile views, and post impression analytics on desktop and mobile in 2026.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'Where to Find the LinkedIn Analytics Dashboard',
+            'How to Interpret "Who Viewed Your Profile"',
+            'Search Appearances: What Recruiters and Companies Are Searching',
+            'Post Impression and Engagement Analytics Explained',
+            'Using Analytics to Improve Your Profile and Content Strategy'
+        ],
+        summary: 'A step-by-step walkthrough of LinkedIn\'s analytics suite: profile view logs, search query intelligence, and post performance tracking.',
+        sections: [
+            `<p>LinkedIn provides every member with a built-in analytics dashboard that tracks profile discoverability, search appearance keywords, and content engagement. Monitoring these metrics is essential for optimizing your personal brand and verifying whether your profile is attracting the right hiring managers and clients.</p>`,
+
+            `<p>To access your stats: (1) Click your profile icon &gt; <strong>View Profile</strong>. (2) Scroll down to the <strong>Analytics</strong> section directly below your headline. You will see three primary cards: <strong>Profile viewers</strong>, <strong>Post impressions</strong>, and <strong>Search appearances</strong>. Click <em>"Show all analytics"</em> for comprehensive reporting.</p>`,
+
+            `<p><strong>Profile Viewers:</strong> Shows the total number of visits to your profile over the past 90 days. Free accounts display the 5 most recent viewers, while Premium members see the full 90-day history with detailed company and title breakdown. A sudden spike in views indicates that your recent post or job application is gaining traction.</p>`,
+
+            `<p><strong>Search Appearances:</strong> This card reveals how many times your profile appeared in LinkedIn search results over the past week, along with the top 5 companies where searchers work, their job titles, and the top keywords used. If searchers are not matching your target roles, update your <a href="/tools/linkedin-headline-generator">Headline</a> with specific job title keywords.</p>`,
+
+            `<p>For individual posts, click <strong>"View analytics"</strong> at the bottom of any published update to see total impressions, unique viewers, member job titles, top locations, and engagement rates.</p>`
+        ],
+        faqs: [
+            { question: 'How often are LinkedIn search appearance stats updated?', answer: 'LinkedIn updates your weekly search appearances every Sunday with aggregated data from the preceding 7 days.' },
+            { question: 'Can I see who searched for my name on LinkedIn?', answer: 'LinkedIn displays aggregated search stats (companies and job titles of searchers) but keeps individual searcher names confidential for privacy.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'gen-z-on-linkedin-and-famous-profiles',
+        title: 'Gen Z on LinkedIn & Top Followed Profiles: Demographics & Leaders',
+        targetKeyword: 'how many Gen Z are on LinkedIn',
+        metaDescription: 'Explore Gen Z growth trends on LinkedIn in 2026. Discover how Gen Z uses LinkedIn, the top 5 most-followed profiles, and who to learn from.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'How Many Gen Z Professionals Are on LinkedIn in 2026?',
+            'How Gen Z Is Reshaping LinkedIn Culture and Content',
+            'Who Is the Most Famous Person on LinkedIn?',
+            'The Top 5 Most Followed LinkedIn Profiles to Study',
+            'Key Takeaways for Building an Authentic Modern Profile'
+        ],
+        summary: 'Explore demographic shifts as 100M+ Gen Z professionals enter LinkedIn, plus teardowns of the most influential global leaders on the platform.',
+        sections: [
+            `<p>Gen Z (born between 1997 and 2012) is the fastest-growing demographic on LinkedIn. Over <strong>100 million Gen Z professionals, graduates, and interns</strong> maintain active profiles in 2026, representing the platform\'s most dynamic creator cohort. As Gen Z enters the workforce, they are transforming LinkedIn from a traditional corporate bulletin board into a transparent, community-driven professional network.</p>`,
+
+            `<p>Unlike older generations who focused primarily on polished corporate updates, Gen Z creators emphasize workplace transparency, salary discussions, mental health, career pivots, and raw behind-the-scenes breakdowns of internships and tech projects. This authenticity drives significantly higher comment engagement and community loyalty.</p>`,
+
+            `<p><strong>Who Is the Most Famous Person on LinkedIn?</strong> Bill Gates is the most followed individual on LinkedIn, with over 35 million followers. His updates on global healthcare, clean energy, and artificial intelligence regularly generate tens of thousands of comments from world leaders and technologists.</p>`,
+
+            `<p><strong>Top 5 LinkedIn Profiles to Study for Content Architecture:</strong></p>
+            <ol>
+                <li><strong>Bill Gates (35M+ followers):</strong> Masterclass in clean long-form essays, global impact storytelling, and book recommendations.</li>
+                <li><strong>Satya Nadella (10M+ followers):</strong> Executive leadership, cloud computing insights, and AI ecosystem strategy.</li>
+                <li><strong>Richard Branson (19M+ followers):</strong> Entrepreneurship, workplace culture, and conversational storytelling.</li>
+                <li><strong>Arianna Huffington (10M+ followers):</strong> Workplace wellness, productivity frameworks, and leadership interviews.</li>
+                <li><strong>Gary Vaynerchuk (5M+ followers):</strong> High-velocity B2B content marketing, personal branding, and micro-video teardowns.</li>
+            </ol>`,
+
+            `<p>Whether you are Gen Z just starting out or an experienced executive, the blueprint is the same: lead with genuine value, communicate with clarity, and maintain an audit score above 80 on <a href="/#upload">LinkedInRank</a>.</p>`
+        ],
+        faqs: [
+            { question: 'What do Gen Z post about on LinkedIn?', answer: 'Gen Z professionals frequently share project learnings, internship experiences, coding tutorials, career transition stories, and honest reflections on early career growth.' },
+            { question: 'Can students under 20 build a significant following on LinkedIn?', answer: 'Yes! Many university students have built 10k+ followings by documenting their learning journeys, hackathons, and research findings publicly.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
     }
 ]
+
