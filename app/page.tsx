@@ -448,10 +448,10 @@ export default function HomePage() {
                                 <span>&rarr;</span>
                             </span>
                             <h2 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
-                                See the before, after, and reasoning.
+                                Before &amp; After Breakdown
                             </h2>
                             <p className="text-[13.5px] text-[#050315]/75">
-                                Inspect exact algorithmic fixes across headlines, summaries, and experience.
+                                Toggle roles below to inspect exact algorithmic fixes.
                             </p>
                         </div>
 

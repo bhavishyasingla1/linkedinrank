@@ -23,45 +23,45 @@ interface Scenario {
 const SCENARIOS: Scenario[] = [
     {
         id: 'engineering',
-        category: 'Engineering & Systems',
+        category: 'Engineering',
         gain: 36,
         before: {
-            headline: 'Software Engineer at Tech Corp | Passionate coder | Building stuff with cool tech',
+            headline: 'Software Engineer at Tech Corp | Passionate coder | Building cool tech',
             score: 58,
             flaws: [
-                'Generic buzzwords ("passionate coder", "cool tech") ignored by search filters',
-                'Missing high-intent technologies (Go, Kubernetes, Distributed Systems)'
+                'Generic buzzwords ignored by search filters',
+                'Missing high-intent keywords (Go, Kubernetes)'
             ]
         },
         after: {
-            headline: 'Staff Platform Engineer | Distributed Systems · Go · Kubernetes · Cloud Scale Architecture',
+            headline: 'Staff Platform Engineer | Distributed Systems · Go · Kubernetes · Cloud Architecture',
             score: 94,
             mobileSnippet: 'Staff Platform Engineer | Distributed Systems · Go...',
             improvements: [
-                'Front-loads verified job titles queried in recruiter talent searches',
-                'Injects 4 standardized keywords required for boolean recruiter queries'
+                'Front-loads target recruiter job title',
+                'Injects 4 standardized search skills'
             ]
         }
     },
     {
         id: 'product',
-        category: 'Product & Strategy',
+        category: 'Product',
         gain: 32,
         before: {
             headline: 'Product Manager | Helping users solve problems | Innovator & Problem Solver',
             score: 62,
             flaws: [
-                'Vague non-quantifiable proposition without domain specialization',
-                'Zero metrics, B2B/B2C segment differentiation, or monetization proof'
+                'Vague proposition without specialization',
+                'Zero metrics or business proof'
             ]
         },
         after: {
-            headline: 'Lead Growth Product Manager | B2B SaaS · PLG · Funnel Monetization ($25M+ ARR)',
+            headline: 'Lead Growth Product Manager | B2B SaaS · PLG · Monetization ($25M+ ARR)',
             score: 94,
             mobileSnippet: 'Lead Growth Product Manager | B2B SaaS · PLG...',
             improvements: [
-                'Specific domain specialization (B2B SaaS, PLG) matches recruiter job specs',
-                'Injects hard revenue metrics ($25M+ ARR) for instant credibility'
+                'Domain match (B2B SaaS · PLG)',
+                'Injects revenue proof ($25M+ ARR)'
             ]
         }
     },
@@ -70,20 +70,20 @@ const SCENARIOS: Scenario[] = [
         category: 'Data & AI',
         gain: 34,
         before: {
-            headline: 'Data Enthusiast & Analyst | SQL, Python, Excel | Looking for new opportunities',
+            headline: 'Data Analyst | SQL, Python, Excel | Looking for new opportunities',
             score: 60,
             flaws: [
-                '"Looking for new opportunities" lowers perceived authority in ranking algorithms',
-                'Lacks production-grade stack keywords (dbt, Snowflake, Real-Time ETL)'
+                '"Looking for opportunities" lowers perceived authority',
+                'Missing modern stack tools (dbt, Snowflake)'
             ]
         },
         after: {
-            headline: 'Senior Analytics & ML Engineer | dbt · Snowflake · Python · Predictive Modeling & Real-Time ETL',
+            headline: 'Senior Analytics Engineer | dbt · Snowflake · Python · Real-Time ETL & ML',
             score: 94,
-            mobileSnippet: 'Senior Analytics & ML Engineer | dbt · Snowflake...',
+            mobileSnippet: 'Senior Analytics Engineer | dbt · Snowflake...',
             improvements: [
-                'Features modern data stack tools (dbt, Snowflake) targeted by hiring teams',
-                'Highlights high-leverage production impact (Real-Time ETL, Predictive Modeling)'
+                'Targeted modern data stack tools',
+                'Highlights high-leverage ETL impact'
             ]
         }
     }
@@ -96,14 +96,14 @@ export default function InteractiveAlgorithmPreview() {
     return (
         <div className="rounded-2xl bg-white border border-[#dedcff] shadow-sm shadow-[#2f27ce]/5 overflow-hidden">
             {/* ── Compact Top Controls ───────────────────────────── */}
-            <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 border-b border-[#dedcff] bg-[#dedcff]/20 flex flex-wrap items-center justify-between gap-2">
+            <div className="px-3.5 py-2 sm:px-4 sm:py-2.5 border-b border-[#dedcff] bg-[#dedcff]/20 flex flex-wrap items-center justify-between gap-2">
                 <div className="inline-flex items-center gap-1.5">
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-2 w-2 shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
                     </span>
                     <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                        Interactive Simulation
+                        Live Simulation
                     </span>
                 </div>
 
@@ -131,13 +131,13 @@ export default function InteractiveAlgorithmPreview() {
             </div>
 
             {/* ── Compact 2-Column Comparison ────────────────────── */}
-            <div className="p-3.5 sm:p-5 space-y-3">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <div className="p-3.5 sm:p-4 space-y-2.5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {/* Before Card */}
-                    <div className="p-3.5 sm:p-4 rounded-xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col justify-between space-y-2.5">
-                        <div className="space-y-1.5">
+                    <div className="p-3 sm:p-3.5 rounded-xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col justify-between space-y-2">
+                        <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-extrabold text-[#DC2626] uppercase tracking-wider bg-[#FEF2F2] border border-[#FECACA] px-2 py-0.5 rounded-full leading-none">
+                                <span className="text-[9.5px] font-extrabold text-[#DC2626] uppercase tracking-wider bg-[#FEF2F2] border border-[#FECACA] px-2 py-0.5 rounded-full leading-none">
                                     Before
                                 </span>
                                 <span className="text-[11px] font-bold text-[#DC2626]">
@@ -145,12 +145,12 @@ export default function InteractiveAlgorithmPreview() {
                                 </span>
                             </div>
 
-                            <p className="text-[12.5px] text-[#050315]/75 font-medium leading-snug line-through decoration-[#DC2626]/40">
+                            <p className="text-[12px] text-[#050315]/75 font-medium leading-snug line-through decoration-[#DC2626]/40 pt-0.5">
                                 {scenario.before.headline}
                             </p>
                         </div>
 
-                        <div className="pt-2 border-t border-[#dedcff]/50 space-y-1 text-[11.5px] text-[#050315]/75">
+                        <div className="pt-1.5 border-t border-[#dedcff]/50 space-y-0.5 text-[11px] text-[#050315]/75">
                             {scenario.before.flaws.map((flaw, idx) => (
                                 <div key={idx} className="flex items-start gap-1.5 leading-snug">
                                     <span className="text-[#DC2626] font-bold shrink-0">✕</span>
@@ -161,30 +161,30 @@ export default function InteractiveAlgorithmPreview() {
                     </div>
 
                     {/* After Card */}
-                    <div className="p-3.5 sm:p-4 rounded-xl bg-white border-2 border-[#2f27ce] shadow-xs flex flex-col justify-between space-y-2.5 relative overflow-hidden group">
+                    <div className="p-3 sm:p-3.5 rounded-xl bg-white border-2 border-[#2f27ce] shadow-xs flex flex-col justify-between space-y-2 relative overflow-hidden group">
                         {/* Subtle Scanner Line */}
                         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#2f27ce] to-transparent animate-scan-beam pointer-events-none" />
 
-                        <div className="space-y-1.5">
+                        <div className="space-y-1">
                             <div className="flex items-center justify-between">
-                                <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2 py-0.5 rounded-full leading-none">
-                                    <span className="relative flex h-1.5 w-1.5">
+                                <span className="inline-flex items-center gap-1.5 text-[9.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-2 py-0.5 rounded-full leading-none">
+                                    <span className="relative flex h-1.5 w-1.5 shrink-0">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2f27ce]" />
                                     </span>
-                                    <span>Optimized · Top 1%</span>
+                                    <span>Optimized</span>
                                 </span>
                                 <span className="text-[11px] font-extrabold text-[#16A34A] bg-[#F0FDF4] border border-[#BBF7D0] px-2 py-0.5 rounded-full leading-none">
                                     Score: {scenario.after.score}/100 (+{scenario.gain} pts)
                                 </span>
                             </div>
 
-                            <p className="text-[13px] font-bold text-[#050315] leading-snug">
+                            <p className="text-[12.5px] font-bold text-[#050315] leading-snug pt-0.5">
                                 {scenario.after.headline}
                             </p>
                         </div>
 
-                        <div className="pt-2 border-t border-[#dedcff] space-y-1 text-[11.5px] text-[#050315]">
+                        <div className="pt-1.5 border-t border-[#dedcff] space-y-0.5 text-[11px] text-[#050315]">
                             {scenario.after.improvements.map((point, idx) => (
                                 <div key={idx} className="flex items-start gap-1.5 leading-snug">
                                     <span className="text-[#2f27ce] font-extrabold shrink-0">✓</span>
@@ -204,7 +204,7 @@ export default function InteractiveAlgorithmPreview() {
 
                     <div className="inline-flex items-center gap-1 font-bold text-[#2f27ce] bg-white px-2 py-0.5 rounded-full border border-[#dedcff] shadow-2xs leading-none">
                         <CheckIcon size={10} />
-                        <span>Fits 120-Char Cutoff</span>
+                        <span>Fits 120-Char Limit</span>
                     </div>
                 </div>
             </div>
