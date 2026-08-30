@@ -443,7 +443,7 @@ img {
   }
 }
 
-@keyframes marqueeTrack {
+@keyframes marqueeScroll {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -452,13 +452,11 @@ img {
   }
 }
 
-.animate-marquee-track {
-  animation: marqueeTrack 32s linear infinite;
+.animate-marquee-scroll {
+  display: flex;
+  flex-shrink: 0;
+  animation: marqueeScroll 28s linear infinite;
   will-change: transform;
-}
-
-.group:hover .animate-marquee-track {
-  animation-play-state: paused;
 }
 
 @keyframes shimmer {
