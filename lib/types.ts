@@ -1,3 +1,10 @@
+export interface HeadlineRewriteItem {
+    text: string
+    score?: number
+    style?: string
+    tip?: string
+}
+
 // Analysis result from scoring engine
 export interface AnalysisResult {
     linkedInScore: number
@@ -9,7 +16,7 @@ export interface AnalysisResult {
     tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum'
     peerContext: string
     improvementPath: ImprovementStep[]
-    headlineRewrites?: string[]
+    headlineRewrites?: (string | HeadlineRewriteItem)[]
     careerStage?: string
     aiEnhanced?: boolean
 }

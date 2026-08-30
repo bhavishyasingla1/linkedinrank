@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
@@ -11,6 +11,7 @@ import RecommendationCards from '@/components/RecommendationCards'
 import ImprovementPath from '@/components/ImprovementPath'
 import HeadlineRewriter from '@/components/HeadlineRewriter'
 import { AnalysisResult } from '@/lib/types'
+import { generateHeadlines } from '@/lib/tools'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -194,6 +195,32 @@ export default function ResultsPage() {
     const profileAbout = analysis.profile?.about || ''
     const skillsList = analysis.profile?.skills || (analysis as any).profile?.skills || []
 
+    const headlineRewritesList = useMemo(() => {
+        if (analysis.headlineRewrites && analysis.headlineRewrites.length > 0) {
+            return analysis.headlineRewrites
+        }
+        if (analysis.profile?.headline || analysis.profile?.experience?.[0]?.title) {
+            const rawRole = analysis.profile.experience?.[0]?.title || analysis.profile.headline || ''
+            const cleanRole = rawRole
+                .split('|')[0]
+                .split('•')[0]
+                .split(' - ')[0]
+                .split('@')[0]
+                .split(' at ')[0]
+                .trim() || 'Professional'
+            const cleanCompany = analysis.profile.experience?.[0]?.company || ''
+            const cleanSkills = (analysis.profile.skills || []).slice(0, 5)
+
+            return generateHeadlines({
+                role: cleanRole,
+                company: cleanCompany,
+                skills: cleanSkills,
+                specialty: cleanSkills[0] || '',
+            })
+        }
+        return []
+    }, [analysis])
+
     return (
         <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <SiteHeader />
@@ -326,17 +353,10 @@ export default function ResultsPage() {
                 />
 
                 {/* ── Headline Alternatives ─────────────────────── */}
-                {analysis.profile?.headline && (
+                {headlineRewritesList.length > 0 && (
                     <HeadlineRewriter
-                        currentHeadline={analysis.profile.headline}
-                        rewrites={
-                            (analysis as any).headlineRewrites && (analysis as any).headlineRewrites.length > 0
-                                ? (analysis as any).headlineRewrites
-                                : [
-                                    `${analysis.profile.headline.split('|')[0].trim()} | Building Scalable Systems & High-Impact Products`,
-                                    `Engineering & Growth Specialist | ${analysis.profile.skills?.slice(0, 3).join(' • ') || 'System Design • Strategy'}`,
-                                ]
-                        }
+                        currentHeadline={analysis.profile?.headline || ''}
+                        rewrites={headlineRewritesList}
                     />
                 )}
 

@@ -8,6 +8,7 @@ import { computeDeterministicScore, classifyArchetype, SCORING_VERSION } from '@
 import { getCachedAnalysis, setCachedAnalysis, getCacheStats, PIPELINE_VERSION } from '@/lib/cache'
 import { getRewriteSuggestions, getLLMUsageStats } from '@/lib/aiSuggestionsV2'
 import { generateHeadlines } from '@/lib/tools'
+import { HeadlineRewriteItem } from '@/lib/types'
 
 // Response type matching exact spec
 interface AnalyzeResponse {
@@ -297,21 +298,33 @@ export async function POST(request: NextRequest) {
             peerContext: analysis.peerContext,
             careerStage: analysis.careerStage,
             potentialGain: analysis.potentialGain,
-            headlineRewrites: [] as string[],
+            headlineRewrites: [] as (string | HeadlineRewriteItem)[],
             aiEnhanced: false,
             profile
         }
 
         // Generate baseline headline alternatives if available
-        if (profileData.headline) {
+        if (profileData.headline || profileData.experience?.[0]?.title) {
             try {
+                const rawRole = profileData.experience?.[0]?.title || profileData.headline || ''
+                const cleanRole = rawRole
+                    .split('|')[0]
+                    .split('•')[0]
+                    .split(' - ')[0]
+                    .split('@')[0]
+                    .split(' at ')[0]
+                    .trim() || 'Professional'
+                const cleanCompany = profileData.experience?.[0]?.company || ''
+                const cleanSkills = (profileData.skills || []).slice(0, 5)
+
                 const generated = generateHeadlines({
-                    role: profileData.headline,
-                    company: profileData.experience?.[0]?.company,
-                    skills: profileData.skills?.slice(0, 5),
+                    role: cleanRole,
+                    company: cleanCompany,
+                    skills: cleanSkills,
+                    specialty: cleanSkills[0] || '',
                 })
                 if (generated.length > 0) {
-                    responseData.headlineRewrites = generated.map(g => g.text)
+                    responseData.headlineRewrites = generated
                 }
             } catch {}
         }
@@ -324,7 +337,7 @@ export async function POST(request: NextRequest) {
                     about: analysis.categoryScores.find(c => c.category === 'About')?.percentage || 50,
                     experience: analysis.categoryScores.find(c => c.category === 'Experience')?.percentage || 50,
                     skills: analysis.categoryScores.find(c => c.category === 'Skills')?.percentage || 50,
-                }).catch(() => ({ aiEnhanced: false, archetype: null, recommendations: [], headlineRewrites: [] as string[] }))
+                }).catch(() => ({ aiEnhanced: false, archetype: null, recommendations: [], headlineRewrites: [] as (string | HeadlineRewriteItem)[] }))
 
                 if (aiEnhancement.aiEnhanced) {
                     responseData.aiEnhanced = true

@@ -412,34 +412,53 @@ Return EXACTLY 5 recommendations as JSON array:
     return result || []
 }
 
-// PROMPT 7: Headline Rewrites
+export interface HeadlineRewriteItem {
+    text: string
+    score?: number
+    style?: string
+    tip?: string
+}
+
+// PROMPT 7: Strategic Headline Rewrites (Alinged with Headline Generator Tool)
 async function generateHeadlineRewrites(
     name: string, role: string, currentHeadline: string, skills: string[], careerStage: string
-): Promise<string[]> {
+): Promise<HeadlineRewriteItem[]> {
     if (!genAI || !currentHeadline) return []
 
-    const topSkills = skills.slice(0, 5).join(', ')
+    const topSkills = skills.slice(0, 5).join(' · ')
 
     const prompt = `${SYSTEM_CONTEXT}
 
-Generate exactly 3 improved LinkedIn headlines for ${name}. Career stage: ${careerStage}.
+Generate 4 high-converting, recruiter-optimized LinkedIn headlines for ${name} (${careerStage} professional).
 
-Current headline: "${currentHeadline}"
-Role: ${role}
-Key skills: ${topSkills}
+CURRENT PROFILE DATA:
+- Current Headline: "${currentHeadline}"
+- Primary Role: ${role}
+- Core Skills / Stack: ${topSkills}
 
-Rules:
-- Each headline must be under 120 characters
-- Professional, human LinkedIn tone
-- Include role + niche + value or unique angle
-- No emojis, no hype language, no em dashes (use | or commas)
-- Each should take a different angle (Value Proposition, Authority, Niche/Builder)
-- Adapt to ${careerStage} stage
+TASK: Generate 4 distinct headline options using these proven strategic angles:
+1. "Value Proposition" (Outcome-driven: Role | Helping [industry] teams achieve [outcome] via [method])
+2. "Authority & Scope" (Credibility: Role at [Company] | Focus & domain scope)
+3. "Specialty-Led" (Niche differentiation: Specialty @ [Company] | Role)
+4. "Skills Stack (SEO)" (Maximum recruiter keyword discoverability: Role | Skill 1 · Skill 2 · Skill 3)
 
-Return ONLY a JSON array of 3 strings, nothing else:
-["headline 1", "headline 2", "headline 3"]`
+STRICT ANTI-AI & FORMATTING CONSTRAINTS:
+- Every headline MUST be strictly under 120 characters (LinkedIn mobile search cutoff).
+- High cognitive hospitality: simple words, concrete tools/skills, zero corporate fluff.
+- BANNED VOCABULARY: passionate, results-driven, visionary, team player, go-getter, delve, robust, pivotal, showcase, enhance.
+- No emojis, no em dashes (use | or · or commas).
 
-    const result = await callGeminiJSON<string[]>(prompt, { temperature: 0.45, maxOutputTokens: 400 })
+Return ONLY a JSON array of 4 objects with this exact structure:
+[
+  {
+    "text": "Exact headline string (strictly <= 120 chars)",
+    "style": "Value Proposition",
+    "score": 95,
+    "tip": "Direct 1-sentence explanation of why recruiter algorithms prefer this format."
+  }
+]`
+
+    const result = await callGeminiJSON<HeadlineRewriteItem[]>(prompt, { temperature: 0.35, maxOutputTokens: 600 })
     return result || []
 }
 
@@ -567,7 +586,7 @@ export async function enhanceWithAI(profile: ProfileData, ruleBasedScores: any) 
         // Generate headline rewrites
         const headlineRewrites = await generateHeadlineRewrites(
             name, role, headline, profile.skills, careerStage
-        ).catch(() => [] as string[])
+        ).catch(() => [] as HeadlineRewriteItem[])
 
         return {
             aiEnhanced: true,
