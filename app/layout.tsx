@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -7,6 +7,15 @@ import './globals.css'
 import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
+    themeColor: '#2f27ce',
+}
 
 export async function generateMetadata(): Promise<Metadata> {
     const dynamicTitle = getDynamicHomepageTitle();
@@ -188,8 +197,6 @@ export default function RootLayout({
     return (
         <html lang="en" dir="ltr">
             <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-                <meta name="theme-color" content="#0A66C2" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
@@ -200,7 +207,7 @@ export default function RootLayout({
                 {/* Skip to content | accessibility */}
                 <a
                     href="#main-content"
-                    className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#0A66C2] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
+                    className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#2f27ce] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"
                 >
                     Skip to main content
                 </a>

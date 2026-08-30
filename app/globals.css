@@ -39,6 +39,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -48,6 +50,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   font-weight: 400;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* Scrollbar */
@@ -148,34 +153,36 @@ a {
   border-radius: 12px;
 }
 
-/* Buttons — Solid, Crisp, Editorial (MANDATORY: NO GRADIENT ON BUTTONS) */
+/* Buttons — Solid, Crisp, Editorial */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 11px 22px;
-  background-color: #0A66C2;
-  color: #FFFFFF;
-  border: 1px solid #0A66C2;
-  border-radius: 8px;
+  background-color: #2f27ce;
+  color: #fbfbfe;
+  border: 1px solid #2f27ce;
+  border-radius: 9999px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
   cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 4px 14px 0 rgba(47, 39, 206, 0.25);
+  transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .btn-primary:hover {
-  background-color: #004182;
-  border-color: #004182;
+  background-color: #433bff;
+  border-color: #433bff;
+  box-shadow: 0 6px 20px 0 rgba(67, 59, 255, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  background-color: #003366;
-  border-color: #003366;
+  background-color: #231c9e;
+  border-color: #231c9e;
   transform: translateY(0.5px);
 }
 
@@ -192,26 +199,26 @@ a {
   gap: 8px;
   padding: 11px 20px;
   background-color: #FFFFFF;
-  color: #0F172A;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
+  color: #050315;
+  border: 1px solid #dedcff;
+  border-radius: 9999px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
   cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  box-shadow: 0 1px 2px 0 rgba(5, 3, 21, 0.04);
+  transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .btn-secondary:hover {
-  background-color: #F8FAFC;
-  border-color: #CBD5E1;
-  color: #0F172A;
+  background-color: #fbfbfe;
+  border-color: #2f27ce;
+  color: #2f27ce;
 }
 
 .btn-secondary:active {
-  background-color: #F1F5F9;
+  background-color: #dedcff;
 }
 
 .btn-ghost {
@@ -221,19 +228,19 @@ a {
   gap: 8px;
   padding: 10px 16px;
   background-color: transparent;
-  color: #475569;
+  color: #050315;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 9999px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
 }
 
 .btn-ghost:hover {
-  background-color: #F1F5F9;
-  color: #0F172A;
+  background-color: #dedcff;
+  color: #2f27ce;
 }
 
 /* Badges & Tags — Restrained & Understated */
@@ -241,25 +248,25 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 9px;
-  border-radius: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.005em;
   line-height: 1.35;
   white-space: nowrap;
 }
 
 .badge-neutral {
-  background-color: #F1F5F9;
-  color: #475569;
-  border: 1px solid #E2E8F0;
+  background-color: #dedcff;
+  color: #050315;
+  border: 1px solid #dedcff;
 }
 
 .badge-brand {
-  background-color: #F0F7FF;
-  color: #0A66C2;
-  border: 1px solid #BAE0FD;
+  background-color: #dedcff;
+  color: #2f27ce;
+  border: 1px solid #dedcff;
 }
 
 .badge-success {
@@ -300,9 +307,9 @@ a {
 }
 
 .badge-platinum {
-  color: #1E40AF;
-  background-color: #EFF6FF;
-  border: 1px solid #BFDBFE;
+  color: #2f27ce;
+  background-color: #dedcff;
+  border: 1px solid #dedcff;
 }
 
 /* Form Inputs */
@@ -310,18 +317,18 @@ a {
   width: 100%;
   padding: 10px 14px;
   font-size: 14px;
-  color: #0F172A;
+  color: #050315;
   background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  border: 1px solid #dedcff;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgba(5, 3, 21, 0.04);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .input-base:focus {
   outline: none;
-  border-color: #0A66C2;
-  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.15);
+  border-color: #2f27ce;
+  box-shadow: 0 0 0 3px rgba(47, 39, 206, 0.15);
 }
 
 .input-base::placeholder {
@@ -331,8 +338,8 @@ a {
 .label-base {
   display: block;
   font-size: 13px;
-  font-weight: 600;
-  color: #334155;
+  font-weight: 700;
+  color: #050315;
   letter-spacing: -0.01em;
   margin-bottom: 6px;
 }
@@ -340,14 +347,14 @@ a {
 /* Progress bar */
 .progress-bar {
   height: 6px;
-  background: #F1F5F9;
+  background: #dedcff;
   border-radius: 3px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #0A66C2;
+  background: linear-gradient(90deg, #2f27ce, #433bff);
   border-radius: 3px;
   transition: width 0.3s ease;
 }
@@ -417,7 +424,7 @@ img {
 
 /* Accessibility */
 *:focus-visible {
-  outline: 2px solid #0A66C2;
+  outline: 2px solid #2f27ce;
   outline-offset: 2px;
 }
 
@@ -448,11 +455,12 @@ img {
 
 /* Mobile Touch & Scroll */
 @media (max-width: 768px) {
-  a, button, [role="button"], summary, input, select, textarea {
+  input, select, textarea, .btn-primary, .btn-secondary, button:not(.badge):not(.pill):not([data-small]) {
     min-height: 44px;
+    touch-action: manipulation;
   }
 
-  article a, .prose a, p a, li a {
+  article a, .prose a, p a, li a, nav a {
     min-height: auto;
   }
 

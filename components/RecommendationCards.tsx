@@ -146,7 +146,7 @@ export default function RecommendationCards({
                                         )}
                                     </div>
                                     {rec.impact && (
-                                        <span className={`text-[11.5px] font-extrabold px-3 py-1 rounded-full shrink-0 shadow-2xs ${
+                                        <span className={`inline-flex items-center justify-center text-center leading-none text-[11px] font-bold px-3 py-1.5 rounded-full shadow-2xs ${
                                             isHigh
                                                 ? 'bg-[#dedcff] text-[#2f27ce]'
                                                 : 'bg-[#dedcff]/40 text-[#050315]/80'

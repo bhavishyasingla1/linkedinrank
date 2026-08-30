@@ -10,22 +10,23 @@ const RING_PRESETS = [
     { label: '#Hiring', color: '#7B3FA0', textColor: '#FFFFFF', text: '#HIRING' },
     { label: 'Creator', color: '#E7A33E', textColor: '#FFFFFF', text: '#CREATOR' },
     { label: 'Speaker', color: '#CC3333', textColor: '#FFFFFF', text: '#SPEAKER' },
-    { label: 'Mentor', color: '#2563EB', textColor: '#FFFFFF', text: '#MENTOR' },
-    { label: 'Custom', color: '#0A66C2', textColor: '#FFFFFF', text: '' },
+    { label: 'Mentor', color: '#2f27ce', textColor: '#FFFFFF', text: '#MENTOR' },
+    { label: 'Custom', color: '#2f27ce', textColor: '#FFFFFF', text: '' },
 ]
 
-function hexToRgb(hex: string): { r: number; g: number; b: number } {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result
-        ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
-        : { r: 95, g: 139, b: 60 }
-}
+const RING_STYLES = [
+    { id: 'solid', label: 'Solid Color' },
+    { id: 'gradient', label: 'Gradient Glow' },
+    { id: 'dual', label: 'Two-Tone Gradient' },
+]
 
 export default function ProfileRingCreator() {
     const [image, setImage] = useState<string | null>(null)
     const [selectedPreset, setSelectedPreset] = useState(0)
+    const [ringStyle, setRingStyle] = useState<'solid' | 'gradient' | 'dual'>('solid')
     const [customText, setCustomText] = useState('')
-    const [customColor, setCustomColor] = useState('#0A66C2')
+    const [customColor, setCustomColor] = useState('#2f27ce')
+    const [customSecondaryColor, setCustomSecondaryColor] = useState('#433bff')
     const [ringThickness, setRingThickness] = useState(35)
     const [ringPosition, setRingPosition] = useState(120)
     const [ringLength, setRingLength] = useState(200)
@@ -59,6 +60,7 @@ export default function ProfileRingCreator() {
 
             ctx.clearRect(0, 0, size, size)
 
+            // Draw circular clipped user photo
             ctx.save()
             ctx.beginPath()
             ctx.arc(center, center, fullRadius, 0, Math.PI * 2)
@@ -77,15 +79,32 @@ export default function ProfileRingCreator() {
             const endRad = ((ringPosition + ringLength) * Math.PI) / 180
             const fadeAngle = 0.3
 
+            // Style preparation
+            let fillStyle: string | CanvasGradient = ringColor
+
+            if (ringStyle === 'gradient') {
+                const grad = ctx.createRadialGradient(center, center, innerR, center, center, outerR)
+                grad.addColorStop(0, ringColor)
+                grad.addColorStop(1, '#ffffff88')
+                fillStyle = grad
+            } else if (ringStyle === 'dual') {
+                const grad = ctx.createLinearGradient(0, 0, size, size)
+                grad.addColorStop(0, ringColor)
+                grad.addColorStop(1, customSecondaryColor || '#433bff')
+                fillStyle = grad
+            }
+
+            // Draw primary ring arc
             ctx.save()
             ctx.beginPath()
             ctx.arc(center, center, outerR, startRad, endRad)
             ctx.arc(center, center, innerR, endRad, startRad, true)
             ctx.closePath()
-            ctx.fillStyle = ringColor
+            ctx.fillStyle = fillStyle
             ctx.fill()
             ctx.restore()
 
+            // Smooth start taper
             for (let i = 0; i < 20; i++) {
                 const t = i / 20
                 const a1 = startRad - fadeAngle * (1 - t)
@@ -95,12 +114,13 @@ export default function ProfileRingCreator() {
                 ctx.arc(center, center, outerR, a1, a2)
                 ctx.arc(center, center, innerR, a2, a1, true)
                 ctx.closePath()
-                ctx.fillStyle = ringColor
+                ctx.fillStyle = fillStyle
                 ctx.globalAlpha = t * 0.8
                 ctx.fill()
                 ctx.restore()
             }
 
+            // Smooth end taper
             for (let i = 0; i < 20; i++) {
                 const t = i / 20
                 const a1 = endRad + fadeAngle * t
@@ -110,12 +130,13 @@ export default function ProfileRingCreator() {
                 ctx.arc(center, center, outerR, a1, a2)
                 ctx.arc(center, center, innerR, a2, a1, true)
                 ctx.closePath()
-                ctx.fillStyle = ringColor
+                ctx.fillStyle = fillStyle
                 ctx.globalAlpha = (1 - t) * 0.8
                 ctx.fill()
                 ctx.restore()
             }
 
+            // Draw curved text inside the ring
             if (showText && ringText) {
                 const midR = (innerR + outerR) / 2
                 const baseFontSize = ringW * 0.42
@@ -164,7 +185,7 @@ export default function ProfileRingCreator() {
             }
         }
         img.src = image
-    }, [image, ringColor, ringText, ringThickness, ringPosition, ringLength, textPosition, textSize, showText])
+    }, [image, ringColor, ringText, ringThickness, ringPosition, ringLength, textPosition, textSize, showText, ringStyle, customSecondaryColor])
 
     useEffect(() => {
         drawRing()
@@ -194,46 +215,51 @@ export default function ProfileRingCreator() {
     return (
         <div className="space-y-6">
             {/* Tool Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#dedcff]">
                 <div>
-                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
                         LinkedIn Profile Photo Ring Creator
                     </h2>
-                    <p className="text-[13px] text-[#64748B] mt-0.5">
-                        Add a distinctive #OpenToWork, #Hiring, or custom branded ring to your profile photo to stand out in the feed.
+                    <p className="text-[13.5px] text-[#050315]/70 mt-1">
+                        Add a distinctive #OpenToWork, #Hiring, Creator, or custom branded ring to your profile photo.
                     </p>
                 </div>
-                <Badge variant="brand" size="sm">
-                    No Watermark
-                </Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="inline-flex items-center justify-center text-center leading-none text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs whitespace-nowrap shrink-0">
+                        100% Free · No Watermark
+                    </span>
+                </div>
             </div>
 
             {/* Photo Upload Area / Preview */}
             {!image ? (
                 <div
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-8 sm:p-12 border-2 border-dashed border-[#CBD5E1] hover:border-[#0A66C2] rounded-2xl bg-[#F8FAFC] hover:bg-[#F0F7FF] transition-all flex flex-col items-center justify-center text-center cursor-pointer space-y-3"
+                    className="p-8 sm:p-14 border-2 border-dashed border-[#dedcff] hover:border-[#2f27ce] rounded-3xl bg-[#fbfbfe] hover:bg-white transition-all duration-200 flex flex-col items-center justify-center text-center cursor-pointer space-y-4 shadow-sm hover:shadow-md"
                 >
-                    <div className="w-14 h-14 rounded-full bg-white shadow-xs border border-[#E2E8F0] flex items-center justify-center text-[#0A66C2]">
-                        <UploadIcon size={24} />
+                    <div className="w-16 h-16 rounded-full bg-[#dedcff]/50 border border-[#dedcff] flex items-center justify-center text-[#2f27ce]">
+                        <UploadIcon size={28} />
                     </div>
                     <div>
-                        <p className="text-[15px] font-bold text-[#0F172A]">Upload your profile photo</p>
-                        <p className="text-[13px] text-[#64748B] mt-0.5">JPEG, PNG, or WebP. 100% processed in your browser.</p>
+                        <p className="text-[16px] font-bold text-[#050315]">Upload your profile photo</p>
+                        <p className="text-[13px] text-[#050315]/60 mt-1">JPEG, PNG, or WebP. 100% private, processed client-side in your browser.</p>
                     </div>
-                    <Button variant="primary" size="md" className="pointer-events-none">
+                    <button
+                        type="button"
+                        className="px-5 py-2.5 rounded-xl bg-[#2f27ce] hover:bg-[#433bff] text-white text-[14px] font-bold shadow-md hover:shadow-lg transition-all"
+                    >
                         Choose Photo
-                    </Button>
+                    </button>
                 </div>
             ) : (
                 <div className="space-y-6">
-                    <div className="p-6 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col items-center justify-center">
-                        <div className="relative p-2 bg-white rounded-full shadow-xs border border-[#E2E8F0]">
-                            <canvas ref={canvasRef} className="w-48 h-48 sm:w-56 sm:h-56 rounded-full" />
+                    <div className="p-8 rounded-3xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col items-center justify-center shadow-sm">
+                        <div className="relative p-2 bg-white rounded-full shadow-lg border border-[#dedcff]">
+                            <canvas ref={canvasRef} className="w-48 h-48 sm:w-60 sm:h-60 rounded-full" />
                         </div>
                         <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="mt-3 text-[12px] font-semibold text-[#0A66C2] hover:underline cursor-pointer"
+                            className="mt-4 text-[13px] font-bold text-[#2f27ce] hover:underline cursor-pointer"
                         >
                             Change Photo
                         </button>
@@ -241,18 +267,18 @@ export default function ProfileRingCreator() {
 
                     {/* Presets */}
                     <div className="space-y-2">
-                        <label className="block text-[13px] font-semibold text-[#334155]">
+                        <label className="block text-[13px] font-bold text-[#050315]">
                             Quick Ring Presets
                         </label>
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-2">
                             {RING_PRESETS.map((p, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setSelectedPreset(i)}
-                                    className={`text-[12px] px-3 py-1.5 rounded-lg border transition-all cursor-pointer select-none ${
+                                    className={`text-[12.5px] px-3.5 py-1.5 rounded-xl border font-bold transition-all cursor-pointer select-none ${
                                         selectedPreset === i
-                                            ? 'bg-[#0A66C2] text-white border-[#0A66C2] font-semibold shadow-xs'
-                                            : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC]'
+                                            ? 'bg-[#2f27ce] text-white border-[#2f27ce] shadow-sm'
+                                            : 'bg-white text-[#050315]/80 border-[#dedcff] hover:border-[#2f27ce]'
                                     }`}
                                 >
                                     {p.label}
@@ -261,61 +287,164 @@ export default function ProfileRingCreator() {
                         </div>
                     </div>
 
-                    {/* Custom Controls */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                                Ring Thickness ({ringThickness}px)
-                            </label>
+                    {/* Ring Styles */}
+                    <div className="space-y-2">
+                        <label className="block text-[13px] font-bold text-[#050315]">
+                            Ring Visual Style
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                            {RING_STYLES.map((st) => (
+                                <button
+                                    key={st.id}
+                                    onClick={() => setRingStyle(st.id as any)}
+                                    className={`text-[12.5px] px-3.5 py-1.5 rounded-xl border font-bold transition-all cursor-pointer select-none ${
+                                        ringStyle === st.id
+                                            ? 'bg-[#2f27ce] text-white border-[#2f27ce] shadow-sm'
+                                            : 'bg-white text-[#050315]/80 border-[#dedcff] hover:border-[#2f27ce]'
+                                    }`}
+                                >
+                                    {st.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Custom Color Selector */}
+                    {isCustom && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff]">
+                            <div>
+                                <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
+                                    Primary Ring Color
+                                </label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={customColor}
+                                        onChange={(e) => setCustomColor(e.target.value)}
+                                        className="w-10 h-10 rounded-xl cursor-pointer border border-[#dedcff] p-1 bg-white"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={customColor}
+                                        onChange={(e) => setCustomColor(e.target.value)}
+                                        className="px-3 py-1.5 rounded-xl bg-white border border-[#dedcff] text-[13px] font-mono text-[#050315] uppercase w-28"
+                                    />
+                                </div>
+                            </div>
+
+                            {ringStyle === 'dual' && (
+                                <div>
+                                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
+                                        Secondary Gradient Color
+                                    </label>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            value={customSecondaryColor}
+                                            onChange={(e) => setCustomSecondaryColor(e.target.value)}
+                                            className="w-10 h-10 rounded-xl cursor-pointer border border-[#dedcff] p-1 bg-white"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={customSecondaryColor}
+                                            onChange={(e) => setCustomSecondaryColor(e.target.value)}
+                                            className="px-3 py-1.5 rounded-xl bg-white border border-[#dedcff] text-[13px] font-mono text-[#050315] uppercase w-28"
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Ring Adjustment Controls */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="p-4 rounded-2xl bg-white border border-[#dedcff]">
+                            <div className="flex justify-between items-center mb-1">
+                                <label className="text-[13px] font-bold text-[#050315]">Thickness</label>
+                                <span className="text-[12px] font-bold text-[#2f27ce]">{ringThickness}px</span>
+                            </div>
                             <input
                                 type="range"
                                 min={15}
                                 max={60}
                                 value={ringThickness}
                                 onChange={(e) => setRingThickness(Number(e.target.value))}
-                                className="w-full accent-[#0A66C2] cursor-pointer"
+                                className="w-full accent-[#2f27ce] cursor-pointer"
                             />
                         </div>
 
-                        <div>
-                            <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                                Arc Length ({ringLength}°)
-                            </label>
+                        <div className="p-4 rounded-2xl bg-white border border-[#dedcff]">
+                            <div className="flex justify-between items-center mb-1">
+                                <label className="text-[13px] font-bold text-[#050315]">Arc Span</label>
+                                <span className="text-[12px] font-bold text-[#2f27ce]">{ringLength}°</span>
+                            </div>
                             <input
                                 type="range"
                                 min={60}
                                 max={360}
                                 value={ringLength}
                                 onChange={(e) => setRingLength(Number(e.target.value))}
-                                className="w-full accent-[#0A66C2] cursor-pointer"
+                                className="w-full accent-[#2f27ce] cursor-pointer"
+                            />
+                        </div>
+
+                        <div className="p-4 rounded-2xl bg-white border border-[#dedcff]">
+                            <div className="flex justify-between items-center mb-1">
+                                <label className="text-[13px] font-bold text-[#050315]">Position Angle</label>
+                                <span className="text-[12px] font-bold text-[#2f27ce]">{ringPosition}°</span>
+                            </div>
+                            <input
+                                type="range"
+                                min={0}
+                                max={360}
+                                value={ringPosition}
+                                onChange={(e) => setRingPosition(Number(e.target.value))}
+                                className="w-full accent-[#2f27ce] cursor-pointer"
                             />
                         </div>
                     </div>
 
-                    {showText && (
-                        <div>
-                            <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                                Ring Label Text
+                    {/* Ring Text Input */}
+                    <div className="p-4 rounded-2xl bg-white border border-[#dedcff] space-y-2">
+                        <div className="flex items-center justify-between">
+                            <label className="text-[13px] font-bold text-[#050315]">
+                                Ring Badge Text
                             </label>
+                            <button
+                                type="button"
+                                onClick={() => setShowText(!showText)}
+                                className="text-[12px] font-bold text-[#2f27ce] hover:underline"
+                            >
+                                {showText ? 'Hide Text' : 'Show Text'}
+                            </button>
+                        </div>
+                        {showText && (
                             <input
                                 type="text"
                                 value={isCustom ? customText : ringText}
-                                onChange={(e) => { setCustomText(e.target.value.toUpperCase()); setSelectedPreset(RING_PRESETS.length - 1) }}
+                                onChange={(e) => {
+                                    setCustomText(e.target.value.toUpperCase())
+                                    setSelectedPreset(RING_PRESETS.length - 1)
+                                }}
                                 placeholder="#OPENTOWORK"
-                                className="input-base font-mono uppercase"
+                                className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] font-mono uppercase bg-[#fbfbfe] text-[#050315]"
                             />
-                        </div>
-                    )}
+                        )}
+                    </div>
 
-                    <Button
+                    <button
                         onClick={handleDownload}
-                        variant="primary"
-                        size="lg"
-                        fullWidth
-                        leftIcon={downloaded ? <CheckIcon size={16} /> : undefined}
+                        className="w-full py-4 rounded-2xl bg-[#2f27ce] hover:bg-[#433bff] text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
                     >
-                        {downloaded ? '✓ High-Res PNG Downloaded!' : 'Download High-Res Profile Photo (800x800)'}
-                    </Button>
+                        {downloaded ? (
+                            <>
+                                <CheckIcon size={18} />
+                                <span>High-Res Photo Downloaded!</span>
+                            </>
+                        ) : (
+                            <span>Download High-Res Profile Photo (800x800 PNG)</span>
+                        )}
+                    </button>
                 </div>
             )}
 

@@ -1,14 +1,16 @@
-// LinkedIn-inspired color palette
+// LinkedInRank Brand Palette (RealtimeColors: 050315-fbfbfe-2f27ce-dedcff-433bff)
 export const COLORS = {
-    PRIMARY: '#0A66C2',
-    SECONDARY: '#004182',
-    ACCENT: '#66B2FF',
-    LIGHT: '#F5F7FA',
-    DARK: '#1D2226',
-    BLACK: '#0B0F14',
-    SUCCESS: '#1DB954',
-    WARNING: '#F5A623',
-    ERROR: '#E24A4A',
+    TEXT: '#050315',
+    BACKGROUND: '#fbfbfe',
+    PRIMARY: '#2f27ce',
+    SECONDARY: '#dedcff',
+    ACCENT: '#433bff',
+    LIGHT: '#fbfbfe',
+    DARK: '#050315',
+    BLACK: '#050315',
+    SUCCESS: '#16A34A',
+    WARNING: '#D97706',
+    ERROR: '#DC2626',
 }
 
 // Category definitions

@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import { generateConnectionMessages as generateFallbackMessages } from '@/lib/tools'
 import ToolPromptBlock, { AIFailedPromptBlock, buildConnectionPrompt } from './ToolPromptBlock'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { UploadIcon, CheckIcon, CopyIcon, SparklesIcon } from '@/components/ui/Icons'
 
 type ConnectionType = 
@@ -107,7 +105,10 @@ export default function ConnectionMessageGenerator() {
             const data = await res.json()
             const profile = data?.data?.profile || data?.profile
             if (profile) {
-                if (profile.name) setName(profile.name.split(/\s+/)[0])
+                if (profile.name) {
+                    const clean = profile.name.replace(/^(dr|mr|mrs|ms|prof|sir)\.?\s+/i, '').trim()
+                    setName(clean.split(/\s+/)[0])
+                }
                 const hl = (profile.headline || '').trim()
                 if (hl) setRecipientRole(hl)
                 else if (profile.experience?.[0]?.title) setRecipientRole(`${profile.experience[0].title}${profile.experience[0].company ? ' at ' + profile.experience[0].company : ''}`)
@@ -184,54 +185,56 @@ export default function ConnectionMessageGenerator() {
     return (
         <div className="space-y-6">
             {/* Tool Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#dedcff]">
                 <div>
-                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
                         LinkedIn Connection Note Crafter
                     </h2>
-                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                    <p className="text-[13.5px] text-[#050315]/70 mt-1">
                         Write personalized &quot;Add a note&quot; invitations strictly under LinkedIn&apos;s 300 character cutoff.
                     </p>
                 </div>
-                <Badge variant="brand" size="sm">
-                    300-Char Safe
-                </Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="inline-flex items-center justify-center text-center leading-none text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs whitespace-nowrap shrink-0">
+                        14 Scenarios · 300-Char Safe
+                    </span>
+                </div>
             </div>
 
             {/* Scenario Pills */}
             <div className="space-y-2">
-                <label className="block text-[13px] font-semibold text-[#334155]">
-                    Select Outreach Scenario
+                <label className="block text-[13px] font-bold text-[#050315]">
+                    Select Outreach Scenario (14 Formats)
                 </label>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                     {CONNECTION_TYPES.map((t) => (
                         <button
                             key={t.id}
                             onClick={() => { setType(t.id); setMessages([]) }}
-                            className={`text-[12px] px-3 py-1.5 rounded-lg border transition-all cursor-pointer select-none ${
+                            className={`text-[12.5px] px-3.5 py-1.5 rounded-xl border font-bold transition-all cursor-pointer select-none ${
                                 type === t.id
-                                    ? 'bg-[#F0F7FF] border-[#0A66C2] text-[#0A66C2] font-bold shadow-xs'
-                                    : 'bg-white border-[#E2E8F0] text-[#475569] hover:border-[#CBD5E1]'
+                                    ? 'bg-[#2f27ce] border-[#2f27ce] text-white shadow-sm'
+                                    : 'bg-white border-[#dedcff] text-[#050315]/80 hover:border-[#2f27ce]'
                             }`}
                         >
                             {t.label}
                         </button>
                     ))}
                 </div>
-                <p className="text-[12px] text-[#0A66C2] bg-[#F0F7FF] border border-[#BAE0FD] p-2.5 rounded-lg mt-1">
-                    💡 {CONNECTION_TYPES.find(t => t.id === type)?.hint}
+                <p className="text-[12.5px] text-[#2f27ce] bg-[#dedcff]/30 border border-[#dedcff] p-3 rounded-xl mt-1.5">
+                    💡 <strong>Strategy:</strong> {CONNECTION_TYPES.find(t => t.id === type)?.hint}
                 </p>
             </div>
 
             {/* Dual PDF Extraction & Info Boxes */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Sender Info */}
-                <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#E2E8F0] space-y-2.5">
+                <div className="p-5 rounded-2xl bg-[#fbfbfe] border border-[#dedcff] space-y-2.5">
                     <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                        <span className="text-[11.5px] font-bold text-[#050315]/70 uppercase tracking-wider">
                             About You (Sender)
                         </span>
-                        <label className="cursor-pointer text-[11px] font-semibold px-2 py-0.5 rounded bg-white border border-[#CBD5E1] text-[#0A66C2] hover:bg-[#F8FAFC]">
+                        <label className="cursor-pointer text-[11.5px] font-bold px-2.5 py-1 rounded-lg bg-white border border-[#dedcff] text-[#2f27ce] hover:border-[#2f27ce]">
                             {senderPdfUploading ? 'Extracting...' : senderPdfDone ? '✓ PDF Loaded' : 'Upload Your PDF'}
                             <input type="file" accept=".pdf" onChange={handleSenderPdf} className="hidden" disabled={senderPdfUploading} />
                         </label>
@@ -241,17 +244,17 @@ export default function ConnectionMessageGenerator() {
                         value={yourRole}
                         onChange={(e) => setYourRole(e.target.value)}
                         placeholder="Your role (e.g. Senior PM at Stripe)"
-                        className="input-base bg-white"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                     />
                 </div>
 
                 {/* Recipient Info */}
-                <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#E2E8F0] space-y-2.5">
+                <div className="p-5 rounded-2xl bg-[#fbfbfe] border border-[#dedcff] space-y-2.5">
                     <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                        <span className="text-[11.5px] font-bold text-[#050315]/70 uppercase tracking-wider">
                             Recipient
                         </span>
-                        <label className="cursor-pointer text-[11px] font-semibold px-2 py-0.5 rounded bg-white border border-[#CBD5E1] text-[#0A66C2] hover:bg-[#F8FAFC]">
+                        <label className="cursor-pointer text-[11.5px] font-bold px-2.5 py-1 rounded-lg bg-white border border-[#dedcff] text-[#2f27ce] hover:border-[#2f27ce]">
                             {recipientPdfUploading ? 'Extracting...' : recipientPdfDone ? '✓ PDF Loaded' : 'Upload Their PDF'}
                             <input type="file" accept=".pdf" onChange={handleRecipientPdf} className="hidden" disabled={recipientPdfUploading} />
                         </label>
@@ -262,14 +265,14 @@ export default function ConnectionMessageGenerator() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="First name"
-                            className="input-base bg-white"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                         />
                         <input
                             type="text"
                             value={recipientRole}
                             onChange={(e) => setRecipientRole(e.target.value)}
                             placeholder="Their role / company"
-                            className="input-base bg-white"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                         />
                     </div>
                 </div>
@@ -278,7 +281,7 @@ export default function ConnectionMessageGenerator() {
             {/* Context & Intent */}
             <div className="space-y-4">
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
                         Specific Context / Shared Connection / Observation
                     </label>
                     <input
@@ -286,41 +289,44 @@ export default function ConnectionMessageGenerator() {
                         value={context}
                         onChange={(e) => setContext(e.target.value)}
                         placeholder={CONTEXT_HINTS[type]}
-                        className="input-base"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                        Your Intent / Goal <span className="text-[#64748B] font-normal">(optional)</span>
+                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
+                        Your Intent / Goal <span className="text-[#050315]/50 font-normal">(optional)</span>
                     </label>
                     <input
                         type="text"
                         value={intent}
                         onChange={(e) => setIntent(e.target.value)}
                         placeholder="e.g. Chat about distributed cache patterns, Discuss engineering openings"
-                        className="input-base"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                     />
                 </div>
 
-                <Button
+                <button
                     onClick={handleGenerate}
                     disabled={loading}
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    isLoading={loading}
-                    rightIcon={<SparklesIcon size={16} />}
+                    className="w-full py-3.5 rounded-2xl bg-[#2f27ce] hover:bg-[#433bff] disabled:opacity-50 text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                    Generate Connection Notes
-                </Button>
+                    {loading ? (
+                        <span>Crafting Personalized Notes...</span>
+                    ) : (
+                        <>
+                            <span>Generate 3 Connection Notes</span>
+                            <SparklesIcon size={18} />
+                        </>
+                    )}
+                </button>
             </div>
 
             {/* Fallback Prompt Block if AI offline */}
             {error === 'ai_failed' && !loading && (
                 <AIFailedPromptBlock
                     toolName="Connection Note Crafter"
-                    color="#0A66C2"
+                    color="#2f27ce"
                     promptText={buildConnectionPrompt({
                         type,
                         name: name || 'there',
@@ -334,75 +340,80 @@ export default function ConnectionMessageGenerator() {
 
             {/* Generated Results */}
             {messages.length > 0 && (
-                <div className="space-y-4 pt-6 border-t border-[#F1F5F9] animate-fade-in">
+                <div className="space-y-4 pt-6 border-t border-[#dedcff] animate-fade-in">
                     <div className="flex items-center justify-between gap-4">
-                        <p className="text-[13px] font-bold text-[#0F172A] uppercase tracking-wider">
+                        <p className="text-[13px] font-extrabold text-[#050315] uppercase tracking-wider">
                             Generated Notes ({messages.length})
                         </p>
                         {isAI && (
-                            <Badge variant="brand" size="sm">
-                                Anti-AI Writing Validated
-                            </Badge>
+                            <span className="inline-flex items-center justify-center text-center leading-none text-[11px] font-bold text-[#2f27ce] bg-[#dedcff] px-2.5 py-1 rounded-full shadow-2xs">
+                                Anti-AI Validated
+                            </span>
                         )}
                     </div>
 
                     <div className="space-y-3">
-                        {messages.map((m, i) => (
-                            <div
-                                key={i}
-                                className="p-4 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#0A66C2] shadow-xs space-y-2.5 transition-all group"
-                            >
-                                <div className="flex items-center justify-between gap-3">
-                                    <div className="flex items-center gap-2">
-                                        <Badge variant="brand" size="sm">
-                                            {m.tone}
-                                        </Badge>
-                                        <span
-                                            className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                                                (m.charCount || m.message?.length || 0) <= 300
-                                                    ? 'bg-[#F0FDF4] text-[#16A34A] border border-[#BBF7D0]'
-                                                    : 'bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA]'
-                                            }`}
+                        {messages.map((m, i) => {
+                            const charCount = m.charCount || m.message?.length || 0
+                            const isOver = charCount > 300
+
+                            return (
+                                <div
+                                    key={i}
+                                    className="p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow space-y-3 transition-all group"
+                                >
+                                    <div className="flex items-center justify-between gap-3">
+                                        <div className="flex items-center gap-2">
+                                            <span className="inline-flex items-center justify-center text-center leading-none text-[11.5px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3 py-1 rounded-full shadow-2xs">
+                                                {m.tone}
+                                            </span>
+                                            <span
+                                                className={`inline-flex items-center justify-center text-center leading-none text-[11.5px] font-mono font-bold px-2.5 py-1 rounded-full border ${
+                                                    !isOver
+                                                        ? 'bg-[#F0FDF4] text-[#16A34A] border-[#BBF7D0]'
+                                                        : 'bg-[#FEF2F2] text-[#DC2626] border-[#FECACA]'
+                                                }`}
+                                            >
+                                                {charCount}/300 chars {!isOver ? '✓ Safe' : '⚠ Over Limit'}
+                                            </span>
+                                        </div>
+
+                                        <button
+                                            onClick={() => copyMessage(m.message, i)}
+                                            className="inline-flex items-center gap-1.5 text-[12.5px] font-bold px-3 py-1 rounded-xl text-[#2f27ce] bg-[#dedcff]/40 hover:bg-[#dedcff] transition-colors cursor-pointer select-none"
                                         >
-                                            {m.charCount || m.message?.length}/300 chars
-                                        </span>
+                                            {copiedIdx === i ? (
+                                                <>
+                                                    <CheckIcon size={14} className="text-[#16A34A]" />
+                                                    <span className="text-[#16A34A]">Copied</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <CopyIcon size={14} />
+                                                    <span>Copy Note</span>
+                                                </>
+                                            )}
+                                        </button>
                                     </div>
 
-                                    <button
-                                        onClick={() => copyMessage(m.message, i)}
-                                        className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-2.5 py-1 rounded-md text-[#0A66C2] hover:bg-[#F0F7FF] transition-colors cursor-pointer select-none"
-                                    >
-                                        {copiedIdx === i ? (
-                                            <>
-                                                <CheckIcon size={13} className="text-[#16A34A]" />
-                                                <span className="text-[#16A34A]">Copied</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <CopyIcon size={13} />
-                                                <span>Copy Note</span>
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
-
-                                <p className="text-[14px] text-[#0F172A] leading-relaxed bg-[#F8FAFC] p-3.5 rounded-lg border border-[#E2E8F0]">
-                                    {m.message}
-                                </p>
-
-                                {m.tip && (
-                                    <p className="text-[12px] text-[#64748B]">
-                                        💡 {m.tip}
+                                    <p className="text-[14.5px] text-[#050315] leading-relaxed bg-[#fbfbfe] p-4 rounded-2xl border border-[#dedcff]">
+                                        {m.message}
                                     </p>
-                                )}
-                            </div>
-                        ))}
+
+                                    {m.tip && (
+                                        <p className="text-[12.5px] text-[#050315]/75">
+                                            💡 <strong>Why this works:</strong> {m.tip}
+                                        </p>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
 
                     {/* Pre-formatted Prompt Block */}
                     <ToolPromptBlock
                         toolName="Connection Note Crafter"
-                        color="#0A66C2"
+                        color="#2f27ce"
                         promptText={buildConnectionPrompt({
                             type,
                             name: name || 'there',

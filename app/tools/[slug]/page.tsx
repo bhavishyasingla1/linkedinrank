@@ -86,7 +86,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
                             </div>
                             <div className="space-y-1">
                                 {tool.tag && (
-                                    <span className="inline-flex items-center gap-1 text-[11px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3 py-0.5 rounded-full mb-1">
+                                    <span className="inline-flex items-center justify-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3 py-1 rounded-full mb-1 leading-none shadow-2xs">
                                         <SparklesIcon size={12} /> {tool.tag}
                                     </span>
                                 )}
@@ -106,7 +106,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
                     {/* Left Column: The Real Tool Interface (Hero) */}
                     <div className="lg:col-span-8 space-y-12 sm:space-y-14">
                         {/* Tool Interactive App Container */}
-                        <div className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 sm:p-9 aside-card-shadow">
+                        <div className="bg-white border-2 border-[#dedcff] rounded-3xl p-5 sm:p-9 aside-card-shadow">
                             <ToolPageClient toolId={tool.id} />
                         </div>
 

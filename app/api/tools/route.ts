@@ -20,16 +20,29 @@ const MODELS = [
 const MAX_RETRIES = 1
 const RETRY_DELAY_MS = 1000
 
-const BANNED_VOCABULARY_CLAUSE = `BANNED VOCABULARY (Never use any of these words or phrases):
-"additionally", "bolster", "crucial", "delve", "emphasize", "enhance", "enhancing", "fostering", "garner", "highlight", "intricate", "intricacies", "landscape", "meticulous", "meticulously", "pivotal", "robust", "showcase", "showcasing", "tapestry", "testament", "underscore", "valuable", "vibrant", "passionate", "results-driven", "team player", "go-getter", "in today's fast-paced world", "not only X, but also Y", "unlock", "supercharge", "transformative", "innovative".
+const BANNED_VOCABULARY_CLAUSE = `═══ STRICT WRITING & ANTI-AI CONSTRAINTS (HUMANS & WORLD-BUILDING RULES) ═══
+1. BANNED VOCABULARY & PHRASES (NEVER use any of these words or stems):
+   "additionally", "align with", "boasts", "bolstered", "crucial", "delve", "delving", "emphasize", "emphasizing", "enduring", "enhance", "enhancing", "fostering", "garner", "highlight", "highlighting", "interplay", "intricate", "intricacies", "key" (as filler adjective), "landscape" (as abstract noun), "meticulous", "meticulously", "pivotal", "robust", "showcase", "showcasing", "tapestry", "testament", "underscore", "valuable", "vibrant", "rich", "profound", "exemplifies", "commitment to", "groundbreaking", "renowned", "diverse array", "unlock", "supercharge", "transformative", "innovative", "passionate", "results-driven", "team player", "go-getter", "in today's fast-paced world", "not only X, but also Y".
 
-SENTENCE & PUNCTUATION RULES:
-- Use plain "is" and "has" constructions.
-- Do NOT use dangling "-ing" clauses at sentence ends.
-- Do NOT force contrast.
-- NEVER use em dashes (—) or en dashes (–). Use commas, periods, or | instead.
-- NO emojis, no hype language, no corporate fluff.
-- Sound like a credible, accomplished human writing naturally.`
+2. SENTENCE CONSTRUCTION & COPULAS:
+   - Use plain "is" and "has" constructions. Avoid dressed-up copula substitutes (serves as, stands as, marks, functions as, operates as, represents, boasts, features, maintains).
+   - NEVER tack on a dangling "-ing" clause at sentence ends (e.g., "...creating a lively sense of community", "...cementing its place").
+   - Do NOT force contrast ("It's not just X, it's Y", "X rather than Y").
+   - Do NOT pad lists to three items artificially.
+   - Do NOT cycle synonyms to dodge natural word repetition.
+
+3. FORMATTING, PUNCTUATION & TONE:
+   - NEVER use em dashes (—) or en dashes (–). Use commas, periods, colons, or | instead.
+   - NO emojis or decorative characters anywhere in output text.
+   - Sentence case for titles and headers (not title case).
+   - Sparing bold; do NOT bold random buzzwords.
+   - Sound like a credible, accomplished human with high signal, cognitive hospitality, and low decoding cost.
+
+4. CONTENT & SOURCING INTEGRITY:
+   - Ground all output in the user's actual context, skills, and industry terminology.
+   - Do NOT invent fake metrics, companies, or credentials.
+   - Do NOT manufacture significance ("marks a pivotal moment", "reflects broader trends").
+   - Omit conversational asides ("I hope this helps", "Certainly", "Here are your options"). Deliver the output directly.`
 
 async function callGeminiWithRetry(
     prompt: string,

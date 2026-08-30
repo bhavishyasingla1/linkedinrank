@@ -8,7 +8,7 @@ interface ToolPromptBlockProps {
     color?: string
 }
 
-export function AIFailedPromptBlock({ toolName, promptText, color = '#0A66C2' }: ToolPromptBlockProps) {
+export function AIFailedPromptBlock({ toolName, promptText, color = '#2f27ce' }: ToolPromptBlockProps) {
     const [copied, setCopied] = useState(false)
 
     const handleCopy = () => {
@@ -29,36 +29,36 @@ export function AIFailedPromptBlock({ toolName, promptText, color = '#0A66C2' }:
     }
 
     return (
-        <div className="mt-2 border border-amber-200 rounded-xl bg-amber-50 overflow-hidden">
-            <div className="px-4 py-3">
-                <div className="flex items-center gap-2 mb-2">
-                    <svg className="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <div className="mt-4 border border-amber-200 rounded-2xl bg-amber-50/80 overflow-hidden shadow-xs">
+            <div className="p-5">
+                <div className="flex items-center gap-2.5 mb-2">
+                    <svg className="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                     </svg>
-                    <p className="text-sm font-semibold text-amber-800">AI is not available right now</p>
+                    <p className="text-[14px] font-bold text-amber-900">AI Service Offline (Rule-Based Fallback Active)</p>
                 </div>
-                <p className="text-xs text-amber-700 mb-3 leading-relaxed">
-                    Copy the prompt below and paste it into <strong>ChatGPT</strong>, <strong>Claude</strong>, or <strong>Gemini</strong> to get your results.
+                <p className="text-[12.5px] text-amber-800 mb-3 leading-relaxed">
+                    You can copy the engineered prompt below and paste it into <strong>ChatGPT</strong>, <strong>Claude</strong>, or <strong>Gemini</strong> for full AI generation.
                 </p>
-                <div className="bg-white border border-amber-100 rounded-lg p-3 mb-3 max-h-48 overflow-y-auto">
-                    <pre className="text-[10px] text-[#4B5563] whitespace-pre-wrap font-sans leading-relaxed">{promptText}</pre>
+                <div className="bg-white border border-amber-200 rounded-xl p-3.5 mb-3 max-h-48 overflow-y-auto">
+                    <pre className="text-[11px] text-[#050315]/80 whitespace-pre-wrap font-mono leading-relaxed">{promptText}</pre>
                 </div>
                 <button
                     onClick={handleCopy}
-                    className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all cursor-pointer"
+                    className="w-full py-3 rounded-xl font-bold text-[13.5px] transition-all cursor-pointer shadow-xs"
                     style={{
                         backgroundColor: copied ? '#ECFDF5' : color,
                         color: copied ? '#059669' : '#fff',
                     }}
                 >
-                    {copied ? '✓ Prompt Copied! Paste it in any AI chatbot' : 'Copy Prompt'}
+                    {copied ? '✓ Prompt Copied to Clipboard!' : 'Copy Pre-Formatted Prompt'}
                 </button>
             </div>
         </div>
     )
 }
 
-export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2' }: ToolPromptBlockProps) {
+export default function ToolPromptBlock({ toolName, promptText, color = '#2f27ce' }: ToolPromptBlockProps) {
     const [copied, setCopied] = useState(false)
     const [expanded, setExpanded] = useState(false)
 
@@ -80,33 +80,35 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
     }
 
     return (
-        <div className="mt-4 border border-dashed border-gray-200 rounded-xl bg-[#FAFBFC] overflow-hidden">
-            <div className="px-4 py-3 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 min-w-0">
-                    <svg className="w-4 h-4 shrink-0" style={{ color }} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-                    </svg>
+        <div className="mt-5 border border-dashed border-[#dedcff] rounded-2xl bg-[#fbfbfe] overflow-hidden">
+            <div className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-white border border-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 shadow-2xs">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                        </svg>
+                    </div>
                     <div className="min-w-0">
-                        <p className="text-[11px] font-semibold text-[#0A0F1C]">Want even better results?</p>
-                        <p className="text-[10px] text-[#6B7280] truncate">Copy this prompt → paste into ChatGPT / Claude / Gemini</p>
+                        <p className="text-[13px] font-bold text-[#050315]">Copy Engineered AI Prompt</p>
+                        <p className="text-[11.5px] text-[#050315]/60 truncate">Paste into ChatGPT, Claude, or Gemini for custom variations</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="text-[10px] text-[#6B7280] hover:text-[#0A0F1C] transition-colors flex items-center gap-1 cursor-pointer"
+                        className="text-[12px] font-semibold text-[#050315]/70 hover:text-[#050315] transition-colors flex items-center gap-1 cursor-pointer px-2.5 py-1.5"
                     >
-                        <svg className={`w-3 h-3 transition-transform ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
-                        {expanded ? 'Hide' : 'Preview'}
+                        {expanded ? 'Hide Prompt' : 'Preview Prompt'}
                     </button>
                     <button
                         onClick={handleCopy}
-                        className="text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-all cursor-pointer"
+                        className="text-[12px] font-bold px-3.5 py-1.5 rounded-xl transition-all cursor-pointer shadow-2xs"
                         style={{
-                            backgroundColor: copied ? '#ECFDF5' : `${color}10`,
-                            color: copied ? '#059669' : color,
+                            backgroundColor: copied ? '#ECFDF5' : '#2f27ce',
+                            color: copied ? '#059669' : '#fff',
                         }}
                     >
                         {copied ? '✓ Copied!' : 'Copy Prompt'}
@@ -114,24 +116,37 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
                 </div>
             </div>
             {expanded && (
-                <div className="border-t border-gray-100 px-4 py-3 max-h-56 overflow-y-auto">
-                    <pre className="text-[10px] text-[#4B5563] whitespace-pre-wrap font-sans leading-relaxed">{promptText}</pre>
+                <div className="border-t border-[#dedcff] p-4 bg-white max-h-60 overflow-y-auto">
+                    <pre className="text-[11px] text-[#050315]/80 whitespace-pre-wrap font-mono leading-relaxed">{promptText}</pre>
                 </div>
             )}
         </div>
     )
 }
 
-// ── Prompt builders for each tool ──────────────────────────
+const CORE_PRINCIPLES = `═══ STRICT WRITING & ANTI-AI CONSTRAINTS (HUMANS & WORLD-BUILDING FRAMEWORK) ═══
+1. BANNED VOCABULARY (Never use any of these words or stems):
+   additionally, align with, boasts, bolstered, crucial, delve, delving, emphasize, emphasizing, enduring, enhance, enhancing, fostering, garner, highlight, highlighting, interplay, intricate, intricacies, key (as filler), landscape (abstract noun), meticulous, meticulously, pivotal, robust, showcase, showcasing, tapestry, testament, underscore, valuable, vibrant, rich, profound, exemplifies, commitment to, groundbreaking, renowned, diverse array, unlock, supercharge, transformative, innovative, passionate, results-driven, team player, go-getter, in today's fast-paced world, not only X but also Y.
 
-const CORE_PRINCIPLES = `CORE WRITING RULES & ANTI-AI CONSTRAINTS:
-1. BANNED VOCABULARY (Never use these): additionally, bolster, crucial, delve, emphasize, enhance, fostering, garner, highlight, intricate, intricacies, landscape, meticulous, pivotal, robust, showcase, tapestry, testament, underscore, valuable, vibrant, passionate, results-driven, team player, go-getter, in today's fast-paced world, not only X but also Y, supercharge, unlock, transformative.
-2. Plain sentence construction: use plain "is" and "has". Do not use dangling "-ing" clauses at sentence ends.
-3. NEVER use em dashes (—) or en dashes (–). Use commas, periods, or | instead.
-4. Start with attention, not information. Open with a scroll-stopping hook.
-5. High cognitive hospitality: short sentences, simple words, one idea per paragraph.
-6. Ground all claims in real details. Never invent metrics or companies.
-7. Tone: credible, human, clear, professional, zero corporate fluff.`
+2. SENTENCE CONSTRUCTION & COPULAS:
+   - Use plain "is" and "has" constructions. Avoid dressed-up copula substitutes (serves as, stands as, marks, functions as, operates as, represents, boasts, features, maintains).
+   - NEVER tack on a dangling "-ing" clause at sentence ends (e.g., "...creating a lively community", "...cementing its position").
+   - Do NOT force contrast ("It's not X, it's Y", "X rather than Y").
+   - Do NOT pad examples to three artificially.
+   - Do NOT cycle synonyms to dodge natural word repetition.
+
+3. FORMATTING, PUNCTUATION & TONE:
+   - NEVER use em dashes (—) or en dashes (–). Use commas, periods, colons, or | instead.
+   - NO emojis, no hype language, no corporate cheerleading, no inflated claims.
+   - Sentence case for titles and headings (not title case).
+   - Sparing bold; do not bold random filler words.
+   - High cognitive hospitality: short clean sentences, ordinary words, low decoding cost.
+
+4. SOURCING & GROUND TRUTH INTEGRITY:
+   - Ground all output in the user's specific background, domain tools, and industry terms.
+   - Never fabricate metrics, companies, or credentials.
+   - Do not manufacture significance ("marks a turning point", "reflects broader trends").
+   - Omit conversational asides ("I hope this helps", "Certainly"). Deliver deliverables directly.`
 
 export function buildAboutPrompt(inputs: {
     role: string; experience?: string; passion?: string;

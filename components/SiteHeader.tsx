@@ -54,20 +54,20 @@ export default function SiteHeader() {
             className={`
                 sticky top-0 z-50 w-full transition-all duration-300
                 ${scrolled
-                    ? 'bg-transparent border-transparent pt-3 pb-2'
+                    ? 'bg-[#fbfbfe]/95 md:bg-transparent md:border-transparent pt-2 md:pt-3 pb-2 border-b border-[#dedcff]/70 md:border-b-0 backdrop-blur-md'
                     : 'bg-[#fbfbfe]/90 backdrop-blur-md border-b border-[#dedcff]/70'
                 }
             `}
         >
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-                {/* Brand Logo: Fades out smoothly when scrolled */}
-                <div className={`transition-all duration-300 ${scrolled ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-4">
+                {/* Brand Logo: Always visible on mobile, fades out smoothly on desktop when scrolled */}
+                <div className={`transition-all duration-300 md:${scrolled ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'} opacity-100 translate-x-0`}>
                     <Link
                         href="/"
-                        className="font-bold text-[19px] tracking-tight text-[#050315] no-underline shrink-0 flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-full px-1"
+                        className="font-bold text-[18px] sm:text-[19px] tracking-tight text-[#050315] no-underline shrink-0 flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-full px-1"
                     >
-                        <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-[#fbfbfe] flex items-center justify-center shadow-sm shadow-[#2f27ce]/30">
-                            <SparklesIcon size={15} />
+                        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-[#fbfbfe] flex items-center justify-center shadow-sm shadow-[#2f27ce]/30">
+                            <SparklesIcon size={14} />
                         </span>
                         <span className="font-extrabold tracking-tight">
                             LinkedIn<span className="text-[#2f27ce]">Rank</span>

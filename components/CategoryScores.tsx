@@ -47,7 +47,7 @@ export default function CategoryScores({ categories }: CategoryScoresProps) {
                                             {cat.category}
                                         </span>
                                         <div className="flex items-center gap-2.5">
-                                            <span className={`text-[11.5px] font-bold px-2.5 py-0.5 rounded-full ${
+                                            <span className={`inline-flex items-center justify-center text-center leading-none text-[11.5px] font-bold px-3 py-1.5 rounded-full shadow-2xs ${
                                                 isStrong
                                                     ? 'bg-[#dedcff] text-[#2f27ce]'
                                                     : isNeedsWork

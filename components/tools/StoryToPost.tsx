@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import { convertStoryToPost } from '@/lib/tools'
 import ToolPromptBlock, { AIFailedPromptBlock, buildStoryToPostPrompt } from './ToolPromptBlock'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { CheckIcon, CopyIcon, SparklesIcon } from '@/components/ui/Icons'
 
 type PostStyle = 'classic' | 'listicle' | 'micro'
@@ -90,27 +88,32 @@ export default function StoryToPost() {
         setTimeout(() => setCopied(false), 2000)
     }
 
+    // Calculate feed preview before the "see more" cutoff (~210 chars / 3 lines)
+    const feedPreview = aiPost?.body ? (aiPost.body.length > 210 ? aiPost.body.slice(0, 210) + '...' : aiPost.body) : ''
+
     return (
         <div className="space-y-6">
             {/* Tool Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#dedcff]">
                 <div>
-                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
                         LinkedIn Story-to-Post Converter
                     </h2>
-                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                    <p className="text-[13.5px] text-[#050315]/70 mt-1">
                         Transform raw career moments into structured, high-engagement LinkedIn posts formatted for mobile readability.
                     </p>
                 </div>
-                <Badge variant="brand" size="sm">
-                    Instant Ghostwriter
-                </Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="inline-flex items-center justify-center text-center leading-none text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs whitespace-nowrap shrink-0">
+                        Mobile Fold Optimized
+                    </span>
+                </div>
             </div>
 
             {/* Form Inputs */}
             <div className="space-y-4">
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
                         Your Raw Story / Work Experience <span className="text-[#DC2626]">*</span>
                     </label>
                     <textarea
@@ -118,66 +121,69 @@ export default function StoryToPost() {
                         onChange={(e) => setRawStory(e.target.value)}
                         placeholder="Tell what happened: e.g. We migrated our core database last Friday and had an unexpected outage at 2 AM. Here is what we learned and how we fixed our failover system..."
                         rows={5}
-                        className="input-base resize-none"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315] resize-none"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                        Core Takeaway / Lesson <span className="text-[#64748B] font-normal">(optional)</span>
+                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
+                        Core Takeaway / Lesson <span className="text-[#050315]/50 font-normal">(optional)</span>
                     </label>
                     <input
                         type="text"
                         value={lesson}
                         onChange={(e) => setLesson(e.target.value)}
                         placeholder="e.g. Redundancy without automated drills is just wishful thinking."
-                        className="input-base"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                     />
                 </div>
 
                 {/* Post Style Selector */}
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-2">
+                    <label className="block text-[13px] font-bold text-[#050315] mb-2">
                         Post Structure &amp; Format
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {STYLES.map((s) => (
                             <button
                                 key={s.id}
                                 onClick={() => setStyle(s.id)}
-                                className={`p-3 rounded-xl border text-left transition-all cursor-pointer select-none ${
+                                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer select-none ${
                                     style === s.id
-                                        ? 'bg-[#F0F7FF] border-[#0A66C2] shadow-xs'
-                                        : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1]'
+                                        ? 'bg-[#dedcff]/40 border-[#2f27ce] shadow-sm'
+                                        : 'bg-white border-[#dedcff] hover:border-[#2f27ce]'
                                 }`}
                             >
-                                <p className={`text-[13px] font-semibold ${style === s.id ? 'text-[#0A66C2]' : 'text-[#0F172A]'}`}>
+                                <p className={`text-[13.5px] font-bold ${style === s.id ? 'text-[#2f27ce]' : 'text-[#050315]'}`}>
                                     {s.label}
                                 </p>
-                                <p className="text-[11px] text-[#64748B] mt-0.5">{s.desc}</p>
+                                <p className="text-[11.5px] text-[#050315]/65 mt-1 leading-snug">{s.desc}</p>
                             </button>
                         ))}
                     </div>
                 </div>
 
-                <Button
+                <button
                     onClick={handleConvert}
                     disabled={!rawStory.trim() || loading}
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    isLoading={loading}
-                    rightIcon={<SparklesIcon size={16} />}
+                    className="w-full py-3.5 rounded-2xl bg-[#2f27ce] hover:bg-[#433bff] disabled:opacity-50 text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                    Format into LinkedIn Post
-                </Button>
+                    {loading ? (
+                        <span>Structuring into LinkedIn Post...</span>
+                    ) : (
+                        <>
+                            <span>Format into Viral LinkedIn Post</span>
+                            <SparklesIcon size={18} />
+                        </>
+                    )}
+                </button>
             </div>
 
             {/* Fallback Prompt Block if AI offline */}
             {error === 'ai_failed' && !loading && (
                 <AIFailedPromptBlock
                     toolName="Story to Post Converter"
-                    color="#0A66C2"
+                    color="#2f27ce"
                     promptText={buildStoryToPostPrompt({
                         story: rawStory,
                         goal: lesson || undefined,
@@ -187,60 +193,80 @@ export default function StoryToPost() {
 
             {/* Generated Post Result */}
             {aiPost && (
-                <div className="space-y-4 pt-6 border-t border-[#F1F5F9] animate-fade-in">
+                <div className="space-y-5 pt-6 border-t border-[#dedcff] animate-fade-in">
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                            <Badge variant="brand" size="sm">
+                            <span className="inline-flex items-center justify-center text-center leading-none text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3.5 py-1 rounded-full shadow-2xs">
                                 Ready to Post
-                            </Badge>
-                            <span className="text-[12px] text-[#64748B]">
-                                {aiPost.word_count || aiPost.body.split(/\s+/).length} words
+                            </span>
+                            <span className="text-[12px] font-mono text-[#050315]/70">
+                                {aiPost.word_count || aiPost.body.split(/\s+/).filter(Boolean).length} words · {aiPost.body.length} chars
                             </span>
                         </div>
 
                         <button
                             onClick={copyFullPost}
-                            className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-[#F0F7FF] border border-[#BAE0FD] text-[#0A66C2] hover:bg-[#E0F2FE] transition-colors cursor-pointer select-none"
+                            className="inline-flex items-center gap-1.5 text-[12.5px] font-bold px-3.5 py-1.5 rounded-xl bg-[#2f27ce] text-white hover:bg-[#433bff] transition-colors cursor-pointer select-none shadow-xs"
                         >
                             {copied ? (
                                 <>
-                                    <CheckIcon size={13} className="text-[#16A34A]" />
-                                    <span className="text-[#16A34A]">Copied Post</span>
+                                    <CheckIcon size={14} />
+                                    <span>Copied Post</span>
                                 </>
                             ) : (
                                 <>
-                                    <CopyIcon size={13} />
+                                    <CopyIcon size={14} />
                                     <span>Copy Full Post</span>
                                 </>
                             )}
                         </button>
                     </div>
 
-                    <div className="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
-                        <div className="text-[14px] text-[#0F172A] leading-relaxed whitespace-pre-wrap font-sans bg-[#F8FAFC] p-4 rounded-lg border border-[#E2E8F0]">
-                            {aiPost.body}
-                            {aiPost.hashtags && aiPost.hashtags.length > 0 && (
-                                <div className="mt-4 pt-3 border-t border-[#E2E8F0] flex flex-wrap gap-1.5">
-                                    {aiPost.hashtags.map((tag, idx) => (
-                                        <span key={idx} className="text-[12px] font-medium text-[#0A66C2]">
-                                            #{tag.replace(/^#/, '')}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+                    {/* Feed "See More" Cutoff Simulator */}
+                    <div className="p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] space-y-1.5">
+                        <div className="flex items-center justify-between text-[11px] font-bold text-[#2f27ce] uppercase tracking-wider">
+                            <span>📱 Mobile Feed Preview (Before &quot;...see more&quot;)</span>
+                            <span className="font-mono">Top ~210 chars</span>
                         </div>
+                        <p className="text-[13.5px] text-[#050315] font-medium leading-relaxed bg-white p-3 rounded-xl border border-[#dedcff]">
+                            {feedPreview} <span className="text-[#2f27ce] font-bold">...see more</span>
+                        </p>
+                    </div>
+
+                    <div className="p-6 rounded-3xl bg-white border border-[#dedcff] aside-card-shadow space-y-4">
+                        <label className="block text-[12px] font-bold text-[#050315]/70 uppercase tracking-wider">
+                            Full Formatted Post (Editable)
+                        </label>
+                        <textarea
+                            value={aiPost.body}
+                            onChange={(e) => setAiPost({ ...aiPost, body: e.target.value })}
+                            rows={10}
+                            className="w-full text-[14.5px] text-[#050315] leading-relaxed font-sans bg-[#fbfbfe] p-4 rounded-2xl border border-[#dedcff] focus:border-[#2f27ce] outline-none resize-y"
+                        />
+
+                        {aiPost.hashtags && aiPost.hashtags.length > 0 && (
+                            <div className="pt-2 flex flex-wrap gap-2">
+                                {aiPost.hashtags.map((tag, idx) => (
+                                    <span key={idx} className="text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/40 px-2.5 py-1 rounded-xl border border-[#dedcff]">
+                                        #{tag.replace(/^#/, '')}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
 
                         {aiPost.takeaway && (
-                            <p className="text-[12px] text-[#475569]">
-                                💡 <strong>Core Takeaway:</strong> {aiPost.takeaway}
-                            </p>
+                            <div className="p-3.5 rounded-xl bg-[#fbfbfe] border border-[#dedcff]">
+                                <p className="text-[12.5px] text-[#050315]/80">
+                                    💡 <strong>Core Takeaway:</strong> {aiPost.takeaway}
+                                </p>
+                            </div>
                         )}
                     </div>
 
                     {/* Pre-formatted Prompt Block */}
                     <ToolPromptBlock
                         toolName="Story to Post Converter"
-                        color="#0A66C2"
+                        color="#2f27ce"
                         promptText={buildStoryToPostPrompt({
                             story: rawStory,
                             goal: lesson || undefined,

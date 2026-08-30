@@ -73,29 +73,29 @@ export default function ToolsPage() {
             <SiteHeader />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
 
-            <main id="main-content" className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-20 sm:space-y-28">
+            <main id="main-content" className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-20 space-y-12 sm:space-y-24">
                 {/* ── 1. Centered Hero Header ───────────────────── */}
-                <div className="text-center max-w-3xl mx-auto space-y-5">
+                <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-5">
                     <nav aria-label="Breadcrumb" className="text-[13px] text-[#050315]/60 flex items-center justify-center gap-2">
                         <Link href="/" className="hover:text-[#2f27ce] transition-colors no-underline">Home</Link>
                         <span>/</span>
                         <span className="text-[#050315] font-semibold">Tools</span>
                     </nav>
 
-                    <div className="space-y-3">
-                        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12.5px] font-extrabold text-[#2f27ce] shadow-xs">
+                    <div className="space-y-2.5 sm:space-y-3">
+                        <div className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-[#dedcff] border border-[#dedcff] text-[11.5px] sm:text-[12.5px] font-extrabold text-[#2f27ce] shadow-xs">
                             <SparklesIcon size={14} /> 100% Free Suite • Zero Logins Required
                         </div>
-                        <h1 className="text-[36px] sm:text-[50px] font-extrabold text-[#050315] tracking-tight leading-[1.1]">
+                        <h1 className="text-[28px] sm:text-[50px] font-extrabold text-[#050315] tracking-tight leading-[1.15]">
                             Free LinkedIn Tools &amp; Generators
                         </h1>
-                        <p className="text-[16px] sm:text-[18px] text-[#050315]/75 leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-[15px] sm:text-[18px] text-[#050315]/75 leading-relaxed max-w-2xl mx-auto">
                             Focused standalone utilities to optimize individual profile sections, inject searchable recruiter keywords, and craft high-performing content.
                         </p>
                     </div>
 
                     {/* Category Quick Jump Pills (Centered & Wrapped) */}
-                    <div className="pt-3 flex items-center justify-center gap-2.5 flex-wrap">
+                    <div className="pt-2 sm:pt-3 flex items-center justify-center gap-2 sm:gap-2.5 flex-wrap">
                         {CATEGORIES.map((cat) => {
                             const CatIcon = cat.icon
                             const count = ALL_TOOLS.filter((t) => t.category === cat.key).length
@@ -103,7 +103,7 @@ export default function ToolsPage() {
                                 <a
                                     key={cat.key}
                                     href={`#${cat.key}`}
-                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:bg-[#dedcff]/30 text-[13px] font-bold text-[#050315] hover:text-[#2f27ce] transition-all no-underline shadow-xs shrink-0 group"
+                                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:bg-[#dedcff]/30 text-[12px] sm:text-[13px] font-bold text-[#050315] hover:text-[#2f27ce] transition-all no-underline shadow-xs shrink-0 group"
                                 >
                                     <CatIcon size={14} className="text-[#2f27ce]" />
                                     <span>{cat.label}</span>
@@ -117,7 +117,7 @@ export default function ToolsPage() {
                 </div>
 
                 {/* ── 2. Category Sections with Spacious Layout ─── */}
-                <div className="space-y-20 sm:space-y-28">
+                <div className="space-y-12 sm:space-y-24">
                     {CATEGORIES.map((cat, idx) => {
                         const tools = ALL_TOOLS.filter((t) => t.category === cat.key)
                         if (tools.length === 0) return null

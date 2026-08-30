@@ -88,32 +88,40 @@ Please optimize and rewrite my LinkedIn profile using the audit diagnostics, can
         })
     }
 
-    prompt += `\n═══ STRICT WRITING & ANTI-AI RULES ═══
-1. BANNED WORDS (DO NOT use any of these):
-   additionally, bolster, crucial, delve, emphasize, enhance, fostering, garner, highlight, intricate, intricacies, landscape, meticulous, pivotal, robust, showcase, tapestry, testament, underscore, valuable, vibrant, passionate, results-driven, team player, go-getter, in today's fast-paced world, not only X but also Y.
+    prompt += `\n═══ STRICT WRITING & ANTI-AI RULES (HUMANS & WORLD-BUILDING FRAMEWORK) ═══
+1. BANNED VOCABULARY & PHRASE CLUSTERS (DO NOT use any of these words or stems):
+   additionally, align with, boasts, bolstered, crucial, delve, delving, emphasize, emphasizing, enduring, enhance, enhancing, fostering, garner, highlight, highlighting, interplay, intricate, intricacies, key (as filler), landscape (abstract noun), meticulous, meticulously, pivotal, robust, showcase, showcasing, tapestry, testament, underscore, valuable, vibrant, rich, profound, exemplifies, commitment to, groundbreaking, renowned, diverse array, unlock, supercharge, transformative, innovative, passionate, results-driven, team player, go-getter, in today's fast-paced world, not only X but also Y.
 
-2. SENTENCE STRUCTURE & TONE:
-   - Use plain "is" and "has" constructions.
-   - Do NOT use dangling "-ing" clauses at sentence ends.
-   - Do NOT force contrast.
+2. SENTENCE CONSTRUCTION & COPULAS:
+   - Use plain "is" and "has" constructions. Avoid dressed-up copula substitutes (serves as, stands as, marks, functions as, operates as, represents, boasts, features, maintains).
+   - NEVER tack on a dangling "-ing" clause at sentence ends (e.g., "...creating a lively community", "...cementing its position").
+   - Do NOT force contrast ("It's not X, it's Y", "X rather than Y").
+   - Do NOT pad examples to three artificially.
+   - Do NOT cycle synonyms to dodge natural word repetition.
+
+3. FORMATTING, PUNCTUATION & TONE:
    - NEVER use em dashes (—) or en dashes (–). Use commas, periods, or | instead.
    - NO emojis, no motivational cheerleading, no inflated claims.
-   - Sound like a credible, accomplished human writing naturally.
+   - Sentence case for all titles and section headings.
+   - Keep bold sparing; don't bold every buzzword.
+   - Sound like a credible, accomplished human with high cognitive hospitality and low decoding cost.
 
-3. SOURCING & TRUTH INTEGRITY:
+4. SOURCING & TRUTH INTEGRITY:
    - Ground all suggestions in my actual experience.
    - Do NOT invent fake metrics, companies, or credentials.
+   - Do NOT manufacture significance ("marks a turning point", "reflects broader trends").
+   - Omit conversational asides ("I hope this helps", "Let me know"). Deliver deliverables directly.
 
 ═══ REQUIRED DELIVERABLES ═══
 
-1. THREE HEADLINE OPTIONS (Under 120 chars each, keyword-rich, no emojis):
+1. THREE HEADLINE OPTIONS (Strictly under 120 chars each, keyword-rich, no emojis, no em dashes):
    - Option 1 (Value Proposition): Who I help + specific outcome.
    - Option 2 (Authority & Expertise): Role + Core Domain + Key Technologies.
    - Option 3 (Builder / Operator): What I build/scale + unique differentiator.
 
 2. COMPLETE ABOUT SECTION REWRITE:
    - First-person voice ("I").
-   - 3-4 short, punchy paragraphs separated by line breaks for mobile readability.
+   - 3-4 short, punchy paragraphs separated by line breaks for cognitive hospitality and mobile scanning.
    - Open with a scroll-stopping hook that states what I build or solve (no generic openers like "I am a...").
    - Weave in my core skills, methodologies, and specific domain tools naturally.
    - End with a clean, direct call-to-action to connect.
@@ -121,6 +129,7 @@ Please optimize and rewrite my LinkedIn profile using the audit diagnostics, can
 3. REVAMPED EXPERIENCE BULLET POINTS:
    - Provide 2-3 high-impact bullet points for my top experience role(s).
    - Format: [Active Power Verb] + [Specific Action/Scope] + [Measurable Outcome/Impact].
+   - Active power verbs: Led, Built, Designed, Shipped, Automated, Scaled, Calibrated, Deployed.
 
 4. TOP 5 STRATEGIC SEARCH TERMS / SKILLS:
    - Recommend 5 specific high-demand industry skills I should add to my profile for recruiter search visibility.`
@@ -130,7 +139,7 @@ Please optimize and rewrite my LinkedIn profile using the audit diagnostics, can
 
 function buildQuickAIPrompt(analysis: AnalysisResult): string {
     const role = analysis.profile?.experience?.[0]?.title || analysis.profile?.headline?.split('|')?.[0]?.trim() || 'Professional'
-    return `Here is my LinkedIn PDF and my LinkedInRank analysis report (Score: ${analysis.linkedInScore}/100, ${analysis.tier} tier, Role: ${role}). Rewrite my headline (under 120 chars), About section (first-person, 3 short paragraphs with hook), and experience bullets based on this feedback. Apply strict human writing rules: no buzzwords (passionate, results-driven, delve, robust, pivotal), no emojis, no em dashes, and keep my authentic voice.`
+    return `Here is my LinkedIn PDF data and my LinkedInRank analysis report (Score: ${analysis.linkedInScore}/100, ${analysis.tier} tier, Role: ${role}). Rewrite my headline (under 120 chars), About section (first-person, 3 short paragraphs with hook), and experience bullets based on this feedback. Apply strict human writing rules: use plain "is"/"has" copulas, no dangling "-ing" clauses, no buzzwords (passionate, results-driven, delve, robust, pivotal, bolster, crucial, showcase), no emojis, no em dashes (use | or commas), and maintain my authentic voice.`
 }
 
 export default function ResultsPage() {
@@ -223,7 +232,7 @@ export default function ResultsPage() {
                 {/* ── Report Intro Header ───────────────────────── */}
                 <div className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 sm:p-8 aside-card-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1.5">
-                        <div className="inline-flex items-center gap-1.5 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-0.5 rounded-full">
+                        <div className="inline-flex items-center justify-center gap-1.5 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3.5 py-1.5 rounded-full leading-none shadow-2xs">
                             <ShieldCheckIcon size={13} /> Verified Audit Report
                         </div>
                         <h1 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
@@ -237,7 +246,7 @@ export default function ResultsPage() {
                         )}
                     </div>
 
-                    <div className="inline-flex items-center gap-1.5 text-[12px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3.5 py-1 rounded-full shadow-2xs self-start sm:self-auto">
+                    <div className="inline-flex items-center justify-center gap-1.5 text-[12px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs self-start sm:self-auto leading-none">
                         <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
                         <span>Audit Complete</span>
                     </div>
@@ -290,13 +299,13 @@ export default function ResultsPage() {
                                         {skillsList.slice(0, 10).map((skill: string, i: number) => (
                                             <span
                                                 key={i}
-                                                className="text-[12px] bg-[#dedcff] text-[#2f27ce] px-3 py-1 rounded-full font-bold shadow-2xs"
+                                                className="inline-flex items-center justify-center text-center leading-none text-[12px] bg-[#dedcff] text-[#2f27ce] px-3.5 py-1.5 rounded-full font-bold shadow-2xs"
                                             >
                                                 {skill}
                                             </span>
                                         ))}
                                         {skillsList.length > 10 && (
-                                            <span className="text-[12px] text-[#050315]/60 px-2 py-1 font-semibold">
+                                            <span className="inline-flex items-center text-[12px] text-[#050315]/60 px-2 py-1 font-semibold">
                                                 +{skillsList.length - 10} more
                                             </span>
                                         )}

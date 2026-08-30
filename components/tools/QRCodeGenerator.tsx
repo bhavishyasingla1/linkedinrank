@@ -2,9 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react'
 import QRCode from 'qrcode'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
-import { CheckIcon, ArrowRightIcon } from '@/components/ui/Icons'
+import { CheckIcon } from '@/components/ui/Icons'
 
 type PatternType = 'square' | 'dots' | 'rounded' | 'classy' | 'smooth'
 type FrameType = 'none' | 'rounded' | 'badge'
@@ -23,19 +21,30 @@ const FRAME_OPTIONS: { label: string; value: FrameType }[] = [
     { label: 'Badge', value: 'badge' },
 ]
 
-const COLOR_PRESETS = ['#000000', '#0A66C2', '#4F46E5', '#059669', '#DC2626', '#D97706']
+const COLOR_PRESETS = ['#2f27ce', '#050315', '#433bff', '#059669', '#dc2626', '#d97706']
 
 export default function QRCodeGeneratorTool() {
     const [url, setUrl] = useState('')
     const [pattern, setPattern] = useState<PatternType>('rounded')
-    const [qrColor, setQrColor] = useState('#000000')
-    const [frame, setFrame] = useState<FrameType>('none')
+    const [qrColor, setQrColor] = useState('#2f27ce')
+    const [frame, setFrame] = useState<FrameType>('rounded')
     const [logo, setLogo] = useState<string | null>(null)
     const [logoType, setLogoType] = useState<'text' | 'emoji' | 'upload'>('text')
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [downloaded, setDownloaded] = useState(false)
     const [error, setError] = useState('')
+
+    // Normalize URL input to proper LinkedIn format
+    const getResolvedUrl = (input: string) => {
+        const trimmed = input.trim()
+        if (!trimmed) return ''
+        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed
+        if (trimmed.includes('linkedin.com')) return `https://${trimmed}`
+        return `https://www.linkedin.com/in/${trimmed.replace(/^@/, '')}`
+    }
+
+    const resolvedUrl = getResolvedUrl(url)
 
     const generateQR = useCallback(() => {
         const canvas = canvasRef.current
@@ -60,27 +69,27 @@ export default function QRCodeGeneratorTool() {
             ctx.fillRect(0, 0, size, size)
         }
 
-        if (!url.trim()) {
-            ctx.strokeStyle = '#E2E8F0'
+        if (!resolvedUrl) {
+            ctx.strokeStyle = '#dedcff'
             ctx.lineWidth = 2
             ctx.setLineDash([8, 8])
-            roundRect(ctx, padding, padding, qrSize, qrSize, 12)
+            roundRect(ctx, padding, padding, qrSize, qrSize, 16)
             ctx.stroke()
             ctx.setLineDash([])
 
-            ctx.fillStyle = '#94A3B8'
-            ctx.font = 'bold 15px -apple-system, sans-serif'
+            ctx.fillStyle = '#050315'
+            ctx.font = 'bold 16px -apple-system, sans-serif'
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
-            ctx.fillText('Enter your LinkedIn profile URL below', size / 2, size / 2)
+            ctx.fillText('Enter your LinkedIn profile or vanity handle below', size / 2, size / 2)
             return
         }
 
         try {
             setError('')
 
-            const qrData = QRCode.create(url, {
-                errorCorrectionLevel: logo ? 'H' : 'M',
+            const qrData = QRCode.create(resolvedUrl, {
+                errorCorrectionLevel: 'H',
             })
 
             const modules = qrData.modules
@@ -107,6 +116,9 @@ export default function QRCodeGeneratorTool() {
                     } else if (pattern === 'smooth') {
                         roundRect(ctx, x, y, moduleSize, moduleSize, moduleSize * 0.45)
                         ctx.fill()
+                    } else if (pattern === 'classy') {
+                        roundRect(ctx, x, y, moduleSize, moduleSize, moduleSize * 0.15)
+                        ctx.fill()
                     } else {
                         ctx.fillRect(x, y, moduleSize, moduleSize)
                     }
@@ -120,10 +132,10 @@ export default function QRCodeGeneratorTool() {
                 const logoY = size / 2 - logoSize / 2
 
                 ctx.fillStyle = '#FFFFFF'
-                roundRect(ctx, logoX - 4, logoY - 4, logoSize + 8, logoSize + 8, 12)
+                roundRect(ctx, logoX - 4, logoY - 4, logoSize + 8, logoSize + 8, 14)
                 ctx.fill()
-                ctx.strokeStyle = '#E2E8F0'
-                ctx.lineWidth = 1.5
+                ctx.strokeStyle = '#dedcff'
+                ctx.lineWidth = 2
                 ctx.stroke()
 
                 if (logoType === 'upload' && logo) {
@@ -131,7 +143,7 @@ export default function QRCodeGeneratorTool() {
                     logoImg.crossOrigin = 'anonymous'
                     logoImg.onload = () => {
                         ctx.save()
-                        roundRect(ctx, logoX, logoY, logoSize, logoSize, 8)
+                        roundRect(ctx, logoX, logoY, logoSize, logoSize, 10)
                         ctx.clip()
                         ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize)
                         ctx.restore()
@@ -154,7 +166,7 @@ export default function QRCodeGeneratorTool() {
             if (frame === 'badge') {
                 const badgeHeight = 38
                 const badgeY = size - padding - badgeHeight + 10
-                const badgeWidth = 170
+                const badgeWidth = 180
                 const badgeX = size / 2 - badgeWidth / 2
 
                 ctx.fillStyle = qrColor
@@ -169,9 +181,9 @@ export default function QRCodeGeneratorTool() {
             }
 
         } catch {
-            setError('Please enter a valid URL (e.g. https://linkedin.com/in/username)')
+            setError('Please enter a valid URL (e.g. https://linkedin.com/in/username or username)')
         }
-    }, [url, pattern, qrColor, frame, logo, logoType])
+    }, [resolvedUrl, pattern, qrColor, frame, logo, logoType])
 
     useEffect(() => {
         generateQR()
@@ -190,7 +202,7 @@ export default function QRCodeGeneratorTool() {
 
     const handleDownload = () => {
         const canvas = canvasRef.current
-        if (!canvas || !url.trim()) return
+        if (!canvas || !resolvedUrl) return
         const link = document.createElement('a')
         link.download = 'linkedin-qr-code.png'
         link.href = canvas.toDataURL('image/png')
@@ -202,39 +214,46 @@ export default function QRCodeGeneratorTool() {
     return (
         <div className="space-y-6">
             {/* Tool Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#dedcff]">
                 <div>
-                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                    <h2 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
                         LinkedIn Profile QR Code Generator
                     </h2>
-                    <p className="text-[13px] text-[#64748B] mt-0.5">
-                        Create beautiful, high-resolution QR codes to put on resumes, slide decks, business cards, and portfolios.
+                    <p className="text-[13.5px] text-[#050315]/70 mt-1">
+                        Create high-resolution QR codes to put on resumes, slide decks, business cards, and portfolios.
                     </p>
                 </div>
-                <Badge variant="brand" size="sm">
-                    Instant Vector / PNG
-                </Badge>
+                <div className="flex items-center gap-2 shrink-0">
+                    <span className="inline-flex items-center justify-center text-center leading-none text-[12px] font-bold text-[#2f27ce] bg-[#dedcff]/70 border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs whitespace-nowrap shrink-0">
+                        Instant Vector / PNG
+                    </span>
+                </div>
             </div>
 
             {/* Canvas Preview Box */}
-            <div className="p-6 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex flex-col items-center justify-center">
-                <div className="p-3 bg-white rounded-xl shadow-xs border border-[#E2E8F0]">
-                    <canvas ref={canvasRef} className="w-56 h-56 sm:w-64 sm:h-64 rounded-lg" />
+            <div className="p-6 rounded-3xl bg-[#fbfbfe] border border-[#dedcff] flex flex-col items-center justify-center">
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#dedcff]">
+                    <canvas ref={canvasRef} className="w-56 h-56 sm:w-64 sm:h-64 rounded-xl" />
                 </div>
+                {resolvedUrl && (
+                    <p className="text-[12px] font-mono text-[#050315]/70 mt-3 truncate max-w-sm">
+                        Target: {resolvedUrl}
+                    </p>
+                )}
             </div>
 
             {/* Form Inputs */}
             <div className="space-y-4">
                 <div>
-                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
-                        LinkedIn Profile or Portfolio URL <span className="text-[#DC2626]">*</span>
+                    <label className="block text-[13px] font-bold text-[#050315] mb-1.5">
+                        LinkedIn Profile URL or Vanity Handle <span className="text-[#DC2626]">*</span>
                     </label>
                     <input
-                        type="url"
+                        type="text"
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
-                        placeholder="https://www.linkedin.com/in/your-handle"
-                        className="input-base"
+                        placeholder="e.g. bhavishyasingla or https://linkedin.com/in/bhavishyasingla"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#dedcff] focus:border-[#2f27ce] outline-none text-[14px] bg-white text-[#050315]"
                     />
                     {error && <p className="text-[12px] text-[#DC2626] mt-1">{error}</p>}
                 </div>
@@ -242,18 +261,18 @@ export default function QRCodeGeneratorTool() {
                 {/* Pattern & Frame Customization */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-[13px] font-semibold text-[#334155] mb-1.5">
+                        <label className="block text-[13px] font-bold text-[#050315] mb-2">
                             Pattern Style
                         </label>
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-2">
                             {PATTERN_OPTIONS.map((p) => (
                                 <button
                                     key={p.value}
                                     onClick={() => setPattern(p.value)}
-                                    className={`text-[12px] px-3 py-1.5 rounded-lg border transition-all cursor-pointer select-none ${
+                                    className={`text-[12.5px] px-3.5 py-1.5 rounded-xl border font-bold transition-all cursor-pointer select-none ${
                                         pattern === p.value
-                                            ? 'bg-[#0A66C2] text-white border-[#0A66C2] font-semibold shadow-xs'
-                                            : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC]'
+                                            ? 'bg-[#2f27ce] text-white border-[#2f27ce] shadow-xs'
+                                            : 'bg-white text-[#050315]/80 border-[#dedcff] hover:border-[#2f27ce]'
                                     }`}
                                 >
                                     {p.label}
@@ -263,18 +282,18 @@ export default function QRCodeGeneratorTool() {
                     </div>
 
                     <div>
-                        <label className="block text-[13px] font-semibold text-[#334155] mb-1.5">
+                        <label className="block text-[13px] font-bold text-[#050315] mb-2">
                             Frame Style
                         </label>
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-2">
                             {FRAME_OPTIONS.map((f) => (
                                 <button
                                     key={f.value}
                                     onClick={() => setFrame(f.value)}
-                                    className={`text-[12px] px-3 py-1.5 rounded-lg border transition-all cursor-pointer select-none ${
+                                    className={`text-[12.5px] px-3.5 py-1.5 rounded-xl border font-bold transition-all cursor-pointer select-none ${
                                         frame === f.value
-                                            ? 'bg-[#0A66C2] text-white border-[#0A66C2] font-semibold shadow-xs'
-                                            : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC]'
+                                            ? 'bg-[#2f27ce] text-white border-[#2f27ce] shadow-xs'
+                                            : 'bg-white text-[#050315]/80 border-[#dedcff] hover:border-[#2f27ce]'
                                     }`}
                                 >
                                     {f.label}
@@ -287,8 +306,8 @@ export default function QRCodeGeneratorTool() {
                 {/* Color & Logo */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-[13px] font-semibold text-[#334155] mb-1.5">
-                            Brand Color
+                        <label className="block text-[13px] font-bold text-[#050315] mb-2">
+                            Brand Color Preset / Custom Hex
                         </label>
                         <div className="flex items-center gap-2">
                             {COLOR_PRESETS.map((c, i) => (
@@ -296,7 +315,7 @@ export default function QRCodeGeneratorTool() {
                                     key={i}
                                     onClick={() => setQrColor(c)}
                                     className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer ${
-                                        qrColor === c ? 'border-[#0F172A] scale-110 shadow-xs' : 'border-transparent'
+                                        qrColor === c ? 'border-[#050315] scale-110 shadow-xs' : 'border-transparent'
                                     }`}
                                     style={{ backgroundColor: c }}
                                 />
@@ -305,36 +324,36 @@ export default function QRCodeGeneratorTool() {
                                 type="text"
                                 value={qrColor}
                                 onChange={(e) => setQrColor(e.target.value)}
-                                className="w-24 px-2.5 py-1 text-[12px] border border-[#CBD5E1] rounded-lg font-mono text-[#0F172A]"
+                                className="w-24 px-2.5 py-1 text-[13px] border border-[#dedcff] rounded-xl font-mono text-[#050315] bg-white outline-none focus:border-[#2f27ce]"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-[13px] font-semibold text-[#334155] mb-1.5">
+                        <label className="block text-[13px] font-bold text-[#050315] mb-2">
                             Center Logo Badge
                         </label>
-                        <div className="flex gap-1.5">
+                        <div className="flex gap-2">
                             <button
                                 onClick={() => { setLogo(null); setLogoType('text') }}
-                                className={`flex-1 py-1.5 px-2 text-[12px] font-semibold rounded-lg border transition-all cursor-pointer ${
-                                    !logo && logoType === 'text' ? 'bg-[#F0F7FF] border-[#0A66C2] text-[#0A66C2]' : 'bg-white border-[#E2E8F0] text-[#64748B]'
+                                className={`flex-1 py-1.5 px-2 text-[12.5px] font-bold rounded-xl border transition-all cursor-pointer ${
+                                    !logo && logoType === 'text' ? 'bg-[#dedcff]/40 border-[#2f27ce] text-[#2f27ce]' : 'bg-white border-[#dedcff] text-[#050315]/70'
                                 }`}
                             >
                                 in Logo
                             </button>
                             <button
                                 onClick={() => { setLogo('emoji'); setLogoType('emoji') }}
-                                className={`flex-1 py-1.5 px-2 text-[12px] font-semibold rounded-lg border transition-all cursor-pointer ${
-                                    logoType === 'emoji' ? 'bg-[#F0F7FF] border-[#0A66C2] text-[#0A66C2]' : 'bg-white border-[#E2E8F0] text-[#64748B]'
+                                className={`flex-1 py-1.5 px-2 text-[12.5px] font-bold rounded-xl border transition-all cursor-pointer ${
+                                    logoType === 'emoji' ? 'bg-[#dedcff]/40 border-[#2f27ce] text-[#2f27ce]' : 'bg-white border-[#dedcff] text-[#050315]/70'
                                 }`}
                             >
                                 ⚡ Badge
                             </button>
                             <button
                                 onClick={() => fileInputRef.current?.click()}
-                                className={`flex-1 py-1.5 px-2 text-[12px] font-semibold rounded-lg border transition-all cursor-pointer ${
-                                    logoType === 'upload' ? 'bg-[#F0F7FF] border-[#0A66C2] text-[#0A66C2]' : 'bg-white border-[#E2E8F0] text-[#64748B]'
+                                className={`flex-1 py-1.5 px-2 text-[12.5px] font-bold rounded-xl border transition-all cursor-pointer ${
+                                    logoType === 'upload' ? 'bg-[#dedcff]/40 border-[#2f27ce] text-[#2f27ce]' : 'bg-white border-[#dedcff] text-[#050315]/70'
                                 }`}
                             >
                                 Upload
@@ -350,16 +369,20 @@ export default function QRCodeGeneratorTool() {
                     </div>
                 </div>
 
-                <Button
+                <button
                     onClick={handleDownload}
-                    disabled={!url.trim()}
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    leftIcon={downloaded ? <CheckIcon size={16} /> : undefined}
+                    disabled={!resolvedUrl}
+                    className="w-full py-3.5 rounded-2xl bg-[#2f27ce] hover:bg-[#433bff] disabled:opacity-50 text-white text-[15px] font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                    {downloaded ? '✓ High-Res PNG Downloaded!' : 'Download High-Res PNG (600x600)'}
-                </Button>
+                    {downloaded ? (
+                        <>
+                            <CheckIcon size={18} />
+                            <span>High-Res PNG Downloaded!</span>
+                        </>
+                    ) : (
+                        <span>Download High-Res PNG (600x600)</span>
+                    )}
+                </button>
             </div>
         </div>
     )

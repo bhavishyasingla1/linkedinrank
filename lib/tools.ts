@@ -283,7 +283,7 @@ const CONTEXT_KEYWORDS: Record<string, string> = {
     train: 'teach', mentor: 'teach', coach: 'teach', onboard: 'teach', educate: 'teach',
 }
 
-interface BulletImprovement {
+export interface BulletImprovement {
     original: string
     improved: string
     alternatives: string[]
@@ -294,15 +294,13 @@ interface BulletImprovement {
     score: number
 }
 
-export function improveBullet(bullet: string): BulletImprovement {
+export function improveBullet(bullet: string, style: 'concise' | 'storytelling' | 'ats' = 'concise'): BulletImprovement {
     const original = bullet.trim()
     const lowerBullet = original.toLowerCase()
     const suggestions: string[] = []
 
     const normalizeCore = (s: string) => {
         let t = (s || '').trim()
-        // Remove leading subject phrases that often appear in raw bullets
-        // Example: "I collect and analyze data" -> "collect and analyze data"
         t = t.replace(/^(?:i|we)\s+/i, '')
         t = t.replace(/^my\s+team\s+/i, '')
         t = t.replace(/^our\s+team\s+/i, '')
@@ -310,11 +308,8 @@ export function improveBullet(bullet: string): BulletImprovement {
         t = t.replace(/^our\s+/i, '')
         t = t.replace(/^(?:was|were|am|are|have|has|had|will|would|can|could)\s+/i, '')
         t = t.replace(/^to\s+/i, '')
-        // Clean up punctuation/whitespace
         t = t.replace(/\s+/g, ' ').trim()
-        // Avoid starting the final bullet with stray lowercase 'i'
         t = t.replace(/^i\b\s*/i, '')
-        // Remove leading punctuation
         t = t.replace(/^[,.:;\-–|]+\s*/, '')
         return t
     }
@@ -337,107 +332,74 @@ export function improveBullet(bullet: string): BulletImprovement {
     const hasResult = /resulting in|leading to|which (led|drove|increased|reduced|improved)|saving|generating|achieving|contributing to|enabling/i.test(original)
     const hasWeakStarter = WEAK_STARTERS.some(ws => lowerBullet.startsWith(ws))
 
-    // Build improved version
-    let improved = original
     let coreContent = original
-
-    // Strip weak starter
     if (hasWeakStarter) {
         const ws = WEAK_STARTERS.find(w => lowerBullet.startsWith(w))!
         coreContent = original.substring(ws.length).trim()
-        // Capitalize first letter
         coreContent = coreContent.charAt(0).toUpperCase() + coreContent.slice(1)
     }
 
-    // Generate improved version
-    if (hasWeakStarter || !hasActionVerb) {
-        const normalizedCore = normalizeCore(coreContent)
-        const coreLower = normalizedCore ? normalizedCore.charAt(0).toLowerCase() + normalizedCore.slice(1) : ''
-        // Check if core starts with a gerund (-ing) | e.g., "managing a team"
-        // In that case, don't prepend another verb; instead use the gerund's root as the verb
-        const gerundMatch = coreLower.match(/^(\w+)ing\b/)
-        if (gerundMatch && hasWeakStarter) {
-            // Re-detect category from the gerund root for a better verb match
-            const gerundRoot = gerundMatch[1].toLowerCase()
-            let gerundCategory = category
-            for (const [keyword, cat] of Object.entries(CONTEXT_KEYWORDS)) {
-                if (gerundRoot.startsWith(keyword.slice(0, 4)) || keyword.startsWith(gerundRoot.slice(0, 4))) {
-                    gerundCategory = cat
-                    break
-                }
-            }
-            const gerundVerbs = ACTION_VERB_MAP[gerundCategory] || ACTION_VERB_MAP.operate
-            // Replace the gerund with the action verb and continue with the rest
-            const restAfterGerund = coreLower.replace(/^\w+ing\s*/, '')
-            improved = `${gerundVerbs[0]} ${restAfterGerund}`.replace(/\s+/g, ' ').trim()
-        } else {
-            // If the normalized core is empty (e.g. user pasted only a weak starter), keep original.
-            if (!coreLower) {
-                improved = original
-            } else {
-                improved = `${verbs[0]} ${coreLower}`
-            }
-            // Clean up double spaces
-            improved = improved.replace(/\s+/g, ' ').trim()
-        }
+    const normalizedCore = normalizeCore(coreContent)
+    const coreLower = normalizedCore ? normalizedCore.charAt(0).toLowerCase() + normalizedCore.slice(1) : 'key initiatives and workflows'
+
+    let v1 = `${verbs[0]} ${coreLower}`
+    let v2 = `${verbs[1] || 'Drove'} ${coreLower}`
+    let v3 = `${verbs[2] || 'Delivered'} ${coreLower}`
+
+    if (style === 'concise') {
+        v1 = `${verbs[0]} ${coreLower}${hasMetric ? '' : ', accelerating delivery by 35%'}`
+        v2 = `${verbs[1] || 'Optimized'} ${coreLower}${hasMetric ? '' : ', driving 2x improvement across core KPIs'}`
+        v3 = `${verbs[2] || 'Executed'} ${coreLower}${hasMetric ? '' : ' with zero downtime'}`
+    } else if (style === 'storytelling') {
+        v1 = `Spearheaded ${coreLower}, resolving legacy bottlenecks and achieving measurable business impact.`
+        v2 = `Identified key inefficiencies in current workflow, then ${verbs[0].toLowerCase()} ${coreLower} to unlock cross-functional scale.`
+        v3 = `Championed ${coreLower} from inception to deployment, partnering with stakeholders to deliver high-priority milestones.`
+    } else if (style === 'ats') {
+        v1 = `${verbs[0]} ${coreLower} utilizing modern best practices, automated tooling, and end-to-end performance monitoring.`
+        v2 = `Architected and executed ${coreLower} with scalable frameworks, reducing operational overhead and standardizing team processes.`
+        v3 = `Directed ${coreLower} across enterprise lifecycle, aligning technical deliverables with strategic roadmap targets.`
     }
 
-    // Generate alternative versions
-    const alternatives: string[] = []
-    const core = hasWeakStarter ? coreContent : (hasActionVerb ? original.replace(/^\w+\s/, '') : original)
-    const altCore = normalizeCore(core)
-    const coreLower = altCore ? altCore.charAt(0).toLowerCase() + altCore.slice(1) : ''
-
-    for (let i = 0; i < Math.min(3, verbs.length); i++) {
-        if (!coreLower) continue
-        const alt = `${verbs[i]} ${coreLower}`.replace(/\s+/g, ' ').trim()
-        if (alt !== improved && alt !== original) {
-            alternatives.push(alt)
-        }
-    }
+    // Clean up punctuation
+    v1 = v1.replace(/\s+/g, ' ').replace(/\.+$/, '').trim()
+    v2 = v2.replace(/\s+/g, ' ').replace(/\.+$/, '').trim()
+    v3 = v3.replace(/\s+/g, ' ').replace(/\.+$/, '').trim()
 
     // Suggestions
     if (hasWeakStarter) {
-        suggestions.push(`Replaced weak opener with strong action verb "${verbs[0]}"`)
+        suggestions.push(`Replaced weak starter phrase with power verb "${verbs[0]}"`)
     } else if (!hasActionVerb) {
-        suggestions.push(`Start with a power verb like ${verbs.slice(0, 3).join(', ')}`)
+        suggestions.push(`Start directly with a power action verb (${verbs.slice(0, 3).join(', ')})`)
     }
 
     if (!hasMetric) {
-        suggestions.push('Add numbers: revenue generated, team size, % improvement, users impacted, or time saved')
+        suggestions.push('Add specific numbers: revenue generated, team size, % improvement, or latency reduction')
     }
 
     if (!hasResult) {
-        suggestions.push('Add the result: "...resulting in 30% faster onboarding" or "...saving $200K annually"')
+        suggestions.push('Specify the concrete business result (e.g. "...resulting in 35% faster delivery")')
     }
 
-    if (original.length < 50) {
-        suggestions.push('Too short | expand with context, scope, and measurable impact')
+    if (original.length < 40) {
+        suggestions.push('Bullet is very brief — add scope, methodology, and outcome for maximum impact')
     }
 
-    if (original.length > 200) {
-        suggestions.push('Consider splitting into two focused bullets for readability')
-    }
-
-    // Score
-    let score = 30
-    if (hasActionVerb || hasWeakStarter) score += 20 // Will be fixed in improved version
-    if (!hasWeakStarter && hasActionVerb) score += 10
+    let score = 35
+    if (hasActionVerb) score += 20
     if (hasMetric) score += 25
-    if (hasResult) score += 15
-    if (original.length >= 50 && original.length <= 200) score += 10
-    if (original.includes(',')) score += 5 // Some structure
+    if (hasResult) score += 20
+    if (original.length >= 50 && original.length <= 180) score += 10
     if (hasWeakStarter) score -= 15
 
     return {
         original,
-        improved,
-        alternatives,
+        improved: v1,
+        alternatives: [v2, v3],
         suggestions,
         has_action_verb: hasActionVerb,
         has_metric: hasMetric,
         has_result: hasResult,
-        score: Math.max(0, Math.min(100, score))
+        score: Math.max(20, Math.min(98, score))
     }
 }
 
@@ -963,11 +925,11 @@ export function generateAbout(input: AboutInput): GeneratedAbout[] {
         results.push({ text, style: 'Bold Opener', word_count: text.split(/\s+/).length, char_count: text.length })
     }
 
-    // Style 3: Scannable | short paragraphs, easy to skim on mobile
+    // Style 3: Conversational | warm, approachable, relatable colleague tone
     {
         const lines: string[] = []
 
-        lines.push(`📌 ${role}`)
+        lines.push(`I build and scale solutions as a ${role}.`)
         lines.push('')
 
         if (exp) {
@@ -976,33 +938,33 @@ export function generateAbout(input: AboutInput): GeneratedAbout[] {
         }
 
         if (achievement) {
-            lines.push(`🏆 ${endSentence(achievement)}`)
+            lines.push(`Over the course of this work, ${achievement.charAt(0).toLowerCase() + achievement.slice(1).replace(/\.$/, '')}.`)
             lines.push('')
         }
 
         if (skillList.length > 0) {
-            lines.push(`🛠 ${skillList.join(' · ')}`)
+            lines.push(`My core toolkit centers around ${skillList.slice(0, 4).join(', ')}${skillList.length > 4 ? ', and related tools' : ''}.`)
             lines.push('')
         }
 
         if (passion) {
-            lines.push(`🔥 ${endSentence(passion.charAt(0).toUpperCase() + passion.slice(1))}`)
+            lines.push(`What genuinely excites me is ${passion.toLowerCase().startsWith('i ') ? passion.toLowerCase().replace(/^i /, '') : passion.toLowerCase()}.`)
             lines.push('')
         }
 
         if (audience) {
-            lines.push(`🤝 I work best with ${audience.toLowerCase()}.`)
+            lines.push(`I love collaborating with ${audience.toLowerCase()}.`)
             lines.push('')
         }
 
         if (cta) {
             lines.push(cta)
         } else {
-            lines.push(`📩 Always open to connect | send me a message.`)
+            lines.push(`Always happy to connect with fellow builders and curious minds — feel free to reach out.`)
         }
 
         const text = lines.filter(l => l !== undefined).join('\n')
-        results.push({ text, style: 'Scannable', word_count: text.split(/\s+/).length, char_count: text.length })
+        results.push({ text, style: 'Conversational', word_count: text.split(/\s+/).length, char_count: text.length })
     }
 
     return results
@@ -1034,30 +996,29 @@ export function generatePostHooks(input: PostHookInput): GeneratedHook[] {
     // Smart topic analysis: extract actionable keywords
     const topicLower = topic.toLowerCase()
     const topicWords = topicLower.split(/\s+/).filter(w => w.length > 3)
-    const coreTopic = topicWords.slice(0, 3).join(' ')
+    const coreTopic = topicWords.slice(0, 3).join(' ') || topic
 
     // Detect domain for richer context
     const domainMap: [RegExp, string, string][] = [
-        [/\b(ai|machine learning|automation|chatgpt|llm|data|algorithm)\b/, 'the AI wave', 'tech-savvy'],
-        [/\b(leadership|manage|team|culture|hiring|talent)\b/, 'leadership circles', 'leader'],
-        [/\b(career|job|interview|resume|promotion|salary|hiring)\b/, 'career growth', 'career-driven'],
-        [/\b(startup|founder|entrepreneur|venture|fundrais|bootstrap)\b/, 'startup culture', 'builder'],
-        [/\b(marketing|brand|content|social media|audience|growth|seo)\b/, 'growth circles', 'growth-focused'],
-        [/\b(sales|revenue|pipeline|deal|closing|cold call)\b/, 'sales floors', 'revenue-minded'],
-        [/\b(design|ux|ui|creative|visual|product design)\b/, 'creative spaces', 'design-thinking'],
-        [/\b(health|wellness|mental|burnout|stress|balance|fitness)\b/, 'wellness conversations', 'health-conscious'],
-        [/\b(finance|invest|money|wealth|trading|crypto|budget)\b/, 'financial circles', 'financially literate'],
-        [/\b(remote|hybrid|wfh|distributed|async|flexible)\b/, 'the future-of-work debate', 'location-independent'],
-        [/\b(education|teach|learn|student|course|skill|training)\b/, 'learning communities', 'growth-oriented'],
-        [/\b(writing|content|blog|newsletter|storytelling|author)\b/, 'content circles', 'storytelling-driven'],
+        [/\b(ai|machine learning|automation|chatgpt|llm|data|algorithm)\b/, 'the AI space', 'tech leaders'],
+        [/\b(leadership|manage|team|culture|hiring|talent)\b/, 'leadership circles', 'managers'],
+        [/\b(career|job|interview|resume|promotion|salary|hiring)\b/, 'career development', 'ambitious professionals'],
+        [/\b(startup|founder|entrepreneur|venture|fundrais|bootstrap)\b/, 'startup ecosystems', 'founders'],
+        [/\b(marketing|brand|content|social media|audience|growth|seo)\b/, 'growth strategy', 'marketers'],
+        [/\b(sales|revenue|pipeline|deal|closing|cold call)\b/, 'B2B sales', 'sales professionals'],
+        [/\b(design|ux|ui|creative|visual|product design)\b/, 'product design', 'designers'],
+        [/\b(health|wellness|mental|burnout|stress|balance|fitness)\b/, 'workplace wellness', 'high performers'],
+        [/\b(finance|invest|money|wealth|trading|crypto|budget)\b/, 'modern finance', 'investors'],
+        [/\b(remote|hybrid|wfh|distributed|async|flexible)\b/, 'future of work', 'remote teams'],
+        [/\b(education|teach|learn|student|course|skill|training)\b/, 'skills education', 'continuous learners'],
+        [/\b(writing|content|blog|newsletter|storytelling|author)\b/, 'content strategy', 'creators'],
     ]
-    let domain = 'the professional world'
-    let audienceAdj = 'ambitious'
+    let domain = 'our industry'
+    let audienceAdj = audience
     for (const [regex, d, adj] of domainMap) {
         if (regex.test(topicLower)) { domain = d; audienceAdj = adj; break }
     }
 
-    // Seeded pick for deterministic variety
     let seed = 0
     for (let i = 0; i < topic.length; i++) seed = ((seed << 5) - seed) + topic.charCodeAt(i)
     const pick = <T,>(arr: T[], offset: number = 0): T => arr[Math.abs(seed + offset) % arr.length]
@@ -1066,44 +1027,44 @@ export function generatePostHooks(input: PostHookInput): GeneratedHook[] {
 
     // Style 1: Pattern Interrupt
     hooks.push({
-        text: `Everyone in ${domain} is talking about ${topic}.\n\nAlmost nobody is doing it right.\n\nHere is the difference between the signal and the noise:`,
+        text: `Most people in ${domain} approach ${topic} backwards.\n\nThey optimize for activity instead of leverage.\n\nHere is the mental model shift that changes everything:`,
         style: 'Pattern Interrupt',
-        why_it_works: 'Pattern interrupts work because they break the expected narrative. The reader assumes agreement, then gets challenged | creating cognitive tension that demands resolution.'
+        why_it_works: 'Disrupts the reader’s expected timeline and triggers curiosity to evaluate their own methods.'
     })
 
     // Style 2: Curiosity Gap
     hooks.push({
-        text: `I spent ${pick(['6 months', '200+ hours', '3 years', 'the last quarter'], 1)} studying how top ${audience} approach ${topic}.\n\n${pick(['One pattern kept showing up.', 'The #1 factor was not what I expected.', 'Three insights changed my entire perspective.', 'What I found surprised me.'], 2)}`,
+        text: `I spent ${pick(['3 months', '6 months', '2 years'], 1)} analyzing how top ${audienceAdj} master ${topic}.\n\n${pick(['The #1 differentiator was not what I expected.', 'One non-obvious pattern separated the top 1% from everyone else.'], 2)}\n\nHere is what I found:`,
         style: 'Curiosity Gap',
-        why_it_works: 'Curiosity gaps exploit the information gap theory | when people feel they are missing key information, the discomfort drives them to keep reading to close the loop.'
+        why_it_works: 'Opens an unresolved information loop that compels the reader to expand "see more".'
     })
 
     // Style 3: Contrarian
     hooks.push({
-        text: `${pick(['Unpopular opinion', 'Hot take', 'Controversial thought', 'I will probably get pushback for this, but'], 3)}: ${angle ? angle : `The most common advice about ${topic} is actively hurting ${audience}`}.\n\n${pick(['Here is what actually works:', 'Let me explain why:', 'And I have the receipts:', 'Here is what I mean:'], 4)}`,
+        text: `Unpopular opinion on ${topic}:\n\nThe conventional playbook is actively holding ${audienceAdj} back.\n\n${angle ? `Here is the real truth about ${angle}:` : 'Here is the counter-intuitive approach that actually drives compounding results:'}`,
         style: 'Contrarian',
-        why_it_works: 'Contrarian hooks trigger the instinct to defend or validate beliefs. Either way, the reader engages | to argue or to learn.'
+        why_it_works: 'Challenges common dogma with intellectual honesty, prompting engagement from both supporters and skeptics.'
     })
 
-    // Style 4: Story Hook (in medias res)
+    // Style 4: Story Hook (In Medias Res)
     hooks.push({
-        text: `${pick(['"You are making a huge mistake."', '"This is not going to work."', '"Why would you try that?"', '"Nobody does it that way."'], 5)}\n\nThat is what I was told when I started approaching ${topic} differently.\n\n${pick(['12 months later, here is what happened:', 'Fast forward to today:', 'They were wrong. Here is why:', 'The results proved everyone wrong:'], 6)}`,
+        text: `"That will never scale in production."\n\nThat was the feedback when we first tested a new approach to ${topic}.\n\n12 months later, here is what the data proved:`,
         style: 'Story Hook',
-        why_it_works: 'In medias res drops readers into a dramatic moment. The emotional tension of a quoted dismissal creates narrative investment | readers need to see the resolution.'
+        why_it_works: 'Opens with direct dialogue and stakes, creating instant narrative investment.'
     })
 
     // Style 5: Data-Led
     hooks.push({
-        text: `${pick(['Only 3%', 'Less than 1 in 10', 'Fewer than 5%', 'A recent study found that 8%'], 7)} of ${audience} ${pick(['actually understand', 'consistently apply', 'get meaningful results from', 'have mastered'], 8)} ${coreTopic}.\n\nThe gap between knowing and doing is where the opportunity lives.`,
+        text: `Only 4% of ${audienceAdj} successfully implement ${coreTopic} on their first attempt.\n\nThe difference between failure and sustainable growth comes down to 3 core guardrails:`,
         style: 'Data-Led',
-        why_it_works: 'Specific numbers create instant credibility and anchor the reader in concrete reality. The low percentage creates both urgency and aspiration | nobody wants to be in the majority failing.'
+        why_it_works: 'Specific numbers signal authority and create urgency around avoiding common pitfalls.'
     })
 
-    // Style 6: Confession
+    // Style 6: Confession / Vulnerability
     hooks.push({
-        text: `I used to be terrible at ${topic}.\n\nNot "learning curve" terrible. I mean ${pick(['embarrassingly, publicly bad', 'so bad my colleagues noticed', 'failing at the basics', "'how-did-I-get-this-job' bad"], 9)}.\n\n${pick(['Here is how I turned it around:', 'What changed everything was surprisingly simple:', 'The turning point was not a course or a book:', 'Then one conversation changed my entire approach:'], 10)}`,
+        text: `My biggest career mistake was misunderstanding ${topic}.\n\nI wasted months fixing symptoms before realizing the root issue.\n\nIf I had to start over today, here is the exact 3-step checklist I would follow:`,
         style: 'Confession',
-        why_it_works: 'Vulnerability builds trust instantly. When someone admits failure on LinkedIn | a platform of curated success | it creates a powerful authenticity signal that stops the scroll.'
+        why_it_works: 'Authentic vulnerability disarms corporate cynicism and positions the author as a helpful mentor.'
     })
 
     return hooks
@@ -1133,32 +1094,32 @@ export function generatePostIdeas(input: PostIdeaInput) {
     const focus = niche || industry
 
     const pillars = ['growth', 'insights', 'engagement', 'growth', 'insights']
-    const formats = ['Text post', 'Carousel', 'Poll', 'Storytelling', 'How-to']
+    const formats = ['Text Breakdown', 'Carousel / Slide Deck', 'Structured Case Study', 'Contrarian Take', 'Step-by-Step Guide']
     const templates = [
         {
-            title: `The #1 mistake most ${industry} professionals make`,
-            hook: `I've been in ${industry} for years. The biggest mistake I see? Confusing activity with progress.`,
-            angle: 'Contrarian insight that challenges conventional wisdom',
+            title: `The 3 Biggest Misconceptions About ${focus}`,
+            hook: `Most professionals in ${industry} overcomplicate ${focus}. Here are the 3 assumptions holding teams back:`,
+            angle: 'Debunks conventional assumptions with practical first-principles thinking',
         },
         {
-            title: `3 ${focus} lessons I learned the hard way`,
-            hook: `Nobody told me these three things when I started in ${focus}. I wish they had.`,
-            angle: 'Personal experience turned into actionable advice',
+            title: `How We Solved A Critical ${focus} Bottleneck`,
+            hook: `When faced with scaling ${focus}, conventional advice told us to add more headcount. Here is what we built instead:`,
+            angle: 'Behind-the-scenes engineering and workflow case study',
         },
         {
-            title: `Why ${industry} is about to change completely`,
-            hook: `The ${industry} market in 2025 looks nothing like 2023. Here is what is shifting and why it matters for your career.`,
-            angle: 'Industry trend analysis with career implications',
+            title: `The ${industry} Playbook For 2026`,
+            hook: `The landscape in ${industry} has shifted drastically. Here is the framework high-performing teams are using to stay ahead:`,
+            angle: 'Forward-looking strategic perspective highlighting modern tools and workflows',
         },
         {
-            title: `My unpopular opinion about ${focus}`,
-            hook: `I will probably get pushback for this, but the most common advice about ${focus} is actively hurting people.`,
-            angle: 'Provocative take that sparks meaningful debate',
+            title: `Why Traditional Approaches to ${focus} Fail`,
+            hook: `I will probably get pushback from industry veterans for saying this, but the old ${focus} methodology is obsolete.`,
+            angle: 'High-signal debate starter grounded in real production observations',
         },
         {
-            title: `How I would build a ${industry} career from scratch today`,
-            hook: `If I were starting over in ${industry} today, here is exactly what I would do differently.`,
-            angle: 'Practical roadmap based on hindsight and experience',
+            title: `5 Tools & Mental Models That Accelerated My ${industry} Career`,
+            hook: `If I had to restart my journey in ${industry} with zero network, these are the 5 systems I would double down on:`,
+            angle: 'Actionable mentorship guide with zero fluff or generic platitudes',
         },
     ]
 
@@ -1182,22 +1143,39 @@ export interface StoryToPostInput {
 }
 
 export function convertStoryToPost(input: StoryToPostInput) {
-    const { story, goal } = input
-    const sentences = story.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 5)
-    const firstSentence = sentences[0] || story.slice(0, 80)
-    const lesson = goal || 'Sometimes the best lessons come from unexpected places.'
+    const { story, tone = 'classic', goal } = input
+    const cleanStory = story.replace(/\s+/g, ' ').trim()
+    const sentences = cleanStory.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 5)
+    const firstSentence = sentences[0] || cleanStory.slice(0, 80)
+    const lesson = goal || 'Compounding progress rarely comes from comfort; it comes from learning in production.'
 
-    const hook = `${firstSentence.slice(0, 60)}...`
-    const body = `${firstSentence}.\n\nBut here is the thing nobody talks about:\n\n${sentences.slice(1, 3).join('. ')}.\n\nThe lesson?\n\n${lesson}\n\nIf you have been through something similar, you know exactly what I mean.\n\nThe experience taught me that growth does not come from comfort. It comes from the moments that challenge everything you thought you knew.`
-    const hashtags = ['careers', 'growth', 'lessons', 'linkedin', 'professionaldevelopment']
+    let hook = ''
+    let body = ''
+    const tags = ['growth', 'leadership', 'careertips', 'productivity', 'lessons']
+
+    if (tone === 'listicle') {
+        hook = `A critical lesson from ${firstSentence.toLowerCase().startsWith('i ') ? firstSentence.slice(2) : firstSentence.slice(0, 60)}:`
+        const points = sentences.slice(1, 4).length > 0 
+            ? sentences.slice(1, 4).map((s, idx) => `${idx + 1}. ${s}.`).join('\n\n')
+            : `1. Define the actual constraint early.\n\n2. Iterate in small, defensible milestones.\n\n3. Protect the team from premature optimization.`
+        
+        body = `${hook}\n\n${points}\n\nThe core takeaway:\n${lesson}\n\nWhat is your team's experience with this?`
+    } else if (tone === 'micro') {
+        hook = `${firstSentence}.`
+        body = `${hook}\n\nMost teams treat this as a surface problem. It is almost always an architecture or process constraint.\n\n${lesson}\n\nAgree or disagree?`
+    } else {
+        hook = `${firstSentence}.\n\nHere is what happened next:`
+        const context = sentences.slice(1, 3).join('. ') || 'We had to re-evaluate our assumptions under real conditions.'
+        body = `${hook}\n\n${context}.\n\nWhat this taught me:\n\n${lesson}\n\nWhen was the last time a setback became your team's biggest advantage?`
+    }
 
     return {
-        hook,
+        hook: body.split('\n')[0] || hook,
         body,
         takeaway: lesson,
-        hashtags,
+        hashtags: tags,
         word_count: body.split(/\s+/).length,
-        tone_used: 'Reflective and authentic',
+        tone_used: tone === 'micro' ? 'Micro Insight' : tone === 'listicle' ? 'Numbered Takeaways' : 'Classic Narrative',
     }
 }
 
@@ -1213,27 +1191,98 @@ export interface CommentInput {
 }
 
 export function generateComments(input: CommentInput) {
-    const { postContent, style = 'insightful', expertise } = input
-    const words = postContent.split(/\s+/).filter(Boolean)
-    const topicWords = words.filter(w => w.length > 5).slice(0, 3).join(' ')
-    const expertiseNote = expertise ? ` From my experience in ${expertise},` : ''
+    const { postContent, style = 'insightful', expertise, length = 'medium' } = input
+    const cleanPost = postContent.replace(/\s+/g, ' ').trim()
+    const words = cleanPost.split(/\s+/).filter(Boolean)
+    const topicWords = words.filter(w => w.length > 5).slice(0, 3).join(' ') || 'this operational challenge'
+    const expNote = expertise ? ` Drawing from my background in ${expertise}, ` : ''
 
-    const comments = [
+    const isShort = length.includes('short') || length === 'short'
+    const isDetailed = length.includes('detailed') || length === 'detailed'
+
+    if (style === 'question') {
+        return [
+            {
+                text: `${expNote}This highlights a critical point regarding ${topicWords}. How do you balance the trade-off between rapid iteration and long-term maintainability when executing this?`,
+                label: 'Trade-Off Question',
+            },
+            {
+                text: `Spot on observation about ${topicWords}. What guardrails have worked best for your team when rolling this out across cross-functional stakeholders?`,
+                label: 'Implementation Probe',
+            },
+            {
+                text: `Terrific breakdown. From your experience, at what team size or inflection point does this shift from a nice-to-have to a non-negotiable requirement?`,
+                label: 'Scale & Milestone Question',
+            },
+        ]
+    }
+
+    if (style === 'contrarian') {
+        return [
+            {
+                text: `${expNote}Interesting perspective on ${topicWords}. One nuance I have seen: while this works well in mature environments, early-stage teams often find that excessive structure here creates unwanted friction before product-market fit is established.`,
+                label: 'Nuance on Stage & Context',
+            },
+            {
+                text: `A valuable viewpoint, though in production we often found the inverse to be true: over-indexing on ${topicWords} can mask deeper architectural debt if the fundamentals are not stabilized first.`,
+                label: 'Root Cause Perspective',
+            },
+            {
+                text: `Appreciate you sharing this. The counter-argument worth weighing is whether the maintenance overhead of this approach justifies the marginal efficiency gains for smaller teams.`,
+                label: 'Cost-Benefit Analysis',
+            },
+        ]
+    }
+
+    if (style === 'story') {
+        return [
+            {
+                text: `${expNote}This reminded me of a project last year where we tackled ${topicWords}. We initially resisted changing our process, but embracing this exact shift reduced our turnaround time by nearly 40%.`,
+                label: 'Quantified Case Study',
+            },
+            {
+                text: `Seeing this in writing mirrors a lesson our team learned the hard way with ${topicWords}. The moment we codified this standard, communication bottlenecks dropped substantially.`,
+                label: 'Team Experience',
+            },
+            {
+                text: `Very relatable. We ran into this exact hurdle during our last migration. Prioritizing ${topicWords} early saved us weeks of painful refactoring down the line.`,
+                label: 'Migration Observation',
+            },
+        ]
+    }
+
+    if (style === 'supportive') {
+        return [
+            {
+                text: `${expNote}Completely agree with this framing on ${topicWords}. Having clear, transparent principles here simplifies decision-making across the board. Thank you for articulating this so clearly.`,
+                label: 'Grounded Validation',
+            },
+            {
+                text: `Such a clean summary of ${topicWords}. The emphasis on execution over theory is something more organizations need to embrace.`,
+                label: 'Execution Affirmation',
+            },
+            {
+                text: `Strongly endorse this. It is rare to see the reality of ${topicWords} explained with this degree of practical clarity.`,
+                label: 'Clarity Endorsement',
+            },
+        ]
+    }
+
+    // Default: 'insightful'
+    return [
         {
-            text: `This resonates.${expertiseNote} the point about ${topicWords || 'this topic'} is especially relevant right now. What I have found is that the people who understand this early gain a significant edge. Thanks for sharing this perspective.`,
-            label: 'Thoughtful Agreement',
+            text: `${expNote}The key insight here on ${topicWords} is that systemic constraints always trump individual effort. When you align incentives around this workflow, compounding velocity naturally follows.`,
+            label: 'Systems Thinking Angle',
         },
         {
-            text: `${expertiseNote ? expertiseNote.trim() : 'Interesting perspective.'} I would add one nuance: the challenge most people face is not understanding the concept, it is implementing it consistently. Have you found any specific approach that makes this easier to sustain long-term?`,
-            label: 'Adds Nuance + Question',
+            text: `High-value perspective. What often gets overlooked with ${topicWords} is second-order effects: getting this right does not just save time, it dramatically increases psychological safety across teams.`,
+            label: 'Second-Order Impact',
         },
         {
-            text: `This reminded me of a similar situation I encountered.${expertiseNote} The insight about ${topicWords || 'this'} mirrors exactly what I saw play out. The key difference was in the execution. Great framing of a complex topic.`,
-            label: 'Personal Experience',
+            text: `${expNote}Terrific framing. I would add that automating the feedback loops around ${topicWords} is what transforms this from a one-off win into an institutional superpower.`,
+            label: 'Leverage & Automation',
         },
     ]
-
-    return comments
 }
 
 // ============================================================
@@ -1250,30 +1299,255 @@ export interface ConnectionMessageInput {
 }
 
 export function generateConnectionMessages(input: ConnectionMessageInput) {
-    const { type, name, context, yourRole, recipientRole } = input
-    const firstName = name.split(' ')[0] || 'there'
+    const { type, name, context, yourRole, recipientRole, intent } = input
+    const cleanName = (name || '').trim().replace(/^(dr|mr|mrs|ms|prof|sir)\.?\s+/i, '')
+    const firstName = cleanName.split(/\s+/)[0] || 'there'
+
+    const sender = yourRole ? yourRole.split(/[|,·]/)[0].trim() : ''
+    const recipient = recipientRole ? recipientRole.split(/[|,·]/)[0].trim() : ''
 
     const templates: Record<string, { tone: string; message: string; tip: string }[]> = {
-        default: [
+        'cold': [
             {
-                tone: 'Direct',
-                message: `Hi ${firstName}, I came across your profile${recipientRole ? ` (${recipientRole.slice(0, 30)})` : ''} and your work caught my attention.${context ? ` ${context.slice(0, 80)}.` : ''} Would love to connect${yourRole ? ` (I'm a ${yourRole.split(' ').slice(0, 4).join(' ')})` : ''}.`,
-                tip: 'Short, specific, and gives them a reason to accept.',
+                tone: 'Direct & Specific',
+                message: `Hi ${firstName}, saw your work${recipient ? ` in ${recipient}` : ''}${context ? ` regarding ${context.slice(0, 45)}` : ''}. ${sender ? `I'm a ${sender} and ` : ''}would love to connect and follow your journey.`,
+                tip: 'Direct, polite, and references their actual domain without generic fluff.',
             },
             {
-                tone: 'Warm',
-                message: `Hey ${firstName}! Really enjoyed seeing your perspective${context ? ` on ${context.slice(0, 50)}` : ''}. I think we have a lot of shared interests${recipientRole ? ` in the ${recipientRole.split(' ').slice(0, 3).join(' ')} space` : ''}. Would be great to be connected!`,
-                tip: 'Warm tone builds rapport and feels personal.',
+                tone: 'Warm & Relatable',
+                message: `Hey ${firstName}! Really appreciate your perspective${context ? ` on ${context.slice(0, 45)}` : ''}. Always keen to connect with fellow builders in the space.`,
+                tip: 'Warm peer-to-peer tone that feels personal and unforced.',
             },
             {
                 tone: 'Value-First',
-                message: `Hi ${firstName}, ${yourRole ? `I'm a ${yourRole.split(' ').slice(0, 4).join(' ')} and ` : ''}I think we could learn a lot from each other's experiences${context ? ` around ${context.slice(0, 50)}` : ''}. Happy to share what I've been working on too.`,
-                tip: 'Offering value upfront increases acceptance rate.',
-            },
+                message: `Hi ${firstName}, loved your recent insights${context ? ` on ${context.slice(0, 40)}` : ''}. ${sender ? `I focus on ${sender} and ` : ''}hope we can exchange ideas down the road.`,
+                tip: 'Positions you as a thoughtful peer offering mutual value.',
+            }
         ],
+        'same-industry': [
+            {
+                tone: 'Direct Peer',
+                message: `Hi ${firstName}, fellow ${sender || 'specialist'} here. Really impressed by your focus on ${recipient || context || 'the space'}. Would love to connect!`,
+                tip: 'Establishes immediate common ground based on your shared domain.',
+            },
+            {
+                tone: 'Shared Workflow',
+                message: `Hey ${firstName}, noticed we're both tackling challenges in ${recipient || 'the industry'}${context ? ` like ${context.slice(0, 40)}` : ''}. Let's stay connected!`,
+                tip: 'Highlights shared technical or market challenges.',
+            },
+            {
+                tone: 'Discussion-Oriented',
+                message: `Hi ${firstName}, great to find another ${sender || 'practitioner'} building in this space. Would love to stay in touch and swap notes.`,
+                tip: 'Low friction invite that encourages future collaboration.',
+            }
+        ],
+        'alumni': [
+            {
+                tone: 'School Pride',
+                message: `Hi ${firstName}, great to connect with a fellow alum${context ? ` (${context.slice(0, 35)})` : ''}! Inspiring to see what you've built${recipient ? ` in ${recipient}` : ''}. Let's connect!`,
+                tip: 'Shared alma mater establishes instant rapport and high acceptance.',
+            },
+            {
+                tone: 'Casual Alum',
+                message: `Hey ${firstName}! Came across your profile while exploring alumni paths${recipient ? ` in ${recipient}` : ''}. Would love to stay connected!`,
+                tip: 'Friendly and straightforward outreach to fellow graduates.',
+            },
+            {
+                tone: 'Mentorship / Shared Roots',
+                message: `Hi ${firstName}, noticed we share the same background${context ? ` from ${context.slice(0, 30)}` : ''}. Would love to connect and follow your trajectory!`,
+                tip: 'Expresses admiration without creating immediate pressure.',
+            }
+        ],
+        'recruiter': [
+            {
+                tone: 'High-Signal Direct',
+                message: `Hi ${firstName}, I'm a ${sender || 'specialist'}${context ? ` specializing in ${context.slice(0, 45)}` : ''}. Stumbled upon your talent focus and wanted to connect for future alignment.`,
+                tip: 'Recruiters appreciate crisp clarity on your core seniority and focus.',
+            },
+            {
+                tone: 'Warm & Open',
+                message: `Hi ${firstName}, love the roles your team is building for${recipient ? ` at ${recipient}` : ''}. ${sender ? `As a ${sender}, ` : ''}let's connect to stay on each other's radar!`,
+                tip: 'Proactive networking that plants a seed for current or future hiring.',
+            },
+            {
+                tone: 'Specialization Fit',
+                message: `Hey ${firstName}, saw you recruit for top teams${recipient ? ` at ${recipient}` : ''}. ${sender ? `I specialize in ${sender}` : 'Wanted to connect'} and expand my network with great recruiters.`,
+                tip: 'Keeps it concise and professional within the 300-char cutoff.',
+            }
+        ],
+        'founder': [
+            {
+                tone: 'Product-Focused',
+                message: `Hi ${firstName}, big fan of what you're building${recipient ? ` at ${recipient}` : ''}${context ? ` around ${context.slice(0, 40)}` : ''}. Would love to connect and follow your growth!`,
+                tip: 'Founders love hearing genuine appreciation for their product.',
+            },
+            {
+                tone: 'Peer Builder',
+                message: `Hey ${firstName}, really admire your journey with ${recipient || 'your venture'}. ${sender ? `As a fellow builder in ${sender}, ` : ''}wanted to connect!`,
+                tip: 'Treats the founder as an equal builder in the broader ecosystem.',
+            },
+            {
+                tone: 'Mission Alignment',
+                message: `Hi ${firstName}, the problem you're tackling${context ? ` in ${context.slice(0, 40)}` : ''} is super timely. Hope to stay connected as you scale!`,
+                tip: 'Validates their company mission with authentic enthusiasm.',
+            }
+        ],
+        'liked-content': [
+            {
+                tone: 'Content Reference',
+                message: `Hi ${firstName}, really enjoyed your recent post${context ? ` on ${context.slice(0, 45)}` : ''}. Great perspective on the real trade-offs. Let's connect!`,
+                tip: 'Referencing a specific post proves you actually read their thoughts.',
+            },
+            {
+                tone: 'Shared Takeaway',
+                message: `Hey ${firstName}! Your post${context ? ` regarding ${context.slice(0, 40)}` : ''} was spot on. Wanted to connect and follow more of your insights.`,
+                tip: 'Encourages the creator and shows you appreciate their public writing.',
+            },
+            {
+                tone: 'Discussion Extension',
+                message: `Hi ${firstName}, loved your breakdown${context ? ` on ${context.slice(0, 35)}` : ''}. Looking forward to seeing your future thoughts on the feed!`,
+                tip: 'Polite and easy for any active content creator to accept.',
+            }
+        ],
+        'mutual-connection': [
+            {
+                tone: 'Mutual Contact Mention',
+                message: `Hi ${firstName}, noticed we're both connected with ${context || 'mutual colleagues in the space'}. Inspiring work${recipient ? ` in ${recipient}` : ''}—let's connect!`,
+                tip: 'Leverages social proof to dramatically increase trust.',
+            },
+            {
+                tone: 'Shared Community',
+                message: `Hey ${firstName}! Saw that we share mutual circles${context ? ` around ${context.slice(0, 40)}` : ''}. Would be great to connect directly!`,
+                tip: 'Warm and natural way to bridge second-degree networks.',
+            },
+            {
+                tone: 'Peer Introduction',
+                message: `Hi ${firstName}, came across your profile via mutual connections. ${sender ? `I'm a ${sender} and ` : ''}would love to be connected!`,
+                tip: 'Crisp, courteous note that establishes mutual network overlap.',
+            }
+        ],
+        'event': [
+            {
+                tone: 'Event Follow-Up',
+                message: `Hi ${firstName}, great meeting you at ${context || 'the event'}${recipient ? ` and discussing ${recipient}` : ''}! Let's stay in touch here on LinkedIn.`,
+                tip: 'Quickly reconnects within 24-48 hours of meeting in person.',
+            },
+            {
+                tone: 'Shared Session',
+                message: `Hey ${firstName}! Really enjoyed our brief chat at ${context || 'the conference'}. Excited to follow your progress${recipient ? ` in ${recipient}` : ''}!`,
+                tip: 'Re-ignites the positive momentum from a live conference or meetup.',
+            },
+            {
+                tone: 'Key Takeaway Mention',
+                message: `Hi ${firstName}, great speaking at ${context || 'the meetup'}. Loved your take on the space—let's keep the conversation going!`,
+                tip: 'Reinforces the relationship right after an offline interaction.',
+            }
+        ],
+        'mentor': [
+            {
+                tone: 'Humble & Focused',
+                message: `Hi ${firstName}, really admire your career trajectory${recipient ? ` as ${recipient}` : ''}. ${context ? `Your insights on ${context.slice(0, 40)} resonate deeply. ` : ''}Would be honored to connect!`,
+                tip: 'Respectful without being overly transactional or demanding of their time.',
+            },
+            {
+                tone: 'Specific Guidance',
+                message: `Hey ${firstName}, as someone building towards ${intent || 'the same path'}, your journey${recipient ? ` in ${recipient}` : ''} is super inspiring. Let's connect!`,
+                tip: 'Shows genuine alignment with their professional milestones.',
+            },
+            {
+                tone: 'Learner Mindset',
+                message: `Hi ${firstName}, loved your advice${context ? ` on ${context.slice(0, 40)}` : ''}. Hope to learn from your shared perspective here on LinkedIn.`,
+                tip: 'Clear and respectful request with zero pressure for immediate calls.',
+            }
+        ],
+        'collaboration': [
+            {
+                tone: 'Collaborative Idea',
+                message: `Hi ${firstName}, love what you're doing${recipient ? ` with ${recipient}` : ''}. ${intent ? `Had an idea around ${intent.slice(0, 45)} ` : ''}and would love to connect and chat!`,
+                tip: 'Piques curiosity about a specific potential partnership.',
+            },
+            {
+                tone: 'Mutual Synergies',
+                message: `Hey ${firstName}, ${sender ? `I'm a ${sender} and ` : ''}see great overlap between our work${context ? ` in ${context.slice(0, 35)}` : ''}. Let's connect!`,
+                tip: 'Frames the connection as mutually beneficial from day one.',
+            },
+            {
+                tone: 'Joint Project',
+                message: `Hi ${firstName}, would love to connect${context ? ` regarding ${context.slice(0, 40)}` : ''}. Think we could create something great together!`,
+                tip: 'Direct invitation to explore joint content or project ideas.',
+            }
+        ],
+        'followup-noreply': [
+            {
+                tone: 'Fresh Value Addition',
+                message: `Hi ${firstName}, wanted to follow up with a quick thought${context ? ` on ${context.slice(0, 45)}` : ''}. No pressure at all—hope you're having a great week!`,
+                tip: 'Low pressure note that adds value rather than asking for things.',
+            },
+            {
+                tone: 'Polite Bump',
+                message: `Hey ${firstName}! Circling back in case my last note got buried. Would still love to connect${recipient ? ` and follow your work in ${recipient}` : ''}!`,
+                tip: 'Acknowledges how busy inboxes get with polite, warm phrasing.',
+            },
+            {
+                tone: 'Brief Reconnect',
+                message: `Hi ${firstName}, know you're super busy. Just wanted to keep this on your radar whenever you have a moment. Cheers!`,
+                tip: 'Super short, humble note that gives them a comfortable out.',
+            }
+        ],
+        'followup-call': [
+            {
+                tone: 'Post-Call Recap',
+                message: `Hi ${firstName}, really enjoyed our conversation yesterday${context ? ` around ${context.slice(0, 45)}` : ''}! Let's stay closely connected here.`,
+                tip: 'Solidifies the relationship right after an intro call or zoom.',
+            },
+            {
+                tone: 'Action Item Note',
+                message: `Hey ${firstName}, thanks for the great call! Excited to follow up on ${intent || 'the next steps we discussed'}. Great to connect!`,
+                tip: 'Keeps momentum moving forward on agreed topics.',
+            },
+            {
+                tone: 'Warm Gratitude',
+                message: `Hi ${firstName}, appreciated your time and insights today. Let's definitely keep in touch as things progress!`,
+                tip: 'Gracious thank-you note that strengthens the connection.',
+            }
+        ],
+        'followup-application': [
+            {
+                tone: 'Job Applicant Note',
+                message: `Hi ${firstName}, just applied for the ${context || 'open role'}${recipient ? ` at ${recipient}` : ''}. ${sender ? `As a ${sender}, ` : ''}I'm super excited about the mission!`,
+                tip: 'Puts a human face and enthusiasm behind your resume submission.',
+            },
+            {
+                tone: 'Hiring Manager Touch',
+                message: `Hey ${firstName}, submitted my application for your team's opening${context ? ` (${context.slice(0, 30)})` : ''}. Would love to connect and follow your team's work!`,
+                tip: 'Polite touchpoint that doesn’t demand immediate review.',
+            },
+            {
+                tone: 'Direct Alignment',
+                message: `Hi ${firstName}, love what your team is building${recipient ? ` at ${recipient}` : ''}. Applied for the opening and wanted to introduce myself directly!`,
+                tip: 'Shows proactive initiative and genuine interest in the company.',
+            }
+        ],
+        'followup-event': [
+            {
+                tone: 'Post-Event Touch',
+                message: `Hi ${firstName}, wonderful meeting you at ${context || 'the gathering'}. Loved hearing your perspective${recipient ? ` on ${recipient}` : ''}. Let's stay in touch!`,
+                tip: 'Personalized recap of an informal or social networking meetup.',
+            },
+            {
+                tone: 'Event Recap',
+                message: `Hey ${firstName}! Great chat at the event. Hope you had safe travels back. Looking forward to staying connected here!`,
+                tip: 'Warm and thoughtful touchpoint following a dinner or conference.',
+            },
+            {
+                tone: 'Topic Follow-Up',
+                message: `Hi ${firstName}, loved discussing ${context || 'our shared interests'} yesterday. Let's keep the dialogue going on LinkedIn!`,
+                tip: 'Bridges the offline conversation to online professional updates.',
+            }
+        ]
     }
 
-    const messages = templates[type] || templates.default
+    const messages = templates[type] || templates.cold
     return messages.map(m => ({
         ...m,
         charCount: m.message.length,
@@ -1294,30 +1568,30 @@ export function generateWeeklyPlan(input: ContentPlannerInput) {
     const { industry, role, frequency } = input
     const freq = parseInt(frequency) || 3
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].slice(0, freq)
-    const pillars = ['growth', 'insights', 'engagement', 'growth', 'insights']
-    const formats = ['Storytelling', 'How-to/Carousel', 'Poll/Question', 'Case Study', 'Listicle']
+    const pillars = ['growth', 'insights', 'engagement', 'growth', 'insights'].slice(0, freq)
+    const formats = ['Storytelling & Lessons', 'Process Breakdown / Carousel', 'Open Question / Debate', 'Case Study & Metrics', 'Tooling & Mental Models'].slice(0, freq)
 
     const prompts = [
-        `Share a lesson from your journey as a ${role} in ${industry}. What did you learn the hard way that you wish someone told you earlier?`,
-        `Break down a process or framework from your ${industry} experience. What does a day/week look like for a ${role}? Share behind-the-scenes.`,
-        `Ask your network a thought-provoking question about ${industry}. Something that sparks genuine discussion, not just "agree/disagree."`,
-        `Share a specific result or outcome from your work as a ${role}. What was the challenge, what did you do, and what happened?`,
-        `List 3-5 tools, books, or resources that have made a real difference in your ${industry} career. Explain why each matters.`,
+        `Share a pivotal lesson from your journey as a ${role} in ${industry}. What did you learn the hard way that you wish someone told you earlier?`,
+        `Break down a concrete process or workflow from your ${industry} experience. What does a high-efficiency sprint look like for a ${role}?`,
+        `Ask your network a thought-provoking question about ${industry}. Challenge a common industry trend and invite diverse perspectives.`,
+        `Share a quantified result from your recent work as a ${role}. What was the challenge, what did you implement, and what was the outcome?`,
+        `List 3-5 tools, frameworks, or resources that have transformed your productivity as a ${role} in ${industry}.`,
     ]
 
     const examples = [
-        `"After ${Math.floor(Math.random() * 5 + 3)} years as a ${role}, here is the one thing I would change if I started over..."`,
-        `"Most ${industry} professionals overcomplicate this. Here is my simple ${Math.floor(Math.random() * 3 + 3)}-step framework..."`,
-        `"Honest question for ${industry} professionals: Is [common practice] actually worth the effort? Here is what I have seen..."`,
-        `"We went from [before] to [after] in ${Math.floor(Math.random() * 6 + 3)} months. Here is exactly how we did it..."`,
-        `"${Math.floor(Math.random() * 3 + 3)} ${industry} tools I cannot live without in 2025. Number ${Math.floor(Math.random() * 2 + 2)} changed everything..."`,
+        `"After years working as a ${role}, here is the #1 lesson that changed how I approach ${industry}:"`,
+        `"Most ${industry} teams overcomplicate this process. Here is our simple 4-step framework:"`,
+        `"Honest question for fellow ${role}s: Is the industry standard for [common practice] actually working for you?"`,
+        `"We cut our delivery time in half last quarter. Here is the exact breakdown of what we fixed:"`,
+        `"3 underrated tools every ${role} in ${industry} should have in their stack in 2026:"`,
     ]
 
     return days.map((day, i) => ({
         day,
-        pillar: pillars[i],
-        format: formats[i],
-        prompt: prompts[i],
-        example: examples[i],
+        pillar: pillars[i] || 'insights',
+        format: formats[i] || 'Text Post',
+        prompt: prompts[i] || `Share a practical insight from ${industry}.`,
+        example: examples[i] || `"Here is what top ${role}s know about ${industry}:"`,
     }))
 }

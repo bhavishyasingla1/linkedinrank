@@ -148,14 +148,14 @@ export default function HeroUploaderStudio() {
                     </div>
 
                     {/* Center Document URL Pill */}
-                    <div className="hidden sm:flex items-center gap-1.5 px-4 py-1 rounded-full bg-white border border-[#dedcff] text-[12px] font-semibold text-[#050315] shadow-2xs">
+                    <div className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-white border border-[#dedcff] text-[12px] font-semibold text-[#050315] shadow-2xs leading-none">
                         <FileTextIcon size={13} className="text-[#2f27ce]" />
                         <span>profile-document.pdf</span>
                     </div>
 
                     {/* Right Security Pill */}
                     <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2f27ce] bg-white border border-[#dedcff] px-3 py-0.5 rounded-full shadow-2xs">
+                        <span className="inline-flex items-center justify-center gap-1 text-[11px] font-bold text-[#2f27ce] bg-white border border-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs leading-none">
                             <ShieldCheckIcon size={12} />
                             <span>100% Private</span>
                         </span>
@@ -218,7 +218,7 @@ export default function HeroUploaderStudio() {
                         </button>
 
                         {/* File Specs Metadata Pill */}
-                        <div className="mt-5 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#dedcff]/60 border border-[#dedcff] text-[12px] font-semibold text-[#050315]">
+                        <div className="mt-5 inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-[#dedcff]/70 border border-[#dedcff] text-[12px] font-semibold text-[#050315] leading-none">
                             <span>PDF format</span>
                             <span>•</span>
                             <span>Max 10MB</span>

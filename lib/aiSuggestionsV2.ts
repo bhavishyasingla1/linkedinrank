@@ -50,49 +50,52 @@ const FALLBACK_MODELS = [
 // ============================================================
 
 const PROMPT_TEMPLATES = {
-    headline_rewrite: `You are a LinkedIn profile optimizer writing with a crisp, human voice. Rewrite the headline to be searchable and differentiated.
+    headline_rewrite: `You are an elite LinkedIn headline optimizer writing with a crisp, human voice. Rewrite the headline to be searchable, differentiated, and high-signal.
 
 Current headline: "{headline}"
 User's role: {role}
 Key skills: {skills}
 
-Rules:
-- Keep under 120 characters
-- Include role and core domain keywords
-- Sound natural and direct
-- No buzzwords (passionate, results-driven, supercharge, transform, delve)
-- No emojis, no em dashes (use | or commas)
+═══ STRICT WRITING & ANTI-AI RULES ═══
+- Keep strictly under 120 characters.
+- Include the exact target role and core domain skills.
+- Use plain "is" and "has" constructions; avoid corporate jargon and filler.
+- BANNED WORDS: additionally, bolster, crucial, delve, emphasize, enhance, fostering, garner, highlight, intricate, landscape, meticulous, pivotal, robust, showcase, tapestry, testament, underscore, valuable, vibrant, passionate, results-driven, team player, go-getter, unlock, supercharge.
+- NEVER use em dashes (—) or en dashes (–). Use | or commas instead.
+- NO emojis, no hype language, no corporate cheerleading.
+- Return ONLY the new headline text, nothing else.`,
 
-Return ONLY the new headline text, nothing else.`,
-
-    about_rewrite: `You are a LinkedIn profile optimizer writing with an authentic human voice. Improve this About section.
+    about_rewrite: `You are a LinkedIn profile strategist writing with an authentic, authoritative human voice. Improve this About section.
 
 Current About: "{about}"
 Headline: {headline}
 Role: {role}
 
-Rules:
-- Start with a clear hook explaining what you build or do
-- Keep first-person voice ("I")
-- Mention specific skills and achievements
-- End with a direct call-to-action
-- 2-3 short paragraphs max
-- No buzzwords or cliches, no em dashes
+═══ STRICT WRITING & ANTI-AI RULES ═══
+- Start with a clear hook explaining what you build, solve, or lead (avoid generic openers like "I am a passionate...").
+- Write in first-person ("I").
+- 2-3 short, punchy paragraphs separated by line breaks for cognitive hospitality and mobile readability.
+- Mention specific tools, methodologies, and outcomes.
+- End with a clean, direct call-to-action to connect.
+- BANNED WORDS: additionally, bolster, crucial, delve, emphasize, enhance, fostering, garner, highlight, intricate, landscape, meticulous, pivotal, robust, showcase, tapestry, testament, underscore, valuable, vibrant, passionate, results-driven, team player, go-getter, in today's fast-paced world.
+- No dangling "-ing" clauses at sentence ends.
+- NEVER use em dashes (—) or en dashes (–). Use commas, periods, or | instead.
+- NO emojis, no fake metrics, no conversational asides.
+- Return ONLY the improved About text, nothing else.`,
 
-Return ONLY the improved About text, nothing else.`,
-
-    bullet_improve: `You are a resume and LinkedIn experience optimizer. Improve this experience bullet point.
+    bullet_improve: `You are a resume and LinkedIn experience optimizer. Transform this experience bullet into a high-impact achievement statement.
 
 Current bullet: "{bullet}"
 Role context: {role} at {company}
 
-Rules:
-- Start with an active verb (Led, Built, Designed, Shipped, Automated, Scaled)
-- State what was done and the specific outcome
-- Keep under 200 characters
-- Be concrete and grounded, no generic filler
-
-Return ONLY the improved bullet text, nothing else.`
+═══ STRICT WRITING & ANTI-AI RULES ═══
+- Format: [Active Power Verb] + [Specific Action/Scope] + [Measurable Outcome/Impact].
+- Active verbs: Led, Built, Designed, Shipped, Automated, Scaled, Calibrated, Engineered, Deployed.
+- Keep under 200 characters.
+- Be concrete and grounded; do NOT invent fake metrics.
+- BANNED WORDS: helped, assisted, responsible for, spearheaded, revolutionized, pivotal, robust, crucial, passionate, results-driven.
+- NEVER use em dashes (—) or en dashes (–).
+- Return ONLY the improved bullet text, nothing else.`
 }
 
 // ============================================================

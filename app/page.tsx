@@ -198,8 +198,8 @@ export default function HomePage() {
                         {/* Centered Hero Header */}
                         <div className="text-center max-w-3xl mx-auto space-y-4">
                             {/* Floating Pill Badge in Soft Lavender */}
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#dedcff]/70 border border-[#dedcff] shadow-xs">
-                                <span className="text-[13px] font-bold text-[#2f27ce] flex items-center gap-1.5">
+                            <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#dedcff]/70 border border-[#dedcff] shadow-xs leading-none">
+                                <span className="text-[13px] font-bold text-[#2f27ce] inline-flex items-center justify-center gap-1.5">
                                     <SparklesIcon size={14} /> Instant Recruiter-Grade Audit
                                 </span>
                             </div>
@@ -227,7 +227,7 @@ export default function HomePage() {
                         <div>
                             <Link
                                 href="/how-linkedin-rank-works"
-                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs"
+                                className="inline-flex items-center justify-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs leading-none"
                             >
                                 <span>Diagnostic Precision</span>
                                 <span>&rarr;</span>
@@ -240,8 +240,8 @@ export default function HomePage() {
                                 Most LinkedIn advice is too vague. We give you exact metrics.
                             </h2>
 
-                            <p className="text-[16px] sm:text-[18px] text-[#050315]/80 leading-relaxed">
-                                Generic career influencers tell you to &ldquo;make your headline pop&rdquo; or &ldquo;be passionate.&rdquo; In reality, recruiters search via exact boolean filters, ATS parsers, and strict algorithmic keyword weights.
+                            <p className="text-[16.5px] sm:text-[18px] text-[#050315]/80 leading-relaxed font-normal">
+                                Generic feedback like &quot;add more impact&quot; or &quot;network more&quot; doesn&apos;t move the needle with recruiter algorithms. LinkedInRank dissects your profile into keyword coverage, achievement density, and structural signals, giving you actionable, mathematically scored fixes.
                             </p>
                         </div>
 
@@ -287,7 +287,7 @@ export default function HomePage() {
                         <div className="space-y-2">
                             <Link
                                 href="/tools"
-                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs"
+                                className="inline-flex items-center justify-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs leading-none"
                             >
                                 <span>Unlimited Optimization</span>
                                 <span>&rarr;</span>

@@ -91,7 +91,7 @@ export default function ScoreHero({
     return (
         <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow animate-fade-in">
             <div className="p-8 sm:p-10 text-center border-b border-[#dedcff]/70 space-y-6">
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] text-[#2f27ce] text-[12px] font-extrabold shadow-2xs">
+                <div className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#dedcff] text-[#2f27ce] text-[12px] font-extrabold shadow-2xs leading-none">
                     <SparklesIcon size={13} /> Algorithmic Recruiter Benchmark
                 </div>
 
@@ -112,7 +112,7 @@ export default function ScoreHero({
                         <span className="text-[18px] sm:text-[20px] font-extrabold text-[#050315]">
                             {displayTier} Profile Rank
                         </span>
-                        <span className="inline-flex items-center gap-1 text-[11.5px] font-extrabold bg-[#dedcff] text-[#2f27ce] px-3 py-1 rounded-full shadow-2xs">
+                        <span className="inline-flex items-center justify-center gap-1 text-[11.5px] font-extrabold bg-[#dedcff] text-[#2f27ce] px-3.5 py-1.5 rounded-full shadow-2xs leading-none">
                             <ShieldCheckIcon size={13} /> Verified Audit
                         </span>
                     </div>
