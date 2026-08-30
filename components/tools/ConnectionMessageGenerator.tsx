@@ -3,27 +3,30 @@
 import { useState } from 'react'
 import { generateConnectionMessages as generateFallbackMessages } from '@/lib/tools'
 import ToolPromptBlock, { AIFailedPromptBlock, buildConnectionPrompt } from './ToolPromptBlock'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
+import { UploadIcon, CheckIcon, CopyIcon, SparklesIcon } from '@/components/ui/Icons'
 
 type ConnectionType = 
     | 'cold' | 'same-industry' | 'alumni' | 'recruiter' | 'founder' 
     | 'liked-content' | 'mutual-connection' | 'event' | 'mentor'
     | 'collaboration' | 'followup-noreply' | 'followup-call' | 'followup-application' | 'followup-event'
 
-const CONNECTION_TYPES: { id: ConnectionType; label: string; icon: string; category: string; hint: string }[] = [
-    { id: 'cold', label: 'Cold Outreach', icon: '🤝', category: 'Initial Connection Request', hint: 'You don\'t know them but want to connect' },
-    { id: 'same-industry', label: 'Same Industry', icon: '🏢', category: 'Initial Connection Request', hint: 'You work in the same field' },
-    { id: 'alumni', label: 'Alumni / School', icon: '🎓', category: 'Initial Connection Request', hint: 'Same school, program, or cohort' },
-    { id: 'recruiter', label: 'To a Recruiter', icon: '🎯', category: 'Initial Connection Request', hint: 'Reaching out about job opportunities' },
-    { id: 'founder', label: 'Founder / CEO', icon: '🚀', category: 'Initial Connection Request', hint: 'Connecting with a company leader' },
-    { id: 'liked-content', label: 'Liked Their Post', icon: '📝', category: 'Initial Connection Request', hint: 'You saw their content and want to connect' },
-    { id: 'mutual-connection', label: 'Mutual Connection', icon: '👥', category: 'Initial Connection Request', hint: 'You share a common connection' },
-    { id: 'event', label: 'Event / Conference', icon: '🎤', category: 'Initial Connection Request', hint: 'Met at or attended the same event' },
-    { id: 'mentor', label: 'Seeking Mentorship', icon: '🧭', category: 'Initial Connection Request', hint: 'Asking for guidance or advice' },
-    { id: 'collaboration', label: 'Collaboration', icon: '⚡', category: 'Initial Connection Request', hint: 'Proposing a project, podcast, collab' },
-    { id: 'followup-noreply', label: 'No Reply Follow-Up', icon: '📩', category: 'Follow-Ups', hint: 'They didn\'t respond to your first message' },
-    { id: 'followup-call', label: 'After a Call', icon: '📞', category: 'Follow-Ups', hint: 'Just had a phone/video call' },
-    { id: 'followup-application', label: 'After Applying', icon: '📋', category: 'Follow-Ups', hint: 'Applied to a job at their company' },
-    { id: 'followup-event', label: 'After an Event', icon: '🤲', category: 'Follow-Ups', hint: 'Met briefly at an event' },
+const CONNECTION_TYPES: { id: ConnectionType; label: string; category: string; hint: string }[] = [
+    { id: 'cold', label: 'Cold Outreach', category: 'Initial Connection', hint: 'Connect with someone new based on their specific work or post' },
+    { id: 'same-industry', label: 'Same Industry Peer', category: 'Initial Connection', hint: 'Connect with a professional working in your industry' },
+    { id: 'alumni', label: 'School / Alumni', category: 'Initial Connection', hint: 'Leverage shared university, college, or bootcamp background' },
+    { id: 'recruiter', label: 'To a Recruiter', category: 'Initial Connection', hint: 'Reach out to talent partners or hiring managers' },
+    { id: 'founder', label: 'Founder / Executive', category: 'Initial Connection', hint: 'Connect with startup founders or department leaders' },
+    { id: 'liked-content', label: 'Liked Their Content', category: 'Initial Connection', hint: 'Reference an insightful post or article they shared' },
+    { id: 'mutual-connection', label: 'Mutual Connection', category: 'Initial Connection', hint: 'Reference a shared mutual contact or community' },
+    { id: 'event', label: 'Event / Conference', category: 'Initial Connection', hint: 'Connect with someone you met at a conference or meetup' },
+    { id: 'mentor', label: 'Seeking Mentorship', category: 'Initial Connection', hint: 'Ask for career guidance with specific context' },
+    { id: 'collaboration', label: 'Collaboration Idea', category: 'Initial Connection', hint: 'Propose a podcast, article, or joint project' },
+    { id: 'followup-noreply', label: 'Follow-Up (No Reply)', category: 'Follow-Ups', hint: 'Polite follow-up after no response to your first note' },
+    { id: 'followup-call', label: 'After a Call / Meeting', category: 'Follow-Ups', hint: 'Follow-up note referencing points discussed in a call' },
+    { id: 'followup-application', label: 'After Job Application', category: 'Follow-Ups', hint: 'Follow-up note to hiring manager after applying' },
+    { id: 'followup-event', label: 'After Meeting at Event', category: 'Follow-Ups', hint: 'Quick recap note after meeting in person' },
 ]
 
 interface MessageResult {
@@ -33,25 +36,23 @@ interface MessageResult {
     tip: string
 }
 
-// ── Context hints per type ──────────────────────────────────
 const CONTEXT_HINTS: Record<ConnectionType, string> = {
-    'cold': 'What caught your eye about them? e.g., "Their post on AI ethics", "They work at Google on search"',
-    'same-industry': 'What is your shared industry/space? e.g., "We both work in fintech", "Both in healthcare AI"',
-    'alumni': 'Which school/program? e.g., "Stanford MBA 2022", "IIT Delhi CS batch"',
-    'recruiter': 'What role/area are you interested in? e.g., "Senior PM roles in AI", "Frontend roles at Series B startups"',
-    'founder': 'What about their company interests you? e.g., "Their product solves X", "Recently raised Series A"',
-    'liked-content': 'Which post/article? e.g., "Their post about hiring mistakes", "Their carousel on sales frameworks"',
-    'mutual-connection': 'Who is the mutual connection? e.g., "We both know Rahul from TechConf", "Connected through Sarah"',
-    'event': 'Which event? e.g., "Web Summit 2025", "Local startup meetup last Friday"',
-    'mentor': 'What guidance do you need? e.g., "Career transition to PM", "How they built their personal brand"',
-    'collaboration': 'What is the collab idea? e.g., "Guest on my podcast", "Co-author a LinkedIn article", "Joint webinar"',
-    'followup-noreply': 'What was your original message about?',
-    'followup-call': 'What did you discuss on the call?',
-    'followup-application': 'Which role did you apply for?',
-    'followup-event': 'Where did you meet and what did you discuss?',
+    'cold': 'e.g. Their post on AI infrastructure, or their engineering blog',
+    'same-industry': 'e.g. Both working on fintech payment gateways or B2B SaaS',
+    'alumni': 'e.g. Stanford CS batch 2022 or IIT Delhi alumni',
+    'recruiter': 'e.g. Senior Frontend / Staff Distributed Systems roles',
+    'founder': 'e.g. Their recent product launch or Series A announcement',
+    'liked-content': 'e.g. Their recent post about database query optimization',
+    'mutual-connection': 'e.g. We both know Alex Chen from Stripe',
+    'event': 'e.g. Spoke briefly after the distributed systems panel at KubeCon',
+    'mentor': 'e.g. Career advice on transitioning from IC engineer to engineering manager',
+    'collaboration': 'e.g. Inviting them as a guest on our tech podcast or co-authoring a guide',
+    'followup-noreply': 'e.g. Following up on my note about collaborating on open-source tools',
+    'followup-call': 'e.g. Great discussing your team roadmap during our 20-min intro yesterday',
+    'followup-application': 'e.g. Applied for the Senior Staff Engineer role at Stripe yesterday',
+    'followup-event': 'e.g. Great meeting you at the networking dinner last night',
 }
 
-// ── Component ──────────────────────────────────────────────
 export default function ConnectionMessageGenerator() {
     const [type, setType] = useState<ConnectionType>('cold')
     const [name, setName] = useState('')
@@ -65,10 +66,9 @@ export default function ConnectionMessageGenerator() {
     const [isAI, setIsAI] = useState(false)
     const [error, setError] = useState('')
 
-    // PDF upload for sender info
+    // PDF uploads
     const [senderPdfUploading, setSenderPdfUploading] = useState(false)
     const [senderPdfDone, setSenderPdfDone] = useState(false)
-    // PDF upload for recipient info
     const [recipientPdfUploading, setRecipientPdfUploading] = useState(false)
     const [recipientPdfDone, setRecipientPdfDone] = useState(false)
 
@@ -84,16 +84,15 @@ export default function ConnectionMessageGenerator() {
             const profile = data?.data?.profile || data?.profile
             if (profile) {
                 const hl = (profile.headline || '').trim()
-                const isUni = /\b(university|institute|college|school|academy|iit|nit|bits|iiit|thapar|vit|srm|amity|manipal|lpu)\b/i.test(hl) && !/(student|intern|engineer|developer|manager|analyst|founder|researcher|professor|designer|consultant|freelanc)/i.test(hl)
-                if (hl && !isUni) setYourRole(hl)
+                if (hl) setYourRole(hl)
                 else if (profile.experience?.[0]?.title) setYourRole(`${profile.experience[0].title}${profile.experience[0].company ? ' at ' + profile.experience[0].company : ''}`)
-                else if (hl) setYourRole(`Student at ${hl}`)
                 setSenderPdfDone(true)
             }
         } catch (err) {
             console.error('Sender PDF upload failed:', err)
         } finally {
             setSenderPdfUploading(false)
+            if (e.target) e.target.value = ''
         }
     }
 
@@ -108,18 +107,17 @@ export default function ConnectionMessageGenerator() {
             const data = await res.json()
             const profile = data?.data?.profile || data?.profile
             if (profile) {
-                if (profile.name) setName(profile.name)
+                if (profile.name) setName(profile.name.split(/\s+/)[0])
                 const hl = (profile.headline || '').trim()
-                const isUni = /\b(university|institute|college|school|academy|iit|nit|bits|iiit|thapar|vit|srm|amity|manipal|lpu)\b/i.test(hl) && !/(student|intern|engineer|developer|manager|analyst|founder|researcher|professor|designer|consultant|freelanc)/i.test(hl)
-                if (hl && !isUni) setRecipientRole(hl)
+                if (hl) setRecipientRole(hl)
                 else if (profile.experience?.[0]?.title) setRecipientRole(`${profile.experience[0].title}${profile.experience[0].company ? ' at ' + profile.experience[0].company : ''}`)
-                else if (hl) setRecipientRole(`Student at ${hl}`)
                 setRecipientPdfDone(true)
             }
         } catch (err) {
             console.error('Recipient PDF upload failed:', err)
         } finally {
             setRecipientPdfUploading(false)
+            if (e.target) e.target.value = ''
         }
     }
 
@@ -137,11 +135,11 @@ export default function ConnectionMessageGenerator() {
                     tool: 'connection-message',
                     input: {
                         type,
-                        name: name || 'there',
-                        context: context || undefined,
-                        intent: intent || undefined,
-                        yourRole: yourRole || undefined,
-                        recipientRole: recipientRole || undefined,
+                        name: name.trim() || 'there',
+                        context: context.trim() || undefined,
+                        intent: intent.trim() || undefined,
+                        yourRole: yourRole.trim() || undefined,
+                        recipientRole: recipientRole.trim() || undefined,
                     }
                 })
             })
@@ -154,15 +152,14 @@ export default function ConnectionMessageGenerator() {
                 throw new Error('AI returned no data')
             }
         } catch {
-            // Fallback: use rule-based generator
             try {
                 const fallback = generateFallbackMessages({
                     type,
-                    name: name || 'there',
-                    context: context || undefined,
-                    yourRole: yourRole || undefined,
-                    recipientRole: recipientRole || undefined,
-                    intent: intent || undefined,
+                    name: name.trim() || 'there',
+                    context: context.trim() || undefined,
+                    yourRole: yourRole.trim() || undefined,
+                    recipientRole: recipientRole.trim() || undefined,
+                    intent: intent.trim() || undefined,
                 })
                 if (fallback.length > 0) {
                     setMessages(fallback)
@@ -179,82 +176,63 @@ export default function ConnectionMessageGenerator() {
     }
 
     const copyMessage = (text: string, idx: number) => {
-        try {
-            navigator.clipboard.writeText(text)
-        } catch {
-            const ta = document.createElement('textarea')
-            ta.value = text
-            ta.style.position = 'fixed'
-            ta.style.opacity = '0'
-            document.body.appendChild(ta)
-            ta.select()
-            document.execCommand('copy')
-            document.body.removeChild(ta)
-        }
+        navigator.clipboard.writeText(text)
         setCopiedIdx(idx)
         setTimeout(() => setCopiedIdx(null), 2000)
     }
 
-    const categories = [...new Set(CONNECTION_TYPES.map(t => t.category))]
-
     return (
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-            <div className="px-5 pt-5 pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Connection Request Crafter</h2>
-                        <p className="text-[11px] text-[#6B7280]">Personalized messages under 300 chars | for cold outreach, recruiters, alumni</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="p-5 space-y-4">
-                {/* Message Type */}
+        <div className="space-y-6">
+            {/* Tool Header */}
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-2">What kind of message?</label>
-                    {categories.map(cat => (
-                        <div key={cat} className="mb-3">
-                            <p className="text-[9px] font-bold text-[#6B7280] uppercase tracking-wider mb-1.5">{cat}</p>
-                            <div className="flex flex-wrap gap-1.5">
-                                {CONNECTION_TYPES.filter(t => t.category === cat).map(t => (
-                                    <button
-                                        key={t.id}
-                                        onClick={() => { setType(t.id); setMessages([]) }}
-                                        className={`text-[11px] px-2.5 py-1.5 rounded-lg border transition-all flex items-center gap-1 ${type === t.id
-                                            ? 'border-[#10B981] bg-emerald-50 text-emerald-800 font-medium'
-                                            : 'border-gray-200 text-[#6B7280] hover:border-gray-300 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        <span className="text-xs">{t.icon}</span> {t.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                    {/* Show hint for selected type */}
-                    <p className="text-[10px] text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg mt-1">
-                        {CONNECTION_TYPES.find(t => t.id === type)?.hint}
+                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                        LinkedIn Connection Note Crafter
+                    </h2>
+                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                        Write personalized &quot;Add a note&quot; invitations strictly under LinkedIn&apos;s 300 character cutoff.
                     </p>
                 </div>
+                <Badge variant="brand" size="sm">
+                    300-Char Safe
+                </Badge>
+            </div>
 
-                {/* Step 1: Your Info */}
-                <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-xl p-3">
-                    <div className="flex items-center justify-between mb-2">
-                        <p className="text-[10px] font-bold text-[#4B5563] uppercase tracking-wider">Step 1: About You (Sender)</p>
-                        <label className={`cursor-pointer text-[10px] font-semibold px-2.5 py-1 rounded-lg border transition-all flex items-center gap-1 ${
-                            senderPdfDone ? 'bg-green-100 border-green-200 text-green-700' : 'border-emerald-200 text-emerald-600 hover:bg-emerald-100'
-                        }`}>
-                            {senderPdfUploading ? (
-                                <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-                            ) : (
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                            )}
-                            {senderPdfDone ? '✓ Extracted' : 'Upload Your PDF'}
+            {/* Scenario Pills */}
+            <div className="space-y-2">
+                <label className="block text-[13px] font-semibold text-[#334155]">
+                    Select Outreach Scenario
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                    {CONNECTION_TYPES.map((t) => (
+                        <button
+                            key={t.id}
+                            onClick={() => { setType(t.id); setMessages([]) }}
+                            className={`text-[12px] px-3 py-1.5 rounded-lg border transition-all cursor-pointer select-none ${
+                                type === t.id
+                                    ? 'bg-[#F0F7FF] border-[#0A66C2] text-[#0A66C2] font-bold shadow-xs'
+                                    : 'bg-white border-[#E2E8F0] text-[#475569] hover:border-[#CBD5E1]'
+                            }`}
+                        >
+                            {t.label}
+                        </button>
+                    ))}
+                </div>
+                <p className="text-[12px] text-[#0A66C2] bg-[#F0F7FF] border border-[#BAE0FD] p-2.5 rounded-lg mt-1">
+                    💡 {CONNECTION_TYPES.find(t => t.id === type)?.hint}
+                </p>
+            </div>
+
+            {/* Dual PDF Extraction & Info Boxes */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Sender Info */}
+                <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#E2E8F0] space-y-2.5">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                            About You (Sender)
+                        </span>
+                        <label className="cursor-pointer text-[11px] font-semibold px-2 py-0.5 rounded bg-white border border-[#CBD5E1] text-[#0A66C2] hover:bg-[#F8FAFC]">
+                            {senderPdfUploading ? 'Extracting...' : senderPdfDone ? '✓ PDF Loaded' : 'Upload Your PDF'}
                             <input type="file" accept=".pdf" onChange={handleSenderPdf} className="hidden" disabled={senderPdfUploading} />
                         </label>
                     </div>
@@ -262,24 +240,19 @@ export default function ConnectionMessageGenerator() {
                         type="text"
                         value={yourRole}
                         onChange={(e) => setYourRole(e.target.value)}
-                        placeholder="Your role or headline (e.g., Product Manager at Acme, CS student at Stanford)"
-                        className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981]/20 bg-white"
+                        placeholder="Your role (e.g. Senior PM at Stripe)"
+                        className="input-base bg-white"
                     />
                 </div>
 
-                {/* Step 2: Recipient Info */}
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-3">
-                    <div className="flex items-center justify-between mb-2">
-                        <p className="text-[10px] font-bold text-[#4B5563] uppercase tracking-wider">Step 2: Who Are You Connecting With?</p>
-                        <label className={`cursor-pointer text-[10px] font-semibold px-2.5 py-1 rounded-lg border transition-all flex items-center gap-1 ${
-                            recipientPdfDone ? 'bg-green-100 border-green-200 text-green-700' : 'border-blue-200 text-blue-600 hover:bg-blue-100'
-                        }`}>
-                            {recipientPdfUploading ? (
-                                <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-                            ) : (
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                            )}
-                            {recipientPdfDone ? '✓ Extracted' : 'Upload Their PDF'}
+                {/* Recipient Info */}
+                <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#E2E8F0] space-y-2.5">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                            Recipient
+                        </span>
+                        <label className="cursor-pointer text-[11px] font-semibold px-2 py-0.5 rounded bg-white border border-[#CBD5E1] text-[#0A66C2] hover:bg-[#F8FAFC]">
+                            {recipientPdfUploading ? 'Extracting...' : recipientPdfDone ? '✓ PDF Loaded' : 'Upload Their PDF'}
                             <input type="file" accept=".pdf" onChange={handleRecipientPdf} className="hidden" disabled={recipientPdfUploading} />
                         </label>
                     </div>
@@ -288,65 +261,148 @@ export default function ConnectionMessageGenerator() {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="Their first name"
-                            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-1 focus:ring-[#0A66C2]/20 bg-white"
+                            placeholder="First name"
+                            className="input-base bg-white"
                         />
                         <input
                             type="text"
                             value={recipientRole}
                             onChange={(e) => setRecipientRole(e.target.value)}
-                            placeholder="Their role (e.g., VP Engineering at Google)"
-                            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-1 focus:ring-[#0A66C2]/20 bg-white"
+                            placeholder="Their role / company"
+                            className="input-base bg-white"
                         />
                     </div>
                 </div>
+            </div>
 
-                {/* Step 3: Context */}
+            {/* Context & Intent */}
+            <div className="space-y-4">
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Step 3: Context <span className="text-[#6B7280] font-normal">(the more detail, the better the message)</span>
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                        Specific Context / Shared Connection / Observation
                     </label>
-                    <textarea
+                    <input
+                        type="text"
                         value={context}
                         onChange={(e) => setContext(e.target.value)}
-                        placeholder={CONTEXT_HINTS[type] || 'Add any relevant context...'}
-                        rows={2}
-                        className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981]/20 transition-all resize-none"
+                        placeholder={CONTEXT_HINTS[type]}
+                        className="input-base"
                     />
                 </div>
 
-                {/* Step 4: Intent (optional) */}
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        What do you want from this connection? <span className="text-[#6B7280] font-normal">(optional but helps a lot)</span>
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                        Your Intent / Goal <span className="text-[#64748B] font-normal">(optional)</span>
                     </label>
                     <input
                         type="text"
                         value={intent}
                         onChange={(e) => setIntent(e.target.value)}
-                        placeholder="e.g., Get on their podcast, Ask about their hiring process, Learn about their career path"
-                        className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981]/20 transition-all"
+                        placeholder="e.g. Chat about distributed cache patterns, Discuss engineering openings"
+                        className="input-base"
                     />
                 </div>
 
-                <button
+                <Button
                     onClick={handleGenerate}
                     disabled={loading}
-                    className="w-full py-3 bg-[#10B981] text-white rounded-xl font-semibold text-sm hover:bg-[#059669] transition-all shadow-sm hover:shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    variant="primary"
+                    size="lg"
+                    fullWidth
+                    isLoading={loading}
+                    rightIcon={<SparklesIcon size={16} />}
                 >
-                    {loading ? (
-                        <span className="flex items-center justify-center gap-2">
-                            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-                            Generating…
-                        </span>
-                    ) : 'Generate Messages'}
-                </button>
+                    Generate Connection Notes
+                </Button>
+            </div>
 
-                {/* AI Failed - show prompt */}
-                {error === 'ai_failed' && !loading && (
-                    <AIFailedPromptBlock
-                        toolName="Connection Crafter"
-                        color="#10B981"
+            {/* Fallback Prompt Block if AI offline */}
+            {error === 'ai_failed' && !loading && (
+                <AIFailedPromptBlock
+                    toolName="Connection Note Crafter"
+                    color="#0A66C2"
+                    promptText={buildConnectionPrompt({
+                        type,
+                        name: name || 'there',
+                        context: context || undefined,
+                        yourRole: yourRole || undefined,
+                        recipientRole: recipientRole || undefined,
+                        intent: intent || undefined,
+                    })}
+                />
+            )}
+
+            {/* Generated Results */}
+            {messages.length > 0 && (
+                <div className="space-y-4 pt-6 border-t border-[#F1F5F9] animate-fade-in">
+                    <div className="flex items-center justify-between gap-4">
+                        <p className="text-[13px] font-bold text-[#0F172A] uppercase tracking-wider">
+                            Generated Notes ({messages.length})
+                        </p>
+                        {isAI && (
+                            <Badge variant="brand" size="sm">
+                                Anti-AI Writing Validated
+                            </Badge>
+                        )}
+                    </div>
+
+                    <div className="space-y-3">
+                        {messages.map((m, i) => (
+                            <div
+                                key={i}
+                                className="p-4 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#0A66C2] shadow-xs space-y-2.5 transition-all group"
+                            >
+                                <div className="flex items-center justify-between gap-3">
+                                    <div className="flex items-center gap-2">
+                                        <Badge variant="brand" size="sm">
+                                            {m.tone}
+                                        </Badge>
+                                        <span
+                                            className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                                                (m.charCount || m.message?.length || 0) <= 300
+                                                    ? 'bg-[#F0FDF4] text-[#16A34A] border border-[#BBF7D0]'
+                                                    : 'bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA]'
+                                            }`}
+                                        >
+                                            {m.charCount || m.message?.length}/300 chars
+                                        </span>
+                                    </div>
+
+                                    <button
+                                        onClick={() => copyMessage(m.message, i)}
+                                        className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-2.5 py-1 rounded-md text-[#0A66C2] hover:bg-[#F0F7FF] transition-colors cursor-pointer select-none"
+                                    >
+                                        {copiedIdx === i ? (
+                                            <>
+                                                <CheckIcon size={13} className="text-[#16A34A]" />
+                                                <span className="text-[#16A34A]">Copied</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <CopyIcon size={13} />
+                                                <span>Copy Note</span>
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+
+                                <p className="text-[14px] text-[#0F172A] leading-relaxed bg-[#F8FAFC] p-3.5 rounded-lg border border-[#E2E8F0]">
+                                    {m.message}
+                                </p>
+
+                                {m.tip && (
+                                    <p className="text-[12px] text-[#64748B]">
+                                        💡 {m.tip}
+                                    </p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Pre-formatted Prompt Block */}
+                    <ToolPromptBlock
+                        toolName="Connection Note Crafter"
+                        color="#0A66C2"
                         promptText={buildConnectionPrompt({
                             type,
                             name: name || 'there',
@@ -356,64 +412,8 @@ export default function ConnectionMessageGenerator() {
                             intent: intent || undefined,
                         })}
                     />
-                )}
-
-                {/* Results */}
-                {messages.length > 0 && (
-                    <div className="space-y-3 pt-4 border-t border-gray-100">
-                        <div className="flex items-center justify-between">
-                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">{messages.length} versions generated</p>
-                            {isAI && (
-                                <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#10B981] to-[#7C3AED] px-2 py-0.5 rounded-full">AI</span>
-                            )}
-                        </div>
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Connection Crafter"
-                            color="#10B981"
-                            promptText={buildConnectionPrompt({
-                                type,
-                                name: name || 'there',
-                                context: context || undefined,
-                                yourRole: yourRole || undefined,
-                                recipientRole: recipientRole || undefined,
-                                intent: intent || undefined,
-                            })}
-                        />
-                        {messages.map((m, i) => (
-                            <div key={i} className="border border-gray-200 rounded-xl overflow-hidden hover:border-gray-300 transition-all group">
-                                <div className="px-4 py-3">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-[9px] font-bold text-[#10B981] bg-emerald-50 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                                                {m.tone}
-                                            </span>
-                                            <span className="text-[9px] text-[#C4C9D4]">{m.charCount || m.message?.length} chars</span>
-                                            {(m.charCount || m.message?.length || 0) <= 300 && (
-                                                <span className="text-[9px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Under limit</span>
-                                            )}
-                                        </div>
-                                        <button
-                                            onClick={() => copyMessage(m.message, i)}
-                                            className="text-[11px] text-[#10B981] hover:underline font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
-                                        >
-                                            {copiedIdx === i ? '✓ Copied' : 'Copy'}
-                                        </button>
-                                    </div>
-                                    <p className="text-[13px] text-[#0A0F1C] leading-relaxed mb-2">{m.message}</p>
-                                    <p className="text-[10px] text-[#6B7280] leading-relaxed">💡 {m.tip}</p>
-                                </div>
-                            </div>
-                        ))}
-                        {/* Char count warning */}
-                        {messages.some(m => (m.charCount || m.message?.length || 0) > 300) && (
-                            <div className="bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-                                <p className="text-[10px] text-amber-700">⚠️ LinkedIn connection notes have a 300 character limit. Messages over 300 chars may need trimming.</p>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     )
 }

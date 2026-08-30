@@ -139,10 +139,10 @@ export function generateHeadlines(input: HeadlineInput): GeneratedHeadline[] {
 
     if (industry) {
         headlines.push({
-            text: `${role} | Passionate about ${industry}${specialty ? ` · ${specialty}` : ''}`,
+            text: `${role} | Specializing in ${industry}${specialty ? ` · ${specialty}` : ''}`,
             score: 84,
-            style: 'Passion-Driven',
-            tip: 'Shows genuine interest in your field. Works well for people building a personal brand.'
+            style: 'Industry-Focused',
+            tip: 'Shows clear domain focus. Works well for people building targeted authority.'
         })
     }
 
@@ -212,7 +212,7 @@ export function generateHeadlines(input: HeadlineInput): GeneratedHeadline[] {
     if (industry) {
         const outcome = specialty ? specialty.toLowerCase() : 'growth'
         headlines.push({
-            text: `Helping ${industry} teams unlock ${outcome} | ${role}${company ? ` @ ${company}` : ''}`,
+            text: `Helping ${industry} teams achieve ${outcome} | ${role}${company ? ` @ ${company}` : ''}`,
             score: 91,
             style: 'Outcome-Focused',
             tip: 'Leading with the outcome you deliver is the most compelling headline format. Top 5% of profiles use this.'
@@ -254,7 +254,7 @@ export function generateHeadlines(input: HeadlineInput): GeneratedHeadline[] {
 const ACTION_VERB_MAP: Record<string, string[]> = {
     build: ['Architected', 'Built', 'Developed', 'Engineered', 'Created'],
     manage: ['Led', 'Directed', 'Managed', 'Oversaw', 'Coordinated'],
-    improve: ['Improved', 'Enhanced', 'Optimized', 'Elevated', 'Upgraded'],
+    improve: ['Improved', 'Strengthened', 'Optimized', 'Elevated', 'Refined'],
     grow: ['Grew', 'Scaled', 'Expanded', 'Increased', 'Accelerated'],
     create: ['Designed', 'Crafted', 'Created', 'Produced', 'Launched'],
     analyze: ['Analyzed', 'Evaluated', 'Assessed', 'Identified', 'Researched'],
@@ -798,11 +798,11 @@ export function calculateOpportunityScore(
 export interface AboutInput {
     name?: string
     role: string
-    experience_summary?: string
+    experience_summary?: string | string[]
     experience?: string
     passion?: string
     achievement?: string
-    skills?: string
+    skills?: string | string[]
     audience?: string
     cta?: string
 }
@@ -817,10 +817,16 @@ interface GeneratedAbout {
 export function generateAbout(input: AboutInput): GeneratedAbout[] {
     const results: GeneratedAbout[] = []
     const role = input.role
-    const exp = input.experience_summary || ''
+    const exp = typeof input.experience_summary === 'string'
+        ? input.experience_summary
+        : Array.isArray(input.experience_summary)
+        ? (input.experience_summary as string[]).join('. ')
+        : typeof input.experience === 'string'
+        ? input.experience
+        : ''
     const passion = input.passion || ''
     const achievement = input.achievement || ''
-    const skills = input.skills || ''
+    const rawSkills = input.skills
     const audience = input.audience || ''
     const cta = input.cta || ''
 
@@ -834,7 +840,11 @@ export function generateAbout(input: AboutInput): GeneratedAbout[] {
     const expSentences = exp.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 10)
     const firstExp = expSentences[0] || ''
     const restExp = expSentences.slice(1).map(s => endSentence(s)).join(' ')
-    const skillList = skills.split(/[,·•]+/).map(s => s.trim()).filter(s => s.length > 1)
+    const skillList = Array.isArray(rawSkills)
+        ? rawSkills.map(s => String(s).trim()).filter(Boolean)
+        : typeof rawSkills === 'string'
+        ? rawSkills.split(/[,·•\n]+/).map(s => s.trim()).filter(s => s.length > 1)
+        : []
 
     // Style 1: Narrative Arc | hook → background → depth → future
     {
@@ -1137,7 +1147,7 @@ export function generatePostIdeas(input: PostIdeaInput) {
         },
         {
             title: `Why ${industry} is about to change completely`,
-            hook: `The ${industry} landscape in 2025 looks nothing like 2023. Here is what is shifting and why it matters for your career.`,
+            hook: `The ${industry} market in 2025 looks nothing like 2023. Here is what is shifting and why it matters for your career.`,
             angle: 'Industry trend analysis with career implications',
         },
         {
@@ -1197,12 +1207,13 @@ export function convertStoryToPost(input: StoryToPostInput) {
 
 export interface CommentInput {
     postContent: string
-    style: string
+    style?: string
     expertise?: string
+    length?: string
 }
 
 export function generateComments(input: CommentInput) {
-    const { postContent, style, expertise } = input
+    const { postContent, style = 'insightful', expertise } = input
     const words = postContent.split(/\s+/).filter(Boolean)
     const topicWords = words.filter(w => w.length > 5).slice(0, 3).join(' ')
     const expertiseNote = expertise ? ` From my experience in ${expertise},` : ''

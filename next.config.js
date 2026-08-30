@@ -55,6 +55,8 @@ const nextConfig = {
             { source: '/blogs/what-to-post-on-linkedin-2025', destination: '/blogs/what-to-post-on-linkedin-2026', permanent: true },
             { source: '/blogs/linkedin-post-templates-2025', destination: '/blogs/linkedin-post-templates-2026', permanent: true },
             { source: '/blogs/linkedin-engagement-tips-2025', destination: '/blogs/linkedin-engagement-tips-2026', permanent: true },
+            { source: '/articles', destination: '/blogs', permanent: true },
+            { source: '/articles/:slug', destination: '/blogs/:slug', permanent: true },
             { source: '/100', destination: '/', permanent: true },
         ]
     },

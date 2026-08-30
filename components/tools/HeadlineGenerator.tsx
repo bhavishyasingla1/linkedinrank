@@ -75,6 +75,7 @@ export default function HeadlineGeneratorTool() {
             console.error('PDF upload failed:', err)
         } finally {
             setPdfUploading(false)
+            if (e.target) e.target.value = ''
         }
     }
 

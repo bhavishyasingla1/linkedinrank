@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Badge } from '@/components/ui/Badge'
-import { CheckCircleIcon, ShieldCheckIcon } from '@/components/ui/Icons'
+import { CheckCircleIcon, ShieldCheckIcon, SparklesIcon } from '@/components/ui/Icons'
 
 interface ScoreHeroProps {
     score: number
@@ -57,82 +57,81 @@ export default function ScoreHero({
 
         const center = size / 2
         const radius = 74
-        const lineWidth = 8
+        const lineWidth = 10
 
         // Clear
         ctx.clearRect(0, 0, size, size)
 
-        // Background track
+        // Background track in soft lavender
         ctx.beginPath()
         ctx.arc(center, center, radius, 0, Math.PI * 2)
-        ctx.strokeStyle = '#F1F5F9'
+        ctx.strokeStyle = '#dedcff'
         ctx.lineWidth = lineWidth
         ctx.stroke()
 
-        // Progress track
+        // Progress track with gradient
         const progress = displayScore / 100
         const startAngle = -Math.PI / 2
         const endAngle = startAngle + Math.PI * 2 * progress
 
+        const gradient = ctx.createLinearGradient(0, 0, size, size)
+        gradient.addColorStop(0, '#2f27ce')
+        gradient.addColorStop(1, '#433bff')
+
         ctx.beginPath()
         ctx.arc(center, center, radius, startAngle, endAngle)
-        ctx.strokeStyle = '#0A66C2'
+        ctx.strokeStyle = gradient
         ctx.lineWidth = lineWidth
         ctx.lineCap = 'round'
         ctx.stroke()
     }, [displayScore])
 
-    const normalizedTier = tier.toLowerCase()
-    const tierBadgeVariant =
-        normalizedTier === 'platinum'
-            ? 'brand'
-            : normalizedTier === 'gold'
-            ? 'warning'
-            : normalizedTier === 'silver'
-            ? 'neutral'
-            : 'neutral'
-
     const displayTier = tier.charAt(0).toUpperCase() + tier.slice(1).toLowerCase()
 
     return (
-        <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-xs animate-fade-in">
-            <div className="p-6 sm:p-8 text-center border-b border-[#F1F5F9]">
-                <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-4">
-                    Profile Audit Score
-                </p>
+        <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow animate-fade-in">
+            <div className="p-8 sm:p-10 text-center border-b border-[#dedcff]/70 space-y-6">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] text-[#2f27ce] text-[12px] font-extrabold shadow-2xs">
+                    <SparklesIcon size={13} /> Algorithmic Recruiter Benchmark
+                </div>
 
-                <div className="relative inline-block mb-3">
-                    <canvas ref={canvasRef} className="mx-auto" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-[44px] font-bold text-[#0F172A] tracking-tight tabular-nums leading-none">
+                <div className="relative inline-flex items-center justify-center my-2">
+                    <canvas ref={canvasRef} className="block" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <span className="text-[44px] sm:text-[50px] font-black text-[#050315] tracking-tight tabular-nums leading-none">
                             {displayScore}
                         </span>
-                        <span className="text-[12px] font-medium text-[#64748B] mt-1">out of 100</span>
+                        <span className="text-[12.5px] font-bold text-[#050315]/60 mt-0.5">
+                            / 100
+                        </span>
                     </div>
                 </div>
 
-                <div className="mt-2">
-                    <Badge variant={tierBadgeVariant} size="lg" dot>
-                        {displayTier} Tier
-                    </Badge>
+                <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2">
+                        <span className="text-[18px] sm:text-[20px] font-extrabold text-[#050315]">
+                            {displayTier} Profile Rank
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-[11.5px] font-extrabold bg-[#dedcff] text-[#2f27ce] px-3 py-1 rounded-full shadow-2xs">
+                            <ShieldCheckIcon size={13} /> Verified Audit
+                        </span>
+                    </div>
+                    {peerContext && (
+                        <p className="text-[14px] text-[#050315]/75 max-w-md mx-auto leading-relaxed">
+                            {peerContext}
+                        </p>
+                    )}
                 </div>
             </div>
 
-            {/* Peer context feedback */}
-            <div className="px-6 py-4 bg-[#FAFAFA] border-b border-[#F1F5F9]">
-                {revealed ? (
-                    <p className="text-[13px] text-[#475569] text-center leading-relaxed animate-fade-in">
-                        {peerContext}
-                    </p>
-                ) : (
-                    <div className="h-4 bg-[#E2E8F0] rounded animate-pulse mx-auto w-3/4" />
-                )}
-            </div>
-
-            {/* Signal Verification Footer */}
-            <div className="px-6 py-3 bg-white flex items-center justify-center gap-2 text-[12px] text-[#64748B]">
-                <ShieldCheckIcon size={15} className="text-[#16A34A]" />
-                <span className="font-medium text-[#334155]">Evaluated across 30+ recruiter search signals</span>
+            <div className="p-5 sm:p-6 bg-[#dedcff]/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+                <p className="text-[13px] text-[#050315]/70">
+                    Audit based on <strong className="text-[#050315]">30+ search matching signals</strong> &amp; real candidate benchmarks.
+                </p>
+                <div className="flex items-center gap-1.5 text-[12.5px] font-bold text-[#2f27ce]">
+                    <CheckCircleIcon size={15} />
+                    <span>In-Memory Safe</span>
+                </div>
             </div>
         </div>
     )

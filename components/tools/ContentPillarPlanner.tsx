@@ -3,16 +3,11 @@
 import { useState } from 'react'
 import { generateWeeklyPlan } from '@/lib/tools'
 import ToolPromptBlock, { AIFailedPromptBlock, buildContentPlannerPrompt } from './ToolPromptBlock'
-
-const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
+import { UploadIcon, CheckIcon, CopyIcon, SparklesIcon } from '@/components/ui/Icons'
 
 type Frequency = '3' | '4' | '5'
-
-const PILLAR_COLORS: Record<string, { bg: string; border: string; text: string; label: string }> = {
-    growth: { bg: '#EEF2FF', border: '#C7D2FE', text: '#4F46E5', label: 'Personal Growth' },
-    insights: { bg: '#F0F7FF', border: '#BFDBFE', text: '#0A66C2', label: 'Professional Insights' },
-    engagement: { bg: '#ECFDF5', border: '#A7F3D0', text: '#059669', label: 'Community Engagement' },
-}
 
 interface DayPlan {
     day: string
@@ -22,12 +17,12 @@ interface DayPlan {
     example: string
 }
 
-// ── Component ──────────────────────────────────────────────
 export default function ContentPillarPlanner() {
     const [industry, setIndustry] = useState('')
     const [role, setRole] = useState('')
     const [frequency, setFrequency] = useState<Frequency>('3')
     const [plan, setPlan] = useState<DayPlan[]>([])
+    const [copiedIdx, setCopiedIdx] = useState<number | null>(null)
     const [copiedAll, setCopiedAll] = useState(false)
     const [loading, setLoading] = useState(false)
     const [isAI, setIsAI] = useState(false)
@@ -58,6 +53,7 @@ export default function ContentPillarPlanner() {
             console.error('PDF upload failed:', err)
         } finally {
             setPdfUploading(false)
+            if (e.target) e.target.value = ''
         }
     }
 
@@ -73,7 +69,7 @@ export default function ContentPillarPlanner() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     tool: 'content-planner',
-                    input: { industry: industry || 'general', role: role || 'professional', frequency }
+                    input: { industry: industry.trim() || 'Technology & Engineering', role: role.trim() || 'Specialist', frequency }
                 })
             })
             const data = await res.json()
@@ -81,213 +77,267 @@ export default function ContentPillarPlanner() {
             if (data.success && Array.isArray(data.data)) {
                 setPlan(data.data)
                 setIsAI(true)
-            } else {
-                throw new Error('AI returned no data')
+                setLoading(false)
+                return
             }
-        } catch {
-            // Fallback: use rule-based generator
-            try {
-                const fallback = generateWeeklyPlan({
-                    industry: industry || 'general',
-                    role: role || 'professional',
-                    frequency,
-                })
-                if (fallback.length > 0) {
-                    setPlan(fallback)
-                    setIsAI(false)
-                } else {
-                    setError('ai_failed')
-                }
-            } catch {
-                setError('ai_failed')
+        } catch {}
+
+        try {
+            const fallback = generateWeeklyPlan({
+                industry: industry.trim() || 'Technology',
+                role: role.trim() || 'Professional',
+                frequency,
+            })
+            if (fallback.length > 0) {
+                setPlan(fallback)
+                setIsAI(false)
+                setLoading(false)
+                return
             }
-        } finally {
-            setLoading(false)
-        }
+        } catch {}
+
+        setError('ai_failed')
+        setLoading(false)
+    }
+
+    const copyDay = (day: DayPlan, idx: number) => {
+        const text = `[${day.day} - ${day.pillar.toUpperCase()}]\nFormat: ${day.format}\nPrompt: ${day.prompt}\nExample Hook: "${day.example}"`
+        navigator.clipboard.writeText(text)
+        setCopiedIdx(idx)
+        setTimeout(() => setCopiedIdx(null), 2000)
     }
 
     const copyFullPlan = () => {
-        const text = plan.map(p => {
-            const colors = PILLAR_COLORS[p.pillar]
-            return `${p.day} | ${colors?.label || p.pillar}\nFormat: ${p.format}\nPrompt: ${p.prompt}\nExample hook: "${p.example}"\n`
-        }).join('\n')
+        const text = plan.map(d => `## ${d.day} (${d.pillar.toUpperCase()})\nFormat: ${d.format}\nPrompt: ${d.prompt}\nExample Hook: "${d.example}"`).join('\n\n')
         navigator.clipboard.writeText(text)
         setCopiedAll(true)
         setTimeout(() => setCopiedAll(false), 2000)
     }
 
     return (
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-            <div className="px-5 pt-5 pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#5B21B6] flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Weekly Content Calendar</h2>
-                        <p className="text-[11px] text-[#6B7280]">Get a full week of posting prompts with hooks | personalized to your role</p>
-                    </div>
+        <div className="space-y-6">
+            {/* Tool Header */}
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+                <div>
+                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                        LinkedIn Content Pillar &amp; Calendar Planner
+                    </h2>
+                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                        Build a structured weekly posting plan balancing professional insights, growth lessons, and community engagement.
+                    </p>
                 </div>
+                <Badge variant="brand" size="sm">
+                    Instant Planner
+                </Badge>
             </div>
 
-            <div className="p-5 space-y-4">
-                {/* Pillar Legend */}
-                <div className="flex items-center gap-3 px-3 py-2.5 bg-[#F8FAFC] rounded-xl">
-                    {Object.values(PILLAR_COLORS).map(p => (
-                        <div key={p.label} className="flex items-center gap-1.5">
-                            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: p.text }} />
-                            <span className="text-[10px] font-medium" style={{ color: p.text }}>{p.label}</span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* PDF Upload */}
-                <div className="flex items-center justify-between bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100 rounded-xl px-3 py-2.5">
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-[#7C3AED]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-                        <p className="text-[11px] text-[#4B5563] font-medium">{pdfExtracted ? 'Profile extracted' : 'Upload LinkedIn PDF to auto-fill'}</p>
+            {/* Optional Auto-Fill from PDF Strip */}
+            <div className="p-4 rounded-xl bg-[#F0F7FF] border border-[#BAE0FD] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-white border border-[#BAE0FD] text-[#0A66C2] flex items-center justify-center shrink-0">
+                        <UploadIcon size={16} />
                     </div>
-                    <label className={`cursor-pointer text-[10px] font-semibold px-2.5 py-1 rounded-lg border transition-all flex items-center gap-1 ${
-                        pdfExtracted ? 'bg-green-100 border-green-200 text-green-700' : 'border-violet-200 text-violet-600 hover:bg-violet-100'
-                    }`}>
-                        {pdfUploading ? (
-                            <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-                        ) : null}
-                        {pdfExtracted ? '✓ Done' : pdfUploading ? 'Extracting...' : 'Upload PDF'}
-                        <input type="file" accept=".pdf" onChange={handlePdfUpload} className="hidden" disabled={pdfUploading} />
-                    </label>
+                    <div>
+                        <p className="text-[13px] font-semibold text-[#0F172A]">
+                            {pdfExtracted ? '✓ Role & Industry extracted' : 'Auto-fill from LinkedIn PDF'}
+                        </p>
+                        <p className="text-[12px] text-[#64748B]">
+                            {pdfExtracted ? 'Calendar will be tailored to your exact industry' : 'Extract your headline & sector to generate a custom content calendar'}
+                        </p>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <label className="cursor-pointer inline-flex items-center justify-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-white border border-[#BAE0FD] text-[#0A66C2] hover:bg-white/80 transition-colors shrink-0 select-none">
+                    {pdfUploading ? 'Extracting...' : pdfExtracted ? 'Re-upload PDF' : 'Upload PDF'}
+                    <input
+                        type="file"
+                        accept=".pdf"
+                        onChange={handlePdfUpload}
+                        className="hidden"
+                        disabled={pdfUploading}
+                    />
+                </label>
+            </div>
+
+            {/* Form Inputs */}
+            <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-xs font-medium text-[#4B5563] mb-1.5">Your Industry</label>
+                        <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                            Your Industry / Domain
+                        </label>
                         <input
                             type="text"
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
-                            placeholder="e.g., Tech, Marketing"
-                            className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED]/20 transition-all"
+                            placeholder="e.g. B2B SaaS, Distributed Systems, FinTech"
+                            className="input-base"
                         />
                     </div>
                     <div>
-                        <label className="block text-xs font-medium text-[#4B5563] mb-1.5">Your Role</label>
+                        <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                            Your Role / Title
+                        </label>
                         <input
                             type="text"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
-                            placeholder="e.g., Product Manager"
-                            className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED]/20 transition-all"
+                            placeholder="e.g. Lead Software Engineer, Product Director"
+                            className="input-base"
                         />
                     </div>
                 </div>
 
-                {/* Frequency */}
+                {/* Posting Frequency Toggle */}
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-2">Posts per week</label>
-                    <div className="flex gap-1 p-1 bg-[#F1F5F9] rounded-xl">
-                        {(['3', '4', '5'] as Frequency[]).map(f => (
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1.5">
+                        Weekly Posting Frequency
+                    </label>
+                    <div className="grid grid-cols-3 gap-2 max-w-md">
+                        {(['3', '4', '5'] as Frequency[]).map((f) => (
                             <button
                                 key={f}
                                 onClick={() => setFrequency(f)}
-                                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${frequency === f
-                                        ? 'bg-white text-[#0A0F1C] shadow-sm'
-                                        : 'text-[#6B7280] hover:text-[#4B5563]'
-                                    }`}
+                                className={`py-2 px-3 rounded-lg border text-center text-[13px] font-semibold transition-all cursor-pointer select-none ${
+                                    frequency === f
+                                        ? 'bg-[#0A66C2] text-white border-[#0A66C2] shadow-xs'
+                                        : 'bg-white text-[#475569] border-[#E2E8F0] hover:bg-[#F8FAFC]'
+                                }`}
                             >
-                                {f}x / week
+                                {f}x per week
                             </button>
                         ))}
                     </div>
                 </div>
 
-                <button
+                <Button
                     onClick={handleGenerate}
                     disabled={loading}
-                    className="w-full py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-all shadow-sm hover:shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    variant="primary"
+                    size="lg"
+                    fullWidth
+                    isLoading={loading}
+                    rightIcon={<SparklesIcon size={16} />}
                 >
-                    {loading ? (
-                        <span className="flex items-center justify-center gap-2">
-                            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-                            Generating…
-                        </span>
-                    ) : 'Generate Weekly Plan'}
-                </button>
+                    Generate {frequency}-Day Content Plan
+                </Button>
+            </div>
 
-                {/* AI Failed - show prompt */}
-                {error === 'ai_failed' && !loading && (
-                    <AIFailedPromptBlock
-                        toolName="Content Calendar"
-                        color="#7C3AED"
+            {/* Fallback Prompt Block if AI offline */}
+            {error === 'ai_failed' && !loading && (
+                <AIFailedPromptBlock
+                    toolName="Content Pillar Planner"
+                    color="#0A66C2"
+                    promptText={buildContentPlannerPrompt({
+                        industry: industry || 'Technology',
+                        role: role || 'Professional',
+                        frequency,
+                    })}
+                />
+            )}
+
+            {/* Generated Weekly Plan */}
+            {plan.length > 0 && (
+                <div className="space-y-4 pt-6 border-t border-[#F1F5F9] animate-fade-in">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-2">
+                            <p className="text-[13px] font-bold text-[#0F172A] uppercase tracking-wider">
+                                Weekly Posting Calendar ({plan.length} Days)
+                            </p>
+                            {isAI && (
+                                <Badge variant="brand" size="sm">
+                                    Anti-AI Writing Validated
+                                </Badge>
+                            )}
+                        </div>
+
+                        <button
+                            onClick={copyFullPlan}
+                            className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-[#F0F7FF] border border-[#BAE0FD] text-[#0A66C2] hover:bg-[#E0F2FE] transition-colors cursor-pointer select-none"
+                        >
+                            {copiedAll ? (
+                                <>
+                                    <CheckIcon size={13} className="text-[#16A34A]" />
+                                    <span className="text-[#16A34A]">Copied Full Week</span>
+                                </>
+                            ) : (
+                                <>
+                                    <CopyIcon size={13} />
+                                    <span>Copy Full Week Plan</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
+
+                    <div className="space-y-3">
+                        {plan.map((day, i) => (
+                            <div
+                                key={i}
+                                className="p-4 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#0A66C2] shadow-xs space-y-3 transition-all group"
+                            >
+                                <div className="flex items-center justify-between gap-3">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[13px] font-bold text-[#0F172A]">
+                                            {day.day}
+                                        </span>
+                                        <Badge
+                                            variant={day.pillar === 'insights' ? 'brand' : day.pillar === 'growth' ? 'neutral' : 'outline'}
+                                            size="sm"
+                                        >
+                                            {day.pillar.toUpperCase()}
+                                        </Badge>
+                                        <span className="text-[11px] text-[#64748B]">
+                                            Format: {day.format}
+                                        </span>
+                                    </div>
+
+                                    <button
+                                        onClick={() => copyDay(day, i)}
+                                        className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-2.5 py-1 rounded-md text-[#0A66C2] hover:bg-[#F0F7FF] transition-colors cursor-pointer select-none"
+                                    >
+                                        {copiedIdx === i ? (
+                                            <>
+                                                <CheckIcon size={13} className="text-[#16A34A]" />
+                                                <span className="text-[#16A34A]">Copied</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <CopyIcon size={13} />
+                                                <span>Copy Day</span>
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <p className="text-[13px] text-[#475569] leading-relaxed">
+                                        <strong>Writing Prompt:</strong> {day.prompt}
+                                    </p>
+                                    <div className="p-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg">
+                                        <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-0.5">
+                                            Opening Hook Example:
+                                        </p>
+                                        <p className="text-[13px] text-[#0F172A] font-medium leading-relaxed">
+                                            &ldquo;{day.example}&rdquo;
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Pre-formatted Prompt Block */}
+                    <ToolPromptBlock
+                        toolName="Content Pillar Planner"
+                        color="#0A66C2"
                         promptText={buildContentPlannerPrompt({
-                            industry,
-                            role,
+                            industry: industry || 'Technology',
+                            role: role || 'Professional',
                             frequency,
                         })}
                     />
-                )}
-
-                {/* Results */}
-                {plan.length > 0 && (
-                    <div className="space-y-3 pt-4 border-t border-gray-100">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Your week</p>
-                                {isAI && (
-                                    <span className="text-[9px] font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#0A66C2] px-2 py-0.5 rounded-full">AI</span>
-                                )}
-                            </div>
-                            <button
-                                onClick={copyFullPlan}
-                                className="text-[11px] text-[#7C3AED] hover:underline font-semibold"
-                            >
-                                {copiedAll ? '✓ Copied all' : 'Copy full plan'}
-                            </button>
-                        </div>
-
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Content Calendar"
-                            color="#7C3AED"
-                            promptText={buildContentPlannerPrompt({
-                                industry,
-                                role,
-                                frequency,
-                            })}
-                        />
-
-                        {plan.map((p, i) => {
-                            const colors = PILLAR_COLORS[p.pillar] || PILLAR_COLORS.insights
-                            return (
-                                <div
-                                    key={i}
-                                    className="rounded-xl border overflow-hidden"
-                                    style={{ borderColor: colors.border, backgroundColor: colors.bg }}
-                                >
-                                    <div className="px-4 py-3">
-                                        <div className="flex items-center justify-between mb-1.5">
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-xs font-bold" style={{ color: colors.text }}>{p.day}</span>
-                                                <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-white/70" style={{ color: colors.text }}>
-                                                    {colors.label}
-                                                </span>
-                                            </div>
-                                            <span className="text-[9px] font-medium px-2 py-0.5 rounded-full bg-white/70 text-[#6B7280]">{p.format}</span>
-                                        </div>
-                                        <p className="text-xs text-[#4B5563] mb-1"><strong>Prompt:</strong> {p.prompt}</p>
-                                        <p className="text-[11px] text-[#6B7280] italic">&ldquo;{p.example}&rdquo;</p>
-                                    </div>
-                                </div>
-                            )
-                        })}
-
-                        <p className="text-[10px] text-center text-[#C4C9D4] leading-relaxed">
-                            Consistency beats perfection. Imperfect posts &gt; no posts.
-                        </p>
-                    </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     )
 }

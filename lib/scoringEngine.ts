@@ -434,68 +434,86 @@ function scoreSkills(skills: string[], headline: string = ''): { total: number; 
     let score = 0
     const breakdown: string[] = []
 
-    // (a) Relevance: are skills meaningful and professional? (35 pts)
-    // IMPORTANT: LinkedIn PDFs only show "Top Skills" (typically 3-5 skills),
-    // NOT all skills from the profile. Do NOT penalize for low count.
-    // Having 3+ skills in PDF means the user has skills on their profile.
-    if (skills.length >= 5) {
+    // (a) Relevance & Completeness (35 pts)
+    // LinkedIn PDFs only show "Top Skills" (typically 3-5 skills).
+    // Having 3+ skills in PDF indicates a complete skills setup on profile.
+    if (skills.length >= 3) {
         score += 35
-        breakdown.push(`✓ ${skills.length} skills listed`)
-    } else if (skills.length >= 3) {
-        score += 28
-        breakdown.push(`✓ ${skills.length} top skills shown (LinkedIn PDFs show selected skills only)`)
+        breakdown.push(`✓ ${skills.length} top skills listed (LinkedIn PDF exports display selected top skills)`)
     } else if (skills.length >= 1) {
-        score += 18
-        breakdown.push(`○ ${skills.length} skill(s) detected from PDF: adding more would help`)
+        score += 30
+        breakdown.push(`✓ ${skills.length} skill(s) listed (adding more to your LinkedIn profile strengthens search presence)`)
     } else {
-        score += 5
-        breakdown.push(`○ Few skills detected`)
+        score += 20
+        breakdown.push(`○ Few skills detected from export`)
     }
 
     // (b) Specificity: tools/technologies vs generic words (35 pts)
+    const specificToolRegex = /(?:python|golang|go\b|rust|java|javascript|typescript|c\+\+|c#|\.net|kotlin|swift|ruby|php|react|angular|vue|next\.js|node|express|django|flask|spring|fastapi|sql|postgres|postgresql|mysql|mongodb|redis|cassandra|elasticsearch|dynamodb|aws|azure|gcp|docker|kubernetes|terraform|ansible|jenkins|ci\/cd|git|linux|microservices|distributed systems|system design|graphql|rest|api|kafka|rabbitmq|spark|hadoop|airflow|pandas|numpy|scipy|scikit|tensorflow|pytorch|keras|llm|nlp|machine learning|deep learning|data modeling|data engineering|tableau|power bi|looker|excel|metabase|figma|sketch|adobe|photoshop|illustrator|after effects|wireframing|prototyping|design system|ui\/ux|user research|product management|agile|scrum|kanban|jira|confluence|roadmapping|a\/b testing|prfaq|seo|sem|google analytics|hubspot|salesforce|copywriting|content strategy|growth marketing|financial modeling|valuation|accounting|quickbooks|sap|supply chain|logistics|crm|b2b|lead generation|sales management|negotiation|devops|security|penetration testing|cybersecurity)/i
+
     const specificSkills = skills.filter(s => {
         const lower = s.toLowerCase()
-        return /(?:python|java|javascript|typescript|react|angular|vue|node|sql|aws|azure|gcp|docker|kubernetes|figma|photoshop|illustrator|excel|tableau|power bi|salesforce|hubspot|sap|jira|git|linux|tensorflow|pytorch|r\b|matlab|stata|spss|autocad|solidworks|revit|html|css)/i.test(lower)
+        return specificToolRegex.test(lower) || (s.length >= 4 && !/^(hardworking|motivated|team player|passionate|dedicated|punctual)$/i.test(lower))
     })
 
-    if (specificSkills.length >= 5) {
+    if (specificSkills.length >= 2 || skills.length >= 3) {
         score += 35
-        breakdown.push('✓ Specific tools and technologies listed')
-    } else if (specificSkills.length >= 2) {
-        score += 20
-        breakdown.push(`○ ${specificSkills.length} specific tools: adding more would improve specificity`)
+        breakdown.push('✓ Specific tools, technologies, and domain capabilities listed')
+    } else if (specificSkills.length >= 1) {
+        score += 30
+        breakdown.push('✓ Professional skills listed (pairing broad domains with exact tooling names enhances search matching)')
     } else {
-        // Check if skills are at least descriptive (not just "Programming")
-        const descriptive = skills.filter(s => s.length > 6)
-        if (descriptive.length >= 3) {
-            score += 10
-            breakdown.push('○ Skills are somewhat descriptive: more specific tools would help')
-        } else {
-            score += 3
-            breakdown.push('○ Skills could be more specific (e.g., "Python" instead of "Programming")')
-        }
+        score += 28
+        breakdown.push('✓ Core skills listed: adding specific tools or frameworks can further improve recruiter discoverability')
     }
 
     // (c) Alignment with career direction (30 pts)
     const headlineLower = headline.toLowerCase()
-    if (headlineLower.length > 5) {
-        const alignedSkills = skills.filter(s => {
-            const skillWords = s.toLowerCase().split(/\s+/)
-            return skillWords.some(word => word.length > 3 && headlineLower.includes(word))
+    
+    // Domain cluster checks
+    const techHeadline = /(?:engineer|developer|architect|software|frontend|backend|full\s*stack|devops|cloud|platform|systems|infrastructure|qa|sre|programmer|coder|tech|web)/i.test(headlineLower)
+    const techSkills = skills.some(s => /(?:go|golang|python|java|react|node|cloud|aws|azure|gcp|kubernetes|docker|sql|api|system|distributed|devops|git|linux|database|c\+\+|rust|typescript|javascript|software|backend|frontend)/i.test(s))
+
+    const productHeadline = /(?:product|pm|program|project|scrum|agile|owner)/i.test(headlineLower)
+    const productSkills = skills.some(s => /(?:product|agile|scrum|roadmap|research|strategy|feature|lifecycle|user|analytics|jira|management)/i.test(s))
+
+    const dataHeadline = /(?:data|analytics|analyst|scientist|bi|machine learning|ai|ml|intelligence)/i.test(headlineLower)
+    const dataSkills = skills.some(s => /(?:data|python|sql|tableau|power bi|pandas|pytorch|tensorflow|analytics|statistics|modeling|etl|ml|ai)/i.test(s))
+
+    const designHeadline = /(?:designer|design|ux|ui|creative|art director)/i.test(headlineLower)
+    const designSkills = skills.some(s => /(?:design|figma|ui|ux|prototype|sketch|adobe|wireframe|user research|visual|graphic)/i.test(s))
+
+    const marketingHeadline = /(?:marketing|growth|content|seo|social media|brand|copywriter|communications)/i.test(headlineLower)
+    const marketingSkills = skills.some(s => /(?:marketing|seo|growth|content|social|campaign|brand|copywriting|ads|analytics|hubspot)/i.test(s))
+
+    const financeHeadline = /(?:finance|financial|accountant|accounting|banking|investment|audit)/i.test(headlineLower)
+    const financeSkills = skills.some(s => /(?:finance|financial|modeling|excel|accounting|audit|tax|valuation|budget|sap|quickbooks)/i.test(s))
+
+    const isDomainAligned = 
+        (techHeadline && techSkills) ||
+        (productHeadline && productSkills) ||
+        (dataHeadline && dataSkills) ||
+        (designHeadline && designSkills) ||
+        (marketingHeadline && marketingSkills) ||
+        (financeHeadline && financeSkills)
+
+    if (headlineLower.length > 3) {
+        const directAlignedSkills = skills.filter(s => {
+            const skillWords = s.toLowerCase().split(/\W+/).filter(w => w.length > 2)
+            return skillWords.some(word => headlineLower.includes(word))
         })
 
-        if (alignedSkills.length >= 3) {
+        if (directAlignedSkills.length >= 1 || isDomainAligned) {
             score += 30
-            breakdown.push('✓ Skills align well with your role')
-        } else if (alignedSkills.length >= 1) {
-            score += 15
-            breakdown.push('○ Some alignment with your role: ensure top skills match your headline')
+            breakdown.push('✓ Skills align directly with your target role and industry')
         } else {
-            breakdown.push('○ Skills don\'t clearly connect to your headline: aligning them would improve coherence')
+            // General professional alignment with mild optimization tip
+            score += 26
+            breakdown.push('✓ Relevant professional skills (mirroring top 3 skills into your headline title optimizes search SEO)')
         }
     } else {
-        // Can't assess alignment without headline: give partial credit
-        score += 10
+        score += 26
+        breakdown.push('✓ Skills detected (aligning headline keywords with top skills reinforces profile clarity)')
     }
 
     return { total: Math.max(0, Math.min(100, score)), breakdown }
@@ -803,7 +821,7 @@ function determineArchetype(profile: ProfileData, score: number, categories: Cat
     if (careerStage === 'early-career' && score >= 45) {
         return {
             label: 'Developing Specialist',
-            description: `${name} is building focused expertise early in their career. Continuing to deepen skills and showcase specific contributions will accelerate professional growth.`
+            description: `${name} is building focused expertise early in their career. Continuing to deepen skills and present specific contributions will accelerate professional growth.`
         }
     }
 
@@ -926,7 +944,7 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
                 const skills = profile.skills?.slice(0, 2).join(', ') || 'key skills'
                 aboutFix = `You don't have an About section. Add one to explain who you are! Try: "I am a ${role} with experience in [your area]. I work with ${skills} and focus on [your interest]. Currently [what you're working on]."`
             } else if (aboutLength < 150) {
-                aboutFix = `Your About section is very brief (${aboutLength} characters). Expand it to at least 200-300 characters. Explain: What do you do? What tools/skills do you use? What are you passionate about?`
+                aboutFix = `Your About section is very brief (${aboutLength} characters). Expand it to at least 200-300 characters. Explain: What do you do? What tools/skills do you use? What problems do you solve?`
             } else {
                 const preview = profile.about!.slice(0, 100)
                 aboutFix = `Your About starts with "${preview}..." - consider adding more specific examples of your work, quantifiable achievements, or what makes your approach unique.`

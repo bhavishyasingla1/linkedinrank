@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import { analyzeSEO } from '@/lib/tools'
 import ToolPromptBlock, { buildSEOPrompt } from './ToolPromptBlock'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
+import { UploadIcon, SparklesIcon, CheckCircleIcon } from '@/components/ui/Icons'
 
 interface SEOResult {
     keyword_density: number
@@ -17,16 +20,16 @@ interface SEOResult {
 }
 
 function ScoreBar({ label, score, max, color }: { label: string; score: number; max: number; color: string }) {
-    const pct = Math.round((score / max) * 100)
+    const pct = Math.min(100, Math.round((score / max) * 100))
     return (
         <div>
-            <div className="flex justify-between items-center mb-1">
-                <span className="text-xs font-medium text-[#4B5563]">{label}</span>
-                <span className="text-[11px] font-bold tabular-nums" style={{ color }}>
-                    {score}/{max}
+            <div className="flex justify-between items-center mb-1 text-[12px]">
+                <span className="font-medium text-[#475569]">{label}</span>
+                <span className="font-bold tabular-nums" style={{ color }}>
+                    {score}/{max} ({pct}%)
                 </span>
             </div>
-            <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F1F5F9] rounded-full overflow-hidden border border-[#E2E8F0]">
                 <div
                     className="h-full rounded-full transition-all duration-700 ease-out"
                     style={{ width: `${pct}%`, backgroundColor: color }}
@@ -68,6 +71,7 @@ export default function SEOCheckerTool() {
             console.error('PDF upload failed:', err)
         } finally {
             setPdfUploading(false)
+            if (e.target) e.target.value = ''
         }
     }
 
@@ -82,220 +86,255 @@ export default function SEOCheckerTool() {
     }
 
     const scoreColor = (score: number) =>
-        score >= 70 ? '#10B981' : score >= 45 ? '#F59E0B' : '#EF4444'
+        score >= 75 ? '#16A34A' : score >= 50 ? '#D97706' : '#DC2626'
 
     const scoreLabel = (score: number) =>
-        score >= 70 ? 'Strong' : score >= 45 ? 'Needs Work' : 'Weak'
+        score >= 75 ? 'Optimal Visibility' : score >= 50 ? 'Moderate Coverage' : 'Needs Optimization'
 
     return (
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
-            <div className="px-5 pt-5 pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#5B21B6] flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-[#0A0F1C] text-[15px]">Profile Keyword Analyzer</h2>
-                        <p className="text-[11px] text-[#6B7280]">Upload your PDF or paste your profile | find missing recruiter keywords</p>
-                    </div>
+        <div className="space-y-6">
+            {/* Tool Header */}
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#F1F5F9]">
+                <div>
+                    <h2 className="text-[17px] font-bold text-[#0F172A] tracking-tight">
+                        Profile Keyword &amp; SEO Analyzer
+                    </h2>
+                    <p className="text-[13px] text-[#64748B] mt-0.5">
+                        Audit keyword discoverability, recruiter search alignment, and missing industry terms.
+                    </p>
                 </div>
+                <Badge variant="brand" size="sm">
+                    Instant Scanner
+                </Badge>
             </div>
 
-            <div className="p-5 space-y-4">
-                {/* PDF Upload */}
-                <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-xl p-4">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center border border-purple-100">
-                            <svg className="w-5 h-5 text-[#7C3AED]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                            </svg>
-                        </div>
-                        <div className="flex-1">
-                            <p className="text-sm font-medium text-[#0A0F1C]">
-                                {pdfExtracted ? '✓ Profile extracted' : 'Upload LinkedIn PDF'}
-                            </p>
-                            <p className="text-[11px] text-[#6B7280]">
-                                {pdfExtracted ? 'Headline, About, and Skills populated' : 'Auto-fills all fields from your profile'}
-                            </p>
-                        </div>
-                        <label className={`cursor-pointer text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${pdfExtracted
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-[#7C3AED] text-white hover:bg-[#6D28D9]'
-                            }`}>
-                            {pdfUploading ? (
-                                <span className="flex items-center gap-1.5">
-                                    <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                    </svg>
-                                    Extracting...
-                                </span>
-                            ) : pdfExtracted ? '✓ Done' : 'Upload'}
-                            <input
-                                type="file"
-                                accept=".pdf"
-                                onChange={handlePdfUpload}
-                                className="hidden"
-                                disabled={pdfUploading}
-                            />
-                        </label>
+            {/* Optional Auto-Fill from PDF Strip */}
+            <div className="p-4 rounded-xl bg-[#F0F7FF] border border-[#BAE0FD] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-white border border-[#BAE0FD] text-[#0A66C2] flex items-center justify-center shrink-0">
+                        <UploadIcon size={16} />
+                    </div>
+                    <div>
+                        <p className="text-[13px] font-semibold text-[#0F172A]">
+                            {pdfExtracted ? '✓ Profile extracted successfully' : 'Auto-fill from LinkedIn PDF'}
+                        </p>
+                        <p className="text-[12px] text-[#64748B]">
+                            {pdfExtracted ? 'Headline, About, and Skills loaded' : 'Extract your headline, about, and skills in one click'}
+                        </p>
                     </div>
                 </div>
 
+                <label className="cursor-pointer inline-flex items-center justify-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-white border border-[#BAE0FD] text-[#0A66C2] hover:bg-white/80 transition-colors shrink-0 select-none">
+                    {pdfUploading ? 'Scanning...' : pdfExtracted ? 'Re-upload PDF' : 'Upload PDF'}
+                    <input
+                        type="file"
+                        accept=".pdf"
+                        onChange={handlePdfUpload}
+                        className="hidden"
+                        disabled={pdfUploading}
+                    />
+                </label>
+            </div>
+
+            {/* Form Inputs */}
+            <div className="space-y-4">
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1.5">Your Headline</label>
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                        Headline
+                    </label>
                     <input
                         type="text"
                         value={formData.headline}
                         onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-                        placeholder='e.g., Software Engineer | Python | Cloud Architecture'
-                        className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED]/20 transition-all"
+                        placeholder="e.g. Senior Software Engineer | Python · AWS · Microservices"
+                        className="input-base"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1.5">About Section</label>
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                        About Section
+                    </label>
                     <textarea
                         value={formData.about}
                         onChange={(e) => setFormData({ ...formData, about: e.target.value })}
-                        placeholder="Paste your LinkedIn About section here..."
+                        placeholder="Paste your LinkedIn About section here to scan for industry keyword coverage..."
                         rows={4}
-                        className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED]/20 resize-none transition-all"
+                        className="input-base resize-none"
                     />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-medium text-[#4B5563] mb-1.5">
-                        Skills <span className="text-[#6B7280] font-normal">(comma or bullet separated)</span>
+                    <label className="block text-[13px] font-semibold text-[#334155] mb-1">
+                        Skills <span className="text-[#64748B] font-normal">(comma-separated)</span>
                     </label>
                     <input
                         type="text"
                         value={formData.skills}
                         onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-                        placeholder="e.g., Python, AWS, React, Machine Learning"
-                        className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED]/20 transition-all"
+                        placeholder="e.g. Python, AWS, React, Distributed Systems, Machine Learning"
+                        className="input-base"
                     />
                 </div>
 
-                <button
+                <Button
                     onClick={handleAnalyze}
                     disabled={!formData.headline.trim() && !formData.about.trim()}
-                    className="w-full py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:scale-[0.98]"
+                    variant="primary"
+                    size="lg"
+                    fullWidth
+                    rightIcon={<SparklesIcon size={16} />}
                 >
-                    Scan Profile SEO
-                </button>
+                    Run Profile SEO Scan
+                </Button>
+            </div>
 
-                {/* Results */}
-                {result && (
-                    <div className="space-y-5 pt-5 border-t border-gray-100">
-                        {/* Copyable AI Prompt */}
-                        <ToolPromptBlock
-                            toolName="Keyword Analyzer"
-                            color="#7C3AED"
-                            promptText={buildSEOPrompt({
-                                headline: formData.headline,
-                                about: formData.about,
-                                skills: formData.skills,
-                            })}
-                        />
-
-                        {/* Overall Score */}
-                        <div className="text-center">
-                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Recruiter Visibility Score</p>
-                            <div className="inline-flex items-center gap-3">
-                                <span className={`text-4xl font-bold tabular-nums`} style={{ color: scoreColor(result.recruiter_score) }}>
+            {/* Scan Results */}
+            {result && (
+                <div className="space-y-5 pt-6 border-t border-[#F1F5F9] animate-fade-in">
+                    {/* Overall Recruiter Score Hero */}
+                    <div className="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-0.5">
+                                Recruiter Visibility Index
+                            </p>
+                            <div className="flex items-baseline gap-2">
+                                <span
+                                    className="text-[36px] font-extrabold tabular-nums tracking-tight"
+                                    style={{ color: scoreColor(result.recruiter_score) }}
+                                >
                                     {result.recruiter_score}
                                 </span>
-                                <div className="text-left">
-                                    <span className="text-sm text-[#6B7280]">/100</span>
-                                    <p className="text-[11px] font-semibold" style={{ color: scoreColor(result.recruiter_score) }}>
-                                        {scoreLabel(result.recruiter_score)}
-                                    </p>
-                                </div>
+                                <span className="text-[14px] text-[#64748B]">/ 100</span>
+                                <span
+                                    className="text-[12px] font-bold px-2 py-0.5 rounded-full ml-2"
+                                    style={{
+                                        backgroundColor: `${scoreColor(result.recruiter_score)}15`,
+                                        color: scoreColor(result.recruiter_score),
+                                    }}
+                                >
+                                    {scoreLabel(result.recruiter_score)}
+                                </span>
                             </div>
                         </div>
 
-                        {/* Section Breakdown */}
-                        <div className="bg-[#F8FAFC] rounded-xl p-4 space-y-3">
-                            <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">Breakdown</p>
-                            <ScoreBar label="Headline" score={result.headline_score} max={30} color={scoreColor(Math.round(result.headline_score / 30 * 100))} />
-                            <ScoreBar label="About Section" score={result.about_score} max={30} color={scoreColor(Math.round(result.about_score / 30 * 100))} />
-                            <ScoreBar label="Skills" score={result.skills_score} max={20} color={scoreColor(Math.round(result.skills_score / 20 * 100))} />
-                            <ScoreBar label="Keyword Spread" score={Math.max(0, result.recruiter_score - result.headline_score - result.about_score - result.skills_score)} max={20} color={scoreColor(Math.round(Math.max(0, result.recruiter_score - result.headline_score - result.about_score - result.skills_score) / 20 * 100))} />
-                        </div>
-
-                        {/* Industry & Coverage */}
                         <div className="flex items-center gap-3">
-                            <div className="flex-1 bg-[#F8FAFC] rounded-xl px-4 py-3">
-                                <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-0.5">Industry</p>
-                                <p className="text-sm font-semibold text-[#7C3AED] capitalize">{result.industry_match}</p>
+                            <div className="p-3 rounded-lg bg-[#FAFAFA] border border-[#E2E8F0] text-center min-w-[100px]">
+                                <p className="text-[10px] font-bold text-[#64748B] uppercase">Industry</p>
+                                <p className="text-[13px] font-bold text-[#0A66C2] capitalize mt-0.5">
+                                    {result.industry_match || 'General'}
+                                </p>
                             </div>
-                            <div className="flex-1 bg-[#F8FAFC] rounded-xl px-4 py-3">
-                                <p className="text-[10px] text-[#6B7280] uppercase tracking-wider mb-0.5">Keyword Coverage</p>
-                                <p className="text-sm font-semibold" style={{ color: scoreColor(result.keyword_density) }}>
+                            <div className="p-3 rounded-lg bg-[#FAFAFA] border border-[#E2E8F0] text-center min-w-[100px]">
+                                <p className="text-[10px] font-bold text-[#64748B] uppercase">Coverage</p>
+                                <p className="text-[13px] font-bold text-[#0F172A] mt-0.5">
                                     {result.keyword_density}%
-                                    <span className="text-[#6B7280] font-normal text-xs ml-1">
-                                        ({result.found_keywords.length}/{result.found_keywords.length + result.missing_keywords.length})
-                                    </span>
                                 </p>
                             </div>
                         </div>
+                    </div>
 
-                        {/* Found Keywords */}
-                        {result.found_keywords.length > 0 && (
-                            <div>
-                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">
-                                    Keywords Found ({result.found_keywords.length})
-                                </p>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {result.found_keywords.map((kw, i) => (
-                                        <span key={i} className="text-[11px] font-medium bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg border border-emerald-100">
+                    {/* Section Breakdown Bars */}
+                    <div className="p-5 rounded-xl bg-[#FAFAFA] border border-[#E2E8F0] space-y-3.5">
+                        <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                            Section Breakdown
+                        </p>
+                        <ScoreBar
+                            label="Headline Keyword Placement"
+                            score={result.headline_score}
+                            max={30}
+                            color={scoreColor(Math.round((result.headline_score / 30) * 100))}
+                        />
+                        <ScoreBar
+                            label="About Section Keyword Depth"
+                            score={result.about_score}
+                            max={30}
+                            color={scoreColor(Math.round((result.about_score / 30) * 100))}
+                        />
+                        <ScoreBar
+                            label="Core Skills Section"
+                            score={result.skills_score}
+                            max={20}
+                            color={scoreColor(Math.round((result.skills_score / 20) * 100))}
+                        />
+                    </div>
+
+                    {/* Keywords Found vs Missing */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Found */}
+                        <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
+                            <p className="text-[11px] font-bold text-[#16A34A] uppercase tracking-wider flex items-center gap-1.5">
+                                <CheckCircleIcon size={14} /> Keywords Found ({result.found_keywords.length})
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 pt-1">
+                                {result.found_keywords.length > 0 ? (
+                                    result.found_keywords.map((kw, i) => (
+                                        <span
+                                            key={i}
+                                            className="text-[12px] font-medium bg-[#F0FDF4] text-[#166534] border border-[#BBF7D0] px-2.5 py-1 rounded-md"
+                                        >
                                             {kw}
                                         </span>
-                                    ))}
-                                </div>
+                                    ))
+                                ) : (
+                                    <p className="text-[12px] text-[#64748B]">No primary keywords matched.</p>
+                                )}
                             </div>
-                        )}
+                        </div>
 
-                        {/* Missing Keywords */}
-                        {result.missing_keywords.length > 0 && (
-                            <div>
-                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">
-                                    Add These Keywords
-                                </p>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {result.missing_keywords.slice(0, 10).map((kw, i) => (
-                                        <span key={i} className="text-[11px] font-medium bg-amber-50 text-amber-700 px-2.5 py-1 rounded-lg border border-amber-100">
+                        {/* Missing Keywords to Add */}
+                        <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-2">
+                            <p className="text-[11px] font-bold text-[#D97706] uppercase tracking-wider flex items-center gap-1.5">
+                                <SparklesIcon size={14} /> Missing Keywords to Target
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 pt-1">
+                                {result.missing_keywords.length > 0 ? (
+                                    result.missing_keywords.slice(0, 10).map((kw, i) => (
+                                        <span
+                                            key={i}
+                                            className="text-[12px] font-medium bg-[#FFFBEB] text-[#92400E] border border-[#FDE68A] px-2.5 py-1 rounded-md"
+                                        >
                                             + {kw}
                                         </span>
-                                    ))}
-                                </div>
+                                    ))
+                                ) : (
+                                    <p className="text-[12px] text-[#64748B]">Full keyword coverage detected!</p>
+                                )}
                             </div>
-                        )}
-
-                        {/* Recommendations */}
-                        {result.recommendations.length > 0 && (
-                            <div className="bg-[#F8FAFC] rounded-xl p-4">
-                                <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-3">How to Improve</p>
-                                <div className="space-y-2.5">
-                                    {result.recommendations.map((rec, i) => (
-                                        <div key={i} className="flex items-start gap-2.5">
-                                            <span className="w-5 h-5 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                                {i + 1}
-                                            </span>
-                                            <p className="text-xs text-[#4B5563] leading-relaxed">{rec}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
+                        </div>
                     </div>
-                )}
 
-            </div>
+                    {/* Recommendations */}
+                    {result.recommendations.length > 0 && (
+                        <div className="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-xs space-y-3">
+                            <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
+                                SEO Improvement Action Items
+                            </p>
+                            <div className="space-y-2">
+                                {result.recommendations.map((rec, i) => (
+                                    <div key={i} className="flex items-start gap-2.5">
+                                        <span className="w-5 h-5 rounded-full bg-[#F0F7FF] text-[#0A66C2] text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                            {i + 1}
+                                        </span>
+                                        <p className="text-[13px] text-[#475569] leading-relaxed">{rec}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Pre-formatted Prompt Block */}
+                    <ToolPromptBlock
+                        toolName="Keyword Analyzer"
+                        color="#0A66C2"
+                        promptText={buildSEOPrompt({
+                            headline: formData.headline,
+                            about: formData.about,
+                            skills: formData.skills,
+                        })}
+                    />
+                </div>
+            )}
         </div>
     )
 }

@@ -2,7 +2,7 @@
 
 import { CategoryScore, ProfileData } from '@/lib/types'
 import { Badge } from '@/components/ui/Badge'
-import { AlertCircleIcon, AlertTriangleIcon, CheckCircleIcon, SparklesIcon } from '@/components/ui/Icons'
+import { AlertCircleIcon, AlertTriangleIcon, CheckCircleIcon, SparklesIcon, ZapIcon } from '@/components/ui/Icons'
 
 interface RecommendationCardsProps {
     recommendations: any[]
@@ -112,67 +112,74 @@ export default function RecommendationCards({
     const bestPractices = getBestPractices(careerStage, archetype, categoryScores, profile)
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-6">
             {/* Core Recommendations List */}
-            <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-xs">
-                <div className="p-5 sm:p-6 border-b border-[#F1F5F9]">
-                    <h3 className="text-[12px] font-bold text-[#64748B] uppercase tracking-wider">
-                        Actionable Recommendations
-                    </h3>
+            <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow">
+                <div className="p-6 sm:p-8 border-b border-[#dedcff]/70 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <ZapIcon size={16} className="text-[#2f27ce]" />
+                        <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                            Prioritized Diagnostic Fixes
+                        </h3>
+                    </div>
+                    <span className="text-[11.5px] font-bold text-[#050315]/60">
+                        {recommendations.length} Action Items
+                    </span>
                 </div>
 
-                <div className="divide-y divide-[#F1F5F9]">
+                <div className="divide-y divide-[#dedcff]/60">
                     {recommendations.map((rec, i) => {
                         const whyContent = rec.whyItMatters || rec.why_it_matters || ''
                         const isHigh = rec.impact === 'High'
-                        const isMed = rec.impact === 'Medium'
-
-                        const badgeVariant = isHigh ? 'error' : isMed ? 'warning' : 'neutral'
 
                         return (
-                            <div key={i} className="p-5 sm:p-6 space-y-3">
+                            <div key={i} className="p-6 sm:p-8 space-y-4">
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="space-y-1">
-                                        <h4 className="text-[14px] font-semibold text-[#0F172A] leading-snug">
+                                        <h4 className="text-[16px] font-bold text-[#050315] leading-snug">
                                             {rec.title}
                                         </h4>
                                         {whyContent && (
-                                            <p className="text-[12px] text-[#64748B] leading-relaxed">
+                                            <p className="text-[13.5px] text-[#050315]/70 leading-relaxed">
                                                 {whyContent}
                                             </p>
                                         )}
                                     </div>
                                     {rec.impact && (
-                                        <Badge variant={badgeVariant} size="sm">
+                                        <span className={`text-[11.5px] font-extrabold px-3 py-1 rounded-full shrink-0 shadow-2xs ${
+                                            isHigh
+                                                ? 'bg-[#dedcff] text-[#2f27ce]'
+                                                : 'bg-[#dedcff]/40 text-[#050315]/80'
+                                        }`}>
                                             {rec.impact} Impact
-                                        </Badge>
+                                        </span>
                                     )}
                                 </div>
 
                                 {rec.fix && (
-                                    <div className="p-3 rounded-lg bg-[#FAFAFA] border border-[#E2E8F0] text-[13px] text-[#334155] leading-relaxed">
-                                        {rec.fix}
+                                    <div className="p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] text-[13.5px] text-[#050315]/85 leading-relaxed">
+                                        <strong className="text-[#050315]">Recommended Action:</strong> {rec.fix}
                                     </div>
                                 )}
 
                                 {(rec.before || rec.after) && (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                                         {rec.before && (
-                                            <div className="p-3 rounded-lg bg-[#FEF2F2]/50 border border-[#FECACA] space-y-1">
-                                                <span className="text-[10px] font-bold text-[#DC2626] uppercase tracking-wider">
-                                                    Original
+                                            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-1">
+                                                <span className="text-[10.5px] font-extrabold text-rose-700 uppercase tracking-wider">
+                                                    Original Phrasing
                                                 </span>
-                                                <p className="text-[12px] text-[#64748B] line-through">
+                                                <p className="text-[12.5px] text-rose-900/70 line-through">
                                                     {rec.before}
                                                 </p>
                                             </div>
                                         )}
                                         {rec.after && (
-                                            <div className="p-3 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0] space-y-1">
-                                                <span className="text-[10px] font-bold text-[#16A34A] uppercase tracking-wider flex items-center gap-1">
-                                                    <SparklesIcon size={11} /> Suggested Fix
+                                            <div className="p-4 rounded-2xl bg-[#dedcff]/35 border border-[#dedcff] space-y-1">
+                                                <span className="text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider flex items-center gap-1">
+                                                    <SparklesIcon size={12} /> Algorithmic Suggested Fix
                                                 </span>
-                                                <p className="text-[12px] font-medium text-[#0F172A]">
+                                                <p className="text-[13px] font-bold text-[#050315]">
                                                     {rec.after}
                                                 </p>
                                             </div>
@@ -187,19 +194,21 @@ export default function RecommendationCards({
 
             {/* Profile Specific Tips */}
             {bestPractices.length > 0 && (
-                <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-xs">
-                    <div className="p-5 sm:p-6 border-b border-[#F1F5F9]">
-                        <h3 className="text-[12px] font-bold text-[#64748B] uppercase tracking-wider">
-                            Profile Context &amp; Best Practices
+                <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow">
+                    <div className="p-6 sm:p-8 border-b border-[#dedcff]/70">
+                        <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                            Profile Context &amp; Recruiter Signals
                         </h3>
                     </div>
-                    <div className="p-5 sm:p-6 space-y-3.5">
+                    <div className="p-6 sm:p-8 space-y-4">
                         {bestPractices.map((bp, i) => (
-                            <div key={i} className="flex items-start gap-2.5 text-[13px]">
-                                <CheckCircleIcon size={16} className="text-[#0A66C2] shrink-0 mt-0.5" />
+                            <div key={i} className="flex items-start gap-3 text-[13.5px]">
+                                <div className="w-6 h-6 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                                    <CheckCircleIcon size={14} />
+                                </div>
                                 <div>
-                                    <p className="font-semibold text-[#0F172A] mb-0.5">{bp.title}</p>
-                                    <p className="text-[#475569] leading-relaxed">{bp.desc}</p>
+                                    <p className="font-bold text-[#050315] mb-0.5">{bp.title}</p>
+                                    <p className="text-[#050315]/70 leading-relaxed">{bp.desc}</p>
                                 </div>
                             </div>
                         ))}

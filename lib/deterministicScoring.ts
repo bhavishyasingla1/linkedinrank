@@ -384,34 +384,41 @@ function scoreSkills(
         }
     }
     
-    // Check 1: Count >= 10 → +6
-    const countOk = skills.length >= 10
-    const countPoints = countOk ? 6 : Math.floor((skills.length / 10) * 6)
+    // Check 1: Count >= 3 (LinkedIn PDF exports only output top 3-5 skills) → +6
+    const countOk = skills.length >= 3
+    const countPoints = countOk ? 6 : skills.length >= 1 ? 4 : 2
     checks.push({ name: 'skill_count_10', ok: countOk, points: countPoints, max_points: 6 })
     rawScore += countPoints
     
-    // Check 2: Top 3 match headline keywords → +5
+    // Check 2: Top skills match role / headline keywords → +5
     let headlineMatches = 0
     if (headline) {
-        const headlineWords = headline.toLowerCase().split(/\W+/).filter(w => w.length > 3)
-        const topSkills = skills.slice(0, 3).map(s => s.toLowerCase())
-        headlineMatches = topSkills.filter(skill => 
+        const headlineLower = headline.toLowerCase()
+        const headlineWords = headlineLower.split(/\W+/).filter(w => w.length > 2)
+        const topSkills = skills.slice(0, 5).map(s => s.toLowerCase())
+        
+        // Direct or domain match
+        const techMatch = /(?:engineer|developer|architect|software|devops|cloud|platform|tech)/i.test(headlineLower) &&
+            topSkills.some(s => /(?:go|golang|python|java|react|node|cloud|aws|kubernetes|docker|sql|api|system|distributed|devops|git|linux|c\+\+|rust|typescript|javascript)/i.test(s))
+        
+        const otherMatches = topSkills.filter(skill => 
             headlineWords.some(word => skill.includes(word) || word.includes(skill))
         ).length
+        
+        headlineMatches = techMatch ? Math.max(2, otherMatches + 1) : otherMatches
     }
-    const matchOk = headlineMatches >= 2
-    const matchPoints = matchOk ? 5 : Math.floor((headlineMatches / 2) * 5)
+    const matchOk = headlineMatches >= 1
+    const matchPoints = matchOk ? 5 : 4
     checks.push({ name: 'top3_headline_match', ok: matchOk, points: matchPoints, max_points: 5 })
     rawScore += matchPoints
     
     // Check 3: Relevance to profile goal mode → +4
-    // In profile_only mode, just check if skills are professional
     const professionalSkills = skills.filter(s => 
         INDUSTRY_KEYWORDS.some(kw => s.toLowerCase().includes(kw)) ||
-        /programming|management|analysis|design|development|strategy|communication|leadership/i.test(s)
+        s.length >= 3
     ).length
-    const relevanceOk = professionalSkills >= 3
-    const relevancePoints = relevanceOk ? 4 : Math.floor((professionalSkills / 3) * 4)
+    const relevanceOk = professionalSkills >= 1
+    const relevancePoints = relevanceOk ? 4 : 3
     checks.push({ name: 'relevance', ok: relevanceOk, points: relevancePoints, max_points: 4 })
     rawScore += relevancePoints
     

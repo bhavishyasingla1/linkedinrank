@@ -20,48 +20,48 @@ export default function HeadlineRewriter({ currentHeadline, rewrites }: Headline
     }
 
     return (
-        <div className="bg-white border border-[#E2E8F0] rounded-xl overflow-hidden shadow-xs">
-            <div className="p-5 sm:p-6 border-b border-[#F1F5F9]">
-                <div className="flex items-center gap-2 mb-1">
-                    <SparklesIcon size={16} className="text-[#0A66C2]" />
-                    <h3 className="text-[12px] font-bold text-[#64748B] uppercase tracking-wider">
-                        Headline Alternatives
+        <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow">
+            <div className="p-6 sm:p-8 border-b border-[#dedcff]/70 space-y-1">
+                <div className="flex items-center gap-2">
+                    <SparklesIcon size={16} className="text-[#2f27ce]" />
+                    <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                        High-Converting Headline Rewrites
                     </h3>
                 </div>
-                <p className="text-[13px] text-[#475569]">
-                    Choose a headline that matches your current positioning and copy it directly to your LinkedIn profile.
+                <p className="text-[14px] text-[#050315]/70">
+                    Choose a tailored formula that matches your target positioning and copy it directly to LinkedIn.
                 </p>
             </div>
 
-            <div className="p-5 sm:p-6 space-y-4">
+            <div className="p-6 sm:p-8 space-y-4">
                 {currentHeadline && (
-                    <div className="p-3.5 rounded-lg bg-[#FAFAFA] border border-[#E2E8F0]">
-                        <p className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-1">
+                    <div className="p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] space-y-1">
+                        <p className="text-[11px] font-extrabold text-[#050315]/60 uppercase tracking-wider">
                             Current Headline
                         </p>
-                        <p className="text-[13px] text-[#475569] leading-relaxed">
+                        <p className="text-[13.5px] text-[#050315]/80 leading-relaxed">
                             {currentHeadline}
                         </p>
                     </div>
                 )}
 
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                     {rewrites.map((rewrite, i) => (
                         <div
                             key={i}
-                            className="flex items-center justify-between gap-3 p-3.5 rounded-lg bg-[#F0F7FF]/60 border border-[#BAE0FD] hover:border-[#0A66C2] transition-colors"
+                            className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] transition-all shadow-xs group"
                         >
-                            <p className="text-[13px] font-medium text-[#0F172A] flex-1 leading-relaxed">
+                            <p className="text-[14px] font-bold text-[#050315] flex-1 leading-relaxed">
                                 {rewrite}
                             </p>
                             <button
                                 onClick={() => handleCopy(rewrite, i)}
-                                className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold bg-white border border-[#BAE0FD] text-[#0A66C2] hover:bg-[#F0F7FF] transition-colors cursor-pointer select-none"
+                                className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-bold bg-[#dedcff] text-[#2f27ce] hover:bg-[#2f27ce] hover:text-white transition-all cursor-pointer select-none shadow-2xs"
                             >
                                 {copiedIndex === i ? (
                                     <>
-                                        <CheckIcon size={13} className="text-[#16A34A]" />
-                                        <span className="text-[#16A34A]">Copied</span>
+                                        <CheckIcon size={13} />
+                                        <span>Copied</span>
                                     </>
                                 ) : (
                                     <>

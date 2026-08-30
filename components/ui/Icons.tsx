@@ -420,3 +420,386 @@ export function BookOpenIcon({ size = 16, className = '', ...props }: IconProps)
     )
 }
 
+export function BriefcaseIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+    )
+}
+
+export function CameraIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+            <circle cx="12" cy="13" r="3" />
+        </svg>
+    )
+}
+
+export function LightbulbIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+        </svg>
+    )
+}
+
+export function PenLineIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+        </svg>
+    )
+}
+
+export function ZapIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+    )
+}
+
+export function CalendarIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+    )
+}
+
+export function MessageSquareIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+    )
+}
+
+export function UserPlusIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <line x1="20" y1="8" x2="20" y2="14" />
+            <line x1="23" y1="11" x2="17" y2="11" />
+        </svg>
+    )
+}
+
+export function UserCheckIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <polyline points="17 11 19 13 23 9" />
+        </svg>
+    )
+}
+
+export function QrCodeIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="7" y="7" width="0.1" height="0.1" strokeWidth="2.5" />
+            <rect x="17.5" y="7" width="0.1" height="0.1" strokeWidth="2.5" />
+            <rect x="7" y="17.5" width="0.1" height="0.1" strokeWidth="2.5" />
+            <rect x="17.5" y="17.5" width="0.1" height="0.1" strokeWidth="2.5" />
+        </svg>
+    )
+}
+
+export function HeadingIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M6 4v16M18 4v16M6 12h12" />
+        </svg>
+    )
+}
+
+export function TrendingUpIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+            <polyline points="17 6 23 6 23 12" />
+        </svg>
+    )
+}
+
+export function BarChart2Icon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+    )
+}
+
+export function UsersIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+    )
+}
+
+export function LayersIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+            <polyline points="2 17 12 22 22 17" />
+            <polyline points="2 12 12 17 22 12" />
+        </svg>
+    )
+}
+
+export function WandIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8L19 13M17.8 6.2L19 5M12.2 6.2L11 5M3 21l9-9M12.2 11.8L11 13" />
+        </svg>
+    )
+}
+
+export function FlameIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z" />
+        </svg>
+    )
+}
+
+export function ToolIcon({ id, size = 20, className = '', ...props }: { id: string; size?: number | string; className?: string } & React.SVGProps<SVGSVGElement>) {
+    switch (id) {
+        case 'headline':
+            return <HeadingIcon size={size} className={className} {...props} />
+        case 'about':
+            return <UserCheckIcon size={size} className={className} {...props} />
+        case 'bullets':
+            return <BriefcaseIcon size={size} className={className} {...props} />
+        case 'ring':
+            return <CameraIcon size={size} className={className} {...props} />
+        case 'seo':
+            return <TrendingUpIcon size={size} className={className} {...props} />
+        case 'postideas':
+            return <LightbulbIcon size={size} className={className} {...props} />
+        case 'storytopost':
+            return <PenLineIcon size={size} className={className} {...props} />
+        case 'hooks':
+            return <ZapIcon size={size} className={className} {...props} />
+        case 'pillars':
+            return <CalendarIcon size={size} className={className} {...props} />
+        case 'comments':
+            return <MessageSquareIcon size={size} className={className} {...props} />
+        case 'messages':
+            return <UserPlusIcon size={size} className={className} {...props} />
+        case 'qrcode':
+            return <QrCodeIcon size={size} className={className} {...props} />
+        default:
+            return <SparklesIcon size={size} className={className} {...props} />
+    }
+}
+
+

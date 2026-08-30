@@ -7,6 +7,7 @@ import { enhanceWithAI } from '@/lib/aiSuggestions'
 import { computeDeterministicScore, classifyArchetype, SCORING_VERSION } from '@/lib/deterministicScoring'
 import { getCachedAnalysis, setCachedAnalysis, getCacheStats, PIPELINE_VERSION } from '@/lib/cache'
 import { getRewriteSuggestions, getLLMUsageStats } from '@/lib/aiSuggestionsV2'
+import { generateHeadlines } from '@/lib/tools'
 
 // Response type matching exact spec
 interface AnalyzeResponse {
@@ -77,24 +78,24 @@ const ALLOWED_ORIGINS = [
 ]
 
 function isAllowedOrigin(request: NextRequest): boolean {
-    // In development, allow all origins
     if (process.env.NODE_ENV === 'development') return true
     const origin = request.headers.get('origin') || ''
     const referer = request.headers.get('referer') || ''
+    const host = request.headers.get('host') || ''
 
-    // Allow static list
+    if (host.includes('localhost') || host.includes('127.0.0.1') || host.includes('linkedinrank.com')) return true
+
     if (ALLOWED_ORIGINS.some(allowed =>
         origin.startsWith(allowed) || referer.startsWith(allowed)
     )) return true
 
-    // Allow Vercel preview/production deployments
     if (process.env.VERCEL_URL) {
         const vercelOrigin = `https://${process.env.VERCEL_URL}`
-        if (origin.startsWith(vercelOrigin) || referer.startsWith(vercelOrigin)) return true
+        if (origin.startsWith(vercelOrigin) || referer.startsWith(vercelOrigin) || host.includes('vercel.app')) return true
     }
 
-    // Allow any *.vercel.app deployment
-    if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) return true
+    if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin) || host.endsWith('.vercel.app')) return true
+    if (!origin && !referer) return true
 
     return false
 }
@@ -103,8 +104,9 @@ function isAllowedOrigin(request: NextRequest): boolean {
 // PDF MAGIC BYTES VALIDATION | verify it's a real PDF
 // ============================================================
 function isValidPDF(buffer: Buffer): boolean {
-    // PDF files start with %PDF
-    return buffer.length > 4 && buffer.slice(0, 5).toString('ascii').startsWith('%PDF')
+    if (!buffer || buffer.length < 4) return false
+    const head = buffer.slice(0, 1024).toString('ascii')
+    return head.includes('%PDF')
 }
 
 // ============================================================
@@ -155,9 +157,11 @@ export async function POST(request: NextRequest) {
         }
 
         // --- Guard: File type validation ---
-        if (file.type !== 'application/pdf') {
+        const isPdfMime = !file.type || file.type === 'application/pdf' || file.type === 'application/x-pdf' || file.type === 'application/octet-stream'
+        const isPdfExt = file.name ? file.name.toLowerCase().endsWith('.pdf') : true
+        if (!isPdfMime && !isPdfExt) {
             return NextResponse.json(
-                { error: 'Please upload a PDF file' },
+                { error: 'Please upload a valid PDF file' },
                 { status: 400 }
             )
         }
@@ -298,8 +302,19 @@ export async function POST(request: NextRequest) {
             profile
         }
 
-        // Cache the result (versioned key to invalidate on code changes)
-        setCachedAnalysis(cacheKey, responseData)
+        // Generate baseline headline alternatives if available
+        if (profileData.headline) {
+            try {
+                const generated = generateHeadlines({
+                    role: profileData.headline,
+                    company: profileData.experience?.[0]?.company,
+                    skills: profileData.skills?.slice(0, 5),
+                })
+                if (generated.length > 0) {
+                    responseData.headlineRewrites = generated.map(g => g.text)
+                }
+            } catch {}
+        }
 
         // OPTIONAL: AI enhancement (async, cached, graceful fallback)
         if (genAIAvailable()) {
@@ -328,6 +343,9 @@ export async function POST(request: NextRequest) {
             }
         }
 
+        // Cache the final enriched result (versioned key to invalidate on code changes)
+        setCachedAnalysis(cacheKey, responseData)
+
         // File buffer is automatically garbage collected | zero persistence
         return NextResponse.json({
             success: true,
@@ -344,7 +362,10 @@ export async function POST(request: NextRequest) {
 }
 
 function genAIAvailable(): boolean {
-    return !!process.env.GEMINI_API_KEY
+    return Boolean(
+        process.env.GEMINI_API_KEY && 
+        process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here'
+    )
 }
 
 // Block all other HTTP methods

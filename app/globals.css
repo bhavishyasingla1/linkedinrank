@@ -3,20 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --primary: #0F172A;
-  --navy: #0F172A;
+  --aside-bg: #fbfbfe;
+  --aside-text: #050315;
+  --aside-primary: #2f27ce;
+  --aside-secondary: #dedcff;
+  --aside-accent: #433bff;
+
+  --primary: #050315;
+  --navy: #050315;
   --navy-light: #1E293B;
   --slate: #475569;
   --slate-light: #64748B;
   --muted: #64748B;
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
-  --bg: #FFFFFF;
-  --bg-alt: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --accent: #0A66C2;
-  --accent-dark: #004182;
-  --accent-light: #F0F7FF;
+  --border: #dedcff;
+  --border-light: #f1f0ff;
+  --bg: #fbfbfe;
+  --bg-alt: #f4f3fe;
+  --bg-card: #ffffff;
+  --accent: #2f27ce;
+  --accent-dark: #231c9e;
+  --accent-light: #dedcff;
   --success: #16A34A;
   --success-light: #F0FDF4;
   --warning: #D97706;
@@ -90,13 +96,39 @@ a {
   transition: color 0.15s ease;
 }
 
-/* Cards & Surfaces — Crisp product aesthetic (no neon glassmorphism) */
+/* Aside High-Tech Minimalist Utilities */
+.aside-hero-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(67, 59, 255, 0.08) 0%, rgba(222, 220, 255, 0.12) 30%, rgba(251, 251, 254, 0) 70%);
+}
+
+.aside-bottom-glow {
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(67, 59, 255, 0.1) 0%, rgba(222, 220, 255, 0.15) 40%, rgba(251, 251, 254, 0) 80%);
+}
+
+.aside-window-shadow {
+  box-shadow: 0 24px 70px -15px rgba(5, 3, 21, 0.08), 0 0 0 1px rgba(222, 220, 255, 0.7);
+}
+
+.aside-card-shadow {
+  box-shadow: 0 10px 30px -10px rgba(5, 3, 21, 0.04), 0 0 0 1px rgba(222, 220, 255, 0.6);
+}
+
+.aside-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aside-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(47, 39, 206, 0.08), 0 0 0 1px rgba(67, 59, 255, 0.3);
+}
+
+/* Cards & Surfaces */
 .card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #dedcff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px -5px rgba(5, 3, 21, 0.03);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .card:hover {

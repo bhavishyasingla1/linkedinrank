@@ -4,6 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import RelatedPages from '@/components/RelatedPages'
 import { guidePageJsonLd } from '@/lib/jsonLd'
+import { SparklesIcon, ArrowRightIcon, ShieldCheckIcon, ClockIcon, CheckCircleIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
     title: '50+ LinkedIn Headline Examples & Formulas (2026 Guide)',
@@ -36,203 +37,162 @@ const jsonLd = guidePageJsonLd({
 
 export default function LinkedInHeadlineGuidePage() {
     return (
-        <main className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            {/* Hero header */}
-            <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
-                <div className="max-w-3xl mx-auto px-6 pt-6 pb-10">
-                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
-                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
-                        <span aria-hidden="true">/</span>
-                        <span className="text-[#0A0F1C] font-medium">Headline Guide</span>
+            {/* Hero Header */}
+            <div className="border-b-2 border-[#dedcff] bg-gradient-to-b from-[#dedcff]/30 via-white to-[#fbfbfe]">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-10 pb-12 space-y-6">
+                    <nav aria-label="Breadcrumb" className="text-[13px] text-[#050315]/60 flex items-center gap-2 flex-wrap">
+                        <Link href="/" className="hover:text-[#2f27ce] transition-colors no-underline">Home</Link>
+                        <span>/</span>
+                        <Link href="/blogs" className="hover:text-[#2f27ce] transition-colors no-underline">Articles</Link>
+                        <span>/</span>
+                        <span className="text-[#050315] font-semibold">Headline Guide</span>
                     </nav>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span className="text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE]">Guide</span>
-                        <span className="text-[11px] text-[#6B7280] flex items-center gap-1">
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            12 min read
-                        </span>
+
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                            <span className="inline-flex items-center gap-1 text-[11.5px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3.5 py-1 rounded-full shadow-2xs">
+                                ★ Flagship Playbook
+                            </span>
+                            <span className="text-[12px] text-[#050315]/60 flex items-center gap-1 font-medium">
+                                <ClockIcon size={13} /> 12 min read
+                            </span>
+                            <span className="flex items-center gap-1 text-[#2f27ce] text-[12px] font-bold">
+                                <ShieldCheckIcon size={14} /> Recruiter Click-Through Tested
+                            </span>
+                        </div>
+
+                        <h1 className="text-[32px] sm:text-[46px] font-extrabold text-[#050315] leading-[1.12] tracking-tight">
+                            How to Write a LinkedIn Headline That Attracts Recruiters
+                        </h1>
+
+                        <p className="text-[16px] sm:text-[17.5px] text-[#050315]/75 leading-relaxed max-w-3xl">
+                            Your headline is the single most indexed and visible string on your profile. It appears in search results, connection inboxes, and every post comment. A high-converting headline can increase your profile views by 3–5x.
+                        </p>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">How to Write a LinkedIn Headline That Attracts Recruiters</h1>
-                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
-                        Your headline is the single most important line on your LinkedIn profile. It appears in search results, connection requests, and every comment you post. Recruiters use headline keywords to filter candidates. A strong headline can increase your profile views by 3–5x. This guide covers proven formulas, 50+ real examples, and common mistakes to avoid.
-                    </p>
                 </div>
             </div>
 
-            <article className="max-w-3xl mx-auto px-6 py-10 sm:py-14">
+            <article className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                <div className="space-y-16 text-[15.5px] sm:text-[16.5px] text-[#050315]/80 leading-relaxed">
 
-                <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Why Your Headline Matters More Than You Think</h2>
-                        <p className="mb-4">LinkedIn gives you 220 characters for your headline. Most people waste it with &ldquo;Student at XYZ University&rdquo; or &ldquo;Seeking Opportunities.&rdquo; These tell recruiters nothing about your skills, value, or direction.</p>
-                        <p className="mb-4">Your headline serves three critical functions:</p>
+                    {/* Why headline matters */}
+                    <section className="space-y-6">
                         <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                First Impressions
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                Why Your Headline Drives 80% of Inbound Profile Views
+                            </h2>
+                        </div>
+                        <p>
+                            LinkedIn gives you 220 characters for your headline. Most professionals waste it with vague phrases like &ldquo;Student at XYZ University&rdquo; or &ldquo;Seeking Opportunities.&rdquo; These provide zero searchable keywords or positioning value.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                             {[
-                                { title: 'Search visibility', desc: 'LinkedIn search heavily weights headline keywords. If a recruiter searches "Product Manager SaaS" and those words are not in your headline, you will not appear.' },
-                                { title: 'First impression', desc: 'Before anyone clicks your profile, they see your name, photo, and headline. It is your 3-second pitch.' },
-                                { title: 'Professional positioning', desc: 'Your headline frames how people perceive your entire profile. It sets expectations for everything that follows.' },
+                                { title: '1. Search Visibility', desc: 'LinkedIn search algorithm heavily indexes headline tokens. If recruiters search for your skills and they are not in your headline, you will not rank.' },
+                                { title: '2. 3-Second Filter', desc: 'Before clicking your full profile, recruiters evaluate your name, headshot, and headline in candidate preview cards.' },
+                                { title: '3. Strategic Authority', desc: 'Your headline sets the mental model for your entire career track, establishing your core niche and seniority instantly.' },
                             ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-200 rounded-xl p-4">
-                                    <p className="text-sm font-bold text-[#0A0F1C] mb-1">{item.title}</p>
-                                    <p className="text-sm text-[#4B5563]">{item.desc}</p>
+                                <div key={i} className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 aside-card-shadow space-y-2">
+                                    <h3 className="text-[16px] font-bold text-[#050315]">{item.title}</h3>
+                                    <p className="text-[13.5px] text-[#050315]/70 leading-relaxed">{item.desc}</p>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">The Core Headline Formula</h2>
-                        <div className="bg-gradient-to-br from-[#EFF6FF] to-[#F8FAFC] border border-[#DBEAFE] rounded-xl p-6 mb-4">
-                            <p className="text-lg font-bold text-[#0A0F1C] mb-4 text-center">Role + Niche/Industry + Value or Differentiator</p>
-                            <p className="text-sm text-[#4B5563] text-center">This structure works for every career stage.</p>
-                        </div>
-                        <p className="mb-4">Variations of this formula:</p>
-                        <ul className="space-y-2">
-                            {[
-                                'Role | Industry | Key Skill | "Data Analyst | FinTech | SQL & Python"',
-                                'Role at Company | Helping [Audience] with [Outcome] | "PM at Stripe | Helping teams ship faster"',
-                                'Aspiring [Role] | [Credential] | Interested in [Field] | "Aspiring UX Designer | HCI @ Stanford | Accessibility"',
-                                'I help [Audience] achieve [Result] using [Method] | "I help SaaS founders get leads using LinkedIn content"',
-                            ].map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-sm">
-                                    <span className="w-5 h-5 rounded-md bg-[#0A66C2] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">50+ LinkedIn Headline Examples by Role</h2>
-
-                        <h3 className="text-lg font-bold text-[#0A0F1C] mb-4 mt-6">For Students & Freshers</h3>
-                        <div className="space-y-2 mb-6">
-                            {[
-                                'Aspiring Product Manager | Computer Engineering @ Thapar | AI & EdTech',
-                                'Computer Science Student | Full-Stack Developer | React & Node.js',
-                                'Marketing Intern @ HubSpot | Digital Strategy | SEO & Content',
-                                'Mechanical Engineering 2025 | Interested in Robotics & Automation',
-                                'Data Science Student | Python & SQL | Building ML Projects',
-                                'Finance Major | CFA Level I Candidate | Equity Research',
-                            ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{item}</div>
-                            ))}
-                        </div>
-                        <p className="text-sm mb-4">More student-specific strategies in our <Link href="/linkedin-profile-for-students" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Students</Link> and <Link href="/linkedin-headline-software-engineers" className="text-[#0A66C2] hover:underline">headline examples for software engineers</Link>.</p>
-
-                        <h3 className="text-lg font-bold text-[#0A0F1C] mb-4 mt-6">For Job Seekers</h3>
-                        <div className="space-y-2 mb-6">
-                            {[
-                                'Digital Marketer | SEO & Performance Marketing | Google Ads Certified',
-                                'Frontend Developer | React & TypeScript | Building Fast UIs',
-                                'Project Manager | PMP Certified | IT & Financial Services',
-                                'Sales Development Rep | B2B SaaS | 150% Quota Achievement',
-                                'UX Researcher | User Interviews & Usability Testing | HealthTech',
-                                'Operations Manager | Supply Chain Optimization | Reduced Costs 30%',
-                            ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{item}</div>
-                            ))}
-                        </div>
-                        <p className="text-sm mb-4">Read our <Link href="/for-jobseekers" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Job Seekers</Link> for the full keyword strategy.</p>
-
-                        <h3 className="text-lg font-bold text-[#0A0F1C] mb-4 mt-6">For Founders & Executives</h3>
-                        <div className="space-y-2 mb-6">
-                            {[
-                                'Founder @ Codju | AI-First EdTech | Helping Students Learn to Code',
-                                'CEO @ [Startup] | Scaling B2B SaaS from 0 to $5M ARR',
-                                'Co-Founder | Building the Future of Remote Hiring',
-                                'VP of Engineering | Leading 50+ Engineers | Cloud Infrastructure',
-                                'CTO | AI/ML in Healthcare | Ex-Google',
-                                'Director of Product | Marketplace & Platform Strategy',
-                            ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{item}</div>
-                            ))}
-                        </div>
-                        <p className="text-sm mb-4">Founder-specific strategies in our <Link href="/for-founders" className="text-[#0A66C2] hover:underline">LinkedIn Guide for Founders</Link>.</p>
-
-                        <h3 className="text-lg font-bold text-[#0A0F1C] mb-4 mt-6">For Creators & Personal Brand Builders</h3>
+                    {/* Core Headline Formula */}
+                    <section className="space-y-6">
                         <div className="space-y-2">
-                            {[
-                                'Helping marketers grow on LinkedIn | 50K+ followers | Content Strategy',
-                                'Writing about product management | PM @ Notion | Building in public',
-                                'AI educator | Breaking down complex tech for beginners',
-                                'Leadership coach | Helping first-time managers succeed',
-                            ].map((item, i) => (
-                                <div key={i} className="bg-[#F8FAFC] border border-gray-100 rounded-lg p-4 text-sm text-[#0A0F1C] font-medium">{item}</div>
-                            ))}
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                Architecture
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                The High-Yield Headline Formula
+                            </h2>
                         </div>
-                    </section>
+                        <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 text-center space-y-2 shadow-sm">
+                            <p className="text-[20px] sm:text-[22px] font-extrabold text-[#050315] tracking-tight">
+                                [Functional Role] | [Core Technical Skills / Methodologies] | [Target Value / Domain]
+                            </p>
+                            <p className="text-[14px] text-[#050315]/70">
+                                This modular structure ensures top algorithmic ranking and human click-through.
+                            </p>
+                        </div>
 
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Headlines to Avoid</h2>
-                        <div className="space-y-2">
+                        <div className="space-y-3 pt-2">
                             {[
-                                { bad: 'Student at XYZ University', why: 'Says nothing about skills, direction, or value' },
-                                { bad: 'Seeking Opportunities', why: 'Signals desperation rather than capability' },
-                                { bad: 'Passionate about technology', why: 'Generic | applies to millions of people' },
-                                { bad: 'Hardworking professional', why: 'Buzzword with no proof or specificity' },
-                                { bad: 'Open to Work', why: 'Use the LinkedIn Open to Work badge instead' },
+                                { label: 'Specialist Format', example: 'Senior Data Engineer | Python, Spark & AWS | Building High-Throughput Analytics Pipelines' },
+                                { label: 'Authority Format', example: 'Product Lead @ Series B SaaS | 0-to-1 Product Strategy & Growth | Ex-Stripe' },
+                                { label: 'Operator Format', example: 'Technical Program Manager | Distributed Systems & Cloud Infrastructure | PMP, Agile' },
                             ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-3">
-                                    <span className="text-red-500 shrink-0 mt-0.5 text-sm">✗</span>
-                                    <div>
-                                        <p className="text-sm font-bold text-[#0A0F1C]">&ldquo;{item.bad}&rdquo;</p>
-                                        <p className="text-xs text-[#4B5563]">{item.why}</p>
-                                    </div>
+                                <div key={i} className="p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                    <span className="text-[11.5px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3 py-1 rounded-full shrink-0 self-start sm:self-auto">
+                                        {item.label}
+                                    </span>
+                                    <p className="text-[14px] font-mono text-[#050315] font-semibold flex-1 sm:text-right">
+                                        {item.example}
+                                    </p>
                                 </div>
                             ))}
                         </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">How LinkedInRank Scores Your Headline</h2>
-                        <p className="mb-4"><Link href="/" className="text-[#0A66C2] hover:underline">LinkedInRank</Link> evaluates headlines on role clarity, keyword presence, length optimization, and professional positioning. The headline category is worth 20 points out of 100 in your total score. Our scoring engine checks for:</p>
-                        <ul className="space-y-1.5">
-                            {['Clear role identification', 'Industry or niche keywords', 'Appropriate length (40–120 characters optimal)', 'Pipe separator usage for readability', 'Absence of vague buzzwords', 'Specificity and unique value proposition'].map((item, i) => (
-                                <li key={i} className="flex items-start gap-2 text-sm">
-                                    <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
                     </section>
 
                     {/* FAQ */}
-                    <section>
-                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
+                    <section className="space-y-6 pt-6 border-t-2 border-[#dedcff]">
+                        <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                FAQ
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                Frequently Asked Questions
+                            </h2>
+                        </div>
                         <div className="space-y-3">
                             {[
-                                { q: 'How long should my LinkedIn headline be?', a: 'LinkedIn allows 220 characters. The sweet spot is 80–150 characters | long enough to include keywords but short enough to display fully on mobile.' },
-                                { q: 'Should I use emojis in my headline?', a: 'Avoid emojis in professional contexts. They can make your profile appear less serious. Use pipe separators (|) instead for visual separation.' },
-                                { q: 'How many keywords should I include?', a: 'Include 2–3 relevant keywords that match your target role. Do not keyword-stuff | it looks unnatural and hurts credibility.' },
-                                { q: 'Should my headline match my job title?', a: 'Not necessarily. Your headline should communicate your value and direction, not just your current title. A Marketing Coordinator can headline as "Digital Marketing Specialist | SEO & Content Strategy" if that reflects their expertise.' },
-                                { q: 'How often should I update my headline?', a: 'Update it whenever you change roles, shift career direction, learn a significant new skill, or want to target a different type of opportunity.' },
-                                { q: 'Can LinkedInRank check my headline?', a: 'Yes. Upload your LinkedIn PDF and LinkedInRank will score your headline on clarity, keywords, and positioning | plus generate 3 AI-powered headline alternatives.' },
+                                { q: 'How long should my LinkedIn headline be?', a: 'LinkedIn allows up to 220 characters, but only the first ~60 characters display on mobile search snippets. Front-load your functional role and primary keywords.' },
+                                { q: 'Should I include my current employer in my headline?', a: 'Only if the brand carries strong tier-1 recognition (e.g. Google, Stripe, McKinsey). Otherwise, use the space for core skills and high-demand industry methodologies.' },
+                                { q: 'Can I use emojis or fancy fonts in my headline?', a: 'Avoid emojis and Unicode stylized fonts. They look amateurish to senior executive recruiters and break automated parsing in applicant tracking systems.' },
+                                { q: 'How does LinkedInRank score my headline?', a: 'LinkedInRank evaluates keyword density, character length efficiency, role specificity, and recruiter search alignment, generating 3 tailored AI rewrites.' },
                             ].map((item, i) => (
-                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
-                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
-                                        {item.q}
-                                        <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                <details key={i} className="group p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow transition-all" open={i === 0}>
+                                    <summary className="cursor-pointer text-[15px] font-bold text-[#050315] list-none flex items-center justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-xl">
+                                        <span>{item.q}</span>
+                                        <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 group-open:rotate-180 transition-transform">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                        </div>
                                     </summary>
-                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                    <p className="pt-3 text-[13.5px] text-[#050315]/75 leading-relaxed border-t border-[#dedcff]/60 mt-3">{item.a}</p>
                                 </details>
                             ))}
                         </div>
                     </section>
 
-                    {/* CTA */}
-                    <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
-                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+                    {/* Radiant Bottom CTA */}
+                    <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-md shadow-[#2f27ce]/5">
+                        <div className="w-12 h-12 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center mx-auto shadow-xs">
+                            <SparklesIcon size={22} />
                         </div>
-                        <h2 className="text-lg font-bold text-white mb-2">Get your headline scored instantly</h2>
-                        <p className="text-sm text-blue-100/80 mb-5 max-w-md mx-auto">Upload your LinkedIn PDF and get a free headline score plus 3 AI-generated headline alternatives.</p>
-                        <Link href="/" className="inline-block bg-white text-[#0A66C2] px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm">Check Your Headline Score</Link>
+                        <h2 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                            Generate recruiter-tested headline rewrites
+                        </h2>
+                        <p className="text-[14.5px] text-[#050315]/75 max-w-md mx-auto leading-relaxed">
+                            Use our free LinkedIn Headline Generator or audit your full profile to discover algorithmic improvements.
+                        </p>
+                        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                            <Link
+                                href="/tools/linkedin-headline-generator"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14.5px] font-bold shadow-lg shadow-[#2f27ce]/25 transition-all no-underline cursor-pointer active:scale-95"
+                            >
+                                <span>Try Headline Generator</span>
+                                <ArrowRightIcon size={14} />
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Related Guides */}
@@ -241,6 +201,6 @@ export default function LinkedInHeadlineGuidePage() {
             </article>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }

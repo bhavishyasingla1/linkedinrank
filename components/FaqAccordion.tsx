@@ -42,26 +42,40 @@ export default function FaqAccordion() {
     }
 
     return (
-        <div className="divide-y divide-[#E2E8F0] border-y border-[#E2E8F0]">
+        <div className="space-y-3">
             {FAQ_ITEMS.map((item, i) => {
                 const isOpen = openIndex === i
                 return (
-                    <div key={i} className="transition-colors">
+                    <div
+                        key={i}
+                        className={`
+                            rounded-2xl transition-all duration-200 border
+                            ${isOpen
+                                ? 'bg-[#dedcff]/30 border-[#2f27ce] shadow-sm'
+                                : 'bg-white border-[#dedcff] hover:border-[#2f27ce]/60 shadow-xs'
+                            }
+                        `}
+                    >
                         <button
                             onClick={() => toggle(i)}
                             aria-expanded={isOpen}
-                            className="w-full flex items-center justify-between py-4 sm:py-5 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] rounded-md"
+                            className="w-full flex items-center justify-between p-5 text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-2xl"
                         >
-                            <span className="text-[15px] sm:text-[16px] font-semibold text-[#0F172A] group-hover:text-[#0A66C2] transition-colors pr-4">
+                            <span className="text-[15.5px] sm:text-[16.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors pr-4">
                                 {item.q}
                             </span>
-                            <ChevronDownIcon
-                                size={18}
-                                className={`text-[#64748B] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#0A66C2]' : ''}`}
-                            />
+                            <div className={`
+                                w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shrink-0
+                                ${isOpen
+                                    ? 'bg-[#2f27ce] text-[#fbfbfe] rotate-180 shadow-xs'
+                                    : 'bg-[#dedcff] text-[#2f27ce] group-hover:bg-[#2f27ce] group-hover:text-white'
+                                }
+                            `}>
+                                <ChevronDownIcon size={16} />
+                            </div>
                         </button>
                         {isOpen && (
-                            <div className="pb-5 pr-6 text-[14px] text-[#475569] leading-relaxed animate-fade-in">
+                            <div className="px-5 pb-5 pt-1 text-[14px] text-[#050315]/80 leading-relaxed animate-fade-in border-t border-[#dedcff]/70 mt-1">
                                 {item.a}
                             </div>
                         )}

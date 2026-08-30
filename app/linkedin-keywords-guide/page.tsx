@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import RelatedPages from '@/components/RelatedPages'
+import { SparklesIcon, ArrowRightIcon, ShieldCheckIcon, ClockIcon, CheckCircleIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
     title: 'LinkedIn Keywords Guide | How to Get Found by Recruiters (2026)',
@@ -44,167 +45,227 @@ const jsonLd = {
 
 export default function LinkedInKeywordsGuidePage() {
     return (
-        <main className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <SiteHeader />
 
-            {/* Hero header */}
-            <div className="bg-gradient-to-b from-[#F8FAFC] to-white border-b border-gray-100">
-                <div className="max-w-3xl mx-auto px-6 pt-6 pb-10">
-                    <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] flex items-center gap-1.5 flex-wrap mb-8">
-                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
-                        <span aria-hidden="true">/</span>
-                        <span className="text-[#0A0F1C] font-medium">Keywords Guide</span>
+            {/* Hero Header with Aside Aesthetic */}
+            <div className="border-b-2 border-[#dedcff] bg-gradient-to-b from-[#dedcff]/30 via-white to-[#fbfbfe]">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-10 pb-12 space-y-6">
+                    <nav aria-label="Breadcrumb" className="text-[13px] text-[#050315]/60 flex items-center gap-2 flex-wrap">
+                        <Link href="/" className="hover:text-[#2f27ce] transition-colors no-underline">Home</Link>
+                        <span>/</span>
+                        <Link href="/blogs" className="hover:text-[#2f27ce] transition-colors no-underline">Articles</Link>
+                        <span>/</span>
+                        <span className="text-[#050315] font-semibold">Keywords Guide</span>
                     </nav>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span className="text-[11px] font-semibold px-3 py-1 rounded-lg bg-[#EFF6FF] text-[#0A66C2] border border-[#DBEAFE]">Guide</span>
-                        <span className="text-[11px] text-[#6B7280] flex items-center gap-1">
-                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            10 min read
-                        </span>
+
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                            <span className="inline-flex items-center gap-1 text-[11.5px] font-extrabold uppercase tracking-wider bg-[#dedcff] text-[#2f27ce] px-3.5 py-1 rounded-full shadow-2xs">
+                                ★ Pillar Guide
+                            </span>
+                            <span className="text-[12px] text-[#050315]/60 flex items-center gap-1 font-medium">
+                                <ClockIcon size={13} /> 10 min read
+                            </span>
+                            <span className="flex items-center gap-1 text-[#2f27ce] text-[12px] font-bold">
+                                <ShieldCheckIcon size={14} /> 2026 Recruiter Algorithm Tested
+                            </span>
+                        </div>
+
+                        <h1 className="text-[32px] sm:text-[46px] font-extrabold text-[#050315] leading-[1.12] tracking-tight">
+                            LinkedIn Keywords Guide: How to Get Found by Recruiters
+                        </h1>
+
+                        <p className="text-[16px] sm:text-[17.5px] text-[#050315]/75 leading-relaxed max-w-3xl">
+                            LinkedIn is a semantic search engine. Recruiters type exact keywords—job titles, core frameworks, tools, and methodologies—to find candidates. If those keywords are not indexed in your profile, <strong className="text-[#050315]">you do not exist</strong> in their search results.
+                        </p>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-bold text-[#0A0F1C] leading-tight tracking-tight mb-5">LinkedIn Keywords Guide: How to Get Found by Recruiters</h1>
-                    <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-2xl">
-                        LinkedIn is a search engine. Recruiters type keywords | job titles, skills, tools, industries | to find candidates. If those keywords are not in your profile, <strong className="text-[#0A0F1C]">you do not exist</strong> in their search results. This guide covers where to place keywords, which ones matter most, and how to optimize without keyword stuffing.
-                    </p>
                 </div>
             </div>
 
-            <article className="max-w-3xl mx-auto px-6 py-10 sm:py-14">
+            <article className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+                <div className="space-y-16 text-[15.5px] sm:text-[16.5px] text-[#050315]/80 leading-relaxed">
 
-                <div className="space-y-16 text-[15px] text-[#4B5563] leading-relaxed">
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">How LinkedIn Search Works</h2>
-                        <p className="mb-4">LinkedIn Recruiter search matches your query against profile content. Each section of your profile carries different weight in search results:</p>
+                    {/* Section 1 */}
+                    <section className="space-y-6">
                         <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                Algorithmic Weights
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                How LinkedIn Recruiter Search Matches Your Profile
+                            </h2>
+                        </div>
+                        <p>
+                            LinkedIn Recruiter search parses your profile into high-priority tokens. Each section carries different algorithmic weight when ranking search results:
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                             {[
-                                { section: 'Headline', weight: 'Highest', desc: 'Most heavily weighted in search. Keywords here have the strongest impact on discoverability.' },
-                                { section: 'Job titles', weight: 'Very High', desc: 'Current and past job titles are used as primary matching criteria.' },
-                                { section: 'Skills section', weight: 'High', desc: 'Used as search filters. Recruiters can filter results by specific skills.' },
-                                { section: 'About section', weight: 'Medium', desc: 'Full-text searchable. First 300 characters carry slightly more weight.' },
-                                { section: 'Experience descriptions', weight: 'Medium', desc: 'Keywords in bullet points contribute to search relevance.' },
-                                { section: 'Education & certifications', weight: 'Lower', desc: 'Useful for filtering by degree, institution, or certification.' },
+                                { section: 'Headline', weight: 'Highest Weight (30%)', desc: 'Most heavily indexed in search. Keywords here have the strongest impact on recruiter discoverability.' },
+                                { section: 'Job Titles', weight: 'Very High (25%)', desc: 'Current and past job titles are used as primary matching criteria in Boolean searches.' },
+                                { section: 'Skills Section', weight: 'High (20%)', desc: 'Used as exact search filters. Recruiters filter candidate pools by specific skills tags.' },
+                                { section: 'About Section', weight: 'Medium (15%)', desc: 'Full-text searchable. The first 300 characters carry significant indexer weight.' },
+                                { section: 'Experience Bullets', weight: 'Medium (7%)', desc: 'Keywords inside outcome-driven bullet points contribute to overall relevance score.' },
+                                { section: 'Education & Certs', weight: 'Lower (3%)', desc: 'Useful for filtering by university, degree level, or certified industry accreditations.' },
                             ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-3 bg-[#F8FAFC] border border-gray-200 rounded-xl p-3">
-                                    <span className="shrink-0 text-xs font-bold text-white bg-[#0A66C2] px-2 py-0.5 rounded">{item.weight}</span>
-                                    <div>
-                                        <p className="text-sm font-bold text-[#0A0F1C]">{item.section}</p>
-                                        <p className="text-xs text-[#4B5563]">{item.desc}</p>
+                                <div key={i} className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 aside-card-shadow space-y-2">
+                                    <div className="flex items-center justify-between">
+                                        <h3 className="text-[16px] font-bold text-[#050315]">{item.section}</h3>
+                                        <span className="text-[11px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-2.5 py-0.5 rounded-full">
+                                            {item.weight}
+                                        </span>
+                                    </div>
+                                    <p className="text-[13.5px] text-[#050315]/70 leading-relaxed">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Section 2 */}
+                    <section className="space-y-6">
+                        <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                Keyword Taxonomy
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                3 Types of Keywords Every Top 1% Profile Includes
+                            </h2>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                            {[
+                                { type: '1. Role Keywords', examples: 'Product Manager, Software Engineer, Data Analyst, UX Designer, Growth Lead', tip: 'Use exact standard titles recruiters search for, not obscure internal tiers.' },
+                                { type: '2. Tool & Skill Keywords', examples: 'React, Python, SQL, Figma, Salesforce, AWS, Tableau, System Design', tip: 'Include both specific tools and the umbrella category it belongs to.' },
+                                { type: '3. Domain Keywords', examples: 'SaaS, FinTech, HealthTech, B2B Enterprise, E-commerce, Marketplace', tip: 'Helps recruiters searching within high-growth verticals.' },
+                            ].map((item, i) => (
+                                <div key={i} className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 aside-card-shadow flex flex-col justify-between space-y-4">
+                                    <div className="space-y-2">
+                                        <h3 className="text-[16px] font-extrabold text-[#050315]">{item.type}</h3>
+                                        <p className="text-[13px] text-[#050315]/75 leading-relaxed font-mono bg-[#dedcff]/20 p-3 rounded-xl border border-[#dedcff]/60">
+                                            {item.examples}
+                                        </p>
+                                    </div>
+                                    <p className="text-[12px] text-[#2f27ce] font-bold bg-[#dedcff]/40 p-2.5 rounded-xl border border-[#dedcff]">
+                                        💡 {item.tip}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Section 3 */}
+                    <section className="space-y-6">
+                        <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                Implementation Map
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                Keyword Placement Checklist
+                            </h2>
+                        </div>
+                        <p>For maximum discoverability, your target keywords should appear across these primary touchpoints:</p>
+                        <div className="space-y-3">
+                            {[
+                                { where: 'Headline', example: '"Data Analyst | SQL, Python & Tableau | FinTech Analytics & ETL Pipelines"' },
+                                { where: 'About Section (First 300 Chars)', example: '"I am a Data Analyst specializing in SQL, Python, and automated reporting pipelines..."' },
+                                { where: 'Current & Past Job Titles', example: '"Senior Product Manager" (avoid "Product Lead Level IV" or internal codes)' },
+                                { where: 'Experience Bullet Points', example: '"Engineered SQL queries and automated dbt models processing 2.5M+ daily transaction records..."' },
+                                { where: 'Skills Section (15–25 Skills)', example: 'SQL, Python, Data Modeling, Tableau, Snowflake, AWS, ETL, Business Intelligence' },
+                                { where: 'Certifications', example: '"Google Data Analytics Professional Certificate", "AWS Certified Data Analytics"' },
+                            ].map((item, i) => (
+                                <div key={i} className="p-4 sm:p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow flex items-start gap-3.5 transition-all">
+                                    <div className="w-6 h-6 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 mt-0.5">
+                                        <CheckCircleIcon size={14} />
+                                    </div>
+                                    <div className="space-y-0.5 flex-1">
+                                        <p className="text-[14.5px] font-bold text-[#050315]">{item.where}</p>
+                                        <p className="text-[13px] text-[#050315]/75 font-mono leading-relaxed">{item.example}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">3 Types of Keywords to Include</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            {[
-                                { type: 'Role keywords', examples: 'Product Manager, Software Engineer, Data Analyst, UX Designer, Marketing Manager', tip: 'Use the exact title recruiters search for, not internal company titles' },
-                                { type: 'Skill & tool keywords', examples: 'React, Python, SQL, Figma, Google Ads, Salesforce, AWS, Excel', tip: 'Include both the tool name and the skill category it belongs to' },
-                                { type: 'Industry keywords', examples: 'SaaS, FinTech, HealthTech, E-commerce, B2B, Enterprise, Startup', tip: 'These help recruiters who search within specific industries' },
-                            ].map((item, i) => (
-                                <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-[0_1px_4px_rgba(0,0,0,0.03)]">
-                                    <p className="text-sm font-bold text-[#0A0F1C] mb-2">{item.type}</p>
-                                    <p className="text-xs text-[#4B5563] mb-2">{item.examples}</p>
-                                    <p className="text-[11px] text-[#0A66C2] font-medium">{item.tip}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Keyword Placement Checklist</h2>
-                        <p className="mb-4">For maximum discoverability, your target keywords should appear in all of these locations:</p>
+                    {/* Section 4: Mistakes to Avoid */}
+                    <section className="space-y-6">
                         <div className="space-y-2">
-                            {[
-                                { where: 'Headline', example: '"Data Analyst | SQL & Python | FinTech"' },
-                                { where: 'About section (first 300 chars)', example: '"I am a Data Analyst specializing in SQL, Python, and financial data..."' },
-                                { where: 'Current job title', example: '"Data Analyst" (not "Analyst II" or internal codes)' },
-                                { where: 'Experience bullet points', example: '"Built SQL queries to analyze 1M+ transaction records..."' },
-                                { where: 'Skills section (15–25 skills)', example: 'SQL, Python, Data Visualization, Tableau, Excel, Statistical Analysis' },
-                                { where: 'Certifications', example: '"Google Data Analytics Professional Certificate"' },
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-2 text-sm">
-                                    <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
-                                    <span><strong className="text-[#0A0F1C]">{item.where}:</strong> {item.example}</span>
-                                </div>
-                            ))}
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                Common Pitfalls
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                Keyword Mistakes That Harm Your Search Ranking
+                            </h2>
                         </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Keyword Mistakes to Avoid</h2>
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                             {[
-                                { mistake: 'Keyword stuffing', desc: 'Repeating "Data Analyst" 15 times looks spammy. Use natural variations.' },
-                                { mistake: 'Using abbreviations only', desc: 'Write "Product Manager" not "PM." Recruiters search full terms.' },
-                                { mistake: 'Internal company titles', desc: '"Associate Level 3" means nothing outside your company. Use industry-standard titles.' },
-                                { mistake: 'Listing skills you cannot demonstrate', desc: 'Only include skills you can discuss in an interview. Credibility matters more than volume.' },
-                                { mistake: 'Ignoring the Skills section', desc: 'Many profiles have fewer than 5 skills. Aim for 15–25 relevant, current skills.' },
+                                { mistake: 'Keyword stuffing', desc: 'Repeating "Product Manager" 15 times looks spammy and triggers quality penalties. Use natural contextual phrasing.' },
+                                { mistake: 'Using abbreviations only', desc: 'Writing "PM" or "SE" exclusively hurts discovery. Recruiters usually search full industry terms.' },
+                                { mistake: 'Internal non-standard job titles', desc: '"Associate Level 3" or "Ninja" means nothing to search filters. Use industry-standard titles.' },
+                                { mistake: 'Listing unverifiable skills', desc: 'Only include technologies and methodologies you can defend in technical recruiter screenings.' },
+                                { mistake: 'Ignoring the Skills section', desc: 'Leaving fewer than 10 skills on your profile prevents you from matching mandatory recruiter filters.' },
                             ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-3">
-                                    <span className="text-red-500 shrink-0 mt-0.5 text-sm">✗</span>
-                                    <div>
-                                        <p className="text-sm font-bold text-[#0A0F1C]">{item.mistake}</p>
-                                        <p className="text-xs text-[#4B5563]">{item.desc}</p>
+                                <div key={i} className="p-4 sm:p-5 rounded-2xl bg-rose-50/70 border border-rose-200 flex items-start gap-3.5">
+                                    <span className="w-6 h-6 rounded-full bg-rose-200 text-rose-800 text-[12px] font-black flex items-center justify-center shrink-0 mt-0.5">✗</span>
+                                    <div className="space-y-0.5">
+                                        <p className="text-[14.5px] font-bold text-rose-950">{item.mistake}</p>
+                                        <p className="text-[13px] text-rose-900/80 leading-relaxed">{item.desc}</p>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">How to Find the Right Keywords for Your Role</h2>
-                        <p className="mb-4">Here is a practical method to identify which keywords to target:</p>
-                        <div className="space-y-2">
-                            {[
-                                'Search for your target job title on LinkedIn Jobs | note recurring skills and requirements',
-                                'Look at profiles of people currently in your target role | what keywords do they use?',
-                                'Check job descriptions for your target role | extract the most-repeated terms',
-                                'Use LinkedIn Skills assessments to identify in-demand skills in your field',
-                                'Review the Skills & Endorsements of top-performing professionals in your niche',
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-2 text-sm">
-                                    <span className="w-5 h-5 rounded-md bg-[#0A66C2] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
-                                    <span>{item}</span>
                                 </div>
                             ))}
                         </div>
                     </section>
 
                     {/* FAQ */}
-                    <section>
-                        <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-1">FAQ</p>
-                        <h2 className="text-2xl font-bold text-[#0A0F1C] mb-6">Frequently Asked Questions</h2>
+                    <section className="space-y-6 pt-6 border-t-2 border-[#dedcff]">
+                        <div className="space-y-2">
+                            <span className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                FAQ
+                            </span>
+                            <h2 className="text-[24px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                                Frequently Asked Questions
+                            </h2>
+                        </div>
                         <div className="space-y-3">
                             {[
-                                { q: 'How many keywords should I include in my profile?', a: 'Focus on 5–8 core keywords and use them naturally across all sections. Quality placement matters more than quantity. Your headline should have 2–3, About section 4–6, and skills section 15–25.' },
-                                { q: 'Does keyword placement affect LinkedIn SSI score?', a: 'LinkedIn SSI (Social Selling Index) measures different factors like network growth and engagement. Keywords primarily affect search visibility, which is separate from SSI but arguably more important for job seekers.' },
-                                { q: 'Should I use the same keywords in every section?', a: 'Use your core keywords consistently but vary the context. Your headline might say "Data Analyst," your About might say "data analysis," and your experience might say "analyzed data." Natural variation is better than exact repetition.' },
-                                { q: 'How does LinkedInRank evaluate keywords?', a: 'LinkedInRank checks for keyword presence in your headline, role clarity, skills relevance to your career stage, and overall consistency across sections. Upload your PDF for a free analysis.' },
-                                { q: 'Do LinkedIn hashtags count as keywords?', a: 'Hashtags on posts help with content discoverability but do not affect profile search. For profile search, focus on the sections listed in this guide: headline, About, job titles, and skills.' },
+                                { q: 'How many keywords should I include in my profile?', a: 'Focus on 5–8 core keywords and weave them naturally across all sections. Your headline should contain 2–3, About section 4–6, and skills section 15–25 relevant skills.' },
+                                { q: 'Does keyword placement affect LinkedIn SSI score?', a: 'LinkedIn SSI measures engagement and network activity. Keywords directly affect search visibility, which is the primary driver of inbound recruiter profile views.' },
+                                { q: 'Should I use the exact same keywords in every section?', a: 'Use consistent core terms but vary the context naturally (e.g. "Data Analyst" in headline, "analyzing high-volume datasets" in experience).' },
+                                { q: 'How does LinkedInRank evaluate keywords?', a: 'LinkedInRank cross-references your headline, about, and skills against benchmark recruiter search databases, highlighting missing high-demand keywords.' },
+                                { q: 'Do hashtags in posts count as profile keywords?', a: 'Post hashtags only affect post discovery, not candidate recruiter search. For candidate search, optimize headline, About, and job titles.' },
                             ].map((item, i) => (
-                                <details key={i} className="group bg-[#F8FAFC] border border-gray-200 rounded-xl overflow-hidden">
-                                    <summary className="cursor-pointer text-sm font-semibold text-[#0A0F1C] list-none flex items-center justify-between gap-3 p-4 hover:bg-white transition-colors">
-                                        {item.q}
-                                        <svg className="w-4 h-4 text-[#6B7280] shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                <details key={i} className="group p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow transition-all" open={i === 0}>
+                                    <summary className="cursor-pointer text-[15px] font-bold text-[#050315] list-none flex items-center justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-xl">
+                                        <span>{item.q}</span>
+                                        <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 group-open:rotate-180 transition-transform">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                                        </div>
                                     </summary>
-                                    <p className="px-4 pb-4 text-sm text-[#4B5563] leading-relaxed">{item.a}</p>
+                                    <p className="pt-3 text-[13.5px] text-[#050315]/75 leading-relaxed border-t border-[#dedcff]/60 mt-3">{item.a}</p>
                                 </details>
                             ))}
                         </div>
                     </section>
 
-                    {/* CTA */}
-                    <div className="bg-gradient-to-br from-[#0A66C2] to-[#084E96] rounded-2xl p-8 sm:p-10 text-center shadow-[0_4px_20px_rgba(10,102,194,0.2)]">
-                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                    {/* Bottom Radiant CTA */}
+                    <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-md shadow-[#2f27ce]/5">
+                        <div className="w-12 h-12 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center mx-auto shadow-xs">
+                            <SparklesIcon size={22} />
                         </div>
-                        <h2 className="text-lg font-bold text-white mb-2">Check if your keywords are working</h2>
-                        <p className="text-sm text-blue-100/80 mb-5 max-w-md mx-auto">LinkedInRank analyzes keyword presence across your entire profile. Get your free score.</p>
-                        <Link href="/" className="inline-block bg-white text-[#0A66C2] px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition-colors no-underline shadow-sm">Analyze Your Keywords</Link>
+                        <h2 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                            Check if your keywords are indexed by recruiters
+                        </h2>
+                        <p className="text-[14.5px] text-[#050315]/75 max-w-md mx-auto leading-relaxed">
+                            LinkedInRank evaluates keyword density across your headline, summary, and experience in 60 seconds.
+                        </p>
+                        <div className="pt-2">
+                            <Link
+                                href="/#upload"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14.5px] font-bold shadow-lg shadow-[#2f27ce]/25 transition-all no-underline cursor-pointer active:scale-95"
+                            >
+                                <span>Analyze Your Keywords Free</span>
+                                <ArrowRightIcon size={14} />
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Related Guides */}
@@ -213,6 +274,6 @@ export default function LinkedInKeywordsGuidePage() {
             </article>
 
             <FooterLayout />
-        </main>
+        </div>
     )
 }

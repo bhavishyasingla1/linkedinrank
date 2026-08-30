@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
-import HeroSlideshow from '@/components/HeroSlideshow'
 import FaqAccordion from '@/components/FaqAccordion'
-import FileUploadWrapper from '@/components/FileUploadWrapper'
-import { Button } from '@/components/ui/Button'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
+import HeroUploaderStudio from '@/components/HeroUploaderStudio'
+import BenchmarkComparison from '@/components/BenchmarkComparison'
+import { HOOK_CLUSTER_ARTICLES } from '@/lib/hookArticlesData'
 import {
     ArrowRightIcon,
     CheckCircleIcon,
@@ -15,7 +13,19 @@ import {
     SparklesIcon,
     FileTextIcon,
     SearchIcon,
-    ChevronRightIcon,
+    WandIcon,
+    FlameIcon,
+    LayersIcon,
+    ZapIcon,
+    TrendingUpIcon,
+    UserCheckIcon,
+    LightbulbIcon,
+    PenLineIcon,
+    MessageSquareIcon,
+    UserPlusIcon,
+    QrCodeIcon,
+    CameraIcon,
+    AlertTriangleIcon,
 } from '@/components/ui/Icons'
 
 const homepageFaqSchema = {
@@ -64,6 +74,14 @@ const homepageFaqSchema = {
         },
         {
             '@type': 'Question',
+            name: 'How is LinkedInRank different from LinkedIn SSI?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'LinkedIn\'s Social Selling Index (SSI) measures your sales engagement and outreach activity. LinkedInRank specifically audits your profile content, keyword density, and search discoverability from a recruiter or client perspective.',
+            },
+        },
+        {
+            '@type': 'Question',
             name: 'What is considered a good LinkedIn score?',
             acceptedAnswer: {
                 '@type': 'Answer',
@@ -73,9 +91,96 @@ const homepageFaqSchema = {
     ],
 }
 
+const ALL_12_TOOLS = [
+    {
+        name: 'Headline Generator',
+        slug: 'linkedin-headline-generator',
+        tag: 'Search Visibility',
+        description: 'Generate 5 recruiter-indexed headlines tailored to your industry, skills, and seniority level.',
+        icon: <WandIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'About Section Generator',
+        slug: 'linkedin-about-generator',
+        tag: 'Storytelling',
+        description: 'Craft authentic, high-converting About sections in 3 distinct tones with natural keyword integration.',
+        icon: <UserCheckIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Experience Bullet Rewriter',
+        slug: 'linkedin-experience-generator',
+        tag: 'ATS Optimization',
+        description: 'Transform passive job responsibilities into quantified achievement bullets with active power verbs.',
+        icon: <FlameIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Profile Photo Ring Creator',
+        slug: 'linkedin-profile-photo-ring',
+        tag: 'Visual Hook',
+        description: 'Add high-contrast gradient rings, Open-To-Work rings, and hiring borders to your avatar.',
+        icon: <CameraIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Profile Keyword Analyzer',
+        slug: 'linkedin-profile-keyword-analyzer',
+        tag: 'Recruiter SEO',
+        description: 'Audit keyword discoverability, recruiter search density, and missing high-demand industry skills.',
+        icon: <TrendingUpIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Post Idea Generator',
+        slug: 'linkedin-post-idea-generator',
+        tag: 'Viral Reach',
+        description: 'Generate 10 algorithm-optimized post topics based on trending industry themes and audience pain points.',
+        icon: <LightbulbIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Story to Post Converter',
+        slug: 'linkedin-story-to-post-converter',
+        tag: 'Content Writing',
+        description: 'Turn rough notes or career milestones into engaging, formatted LinkedIn posts with punchy pacing.',
+        icon: <PenLineIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Post Hook Generator',
+        slug: 'linkedin-post-hook-generator',
+        tag: 'Viral Reach',
+        description: 'Generate 6 scroll-stopping opening hooks built on pattern interrupts and curiosity gaps.',
+        icon: <SparklesIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Content Pillar Planner',
+        slug: 'linkedin-content-planner',
+        tag: 'Thought Leadership',
+        description: 'Build a structured weekly posting calendar balancing industry insights and growth lessons.',
+        icon: <LayersIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Smart Comment Generator',
+        slug: 'linkedin-comment-generator',
+        tag: 'Engagement',
+        description: 'Generate thoughtful, value-add comments that build authority and attract profile views.',
+        icon: <MessageSquareIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Connection Note Crafter',
+        slug: 'linkedin-connection-message-generator',
+        tag: 'Outreach',
+        description: 'Write personalized invitations for 14 scenarios strictly under LinkedIn’s 300 character cutoff.',
+        icon: <UserPlusIcon size={18} className="text-[#2f27ce]" />,
+    },
+    {
+        name: 'Profile QR Code Generator',
+        slug: 'linkedin-qr-code-generator',
+        tag: 'Brand Assets',
+        description: 'Create high-resolution vector and PNG QR codes for resumes, business cards, and slide decks.',
+        icon: <QrCodeIcon size={18} className="text-[#2f27ce]" />,
+    },
+]
+
 export default function HomePage() {
     return (
-        <div className="min-h-screen bg-white flex flex-col selection:bg-[#F0F7FF] selection:text-[#0A66C2]">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <SiteHeader />
 
             <script
@@ -85,269 +190,296 @@ export default function HomePage() {
 
             <main id="main-content" className="flex-1">
                 {/* ── 1. HERO SECTION ────────────────────────────── */}
-                <section className="pt-12 sm:pt-20 pb-14 sm:pb-20 border-b border-[#F1F5F9] bg-gradient-to-b from-[#FAFAFA] to-white">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-                            {/* Hero Copy (7 cols on lg) */}
-                            <div className="lg:col-span-6 space-y-6">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#F0F7FF] border border-[#BAE0FD]">
-                                    <span className="w-2 h-2 rounded-full bg-[#0A66C2]" />
-                                    <span className="text-[12px] font-semibold text-[#0A66C2]">
-                                        Free Profile Audit • No Login Required
-                                    </span>
-                                </div>
-
-                                <h1 className="text-[34px] sm:text-[44px] lg:text-[48px] font-bold text-[#0F172A] tracking-tight leading-[1.12]">
-                                    Analyze your <br className="hidden sm:inline" />
-                                    LinkedIn profile.
-                                </h1>
-
-                                <p className="text-[16px] sm:text-[17px] text-[#475569] leading-relaxed max-w-lg">
-                                    See what is working, what is holding your profile back, and what you should improve next — scored out of 100 across 30+ recruiter signals.
-                                </p>
-
-                                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                                    <Button
-                                        href="#upload"
-                                        variant="primary"
-                                        size="lg"
-                                        rightIcon={<ArrowRightIcon size={16} />}
-                                    >
-                                        Analyze Your Profile
-                                    </Button>
-                                    <Button
-                                        href="/tools"
-                                        variant="secondary"
-                                        size="lg"
-                                    >
-                                        Explore Free Tools
-                                    </Button>
-                                </div>
+                <section
+                    id="upload"
+                    className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 overflow-hidden scroll-mt-20 aside-hero-glow"
+                >
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12">
+                        {/* Centered Hero Header */}
+                        <div className="text-center max-w-3xl mx-auto space-y-4">
+                            {/* Floating Pill Badge in Soft Lavender */}
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#dedcff]/70 border border-[#dedcff] shadow-xs">
+                                <span className="text-[13px] font-bold text-[#2f27ce] flex items-center gap-1.5">
+                                    <SparklesIcon size={14} /> Instant Recruiter-Grade Audit
+                                </span>
                             </div>
 
-                            {/* Hero Visual (5 cols on lg) */}
-                            <div className="lg:col-span-6">
-                                <HeroSlideshow />
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                            {/* Main Headline */}
+                            <h1 className="text-[38px] sm:text-[52px] lg:text-[58px] font-extrabold text-[#050315] tracking-tight leading-[1.1]">
+                                The most intelligent LinkedIn profile evaluator.
+                            </h1>
 
-                {/* ── 2. TRUST STRIP ─────────────────────────────── */}
-                <section className="py-6 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="flex flex-wrap items-center justify-between gap-y-4 gap-x-6 text-[13px] font-medium text-[#475569]">
-                            <div className="flex items-center gap-2">
-                                <CheckCircleIcon size={16} className="text-[#0A66C2]" />
-                                <span>Free to analyze</span>
-                            </div>
-                            <div className="hidden sm:block text-[#CBD5E1]" aria-hidden="true">•</div>
-                            <div className="flex items-center gap-2">
-                                <ShieldCheckIcon size={16} className="text-[#0A66C2]" />
-                                <span>No LinkedIn login required</span>
-                            </div>
-                            <div className="hidden sm:block text-[#CBD5E1]" aria-hidden="true">•</div>
-                            <div className="flex items-center gap-2">
-                                <FileTextIcon size={16} className="text-[#0A66C2]" />
-                                <span>PDF-based analysis</span>
-                            </div>
-                            <div className="hidden sm:block text-[#CBD5E1]" aria-hidden="true">•</div>
-                            <div className="flex items-center gap-2">
-                                <ClockIcon size={16} className="text-[#0A66C2]" />
-                                <span>Results in under 60 seconds</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ── 3. PROBLEM SECTION (Editorial Comparison) ──── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-white">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6">
-                        <div className="mb-10">
-                            <Badge variant="neutral" size="sm" className="mb-3">
-                                The Challenge
-                            </Badge>
-                            <h2 className="text-[26px] sm:text-[34px] font-bold text-[#0F172A] tracking-tight mb-4">
-                                Most LinkedIn advice is too vague.
-                            </h2>
-                            <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
-                                Most professionals know their profile could be stronger, but generic tips don’t provide actionable clarity.
+                            {/* Minimalist Supporting Text */}
+                            <p className="text-[16px] sm:text-[18px] text-[#050315]/75 leading-relaxed max-w-2xl mx-auto font-normal">
+                                Audit your profile across 30+ signals in seconds. Discover missing keywords, fix weak experience bullet points, and generate recruiter-ready rewrites.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Floating App Window (PDF Dropzone) */}
+                        <HeroUploaderStudio />
+                    </div>
+                </section>
+
+                {/* ── 2. PROBLEM STATEMENT & PHILOSOPHY SECTION (Soft Lavender Wash) ─── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 text-center">
+                        {/* Centered Pill Badge */}
+                        <div>
+                            <Link
+                                href="/how-linkedin-rank-works"
+                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs"
+                            >
+                                <span>Diagnostic Precision</span>
+                                <span>&rarr;</span>
+                            </Link>
+                        </div>
+
+                        {/* Centered Headline & Narrative */}
+                        <div className="space-y-4 max-w-3xl mx-auto">
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                                Most LinkedIn advice is too vague. We give you exact metrics.
+                            </h2>
+
+                            <p className="text-[16px] sm:text-[18px] text-[#050315]/80 leading-relaxed">
+                                Generic career influencers tell you to &ldquo;make your headline pop&rdquo; or &ldquo;be passionate.&rdquo; In reality, recruiters search via exact boolean filters, ATS parsers, and strict algorithmic keyword weights.
+                            </p>
+                        </div>
+
+                        {/* Centered Comparison Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-left pt-2">
                             {/* Generic Advice */}
-                            <div className="p-6 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC]">
-                                <p className="text-[12px] font-bold text-[#DC2626] uppercase tracking-wider mb-4 flex items-center gap-1.5">
-                                    <span>✕</span> What you usually hear
-                                </p>
-                                <ul className="space-y-3.5 text-[14px] text-[#475569]">
-                                    <li className="flex items-start gap-2.5">
-                                        <span className="text-[#94A3B8] select-none">—</span>
-                                        <span>&ldquo;Make your headline stand out.&rdquo;</span>
-                                    </li>
-                                    <li className="flex items-start gap-2.5">
-                                        <span className="text-[#94A3B8] select-none">—</span>
-                                        <span>&ldquo;Add more relevant keywords to your profile.&rdquo;</span>
-                                    </li>
-                                    <li className="flex items-start gap-2.5">
-                                        <span className="text-[#94A3B8] select-none">—</span>
-                                        <span>&ldquo;Optimize your About section for storytelling.&rdquo;</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {/* What LinkedInRank provides */}
-                            <div className="p-6 rounded-xl border border-[#BAE0FD] bg-[#F0F7FF]">
-                                <p className="text-[12px] font-bold text-[#0A66C2] uppercase tracking-wider mb-4 flex items-center gap-1.5">
-                                    <span>✓</span> What LinkedInRank answers
-                                </p>
-                                <ul className="space-y-3.5 text-[14px] text-[#0F172A] font-medium">
-                                    <li className="flex items-start gap-2.5">
-                                        <CheckCircleIcon size={16} className="text-[#0A66C2] shrink-0 mt-0.5" />
-                                        <span>What exact terms are missing from your headline?</span>
-                                    </li>
-                                    <li className="flex items-start gap-2.5">
-                                        <CheckCircleIcon size={16} className="text-[#0A66C2] shrink-0 mt-0.5" />
-                                        <span>Which section is creating the largest friction?</span>
-                                    </li>
-                                    <li className="flex items-start gap-2.5">
-                                        <CheckCircleIcon size={16} className="text-[#0A66C2] shrink-0 mt-0.5" />
-                                        <span>What specific copy should you replace first?</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ── 4. PRODUCT EXPERIENCE (How It Works) ────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="max-w-2xl mb-12">
-                            <Badge variant="brand" size="sm" className="mb-3">
-                                Workflow
-                            </Badge>
-                            <h2 className="text-[26px] sm:text-[34px] font-bold text-[#0F172A] tracking-tight mb-3">
-                                From PDF export to recruiter-ready profile.
-                            </h2>
-                            <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
-                                A simple four-step process that evaluates your profile structure without sharing your credentials.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {[
-                                {
-                                    step: '01',
-                                    title: 'Upload PDF',
-                                    description: 'Export your profile as a PDF from LinkedIn and drop it in. No passwords required.',
-                                },
-                                {
-                                    step: '02',
-                                    title: 'Analyze Signals',
-                                    description: '30+ recruiter search signals, keyword densities, and structure are checked in memory.',
-                                },
-                                {
-                                    step: '03',
-                                    title: 'Understand Score',
-                                    description: 'Get a clear score out of 100 with category breakdowns for Headline, About, and Experience.',
-                                },
-                                {
-                                    step: '04',
-                                    title: 'Apply Improvements',
-                                    description: 'Review copy-pasteable rewrites and a step-by-step roadmap to boost your visibility.',
-                                },
-                            ].map((item, i) => (
-                                <Card key={i} className="p-6 space-y-3 bg-white">
-                                    <span className="text-[12px] font-bold text-[#0A66C2] tracking-wider uppercase">
-                                        Step {item.step}
-                                    </span>
-                                    <h3 className="text-[16px] font-semibold text-[#0F172A] tracking-tight">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-[13px] text-[#475569] leading-relaxed">
-                                        {item.description}
+                            <div className="p-7 rounded-3xl bg-white/80 border border-[#dedcff] space-y-3.5 shadow-xs flex flex-col justify-between">
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[11.5px] font-extrabold text-[#050315]/50 uppercase tracking-wider">
+                                        Generic Advice
                                     </p>
-                                </Card>
-                            ))}
+                                    <span className="text-[10.5px] font-bold text-[#DC2626] bg-[#FEF2F2] px-2.5 py-0.5 rounded-full">
+                                        Low Visibility
+                                    </span>
+                                </div>
+                                <p className="text-[14.5px] text-[#050315]/70 leading-relaxed">
+                                    &ldquo;Add more buzzwords, write a dramatic journey, and tell recruiters you are a passionate multitasker.&rdquo;
+                                </p>
+                            </div>
+
+                            {/* LinkedInRank Exact Metrics */}
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#2f27ce] shadow-xl shadow-[#2f27ce]/10 space-y-3.5 flex flex-col justify-between">
+                                <div className="flex items-center justify-between">
+                                    <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider flex items-center gap-1.5">
+                                        <SparklesIcon size={14} /> LinkedInRank Algorithm
+                                    </p>
+                                    <span className="text-[11px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3 py-0.5 rounded-full shadow-2xs">
+                                        Top 1% Ranked
+                                    </span>
+                                </div>
+                                <p className="text-[14.5px] text-[#050315] font-semibold leading-relaxed">
+                                    Inject exact high-intent search terms tailored to recruiter search filters, calibrate quantifiable outcome metrics, and fit mobile line limits.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                {/* ── 5. SCORE & RECOMMENDATION SHOWCASE ─────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-white">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6">
-                        <div className="mb-12">
-                            <Badge variant="neutral" size="sm" className="mb-3">
-                                Real Report Breakdown
-                            </Badge>
-                            <h2 className="text-[26px] sm:text-[34px] font-bold text-[#0F172A] tracking-tight mb-3">
-                                Context alongside every metric.
+                {/* ── 3. INTERACTIVE CAPABILITIES & VISUAL CARDS ──── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        {/* Section Header */}
+                        <div className="space-y-2">
+                            <Link
+                                href="/tools"
+                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full transition-colors no-underline shadow-2xs"
+                            >
+                                <span>Unlimited Optimization</span>
+                                <span>&rarr;</span>
+                            </Link>
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                Everything you need to rank higher on recruiter searches.
                             </h2>
-                            <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
-                                A score only matters if you know what caused it. LinkedInRank shows you the before, the after, and the reasoning behind each suggestion.
-                            </p>
                         </div>
 
-                        {/* Concrete Before / After Showcase */}
-                        <div className="border border-[#E2E8F0] rounded-xl overflow-hidden shadow-xs bg-white">
-                            <div className="p-6 sm:p-7 border-b border-[#F1F5F9] bg-[#FAFAFA] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div>
-                                    <span className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
-                                        Sample Improvement: Headline Optimization
-                                    </span>
-                                    <h3 className="text-[18px] font-semibold text-[#0F172A] tracking-tight mt-0.5">
-                                        Computer Science Student Profile
+                        {/* 3 Visual Cards with Floating UI Elements */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Card 1: Headline Rewriter */}
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
+                                        <WandIcon size={20} />
+                                    </div>
+                                    <h3 className="text-[20px] font-extrabold text-[#050315] tracking-tight">
+                                        Headline Rewriter
                                     </h3>
+                                    <p className="text-[14px] text-[#050315]/70 leading-relaxed">
+                                        Live before/after chip comparison showing exact keyword matching and mobile snippet preservation.
+                                    </p>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[13px] font-bold text-[#16A34A] bg-[#F0FDF4] border border-[#BBF7D0] px-2.5 py-1 rounded-md">
-                                        +8 Points Expected Gain
+
+                                <div className="space-y-2.5 pt-2">
+                                    <div className="p-3 rounded-xl bg-[#dedcff]/30 border border-[#dedcff] text-[12px] text-[#050315]/60 flex items-center justify-between gap-2 line-through">
+                                        <span>Software Engineer at Tech Corp</span>
+                                        <span className="text-[10px] font-bold uppercase text-[#050315]/40 shrink-0">Before</span>
+                                    </div>
+                                    <div className="p-3 rounded-xl bg-white border-2 border-[#2f27ce] text-[12.5px] text-[#050315] font-bold flex items-center justify-between gap-2 shadow-xs">
+                                        <span>Staff Platform Engineer | Go • K8s</span>
+                                        <span className="text-[10.5px] font-extrabold uppercase text-[#2f27ce] bg-[#dedcff] px-2.5 py-0.5 rounded-full shrink-0">+14 pts</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 2: Experience Metric Injection */}
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
+                                        <FlameIcon size={20} />
+                                    </div>
+                                    <h3 className="text-[20px] font-extrabold text-[#050315] tracking-tight">
+                                        Experience Metric Injection
+                                    </h3>
+                                    <p className="text-[14px] text-[#050315]/70 leading-relaxed">
+                                        Converts passive job descriptions into quantitative impact metrics using the Context-Action-Result framework.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce]">
+                                        +42% Pipeline
+                                    </span>
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#2f27ce]">
+                                        14.2x Scale
+                                    </span>
+                                    <span className="px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-bold text-[#050315]">
+                                        $2.4M ARR
                                     </span>
                                 </div>
                             </div>
 
-                            <div className="p-6 sm:p-7 space-y-6">
+                            {/* Card 3: ATS & Keyword Matcher */}
+                            <div className="p-7 rounded-3xl bg-white border-2 border-[#dedcff] aside-card-shadow aside-card-hover space-y-5 flex flex-col justify-between">
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center font-bold shadow-xs">
+                                        <LayersIcon size={20} />
+                                    </div>
+                                    <h3 className="text-[20px] font-extrabold text-[#050315] tracking-tight">
+                                        ATS &amp; Keyword Matcher
+                                    </h3>
+                                    <p className="text-[14px] text-[#050315]/70 leading-relaxed">
+                                        Surfaces high-intent search criteria and standardized skills required to pass automated recruiter filtering queries.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-wrap gap-1.5 pt-2">
+                                    {['Distributed Systems', 'Go / Golang', 'Kubernetes', 'System Design'].map((tag, idx) => (
+                                        <span
+                                            key={idx}
+                                            className="px-3 py-1 rounded-full bg-[#dedcff]/50 border border-[#dedcff] text-[11.5px] font-bold text-[#050315]"
+                                        >
+                                            ✓ {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ── 4. BENCHMARK & SCORE COMPARISON SECTION (Soft Lavender Wash) ─────── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="text-center max-w-2xl mx-auto space-y-3">
+                            <Link
+                                href="/how-linkedin-rank-works"
+                                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[13.5px] font-extrabold shadow-sm hover:shadow-md transition-all duration-200 group no-underline"
+                            >
+                                <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
+                                <SparklesIcon size={14} />
+                                <span>Algorithmic Precision</span>
+                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                            </Link>
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                                Built on real recruiter signals.
+                            </h2>
+                            <p className="text-[16px] text-[#050315]/75 leading-relaxed">
+                                LinkedInRank evaluates your profile against industry benchmark standards.
+                            </p>
+                        </div>
+
+                        {/* Interactive Dynamic Benchmark Bar Component */}
+                        <BenchmarkComparison />
+                    </div>
+                </section>
+
+                {/* ── 5. WORKFLOW & ALGORITHMIC REASONING SHOWCASE ── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="text-center max-w-2xl mx-auto space-y-2">
+                            <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs">
+                                <span>Algorithmic Reasoning</span>
+                                <span>&rarr;</span>
+                            </span>
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                See the before, after, and reasoning.
+                            </h2>
+                            <p className="text-[15.5px] text-[#050315]/75">
+                                A score only matters if you know what caused it. Here is how our engine reconstructs a low-performing headline.
+                            </p>
+                        </div>
+
+                        {/* Split Card UI */}
+                        <div className="rounded-3xl bg-white border-2 border-[#dedcff] shadow-xl shadow-[#2f27ce]/5 overflow-hidden">
+                            <div className="p-6 sm:p-7 border-b border-[#dedcff] bg-[#dedcff]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div>
+                                    <span className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                        Live Rewrite Transformation
+                                    </span>
+                                    <h3 className="text-[19px] font-extrabold text-[#050315] mt-0.5">
+                                        Software Engineer &rarr; Staff Platform Engineer
+                                    </h3>
+                                </div>
+                                <span className="px-4 py-1 rounded-full bg-[#2f27ce] text-[#fbfbfe] text-[12.5px] font-extrabold shadow-sm shrink-0 self-start sm:self-auto">
+                                    +14 Points Expected Gain
+                                </span>
+                            </div>
+
+                            <div className="p-6 sm:p-8 space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {/* Before */}
-                                    <div className="p-4 rounded-lg bg-[#FEF2F2]/40 border border-[#FECACA] space-y-1.5">
-                                        <p className="text-[11px] font-bold text-[#DC2626] uppercase tracking-wider">
-                                            Original Headline
+                                    {/* Original Headline */}
+                                    <div className="p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] space-y-1.5">
+                                        <p className="text-[11px] font-extrabold text-[#050315]/50 uppercase tracking-wider">
+                                            Original Headline (Low Search Reach)
                                         </p>
-                                        <p className="text-[14px] text-[#475569]">
-                                            Computer Science Student | AI Enthusiast | Developer
+                                        <p className="text-[14px] text-[#050315]/70 line-through">
+                                            Software Engineer at Stripe | Building stuff | Tech enthusiast
                                         </p>
                                     </div>
 
-                                    {/* After */}
-                                    <div className="p-4 rounded-lg bg-[#F0FDF4] border border-[#BBF7D0] space-y-1.5">
-                                        <p className="text-[11px] font-bold text-[#16A34A] uppercase tracking-wider flex items-center gap-1">
+                                    {/* LinkedInRank Recommended Rewrite */}
+                                    <div className="p-4 rounded-2xl bg-white border-2 border-[#2f27ce] space-y-1.5 shadow-sm">
+                                        <p className="text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider flex items-center gap-1">
                                             <SparklesIcon size={12} />
                                             LinkedInRank Recommended Rewrite
                                         </p>
-                                        <p className="text-[14px] font-medium text-[#0F172A]">
-                                            Computer Science Student Building AI &amp; Automation Systems | Python · SEO · Product
+                                        <p className="text-[14px] font-bold text-[#050315]">
+                                            Staff Platform Engineer | Distributed Systems • Go • Kubernetes • High-Scale Infrastructure
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="p-4 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]">
-                                    <p className="text-[12px] font-semibold text-[#334155] uppercase tracking-wider mb-1.5">
-                                        Why this recommendation works
+                                {/* Reasoning Box in Electric Accent Border */}
+                                <div className="p-6 rounded-2xl bg-[#dedcff]/40 border-2 border-[#433bff] space-y-2.5">
+                                    <p className="text-[12.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                        Algorithmic Reasoning Breakdown
                                     </p>
-                                    <ul className="space-y-1.5 text-[13px] text-[#475569]">
-                                        <li className="flex items-center gap-2">
-                                            <span className="text-[#0A66C2]">✓</span>
-                                            <span>Transitions from passive student labeling to proactive capability positioning.</span>
+                                    <ul className="space-y-2 text-[14px] text-[#050315]">
+                                        <li className="flex items-center gap-2.5">
+                                            <span className="text-[#2f27ce] font-black">✓</span>
+                                            <span>Transitions generic terms to high-demand technical job titles.</span>
                                         </li>
-                                        <li className="flex items-center gap-2">
-                                            <span className="text-[#0A66C2]">✓</span>
-                                            <span>Includes exact indexed skills filtered by technical recruiters.</span>
+                                        <li className="flex items-center gap-2.5">
+                                            <span className="text-[#2f27ce] font-black">✓</span>
+                                            <span>Front-loads top 4 technologies queried in recruiter filters.</span>
                                         </li>
-                                        <li className="flex items-center gap-2">
-                                            <span className="text-[#0A66C2]">✓</span>
-                                            <span>Highlights concrete functional focus (Systems &amp; Automation).</span>
+                                        <li className="flex items-center gap-2.5">
+                                            <span className="text-[#2f27ce] font-black">✓</span>
+                                            <span>Fits strictly within the 120-character mobile snippet cutoff.</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -356,173 +488,120 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 6. "WHAT YOU GET" SECTION ──────────────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                            {/* Left Big Statement */}
-                            <div className="lg:col-span-5 space-y-4">
-                                <Badge variant="brand" size="sm">
-                                    Comprehensive Breakdown
-                                </Badge>
-                                <h2 className="text-[28px] sm:text-[36px] font-bold text-[#0F172A] tracking-tight leading-[1.18]">
-                                    You don&apos;t just get a score.
-                                </h2>
-                                <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
-                                    Every report provides a structured audit designed to turn ambiguity into immediate profile improvements.
-                                </p>
-                            </div>
+                {/* ── 6. FEATURE GRID (Sub-features & Privacy) ─────── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="text-center max-w-2xl mx-auto space-y-2">
+                            <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs">
+                                <span>Core Guarantees</span>
+                                <span>&rarr;</span>
+                            </span>
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                Built for speed, privacy, and impact.
+                            </h2>
+                        </div>
 
-                            {/* Right 4 Strategic Deliverables */}
-                            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {[
-                                    {
-                                        title: 'See what matters',
-                                        description: 'Understand which sections carry the highest weight in recruiter search algorithms.',
-                                    },
-                                    {
-                                        title: 'Find weak sections',
-                                        description: 'Identify the exact phrases or missing elements reducing your reach.',
-                                    },
-                                    {
-                                        title: 'Understand why',
-                                        description: 'Learn the principles behind recruiter search psychology and filter preferences.',
-                                    },
-                                    {
-                                        title: 'Know what to fix first',
-                                        description: 'Follow a prioritized point roadmap that tells you where to invest your time.',
-                                    },
-                                ].map((item, i) => (
-                                    <div
-                                        key={i}
-                                        className="p-5 rounded-xl border border-[#E2E8F0] bg-white space-y-2 shadow-xs"
-                                    >
-                                        <h3 className="text-[15px] font-semibold text-[#0F172A] tracking-tight">
-                                            {item.title}
+                        {/* 4-Column Light Card Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {[
+                                {
+                                    title: '100% Private & Ephemeral',
+                                    description: 'Data is processed locally in temporary memory. Zero persistent database storage, zero logins.',
+                                    icon: <ShieldCheckIcon size={20} className="text-[#2f27ce]" />,
+                                },
+                                {
+                                    title: 'Anti-AI Natural Tone',
+                                    description: 'Crafted for human recruiters. We eliminate robotic AI cliches and corporate jargon.',
+                                    icon: <SparklesIcon size={20} className="text-[#2f27ce]" />,
+                                },
+                                {
+                                    title: '30+ Recruiter Signals',
+                                    description: 'Audits real search keyword indexing, title discoverability, and metric density.',
+                                    icon: <SearchIcon size={20} className="text-[#2f27ce]" />,
+                                },
+                                {
+                                    title: 'Instant Fix Templates',
+                                    description: 'Copy-pasteable headline formulas and CAR experience bullet rewrites ready to deploy.',
+                                    icon: <FileTextIcon size={20} className="text-[#2f27ce]" />,
+                                },
+                            ].map((card, idx) => (
+                                <div
+                                    key={idx}
+                                    className="p-6 rounded-2xl bg-white border border-[#dedcff] aside-card-shadow aside-card-hover space-y-3 flex flex-col justify-between"
+                                >
+                                    <div className="space-y-3">
+                                        <div className="w-11 h-11 rounded-2xl bg-[#dedcff] flex items-center justify-center shadow-xs">
+                                            {card.icon}
+                                        </div>
+                                        <h3 className="text-[16px] font-extrabold text-[#050315] tracking-tight">
+                                            {card.title}
                                         </h3>
-                                        <p className="text-[13px] text-[#475569] leading-relaxed">
-                                            {item.description}
+                                        <p className="text-[13.5px] text-[#050315]/70 leading-relaxed">
+                                            {card.description}
                                         </p>
                                     </div>
-                                ))}
-                            </div>
+                                    <div className="pt-2 text-[11px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                        Guaranteed
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                {/* ── 7. LIVE UPLOADER SECTION ────────────────────── */}
-                <section id="upload" className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-white scroll-mt-20">
-                    <div className="max-w-2xl mx-auto px-4 sm:px-6">
-                        <div className="text-center mb-8">
-                            <Badge variant="brand" size="sm" className="mb-3">
-                                Instant Analysis
-                            </Badge>
-                            <h2 className="text-[26px] sm:text-[34px] font-bold text-[#0F172A] tracking-tight mb-2">
-                                Upload your LinkedIn profile
-                            </h2>
-                            <p className="text-[14px] sm:text-[15px] text-[#475569]">
-                                Drop your LinkedIn PDF export to generate your comprehensive score and fixes.
-                            </p>
-                        </div>
-
-                        {/* Uploader Dropzone Component */}
-                        <div className="bg-white rounded-xl">
-                            <FileUploadWrapper />
-                        </div>
-
-                        {/* 3-Step Guide on Exporting PDF */}
-                        <div className="mt-8 p-5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
-                            <p className="text-[12px] font-bold text-[#334155] uppercase tracking-wider mb-3">
-                                How to download your LinkedIn PDF export:
-                            </p>
-                            <ol className="space-y-2 text-[13px] text-[#475569]">
-                                <li className="flex items-center gap-2">
-                                    <span className="w-5 h-5 rounded-full bg-[#E2E8F0] text-[#0F172A] font-bold text-[11px] flex items-center justify-center shrink-0">
-                                        1
-                                    </span>
-                                    <span>Navigate to your LinkedIn profile in your browser.</span>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <span className="w-5 h-5 rounded-full bg-[#E2E8F0] text-[#0F172A] font-bold text-[11px] flex items-center justify-center shrink-0">
-                                        2
-                                    </span>
-                                    <span>Click <strong>&ldquo;More&rdquo;</strong> (or the &ldquo;...&rdquo; button) under your profile headline.</span>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <span className="w-5 h-5 rounded-full bg-[#E2E8F0] text-[#0F172A] font-bold text-[11px] flex items-center justify-center shrink-0">
-                                        3
-                                    </span>
-                                    <span>Select <strong>&ldquo;Save to PDF&rdquo;</strong> and upload that file here.</span>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ── 8. FEATURED TOOLS SECTION ──────────────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                {/* ── 7. ALL 12 FREE TOOLS SUITE ──────────────────── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div>
-                                <Badge variant="neutral" size="sm" className="mb-2">
-                                    Focused Utilities
-                                </Badge>
-                                <h2 className="text-[24px] sm:text-[30px] font-bold text-[#0F172A] tracking-tight">
-                                    Need to fix one section?
+                                <span className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] bg-[#dedcff]/60 border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs mb-2">
+                                    <span>Complete Tool Suite</span>
+                                    <span>&rarr;</span>
+                                </span>
+                                <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                    12 Free LinkedIn Generators
                                 </h2>
-                                <p className="text-[14px] text-[#475569] mt-1">
-                                    Dedicated tools to generate and refine individual profile components.
+                                <p className="text-[15px] text-[#050315]/70 mt-1">
+                                    Instant standalone generators built for every profile section and content strategy.
                                 </p>
                             </div>
 
                             <Link
                                 href="/tools"
-                                className="text-[14px] font-semibold text-[#0A66C2] hover:text-[#004182] inline-flex items-center gap-1.5 transition-colors no-underline shrink-0"
+                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] transition-colors no-underline shrink-0"
                             >
-                                <span>Explore all tools</span>
+                                <span>Explore all 12 tools</span>
                                 <ArrowRightIcon size={14} />
                             </Link>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {[
-                                {
-                                    name: 'Headline Generator',
-                                    href: '/tools/linkedin-headline-generator',
-                                    description: 'Generate recruiter-optimized headlines tailored to your industry and seniority level.',
-                                },
-                                {
-                                    name: 'About Section Generator',
-                                    href: '/tools/linkedin-about-generator',
-                                    description: 'Turn your experience into an authentic, structured summary that engages readers.',
-                                },
-                                {
-                                    name: 'Experience Generator',
-                                    href: '/tools/linkedin-experience-generator',
-                                    description: 'Convert basic bullet points into quantified achievement statements.',
-                                },
-                                {
-                                    name: 'Keyword Analyzer',
-                                    href: '/tools/linkedin-profile-keyword-analyzer',
-                                    description: 'Discover high-intent recruiter search keywords missing from your profile.',
-                                },
-                            ].map((tool, i) => (
+                            {ALL_12_TOOLS.map((tool) => (
                                 <Link
-                                    key={i}
-                                    href={tool.href}
-                                    className="p-5 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#0A66C2] shadow-xs hover:shadow-md transition-all duration-150 flex flex-col justify-between no-underline group"
+                                    key={tool.slug}
+                                    href={`/tools/${tool.slug}`}
+                                    className="p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between no-underline group"
                                 >
-                                    <div className="space-y-2">
-                                        <h3 className="text-[15px] font-semibold text-[#0F172A] group-hover:text-[#0A66C2] transition-colors">
+                                    <div className="space-y-2.5">
+                                        <div className="flex items-center justify-between">
+                                            <span className="inline-flex items-center justify-center text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full text-center leading-none shadow-2xs">
+                                                {tool.tag}
+                                            </span>
+                                            <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center">
+                                                {tool.icon}
+                                            </div>
+                                        </div>
+                                        <h3 className="text-[15px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
                                             {tool.name}
                                         </h3>
-                                        <p className="text-[13px] text-[#475569] leading-relaxed">
+                                        <p className="text-[12.5px] text-[#050315]/70 leading-relaxed line-clamp-2">
                                             {tool.description}
                                         </p>
                                     </div>
-                                    <div className="pt-4 flex items-center text-[12px] font-semibold text-[#0A66C2]">
-                                        <span>Use tool</span>
-                                        <ChevronRightIcon size={14} className="ml-1 group-hover:translate-x-0.5 transition-transform" />
+
+                                    <div className="pt-3 border-t border-[#dedcff]/70 mt-3 flex items-center justify-between text-[12.5px] font-bold text-[#2f27ce]">
+                                        <span>Use Free Tool</span>
+                                        <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                                     </div>
                                 </Link>
                             ))}
@@ -530,122 +609,153 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 9. ARTICLES & GUIDES PREVIEW ───────────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-white">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-                            <div>
-                                <Badge variant="neutral" size="sm" className="mb-2">
-                                    Editorial Insights
-                                </Badge>
-                                <h2 className="text-[24px] sm:text-[30px] font-bold text-[#0F172A] tracking-tight">
-                                    Learn how to improve your LinkedIn presence.
+                {/* ── 8. TRENDING ARTICLES CLUSTER (Soft Lavender Wash) ─ */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#dedcff]/30">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            <div className="space-y-2">
+                                <Link
+                                    href="/blogs"
+                                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[13.5px] font-extrabold shadow-sm hover:shadow-md transition-all duration-200 group no-underline"
+                                >
+                                    <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
+                                    <SparklesIcon size={14} />
+                                    <span>Editorial Strategy</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                </Link>
+                                <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                    Trending LinkedIn Hooks &amp; Strategy Guides
                                 </h2>
-                                <p className="text-[14px] text-[#475569] mt-1">
-                                    Practical guides on positioning, keywords, recruiter psychology, and job search strategy.
+                                <p className="text-[15px] text-[#050315]/75 max-w-2xl leading-relaxed">
+                                    Psychological frameworks, scroll-stopping opening lines, and algorithm-tested playbooks.
                                 </p>
                             </div>
 
                             <Link
                                 href="/blogs"
-                                className="text-[14px] font-semibold text-[#0A66C2] hover:text-[#004182] inline-flex items-center gap-1.5 transition-colors no-underline shrink-0"
+                                className="inline-flex items-center gap-1.5 text-[14px] font-bold text-[#2f27ce] hover:text-[#433bff] transition-colors no-underline shrink-0"
                             >
                                 <span>Browse all articles</span>
                                 <ArrowRightIcon size={14} />
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[
-                                {
-                                    category: 'Optimization Guide',
-                                    title: 'The Complete LinkedIn Profile Optimization Guide',
-                                    excerpt: 'Step-by-step instructions on structuring your headline, summary, and experience to maximize recruiter reach.',
-                                    meta: '8 min read',
-                                    href: '/linkedin-optimization-guide',
-                                },
-                                {
-                                    category: 'Keywords & SEO',
-                                    title: 'How Recruiters Actually Search and Filter on LinkedIn',
-                                    excerpt: 'Understand keyword matching, boolean search syntax, and placement strategies inside LinkedIn Recruiter.',
-                                    meta: '6 min read',
-                                    href: '/linkedin-keywords-guide',
-                                },
-                                {
-                                    category: 'Headlines',
-                                    title: '100+ Recruiter-Approved LinkedIn Headline Examples',
-                                    excerpt: 'Formulas and proven templates for software engineers, marketers, founders, and students.',
-                                    meta: '10 min read',
-                                    href: '/linkedin-headline-examples',
-                                },
-                            ].map((article, i) => (
-                                <Link
-                                    key={i}
-                                    href={article.href}
-                                    className="p-6 rounded-xl border border-[#E2E8F0] bg-white hover:border-[#0A66C2] shadow-xs hover:shadow-md transition-all duration-150 flex flex-col justify-between no-underline group"
-                                >
-                                    <div className="space-y-2.5">
-                                        <span className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-wider">
-                                            {article.category}
-                                        </span>
-                                        <h3 className="text-[16px] font-semibold text-[#0F172A] group-hover:text-[#0A66C2] transition-colors leading-snug">
-                                            {article.title}
-                                        </h3>
-                                        <p className="text-[13px] text-[#475569] leading-relaxed">
-                                            {article.excerpt}
-                                        </p>
+                        {/* Top 4 Curated Article Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                            {HOOK_CLUSTER_ARTICLES.slice(0, 4).map((art, idx) => {
+                                const readTime = Math.max(4, Math.ceil((art.h2Outline.length * 150 + 200) / 200))
+
+                                return (
+                                    <div
+                                        key={art.slug}
+                                        className="p-6 rounded-3xl bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between group transition-all duration-200"
+                                    >
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <span className="inline-flex items-center justify-center text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full text-center leading-none shadow-2xs">
+                                                    {idx === 0 ? '★ Pillar Guide' : art.targetKeyword}
+                                                </span>
+                                                <span className="text-[11.5px] text-[#050315]/60 flex items-center gap-1 shrink-0 font-medium">
+                                                    <ClockIcon size={12} /> {readTime} min
+                                                </span>
+                                            </div>
+
+                                            <Link
+                                                href={`/blogs/${art.slug}`}
+                                                className="block no-underline pt-1"
+                                            >
+                                                <h3 className="text-[15.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
+                                                    {art.title}
+                                                </h3>
+                                            </Link>
+
+                                            <p className="text-[13px] text-[#050315]/70 leading-relaxed line-clamp-3">
+                                                {art.summary}
+                                            </p>
+                                        </div>
+
+                                        <div className="pt-4 border-t border-[#dedcff]/70 mt-4 flex items-center justify-between text-[13px]">
+                                            <Link
+                                                href={`/blogs/${art.slug}`}
+                                                className="font-bold text-[#2f27ce] group-hover:text-[#433bff] transition-colors no-underline inline-flex items-center gap-1"
+                                            >
+                                                <span>Continue reading</span>
+                                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                                            </Link>
+                                        </div>
                                     </div>
-                                    <div className="pt-5 border-t border-[#F1F5F9] text-[12px] text-[#64748B] flex items-center justify-between">
-                                        <span>{article.meta}</span>
-                                        <span className="text-[#0A66C2] font-semibold group-hover:translate-x-0.5 transition-transform">
-                                            Read article →
-                                        </span>
-                                    </div>
-                                </Link>
-                            ))}
+                                )
+                            })}
                         </div>
                     </div>
                 </section>
 
-                {/* ── 10. FAQ SECTION ────────────────────────────── */}
-                <section className="py-16 sm:py-24 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                    <div className="max-w-3xl mx-auto px-4 sm:px-6">
-                        <div className="text-center mb-10">
-                            <Badge variant="neutral" size="sm" className="mb-2">
-                                FAQ
-                            </Badge>
-                            <h2 className="text-[26px] sm:text-[32px] font-bold text-[#0F172A] tracking-tight mb-2">
-                                Questions, answered.
+                {/* ── 9. FAQ ACCORDION ───────────────────────────── */}
+                <section className="py-20 sm:py-28 border-t border-[#dedcff] bg-[#fbfbfe]">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
+                        <div className="text-center max-w-xl mx-auto space-y-3">
+                            <Link
+                                href="/faq"
+                                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[13.5px] font-extrabold shadow-sm hover:shadow-md transition-all duration-200 group no-underline"
+                            >
+                                <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
+                                <SparklesIcon size={14} />
+                                <span>FAQ &amp; Knowledge Base</span>
+                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                            </Link>
+                            <h2 className="text-[28px] sm:text-[38px] font-extrabold text-[#050315] tracking-tight">
+                                Everything you need to know.
                             </h2>
-                            <p className="text-[14px] text-[#475569]">
-                                Everything you need to know about our analysis, scoring signals, and privacy.
+                            <p className="text-[16px] text-[#050315]/75 leading-relaxed">
+                                Clear answers about scoring criteria, data privacy, PDF exports, and profile optimization strategies.
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs">
-                            <FaqAccordion />
+                        <FaqAccordion />
+
+                        {/* Centered Explore More FAQs CTA Button */}
+                        <div className="text-center pt-2">
+                            <Link
+                                href="/faq"
+                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] text-[14px] font-extrabold shadow-xs hover:shadow-md hover:bg-[#dedcff]/30 transition-all duration-150 no-underline group cursor-pointer"
+                            >
+                                <span>Explore all FAQs &amp; Knowledge Base</span>
+                                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                            </Link>
                         </div>
                     </div>
                 </section>
 
-                {/* ── 11. FINAL HOMEPAGE CTA ─────────────────────── */}
-                <section className="py-16 sm:py-24 bg-white">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-5">
-                        <h2 className="text-[28px] sm:text-[38px] font-bold text-[#0F172A] tracking-tight">
-                            See what your profile is really saying.
-                        </h2>
-                        <p className="text-[15px] sm:text-[16px] text-[#475569] max-w-xl mx-auto leading-relaxed">
-                            Upload your LinkedIn PDF export and receive a comprehensive breakdown of what to improve in under a minute.
-                        </p>
-                        <div className="pt-3">
-                            <Button
-                                href="#upload"
-                                variant="primary"
-                                size="lg"
-                                rightIcon={<ArrowRightIcon size={16} />}
+                {/* ── 10. BOTTOM CTA HERO SECTION ────────────────── */}
+                <section className="relative py-24 sm:py-32 overflow-hidden bg-[#fbfbfe] border-t border-[#dedcff] aside-bottom-glow">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+                        <div className="space-y-3">
+                            <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-xs">
+                                <SparklesIcon size={13} /> Built for Ambitious Professionals
+                            </span>
+                            <h2 className="text-[32px] sm:text-[46px] font-extrabold text-[#050315] tracking-tight leading-tight">
+                                Crafted for ambitious professionals. Start your audit today.
+                            </h2>
+                            <p className="text-[16px] sm:text-[17.5px] text-[#050315]/75 max-w-xl mx-auto leading-relaxed">
+                                Join thousands of job seekers, creators, and founders optimizing their LinkedIn discoverability with algorithmic precision.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+                            <Link
+                                href="/#upload"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[15px] font-bold shadow-lg shadow-[#2f27ce]/25 hover:shadow-xl hover:shadow-[#433bff]/35 transition-all duration-150 cursor-pointer no-underline active:scale-95"
                             >
-                                Analyze Your Profile
-                            </Button>
+                                <span>Try Free Audit Studio</span>
+                                <ArrowRightIcon size={15} />
+                            </Link>
+
+                            <Link
+                                href="/tools"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#dedcff] hover:bg-[#dedcff]/70 text-[#050315] border border-[#dedcff] text-[15px] font-bold transition-all duration-150 no-underline cursor-pointer active:scale-95"
+                            >
+                                <span>Explore 12 Free Tools</span>
+                            </Link>
                         </div>
                     </div>
                 </section>

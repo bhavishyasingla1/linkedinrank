@@ -45,7 +45,7 @@ export function AIFailedPromptBlock({ toolName, promptText, color = '#0A66C2' }:
                 </div>
                 <button
                     onClick={handleCopy}
-                    className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all"
+                    className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all cursor-pointer"
                     style={{
                         backgroundColor: copied ? '#ECFDF5' : color,
                         color: copied ? '#059669' : '#fff',
@@ -94,7 +94,7 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
                 <div className="flex items-center gap-2 shrink-0">
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="text-[10px] text-[#6B7280] hover:text-[#0A0F1C] transition-colors flex items-center gap-1"
+                        className="text-[10px] text-[#6B7280] hover:text-[#0A0F1C] transition-colors flex items-center gap-1 cursor-pointer"
                     >
                         <svg className={`w-3 h-3 transition-transform ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -103,7 +103,7 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
                     </button>
                     <button
                         onClick={handleCopy}
-                        className="text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-all"
+                        className="text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-all cursor-pointer"
                         style={{
                             backgroundColor: copied ? '#ECFDF5' : `${color}10`,
                             color: copied ? '#059669' : color,
@@ -124,30 +124,21 @@ export default function ToolPromptBlock({ toolName, promptText, color = '#0A66C2
 
 // ── Prompt builders for each tool ──────────────────────────
 
-const CORE_PRINCIPLES = `CORE PRINCIPLES (apply to every section):
-1. Start with ATTENTION, not information. Open with pattern interruption.
-2. Emotion Formula: Relevance + Tension + Identity = Engagement.
-3. Write for RECEPTION, not expression. Focus on what the reader experiences.
-4. Use CONCRETE specifics over abstract claims. Stories beat statistics.
-5. Engineer COGNITIVE EASE: short sentences, simple words, one idea per paragraph.
-6. Identity-based framing: position the person as someone others want to work with.
-7. Avoid generic AI tone: no "In today's world...", no "It's not just X, it's Y".
-8. Attack core assumptions, not surface points. High leverage > high volume.
-9. Introduce cognitive dissonance: show two beliefs that conflict.
-10. Anchor with proof: reference results, case studies, specific outcomes.
-11. Optimize for share psychology: validates beliefs, signals status, makes reader look smart.
-12. End with psychological closure: powerful reframing, sharp question, or mic-drop line.
-13. LinkedIn context: frame through growth, leverage, career mobility, authority, skill edge.
-14. Make the reader the hero, not the author.
-15. Engineer memory: clean structure, clear thesis, strong contrast, repeatable phrases.
-16. NEVER use em dashes or en dashes. Use commas, periods, or conjunctions instead. Dashes signal AI-generated text.`
+const CORE_PRINCIPLES = `CORE WRITING RULES & ANTI-AI CONSTRAINTS:
+1. BANNED VOCABULARY (Never use these): additionally, bolster, crucial, delve, emphasize, enhance, fostering, garner, highlight, intricate, intricacies, landscape, meticulous, pivotal, robust, showcase, tapestry, testament, underscore, valuable, vibrant, passionate, results-driven, team player, go-getter, in today's fast-paced world, not only X but also Y, supercharge, unlock, transformative.
+2. Plain sentence construction: use plain "is" and "has". Do not use dangling "-ing" clauses at sentence ends.
+3. NEVER use em dashes (—) or en dashes (–). Use commas, periods, or | instead.
+4. Start with attention, not information. Open with a scroll-stopping hook.
+5. High cognitive hospitality: short sentences, simple words, one idea per paragraph.
+6. Ground all claims in real details. Never invent metrics or companies.
+7. Tone: credible, human, clear, professional, zero corporate fluff.`
 
 export function buildAboutPrompt(inputs: {
     role: string; experience?: string; passion?: string;
     achievement?: string; skills?: string; audience?: string;
     currentAbout?: string; education?: string[];
 }): string {
-    return `You are an elite LinkedIn About section strategist. You engineer perception, not bios.
+    return `You are an elite LinkedIn About section strategist. You write authentic, high-converting profiles that build genuine authority.
 
 MY PROFILE:
 - Role: ${inputs.role}
@@ -162,21 +153,18 @@ ${inputs.currentAbout ? `- Current About (rewrite this): "${inputs.currentAbout}
 ${CORE_PRINCIPLES}
 
 TASK: Write 3 LinkedIn About sections in these styles:
-1. Narrative Arc: Hook with surprising insight, background, proof, vision
+1. Narrative Arc: Hook with clear insight, background, proof, vision
 2. Authority & Expertise: Direct, data-backed, credential-led
-3. Conversational: Warm but smart, like a brilliant colleague over coffee
+3. Conversational: Warm and smart, like explaining what you do to a colleague over coffee
 
-WORD LIMIT: 150-250 words per version. Under 2,600 characters (LinkedIn limit).
+WORD LIMIT: 150-250 words per version. Under 2,000 characters.
 
 RULES:
-- First person ("I"), under 2,600 characters
-- Open with a PATTERN INTERRUPT (never "I am a..." or "With X years...")
-- Structure: Hook, Proof, Authority, CTA
-- Include 2+ quantified achievements per version
+- First person ("I")
+- Open with a hook stating what you do or build (never "I am a..." or "With X years...")
+- Structure: Hook, Proof, Focus, CTA
 - Weave in 5+ industry keywords for SEO
-- End with a clear, direct call-to-action
-- The reader should finish thinking "I want to work with this person"
-- NEVER use em dashes. Use commas or periods instead.
+- End with a clean, direct call-to-action
 
 Format each with the style name as a header.`
 }
@@ -184,7 +172,7 @@ Format each with the style name as a header.`
 export function buildCommentPrompt(inputs: {
     postContent: string; style: string; expertise?: string; length?: string;
 }): string {
-    return `You are a LinkedIn authority-building strategist. Write comments that build the commenter's reputation.
+    return `You are a LinkedIn strategist. Write high-signal comments that build reputation and demonstrate genuine domain expertise.
 
 POST TO COMMENT ON:
 """
@@ -202,13 +190,12 @@ TASK: Write 3 comments.
 WORD LIMIT: Match the requested length exactly. Short = 30-50 words. Medium = 50-80 words. Detailed = 80-120 words.
 
 RULES:
-- Reference SPECIFIC points from the post (not vague generalizations)
+- Reference SPECIFIC points from the post
 - NO generic openers ("Great post!", "Love this!", "Totally agree!")
 - Each takes a DIFFERENT angle on the post
 - Sound like a real human who deeply read the post
 - Position the commenter as someone worth following
 - At least one ends with a follow-up question
-- NEVER use em dashes. Use commas or periods.
 
 Format: Give each a 2-5 word label describing the angle.`
 }
@@ -217,7 +204,7 @@ export function buildHeadlinePrompt(inputs: {
     role: string; company?: string; industry?: string;
     skills?: string[]; currentHeadline?: string; about?: string;
 }): string {
-    return `You are an elite LinkedIn headline strategist. Engineer first impressions.
+    return `You are an elite LinkedIn headline strategist. You write crisp, human, high-converting headlines.
 
 MY PROFILE:
 - Role: ${inputs.role}
@@ -230,20 +217,18 @@ ${inputs.about ? `- About snippet: "${inputs.about.slice(0, 300)}"` : ''}
 ${CORE_PRINCIPLES}
 
 TASK: Write 6 headlines (under 120 chars each) in these styles:
-1. Value Proposition: "I help [audience] achieve [outcome]"
+1. Value Proposition: "I help [audience] [outcome]"
 2. Authority: Role + Company + Domain expertise
 3. Outcome-Focused: Lead with measurable results
 4. Intersection: Unique combo of skills/domains
-5. Mission-Driven: Who you serve + why it matters
+5. Mission-Driven: Who you serve + problem you solve
 6. Builder: "Building [what] | [Role] | [Differentiator]"
 
 CHARACTER LIMIT: Each headline MUST be under 120 characters.
 
 RULES:
 - Front-load recruiter search keywords
-- Create curiosity gap, make them click
-- Zero clichés: no "passionate", "results-driven", "team player"
-- NEVER use em dashes. Use | or commas instead.
+- Create curiosity gap
 - Score each 75-98 based on keyword density, specificity, positioning, curiosity`
 }
 
@@ -251,7 +236,7 @@ export function buildPostIdeaPrompt(inputs: {
     industry: string; goal: string; niche?: string;
     expertise?: string; postType?: string;
 }): string {
-    return `You are a LinkedIn content strategist who engineers posts for perception impact.
+    return `You are a LinkedIn content strategist who designs posts for maximum professional perception.
 
 CONTEXT:
 - Industry: ${inputs.industry}
@@ -272,18 +257,18 @@ For each idea provide:
 - The FORMAT (text, carousel, poll, storytelling, etc.)
 - Content PILLAR (growth, insights, or engagement)
 
-Each idea must be deeply specific to ${inputs.industry}, referencing real trends, tools, challenges. No generic ideas.`
+Each idea must be deeply specific to ${inputs.industry}, referencing real trends, tools, or challenges.`
 }
 
 export function buildStoryToPostPrompt(inputs: {
     story: string; tone?: string; audience?: string; goal?: string;
 }): string {
-    return `You are an elite LinkedIn ghostwriter who engineers posts for perception and influence.
+    return `You are an elite LinkedIn ghostwriter who turns real experiences into high-signal LinkedIn posts.
 
 RAW STORY:
 "${inputs.story}"
 
-${inputs.tone ? `Tone: ${inputs.tone}` : 'Tone: Professional but human'}
+${inputs.tone ? `Tone: ${inputs.tone}` : 'Tone: Professional, direct, human'}
 ${inputs.audience ? `Audience: ${inputs.audience}` : ''}
 ${inputs.goal ? `Goal/Lesson: ${inputs.goal}` : ''}
 
@@ -291,21 +276,19 @@ ${CORE_PRINCIPLES}
 
 TASK: Transform this into a ready-to-post LinkedIn post.
 
-WORD LIMIT: 150-250 words. No longer.
+WORD LIMIT: 150-250 words.
 
 STRUCTURE: Hook, Tension, Story, Concrete Example, Insight, Strong Close
 - First person, short paragraphs (1-2 sentences each)
 - Hook must be a pattern interrupt
-- End with psychological closure (reframing, sharp question, or mic-drop)
-- Add 3-5 relevant hashtags
-- Make it SPECIFIC with real details from the story
-- NEVER use em dashes. Use commas or periods.`
+- End with a sharp takeaway or question
+- Add 3-5 relevant hashtags`
 }
 
 export function buildHookPrompt(inputs: {
     topic: string; angle?: string; audience?: string;
 }): string {
-    return `You are a scroll-psychology expert who engineers LinkedIn opening lines.
+    return `You are a scroll-psychology expert who writes LinkedIn opening lines that stop the scroll.
 
 POST CONTEXT:
 - Topic: ${inputs.topic}
@@ -316,25 +299,24 @@ ${CORE_PRINCIPLES}
 
 TASK: Generate 6 hooks using these psychological techniques:
 1. Pattern Interrupt: say something unexpected
-2. Curiosity Gap: open a loop they must close
-3. Contrarian: challenge the popular belief with evidence
-4. Story Hook: drop into the middle of a compelling moment
+2. Curiosity Gap: open a loop they want to close
+3. Contrarian: question a common belief with evidence
+4. Story Hook: drop into the middle of a concrete moment
 5. Data-Led: lead with a surprising statistic
-6. Confession: vulnerable admission that builds trust
+6. Confession: honest admission that builds trust
 
 WORD LIMIT: Each hook must be 10-30 words (1-3 lines). Each explanation: 15-25 words.
 
 RULES:
-- Hyper-specific to the topic. Generic hooks = failure.
-- Include why each works psychologically.
-- NEVER use em dashes. Use commas or periods.`
+- Hyper-specific to the topic.
+- Include why each works psychologically.`
 }
 
 export function buildConnectionPrompt(inputs: {
     type: string; name: string; context?: string;
     yourRole?: string; recipientRole?: string; intent?: string;
 }): string {
-    return `You are a LinkedIn connection message expert. Write the "Add a note" message for a connection request.
+    return `You are a LinkedIn connection message expert. Write the short "Add a note" message for a connection request.
 
 SCENARIO:
 - Message type: ${inputs.type}
@@ -348,23 +330,20 @@ ${CORE_PRINCIPLES}
 
 TASK: Write 3 connection messages.
 
-CHARACTER LIMIT: Each message MUST be under 300 characters (LinkedIn limit).
+CHARACTER LIMIT: Each message MUST be strictly under 300 characters (LinkedIn limit). Aim for 240-280 characters.
 
 RULES:
-- Use their FIRST NAME naturally, not their full name or title
-- NEVER copy-paste full headlines into messages. Paraphrase roles in 3-5 words max
+- Use their FIRST NAME naturally
+- NEVER copy full headlines into messages. Paraphrase roles in 3-5 words max
 - Each with a DIFFERENT tone: one direct, one warm, one value-offering
-- Be specific about WHY you want to connect
-- NO generic filler like "I'd love to connect" without a reason
-- Sound like a real person typing a quick note, not a formal letter
-- Include 1 tip per message on why that approach works
-- NEVER use em dashes or en dashes. Use commas or periods.`
+- Specific reason for connecting
+- NO generic filler like "I'd love to connect" without a reason`
 }
 
 export function buildContentPlannerPrompt(inputs: {
     industry: string; role: string; frequency: string;
 }): string {
-    return `You are a LinkedIn content calendar expert.
+    return `You are a LinkedIn content calendar expert creating a weekly plan.
 
 CONTEXT:
 - Industry: ${inputs.industry}
@@ -381,16 +360,15 @@ For each day provide:
 - Content PILLAR (growth ~40%, insights ~40%, engagement ~20%)
 - FORMAT (text, carousel, poll, storytelling, how-to, etc.)
 - Detailed PROMPT specific to ${inputs.industry} + ${inputs.role}
-- Example HOOK for each day (scroll-stopping)
+- Example HOOK for each day
 
-Every prompt must reference real trends, tools, or challenges in ${inputs.industry}.
-NEVER use em dashes. Use commas or periods.`
+Every prompt must reference real trends, tools, or challenges in ${inputs.industry}.`
 }
 
 export function buildBulletPrompt(inputs: {
     bullet: string; role?: string; industry?: string;
 }): string {
-    return `You are a LinkedIn experience section expert. Rewrite weak job descriptions into achievement bullets.
+    return `You are a LinkedIn experience section editor. Rewrite weak job descriptions into clear achievement statements.
 
 ORIGINAL BULLET:
 "${inputs.bullet}"
@@ -401,25 +379,22 @@ ${inputs.industry ? `Industry: ${inputs.industry}` : ''}
 ${CORE_PRINCIPLES}
 
 TASK: Rewrite into 3 achievement-driven bullet styles:
-1. Metrics-Heavy: Lead with numbers (%, $, team size, time saved)
-2. Impact-Focused: Emphasize the business outcome
-3. Leadership-Framed: Show scope and responsibility
+1. Metrics-Focused: Lead with numbers (%, $, team size, time saved)
+2. Impact-Focused: Emphasize the functional outcome
+3. Execution-Focused: Show scope and responsibility
 
 WORD LIMIT: Each bullet should be 15-30 words. One sentence max.
 
 RULES:
-- Start with power verb (Led, Built, Designed, Shipped, Automated, Scaled)
+- Start with an active power verb (Led, Built, Designed, Shipped, Automated, Scaled)
 - Format: "[Power verb] + [specific action] + [measurable result]"
-- NEVER start with "Enhanced", "Utilized", or "Assisted"
-- If no metrics given, use realistic placeholders: "[X]%"
-- Each bullet should make a recruiter think "I need to interview this person"
-- NEVER use em dashes. Use commas.`
+- NEVER start with "Enhanced", "Utilized", or "Assisted"`
 }
 
 export function buildSEOPrompt(inputs: {
     headline: string; about: string; skills: string;
 }): string {
-    return `You are a LinkedIn SEO and recruiter-visibility expert.
+    return `You are a LinkedIn SEO and recruiter-visibility strategist.
 
 MY CURRENT PROFILE:
 - Headline: "${inputs.headline}"
@@ -428,14 +403,14 @@ MY CURRENT PROFILE:
 
 ${CORE_PRINCIPLES}
 
-TASK: Analyze my profile's keyword coverage.
+TASK: Analyze my profile's keyword discoverability.
 
 KEEP OUTPUT CONCISE. Total response: under 400 words.
 
 Provide:
-1. MISSING KEYWORDS: Top 10 keywords recruiters search for in my industry that I'm missing
+1. MISSING KEYWORDS: Top 10 searchable keywords recruiters use in my industry that I am missing
 2. KEYWORD PLACEMENT: Where each keyword should go (headline, about, experience, skills)
 3. SEARCH VISIBILITY SCORE: Rate my current discoverability 1-100
-4. REWRITE SUGGESTIONS: Show me exactly how to weave missing keywords naturally
-5. COMPETITOR KEYWORDS: What do top profiles in my field include that I don't?`
+4. REWRITE SUGGESTIONS: Show me how to weave missing keywords naturally
+5. TOP COMPETITOR PATTERNS: What do top-ranked profiles in my field include that I do not?`
 }

@@ -18,26 +18,26 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantStyles: Record<ButtonVariant, string> = {
     primary:
-        'bg-[#0A66C2] text-white border border-[#0A66C2] hover:bg-[#004182] hover:border-[#004182] active:bg-[#003366] shadow-[0_1px_2px_0_rgba(15,23,42,0.06)]',
+        'bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] border border-[#2f27ce] shadow-md shadow-[#2f27ce]/20 active:scale-95',
     navy:
-        'bg-[#0F172A] text-white border border-[#0F172A] hover:bg-[#1E293B] hover:border-[#1E293B] active:bg-[#020617] shadow-[0_1px_2px_0_rgba(15,23,42,0.06)]',
+        'bg-[#050315] text-[#fbfbfe] border border-[#050315] hover:bg-[#1a173b] hover:border-[#2f27ce] shadow-md shadow-[#050315]/10 active:scale-95',
     secondary:
-        'bg-white text-[#0F172A] border border-[#E2E8F0] hover:bg-[#F8FAFC] hover:border-[#CBD5E1] active:bg-[#F1F5F9] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]',
+        'bg-[#dedcff]/50 text-[#2f27ce] border border-[#dedcff] hover:bg-[#dedcff] hover:border-[#2f27ce] active:bg-[#dedcff] active:scale-95',
     ghost:
-        'bg-transparent text-[#475569] border border-transparent hover:bg-[#F1F5F9] hover:text-[#0F172A] active:bg-[#E2E8F0]',
+        'bg-transparent text-[#050315]/80 border border-transparent hover:bg-[#dedcff]/40 hover:text-[#2f27ce] active:scale-95',
     destructive:
-        'bg-[#DC2626] text-white border border-[#DC2626] hover:bg-[#B91C1C] hover:border-[#B91C1C] active:bg-[#991B1B] shadow-[0_1px_2px_0_rgba(15,23,42,0.06)]',
+        'bg-[#DC2626] text-white border border-[#DC2626] hover:bg-[#B91C1C] active:scale-95 shadow-xs',
     outline:
-        'bg-transparent text-[#0F172A] border border-[#E2E8F0] hover:bg-[#F8FAFC] hover:border-[#CBD5E1] active:bg-[#F1F5F9]',
+        'bg-white text-[#050315] border-2 border-[#dedcff] hover:border-[#2f27ce] hover:text-[#2f27ce] active:scale-95',
     link:
-        'bg-transparent text-[#0A66C2] border-0 p-0 h-auto hover:text-[#004182] hover:underline underline-offset-4 shadow-none',
+        'bg-transparent text-[#2f27ce] border-0 p-0 h-auto hover:text-[#433bff] hover:underline underline-offset-4 shadow-none',
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
-    sm: 'px-3 py-1.5 text-[13px] rounded-md gap-1.5 min-h-[34px]',
-    md: 'px-4 py-2 text-[14px] rounded-lg gap-2 min-h-[40px]',
-    lg: 'px-5 py-2.5 text-[15px] rounded-lg gap-2 min-h-[46px] font-semibold',
-    xl: 'px-6 py-3.5 text-[16px] rounded-xl gap-2.5 min-h-[52px] font-semibold',
+    sm: 'px-3.5 py-1.5 text-[13px] rounded-full gap-1.5 min-h-[34px] font-bold',
+    md: 'px-5 py-2.5 text-[14px] rounded-full gap-2 min-h-[40px] font-bold',
+    lg: 'px-6 py-3 text-[15px] rounded-full gap-2 min-h-[46px] font-bold',
+    xl: 'px-7 py-3.5 text-[16px] rounded-full gap-2.5 min-h-[52px] font-extrabold',
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -60,9 +60,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref
     ) => {
         const baseClasses = `
-            inline-flex items-center justify-center font-medium tracking-tight
-            transition-all duration-150 ease-out select-none active:scale-[0.99]
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] focus-visible:ring-offset-2
+            inline-flex items-center justify-center font-bold tracking-tight
+            transition-all duration-150 ease-out select-none active:scale-[0.98]
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] focus-visible:ring-offset-2
             disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:transform-none
             ${variantStyles[variant]}
             ${variant !== 'link' ? sizeStyles[size] : ''}
@@ -100,21 +100,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )
 
         if (href) {
-            const isExternal = href.startsWith('http') || href.startsWith('mailto:')
-            if (isExternal) {
-                return (
-                    <a
-                        href={href}
-                        target={target || '_blank'}
-                        rel={rel || 'noopener noreferrer'}
-                        className={baseClasses}
-                    >
-                        {content}
-                    </a>
-                )
-            }
             return (
-                <Link href={href} className={baseClasses}>
+                <Link
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={`${baseClasses} no-underline`}
+                >
                     {content}
                 </Link>
             )

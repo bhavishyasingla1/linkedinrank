@@ -8,6 +8,13 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                aside: {
+                    bg: '#fbfbfe',
+                    text: '#050315',
+                    primary: '#2f27ce',
+                    secondary: '#dedcff',
+                    accent: '#433bff',
+                },
                 brand: {
                     50: '#F0F7FF',
                     100: '#E0EFFF',

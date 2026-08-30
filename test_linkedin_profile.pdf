@@ -1,0 +1,55 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 677 >>
+stream
+BT
+/F1 12 Tf
+50 720 Td
+15 TL
+(Alex Mercer) '
+(Staff Software Engineer at Stripe | Distributed Systems & Cloud Infrastructure) '
+(San Francisco, California, United States) '
+(Summary) '
+(Experienced platform engineer leading distributed ledger architecture across high-throughput services.) '
+(Experience) '
+(Stripe) '
+(Staff Software Engineer) '
+(January 2021 - Present \(3 years 2 months\)) '
+(San Francisco, CA) '
+(Led architecture of core ledger processing 50M daily transactions with 99.999% uptime.) '
+(Top Skills) '
+(Go \(Golang\)) '
+(Kubernetes) '
+(Distributed Systems) '
+(Education) '
+(University of California, Berkeley) '
+(Bachelor of Science, Computer Science) '
+ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000969 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1039
+%%EOF

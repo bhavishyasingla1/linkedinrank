@@ -4,9 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { ChevronDownIcon, ArrowRightIcon } from '@/components/ui/Icons'
+import { ChevronDownIcon, ArrowRightIcon, SparklesIcon } from '@/components/ui/Icons'
 
 const FAQ_SECTIONS = [
     {
@@ -81,88 +79,84 @@ export default function FaqPage() {
     const [openFaq, setOpenFaq] = useState<string | null>('about-0')
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
+        <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             <SiteHeader />
 
-            <main id="main-content" className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-14 space-y-10">
+            <main id="main-content" className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12">
                 {/* ── Header ───────────────────────────────────── */}
-                <div className="space-y-3">
-                    <nav aria-label="Breadcrumb" className="text-[13px] text-[#64748B] flex items-center gap-1.5">
-                        <Link href="/" className="hover:text-[#0A66C2] transition-colors no-underline">Home</Link>
+                <div className="space-y-4">
+                    <nav aria-label="Breadcrumb" className="text-[13px] text-[#050315]/60 flex items-center gap-2">
+                        <Link href="/" className="hover:text-[#2f27ce] transition-colors no-underline">Home</Link>
                         <span>/</span>
-                        <span className="text-[#0F172A] font-medium">FAQ</span>
+                        <span className="text-[#050315] font-semibold">FAQ</span>
                     </nav>
 
-                    <div className="max-w-2xl pt-2 space-y-2">
-                        <Badge variant="brand" size="sm">
-                            Knowledge Base &amp; FAQ
-                        </Badge>
-                        <h1 className="text-[28px] sm:text-[36px] font-bold text-[#0F172A] tracking-tight">
+                    <div className="max-w-2xl space-y-3">
+                        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] text-[12px] font-extrabold text-[#2f27ce]">
+                            <SparklesIcon size={13} /> Knowledge Base &amp; FAQ
+                        </div>
+                        <h1 className="text-[32px] sm:text-[44px] font-extrabold text-[#050315] tracking-tight leading-tight">
                             Frequently Asked Questions
                         </h1>
-                        <p className="text-[15px] sm:text-[16px] text-[#475569] leading-relaxed">
+                        <p className="text-[16px] sm:text-[17.5px] text-[#050315]/75 leading-relaxed">
                             Clear answers about scoring criteria, data privacy, PDF exports, and profile optimization strategies.
                         </p>
                     </div>
                 </div>
 
-                {/* ── Topic Filter Pills ────────────────────────── */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-                    {FAQ_SECTIONS.map((section) => (
-                        <button
-                            key={section.id}
-                            onClick={() => {
-                                const el = document.getElementById(`faq-section-${section.id}`)
-                                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                            }}
-                            className="px-3.5 py-1.5 rounded-lg text-[13px] font-semibold bg-white border border-[#E2E8F0] text-[#475569] hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors shrink-0 cursor-pointer"
-                        >
-                            {section.title}
-                        </button>
-                    ))}
-                </div>
-
                 {/* ── Grouped FAQ Sections ──────────────────────── */}
-                <div className="space-y-10">
+                <div className="space-y-12">
                     {FAQ_SECTIONS.map((section) => (
                         <section
                             key={section.id}
                             id={`faq-section-${section.id}`}
-                            className="scroll-mt-24 space-y-3"
+                            className="scroll-mt-24 space-y-4"
                         >
-                            <h2 className="text-[18px] font-bold text-[#0F172A] tracking-tight">
+                            <h2 className="text-[20px] font-extrabold text-[#050315] tracking-tight border-b border-[#dedcff] pb-2">
                                 {section.title}
                             </h2>
 
-                            <div className="bg-white border border-[#E2E8F0] rounded-xl divide-y divide-[#F1F5F9] shadow-xs">
+                            <div className="space-y-3">
                                 {section.faqs.map((item, fi) => {
                                     const key = `${section.id}-${fi}`
                                     const isOpen = openFaq === key
 
                                     return (
-                                        <div key={key} className="transition-colors">
+                                        <div
+                                            key={key}
+                                            className={`
+                                                rounded-2xl transition-all duration-200 border
+                                                ${isOpen
+                                                    ? 'bg-[#dedcff]/30 border-[#2f27ce] shadow-sm'
+                                                    : 'bg-white border-[#dedcff] hover:border-[#2f27ce]/60 shadow-xs'
+                                                }
+                                            `}
+                                        >
                                             <button
                                                 onClick={() => setOpenFaq(isOpen ? null : key)}
-                                                className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-[#FAFAFA] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] rounded-md"
+                                                className="w-full flex items-center justify-between gap-4 p-5 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce] rounded-2xl"
                                                 aria-expanded={isOpen}
                                             >
-                                                <span className="text-[15px] font-semibold text-[#0F172A] leading-snug">
+                                                <span className="text-[15.5px] font-bold text-[#050315] leading-snug">
                                                     {item.q}
                                                 </span>
-                                                <ChevronDownIcon
-                                                    size={16}
-                                                    className={`text-[#64748B] shrink-0 transition-transform duration-200 ${
-                                                        isOpen ? 'rotate-180 text-[#0A66C2]' : ''
-                                                    }`}
-                                                />
+                                                <div className={`
+                                                    w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shrink-0
+                                                    ${isOpen
+                                                        ? 'bg-[#2f27ce] text-[#fbfbfe] rotate-180 shadow-xs'
+                                                        : 'bg-[#dedcff] text-[#2f27ce]'
+                                                    }
+                                                `}>
+                                                    <ChevronDownIcon size={16} />
+                                                </div>
                                             </button>
 
                                             {isOpen && (
-                                                <div className="px-5 pb-5 pt-1 text-[14px] text-[#475569] leading-relaxed animate-fade-in border-t border-[#F8FAFC]">
+                                                <div className="px-5 pb-5 pt-1 text-[14px] text-[#050315]/80 leading-relaxed animate-fade-in border-t border-[#dedcff]/70 mt-1">
                                                     {item.a}
                                                 </div>
                                             )}
@@ -174,28 +168,25 @@ export default function FaqPage() {
                     ))}
                 </div>
 
-                {/* ── Final Profile Score CTA ───────────────────── */}
-                <div className="bg-[#0F172A] border border-[#1E293B] rounded-xl p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
-                    <div className="space-y-1 max-w-xl">
-                        <span className="text-[11px] font-bold text-[#38BDF8] uppercase tracking-wider">
-                            Ready to analyze your profile?
-                        </span>
-                        <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight">
-                            Get your free LinkedIn score &amp; roadmap
-                        </h3>
-                        <p className="text-[13px] text-[#94A3B8] leading-relaxed">
-                            Upload your LinkedIn export to discover your profile rank and specific improvements.
-                        </p>
-                    </div>
-                    <div className="shrink-0">
-                        <Button
+                {/* ── Final Profile Score CTA (Aside Radiant Box) ─ */}
+                <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-md shadow-[#2f27ce]/5">
+                    <span className="inline-flex items-center gap-1.5 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full">
+                        <SparklesIcon size={13} /> Instant Recruiter-Grade Audit
+                    </span>
+                    <h3 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
+                        Get your free LinkedIn score &amp; roadmap
+                    </h3>
+                    <p className="text-[14.5px] text-[#050315]/75 max-w-md mx-auto leading-relaxed">
+                        Upload your LinkedIn export to discover your profile rank and specific improvements in under 60 seconds.
+                    </p>
+                    <div className="pt-2">
+                        <Link
                             href="/#upload"
-                            variant="primary"
-                            size="md"
-                            rightIcon={<ArrowRightIcon size={14} />}
+                            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-[#fbfbfe] text-[14.5px] font-bold shadow-lg shadow-[#2f27ce]/25 transition-all duration-150 no-underline cursor-pointer active:scale-95 whitespace-nowrap"
                         >
-                            Analyze Profile Free
-                        </Button>
+                            <span>Analyze Profile Free</span>
+                            <ArrowRightIcon size={14} />
+                        </Link>
                     </div>
                 </div>
             </main>

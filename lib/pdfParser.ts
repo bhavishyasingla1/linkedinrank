@@ -1,4 +1,5 @@
 import pdf from 'pdf-parse'
+import zlib from 'zlib'
 import { ProfileData, ExperienceItem } from './types'
 import { canonicalizeProfile, CanonicalResult } from './canonicalize'
 
@@ -49,9 +50,19 @@ interface LayoutAnalysis {
  */
 export async function parseLinkedInPDF(buffer: Buffer): Promise<ExtendedProfileData> {
     try {
-        // Parse PDF to text
-        const data = await pdf(buffer)
-        const text = data.text
+        // Parse PDF to text with robust fallback
+        let text = ''
+        try {
+            const data = await pdf(buffer)
+            text = data.text || ''
+        } catch (pdfErr) {
+            console.warn('[PDF PARSE] Standard parser failed, attempting raw stream fallback...')
+            text = extractRawPdfText(buffer)
+        }
+
+        if (!text.trim()) {
+            text = extractRawPdfText(buffer)
+        }
         
         // Analyze layout to handle two-column LinkedIn PDFs
         const layout = analyzeLayout(text)
@@ -138,6 +149,7 @@ export async function parseLinkedInPDF(buffer: Buffer): Promise<ExtendedProfileD
             canonical
         }
     } catch (error) {
+        console.error('[PDF PARSE RAW ERROR]:', error)
         throw new Error('Failed to parse PDF. Please ensure this is a valid LinkedIn profile PDF.')
     }
 }
@@ -1423,4 +1435,71 @@ function extractHonors(text: string): string[] {
     })
 
     return [...new Set(honors)].slice(0, 10)
+}
+
+/**
+ * Fallback raw stream text extractor for resilience against non-standard or malformed PDF streams
+ */
+function extractRawPdfText(buffer: Buffer): string {
+    let extracted = ''
+    try {
+        const rawString = buffer.toString('binary')
+        const streamRegex = /stream\r?\n([\s\S]*?)\r?\nendstream/g
+        let match
+
+        while ((match = streamRegex.exec(rawString)) !== null) {
+            const streamData = match[1]
+            let content = streamData
+
+            try {
+                const streamBuf = Buffer.from(streamData, 'binary')
+                const decompressed = zlib.inflateSync(streamBuf)
+                content = decompressed.toString('utf8')
+            } catch {
+                content = streamData
+            }
+
+            // Extract string literals (text)
+            const textMatches = content.match(/\((?:\\\(|\\\)|[^()])*\)\s*(?:Tj|'|")/g)
+            if (textMatches) {
+                for (const tm of textMatches) {
+                    const clean = tm
+                        .replace(/^\(/, '')
+                        .replace(/\)\s*(?:Tj|'|")$/, '')
+                        .replace(/\\([()\\])/g, '$1')
+                    if (clean.trim()) extracted += clean + '\n'
+                }
+            }
+
+            // Extract array literals [(text) -10 (more)] TJ
+            const tjMatches = content.match(/\[([\s\S]*?)\]\s*TJ/g)
+            if (tjMatches) {
+                for (const tj of tjMatches) {
+                    const subTexts = tj.match(/\((?:\\\(|\\\)|[^()])*\)/g)
+                    if (subTexts) {
+                        const line = subTexts
+                            .map((st) => st.slice(1, -1).replace(/\\([()\\])/g, '$1'))
+                            .join('')
+                        if (line.trim()) extracted += line + '\n'
+                    }
+                }
+            }
+        }
+
+        if (!extracted.trim()) {
+            const directMatches = rawString.match(
+                /\(([A-Za-z0-9 .,/|;:!@#$%^&*()_+=-]{2,120})\)\s*(?:Tj|'|"|TJ)/g
+            )
+            if (directMatches) {
+                for (const dm of directMatches) {
+                    const val = dm.replace(/^\(/, '').replace(/\)\s*(?:Tj|'|"|TJ)$/, '')
+                    if (val.trim()) extracted += val + '\n'
+                }
+            }
+        }
+    } catch (e) {
+        console.error('[PDF PARSE] extractRawPdfText error:', e)
+    }
+
+    return extracted
 }

@@ -6,9 +6,8 @@
  * Rules:
  * - LLMs ONLY for human-style rewrites (headlines/about/experience)
  * - NOT for numeric scoring
- * - temperature=0, top_p=0.0, max_tokens=400
+ * - Fallback models with resilient error handling
  * - Cache keyed by input_hash + prompt_signature
- * - Queue/batch LLM calls, return immediately with "queued_rewrite" indicator
  */
 
 import { GoogleGenerativeAI } from '@google/generative-ai'
@@ -16,18 +15,20 @@ import { ProfileData } from './types'
 import { 
     getCachedLLMResponse, 
     setCachedLLMResponse, 
-    generatePromptSignature,
-    hasLLMCache,
-    llmQueue,
+    generatePromptSignature, 
+    hasLLMCache, 
+    llmQueue, 
     PIPELINE_VERSION 
 } from './cache'
 
-const genAI = process.env.GEMINI_API_KEY
-    ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+const apiKey = process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here'
+    ? process.env.GEMINI_API_KEY
     : null
 
+const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null
+
 // ============================================================
-// DETERMINISTIC LLM CONFIG
+// DETERMINISTIC LLM CONFIG & MODELS
 // ============================================================
 
 const LLM_CONFIG = {
@@ -36,14 +37,20 @@ const LLM_CONFIG = {
     maxOutputTokens: 400
 }
 
-const MODEL_NAME = 'gemini-3.1-flash-lite'
+const FALLBACK_MODELS = [
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
+    'gemini-1.5-flash',
+    'gemini-2.0-flash-lite',
+    'gemini-3.1-flash-lite',
+]
 
 // ============================================================
-// PROMPT TEMPLATES
+// PROMPT TEMPLATES (Strict Anti-AI and High-Signal)
 // ============================================================
 
 const PROMPT_TEMPLATES = {
-    headline_rewrite: `You are a LinkedIn profile optimizer. Rewrite the headline to be more compelling and searchable.
+    headline_rewrite: `You are a LinkedIn profile optimizer writing with a crisp, human voice. Rewrite the headline to be searchable and differentiated.
 
 Current headline: "{headline}"
 User's role: {role}
@@ -51,40 +58,39 @@ Key skills: {skills}
 
 Rules:
 - Keep under 120 characters
-- Include role + domain/industry
-- Add value proposition if possible
-- Professional tone, no emojis
-- Make it specific to their background
+- Include role and core domain keywords
+- Sound natural and direct
+- No buzzwords (passionate, results-driven, supercharge, transform, delve)
+- No emojis, no em dashes (use | or commas)
 
 Return ONLY the new headline text, nothing else.`,
 
-    about_rewrite: `You are a LinkedIn profile optimizer. Improve the About section.
+    about_rewrite: `You are a LinkedIn profile optimizer writing with an authentic human voice. Improve this About section.
 
 Current About: "{about}"
 Headline: {headline}
 Role: {role}
 
 Rules:
-- Start with a compelling hook
-- Keep first-person voice
-- Mention specific skills/achievements
-- Add a call-to-action at the end
-- 3-4 paragraphs max
-- Professional but authentic tone
+- Start with a clear hook explaining what you build or do
+- Keep first-person voice ("I")
+- Mention specific skills and achievements
+- End with a direct call-to-action
+- 2-3 short paragraphs max
+- No buzzwords or cliches, no em dashes
 
 Return ONLY the improved About text, nothing else.`,
 
-    bullet_improve: `You are a LinkedIn profile optimizer. Improve this experience bullet point.
+    bullet_improve: `You are a resume and LinkedIn experience optimizer. Improve this experience bullet point.
 
 Current bullet: "{bullet}"
 Role context: {role} at {company}
 
 Rules:
-- Start with action verb
-- Add quantifiable metrics if inferable
-- Use XYZ format: Accomplished X, measured by Y, by doing Z
+- Start with an active verb (Led, Built, Designed, Shipped, Automated, Scaled)
+- State what was done and the specific outcome
 - Keep under 200 characters
-- Be specific, not generic
+- Be concrete and grounded, no generic filler
 
 Return ONLY the improved bullet text, nothing else.`
 }
@@ -132,40 +138,41 @@ async function callLLMWithCache(
         return { rewrite: null, cached: false, queued: false, error: 'AI not configured' }
     }
     
-    try {
-        const model = genAI.getGenerativeModel({ model: MODEL_NAME })
-        
-        // Build prompt from template
-        let prompt = PROMPT_TEMPLATES[promptTemplate]
-        for (const [key, value] of Object.entries(variables)) {
-            prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value)
-        }
-        
-        const result = await model.generateContent({
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-            generationConfig: {
-                temperature: LLM_CONFIG.temperature,
-                topP: LLM_CONFIG.topP,
-                maxOutputTokens: LLM_CONFIG.maxOutputTokens
+    let prompt = PROMPT_TEMPLATES[promptTemplate]
+    for (const [key, value] of Object.entries(variables)) {
+        prompt = prompt.replace(new RegExp(`{${key}}`, 'g'), value)
+    }
+
+    for (const modelName of FALLBACK_MODELS) {
+        try {
+            const model = genAI.getGenerativeModel({ model: modelName })
+            const result = await model.generateContent({
+                contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                generationConfig: {
+                    temperature: LLM_CONFIG.temperature,
+                    topP: LLM_CONFIG.topP,
+                    maxOutputTokens: LLM_CONFIG.maxOutputTokens
+                }
+            })
+            
+            const response = result.response.text().trim()
+            if (response) {
+                // Cache the result
+                setCachedLLMResponse(inputHash, promptSignature, response)
+                llmQueue.incrementCount()
+                return { rewrite: response, cached: false, queued: false }
             }
-        })
-        
-        const response = result.response.text().trim()
-        
-        // Cache the result
-        setCachedLLMResponse(inputHash, promptSignature, response)
-        llmQueue.incrementCount()
-        
-        return { rewrite: response, cached: false, queued: false }
-        
-    } catch (error: any) {
-        console.error('LLM call failed:', error.message)
-        return { 
-            rewrite: null, 
-            cached: false, 
-            queued: false, 
-            error: 'LLM call failed' 
+        } catch (error: any) {
+            console.warn(`[LLM V2] Model ${modelName} failed:`, error?.message?.slice(0, 120))
+            continue
         }
+    }
+
+    return { 
+        rewrite: null, 
+        cached: false, 
+        queued: false, 
+        error: 'LLM call failed across all models' 
     }
 }
 

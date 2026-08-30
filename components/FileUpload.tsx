@@ -3,11 +3,12 @@
 import { useState, useRef, useEffect, DragEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { UploadIcon, ShieldCheckIcon, ClockIcon, AlertCircleIcon } from '@/components/ui/Icons'
+import { setPendingFile } from '@/lib/uploadStore'
 
 export default function FileUpload() {
     const [isDragging, setIsDragging] = useState(false)
-    const [error, setError] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
+    const [error, setError] = useState('')
     const fileInputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
@@ -39,12 +40,32 @@ export default function FileUpload() {
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) processFile(file)
+        if (e.target) e.target.value = ''
+    }
+
+    const fileToBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onload = () => {
+                const res = (reader.result as string) || ''
+                const base64 = res.includes(',') ? res.split(',')[1] : res
+                resolve(base64)
+            }
+            reader.onerror = (err) => reject(err)
+            reader.readAsDataURL(file)
+        })
     }
 
     const processFile = async (file: File) => {
         setError('')
 
-        if (file.type !== 'application/pdf') {
+        const isPdf = 
+            file.type === 'application/pdf' ||
+            file.type === 'application/x-pdf' ||
+            file.type === 'application/octet-stream' ||
+            file.name.toLowerCase().endsWith('.pdf')
+
+        if (!isPdf) {
             setError('Please upload a PDF file. LinkedIn exports are in PDF format.')
             return
         }
@@ -57,12 +78,11 @@ export default function FileUpload() {
         setIsProcessing(true)
 
         try {
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                const base64 = e.target?.result as string
-                const base64Data = base64.split(',')[1]
+            setPendingFile(file)
 
-                try {
+            try {
+                const base64Data = await fileToBase64(file)
+                if (base64Data) {
                     sessionStorage.setItem(
                         'uploadingFile',
                         JSON.stringify({
@@ -70,22 +90,15 @@ export default function FileUpload() {
                             fileContent: base64Data,
                         })
                     )
-                    router.push('/loading-analysis')
-                } catch (storageErr: any) {
-                    setIsProcessing(false)
-                    setError(
-                        'File is too large for temporary browser memory. Try re-exporting a fresh PDF from your LinkedIn profile.'
-                    )
                 }
+            } catch (storageErr) {
+                console.warn('sessionStorage serialization skipped:', storageErr)
             }
-            reader.onerror = () => {
-                setIsProcessing(false)
-                setError('Failed to read file. Please try selecting the file again.')
-            }
-            reader.readAsDataURL(file)
+
+            router.push('/loading-analysis')
         } catch (err: any) {
             setIsProcessing(false)
-            setError(err.message || 'Failed to read file. Please try again.')
+            setError(err.message || 'Failed to process file. Please try again.')
         }
     }
 

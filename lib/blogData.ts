@@ -1,5 +1,4 @@
-// Blog content data for all tool clusters
-// Each tool has 10 blog posts with full SEO metadata
+import { HOOK_CLUSTER_ARTICLES } from './hookArticlesData'
 
 export interface BlogPost {
     slug: string
@@ -20,6 +19,10 @@ const DATE_PUBLISHED = '2026-02-01'
 const DATE_MODIFIED = '2026-06-07'
 
 export const ALL_BLOG_POSTS: BlogPost[] = [
+    // ═══════════════════════════════════════════════════════════
+    // LINKEDIN HOOKS SEO CONTENT CLUSTER (6 FLAGSHIP PILLARS)
+    // ═══════════════════════════════════════════════════════════
+    ...HOOK_CLUSTER_ARTICLES,
     // ═══════════════════════════════════════════════════════════
     // HEADLINE GENERATOR CLUSTER (10)
     // ═══════════════════════════════════════════════════════════

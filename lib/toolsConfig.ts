@@ -9,6 +9,7 @@ export interface ToolMeta {
     id: string
     slug: string
     name: string
+    shortDesc?: string
     seoTitle: string
     metaDescription: string
     h1: string
@@ -57,6 +58,7 @@ export function getAllToolSlugs(): string[] {
 export const ALL_TOOLS: ToolMeta[] = [
     {
         id: 'headline', slug: 'linkedin-headline-generator', name: 'LinkedIn Headline Generator',
+        shortDesc: 'Generate keyword-optimized, recruiter-ready headlines scored for impact and clarity.',
         seoTitle: 'LinkedIn Headline Generator | AI Examples & Templates (2026)',
         metaDescription: 'Generate professional LinkedIn headlines for students, graduates, and professionals. Try AI-powered headline examples, analyzer, and keyword-optimized suggestions free.',
         h1: 'LinkedIn Headline Generator', heroText: 'Your LinkedIn headline is the first thing recruiters see. Generate keyword-optimized, recruiter-ready headlines in seconds with AI-powered suggestions tailored to your role and industry.',
@@ -82,6 +84,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'about', slug: 'linkedin-about-generator', name: 'LinkedIn About Section Generator',
+        shortDesc: 'Write compelling, first-person summary bios in 3 brand voices tailored to your career.',
         seoTitle: 'LinkedIn About Section Generator | AI Summary Writer (2026)',
         metaDescription: 'Generate a compelling LinkedIn About section in 3 styles. AI-powered summary writer creates first-person, keyword-rich About sections from your experience.',
         h1: 'LinkedIn About Section Generator', heroText: 'Your About section is where connections decide to reach out or scroll past. Generate a first-person, keyword-rich summary in three distinct styles tailored to your actual experience.',
@@ -105,6 +108,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'bullets', slug: 'linkedin-experience-generator', name: 'LinkedIn Experience Description Generator',
+        shortDesc: 'Rewrite plain job duties into high-impact, quantified achievement bullet points.',
         seoTitle: 'LinkedIn Experience Generator | Bullet Point Examples (2026)',
         metaDescription: 'Rewrite your LinkedIn experience bullet points with AI. Transform weak descriptions into achievement-focused, keyword-rich bullets that attract recruiters.',
         h1: 'LinkedIn Experience Description Generator', heroText: 'Transform bland job descriptions into achievement-focused, recruiter-optimized bullet points. Paste your current descriptions and get AI-rewritten versions instantly.',
@@ -127,6 +131,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'ring', slug: 'linkedin-profile-photo-ring', name: 'LinkedIn Profile Photo Ring Creator',
+        shortDesc: 'Add eye-catching colored borders and gradient rings to make your photo pop in feeds.',
         seoTitle: 'LinkedIn Profile Photo Ring Creator | Free Templates (2026)',
         metaDescription: 'Add a professional colored ring to your LinkedIn profile photo for free. Choose from branded ring styles to make your profile picture stand out.',
         h1: 'LinkedIn Profile Photo Ring Creator', heroText: 'Make your profile photo stand out in the LinkedIn feed with a professional colored ring. Upload your photo and add a custom ring in seconds.',
@@ -149,6 +154,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'seo', slug: 'linkedin-profile-keyword-analyzer', name: 'LinkedIn Profile Keyword Analyzer',
+        shortDesc: 'Identify missing keywords and optimize section density to maximize recruiter search rank.',
         seoTitle: 'LinkedIn Keyword Analyzer | Free SEO Checker (2026)',
         metaDescription: 'Analyze your LinkedIn profile keywords and SEO score. Get keyword coverage analysis, missing keywords, and optimization recommendations.',
         h1: 'LinkedIn Profile Keyword Analyzer', heroText: 'Discover which keywords are missing from your LinkedIn profile. Upload your PDF and get a keyword coverage score with specific recommendations.',
@@ -171,6 +177,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'postideas', slug: 'linkedin-post-idea-generator', name: 'LinkedIn Post Idea Generator',
+        shortDesc: 'Generate viral, niche-tailored post concepts, structured outlines, and strategic angles.',
         seoTitle: 'LinkedIn Post Idea Generator | Content Ideas & Templates (2026)',
         metaDescription: 'Generate engaging LinkedIn post ideas tailored to your industry. AI-powered content ideas for thought leadership, job search, and audience growth.',
         h1: 'LinkedIn Post Idea Generator', heroText: 'Never stare at a blank screen again. Get AI-generated post ideas tailored to your industry, goals, and audience.',
@@ -193,6 +200,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'storytopost', slug: 'linkedin-story-to-post-converter', name: 'LinkedIn Story to Post Converter',
+        shortDesc: 'Transform rough notes and career anecdotes into ready-to-publish viral post formats.',
         seoTitle: 'LinkedIn Story to Post Converter | Free AI Tool (2026)',
         metaDescription: 'Convert raw stories into polished LinkedIn posts. AI-powered converter transforms rough ideas into engaging, structured posts ready to publish.',
         h1: 'LinkedIn Story to Post Converter', heroText: 'Turn your raw experiences into polished, engaging LinkedIn posts. Describe what happened and what you learned, get a ready-to-publish post.',
@@ -214,6 +222,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'hooks', slug: 'linkedin-post-hook-generator', name: 'LinkedIn Post Hook Generator',
+        shortDesc: 'Craft curiosity-driven opening lines designed to stop the scroll and win "see more" clicks.',
         seoTitle: 'LinkedIn Post Hook Generator | Opening Line Examples (2026)',
         metaDescription: 'Generate scroll-stopping LinkedIn post hooks. AI-powered hook generator creates attention-grabbing opening lines tailored to your topic and audience.',
         h1: 'LinkedIn Post Hook Generator', heroText: 'Your first line decides if anyone reads the rest. Generate scroll-stopping hooks for your LinkedIn posts that create curiosity and drive engagement.',
@@ -235,6 +244,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'pillars', slug: 'linkedin-content-planner', name: 'LinkedIn Content Planner',
+        shortDesc: 'Build a high-consistency weekly calendar with balanced topics and daily writing prompts.',
         seoTitle: 'LinkedIn Content Planner | Weekly Calendar Template (2026)',
         metaDescription: 'Plan your LinkedIn content with a weekly posting calendar. AI-generated content pillars, post prompts, and scheduling for your industry.',
         h1: 'LinkedIn Content Planner', heroText: 'Stop posting randomly. Get a weekly content calendar with post prompts and content pillars tailored to your industry and role.',
@@ -256,6 +266,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'comments', slug: 'linkedin-comment-generator', name: 'LinkedIn Comment Generator',
+        shortDesc: 'Generate insightful, value-add replies to trending posts that attract profile visits.',
         seoTitle: 'LinkedIn Comment Generator | AI Comment Templates (2026)',
         metaDescription: 'Generate thoughtful LinkedIn comments that build connections. AI-powered comment writer creates engaging, authentic replies for any post.',
         h1: 'LinkedIn Comment Generator', heroText: 'Write comments that get noticed and build relationships. Generate thoughtful, engaging replies for LinkedIn posts that showcase your expertise.',
@@ -277,6 +288,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'messages', slug: 'linkedin-connection-message-generator', name: 'LinkedIn Connection Message Generator',
+        shortDesc: 'Draft customized outreach and connection notes that achieve 2-3x higher accept rates.',
         seoTitle: 'LinkedIn Connection Message Generator | Templates (2026)',
         metaDescription: 'Generate personalized LinkedIn connection request messages. AI-powered message writer creates authentic, effective notes for any networking scenario.',
         h1: 'LinkedIn Connection Message Generator', heroText: 'Stop sending blank connection requests. Generate personalized, authentic connection notes that get accepted for any professional scenario.',
@@ -298,6 +310,7 @@ export const ALL_TOOLS: ToolMeta[] = [
     },
     {
         id: 'qrcode', slug: 'linkedin-qr-code-generator', name: 'LinkedIn QR Code Generator',
+        shortDesc: 'Create instant scannable QR codes for resumes, business cards, and presentation decks.',
         seoTitle: 'LinkedIn QR Code Generator | Free Profile QR Code (2026)',
         metaDescription: 'Generate a free QR code for your LinkedIn profile. Share your profile at events, on business cards, and in presentations with a custom QR code.',
         h1: 'LinkedIn QR Code Generator', heroText: 'Share your LinkedIn profile instantly at events and on business cards. Generate a custom QR code for your profile in seconds.',

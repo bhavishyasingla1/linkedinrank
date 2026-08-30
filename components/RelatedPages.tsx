@@ -3,20 +3,13 @@ import { getRelatedPages, getPillarPage } from '@/lib/seoConfig'
 
 interface RelatedPagesProps {
   currentSlug: string
-  /** Additional hardcoded links to always include */
   extraLinks?: { label: string; href: string }[]
 }
 
-/**
- * Programmatic related pages component.
- * Automatically generates internal links based on keyword similarity.
- * Every page gets: homepage link + pillar guide link + 3 related pages.
- */
 export default function RelatedPages({ currentSlug, extraLinks }: RelatedPagesProps) {
   const related = getRelatedPages(currentSlug, 3)
   const pillar = getPillarPage(currentSlug)
 
-  // Build link list: homepage → pillar → related → extras
   const links: { label: string; href: string }[] = [
     { label: 'LinkedInRank Home', href: '/' },
   ]
@@ -38,14 +31,16 @@ export default function RelatedPages({ currentSlug, extraLinks }: RelatedPagesPr
   }
 
   return (
-    <div className="pt-8 border-t border-gray-100">
-      <p className="text-[11px] font-bold text-[#0A66C2] uppercase tracking-widest mb-4">Related Guides</p>
-      <div className="flex flex-wrap gap-2">
+    <div className="pt-10 border-t-2 border-[#dedcff] space-y-4">
+      <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+        Related Strategy Guides
+      </p>
+      <div className="flex flex-wrap gap-2.5">
         {links.map((item, i) => (
           <Link
             key={i}
             href={item.href}
-            className="text-xs font-medium text-[#4B5563] bg-[#F8FAFC] border border-gray-200 px-3 py-1.5 rounded-lg no-underline hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors"
+            className="text-[13px] font-bold text-[#050315] bg-white border border-[#dedcff] px-4 py-2 rounded-full no-underline hover:border-[#2f27ce] hover:text-[#2f27ce] hover:bg-[#dedcff]/30 transition-all shadow-xs"
           >
             {item.label}
           </Link>
