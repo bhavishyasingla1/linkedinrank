@@ -170,8 +170,12 @@ export default function FaqPage() {
 
                 {/* ── Final Profile Score CTA (Aside Radiant Box) ─ */}
                 <div className="bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-md shadow-[#2f27ce]/5">
-                    <span className="inline-flex items-center gap-1.5 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full">
-                        <SparklesIcon size={13} /> Instant Recruiter-Grade Audit
+                    <span className="inline-flex items-center justify-center gap-2 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3.5 py-1 rounded-full leading-none shadow-2xs">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
+                        </span>
+                        <span>Instant Recruiter-Grade Audit</span>
                     </span>
                     <h3 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
                         Get your free LinkedIn score &amp; roadmap

@@ -210,8 +210,8 @@ export default function HomePage() {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-75" />
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2f27ce]" />
                                 </span>
-                                <span className="text-[13px] font-bold text-[#2f27ce] inline-flex items-center justify-center gap-1.5">
-                                    <SparklesIcon size={14} /> Instant Recruiter-Grade Audit
+                                <span className="text-[13px] font-bold text-[#2f27ce]">
+                                    Instant Recruiter-Grade Audit
                                 </span>
                             </div>
 
