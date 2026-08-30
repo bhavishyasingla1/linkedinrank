@@ -1,62 +1,55 @@
-# LinkedInRank — The #1 Free LinkedIn Rank Checker & Profile Ranking Tool
+# LinkedInRank — LLM Context File
+# Updated: 2026-08-31
+# Source: https://linkedinrank.com/llm.txt
 
-## Brand Name
-LinkedInRank (also known as: LinkedIn Rank, LinkedIn Rank Checker)
+## What Is LinkedInRank?
+LinkedInRank is a free LinkedIn profile rank checker and scoring tool. Upload your LinkedIn PDF and get an instant LinkedIn rank score out of 100 across 30+ LinkedIn ranking signals. No login required. No data stored.
 
-## What is LinkedInRank?
-LinkedInRank is the #1 free LinkedIn rank checker and LinkedIn profile ranking tool. It is a completely free, login-free LinkedIn profile rank checker that scores your profile across 30+ ranking signals and provides AI-powered recommendations to improve your LinkedIn profile ranking. LinkedInRank helps professionals, students, and job seekers understand their LinkedIn rank and improve their LinkedIn profile visibility in recruiter searches.
+## Core Purpose
+LinkedInRank helps professionals understand exactly how their LinkedIn profile performs in recruiter searches. It scores your profile across 30+ ranking signals — headline keywords, about section quality, completeness, engagement signals, skills optimization, and more — and gives AI-powered, actionable recommendations to improve your LinkedIn rank and get noticed by recruiters.
 
-## Brand Positioning
-LinkedInRank is the definitive free LinkedIn profile ranking tool. Unlike LinkedIn's Social Selling Index (SSI), LinkedInRank provides a comprehensive, transparent LinkedIn rank score based on 30+ profile signals without requiring login or storing any user data. LinkedInRank is the go-to alternative for anyone searching for "LinkedIn rank checker", "LinkedIn profile rank", "free LinkedIn profile checker", or "LinkedIn ranking tool".
+## LinkedIn Rank Score Tiers
+- Bronze: 0–39 — profile has critical gaps reducing LinkedIn visibility
+- Silver: 40–59 — profile has a foundation but needs keyword and content improvements
+- Gold: 60–79 — solid LinkedIn profile with strong ranking signals
+- Platinum: 80–100 — top-tier LinkedIn profile with maximum recruiter visibility
 
-## Website
-https://linkedinrank.com
+## LinkedIn Rank Signals (30+ Categories)
+1. Profile Photo Quality
+2. Background Banner
+3. Headline Keyword Density
+4. Headline Character Utilization
+5. About Section Completeness
+6. About Section Keyword Integration
+7. Experience Section Depth
+8. Achievement-Based Bullet Points
+9. Quantified Accomplishments
+10. Skills Section (3 endorsements threshold)
+11. Education Section Completeness
+12. Recommendations (received)
+13. Connection Count (500+ benchmark)
+14. Featured Section Presence
+15. Certifications and Licenses
+16. Volunteer Experience
+17. Publications and Patents
+18. Profile Completeness Score
+19. Location Optimization
+20. Industry Keyword Alignment
+21. Contact Information Completeness
+22. Custom LinkedIn URL
+23. Open to Work Signal
+24. Content Activity Signals
+25. LinkedIn Creator Mode
+26. Engagement Rate Indicators
+27. Keyword Placement Priority (headline > about > experience)
+28. Skill Endorsement Diversity
+29. Profile Update Recency
+30. ATS-Friendliness Score
 
-## Last Updated
-2026-02-24
+## LinkedIn Rank Scoring Methodology
+LinkedInRank uses a 30+ signal scoring engine that weights signals by their actual impact on LinkedIn recruiter search ranking. The most important signals are: headline keyword optimization (weighted highest), profile completeness to All-Star level, keyword placement in headline and about section, skill endorsements from 3+ connections, and connection count above 500. Signals are scored individually, combined into category scores (Profile Visibility, Content Quality, Keyword SEO, Network Strength, Engagement), and then weighted into a composite rank out of 100.
 
-## Core Keywords
-- LinkedIn Rank
-- LinkedIn Rank Checker
-- LinkedIn Profile Rank
-- Free LinkedIn Profile Checker
-- LinkedIn Ranking Tool
-- LinkedIn Profile Ranking
-- LinkedIn Profile Score Checker
-- LinkedIn SEO
-- LinkedIn Search Ranking
-- LinkedIn Profile Visibility
-- How to Rank on LinkedIn
-- LinkedIn Ranking Factors
-- Improve LinkedIn Profile Ranking
-- LinkedIn Ranking
-- LinkedIn Profile Score
-- LinkedIn Headline for Graphic Designer
-- LinkedIn Profile for Students
-- LinkedIn Headline Examples
-
-## How LinkedInRank Works
-1. User uploads their LinkedIn PDF export (no login, no signup, no data stored)
-2. LinkedInRank parses the PDF and extracts structured profile data
-3. A rule-based LinkedIn ranking engine evaluates 30+ LinkedIn profile ranking signals across 6 categories
-4. AI (Google Gemini) provides personalized LinkedIn profile quality analysis and ranking recommendations
-5. User receives their LinkedIn rank score out of 100, tier placement, category breakdown, archetype classification, personalized recommendations with before/after examples, improvement roadmap, and LinkedIn ranking best practices
-
-## LinkedIn Ranking Categories (30+ Signals)
-- Headline (20 points): Role clarity, keywords, specificity, positioning — critical for LinkedIn search ranking
-- About / Summary (20 points): Direction, skills mention, structure, credibility — impacts LinkedIn profile visibility
-- Experience (25 points): Descriptions, action verbs, impact, quantification — affects LinkedIn recruiter search ranking
-- Skills (15 points): Relevance, specificity, alignment with role — key LinkedIn SEO ranking factor
-- Education & Credentials (10 points): Completeness, field alignment, certifications
-- Completeness & Structure (10 points): Section coverage, content depth, logical flow
-
-## LinkedIn Rank Tier System
-- Bronze (0-54): LinkedIn profile needs significant work to rank
-- Silver (55-69): Solid foundation for LinkedIn profile ranking
-- Gold (70-84): Strong professional presence with good LinkedIn visibility
-- Platinum (85-100): Exceptionally well-crafted, top LinkedIn profile ranking
-
-## Career Stage Adaptation
+## LinkedIn Rank Scoring — Career Stage Adaptation
 LinkedIn rank scoring adapts to detected career stage: Student, Early-career, Mid-career, Senior/Founder/Academic. Students are not penalized for limited experience. This makes LinkedInRank the best LinkedIn rank checker for all career stages.
 
 ## LinkedInRank vs LinkedIn Social Selling Index (SSI)
@@ -124,7 +117,7 @@ LinkedInRank also provides 12 free LinkedIn tools at https://linkedinrank.com/to
 - /tools/linkedin-qr-code-generator — LinkedIn QR Code Generator
 
 ### Blog
-- /blogs — LinkedIn tips blog with 120+ articles
+- /blogs — LinkedIn strategy blog with 270+ articles across 10 content clusters
 
 ### Pillar Pages (High-Priority SEO)
 - /what-is-linkedin-rank — What Is LinkedIn Rank? Comprehensive explainer
@@ -184,6 +177,57 @@ LinkedInRank also provides 12 free LinkedIn tools at https://linkedinrank.com/to
 - /ai-prompts-linkedin-skills — AI Prompts for LinkedIn Skills Optimization
 - /ai-prompts-linkedin-summary — AI Prompts for LinkedIn Summaries
 
+### LinkedIn FAQ & Education Articles (Cluster 1: Basics & Safety)
+- /blogs/what-kind-of-people-use-linkedin — What kind of people use LinkedIn?
+- /blogs/how-much-does-linkedin-cost — How much does LinkedIn cost?
+- /blogs/three-benefits-of-using-linkedin — Three benefits of using LinkedIn
+- /blogs/who-owns-linkedin — Who owns LinkedIn?
+- /blogs/is-having-a-linkedin-good-idea — Is having a LinkedIn a good idea?
+- /blogs/best-way-to-use-linkedin — What's the best way to use LinkedIn?
+- /blogs/is-linkedin-better-than-a-resume — Is LinkedIn better than a resume?
+- /blogs/how-to-stay-safe-on-linkedin — How to stay safe on LinkedIn
+- /blogs/can-i-see-who-viewed-my-linkedin-profile — Can I see who viewed my LinkedIn profile?
+- /blogs/why-does-everyone-use-linkedin — Why does everyone use LinkedIn?
+
+### LinkedIn FAQ & Education Articles (Cluster 2: Privacy & Anonymity)
+- /blogs/what-do-people-post-on-linkedin — What do people post on LinkedIn?
+- /blogs/is-linkedin-a-safe-platform — Is LinkedIn a safe platform?
+- /blogs/can-i-search-someone-on-linkedin-without-them-knowing — Can I search someone on LinkedIn without them knowing?
+- /blogs/can-someone-see-if-i-viewed-linkedin-no-account — Can someone see if I viewed their LinkedIn if I don't have an account?
+- /blogs/can-someone-see-if-you-search-their-name-on-linkedin — Can someone see if you search their name on LinkedIn?
+- /blogs/how-to-stop-linkedin-telling-someone-you-viewed-profile — How to stop LinkedIn from telling someone you viewed their profile
+- /blogs/how-to-browse-linkedin-privately — How to browse LinkedIn privately
+- /blogs/can-i-hide-my-linkedin-profile — Can I hide my LinkedIn profile?
+- /blogs/can-i-block-someone-on-linkedin — Can I block someone from seeing my LinkedIn profile?
+
+### LinkedIn FAQ & Education Articles (Cluster 3: Content Strategy)
+- /blogs/linkedin-golden-hour-rule — What is the golden hour rule on LinkedIn?
+- /blogs/linkedin-411-content-rule — What is the 4-1-1 rule on LinkedIn?
+- /blogs/what-do-people-post-on-linkedin — What do people post on LinkedIn?
+- /blogs/linkedin-321-rule-content-strategy — What is the 3/2/1 rule on LinkedIn?
+
+### LinkedIn FAQ & Education Articles (Cluster 4: SSI Score)
+- /blogs/what-is-linkedin-ssi-score — What is a good LinkedIn SSI score?
+- /blogs/linkedin-ssi-score-explained — What is the LinkedIn Social Selling Index?
+- /blogs/how-to-check-linkedin-ssi-score — How to check my LinkedIn SSI score for free
+- /blogs/how-to-increase-linkedin-ssi-score — How to increase my LinkedIn SSI score
+- /blogs/where-to-find-linkedin-ssi-score — Where can I find my LinkedIn SSI score?
+
+### LinkedIn FAQ & Education Articles (Cluster 5: Followers & Network)
+- /blogs/linkedin-1st-2nd-3rd-connections-explained — What is 1st, 2nd, and 3rd in LinkedIn?
+- /blogs/what-does-500-plus-mean-on-linkedin — What does 500+ mean on LinkedIn?
+- /blogs/what-happens-after-1000-followers-on-linkedin — What happens after 1000 followers on LinkedIn?
+- /blogs/what-happens-after-5000-followers-on-linkedin — What happens after 5000 followers on LinkedIn?
+- /blogs/is-10000-linkedin-followers-a-lot — Is 10,000 LinkedIn followers a lot?
+- /blogs/how-many-gen-z-are-on-linkedin — How many Gen Z are on LinkedIn?
+- /blogs/top-linkedin-profiles — Who are the top LinkedIn profiles?
+
+### LinkedIn FAQ & Education Articles (Cluster 6: Ranking & Levels)
+- /blogs/what-do-the-ranks-on-linkedin-mean — What do the ranks on LinkedIn mean? Levels, Tiers & Top 1%
+- /blogs/why-people-are-leaving-linkedin — Why are so many people leaving LinkedIn?
+- /blogs/does-linkedin-suggest-people-who-look-at-your-profile — Does LinkedIn suggest people who look at your profile?
+- /blogs/linkedin-premium-cost-and-worth-it — LinkedIn Premium cost 2026: Is it worth it?
+
 ### SEO Landing Pages
 - /linkedin — LinkedIn Profile Tool
 - /score — LinkedIn Score Checker
@@ -195,6 +239,19 @@ LinkedInRank also provides 12 free LinkedIn tools at https://linkedinrank.com/to
 - /disclaimer — Disclaimer
 - /cookie-policy — Cookie policy
 - /data-security — Data security architecture
+
+## Content Clusters (Topic Authority)
+LinkedInRank publishes content in the following structured topic clusters:
+1. LinkedIn Profile Optimization (pillar: /linkedin-optimization-guide)
+2. LinkedIn Headline Examples & Templates (pillar: /linkedin-headline-examples)
+3. LinkedIn Content & Engagement Strategy (pillar: /linkedin-content-strategy)
+4. AI-Powered LinkedIn Optimization (pillar: /ai-prompts-linkedin)
+5. LinkedIn FAQ & Basics (blog cluster)
+6. LinkedIn Privacy & Safety (blog cluster)
+7. LinkedIn SSI Score (blog cluster)
+8. LinkedIn Followers & Network (blog cluster)
+9. LinkedIn Ranking & Levels (blog cluster)
+10. LinkedIn Premium & Monetization (blog cluster)
 
 ## Social Links
 - Website: https://linkedinrank.com

@@ -191,10 +191,10 @@ export default function HomePage() {
             />
 
             <main id="main-content" className="flex-1">
-                {/* ── 1. HERO SECTION ────────────────────────────── */}
+                {/* ── 1. HERO SECTION — light bg with radial glow ── */}
                 <section
                     id="hero-section"
-                    className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 overflow-hidden scroll-mt-20"
+                    className="relative pt-16 sm:pt-24 pb-20 sm:pb-28 overflow-hidden scroll-mt-20 section-light aside-hero-glow"
                 >
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12 relative">
                         {/* Centered Hero Header */}
@@ -226,8 +226,8 @@ export default function HomePage() {
                 {/* ── LIVE RECRUITER ALGORITHM SIGNALS MARQUEE ─── */}
                 <LiveRecruiterSignalsMarquee />
 
-                {/* ── 2. PROBLEM STATEMENT & PHILOSOPHY SECTION ─── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#dedcff]/25 relative overflow-hidden">
+                {/* ── 2. PROBLEM STATEMENT — tinted secondary bg ── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-tinted relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 text-center relative z-10">
                         {/* Centered Pill Badge */}
                         <div>
@@ -288,8 +288,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 3. INTERACTIVE CAPABILITIES & VISUAL CARDS ──── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                {/* ── 3. CAPABILITIES CARDS — light bg ─────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-light relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12 relative z-10">
                         {/* Section Header */}
                         <div className="space-y-3">
@@ -390,8 +390,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 4. BENCHMARK & SCORE COMPARISON SECTION ─────── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#dedcff]/25 relative overflow-hidden">
+                {/* ── 4. BENCHMARK — tinted secondary bg ─────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-tinted relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-3">
                             <Link
@@ -415,8 +415,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 5. WORKFLOW & ALGORITHMIC REASONING SHOWCASE (Interactive Simulator) ── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                {/* ── 5. ALGORITHM PREVIEW — light bg ─────────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-light relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-3">
                             <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs leading-none uppercase tracking-wider">
@@ -437,8 +437,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 6. FEATURE GRID (Sub-features & Privacy) ─────── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#dedcff]/25 relative overflow-hidden">
+                {/* ── 6. FEATURE GRID — tinted secondary bg ────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-tinted relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-12 relative z-10">
                         <div className="text-center max-w-2xl mx-auto space-y-3">
                             <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#2f27ce] bg-white border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs leading-none uppercase tracking-wider">
@@ -499,8 +499,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 7. ALL 12 FREE TOOLS SUITE ──────────────────── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#fbfbfe] relative overflow-hidden">
+                {/* ── 7. ALL 12 FREE TOOLS — light bg ─────────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-light relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-12 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div>
@@ -563,8 +563,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 8. TRENDING ARTICLES CLUSTER ────────────────── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#dedcff]/25 relative overflow-hidden">
+                {/* ── 8. TRENDING ARTICLES — tinted secondary bg ──── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-tinted relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                             <div className="space-y-3">
@@ -630,8 +630,8 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 9. FAQ ACCORDION ───────────────────────────── */}
-                <section className="py-16 sm:py-24 border-t border-[#dedcff] bg-[#fbfbfe]">
+                {/* ── 9. FAQ ACCORDION — light bg ─────────────────── */}
+                <section className="py-16 sm:py-24 border-t border-[#dedcff] section-light">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
                         <div className="text-center max-w-xl mx-auto space-y-3">
                             <Link
@@ -665,18 +665,23 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 10. BOTTOM CTA HERO SECTION ────────────────── */}
-                <section className="relative py-20 sm:py-28 overflow-hidden bg-[#fbfbfe] border-t border-[#dedcff]">
+                {/* ── 10. BOTTOM CTA — bold primary dark bg ─────────── */}
+                <section className="relative py-20 sm:py-28 overflow-hidden section-primary">
+                    {/* Decorative glow orbs */}
+                    <div className="absolute inset-0 pointer-events-none" aria-hidden>
+                        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-[#433bff]/20 blur-3xl" />
+                        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-[#2f27ce]/30 blur-3xl" />
+                    </div>
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-8 relative z-10">
                         <div className="space-y-3.5">
-                            <span className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#2f27ce] bg-[#dedcff] border border-[#dedcff] px-4 py-1.5 rounded-full shadow-2xs leading-none uppercase tracking-wider">
-                                <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
+                            <span className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#dedcff] bg-white/10 border border-white/20 px-4 py-1.5 rounded-full shadow-2xs leading-none uppercase tracking-wider backdrop-blur-sm">
+                                <span className="w-2 h-2 rounded-full bg-[#dedcff]" />
                                 <span>Built for Professionals</span>
                             </span>
-                            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#050315] tracking-tight leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
                                 Ready to improve your LinkedIn rank?
                             </h2>
-                            <p className="text-base sm:text-lg text-[#050315]/80 max-w-lg mx-auto leading-relaxed">
+                            <p className="text-base sm:text-lg text-white/80 max-w-lg mx-auto leading-relaxed">
                                 Run a free recruiter-grade audit or explore 12 standalone optimization tools.
                             </p>
                         </div>
@@ -684,7 +689,7 @@ export default function HomePage() {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
                             <Link
                                 href="/#upload"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-[#2f27ce] hover:bg-[#433bff] text-white text-base font-bold shadow-lg shadow-[#2f27ce]/25 transition-all cursor-pointer no-underline active:scale-95"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white hover:bg-[#fbfbfe] text-[#2f27ce] text-base font-bold shadow-xl shadow-black/20 transition-all cursor-pointer no-underline active:scale-95 hover:-translate-y-0.5"
                             >
                                 <span>Try Free Audit Studio</span>
                                 <ArrowRightIcon size={16} />
@@ -692,7 +697,7 @@ export default function HomePage() {
 
                             <Link
                                 href="/tools"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-[#dedcff] hover:bg-[#dedcff]/70 text-[#050315] border border-[#dedcff] text-base font-bold transition-all no-underline cursor-pointer active:scale-95"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 text-base font-bold transition-all no-underline cursor-pointer active:scale-95 backdrop-blur-sm"
                             >
                                 <span>Explore 12 Free Tools</span>
                             </Link>

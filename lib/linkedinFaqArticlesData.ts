@@ -875,7 +875,195 @@ export const LINKEDIN_FAQ_ARTICLES: BlogPost[] = [
         ],
         datePublished: DATE_PUBLISHED,
         dateModified: DATE_MODIFIED
+    },
+
+    // ═══════════════════════════════════════════════════════════
+    // 7. LINKEDIN RANKING, LEVELS, & PROFILE TIERS
+    // ═══════════════════════════════════════════════════════════
+    {
+        slug: 'what-do-the-ranks-on-linkedin-mean',
+        title: 'What Do the Ranks on LinkedIn Mean? Levels, Tiers & Top 1% Explained',
+        targetKeyword: 'what do the ranks on LinkedIn mean',
+        metaDescription: 'Understand LinkedIn ranks, profile levels, Top 1%, and All-Star status. Learn how to see your ranking and what each tier unlocks for recruiters.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'What Are the Different Ranks and Levels on LinkedIn?',
+            'How to See Your LinkedIn Profile Ranking and Stats',
+            'What Is Top 1% on LinkedIn and How Do You Get There?',
+            'LinkedIn All-Star Profile Level: The Completeness Score',
+            'What Percentage of LinkedIn Users Have 500+ Connections?'
+        ],
+        summary: 'A complete guide to LinkedIn profile levels, All-Star status, Top 1% ranking, and the SSI score system that determines your algorithmic visibility.',
+        sections: [
+            `<p>LinkedIn operates multiple overlapping "ranking" systems, which confuses most professionals. There are three main ranking dimensions you should understand:</p>
+            <ol>
+                <li><strong>Profile Completeness Level (Beginner → All-Star):</strong> LinkedIn assigns a profile strength badge based on completeness of your profile fields.</li>
+                <li><strong>SSI Industry & Network Rank (Top 1%–Top 50%):</strong> Your Social Selling Index percentile versus others in your industry.</li>
+                <li><strong>Recruiter Search Rank:</strong> Your algorithmic position when a recruiter runs a keyword-filtered candidate search.</li>
+            </ol>
+            <p>Each system serves a different purpose. Understand all three to maximize your discoverability. Check your current status with our <a href="/#upload">Free LinkedIn Rank Audit</a>.</p>`,
+
+            `<p>To see your profile ranking and stats: (1) Navigate to your LinkedIn profile and scroll to the <strong>Analytics</strong> section to find Search appearances and Profile viewers. (2) Visit <a href="https://www.linkedin.com/sales/ssi" target="_blank" rel="noopener noreferrer">linkedin.com/sales/ssi</a> to see your SSI rank vs. your industry. (3) Run a self-search by typing your name + your target job title to see which page and position you appear on in recruiter results.</p>`,
+
+            `<p><strong>What Is Top 1% on LinkedIn?</strong> Your SSI dashboard shows an "Industry SSI Rank" card. If it says "Top 1%," you are in the most engaged and visible tier among all professionals in your sector. This means your content receives maximum algorithmic distribution, recruiters find you frequently in search, and inbound connection acceptance rates are highest. To reach Top 1%, you typically need an SSI score above 75, 500+ connections, regular high-engagement posts, and a fully-completed profile.</p>`,
+
+            `<p>LinkedIn's <strong>All-Star Profile Level</strong> is awarded based on filling out all the essential sections: (1) Profile photo, (2) Location, (3) Industry, (4) Education, (5) Current job with description, (6) Two past positions, (7) At least 3 skills, (8) 50+ connections. An All-Star profile receives 40x more opportunities than incomplete profiles in recruiter search results.</p>`,
+
+            `<p>Fewer than <strong>3% of LinkedIn's 1 billion users</strong> have 500+ connections. While LinkedIn stops displaying the exact count above 501 and shows "500+" to encourage connection milestones, reaching this threshold places you in the top percentile for network reach and 2nd-degree search discoverability. The "500+ connections" badge signals established authority to every recruiter and client who visits your profile.</p>`
+        ],
+        faqs: [
+            { question: 'What is LinkedIn All-Star level?', answer: 'All-Star is the highest profile completeness badge LinkedIn awards. It means all essential profile sections are complete, giving you 40x more recruiter visibility.' },
+            { question: 'How do I check my LinkedIn profile rank?', answer: 'View your Search appearances and SSI rank at linkedin.com/sales/ssi. For ATS keyword ranking, run a free scan at LinkedInRank.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'why-people-are-leaving-linkedin',
+        title: 'Why Are So Many People Leaving LinkedIn? The Real Reasons in 2026',
+        targetKeyword: 'why are so many people leaving LinkedIn',
+        metaDescription: 'The honest reasons why professionals are disengaging from LinkedIn in 2026: toxic positivity, spam, AI-generated content fatigue, and privacy concerns.',
+        toolSlug: 'linkedin-post-hook-generator',
+        toolName: 'LinkedIn Post Hook Generator',
+        h2Outline: [
+            '"Toxic Positivity" and Performative Corporate Culture',
+            'AI-Generated Content Flooding the Feed',
+            'Aggressive Sales Spam and InMail Fatigue',
+            'Privacy Concerns and Data Scraping Issues',
+            'How to Stay on LinkedIn Without Burning Out'
+        ],
+        summary: 'An honest look at why professionals are reducing LinkedIn usage or deleting accounts—and how to use the platform authentically without burning out.',
+        sections: [
+            `<p>LinkedIn's explosive growth has come with a notable backlash: a growing segment of professionals are logging off, deactivating accounts, or drastically reducing their LinkedIn activity. The reasons are both cultural and structural, and understanding them helps you use the platform more effectively—without falling into the same traps.</p>
+            <p>The core complaint: LinkedIn has evolved from a job-focused network into a performative self-promotion machine. Viral posts consisting of humble-brag narratives ("I was fired 3 times before building a $10M business") dominate feeds while genuine industry insights get buried.</p>`,
+
+            `<p>Since AI tools became mainstream in 2023–2025, the volume of AI-generated posts on LinkedIn has increased by an estimated 400%. Professionals report that the feed now feels homogenous: the same "thought leadership" frameworks, the same recycled statistics, the same carousel templates. Authenticity—the original engine of LinkedIn trust—is in short supply.</p>`,
+
+            `<p>Sales professionals increasingly abuse LinkedIn's connection and InMail systems to deliver unsolicited pitches 30 seconds after a connection request is accepted (the "pitch slap"). This behavior has degraded trust across the platform, causing many users to stop accepting connection requests altogether and disconnect from professional networking.</p>`,
+
+            `<p>LinkedIn has faced multiple data privacy controversies, including scraping disputes and opt-in confusion around AI training datasets. Some professionals—particularly in security, legal, and privacy-sensitive industries—have reduced their public profile visibility or deleted accounts entirely over concern about data usage.</p>`,
+
+            `<p>If LinkedIn feels exhausting, restructure your relationship with it: (1) Batch your time to 15 minutes per day. (2) Mute accounts that post hollow corporate content. (3) Use <a href="/blogs/linkedin-golden-hour-rule">the Golden Hour strategy</a> to make each post work harder with less frequency. (4) Focus on creating 2 high-quality posts per week rather than noisy daily updates. The professionals who master strategic, authentic LinkedIn use will dominate as the low-effort mass leaves.</p>`
+        ],
+        faqs: [
+            { question: 'Is LinkedIn dying as a platform?', answer: 'No. LinkedIn continues to grow by 2-3 million new members per week. The users leaving represent a loud minority. For B2B, recruiting, and career advancement, LinkedIn remains the dominant platform.' },
+            { question: 'What is a good alternative to LinkedIn?', answer: 'There is currently no comparable professional network at LinkedIn\'s scale. For niche communities: GitHub for tech, Behance for design, and Twitter/X for thought leadership can complement (not replace) LinkedIn.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'does-linkedin-suggest-people-who-look-at-your-profile',
+        title: 'Does LinkedIn Suggest People Who Look At Your Profile?',
+        targetKeyword: 'does LinkedIn suggest people who look at your profile',
+        metaDescription: 'Find out if LinkedIn recommends or suggests people who viewed your profile. Understand the viewer-to-connection algorithm and People You May Know logic.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'Does LinkedIn Suggest Your Profile Viewers as Connections?',
+            'How the "People You May Know" Algorithm Works',
+            'Can Someone See That You Viewed Their Profile in Suggestions?',
+            'Strategic Implications: Who to View and When',
+            'How to Use Profile Views as Inbound Signals'
+        ],
+        summary: 'The truth about LinkedIn\'s profile viewer recommendation engine: whether it suggests viewers to each other, how PYMK works, and how to use views strategically.',
+        sections: [
+            `<p><strong>Yes, LinkedIn does use profile view data as one of the many signals in its "People You May Know" (PYMK) recommendation algorithm.</strong> If you view someone's profile without connecting, LinkedIn may surface their profile in your PYMK list—and in some cases, your profile in theirs. This is not guaranteed and depends on additional matching signals like mutual connections, shared industry, and overlapping skills.</p>`,
+
+            `<p>LinkedIn's PYMK algorithm aggregates over 200 behavioral, demographic, and network signals including: mutual 1st-degree connections, shared past employers, overlapping education history, profile view events (especially bidirectional), similar job titles and industries, and engagement with common content.</p>`,
+
+            `<p>When you view someone's profile, they receive a notification ("X viewed your profile") only if you are in default or semi-private mode. If they check their viewer list and see your name, they may choose to connect with you. However, LinkedIn does NOT send an explicit "this person viewed your profile, so we're connecting you" message. The surfacing happens passively through the PYMK algorithm over the following days.</p>`,
+
+            `<p>Strategic tip: Viewing the profile of a target recruiter or hiring manager before applying to their open role signals intent to their PYMK algorithm. Combined with a personalized connection request shortly after, this two-step sequence significantly increases acceptance rates.</p>`,
+
+            `<p>When you receive a profile view from someone relevant to your career (a recruiter at your target company, a peer at a competitor, a potential client), treat it as a warm signal. Visit their profile in return, send a brief personalized connection note referencing a shared industry or interest, and open a conversation naturally. This converts passive views into active professional relationships.</p>`
+        ],
+        faqs: [
+            { question: 'Will LinkedIn tell someone if I keep viewing their profile repeatedly?', answer: 'In standard mode, yes—each visit registers in their viewer log. Enable Private Mode (Settings > Visibility > Profile viewing options) to browse anonymously.' },
+            { question: 'How do I stop LinkedIn from showing my profile in recommendations?', answer: 'Reducing your SSI engagement activity, limiting your profile views, and reducing public post engagement will lower your PYMK visibility—but there is no complete opt-out.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+
+    // ═══════════════════════════════════════════════════════════
+    // 8. LINKEDIN PREMIUM: COST, VALUE, FREE TRIAL, 3/2/1 RULE
+    // ═══════════════════════════════════════════════════════════
+    {
+        slug: 'linkedin-premium-cost-and-worth-it',
+        title: 'LinkedIn Premium Cost 2026: Is It Worth It? Free Trial & Annual Price',
+        targetKeyword: 'how much does LinkedIn Premium cost for 1 year',
+        metaDescription: 'Full breakdown of LinkedIn Premium yearly cost in 2026. Compare Career, Business, Sales Navigator pricing, free trial options, and whether it\'s worth paying.',
+        toolSlug: 'linkedin-profile-keyword-analyzer',
+        toolName: 'LinkedIn Profile Keyword Analyzer',
+        h2Outline: [
+            'LinkedIn Premium Plans: 2026 Monthly and Annual Pricing',
+            'Is LinkedIn Premium Worth It for Job Seekers in 2026?',
+            'How to Get LinkedIn Premium Free for 1 Month (Official Trial)',
+            'The Legitimate Ways to Get LinkedIn Premium for Longer at No Cost',
+            'Maximizing Free LinkedIn Without Paying a Penny'
+        ],
+        summary: 'Full 2026 pricing analysis of LinkedIn Premium Career, Business, and Sales Navigator—plus legitimate free trial methods and how to maximize free LinkedIn.',
+        sections: [
+            `<p>LinkedIn Premium is available across four tiers with the following approximate 2026 pricing:</p>
+            <ul>
+                <li><strong>Premium Career:</strong> ~$29.99–$39.99/month (billed monthly) or ~$239.88/year (saves ~$120).</li>
+                <li><strong>Premium Business:</strong> ~$59.99/month or ~$479.88/year.</li>
+                <li><strong>Sales Navigator Core:</strong> ~$79.99/month or ~$779.88/year.</li>
+                <li><strong>Recruiter Lite:</strong> ~$170/month or ~$1,679.88/year.</li>
+            </ul>
+            <p>Annual billing offers roughly 20–40% savings over monthly. Prices vary by country and occasional promotional periods.</p>`,
+
+            `<p><strong>For job seekers: LinkedIn Premium is not a necessity.</strong> Recruiters rank candidates based on keyword relevance, profile completeness, and social proof—not subscription status. Premium Career's main job-search benefits are: (1) Who viewed your profile for the last 90 days (vs. 5 on free), (2) InMail messages to recruiters without a connection, (3) "Top Applicant" badge on applications, and (4) LinkedIn Learning access. For most candidates, <a href="/#upload">optimizing your profile with LinkedInRank</a> and updating your <a href="/tools/linkedin-headline-generator">headline</a> delivers higher ROI than subscribing.</p>`,
+
+            `<p><strong>Official Free Trial:</strong> LinkedIn offers a <strong>1-month free trial</strong> of Premium Career or Premium Business to eligible accounts (usually first-time subscribers). Navigate to your LinkedIn homepage, click "Try Premium" in the left sidebar, select your plan, and enter payment details. You can cancel before the trial ends with no charge. LinkedIn also occasionally extends free trials to 2 months for promotional periods.</p>`,
+
+            `<p><strong>Legitimate longer free access methods:</strong> (1) <em>LinkedIn for Job Seekers program:</em> LinkedIn periodically offers free Premium access to displaced workers—check LinkedIn's official blog for active programs. (2) <em>University partnerships:</em> Many universities provide students free LinkedIn Premium subscriptions—check with your university's career services. (3) <em>Microsoft 365 bundles:</em> Some Microsoft 365 Business plans include LinkedIn Recruiter tools. (4) <em>Job loss/career transition support:</em> LinkedIn has announced temporary free access initiatives during economic downturns for laid-off professionals.</p>`,
+
+            `<p>To maximize free LinkedIn: (1) Use LinkedIn's native job alerts to surface relevant openings without Premium. (2) Optimize your profile completeness to All-Star level for free. (3) Run our <a href="/#upload">free LinkedInRank audit</a> for keyword-level improvements that outperform what Premium Career's applicant insights provide. (4) Use the 5 free "who viewed your profile" slots strategically by checking them daily and reaching out to relevant visitors.</p>`
+        ],
+        faqs: [
+            { question: 'Is there a way to get LinkedIn Premium for free permanently?', answer: 'Not permanently, but LinkedIn offers a 1-month free trial, university partnerships, and periodic job-seeker programs that extend free access.' },
+            { question: 'Does having LinkedIn Premium make your profile rank higher in recruiter search?', answer: 'No. Recruiter search ranking is based on keyword match, skill relevance, experience metrics, and location—not subscription status.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
+    },
+    {
+        slug: 'linkedin-321-rule-content-strategy',
+        title: 'What Is the 3/2/1 Rule on LinkedIn? Content Strategy Explained',
+        targetKeyword: '3/2/1 rule on LinkedIn',
+        metaDescription: 'Learn the LinkedIn 3/2/1 rule for content posting. How to structure your weekly publishing schedule for maximum reach and algorithmic amplification.',
+        toolSlug: 'linkedin-post-hook-generator',
+        toolName: 'LinkedIn Post Hook Generator',
+        h2Outline: [
+            'What Is the 3/2/1 Content Rule on LinkedIn?',
+            'The 3: Educational Value-First Posts',
+            'The 2: Community Engagement and Interaction Posts',
+            'The 1: Promotional or Commercial Post',
+            '3/2/1 vs. 4-1-1 Rule: Which Framework Should You Use?'
+        ],
+        summary: 'A practical breakdown of the LinkedIn 3/2/1 content rule and how it compares to the 4-1-1 framework for sustainable, high-trust personal brand building.',
+        sections: [
+            `<p>The <strong>3/2/1 Rule on LinkedIn</strong> is a content calendar framework that prescribes a specific mix of post types per week to build authentic authority without becoming a self-promotion machine. For every 6 posts you publish, the structure is: <strong>3 educational posts</strong>, <strong>2 community engagement posts</strong>, and <strong>1 promotional post</strong>.</p>`,
+
+            `<p>The <strong>3 educational posts</strong> are your core value delivery engine. These are insights, tutorials, frameworks, or industry breakdowns that teach your audience something tangible. Strong formats include step-by-step carousels, "I learned X the hard way" narrative teardowns, and numbered list posts. For maximum reach, open these posts with proven <a href="/blogs/linkedin-hooks">psychological hooks</a> that drive the "see more" tap within the critical <a href="/blogs/linkedin-golden-hour-rule">Golden Hour window</a>.</p>`,
+
+            `<p>The <strong>2 community posts</strong> are interaction-first: a genuine question asked of your audience, a response to trending industry discourse, a thoughtful engagement post tagging relevant peers, or a "what do you think about X?" poll. These posts are not designed for self-promotion—they are designed to build conversation equity and demonstrate that you are listening, not just broadcasting.</p>`,
+
+            `<p>The <strong>1 promotional post</strong> is where you convert trust into commercial intent: announcing a new service, sharing a client result, linking to your newsletter, promoting an open role, or showcasing a completed project. Because this post follows 5 consecutive value-first posts, the audience is primed to receive it without feeling sold to.</p>`,
+
+            `<p>The <strong>3/2/1 vs. 4-1-1 comparison:</strong> The <a href="/blogs/linkedin-4-1-1-content-rule">4-1-1 rule</a> prescribes 4 educational, 1 curated, 1 promotional—better for high-volume creators publishing daily. The 3/2/1 rule is better for professionals posting 3 to 5 times per week who want a stronger two-way community dynamic. Neither is strictly superior—choose based on your posting frequency and whether you prioritize reach (4-1-1) or community depth (3/2/1).</p>`
+        ],
+        faqs: [
+            { question: 'How many times per week should I post on LinkedIn?', answer: 'Most creators peak at 3 to 5 times per week. Posting daily is possible but only sustainable if you consistently produce high-quality, non-repetitive content.' },
+            { question: 'Can I apply the 3/2/1 rule if I only post twice a week?', answer: 'Yes. Scale it proportionally: for every 6 posts total (over 3 weeks at 2 posts/week), follow the 3/2/1 ratio.' }
+        ],
+        datePublished: DATE_PUBLISHED,
+        dateModified: DATE_MODIFIED
     }
 ]
+
 
 

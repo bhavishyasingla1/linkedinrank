@@ -209,8 +209,8 @@ export default function CompareToolsPage() {
                 </section>
 
                 {/* ── Call to Action ─── */}
-                <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-white text-center space-y-5 shadow-lg">
-                    <h3 className="text-[24px] sm:text-[30px] font-black tracking-tight leading-tight">
+                <div className="dark-cta p-8 sm:p-10 rounded-3xl bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-white text-center space-y-5 shadow-xl shadow-[#2f27ce]/30">
+                    <h3 className="text-[24px] sm:text-[30px] font-black tracking-tight leading-tight text-white">
                         Test Your Profile Against 30+ ATS Signals
                     </h3>
                     <p className="text-[15px] text-white/80 max-w-lg mx-auto leading-relaxed">
@@ -218,7 +218,7 @@ export default function CompareToolsPage() {
                     </p>
                     <Link
                         href="/#upload"
-                        className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-[#2f27ce] font-extrabold text-[14px] shadow-md hover:bg-[#dedcff] transition-all no-underline active:scale-95"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-[#2f27ce] font-extrabold text-[14px] shadow-md hover:bg-[#dedcff] transition-all no-underline active:scale-95 hover:-translate-y-0.5"
                     >
                         <span>Audit Your Profile for Free</span>
                         <ArrowRightIcon size={15} />

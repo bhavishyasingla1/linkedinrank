@@ -31,20 +31,22 @@ export default function RelatedPages({ currentSlug, extraLinks }: RelatedPagesPr
   }
 
   return (
-    <div className="pt-10 border-t-2 border-[#dedcff] space-y-4">
-      <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-        Related Strategy Guides
-      </p>
-      <div className="flex flex-wrap gap-2.5">
-        {links.map((item, i) => (
-          <Link
-            key={i}
-            href={item.href}
-            className="text-[13px] font-bold text-[#050315] bg-white border border-[#dedcff] px-4 py-2 rounded-full no-underline hover:border-[#2f27ce] hover:text-[#2f27ce] hover:bg-[#dedcff]/30 transition-all shadow-xs"
-          >
-            {item.label}
-          </Link>
-        ))}
+    <div className="border-t border-[#dedcff] bg-[#fbfbfe]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-4">
+        <p className="text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+          Related Strategy Guides
+        </p>
+        <div className="flex flex-wrap gap-2.5">
+          {links.map((item, i) => (
+            <Link
+              key={i}
+              href={item.href}
+              className="text-[13px] font-bold text-[#050315] bg-white border border-[#dedcff] px-4 py-2 rounded-full no-underline hover:border-[#2f27ce] hover:text-[#2f27ce] hover:bg-[#dedcff]/30 transition-all shadow-xs"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )

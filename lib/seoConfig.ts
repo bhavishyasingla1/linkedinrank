@@ -21,7 +21,7 @@ export const ALL_PAGES: PageSEO[] = [
     description: 'Complete guide to optimize your LinkedIn profile for maximum recruiter visibility. Step-by-step strategies for headline, about section, experience, keywords, and SEO.',
     primaryKeyword: 'linkedin profile optimization',
     tags: ['optimization', 'linkedin', 'profile', 'guide', 'headline', 'about', 'experience', 'skills'],
-    lastModified: '2026-03-26',
+    lastModified: '2026-08-31',
     type: 'pillar',
     label: 'Full Optimization Guide',
   },
@@ -31,7 +31,7 @@ export const ALL_PAGES: PageSEO[] = [
     description: 'Copy-paste LinkedIn headline examples for all industries. 100+ proven templates for software engineers, marketers, finance, HR, students, and job seekers.',
     primaryKeyword: 'linkedin headline examples',
     tags: ['headline', 'examples', 'templates', 'linkedin', 'recruiters', 'copy paste'],
-    lastModified: '2026-03-26',
+    lastModified: '2026-08-31',
     type: 'pillar',
     label: 'Headline Examples Master',
   },
@@ -612,6 +612,9 @@ export const TOPIC_CLUSTERS: TopicCluster[] = [
     description: 'Content creation and engagement strategies for LinkedIn',
     spokes: [
       'viral-post-formulas',
+      'linkedin-411-content-rule',
+      'linkedin-321-rule-content-strategy',
+      'linkedin-golden-hour-rule',
     ],
   },
   {
@@ -627,6 +630,69 @@ export const TOPIC_CLUSTERS: TopicCluster[] = [
     ],
   },
 ]
+
+// ─── Blog Topic Clusters (for internal linking in blog posts) ───────────────
+export const BLOG_TOPIC_CLUSTERS: Record<string, string[]> = {
+  'linkedin-basics': [
+    'what-kind-of-people-use-linkedin',
+    'how-much-does-linkedin-cost',
+    'three-benefits-of-using-linkedin',
+    'who-owns-linkedin',
+    'is-having-a-linkedin-good-idea',
+    'best-way-to-use-linkedin',
+    'is-linkedin-better-than-a-resume',
+    'why-does-everyone-use-linkedin',
+  ],
+  'linkedin-privacy': [
+    'how-to-stay-safe-on-linkedin',
+    'can-i-see-who-viewed-my-linkedin-profile',
+    'can-i-search-someone-on-linkedin-without-them-knowing',
+    'can-someone-see-if-i-viewed-linkedin-no-account',
+    'can-someone-see-if-you-search-their-name-on-linkedin',
+    'how-to-stop-linkedin-telling-someone-you-viewed-profile',
+    'how-to-browse-linkedin-privately',
+    'can-i-hide-my-linkedin-profile',
+    'can-i-block-someone-on-linkedin',
+    'is-linkedin-a-safe-platform',
+    'does-linkedin-suggest-people-who-look-at-your-profile',
+  ],
+  'linkedin-ssi': [
+    'what-is-linkedin-ssi-score',
+    'linkedin-ssi-score-explained',
+    'how-to-check-linkedin-ssi-score',
+    'how-to-increase-linkedin-ssi-score',
+    'where-to-find-linkedin-ssi-score',
+  ],
+  'linkedin-followers': [
+    'linkedin-1st-2nd-3rd-connections-explained',
+    'what-does-500-plus-mean-on-linkedin',
+    'what-happens-after-1000-followers-on-linkedin',
+    'what-happens-after-5000-followers-on-linkedin',
+    'is-10000-linkedin-followers-a-lot',
+    'how-many-gen-z-are-on-linkedin',
+    'top-linkedin-profiles',
+  ],
+  'linkedin-ranking-levels': [
+    'what-do-the-ranks-on-linkedin-mean',
+    'why-people-are-leaving-linkedin',
+    'does-linkedin-suggest-people-who-look-at-your-profile',
+    'linkedin-premium-cost-and-worth-it',
+  ],
+  'linkedin-content-strategy': [
+    'linkedin-golden-hour-rule',
+    'linkedin-411-content-rule',
+    'linkedin-321-rule-content-strategy',
+    'what-do-people-post-on-linkedin',
+  ],
+  'linkedin-hooks': [
+    'linkedin-hooks',
+    'linkedin-hooks-examples',
+    'best-linkedin-post-hooks',
+    'linkedin-carousel-hooks',
+    'linkedin-story-hooks',
+    'linkedin-hooks-templates',
+  ],
+}
 
 /**
  * Get the cluster a page belongs to.

@@ -16,8 +16,13 @@ export default function HeroUploaderStudio() {
     const [isDragging, setIsDragging] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
     const [error, setError] = useState('')
+    const [mounted, setMounted] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     useEffect(() => {
         const savedError = sessionStorage.getItem('analysisError')
@@ -296,7 +301,15 @@ export default function HeroUploaderStudio() {
                         </div>
                         <div className="text-left min-w-0">
                             <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#2f27ce] uppercase tracking-wider leading-none">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#2f27ce]" />
+                                {/* Animated ping — client-only to avoid hydration mismatch */}
+                                {mounted ? (
+                                    <span className="relative flex h-1.5 w-1.5 shrink-0">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2f27ce] opacity-60" />
+                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#2f27ce]" />
+                                    </span>
+                                ) : (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#2f27ce]" />
+                                )}
                                 Step 3
                             </span>
                             <span className="block text-sm font-bold text-[#050315] truncate mt-0.5">

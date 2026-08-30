@@ -1,18 +1,21 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ShieldCheckIcon, CheckCircleIcon, SparklesIcon } from '@/components/ui/Icons'
 
 const STAGES = [
-    { id: 1, label: 'Reading LinkedIn PDF structure', duration: 1200 },
-    { id: 2, label: 'Evaluating headline & search positioning', duration: 1400 },
-    { id: 3, label: 'Auditing experience depth & metrics', duration: 1600 },
-    { id: 4, label: 'Checking keyword discoverability & skills', duration: 1800 },
-    { id: 5, label: 'Calculating section scores and tier', duration: 2000 },
-    { id: 6, label: 'Generating personalized roadmap', duration: 700 },
+    { id: 1, label: 'Reading LinkedIn PDF structure' },
+    { id: 2, label: 'Evaluating headline & search positioning' },
+    { id: 3, label: 'Auditing experience depth & metrics' },
+    { id: 4, label: 'Checking keyword discoverability & skills' },
+    { id: 5, label: 'Calculating section scores and tier' },
+    { id: 6, label: 'Generating personalized roadmap' },
 ]
+
+// Progress thresholds per stage (0-88% is animated, 88-95% is slow crawl, 95-100 is instant on complete)
+const STAGE_PROGRESS = [0, 14, 28, 44, 58, 74, 88]
 
 import { getPendingFile, clearPendingFile } from '@/lib/uploadStore'
 
@@ -20,6 +23,8 @@ export default function LoadingAnalysisPage() {
     const [currentStage, setCurrentStage] = useState(0)
     const [progress, setProgress] = useState(0)
     const router = useRouter()
+    const routerRef = useRef(router)
+    routerRef.current = router
 
     useEffect(() => {
         let fileToUpload: File | null = getPendingFile()
@@ -43,20 +48,20 @@ export default function LoadingAnalysisPage() {
         }
 
         if (!fileToUpload) {
-            router.push('/')
+            routerRef.current.push('/')
             return
         }
 
         let mounted = true
-        let isAnalysisComplete = false
-        let analysisErrorOccurred: string | null = null
 
+        // Shared signal — API sets this when done
+        const apiSignal = { done: false, success: false, error: null as string | null }
+
+        // ── API call ─────────────────────────────────────────────────
         const analyzeFile = async () => {
             try {
-                if (!fileToUpload) throw new Error('No file provided')
-
                 const formData = new FormData()
-                formData.append('file', fileToUpload)
+                formData.append('file', fileToUpload!)
 
                 const response = await fetch('/api/analyze', {
                     method: 'POST',
@@ -70,72 +75,114 @@ export default function LoadingAnalysisPage() {
 
                 const result = await response.json()
                 const analysisData = result.data || result
-
                 sessionStorage.setItem('analysisResult', JSON.stringify(analysisData))
-                isAnalysisComplete = true
-                return true
+                apiSignal.success = true
             } catch (error: any) {
                 console.error('Analysis error:', error)
-                analysisErrorOccurred = error.message || 'Analysis failed. Please try again.'
-                isAnalysisComplete = true
-                return false
+                apiSignal.error = error.message || 'Analysis failed. Please try again.'
+            } finally {
+                apiSignal.done = true
             }
         }
 
-        const runSmoothProgress = async () => {
-            const totalStages = STAGES.length
-            const stageStepTime = 260
+        // ── Smooth progress animation ────────────────────────────────
+        //
+        // Phase 1: Animate stage-by-stage from 0% → 88%
+        //          Total duration ≈ 9s (covers most real API times)
+        //          Each stage animates smoothly with easing.
+        //
+        // Phase 2: Slow crawl from 88% → 95% at ~0.4% per second
+        //          This runs while we wait for the API to finish.
+        //
+        // Phase 3: API done → snap 95% → 100%, brief pause, redirect.
+        //
+        const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
-            for (let i = 0; i < totalStages; i++) {
-                if (!mounted || analysisErrorOccurred) return
+        const animateToValue = async (
+            from: number,
+            to: number,
+            durationMs: number,
+            onTick: (v: number) => void,
+        ) => {
+            const steps = 40
+            const stepMs = durationMs / steps
+            for (let i = 1; i <= steps; i++) {
+                if (!mounted) return
+                // Ease-in-out cubic
+                const t = i / steps
+                const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+                onTick(from + (to - from) * eased)
+                await sleep(stepMs)
+            }
+        }
+
+        const runProgress = async () => {
+            // Phase 1: Stage-by-stage animation (0 → 88%) over ~9 seconds
+            // Per stage: 9000ms / 6 stages = 1500ms each
+            const stageDuration = 1500
+
+            for (let i = 0; i < STAGES.length; i++) {
+                if (!mounted) return
+
                 setCurrentStage(i)
 
-                const startPct = (i / totalStages) * 100
-                const endPct = ((i + 1) / totalStages) * 100 - (i === totalStages - 1 ? 5 : 0)
-                const subSteps = 10
-                const subStepDuration = stageStepTime / subSteps
-                const pctIncrement = (endPct - startPct) / subSteps
+                const fromPct = STAGE_PROGRESS[i]
+                const toPct = STAGE_PROGRESS[i + 1]
 
-                for (let j = 1; j <= subSteps; j++) {
-                    if (!mounted || analysisErrorOccurred) return
-                    setProgress(startPct + pctIncrement * j)
-                    await new Promise((r) => setTimeout(r, subStepDuration))
-                }
-            }
+                await animateToValue(fromPct, toPct, stageDuration, (v) => {
+                    if (mounted) setProgress(v)
+                })
 
-            const maxWaitTime = 25000
-            const checkInterval = 200
-            let waited = 0
-
-            while (!isAnalysisComplete && waited < maxWaitTime) {
-                if (!mounted) return
-                await new Promise((r) => setTimeout(r, checkInterval))
-                waited += checkInterval
+                // If API already done before we finish stage animation, break out
+                if (apiSignal.done) break
             }
 
             if (!mounted) return
 
-            if (analysisErrorOccurred) {
-                sessionStorage.setItem('analysisError', analysisErrorOccurred)
-                router.push('/#upload')
+            // Phase 2: Slow crawl 88% → 95% while waiting for API
+            // Rate: 0.3% per second = ~23s to reach 95% (safe upper limit)
+            const crawlFrom = Math.min(progress, 88)
+            const crawlTo = 95
+            const crawlRatePerMs = 0.3 / 1000 // 0.3% per second
+
+            let crawlCurrent = crawlFrom
+            while (!apiSignal.done && mounted && crawlCurrent < crawlTo) {
+                await sleep(50)
+                crawlCurrent = Math.min(crawlCurrent + crawlRatePerMs * 50, crawlTo)
+                if (mounted) setProgress(crawlCurrent)
+            }
+
+            if (!mounted) return
+
+            // Phase 3: API done — finish up
+            if (apiSignal.error) {
+                sessionStorage.setItem('analysisError', apiSignal.error)
+                routerRef.current.push('/#upload')
                 return
             }
 
-            setProgress(100)
-            await new Promise((r) => setTimeout(r, 400))
+            // Snap to 100% with a quick smooth animation
+            const currentPct = crawlCurrent
+            await animateToValue(currentPct, 100, 400, (v) => {
+                if (mounted) setProgress(v)
+            })
+
+            // Brief hold at 100%
+            await sleep(350)
 
             if (mounted) {
-                router.push('/results')
+                routerRef.current.push('/results')
             }
         }
 
         analyzeFile()
-        runSmoothProgress()
+        runProgress()
 
         return () => {
             mounted = false
         }
-    }, [router])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <main className="min-h-screen bg-[#fbfbfe] text-[#050315] flex items-center justify-center p-4 sm:p-6 aside-hero-glow">
@@ -172,7 +219,7 @@ export default function LoadingAnalysisPage() {
                     {/* Progress Track */}
                     <div className="h-3 bg-[#dedcff]/50 rounded-full overflow-hidden p-0.5 border border-[#dedcff]">
                         <div
-                            className="h-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] rounded-full transition-all duration-150 ease-out shadow-sm shadow-[#2f27ce]/30"
+                            className="h-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] rounded-full shadow-sm shadow-[#2f27ce]/30 transition-none"
                             style={{ width: `${progress}%` }}
                         />
                     </div>

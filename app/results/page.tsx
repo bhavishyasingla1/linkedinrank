@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
@@ -148,54 +148,47 @@ export default function ResultsPage() {
     const [promptMode, setPromptMode] = useState<'full' | 'quick'>('full')
     const [promptCopied, setPromptCopied] = useState(false)
     const router = useRouter()
+    const routerRef = useRef(router)
+    // Keep routerRef current without adding router to effect deps
+    routerRef.current = router
 
     useEffect(() => {
-        const stored = sessionStorage.getItem('analysisResult')
-        if (!stored) {
-            router.push('/')
-            return
-        }
+        let cancelled = false
         try {
-            setAnalysis(JSON.parse(stored))
+            const stored = sessionStorage.getItem('analysisResult')
+            if (!stored) {
+                routerRef.current.push('/')
+                return
+            }
+            const parsed = JSON.parse(stored)
+            if (!cancelled) setAnalysis(parsed)
         } catch {
-            router.push('/')
+            routerRef.current.push('/')
         }
-    }, [router])
+        return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) // Run once on mount only — router is stable via ref
 
-    const getActivePrompt = () => {
+    const getActivePrompt = useCallback(() => {
         if (!analysis) return ''
         return promptMode === 'full' ? buildFullAIPrompt(analysis) : buildQuickAIPrompt(analysis)
-    }
+    }, [analysis, promptMode])
 
-    const handleCopyPrompt = () => {
+    const handleCopyPrompt = useCallback(() => {
         if (!analysis) return
         const promptText = getActivePrompt()
         navigator.clipboard.writeText(promptText)
         setPromptCopied(true)
         setTimeout(() => setPromptCopied(false), 2500)
-    }
+    }, [analysis, getActivePrompt])
 
-    const handlePrint = () => {
+    const handlePrint = useCallback(() => {
         window.print()
-    }
+    }, [])
 
-    if (!analysis) {
-        return (
-            <div className="min-h-screen bg-[#fbfbfe] flex items-center justify-center">
-                <div className="w-9 h-9 rounded-full border-3 border-[#dedcff] border-t-[#2f27ce] animate-spin" />
-            </div>
-        )
-    }
-
-    const userName = analysis.profile?.name || 'LinkedIn User'
-    const careerStage = (analysis as any).careerStage || ''
-    const archetype = (analysis as any).archetype?.label || (analysis as any).archetype?.description || ''
-
-    const profileHeadline = analysis.profile?.headline || ''
-    const profileAbout = analysis.profile?.about || ''
-    const skillsList = analysis.profile?.skills || (analysis as any).profile?.skills || []
-
+    // ── MUST be before early return to satisfy Rules of Hooks ──────
     const headlineRewritesList = useMemo(() => {
+        if (!analysis) return []
         if (analysis.headlineRewrites && analysis.headlineRewrites.length > 0) {
             return analysis.headlineRewrites
         }
@@ -220,6 +213,22 @@ export default function ResultsPage() {
         }
         return []
     }, [analysis])
+
+    if (!analysis) {
+        return (
+            <div className="min-h-screen bg-[#fbfbfe] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full border-3 border-[#dedcff] border-t-[#2f27ce] animate-spin" />
+            </div>
+        )
+    }
+
+    const userName = analysis.profile?.name || 'LinkedIn User'
+    const careerStage = (analysis as any).careerStage || ''
+    const archetype = (analysis as any).archetype?.label || (analysis as any).archetype?.description || ''
+
+    const profileHeadline = analysis.profile?.headline || ''
+    const profileAbout = analysis.profile?.about || ''
+    const skillsList = analysis.profile?.skills || (analysis as any).profile?.skills || []
 
     return (
         <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">

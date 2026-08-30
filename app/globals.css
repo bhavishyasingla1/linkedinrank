@@ -127,6 +127,46 @@ a {
   box-shadow: 0 20px 40px -10px rgba(47, 39, 206, 0.08), 0 0 0 1px rgba(67, 59, 255, 0.3);
 }
 
+/* ── Section Palette Utilities ────────────────────────────────────
+   Use these on <section> elements for consistent color rhythm:
+   .section-light   → #fbfbfe base (hero, tools, algorithm, FAQ)
+   .section-tinted  → #dedcff/30 tint (stats, benchmark, features, articles)
+   .section-primary → #2f27ce dark (bottom CTA hero)
+──────────────────────────────────────────────────────────────── */
+.section-light {
+  background: #fbfbfe;
+}
+
+.section-tinted {
+  background: linear-gradient(180deg, rgba(222, 220, 255, 0.18) 0%, rgba(222, 220, 255, 0.30) 50%, rgba(222, 220, 255, 0.18) 100%);
+}
+
+.section-primary {
+  background: linear-gradient(135deg, #050315 0%, #231c9e 60%, #2f27ce 100%);
+  color: #fbfbfe;
+}
+
+.section-primary h2,
+.section-primary h3,
+.section-primary p {
+  color: #fbfbfe;
+}
+
+/* ── Dark gradient CTA boxes ────────────────────────────────────────
+   Headings inside any bg-[#050315] or from-[#2f27ce] gradient container
+   must be white — globals.css h1-h6 rule overrides Tailwind's
+   inherited text-white, so we need explicit reset here.
+──────────────────────────────────────────────────────────────── */
+.dark-cta h1, .dark-cta h2, .dark-cta h3,
+.dark-cta h4, .dark-cta h5, .dark-cta h6 {
+  color: #fbfbfe;
+}
+
+/* Dividers between sections */
+.section-divider {
+  border-top: 1px solid rgba(222, 220, 255, 0.7);
+}
+
 /* Cards & Surfaces */
 .card {
   background: #ffffff;

@@ -38,6 +38,13 @@ export async function generateMetadata(): Promise<Metadata> {
             'linkedin recruiter search ranking', 'linkedin social selling index',
             'free linkedin analysis', 'linkedin profile review', 'linkedin optimization tool',
             'linkedin profile audit', 'linkedin profile grader',
+            'linkedin ssi score', 'what is linkedin ssi score', 'linkedin ssi checker',
+            'linkedin premium cost', 'is linkedin premium worth it', 'linkedin golden hour rule',
+            'linkedin 4-1-1 rule', 'linkedin 321 rule', 'what do the ranks on linkedin mean',
+            'linkedin all star profile', 'linkedin top 1 percent', '500 connections linkedin',
+            'linkedin followers', 'linkedin privacy', 'browse linkedin anonymously',
+            'linkedin headline generator', 'linkedin about section generator',
+            'how much does linkedin cost', 'who owns linkedin', 'linkedin safety',
         ],
         authors: [{ name: 'LinkedInRank', url: 'https://linkedinrank.com' }],
         creator: 'LinkedInRank',
@@ -135,6 +142,15 @@ const jsonLd = {
                 'LinkedIn search ranking',
                 'LinkedIn recruiter visibility',
                 'LinkedIn algorithm ranking factors',
+                'LinkedIn SSI score',
+                'LinkedIn Social Selling Index',
+                'LinkedIn All-Star profile',
+                'LinkedIn content strategy',
+                'LinkedIn golden hour rule',
+                'LinkedIn premium pricing',
+                'LinkedIn privacy settings',
+                'LinkedIn profile analytics',
+                'LinkedIn follower growth',
             ],
         },
         {
@@ -200,7 +216,8 @@ export default function RootLayout({
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
                 <meta name="format-detection" content="telephone=no" />
-
+                {/* LLM context file for AI crawlers */}
+                <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llm.txt" />
                 <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com" />
             </head>
             <body className={inter.className} suppressHydrationWarning>
