@@ -1,9 +1,8 @@
-'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import { LinkedInIcon, SparklesIcon } from '@/components/ui/Icons'
 import GooglePreferredSource from '@/components/GooglePreferredSource'
+import NewsletterCard from '@/components/NewsletterCard'
 
 const CURRENT_YEAR = 2026
 
@@ -52,8 +51,11 @@ const LEGAL_LINKS = [
 
 export default function FooterLayout() {
     return (
-        <footer className="bg-[#fbfbfe] text-[#050315] border-t border-[#dedcff] pt-16 pb-12 transition-colors">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
+        <footer className="bg-[#fbfbfe] text-[#050315] border-t border-[#dedcff] pt-12 pb-12 transition-colors">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
+                {/* ── Featured LinkedIn Newsletter Strip ───────── */}
+                <NewsletterCard variant="footer" />
+
                 {/* 5-Column Minimalist Layout */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6 pb-12 border-b border-[#dedcff]/70">
                     {/* Brand Column (Spans 2 on large screens) */}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import RelatedPages from '@/components/RelatedPages'
+import NewsletterCard from '@/components/NewsletterCard'
 import { SparklesIcon, ShieldCheckIcon, ArrowRightIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
@@ -150,6 +151,8 @@ export default function AboutPage() {
                             </a>
                         </div>
                     </div>
+
+                    <NewsletterCard variant="banner" />
                 </section>
 
                 {/* CTA */}

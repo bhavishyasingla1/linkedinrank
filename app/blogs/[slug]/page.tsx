@@ -7,6 +7,7 @@ import { breadcrumbJsonLd, articleJsonLd, faqJsonLd } from '@/lib/jsonLd'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
 import GooglePreferredSource from '@/components/GooglePreferredSource'
+import NewsletterCard from '@/components/NewsletterCard'
 import { ArrowRightIcon, ChevronDownIcon, ClockIcon, SparklesIcon, ShieldCheckIcon, ToolIcon } from '@/components/ui/Icons'
 
 export function generateStaticParams() {
@@ -314,7 +315,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             </div>
                         )}
 
-                        {/* 2. Google Preferred Source Card */}
+                        {/* 2. AI This Week Newsletter Card */}
+                        <NewsletterCard variant="card" />
+
+                        {/* 3. Google Preferred Source Card */}
                         <GooglePreferredSource variant="card" />
 
                         {/* 3. Full Profile Score CTA (Radiant Card) */}
