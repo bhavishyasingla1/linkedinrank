@@ -97,85 +97,85 @@ const ALL_12_TOOLS = [
     {
         name: 'Headline Generator',
         slug: 'linkedin-headline-generator',
-        tag: 'Search Visibility',
-        description: 'Generate 5 recruiter-indexed headlines tailored to your industry, skills, and seniority level.',
+        tag: 'Search SEO',
+        description: 'Recruiter-ranked search headlines',
         icon: <WandIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'About Section Generator',
         slug: 'linkedin-about-generator',
         tag: 'Storytelling',
-        description: 'Craft authentic, high-converting About sections in 3 distinct tones with natural keyword integration.',
+        description: 'Authentic 3-tone story crafter',
         icon: <UserCheckIcon size={18} className="text-[#2f27ce]" />,
     },
     {
-        name: 'Experience Bullet Rewriter',
+        name: 'Experience Rewriter',
         slug: 'linkedin-experience-generator',
-        tag: 'ATS Optimization',
-        description: 'Transform passive job responsibilities into quantified achievement bullets with active power verbs.',
+        tag: 'ATS Metric',
+        description: 'Quantified CAR impact bullets',
         icon: <FlameIcon size={18} className="text-[#2f27ce]" />,
     },
     {
-        name: 'Profile Photo Ring Creator',
+        name: 'Profile Photo Ring',
         slug: 'linkedin-profile-photo-ring',
         tag: 'Visual Hook',
-        description: 'Add high-contrast gradient rings, Open-To-Work rings, and hiring borders to your avatar.',
+        description: 'Custom high-contrast avatar rings',
         icon: <CameraIcon size={18} className="text-[#2f27ce]" />,
     },
     {
-        name: 'Profile Keyword Analyzer',
+        name: 'Keyword Analyzer',
         slug: 'linkedin-profile-keyword-analyzer',
         tag: 'Recruiter SEO',
-        description: 'Audit keyword discoverability, recruiter search density, and missing high-demand industry skills.',
+        description: 'Search density & ATS skill audit',
         icon: <TrendingUpIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'Post Idea Generator',
         slug: 'linkedin-post-idea-generator',
         tag: 'Viral Reach',
-        description: 'Generate 10 algorithm-optimized post topics based on trending industry themes and audience pain points.',
+        description: 'Algorithm-tested topic ideas',
         icon: <LightbulbIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'Story to Post Converter',
         slug: 'linkedin-story-to-post-converter',
-        tag: 'Content Writing',
-        description: 'Turn rough notes or career milestones into engaging, formatted LinkedIn posts with punchy pacing.',
+        tag: 'Writing',
+        description: 'Raw notes to structured posts',
         icon: <PenLineIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'Post Hook Generator',
         slug: 'linkedin-post-hook-generator',
-        tag: 'Viral Reach',
-        description: 'Generate 6 scroll-stopping opening hooks built on pattern interrupts and curiosity gaps.',
-        icon: <SparklesIcon size={18} className="text-[#2f27ce]" />,
+        tag: 'Viral Hook',
+        description: 'Scroll-stopping opening lines',
+        icon: <ZapIcon size={18} className="text-[#2f27ce]" />,
     },
     {
-        name: 'Content Pillar Planner',
+        name: 'Content Planner',
         slug: 'linkedin-content-planner',
-        tag: 'Thought Leadership',
-        description: 'Build a structured weekly posting calendar balancing industry insights and growth lessons.',
+        tag: 'Strategy',
+        description: 'Weekly posting calendar planner',
         icon: <LayersIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'Smart Comment Generator',
         slug: 'linkedin-comment-generator',
         tag: 'Engagement',
-        description: 'Generate thoughtful, value-add comments that build authority and attract profile views.',
+        description: 'High-authority discussion replies',
         icon: <MessageSquareIcon size={18} className="text-[#2f27ce]" />,
     },
     {
         name: 'Connection Note Crafter',
         slug: 'linkedin-connection-message-generator',
         tag: 'Outreach',
-        description: 'Write personalized invitations for 14 scenarios strictly under LinkedIn’s 300 character cutoff.',
+        description: 'Custom notes under 300 characters',
         icon: <UserPlusIcon size={18} className="text-[#2f27ce]" />,
     },
     {
-        name: 'Profile QR Code Generator',
+        name: 'Profile QR Generator',
         slug: 'linkedin-qr-code-generator',
-        tag: 'Brand Assets',
-        description: 'Create high-resolution vector and PNG QR codes for resumes, business cards, and slide decks.',
+        tag: 'Brand Asset',
+        description: 'Vector & PNG resume QR badges',
         icon: <QrCodeIcon size={18} className="text-[#2f27ce]" />,
     },
 ]
@@ -555,32 +555,35 @@ export default function HomePage() {
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
                             {ALL_12_TOOLS.map((tool) => (
                                 <Link
                                     key={tool.slug}
                                     href={`/tools/${tool.slug}`}
-                                    className="p-4.5 sm:p-5 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] aside-card-shadow aside-card-hover flex flex-col justify-between no-underline group shimmer-container transition-all duration-300"
+                                    className="p-4 rounded-2xl bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:shadow-md hover:shadow-[#2f27ce]/5 aside-card-hover flex flex-col justify-between no-underline group transition-all duration-200"
                                 >
-                                    <div className="space-y-2">
+                                    <div className="space-y-2.5">
                                         <div className="flex items-center justify-between">
-                                            <span className="inline-flex items-center justify-center text-[10.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3 py-1 rounded-full text-center leading-none shadow-2xs">
-                                                {tool.tag}
-                                            </span>
-                                            <div className="w-7 h-7 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <div className="w-8 h-8 rounded-xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center group-hover:scale-105 transition-transform">
                                                 {tool.icon}
                                             </div>
+                                            <span className="text-[10px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff]/60 px-2.5 py-0.5 rounded-full leading-none">
+                                                {tool.tag}
+                                            </span>
                                         </div>
-                                        <h3 className="text-[14.5px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
-                                            {tool.name}
-                                        </h3>
-                                        <p className="text-[12px] text-[#050315]/70 leading-relaxed line-clamp-2">
-                                            {tool.description}
-                                        </p>
+
+                                        <div className="space-y-0.5 pt-0.5">
+                                            <h3 className="text-[14px] font-bold text-[#050315] group-hover:text-[#2f27ce] transition-colors leading-snug">
+                                                {tool.name}
+                                            </h3>
+                                            <p className="text-[12px] text-[#050315]/65 leading-normal">
+                                                {tool.description}
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div className="pt-2.5 border-t border-[#dedcff]/70 mt-2.5 flex items-center justify-between text-[12px] font-bold text-[#2f27ce]">
-                                        <span>Use Free Tool</span>
+                                    <div className="pt-2.5 border-t border-[#dedcff]/50 mt-2.5 flex items-center justify-between text-[11.5px] font-bold text-[#2f27ce]">
+                                        <span>Open Tool</span>
                                         <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                                     </div>
                                 </Link>
