@@ -18,20 +18,20 @@ import {
 } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
-    title: '12 Free LinkedIn Tools & Generators (2026)',
-    description: 'Free AI-powered LinkedIn tools: headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
+    title: '13 Free LinkedIn Tools & Generators (2026)',
+    description: 'Free AI-powered LinkedIn tools: ATS resume maker, headline generator, about section writer, keyword analyzer, post ideas, content planner, and more. No signup required.',
     alternates: { canonical: `${SITE_URL}/tools` },
     openGraph: {
-        title: '12 Free LinkedIn Tools & Generators (2026)',
-        description: 'Free AI-powered LinkedIn tools for profile optimization, content creation, and networking.',
+        title: '13 Free LinkedIn Tools & Generators (2026)',
+        description: 'Free AI-powered LinkedIn tools for profile optimization, ATS resume generation, content creation, and networking.',
         url: `${SITE_URL}/tools`,
         siteName: SITE_NAME,
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: '12 Free LinkedIn Tools & Generators (2026)',
-        description: 'Free AI-powered LinkedIn tools for profile optimization and content creation.',
+        title: '13 Free LinkedIn Tools & Generators (2026)',
+        description: 'Free AI-powered LinkedIn tools for profile optimization and ATS resume creation.',
     },
 }
 

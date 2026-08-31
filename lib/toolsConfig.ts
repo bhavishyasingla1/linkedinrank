@@ -37,6 +37,7 @@ export const TOOL_SLUGS: Record<string, string> = {
     comments: 'linkedin-comment-generator',
     messages: 'linkedin-connection-message-generator',
     qrcode: 'linkedin-qr-code-generator',
+    atsresume: 'linkedin-pdf-to-ats-resume-maker',
 }
 
 export const SLUG_TO_TOOL_ID: Record<string, string> = Object.fromEntries(
@@ -329,5 +330,36 @@ export const ALL_TOOLS: ToolMeta[] = [
             { question: 'Where should I use my LinkedIn QR code?', answer: 'Business cards, conference badges, presentation slides, email signatures, resumes, and portfolio websites.' },
         ],
         relatedTools: ['linkedin-profile-photo-ring', 'linkedin-headline-generator'],
+    },
+    {
+        id: 'atsresume', slug: 'linkedin-pdf-to-ats-resume-maker', name: 'LinkedIn PDF to Professional Resume Maker',
+        shortDesc: 'Convert your LinkedIn PDF export into a clean, professional single-column resume for free.',
+        seoTitle: 'LinkedIn PDF to Professional Resume Maker | Free Resume Generator',
+        metaDescription: 'Convert your LinkedIn profile PDF into a clean, single-column professional resume in seconds. Easily edit details and export directly to PDF, Word, and text for free.',
+        h1: 'LinkedIn PDF to Professional Resume Maker',
+        heroText: 'Transform your LinkedIn PDF export into a clean, recruiter-ready professional resume for free. Auto-fill your details, customize your experience, and export high-contrast PDF, Word, or text files instantly.',
+        primaryKeyword: 'LinkedIn PDF to resume maker',
+        secondaryKeywords: [
+            'LinkedIn to resume',
+            'free resume generator',
+            'LinkedIn profile to resume',
+            'professional resume builder',
+            'convert LinkedIn PDF to resume',
+            'single column resume'
+        ],
+        category: 'profile-optimization', categoryLabel: 'Profile Optimization', tag: '100% Free',
+        features: [
+            { title: 'Single-Column Clean Layout', description: 'Zero tables, zero sidebars, and clean structure formatted for recruiters and HR portals.' },
+            { title: 'Instant LinkedIn PDF Parsing', description: 'Upload your downloaded LinkedIn profile PDF to instantly extract experience, education, skills, and summary.' },
+            { title: 'On-Page Live Editing', description: 'Easily update your city, job titles, accomplishments, and contact details directly on the page.' },
+            { title: 'Multi-Format Free Export', description: 'Download clean selectable-text PDF, Microsoft Word document (.doc), or plain text (.txt) for free.' },
+        ],
+        faqs: [
+            { question: 'How do I convert my LinkedIn profile PDF into a professional resume?', answer: 'Download your LinkedIn profile as a PDF by clicking "More" > "Save to PDF" on your LinkedIn profile page. Then upload the file here. The tool automatically maps your experience into standard professional formatting ready to download.' },
+            { question: 'Is this resume maker completely free?', answer: 'Yes, 100% free with no signup, watermarks, or hidden paywalls.' },
+            { question: 'Can I edit my city and contact details before downloading?', answer: 'Yes. All fields including your full name, title, city/location, email, phone, and work history can be edited directly on the page.' },
+            { question: 'Should I export my resume as PDF or Word?', answer: 'Both formats are supported. Our PDF export uses clean, vector text without embedded images or tables. You can also export as plain text or Word (.doc).' },
+        ],
+        relatedTools: ['linkedin-experience-generator', 'linkedin-about-generator', 'linkedin-profile-keyword-analyzer', 'linkedin-headline-generator'],
     },
 ]

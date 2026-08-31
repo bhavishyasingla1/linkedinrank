@@ -797,6 +797,8 @@ export function ToolIcon({ id, size = 20, className = '', ...props }: { id: stri
             return <UserPlusIcon size={size} className={className} {...props} />
         case 'qrcode':
             return <QrCodeIcon size={size} className={className} {...props} />
+        case 'atsresume':
+            return <FileTextIcon size={size} className={className} {...props} />
         default:
             return <SparklesIcon size={size} className={className} {...props} />
     }
@@ -870,4 +872,89 @@ export function MailIcon({ size = 16, className = '', ...props }: IconProps) {
         </svg>
     )
 }
+
+export function TerminalIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <polyline points="4 17 10 11 4 5" />
+            <line x1="12" y1="19" x2="20" y2="19" />
+        </svg>
+    )
+}
+
+export function DownloadIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+    )
+}
+
+export function PrinterIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect width="12" height="8" x="6" y="14" />
+        </svg>
+    )
+}
+
+export function FileCodeIcon({ size = 16, className = '', ...props }: IconProps) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={className}
+            {...props}
+        >
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+            <path d="m10 13-2 2 2 2" />
+            <path d="m14 17 2-2-2-2" />
+        </svg>
+    )
+}
+
 

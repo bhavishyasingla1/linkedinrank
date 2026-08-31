@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ShieldCheckIcon, CheckCircleIcon, SparklesIcon } from '@/components/ui/Icons'
+import { getPendingFile } from '@/lib/uploadStore'
+import { CheckIcon, ShieldCheckIcon, SparklesIcon } from '@/components/ui/Icons'
 
 const STAGES = [
     { id: 1, label: 'Reading LinkedIn PDF structure' },
@@ -14,10 +15,8 @@ const STAGES = [
     { id: 6, label: 'Generating personalized roadmap' },
 ]
 
-// Progress thresholds per stage (0-88% is animated, 88-95% is slow crawl, 95-100 is instant on complete)
-const STAGE_PROGRESS = [0, 14, 28, 44, 58, 74, 88]
-
-import { getPendingFile, clearPendingFile } from '@/lib/uploadStore'
+// Progress thresholds per stage (0-88% is animated across ~4 seconds to match AI speed)
+const STAGE_PROGRESS = [0, 15, 30, 48, 64, 78, 90]
 
 export default function LoadingAnalysisPage() {
     const [currentStage, setCurrentStage] = useState(0)
@@ -85,17 +84,7 @@ export default function LoadingAnalysisPage() {
             }
         }
 
-        // ── Smooth progress animation ────────────────────────────────
-        //
-        // Phase 1: Animate stage-by-stage from 0% → 88%
-        //          Total duration ≈ 9s (covers most real API times)
-        //          Each stage animates smoothly with easing.
-        //
-        // Phase 2: Slow crawl from 88% → 95% at ~0.4% per second
-        //          This runs while we wait for the API to finish.
-        //
-        // Phase 3: API done → snap 95% → 100%, brief pause, redirect.
-        //
+        // ── Smooth progress animation calibrated for 4-5s AI response ──
         const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
         const animateToValue = async (
@@ -104,11 +93,10 @@ export default function LoadingAnalysisPage() {
             durationMs: number,
             onTick: (v: number) => void,
         ) => {
-            const steps = 40
+            const steps = 25
             const stepMs = durationMs / steps
             for (let i = 1; i <= steps; i++) {
                 if (!mounted) return
-                // Ease-in-out cubic
                 const t = i / steps
                 const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
                 onTick(from + (to - from) * eased)
@@ -117,9 +105,8 @@ export default function LoadingAnalysisPage() {
         }
 
         const runProgress = async () => {
-            // Phase 1: Stage-by-stage animation (0 → 88%) over ~9 seconds
-            // Per stage: 9000ms / 6 stages = 1500ms each
-            const stageDuration = 1500
+            // Phase 1: Dynamic stage-by-stage progression (~680ms per stage = ~4.0s total)
+            const stageDuration = 680
 
             for (let i = 0; i < STAGES.length; i++) {
                 if (!mounted) return
@@ -133,22 +120,20 @@ export default function LoadingAnalysisPage() {
                     if (mounted) setProgress(v)
                 })
 
-                // If API already done before we finish stage animation, break out
-                if (apiSignal.done) break
+                if (apiSignal.done && i >= 4) break
             }
 
             if (!mounted) return
 
-            // Phase 2: Slow crawl 88% → 95% while waiting for API
-            // Rate: 0.3% per second = ~23s to reach 95% (safe upper limit)
-            const crawlFrom = Math.min(progress, 88)
-            const crawlTo = 95
-            const crawlRatePerMs = 0.3 / 1000 // 0.3% per second
+            // Phase 2: If API is still processing, gently crawl 90% → 96%
+            const crawlFrom = Math.min(progress, 90)
+            const crawlTo = 96
+            const crawlRatePerMs = 1.5 / 1000
 
             let crawlCurrent = crawlFrom
             while (!apiSignal.done && mounted && crawlCurrent < crawlTo) {
-                await sleep(50)
-                crawlCurrent = Math.min(crawlCurrent + crawlRatePerMs * 50, crawlTo)
+                await sleep(40)
+                crawlCurrent = Math.min(crawlCurrent + crawlRatePerMs * 40, crawlTo)
                 if (mounted) setProgress(crawlCurrent)
             }
 
@@ -161,14 +146,15 @@ export default function LoadingAnalysisPage() {
                 return
             }
 
-            // Snap to 100% with a quick smooth animation
-            const currentPct = crawlCurrent
-            await animateToValue(currentPct, 100, 400, (v) => {
+            // Set final stage active and snap to 100%
+            setCurrentStage(STAGES.length - 1)
+            const currentPct = Math.max(crawlCurrent, 92)
+            await animateToValue(currentPct, 100, 260, (v) => {
                 if (mounted) setProgress(v)
             })
 
             // Brief hold at 100%
-            await sleep(350)
+            await sleep(220)
 
             if (mounted) {
                 routerRef.current.push('/results')
@@ -185,47 +171,48 @@ export default function LoadingAnalysisPage() {
     }, [])
 
     return (
-        <main className="min-h-screen bg-[#fbfbfe] text-[#050315] flex items-center justify-center p-4 sm:p-6 aside-hero-glow">
+        <main className="min-h-screen bg-[#fbfbfe] text-[#050315] flex items-center justify-center p-4 sm:p-6 select-none aside-hero-glow">
             <div className="max-w-md w-full">
-                {/* Brand Logo */}
-                <div className="text-center mb-8 space-y-2">
+                {/* Brand Logo Header */}
+                <div className="text-center mb-6 sm:mb-8 space-y-2.5 sm:space-y-3">
                     <Link
                         href="/"
-                        className="font-bold text-[22px] tracking-tight text-[#050315] no-underline inline-flex items-center gap-2"
+                        className="font-extrabold text-[20px] sm:text-[26px] tracking-tight text-[#050315] no-underline inline-flex items-center gap-2 sm:gap-2.5"
                     >
-                        <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-[#fbfbfe] flex items-center justify-center shadow-xs">
+                        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-white flex items-center justify-center shadow-xs shrink-0">
                             <SparklesIcon size={15} />
                         </span>
-                        <span className="font-extrabold tracking-tight">
+                        <span>
                             LinkedIn<span className="text-[#2f27ce]">Rank</span>
                         </span>
                     </Link>
-                    <p className="text-[13px] font-medium text-[#050315]/65">
+                    <p className="text-[12.5px] sm:text-[14px] text-[#050315]/75 max-w-sm mx-auto leading-relaxed px-2">
                         Evaluating profile against 30+ recruiter search signals
                     </p>
                 </div>
 
-                {/* Progress Card */}
-                <div className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 sm:p-8 aside-card-shadow space-y-6">
-                    <div className="text-center space-y-1">
-                        <span className="text-[44px] font-black text-[#050315] tabular-nums tracking-tight">
+                {/* Main Progress Card */}
+                <div className="bg-white border-2 border-[#dedcff] rounded-2xl sm:rounded-3xl p-5 sm:p-9 aside-card-shadow space-y-5 sm:space-y-6">
+                    {/* Big Centered Metric */}
+                    <div className="text-center space-y-1.5 sm:space-y-2">
+                        <span className="text-[48px] sm:text-[64px] font-black text-[#2f27ce] tracking-tight tabular-nums leading-none block">
                             {Math.round(progress)}%
                         </span>
-                        <p className="text-[13.5px] font-bold text-[#2f27ce] animate-fade-in" key={currentStage}>
+                        <div className="text-[13px] sm:text-[15px] font-extrabold text-[#050315] animate-fade-in truncate px-1" key={currentStage}>
                             {STAGES[currentStage]?.label}
-                        </p>
+                        </div>
                     </div>
 
-                    {/* Progress Track */}
-                    <div className="h-3 bg-[#dedcff]/50 rounded-full overflow-hidden p-0.5 border border-[#dedcff]">
+                    {/* Progress Bar */}
+                    <div className="h-2.5 sm:h-3 bg-[#dedcff]/50 rounded-full p-0.5 border border-[#dedcff] overflow-hidden">
                         <div
-                            className="h-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] rounded-full shadow-sm shadow-[#2f27ce]/30 transition-none"
+                            className="h-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] rounded-full shadow-xs transition-none"
                             style={{ width: `${progress}%` }}
                         />
                     </div>
 
                     {/* Stage Checklist */}
-                    <div className="space-y-2.5 pt-4 border-t border-[#dedcff]">
+                    <div className="space-y-2.5 sm:space-y-3 pt-3.5 sm:pt-4 border-t border-[#dedcff]/70">
                         {STAGES.map((stage, index) => {
                             const isDone = index < currentStage
                             const isCurrent = index === currentStage
@@ -233,7 +220,7 @@ export default function LoadingAnalysisPage() {
                             return (
                                 <div
                                     key={stage.id}
-                                    className={`flex items-center gap-3 text-[12.5px] transition-colors ${
+                                    className={`flex items-center gap-2.5 sm:gap-3 text-[12.5px] sm:text-[14px] transition-colors ${
                                         isDone
                                             ? 'text-[#050315]/60'
                                             : isCurrent
@@ -242,18 +229,18 @@ export default function LoadingAnalysisPage() {
                                     }`}
                                 >
                                     <div
-                                        className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border ${
+                                        className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${
                                             isDone
                                                 ? 'bg-[#dedcff] border-[#dedcff] text-[#2f27ce]'
                                                 : isCurrent
-                                                ? 'bg-[#2f27ce] border-[#2f27ce] text-white shadow-xs'
+                                                ? 'bg-[#2f27ce] border-[#2f27ce] text-white shadow-2xs'
                                                 : 'bg-white border-[#dedcff]'
                                         }`}
                                     >
-                                        {isDone && <CheckCircleIcon size={12} />}
+                                        {isDone && <CheckIcon size={12} />}
                                         {isCurrent && <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
                                     </div>
-                                    <span>{stage.label}</span>
+                                    <span className="leading-snug flex-1">{stage.label}</span>
                                 </div>
                             )
                         })}
@@ -261,8 +248,8 @@ export default function LoadingAnalysisPage() {
                 </div>
 
                 {/* Privacy Badge */}
-                <div className="flex items-center justify-center gap-1.5 mt-6 text-[12.5px] text-[#050315]/60 font-medium">
-                    <ShieldCheckIcon size={14} className="text-[#2f27ce]" />
+                <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-5 sm:mt-6 text-[11.5px] sm:text-[13px] text-[#050315]/65 font-medium text-center px-2">
+                    <ShieldCheckIcon size={14} className="text-[#2f27ce] shrink-0" />
                     <span>Processed in temporary memory • Zero persistent storage</span>
                 </div>
             </div>

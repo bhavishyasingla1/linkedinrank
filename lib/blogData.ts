@@ -1,5 +1,9 @@
 import { HOOK_CLUSTER_ARTICLES } from './hookArticlesData'
 import { LINKEDIN_FAQ_ARTICLES } from './linkedinFaqArticlesData'
+import { PROFILE_SCORE_ARTICLES } from './profileScoreArticlesData'
+import { LINKEDIN_SEO_ARTICLES } from './linkedinSeoArticlesData'
+import { LINKEDIN_QUESTIONS_ARTICLES } from './linkedinQuestionsArticlesData'
+import { BRANDING_JOB_SEARCH_ARTICLES } from './brandingAndJobSearchArticlesData'
 
 export interface BlogPost {
     slug: string
@@ -20,6 +24,22 @@ const DATE_PUBLISHED = '2026-02-01'
 const DATE_MODIFIED = '2026-08-31'
 
 export const ALL_BLOG_POSTS: BlogPost[] = [
+    // ═══════════════════════════════════════════════════════════
+    // PERSONAL BRANDING & JOB SEARCH STRATEGY CLUSTER (20)
+    // ═══════════════════════════════════════════════════════════
+    ...BRANDING_JOB_SEARCH_ARTICLES,
+    // ═══════════════════════════════════════════════════════════
+    // LINKEDIN PROFILE SCORE & RANKING TOPIC CLUSTER (20)
+    // ═══════════════════════════════════════════════════════════
+    ...PROFILE_SCORE_ARTICLES,
+    // ═══════════════════════════════════════════════════════════
+    // LINKEDIN SEO & KEYWORDS CLUSTER (16)
+    // ═══════════════════════════════════════════════════════════
+    ...LINKEDIN_SEO_ARTICLES,
+    // ═══════════════════════════════════════════════════════════
+    // HIGH-INTENT SPECIFIC QUESTIONS CLUSTER (12)
+    // ═══════════════════════════════════════════════════════════
+    ...LINKEDIN_QUESTIONS_ARTICLES,
     // ═══════════════════════════════════════════════════════════
     // LINKEDIN FAQ, SAFETY, ETIQUETTE, & STUDENT GUIDES
     // ═══════════════════════════════════════════════════════════
@@ -419,10 +439,13 @@ export function getAdjacentBlogs(slug: string): { previous: BlogPost | null; nex
  */
 export function getCorePillarGuides(): BlogPost[] {
     const pillarSlugs = [
+        'linkedin-profile-score-guide',
+        'linkedin-seo-complete-guide',
+        'what-is-top-1-percent-linkedin',
+        'linkedin-keywords-complete-guide',
         'linkedin-hooks',
         'how-to-write-linkedin-headline',
         'how-to-write-linkedin-about-section',
-        'linkedin-experience-bullet-points-formula',
         'what-kind-of-people-use-linkedin',
         'how-much-does-linkedin-cost-free-vs-premium',
         'can-i-search-someone-on-linkedin-without-them-knowing',

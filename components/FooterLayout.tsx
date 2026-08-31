@@ -16,12 +16,12 @@ const PRODUCT_LINKS = [
 ]
 
 const TOOL_LINKS = [
+    { href: '/tools/linkedin-pdf-to-ats-resume-maker', label: 'ATS Resume Maker' },
     { href: '/tools/linkedin-headline-generator', label: 'Headline Generator' },
     { href: '/tools/linkedin-about-generator', label: 'About Generator' },
     { href: '/tools/linkedin-experience-generator', label: 'Experience Generator' },
     { href: '/tools/linkedin-profile-keyword-analyzer', label: 'Keyword Analyzer' },
-    { href: '/tools/linkedin-post-hook-generator', label: 'Post Hook Generator' },
-    { href: '/tools', label: 'All 12 Tools →' },
+    { href: '/tools', label: 'All 13 Tools →' },
 ]
 
 const LEARN_LINKS = [
@@ -66,7 +66,7 @@ export default function FooterLayout() {
                         >
                             <span>LinkedIn</span><span className="text-[#2f27ce]">Rank</span>
                         </Link>
-                        <p className="text-[13.5px] text-[#050315]/70 leading-relaxed max-w-sm">
+                        <p className="text-[13.5px] sm:text-[14px] text-[#050315]/75 leading-relaxed max-w-sm">
                             The intelligent profile evaluator. Discover missing keywords, fix weak experience bullets, and calibrate your profile against 30+ recruiter search signals.
                         </p>
 
@@ -109,13 +109,13 @@ export default function FooterLayout() {
 
                     {/* Column 1: Product */}
                     <div className="space-y-3">
-                        <h4 className="text-[12px] font-extrabold text-[#050315] uppercase tracking-wider">Product</h4>
+                        <h4 className="text-[12px] sm:text-[12.5px] font-extrabold text-[#050315] uppercase tracking-wider">Product</h4>
                         <ul className="space-y-2">
                             {PRODUCT_LINKS.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-[13px] text-[#050315]/70 hover:text-[#433bff] transition-colors no-underline"
+                                        className="text-[13.5px] sm:text-[14px] text-[#050315]/75 hover:text-[#2f27ce] transition-colors no-underline block"
                                     >
                                         {link.label}
                                     </Link>
@@ -126,13 +126,13 @@ export default function FooterLayout() {
 
                     {/* Column 2: Tools */}
                     <div className="space-y-3">
-                        <h4 className="text-[12px] font-extrabold text-[#050315] uppercase tracking-wider">Tools</h4>
+                        <h4 className="text-[12px] sm:text-[12.5px] font-extrabold text-[#050315] uppercase tracking-wider">Tools</h4>
                         <ul className="space-y-2">
                             {TOOL_LINKS.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-[13px] text-[#050315]/70 hover:text-[#433bff] transition-colors no-underline"
+                                        className="text-[13.5px] sm:text-[14px] text-[#050315]/75 hover:text-[#2f27ce] transition-colors no-underline block"
                                     >
                                         {link.label}
                                     </Link>
@@ -143,13 +143,13 @@ export default function FooterLayout() {
 
                     {/* Column 3: Learn */}
                     <div className="space-y-3">
-                        <h4 className="text-[12px] font-extrabold text-[#050315] uppercase tracking-wider">Learn</h4>
+                        <h4 className="text-[12px] sm:text-[12.5px] font-extrabold text-[#050315] uppercase tracking-wider">Learn</h4>
                         <ul className="space-y-2">
                             {LEARN_LINKS.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-[13px] text-[#050315]/70 hover:text-[#433bff] transition-colors no-underline"
+                                        className="text-[13.5px] sm:text-[14px] text-[#050315]/75 hover:text-[#2f27ce] transition-colors no-underline block"
                                     >
                                         {link.label}
                                     </Link>
@@ -160,13 +160,13 @@ export default function FooterLayout() {
 
                     {/* Column 4: Company & Legal */}
                     <div className="space-y-3">
-                        <h4 className="text-[12px] font-extrabold text-[#050315] uppercase tracking-wider">Legal</h4>
+                        <h4 className="text-[12px] sm:text-[12.5px] font-extrabold text-[#050315] uppercase tracking-wider">Legal</h4>
                         <ul className="space-y-2">
                             {LEGAL_LINKS.map((link) => (
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-[13px] text-[#050315]/70 hover:text-[#433bff] transition-colors no-underline"
+                                        className="text-[13.5px] sm:text-[14px] text-[#050315]/75 hover:text-[#2f27ce] transition-colors no-underline block"
                                     >
                                         {link.label}
                                     </Link>
@@ -177,7 +177,7 @@ export default function FooterLayout() {
                 </div>
 
                 {/* Bottom Bar: Copyright + Disclaimer */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#050315]/60 pt-2">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] sm:text-[13px] text-[#050315]/65 pt-2">
                     <p>© {CURRENT_YEAR} LinkedInRank. Built with diagnostic precision.</p>
                     <p className="text-center sm:text-right max-w-md">
                         Not affiliated with, endorsed by, or sponsored by LinkedIn Corporation.

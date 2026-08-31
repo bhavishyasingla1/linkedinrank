@@ -10,24 +10,27 @@ import GooglePreferredSource from '@/components/GooglePreferredSource'
 import { ArrowRightIcon, SparklesIcon } from '@/components/ui/Icons'
 
 export const metadata: Metadata = {
-    title: 'LinkedIn Strategy & Profile Guides (2026)',
-    description: '120+ expert LinkedIn guides, examples, and templates. Headline formulas, about section examples, experience descriptions, content strategies, and more. All free.',
+    title: 'LinkedIn Strategy, SEO & Profile Guides (2026)',
+    description: '170+ expert LinkedIn guides, profile score breakdowns, keyword research playbooks, and algorithmic strategies. All free.',
     alternates: { canonical: `${SITE_URL}/blogs` },
     openGraph: {
-        title: 'LinkedIn Strategy & Profile Guides (2026)',
-        description: '120+ expert LinkedIn guides, examples, and templates for profile optimization and content creation.',
+        title: 'LinkedIn Strategy, SEO & Profile Guides (2026)',
+        description: '170+ expert LinkedIn guides, profile score breakdowns, keyword research playbooks, and algorithmic strategies.',
         url: `${SITE_URL}/blogs`,
         siteName: SITE_NAME,
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LinkedIn Strategy & Profile Guides (2026)',
-        description: '120+ expert LinkedIn guides, examples, and templates.',
+        title: 'LinkedIn Strategy, SEO & Profile Guides (2026)',
+        description: '170+ expert LinkedIn guides, profile score breakdowns, and keyword strategies.',
     },
 }
 
 const CATEGORIES = [
+    { slug: 'score', name: 'Profile Score & Rating' },
+    { slug: 'seo', name: 'Keywords & SEO' },
+    { slug: 'branding', name: 'Personal Branding' },
     { slug: 'hooks', name: 'Hooks & Copywriting' },
     { slug: 'headline', name: 'Headlines' },
     { slug: 'about', name: 'About Section' },
@@ -35,7 +38,6 @@ const CATEGORIES = [
     { slug: 'faq', name: 'LinkedIn Basics & FAQ' },
     { slug: 'privacy', name: 'Privacy & Safety' },
     { slug: 'students', name: 'Students & Internships' },
-    { slug: 'seo', name: 'Keywords & SEO' },
     { slug: 'linkedin-connection-message-generator', name: 'Networking & Outreach' },
 ]
 

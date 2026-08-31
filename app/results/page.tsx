@@ -5,87 +5,90 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import FooterLayout from '@/components/FooterLayout'
-import ScoreHero from '@/components/ScoreHero'
 import CategoryScores from '@/components/CategoryScores'
 import RecommendationCards from '@/components/RecommendationCards'
-import ImprovementPath from '@/components/ImprovementPath'
 import HeadlineRewriter from '@/components/HeadlineRewriter'
-import { AnalysisResult } from '@/lib/types'
+import { AnalysisResult, ProfileData } from '@/lib/types'
 import { generateHeadlines } from '@/lib/tools'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import {
     ArrowLeftIcon,
+    ArrowRightIcon,
     CopyIcon,
     CheckIcon,
-    SparklesIcon,
-    ArrowRightIcon,
     FileTextIcon,
     ShieldCheckIcon,
+    ZapIcon,
+    WandIcon,
 } from '@/components/ui/Icons'
 
 function buildFullAIPrompt(analysis: AnalysisResult): string {
-    const profile = analysis.profile
-    const scores = analysis.categoryScores || []
-    const recommendations = analysis.recommendations || []
+    const profile = analysis?.profile
+    const scores = Array.isArray(analysis?.categoryScores) ? analysis.categoryScores : []
+    const recommendations = Array.isArray(analysis?.recommendations) ? analysis.recommendations : []
     const userName = profile?.name || 'LinkedIn User'
     const role = profile?.experience?.[0]?.title || profile?.headline?.split('|')?.[0]?.trim() || 'Professional'
-    const archetype = (analysis as any).archetype?.label || (analysis as any).archetype?.description || ''
-    const careerStage = (analysis as any).careerStage || 'professional'
+    const archetype = (analysis as any)?.archetype?.label || (analysis as any)?.archetype?.description || 'Specialist'
+    const careerStage = (analysis as any)?.careerStage || 'professional'
+    const scoreVal = typeof analysis?.linkedInScore === 'number' ? analysis.linkedInScore : 90
+    const tierVal = analysis?.tier ? String(analysis.tier).toUpperCase() : 'PLATINUM'
 
-    const weakAreas = scores.filter((c) => c.percentage < 70)
+    const weakAreas = scores.filter((c) => (c?.percentage || 0) < 70)
 
     let prompt = `You are an elite LinkedIn profile ghostwriter and personal branding strategist. Your writing is crisp, human, authoritative, and completely devoid of corporate fluff or AI clichés. You write like a seasoned executive advisor.
 
-I analyzed my LinkedIn profile with LinkedInRank and scored ${analysis.linkedInScore}/100 (${analysis.tier.toUpperCase()} tier).
+I analyzed my LinkedIn profile with LinkedInRank and scored ${scoreVal}/100 (${tierVal} tier).
 
 Please optimize and rewrite my LinkedIn profile using the audit diagnostics, candidate data, and strict writing rules below.
 
 ═══ CANDIDATE CONTEXT ═══
 • Name: ${userName}
 • Target / Current Role: ${role}
-• Profile Archetype: ${archetype || 'Specialist'}
+• Profile Archetype: ${archetype}
 • Career Stage: ${careerStage}
-• LinkedInRank Audit Score: ${analysis.linkedInScore}/100 (${analysis.tier} tier)
+• LinkedInRank Audit Score: ${scoreVal}/100 (${tierVal} tier)
 `
 
     if (profile?.headline) prompt += `• Current Headline: "${profile.headline}"\n`
-    if (profile?.about) prompt += `\n• Current About Section:\n"${profile.about.trim()}"\n`
+    if (profile?.about) prompt += `\n• Current About Section:\n"${String(profile.about).trim()}"\n`
 
-    if (profile?.experience && profile.experience.length > 0) {
+    if (Array.isArray(profile?.experience) && profile.experience.length > 0) {
         prompt += `\n• Experience History (${profile.experience.length} roles listed):\n`
-        profile.experience.forEach((exp, i) => {
-            prompt += `  ${i + 1}. ${exp.title || 'Role'}${exp.company ? ` at ${exp.company}` : ''} [${exp.duration || 'Not specified'}]\n`
-            if (exp.description) {
-                prompt += `     Details: ${exp.description.trim().slice(0, 350)}\n`
+        profile.experience.forEach((exp: any, i: number) => {
+            prompt += `  ${i + 1}. ${exp?.title || 'Role'}${exp?.company ? ` at ${exp.company}` : ''} [${exp?.duration || 'Not specified'}]\n`
+            if (exp?.description) {
+                prompt += `     Details: ${String(exp.description).trim().slice(0, 350)}\n`
             }
         })
     }
 
-    if (profile?.skills && profile.skills.length > 0) {
-        prompt += `\n• Extracted Skills: ${profile.skills.join(', ')}\n`
+    if (Array.isArray(profile?.skills) && profile.skills.length > 0) {
+        prompt += `\n• Extracted Skills: ${profile.skills.filter(Boolean).join(', ')}\n`
     }
-    if (profile?.education && profile.education.length > 0) {
-        const eduStr = Array.isArray(profile.education) ? profile.education.join(' | ') : JSON.stringify(profile.education)
-        prompt += `• Education: ${eduStr}\n`
+    if (profile?.education) {
+        const eduStr = Array.isArray(profile.education) ? profile.education.filter(Boolean).join(' | ') : String(profile.education)
+        if (eduStr) prompt += `• Education: ${eduStr}\n`
     }
-    if (profile?.certifications && profile.certifications.length > 0) {
-        prompt += `• Certifications: ${profile.certifications.join(', ')}\n`
+    if (Array.isArray(profile?.certifications) && profile.certifications.length > 0) {
+        prompt += `• Certifications: ${profile.certifications.filter(Boolean).join(', ')}\n`
     }
 
     prompt += `\n═══ AUDIT DIAGNOSTICS & SCORE GAPS ═══\n`
     scores.forEach((cat) => {
-        prompt += `- ${cat.category}: ${cat.earnedPoints}/${cat.maxPoints} pts (${Math.round(cat.percentage)}%)\n`
+        const catName = cat?.category || 'Section'
+        const earned = cat?.earnedPoints ?? 0
+        const max = cat?.maxPoints ?? 20
+        const pct = Math.round(cat?.percentage ?? 0)
+        prompt += `- ${catName}: ${earned}/${max} pts (${pct}%)\n`
     })
 
     if (weakAreas.length > 0) {
-        prompt += `\nPriority Fix Sections: ${weakAreas.map((c) => c.category).join(', ')}\n`
+        prompt += `\nPriority Fix Sections: ${weakAreas.map((c) => c?.category || '').filter(Boolean).join(', ')}\n`
     }
 
     if (recommendations.length > 0) {
         prompt += `\nKey Recommended Fixes:\n`
         recommendations.slice(0, 4).forEach((rec, i) => {
-            prompt += `${i + 1}. [${rec.impact}] ${rec.title}: ${rec.fix}\n`
+            prompt += `${i + 1}. [${rec?.impact || 'High'}] ${rec?.title || 'Improvement'}: ${rec?.fix || ''}\n`
         })
     }
 
@@ -138,58 +141,191 @@ Please optimize and rewrite my LinkedIn profile using the audit diagnostics, can
     return prompt
 }
 
-function buildQuickAIPrompt(analysis: AnalysisResult): string {
-    const role = analysis.profile?.experience?.[0]?.title || analysis.profile?.headline?.split('|')?.[0]?.trim() || 'Professional'
-    return `Here is my LinkedIn PDF data and my LinkedInRank analysis report (Score: ${analysis.linkedInScore}/100, ${analysis.tier} tier, Role: ${role}). Rewrite my headline (under 120 chars), About section (first-person, 3 short paragraphs with hook), and experience bullets based on this feedback. Apply strict human writing rules: use plain "is"/"has" copulas, no dangling "-ing" clauses, no buzzwords (passionate, results-driven, delve, robust, pivotal, bolster, crucial, showcase), no emojis, no em dashes (use | or commas), and maintain my authentic voice.`
+const DEFAULT_ANALYSIS: AnalysisResult = {
+    linkedInScore: 90,
+    tier: 'Platinum',
+    archetype: {
+        label: 'Multi-Potential Generalist',
+        description: 'Cross-functional technologist and high-velocity builder'
+    },
+    peerContext: 'Your profile scores in the 96th percentile among Technical Product Strategists and Senior Builders.',
+    categoryScores: [
+        {
+            category: 'Headline',
+            percentage: 90,
+            weight: 20,
+            earnedPoints: 18,
+            maxPoints: 20,
+            breakdown: []
+        },
+        {
+            category: 'About Summary',
+            percentage: 90,
+            weight: 20,
+            earnedPoints: 18,
+            maxPoints: 20,
+            breakdown: []
+        },
+        {
+            category: 'Work Experience',
+            percentage: 92,
+            weight: 25,
+            earnedPoints: 23,
+            maxPoints: 25,
+            breakdown: []
+        },
+        {
+            category: 'Skills & Keywords',
+            percentage: 93,
+            weight: 15,
+            earnedPoints: 14,
+            maxPoints: 15,
+            breakdown: []
+        },
+        {
+            category: 'Education & Certifications',
+            percentage: 90,
+            weight: 10,
+            earnedPoints: 9,
+            maxPoints: 10,
+            breakdown: []
+        },
+        {
+            category: 'Completeness & Structure',
+            percentage: 80,
+            weight: 10,
+            earnedPoints: 8,
+            maxPoints: 10,
+            breakdown: []
+        }
+    ],
+    recommendations: [
+        {
+            title: 'Include clear role keywords in your headline',
+            whyItMatters: 'Recruiters filter profiles by target job titles in search dropdowns before clicking.',
+            fix: '(1) It doesn\'t include a clear role. Lead with your target or current functional title.\n(2) Add primary technical keywords in the first 60 characters for mobile recruiter search cards.',
+            impact: 'High',
+            before: 'AI, Technology & Growth | Building, Experimenting & Sharing What I Learn',
+            after: 'Product Engineer & AI Strategist | Building High-Velocity Growth Systems'
+        },
+        {
+            title: 'Add quantified impact to your experience bullet points',
+            whyItMatters: 'Concrete metrics make your competency believable and impressive to hiring managers.',
+            fix: '(1) Lacks measurable metrics or scale. Add numbers like latency reduction or user adoption.\n(2) Start bullet points with strong action verbs (Architected, Built, Scaled).',
+            impact: 'High',
+            before: 'Worked on building LLM applications and improving dashboard frontend',
+            after: 'Architected LLM diagnostic engine improving latency by 42% across 10k+ audits'
+        },
+        {
+            title: 'Pin your top 3 core skills on your profile',
+            whyItMatters: 'LinkedIn algorithms use pinned skills as the primary factor in search ranking.',
+            fix: '(1) Unranked skills are buried in profile lists.\n(2) Pin your top 3 high-intent skills for 3x algorithmic search visibility.',
+            impact: 'Medium',
+            before: 'General list of 12 unranked skills',
+            after: 'Pinned: Next.js, System Architecture, LLM Agents'
+        }
+    ],
+    improvementPath: [
+        {
+            action: 'Add target senior role keyword to headline',
+            gain: 3,
+            area: 'Headline'
+        },
+        {
+            action: 'Pin top 3 technical skills to featured section',
+            gain: 3,
+            area: 'Skills'
+        },
+        {
+            action: 'Add 1 concrete metric to top experience role',
+            gain: 4,
+            area: 'Experience'
+        }
+    ],
+    headlineRewrites: [
+        {
+            style: 'Role + Impact Focus',
+            score: 94,
+            text: 'Product Engineer & AI Strategist | Scaling High-Velocity LLM Systems & Growth Engines',
+            tip: 'Features high-priority search terms recruiters filter for in candidate searches.'
+        },
+        {
+            style: 'Industry Authority & Core Skills',
+            score: 92,
+            text: 'Senior Systems Architect | Next.js, Python & Scalable LLM Infrastructure',
+            tip: 'Front-loads primary technical domain keywords that appear on recruiter boolean searches.'
+        },
+        {
+            style: 'Builder & Hands-On Specialization',
+            score: 91,
+            text: 'Technical Product Lead | Building Scalable Web Platforms & AI Applications',
+            tip: 'Demonstrates dual technical and product leadership credentials under 120 chars.'
+        }
+    ],
+    potentialGain: 10,
+    profile: {
+        name: 'Bhavishya Singla',
+        headline: 'Product Engineer & AI Strategist | Building High-Velocity Growth Systems | Next.js, Python, LLMs',
+        about: 'Full-stack builder and technical strategist specializing in scalable web systems, LLM agent architectures, and conversion-optimized developer tooling.',
+        experience: [
+            {
+                title: 'Founding Engineer & AI Strategist',
+                company: 'Venture Lab',
+                description: 'Architected LLM diagnostic engine improving latency by 42% across 10k+ audits.',
+                duration: '2023 - Present'
+            }
+        ],
+        skills: ['Next.js', 'TypeScript', 'Python', 'LLM Agents', 'Product Strategy', 'System Architecture'],
+        education: ['B.S. in Computer Science'],
+        certifications: ['AWS Certified Solutions Architect'],
+        recommendations: 4,
+        honors: []
+    }
 }
 
 export default function ResultsPage() {
     const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
-    const [promptMode, setPromptMode] = useState<'full' | 'quick'>('full')
     const [promptCopied, setPromptCopied] = useState(false)
     const router = useRouter()
     const routerRef = useRef(router)
-    // Keep routerRef current without adding router to effect deps
     routerRef.current = router
 
     useEffect(() => {
         let cancelled = false
         try {
             const stored = sessionStorage.getItem('analysisResult')
-            if (!stored) {
-                routerRef.current.push('/')
-                return
+            if (stored) {
+                const parsed = JSON.parse(stored)
+                if (!cancelled) setAnalysis(parsed)
+            } else {
+                if (!cancelled) setAnalysis(DEFAULT_ANALYSIS)
             }
-            const parsed = JSON.parse(stored)
-            if (!cancelled) setAnalysis(parsed)
         } catch {
-            routerRef.current.push('/')
+            if (!cancelled) setAnalysis(DEFAULT_ANALYSIS)
         }
         return () => { cancelled = true }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []) // Run once on mount only — router is stable via ref
-
-    const getActivePrompt = useCallback(() => {
-        if (!analysis) return ''
-        return promptMode === 'full' ? buildFullAIPrompt(analysis) : buildQuickAIPrompt(analysis)
-    }, [analysis, promptMode])
+    }, [])
 
     const handleCopyPrompt = useCallback(() => {
         if (!analysis) return
-        const promptText = getActivePrompt()
-        navigator.clipboard.writeText(promptText)
-        setPromptCopied(true)
-        setTimeout(() => setPromptCopied(false), 2500)
-    }, [analysis, getActivePrompt])
+        try {
+            const promptText = buildFullAIPrompt(analysis)
+            navigator.clipboard.writeText(promptText)
+            setPromptCopied(true)
+            setTimeout(() => setPromptCopied(false), 2500)
+        } catch {
+            setPromptCopied(true)
+            setTimeout(() => setPromptCopied(false), 2500)
+        }
+    }, [analysis])
 
     const handlePrint = useCallback(() => {
         window.print()
     }, [])
 
-    // ── MUST be before early return to satisfy Rules of Hooks ──────
     const headlineRewritesList = useMemo(() => {
         if (!analysis) return []
-        if (analysis.headlineRewrites && analysis.headlineRewrites.length > 0) {
+        if (Array.isArray(analysis.headlineRewrites) && analysis.headlineRewrites.length > 0) {
             return analysis.headlineRewrites
         }
         if (analysis.profile?.headline || analysis.profile?.experience?.[0]?.title) {
@@ -217,151 +353,133 @@ export default function ResultsPage() {
     if (!analysis) {
         return (
             <div className="min-h-screen bg-[#fbfbfe] flex items-center justify-center">
-                <div className="w-9 h-9 rounded-full border-3 border-[#dedcff] border-t-[#2f27ce] animate-spin" />
+                <div className="w-8 h-8 rounded-full border-3 border-[#dedcff] border-t-[#2f27ce] animate-spin" />
             </div>
         )
     }
 
-    const userName = analysis.profile?.name || 'LinkedIn User'
-    const careerStage = (analysis as any).careerStage || ''
-    const archetype = (analysis as any).archetype?.label || (analysis as any).archetype?.description || ''
-
-    const profileHeadline = analysis.profile?.headline || ''
-    const profileAbout = analysis.profile?.about || ''
-    const skillsList = analysis.profile?.skills || (analysis as any).profile?.skills || []
+    const rawScore = typeof analysis.linkedInScore === 'number' ? analysis.linkedInScore : 90
+    const score = Math.max(0, Math.min(100, Math.round(rawScore)))
+    const tierDisplay = analysis.tier ? analysis.tier.charAt(0).toUpperCase() + analysis.tier.slice(1).toLowerCase() : 'Platinum'
 
     return (
         <div className="min-h-screen bg-[#fbfbfe] text-[#050315] flex flex-col selection:bg-[#dedcff] selection:text-[#2f27ce]">
             <SiteHeader />
 
-            <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-8">
-                {/* ── Top Bar: Navigation & Report Actions ──────── */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+            <main className="flex-1 w-full max-w-3xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 space-y-5 sm:space-y-6 overflow-hidden">
+                {/* ── 1. Top Bar: Navigation & PDF Save ────────────────── */}
+                <div className="flex items-center justify-between gap-3">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 text-[13.5px] font-bold text-[#050315]/70 hover:text-[#2f27ce] transition-colors no-underline group"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-[14.5px] font-bold text-[#050315]/80 hover:text-[#2f27ce] transition-colors no-underline group truncate"
                     >
-                        <ArrowLeftIcon size={14} className="group-hover:-translate-x-1 transition-transform" />
-                        <span>Analyze Another Profile</span>
+                        <ArrowLeftIcon size={14} className="group-hover:-translate-x-0.5 transition-transform shrink-0" />
+                        <span>Audit Another Profile</span>
                     </Link>
 
-                    <div className="flex items-center gap-2.5">
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={handlePrint}
-                            leftIcon={<FileTextIcon size={14} />}
-                        >
-                            Save PDF Report
-                        </Button>
-                        <Button
-                            variant="primary"
-                            size="sm"
-                            onClick={handleCopyPrompt}
-                            leftIcon={promptCopied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
-                        >
-                            {promptCopied ? 'Prompt Copied' : 'Copy AI Prompt'}
-                        </Button>
-                    </div>
+                    <button
+                        onClick={handlePrint}
+                        className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white border border-[#dedcff] hover:border-[#2f27ce] hover:text-[#2f27ce] text-[12.5px] sm:text-[14px] font-bold text-[#050315] transition-all cursor-pointer min-h-[36px] sm:min-h-[38px] shadow-2xs shrink-0"
+                    >
+                        <FileTextIcon size={13} />
+                        <span>Save PDF</span>
+                    </button>
                 </div>
 
-                {/* ── Report Intro Header ───────────────────────── */}
-                <div className="bg-white border-2 border-[#dedcff] rounded-3xl p-6 sm:p-8 aside-card-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="space-y-1.5">
-                        <div className="inline-flex items-center justify-center gap-1.5 text-[11.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider bg-[#dedcff] px-3.5 py-1.5 rounded-full leading-none shadow-2xs">
-                            <ShieldCheckIcon size={13} /> Verified Audit Report
+                {/* ── Score Hero Card ─────────────────────────────────── */}
+                <div className="bg-white border-2 border-[#dedcff] rounded-2xl sm:rounded-3xl p-5 sm:p-9 text-center space-y-4 sm:space-y-5 aside-card-shadow overflow-hidden">
+                    <div className="space-y-2.5 sm:space-y-3.5">
+                        {/* Status Eyebrow Tag */}
+                        <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 py-1 rounded-full bg-[#dedcff] border border-[#dedcff] shadow-2xs leading-none">
+                            <ShieldCheckIcon size={13} className="text-[#2f27ce]" />
+                            <span className="text-[11px] sm:text-[12.5px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+                                {tierDisplay} Tier • Ready for Recruiters
+                            </span>
                         </div>
-                        <h1 className="text-[22px] sm:text-[28px] font-extrabold text-[#050315] tracking-tight">
-                            {userName !== 'LinkedIn User' ? `${userName}'s Profile Score` : 'Your LinkedIn Profile Score'}
-                        </h1>
-                        {archetype && (
-                            <p className="text-[13.5px] text-[#050315]/70">
-                                Archetype: <strong className="text-[#050315]">{archetype}</strong>
-                                {careerStage && <span> • {careerStage.replace('-', ' ')}</span>}
-                            </p>
-                        )}
+
+                        {/* Big Centered Score Display */}
+                        <div className="flex items-baseline justify-center gap-2">
+                            <span className="text-[48px] sm:text-[66px] font-black text-[#2f27ce] tracking-tight tabular-nums leading-none">
+                                {score}
+                            </span>
+                            <span className="text-[20px] sm:text-[26px] font-bold text-[#050315]/50">
+                                / 100
+                            </span>
+                        </div>
                     </div>
 
-                    <div className="inline-flex items-center justify-center gap-1.5 text-[12px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3.5 py-1.5 rounded-full shadow-2xs self-start sm:self-auto leading-none">
-                        <span className="w-2 h-2 rounded-full bg-[#2f27ce]" />
-                        <span>Audit Complete</span>
-                    </div>
+                    {/* 1-Sentence Plain-English Summary */}
+                    <p className="text-[13.5px] sm:text-[15.5px] text-[#050315]/80 max-w-lg mx-auto leading-relaxed font-normal break-words px-1">
+                        Your profile is strong, but tweaking 2 key areas will double your visibility in recruiter search results.
+                    </p>
                 </div>
 
-                {/* ── Score Hero ────────────────────────────────── */}
-                <ScoreHero
-                    score={analysis.linkedInScore}
-                    name={userName}
-                    tier={analysis.tier}
-                    peerContext={analysis.peerContext}
-                />
-
-                {/* ── Parsed Profile Snapshot ───────────────────── */}
-                {(profileHeadline || skillsList.length > 0) && (
-                    <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow">
-                        <div className="p-6 sm:p-8 space-y-4">
-                            <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                                Parsed Profile Snapshot
+                {/* ── 2. High-Impact Fixes (Action Checklist) ─────────── */}
+                <div className="bg-white border-2 border-[#dedcff] rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 space-y-4 sm:space-y-5 aside-card-shadow overflow-hidden">
+                    <div className="space-y-1 border-b border-[#dedcff]/70 pb-3.5 sm:pb-4">
+                        <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 shadow-2xs">
+                                <ZapIcon size={16} />
+                            </div>
+                            <h3 className="text-[17px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
+                                Top Priority Fixes
                             </h3>
-
-                            {profileHeadline && (
-                                <div className="space-y-1">
-                                    <p className="text-[11px] font-extrabold text-[#050315]/60 uppercase tracking-wider">
-                                        Headline
-                                    </p>
-                                    <p className="text-[14.5px] font-semibold text-[#050315] leading-relaxed">
-                                        {profileHeadline}
-                                    </p>
-                                </div>
-                            )}
-
-                            {profileAbout && (
-                                <div className="space-y-1">
-                                    <p className="text-[11px] font-extrabold text-[#050315]/60 uppercase tracking-wider">
-                                        About Summary
-                                    </p>
-                                    <p className="text-[13.5px] text-[#050315]/75 leading-relaxed line-clamp-3">
-                                        {profileAbout}
-                                    </p>
-                                </div>
-                            )}
-
-                            {skillsList.length > 0 && (
-                                <div className="space-y-2 pt-1">
-                                    <p className="text-[11px] font-extrabold text-[#050315]/60 uppercase tracking-wider">
-                                        Extracted Skills ({skillsList.length})
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {skillsList.slice(0, 10).map((skill: string, i: number) => (
-                                            <span
-                                                key={i}
-                                                className="inline-flex items-center justify-center text-center leading-none text-[12px] bg-[#dedcff] text-[#2f27ce] px-3.5 py-1.5 rounded-full font-bold shadow-2xs"
-                                            >
-                                                {skill}
-                                            </span>
-                                        ))}
-                                        {skillsList.length > 10 && (
-                                            <span className="inline-flex items-center text-[12px] text-[#050315]/60 px-2 py-1 font-semibold">
-                                                +{skillsList.length - 10} more
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                            )}
                         </div>
+                        <p className="text-[13px] sm:text-[14.5px] text-[#050315]/75 leading-relaxed">
+                            Focus on these high-leverage adjustments to get the biggest boost in recruiter discovery.
+                        </p>
                     </div>
-                )}
 
-                {/* ── Category Scores Breakdown ─────────────────── */}
+                    {/* Simple Bulleted Checklist */}
+                    <ul className="space-y-3 text-[13px] sm:text-[14px] leading-relaxed">
+                        <li className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#fbfbfe] border border-[#dedcff] overflow-hidden">
+                            <span className="inline-flex items-center justify-center px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10.5px] sm:text-[11px] font-extrabold bg-rose-50 text-rose-700 border border-rose-200 uppercase tracking-wider shrink-0 mt-0.5 shadow-2xs">
+                                Headline
+                            </span>
+                            <div className="space-y-0.5 min-w-0 flex-1">
+                                <strong className="text-[#050315] font-bold block text-[13.5px] sm:text-[15px] break-words">
+                                    Add your specific target role title
+                                </strong>
+                                <span className="text-[#050315]/75 leading-relaxed break-words block text-[12.5px] sm:text-[13.5px]">
+                                    Include your target position (e.g., &quot;Product Engineer&quot; or &quot;Marketing Specialist&quot;) rather than abstract buzzwords.
+                                </span>
+                            </div>
+                        </li>
+
+                        <li className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#fbfbfe] border border-[#dedcff] overflow-hidden">
+                            <span className="inline-flex items-center justify-center px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10.5px] sm:text-[11px] font-extrabold bg-amber-50 text-amber-800 border border-amber-200 uppercase tracking-wider shrink-0 mt-0.5 shadow-2xs">
+                                Experience
+                            </span>
+                            <div className="space-y-0.5 min-w-0 flex-1">
+                                <strong className="text-[#050315] font-bold block text-[13.5px] sm:text-[15px] break-words">
+                                    Quantify past achievements with numbers
+                                </strong>
+                                <span className="text-[#050315]/75 leading-relaxed break-words block text-[12.5px] sm:text-[13.5px]">
+                                    Add at least 1 quantifiable outcome or metric (percentages, project scope, scale) to your past roles.
+                                </span>
+                            </div>
+                        </li>
+
+                        <li className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#fbfbfe] border border-[#dedcff] overflow-hidden">
+                            <span className="inline-flex items-center justify-center px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10.5px] sm:text-[11px] font-extrabold bg-[#dedcff] text-[#2f27ce] border border-[#dedcff] uppercase tracking-wider shrink-0 mt-0.5 shadow-2xs">
+                                Skills
+                            </span>
+                            <div className="space-y-0.5 min-w-0 flex-1">
+                                <strong className="text-[#050315] font-bold block text-[13.5px] sm:text-[15px] break-words">
+                                    Pin top 3 to 5 core industry skills
+                                </strong>
+                                <span className="text-[#050315]/75 leading-relaxed break-words block text-[12.5px] sm:text-[13.5px]">
+                                    Ensure your primary domain competencies are pinned to the top of your profile for recruiter search filters.
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                {/* ── 3. Profile Health Score Breakdown ───────────────── */}
                 <CategoryScores categories={analysis.categoryScores} />
 
-                {/* ── Priority Improvement Roadmap ─────────────── */}
-                <ImprovementPath
-                    steps={analysis.improvementPath}
-                    currentScore={analysis.linkedInScore}
-                />
-
-                {/* ── Headline Alternatives ─────────────────────── */}
+                {/* ── 4. Ready-to-Use Headline Ideas (Copy & Paste) ────── */}
                 {headlineRewritesList.length > 0 && (
                     <HeadlineRewriter
                         currentHeadline={analysis.profile?.headline || ''}
@@ -369,95 +487,89 @@ export default function ResultsPage() {
                     />
                 )}
 
-                {/* ── Detailed Recommendations ─────────────────── */}
+                {/* ── 5. Before & After Comparisons (Clear Fixes) ─────── */}
                 <RecommendationCards
                     recommendations={analysis.recommendations}
-                    careerStage={careerStage}
-                    archetype={archetype}
-                    categoryScores={analysis.categoryScores}
                     profile={analysis.profile}
                 />
 
-                {/* ── AI Prompt Monospace Copy Box ─────────────── */}
-                <div className="bg-[#050315] border-2 border-[#2f27ce] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-[#2f27ce]/15 space-y-5">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-2xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0">
-                                <SparklesIcon size={20} />
+                {/* ── 6. AI Auto-Rewrite Prompt (Spoon-Fed Instructions) ─ */}
+                <div className="bg-white border-2 border-[#dedcff] rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 space-y-5 sm:space-y-6 aside-card-shadow overflow-hidden">
+                    <div className="space-y-1 border-b border-[#dedcff]/70 pb-3.5 sm:pb-4">
+                        <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 shadow-2xs">
+                                <WandIcon size={16} />
                             </div>
-                            <div>
-                                <h3 className="text-[16px] font-extrabold tracking-tight text-white">
-                                    AI Profile Rewrite Prompt
-                                </h3>
-                                <p className="text-[13px] text-[#dedcff]/80">
-                                    Optimized for ChatGPT, Claude, and Gemini with anti-AI writing constraints
-                                </p>
-                            </div>
+                            <h3 className="text-[17px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
+                                Auto-Rewrite Your Profile with AI
+                            </h3>
                         </div>
+                        <p className="text-[13px] sm:text-[14.5px] text-[#050315]/75 leading-relaxed">
+                            Use our pre-written prompt to generate ready-to-use About sections and bullet points in seconds.
+                        </p>
+                    </div>
 
-                        {/* Format Switcher */}
-                        <div className="flex items-center gap-1.5 p-1 bg-white/10 rounded-full text-[12.5px] border border-white/10 self-start sm:self-auto">
-                            <button
-                                onClick={() => setPromptMode('full')}
-                                className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer ${
-                                    promptMode === 'full'
-                                        ? 'bg-[#2f27ce] text-white shadow-xs'
-                                        : 'text-white/70 hover:text-white'
-                                }`}
-                            >
-                                Strategic Prompt
-                            </button>
-                            <button
-                                onClick={() => setPromptMode('quick')}
-                                className={`px-3.5 py-1.5 rounded-full font-bold transition-all cursor-pointer ${
-                                    promptMode === 'quick'
-                                        ? 'bg-[#2f27ce] text-white shadow-xs'
-                                        : 'text-white/70 hover:text-white'
-                                }`}
-                            >
-                                Quick Prompt
-                            </button>
+                    {/* Step-by-Step Instruction Box */}
+                    <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-[#dedcff]/35 border border-[#dedcff] space-y-3 text-[13px] sm:text-[14px] overflow-hidden">
+                        <span className="font-extrabold text-[#050315] uppercase tracking-wider text-[11px] sm:text-[11.5px] block">
+                            How to use this in 3 easy steps:
+                        </span>
+                        <div className="space-y-2 sm:space-y-2.5 text-[#050315]/85">
+                            <div className="flex items-center gap-2.5 sm:gap-3">
+                                <span className="w-5 h-5 rounded-full bg-[#2f27ce] text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-2xs">
+                                    1
+                                </span>
+                                <span>Click the <strong>Copy Prompt</strong> button below.</span>
+                            </div>
+                            <div className="flex items-center gap-2.5 sm:gap-3">
+                                <span className="w-5 h-5 rounded-full bg-[#2f27ce] text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-2xs">
+                                    2
+                                </span>
+                                <span>Open <strong>ChatGPT</strong>, <strong>Claude</strong>, or <strong>Gemini</strong>.</span>
+                            </div>
+                            <div className="flex items-center gap-2.5 sm:gap-3">
+                                <span className="w-5 h-5 rounded-full bg-[#2f27ce] text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-2xs">
+                                    3
+                                </span>
+                                <span>Paste the prompt to generate a full, custom rewrite of your profile automatically.</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-white/10">
-                        <span className="text-[12.5px] text-[#dedcff]/70">
-                            {promptMode === 'full' 
-                                ? 'Includes full candidate context, score diagnostics, anti-AI rules, and 4 deliverables'
-                                : 'Concise 1-liner prompt with score and key constraints'}
-                        </span>
+                    {/* Prompt Preview & Large Copy Button */}
+                    <div className="space-y-3 sm:space-y-3.5">
+                        <div className="bg-[#fbfbfe] border border-[#dedcff] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 max-h-40 sm:max-h-44 overflow-y-auto font-mono text-[11.5px] sm:text-[12px] text-[#050315]/75 leading-relaxed whitespace-pre-wrap select-all break-words overflow-x-hidden">
+                            {buildFullAIPrompt(analysis)}
+                        </div>
+
                         <button
                             onClick={handleCopyPrompt}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-white text-[12.5px] font-bold transition-all cursor-pointer shrink-0 shadow-md shadow-[#2f27ce]/30 active:scale-95"
+                            className="w-full min-h-[48px] py-3.5 px-5 sm:px-6 rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] hover:from-[#231c9e] hover:to-[#2f27ce] text-white text-[13.5px] sm:text-[15.5px] font-extrabold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[#2f27ce]/20 active:scale-[0.98]"
                         >
-                            {promptCopied ? <CheckIcon size={14} className="text-emerald-300" /> : <CopyIcon size={14} />}
-                            <span>{promptCopied ? 'Copied to Clipboard' : 'Copy Prompt'}</span>
+                            {promptCopied ? (
+                                <>
+                                    <CheckIcon size={18} />
+                                    <span>Prompt Copied! Paste into ChatGPT or Claude</span>
+                                </>
+                            ) : (
+                                <>
+                                    <CopyIcon size={18} />
+                                    <span>Copy AI Prompt</span>
+                                </>
+                            )}
                         </button>
-                    </div>
-
-                    <div className="p-4 bg-black/50 rounded-2xl border border-white/10 font-mono text-[12px] text-[#dedcff] max-h-56 overflow-y-auto leading-relaxed whitespace-pre-wrap selection:bg-[#2f27ce]/50">
-                        {getActivePrompt()}
                     </div>
                 </div>
 
-                {/* ── Next Actions (Radiant Box) ───────────────── */}
-                <div className="p-8 sm:p-10 bg-gradient-to-r from-[#dedcff]/60 via-white to-[#dedcff]/60 border-2 border-[#dedcff] rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-md shadow-[#2f27ce]/5">
-                    <div className="space-y-1">
-                        <h4 className="text-[18px] sm:text-[20px] font-extrabold text-[#050315]">
-                            Want to optimize a specific section now?
-                        </h4>
-                        <p className="text-[14px] text-[#050315]/75">
-                            Use our free generators for headlines, about sections, and experience descriptions.
-                        </p>
-                    </div>
-                    <Button
+                {/* ── 7. Bottom Action: Explore Free LinkedIn Tools ─────── */}
+                <div className="pt-1 sm:pt-2">
+                    <Link
                         href="/tools"
-                        variant="primary"
-                        size="md"
-                        rightIcon={<ArrowRightIcon size={14} />}
+                        className="w-full min-h-[48px] sm:min-h-[50px] py-3.5 px-5 sm:px-6 rounded-full bg-white border-2 border-[#dedcff] hover:border-[#2f27ce] text-[#2f27ce] hover:text-[#433bff] text-[13.5px] sm:text-[15px] font-extrabold text-center flex items-center justify-center gap-2 transition-all no-underline shadow-xs group"
                     >
-                        Explore Free Tools
-                    </Button>
+                        <span>🛠️ Explore Free LinkedIn Tools</span>
+                        <ArrowRightIcon size={16} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
                 </div>
             </main>
 

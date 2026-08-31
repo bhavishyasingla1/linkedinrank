@@ -22,8 +22,8 @@ export default function BlogIndexClient({ allPosts, categories }: BlogIndexClien
 
     // 2 Highlighted Spotlight articles for the top of the directory
     const spotlightArticles = useMemo(() => {
-        const pillar1 = allPosts.find(p => p.slug === 'linkedin-hooks') || allPosts[0]
-        const pillar2 = allPosts.find(p => p.slug === 'authority-hooks') || allPosts[1]
+        const pillar1 = allPosts.find(p => p.slug === 'linkedin-profile-score-guide') || allPosts[0]
+        const pillar2 = allPosts.find(p => p.slug === 'linkedin-seo-complete-guide') || allPosts[1]
         return [pillar1, pillar2].filter(Boolean)
     }, [allPosts])
 
@@ -32,14 +32,17 @@ export default function BlogIndexClient({ allPosts, categories }: BlogIndexClien
             const matchesCat =
                 selectedCategory === 'all' ||
                 post.toolSlug === selectedCategory ||
+                (selectedCategory === 'score' && (post.slug.includes('score') || post.slug.includes('rating') || post.slug.includes('rater') || post.slug.includes('rank') || post.slug.includes('level') || post.slug.includes('ssi') || post.slug.includes('percent'))) ||
+                (selectedCategory === 'seo' && (post.slug.includes('seo') || post.slug.includes('keyword') || post.slug.includes('search') || post.toolSlug.includes('seo') || post.toolSlug.includes('keyword'))) ||
+                (selectedCategory === 'branding' && (post.slug.includes('brand') || post.slug.includes('rule') || post.slug.includes('effective') || post.slug.includes('picture') || post.slug.includes('appropriate') || post.slug.includes('worth-it') || post.slug.includes('red-flag'))) ||
                 (selectedCategory === 'hooks' && (post.slug.includes('hook') || post.toolSlug.includes('hook') || post.targetKeyword.toLowerCase().includes('hook'))) ||
                 (selectedCategory === 'headline' && post.toolSlug.includes('headline')) ||
                 (selectedCategory === 'about' && post.toolSlug.includes('about')) ||
                 (selectedCategory === 'experience' && post.toolSlug.includes('experience')) ||
-                (selectedCategory === 'faq' && (post.slug.includes('what-') || post.slug.includes('how-much-') || post.slug.includes('golden-hour') || post.slug.includes('4-1-1') || post.slug.includes('500-connections') || post.slug.includes('etiquette') || post.slug.includes('benefits'))) ||
-                (selectedCategory === 'privacy' && (post.slug.includes('private') || post.slug.includes('safe') || post.slug.includes('hide') || post.slug.includes('search-someone') || post.slug.includes('without-account'))) ||
+                (selectedCategory === 'faq' && (post.slug.includes('what-') || post.slug.includes('how-much-') || post.slug.includes('how-to-') || post.slug.includes('is-') || post.slug.includes('who-') || post.slug.includes('golden-hour') || post.slug.includes('4-1-1') || post.slug.includes('500-') || post.slug.includes('etiquette') || post.slug.includes('benefits') || post.slug.includes('leaving-linkedin') || post.slug.includes('followers') || post.slug.includes('job'))) ||
+                (selectedCategory === 'privacy' && (post.slug.includes('private') || post.slug.includes('safe') || post.slug.includes('hide') || post.slug.includes('search-someone') || post.slug.includes('without-account') || post.slug.includes('suggest-people'))) ||
                 (selectedCategory === 'students' && (post.slug.includes('student') || post.slug.includes('intern') || post.slug.includes('no-experience') || post.slug.includes('fresh-graduate') || post.slug.includes('resume-cv'))) ||
-                (selectedCategory === 'seo' && (post.toolSlug.includes('seo') || post.toolSlug.includes('keyword')))
+                (selectedCategory === 'linkedin-connection-message-generator' && (post.slug.includes('connection') || post.slug.includes('message') || post.toolSlug.includes('connection') || post.toolSlug.includes('message')))
 
             const q = searchQuery.toLowerCase().trim()
             const matchesSearch =

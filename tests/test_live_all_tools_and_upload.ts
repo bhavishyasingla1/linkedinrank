@@ -49,7 +49,7 @@ async function runFullIntegrationTest() {
         const res = await fetch(`${BASE_URL}/tools`)
         const html = await res.text()
         const allSlugsPresent = Object.values(TOOL_SLUGS).every(slug => html.includes(`/tools/${slug}`))
-        report('2. Tools Index (GET /tools) contains all 12 tools', res.status === 200 && allSlugsPresent)
+        report(`2. Tools Index (GET /tools) contains all ${Object.keys(TOOL_SLUGS).length} tools`, res.status === 200 && allSlugsPresent)
     } catch (e: any) {
         report('2. Tools Index (GET /tools)', false, e.message)
     }

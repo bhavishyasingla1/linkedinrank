@@ -880,27 +880,29 @@ function generateRecommendations(profile: ProfileData, categories: CategoryScore
 
 function getCategoryRecommendation(category: string, profile: ProfileData, score: number): any {
     const name = profile.name || 'You'
+    const firstJob = profile.experience?.[0]?.title || ''
+    const firstCompany = profile.experience?.[0]?.company || ''
 
     switch (category) {
         case 'Headline':
             const actualHeadline = profile.headline || ''
             const hasHeadline = actualHeadline.length > 0
-            const firstJob = profile.experience?.[0]?.title || ''
-            const firstCompany = profile.experience?.[0]?.company || ''
 
             let headlineFix = ''
             let headlineTitle = `${name}, your headline could be stronger`
+            let headlineBefore = actualHeadline || 'No headline detected'
+            let headlineAfter = firstJob
+                ? `${firstJob} | ${profile.skills?.[0] ? `${profile.skills[0]} & ` : ''}${firstCompany ? `${firstCompany} • ` : ''}Growth & Innovation`
+                : 'Product Engineer & Strategist | Building High-Velocity Growth Systems'
 
             if (!hasHeadline) {
                 headlineFix = firstJob
-                    ? `No headline detected. Your most recent role is "${firstJob}"${firstCompany ? ` at ${firstCompany}` : ''} | use that as a starting point. A strong headline follows the pattern: [Role] | [What you specialize in] | [Who you help or what you achieve].`
-                    : `No headline detected. Add one that clearly signals what you do. Follow this pattern: [Your Role] | [Your specialization] | [What you achieve or who you help].`
+                    ? `(1) No headline detected. Your most recent role is "${firstJob}"${firstCompany ? ` at ${firstCompany}` : ''} | lead with that.\n(2) Follow the pattern: [Role] | [Specialization] | [Value/Outcome].`
+                    : `(1) No headline detected. Add your target role title.\n(2) Follow the pattern: [Your Role] | [Your Specialization] | [Value you bring].`
             } else {
-                // Analyze specific weaknesses of the current headline
                 const issues: string[] = []
                 const hasPipe = actualHeadline.includes('|')
                 const hasRole = /\b(engineer|developer|designer|manager|analyst|consultant|founder|director|lead|specialist|professor|researcher|scientist|architect|coordinator|officer|head|chief|ceo|cto|vp|president|advisor|creator|writer|coach|trainer|strategist|marketer|intern|student)\b/i.test(actualHeadline)
-                const hasCompany = firstCompany && actualHeadline.toLowerCase().includes(firstCompany.toLowerCase())
                 const isVague = /\b(passionate|driven|motivated|dedicated|experienced|results-oriented|dynamic|innovative|creative|hardworking|self-starter)\b/i.test(actualHeadline)
                 const isTooGeneric = !hasRole && !hasPipe && actualHeadline.length < 60
 
@@ -918,18 +920,20 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
                 }
 
                 if (issues.length > 0) {
-                    headlineFix = `Your headline: "${actualHeadline.length > 80 ? actualHeadline.slice(0, 80) + '...' : actualHeadline}"\n\nWhat to improve: ${issues.map((issue, i) => `(${i + 1}) ${issue}`).join('. ')}.`
+                    headlineFix = issues.map((issue, i) => `(${i + 1}) ${issue}`).join('\n')
                 } else if (score >= 80) {
                     headlineTitle = `${name}, your headline is strong`
-                    headlineFix = `Your headline "${actualHeadline.slice(0, 80)}${actualHeadline.length > 80 ? '...' : ''}" is well-structured. To keep it effective, review it when your role or goals change.`
+                    headlineFix = `(1) Your headline is well-structured.\n(2) Review it periodically when your target roles or specialties change.`
                 } else {
-                    headlineFix = `Your headline "${actualHeadline.slice(0, 80)}${actualHeadline.length > 80 ? '...' : ''}" is decent but could be sharper. The best headlines follow: [Role] | [Specialization] | [Value you bring]. Make every word earn its place.`
+                    headlineFix = `(1) Follow the high-conversion formula: [Target Role] | [Core Technical Skills] | [Measurable Outcome].\n(2) Place key search terms in the first 60 characters.`
                 }
             }
 
             return {
                 title: headlineTitle,
                 whyItMatters: 'Your headline is the first thing recruiters see. A clear headline with your role and niche gets significantly more profile views.',
+                before: headlineBefore,
+                after: headlineAfter,
                 fix: headlineFix,
                 impact: 'High' as const
             }
@@ -938,21 +942,23 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
             const hasAbout = profile.about && profile.about.length > 0
             const aboutLength = profile.about?.length || 0
 
+            let aboutBefore = profile.about ? (profile.about.length > 120 ? profile.about.slice(0, 120) + '...' : profile.about) : 'No summary section detected.'
+            let aboutAfter = `I am a ${firstJob || 'Professional'} specializing in ${profile.skills?.slice(0, 3).join(', ') || 'modern industry workflows'}. I focus on delivering scalable, high-impact results.`
             let aboutFix = ''
+
             if (!hasAbout) {
-                const role = profile.experience?.[0]?.title || 'your role'
-                const skills = profile.skills?.slice(0, 2).join(', ') || 'key skills'
-                aboutFix = `You don't have an About section. Add one to explain who you are! Try: "I am a ${role} with experience in [your area]. I work with ${skills} and focus on [your interest]. Currently [what you're working on]."`
+                aboutFix = `(1) Add an About section to introduce your expertise.\n(2) Explain who you are, the tools you use, and what you are currently working on.`
             } else if (aboutLength < 150) {
-                aboutFix = `Your About section is very brief (${aboutLength} characters). Expand it to at least 200-300 characters. Explain: What do you do? What tools/skills do you use? What problems do you solve?`
+                aboutFix = `(1) Expand your summary from ${aboutLength} characters to 200-400 characters.\n(2) Outline your core tools, methodologies, and career accomplishments.`
             } else {
-                const preview = profile.about!.slice(0, 100)
-                aboutFix = `Your About starts with "${preview}..." - consider adding more specific examples of your work, quantifiable achievements, or what makes your approach unique.`
+                aboutFix = `(1) Open with a scroll-stopping first line stating what you build or solve.\n(2) Weave in 3+ specific technical skills or tools.\n(3) End with a clear call-to-action to connect.`
             }
 
             return {
                 title: `${name}, your professional summary could be more compelling`,
                 whyItMatters: `Your About section is your elevator pitch. It should clearly explain what you do, what you're good at, and what drives you.`,
+                before: aboutBefore,
+                after: aboutAfter,
                 fix: aboutFix,
                 impact: 'High' as const
             }
@@ -961,26 +967,32 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
             return {
                 title: 'Your experience descriptions could show more impact',
                 whyItMatters: 'Clear responsibilities and demonstrated ownership make your experience credible. Action verbs and specific contributions stand out.',
-                fix: 'For each role, describe what you were responsible for and what you contributed. Start with action verbs.',
+                before: profile.experience?.[0]?.description ? (profile.experience[0].description.length > 120 ? profile.experience[0].description.slice(0, 120) + '...' : profile.experience[0].description) : 'Worked on projects and supported team operations.',
+                after: 'Architected core systems and automated diagnostic workflows, improving team efficiency by 35% across key projects.',
+                fix: '(1) Start bullet points with strong action verbs (Led, Built, Scaled).\n(2) Add at least 1 measurable metric or scale indicator.\n(3) Clearly state your direct ownership and team impact.',
                 impact: 'High' as const
             }
 
         case 'Skills':
             const userSkills = profile.skills || []
             const skillsCount = userSkills.length
-            const userRole = profile.experience?.[0]?.title || 'your role'
+            const userRole = firstJob || 'your role'
 
+            let skillsBefore = skillsCount > 0 ? userSkills.join(', ') : 'No skills detected in PDF export.'
+            let skillsAfter = `Pinned: ${userSkills.slice(0, 3).join(', ') || 'Next.js, System Architecture, LLMs'}`
             let skillsFix = ''
+
             if (skillsCount === 0) {
-                skillsFix = `No skills were detected in your PDF. On LinkedIn, go to your profile and add technical skills relevant to ${userRole} | specific tools, frameworks, and methodologies you actually use.`
+                skillsFix = `(1) Add technical and domain skills relevant to ${userRole}.\n(2) Include specific tools, frameworks, and methodologies you use.`
             } else {
-                const currentSkills = userSkills.join(', ')
-                skillsFix = `Your visible skills: ${currentSkills}. LinkedIn PDFs only show your top skills. Best practices: (1) Ensure your top skills directly reflect your current role as ${userRole}. (2) Pin your most relevant skills to the top. (3) Replace generic terms like "Management" with specific ones like "Product Management" or "Agile Project Management". (4) Skills should align with keywords in your headline and experience descriptions.`
+                skillsFix = `(1) Pin your top 3 most relevant domain skills to the top of your profile.\n(2) Replace generic terms like "Management" with specific tools like "Product Strategy" or "Agile Scrum".\n(3) Align skills directly with keywords in your headline and experience.`
             }
 
             return {
                 title: `${name}, refine your skills section`,
                 whyItMatters: 'Your top skills are what recruiters see first. LinkedIn only shows a few in your PDF | make sure they are relevant, specific, and aligned with your role.',
+                before: skillsBefore,
+                after: skillsAfter,
                 fix: skillsFix,
                 impact: 'Medium' as const
             }
@@ -989,7 +1001,9 @@ function getCategoryRecommendation(category: string, profile: ProfileData, score
             return {
                 title: 'Strengthen your education section',
                 whyItMatters: 'Complete education details with field of study and institution make your profile more credible.',
-                fix: 'Ensure your degree, institution, and field of study are listed. Relevant certifications are a strong bonus.',
+                before: profile.education?.[0] ? String(profile.education[0]) : 'Partial education details or missing certifications.',
+                after: `${profile.education?.[0] || 'B.S. in Computer Science'} | Industry Certified`,
+                fix: '(1) Ensure degree type, field of study, and institution name are listed.\n(2) Add active industry certifications or accredited coursework.',
                 impact: 'Medium' as const
             }
 

@@ -59,6 +59,7 @@ setInterval(() => {
 }, 5 * 60 * 1000)
 
 function isRateLimited(ip: string): boolean {
+    if (process.env.NODE_ENV === 'development') return false
     const now = Date.now()
     const timestamps = requestLog.get(ip) || []
     const recent = timestamps.filter(t => now - t < RATE_LIMIT_WINDOW_MS)

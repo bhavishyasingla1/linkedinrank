@@ -1595,3 +1595,870 @@ export function generateWeeklyPlan(input: ContentPlannerInput) {
         example: examples[i] || `"Here is what top ${role}s know about ${industry}:"`,
     }))
 }
+
+// ============================================================
+// 12. ATS RESUME MAKER & OPTIMIZATION ENGINE
+// ============================================================
+
+export interface ATSContactInfo {
+    fullName: string
+    headline: string
+    email: string
+    phone: string
+    location: string
+    linkedinUrl: string
+    portfolioUrl?: string
+}
+
+export interface ATSExperienceItem {
+    id: string
+    title: string
+    company: string
+    location?: string
+    startDate: string
+    endDate: string
+    current?: boolean
+    bullets: string[]
+}
+
+export interface ATSEducationItem {
+    id: string
+    degree: string
+    school: string
+    location?: string
+    graduationYear: string
+    details?: string
+}
+
+export interface ATSProjectItem {
+    id: string
+    name: string
+    role?: string
+    tools?: string
+    bullets: string[]
+}
+
+export interface ATSSkillsData {
+    technical: string[]
+    frameworksAndTools: string[]
+    coreCompetencies: string[]
+}
+
+export interface ATSResumeData {
+    contact: ATSContactInfo
+    summary: string
+    experience: ATSExperienceItem[]
+    skills: ATSSkillsData
+    education: ATSEducationItem[]
+    certifications: string[]
+    projects?: ATSProjectItem[]
+}
+
+export interface ATSScoreCheck {
+    id: string
+    title: string
+    category: 'layout' | 'content' | 'keywords' | 'structure'
+    status: 'pass' | 'warning' | 'fail'
+    description: string
+    fixTip?: string
+}
+
+export interface ATSScoreReport {
+    overallScore: number
+    grade: 'A+' | 'A' | 'B' | 'C'
+    checks: ATSScoreCheck[]
+    metrics: {
+        actionVerbRate: number
+        metricDensityRate: number
+        buzzwordCount: number
+        wordCount: number
+        estimatedPages: number
+    }
+}
+
+export interface JobMatchAnalysis {
+    matchScore: number
+    matchedKeywords: string[]
+    missingKeywords: string[]
+    recommendations: string[]
+}
+
+export const ATS_POWER_VERBS = [
+    'architected', 'automated', 'built', 'championed', 'consolidated', 'created',
+    'delivered', 'deployed', 'designed', 'developed', 'directed', 'engineered',
+    'established', 'executed', 'expanded', 'expedited', 'formulated', 'generated',
+    'guided', 'implemented', 'improved', 'increased', 'initiated', 'instituted',
+    'integrated', 'launched', 'led', 'maximized', 'migrated', 'minimized',
+    'negotiated', 'optimized', 'orchestrated', 'overhauled', 'pioneered', 'produced',
+    'programmed', 'reduced', 'refactored', 'resolved', 'restructured', 'revamped',
+    'scaled', 'secured', 'spearheaded', 'standardized', 'streamlined', 'strengthened',
+    'supervised', 'trained', 'transformed', 'upgraded', 'validated', 'yielded'
+]
+
+export const ATS_WEAK_WORDS = [
+    'responsible for', 'duties included', 'helped with', 'assisted with', 'worked on',
+    'handled', 'participated in', 'contributed to', 'involved in', 'attempted', 'supported'
+]
+
+export const ATS_BANNED_BUZZWORDS = [
+    'passionate', 'results-driven', 'team player', 'go-getter', 'hard worker',
+    'think outside the box', 'self-starter', 'synergy', 'rockstar', 'guru',
+    'ninja', 'dynamic', 'detail-oriented', 'meticulous', 'delve', 'tapestry',
+    'testament', 'pivotal', 'supercharge', 'unlock'
+]
+
+/**
+ * Extract ATS Resume Data from parsed LinkedIn Profile JSON
+ */
+export function extractATSResumeFromProfile(profile: any): ATSResumeData {
+    if (!profile) return generateSampleATSResume()
+
+    // 1. Clean contact details
+    const fullName = clean(profile.name) || 'Candidate Name'
+    const headline = clean(profile.headline) || clean(profile.experience?.[0]?.title) || 'Professional'
+    
+    // Check if canonical contact exists or fallback
+    const canonicalContact = profile.canonical?.contact || {}
+    const rawEmail = clean(canonicalContact.email) || clean(profile.email) || ''
+    const rawPhone = clean(canonicalContact.phone) || clean(profile.phone) || ''
+    const rawLocation = clean(profile.location) || clean(canonicalContact.location) || clean(profile.canonical?.display_data?.location) || ''
+    
+    let cleanLinkedin = clean(canonicalContact.linkedinUrl) || clean(profile.linkedinUrl) || ''
+    if (!cleanLinkedin && profile.url) cleanLinkedin = profile.url
+    // Strip query parameters from LinkedIn URL for clean ATS standard
+    if (cleanLinkedin.includes('?')) {
+        cleanLinkedin = cleanLinkedin.split('?')[0]
+    }
+
+    // 2. Summary
+    const summary = clean(profile.about) || clean(profile.canonical?.display_data?.about) || ''
+
+    // 3. Experience with standard single-column dates & bullets
+    const rawExp = Array.isArray(profile.experience) ? profile.experience : (profile.canonical?.display_data?.experiences || [])
+    const experience: ATSExperienceItem[] = rawExp.map((exp: any, idx: number) => {
+        const title = clean(exp.title) || 'Role'
+        const company = clean(exp.company) || 'Company'
+        
+        let startDate = '01/2023'
+        let endDate = 'Present'
+        let current = true
+
+        const duration = clean(exp.duration) || ''
+        if (duration) {
+            const parts = duration.split(/[-–—to]+/i).map(p => p.trim())
+            if (parts.length >= 2) {
+                startDate = formatATSDate(parts[0])
+                endDate = parts[1].toLowerCase().includes('present') ? 'Present' : formatATSDate(parts[1])
+                current = endDate.toLowerCase().includes('present')
+            } else if (parts.length === 1) {
+                startDate = formatATSDate(parts[0])
+            }
+        }
+
+        // Split description into discrete bullet items
+        const rawDesc = clean(exp.description) || ''
+        let bullets: string[] = []
+        if (rawDesc) {
+            const splitLines = rawDesc
+                .split(/[\n\r•\-\*\u2022\u25E6\u25AA\u25CF]+/)
+                .map(l => l.trim())
+                .filter(l => l.length > 20)
+            
+            if (splitLines.length > 0) {
+                bullets = splitLines
+            } else if (rawDesc.length > 20) {
+                bullets = [rawDesc]
+            }
+        }
+
+        if (bullets.length === 0) {
+            bullets = [`Executed core ${title} responsibilities, managing key project deliverables and cross-functional team milestones.`]
+        }
+
+        return {
+            id: `exp-${idx}-${Date.now()}`,
+            title,
+            company,
+            location: clean(exp.location) || '',
+            startDate,
+            endDate,
+            current,
+            bullets
+        }
+    })
+
+    // 4. Skills categorizer
+    const rawSkills: string[] = Array.isArray(profile.skills) ? profile.skills : (profile.canonical?.display_data?.skills || [])
+    const categorized = categorizeSkills(rawSkills)
+
+    // 5. Education
+    const rawEdu = Array.isArray(profile.education) ? profile.education : (profile.canonical?.display_data?.education || [])
+    const education: ATSEducationItem[] = rawEdu.map((edu: any, idx: number) => {
+        if (typeof edu === 'string') {
+            const parts = edu.split(/[,|–-]/).map(p => p.trim())
+            return {
+                id: `edu-${idx}-${Date.now()}`,
+                degree: parts[1] || 'Degree / Studies',
+                school: parts[0] || edu,
+                graduationYear: parts[2] || '',
+                details: ''
+            }
+        }
+        return {
+            id: `edu-${idx}-${Date.now()}`,
+            degree: clean(edu.degree) || clean(edu.fieldOfStudy) || 'Bachelor of Science',
+            school: clean(edu.school) || clean(edu.institution) || 'University',
+            location: clean(edu.location) || '',
+            graduationYear: clean(edu.endYear || edu.duration || edu.year) || '',
+            details: clean(edu.details || edu.activities) || ''
+        }
+    })
+
+    // 6. Certifications
+    const rawCerts = Array.isArray(profile.certifications) ? profile.certifications : (profile.canonical?.display_data?.certifications || [])
+    const certifications: string[] = rawCerts.map((c: any) => typeof c === 'string' ? c : (c.name || c.title || '')).filter(Boolean)
+
+    return {
+        contact: {
+            fullName,
+            headline,
+            email: rawEmail || (fullName.toLowerCase().replace(/\s+/g, '.') + '@example.com'),
+            phone: rawPhone || '(555) 012-3456',
+            location: rawLocation || 'San Francisco, CA',
+            linkedinUrl: cleanLinkedin || `https://linkedin.com/in/${fullName.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
+            portfolioUrl: ''
+        },
+        summary: summary || `Accomplished ${headline} with demonstrated expertise in driving measurable business outcomes, scalable technical architectures, and high-impact cross-functional team execution.`,
+        experience: experience.length > 0 ? experience : generateSampleATSResume().experience,
+        skills: categorized,
+        education: education.length > 0 ? education : [{
+            id: 'edu-sample-1',
+            degree: 'Bachelor of Science in Computer Science',
+            school: 'State University',
+            location: 'Austin, TX',
+            graduationYear: '2022'
+        }],
+        certifications: certifications.length > 0 ? certifications : ['AWS Certified Solutions Architect', 'Project Management Professional (PMP)'],
+        projects: []
+    }
+}
+
+/**
+ * Format date string into ATS compliant MM/YYYY or Month YYYY
+ */
+function formatATSDate(dateStr: string): string {
+    if (!dateStr) return '01/2023'
+    const trimmed = dateStr.trim()
+    if (trimmed.toLowerCase() === 'present') return 'Present'
+
+    const months: Record<string, string> = {
+        'jan': '01', 'january': '01',
+        'feb': '02', 'february': '02',
+        'mar': '03', 'march': '03',
+        'apr': '04', 'april': '04',
+        'may': '05',
+        'jun': '06', 'june': '06',
+        'jul': '07', 'july': '07',
+        'aug': '08', 'august': '08',
+        'sep': '09', 'september': '09',
+        'oct': '10', 'october': '10',
+        'nov': '11', 'november': '11',
+        'dec': '12', 'december': '12'
+    }
+
+    const yearMatch = trimmed.match(/\b(19\d\d|20\d\d)\b/)
+    const monthMatch = trimmed.match(/\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b/i)
+
+    if (yearMatch && monthMatch) {
+        const mm = months[monthMatch[1].toLowerCase()] || '01'
+        return `${mm}/${yearMatch[1]}`
+    } else if (yearMatch) {
+        return `01/${yearMatch[1]}`
+    }
+
+    return trimmed
+}
+
+/**
+ * Categorize skills list into Technical, Tools, and Core Competencies
+ */
+export function categorizeSkills(skills: string[]): ATSSkillsData {
+    const techPatterns = /\b(python|javascript|typescript|react|node|java|c\+\+|golang|sql|nosql|graphql|aws|azure|gcp|docker|kubernetes|terraform|rust|ruby|swift|kotlin|api|backend|frontend|html|css|linux)\b/i
+    const toolPatterns = /\b(git|github|gitlab|jira|confluence|figma|postman|vscode|datadog|splunk|tableau|power bi|snowflake|kafka|redis|jenkins|circleci|webpack|vite|slack|notion)\b/i
+
+    const technical: string[] = []
+    const frameworksAndTools: string[] = []
+    const coreCompetencies: string[] = []
+
+    skills.forEach(s => {
+        const item = s.trim()
+        if (!item) return
+        if (techPatterns.test(item)) {
+            technical.push(item)
+        } else if (toolPatterns.test(item)) {
+            frameworksAndTools.push(item)
+        } else {
+            coreCompetencies.push(item)
+        }
+    })
+
+    // If some lists are empty, balance them gracefully
+    if (technical.length === 0 && skills.length > 0) {
+        technical.push(...skills.slice(0, Math.ceil(skills.length / 2)))
+        coreCompetencies.push(...skills.slice(Math.ceil(skills.length / 2)))
+    }
+
+    return {
+        technical: technical.slice(0, 10),
+        frameworksAndTools: frameworksAndTools.slice(0, 10),
+        coreCompetencies: coreCompetencies.slice(0, 10)
+    }
+}
+
+/**
+ * Real-time ATS Compatibility Scoring & Diagnostic Engine
+ */
+export function calculateATSScore(resume: ATSResumeData, targetJobDescription?: string): ATSScoreReport {
+    const checks: ATSScoreCheck[] = []
+    let score = 100
+
+    // 1. Single Column Layout (Always passes in our engine, informs user)
+    checks.push({
+        id: 'single-column-layout',
+        title: 'Single-Column Structure',
+        category: 'layout',
+        status: 'pass',
+        description: 'Document adheres to strict single-column ATS format without sidebars, nested tables, or reading barriers.'
+    })
+
+    // 2. Contact Information Placement Check
+    const hasName = Boolean(resume.contact.fullName && resume.contact.fullName.trim().length > 2)
+    const hasEmail = Boolean(resume.contact.email && resume.contact.email.includes('@'))
+    const hasPhone = Boolean(resume.contact.phone && resume.contact.phone.replace(/\D/g, '').length >= 10)
+    const hasLocation = Boolean(resume.contact.location && resume.contact.location.trim().length > 2)
+
+    if (hasName && hasEmail && hasPhone && hasLocation) {
+        checks.push({
+            id: 'contact-placement',
+            title: 'Main Body Contact Placement',
+            category: 'structure',
+            status: 'pass',
+            description: 'Name, email, phone, and location are positioned in the top body section, fully readable by Workday and Greenhouse parsers.'
+        })
+    } else {
+        score -= 10
+        checks.push({
+            id: 'contact-placement',
+            title: 'Incomplete Contact Details',
+            category: 'structure',
+            status: 'warning',
+            description: 'Ensure email, phone number, and location are provided at the top of the body text.',
+            fixTip: 'Add your direct phone number, clean email, and city/state to avoid parser drop-off.'
+        })
+    }
+
+    // 3. Universal Headings Check
+    checks.push({
+        id: 'standard-headings',
+        title: 'Universal ATS Section Titles',
+        category: 'structure',
+        status: 'pass',
+        description: 'Uses recognized standard section titles: Professional Summary, Work Experience, Skills, Education.'
+    })
+
+    // 4. Bullet Points & Action Verb Analysis
+    const allBullets: string[] = []
+    resume.experience.forEach(exp => {
+        if (Array.isArray(exp.bullets)) allBullets.push(...exp.bullets)
+    })
+
+    let actionVerbCount = 0
+    let metricCount = 0
+    let weakWordCount = 0
+    let buzzwordCount = 0
+
+    const metricRegex = /\b(\d+[\d,.]*|\d+k|\d+m|\d+%\b|\$[\d,.]+|\b\d+\s*(?:users|clients|customers|teams|hours|days|weeks|months|projects|services|engineers|developers|leads|dollars|percent|x)\b)/i
+
+    allBullets.forEach(b => {
+        const trimmed = b.trim()
+        if (!trimmed) return
+
+        const firstWord = trimmed.split(/\s+/)[0].replace(/[^a-zA-Z]/g, '').toLowerCase()
+        if (ATS_POWER_VERBS.includes(firstWord) || ATS_POWER_VERBS.some(pv => pv.startsWith(firstWord))) {
+            actionVerbCount++
+        }
+
+        if (metricRegex.test(trimmed)) {
+            metricCount++
+        }
+
+        const lowerBullet = trimmed.toLowerCase()
+        if (ATS_WEAK_WORDS.some(ww => lowerBullet.includes(ww))) {
+            weakWordCount++
+        }
+
+        if (ATS_BANNED_BUZZWORDS.some(bw => lowerBullet.includes(bw))) {
+            buzzwordCount++
+        }
+    })
+
+    const totalBullets = Math.max(1, allBullets.length)
+    const actionVerbRate = Math.round((actionVerbCount / totalBullets) * 100)
+    const metricDensityRate = Math.round((metricCount / totalBullets) * 100)
+
+    if (actionVerbRate >= 75) {
+        checks.push({
+            id: 'power-verbs',
+            title: `Strong Power Verb Density (${actionVerbRate}%)`,
+            category: 'content',
+            status: 'pass',
+            description: `${actionVerbCount} of ${totalBullets} experience bullet points begin with active achievement verbs (e.g., Engineered, Scaled, Spearheaded).`
+        })
+    } else {
+        score -= 12
+        checks.push({
+            id: 'power-verbs',
+            title: `Low Action Verb Density (${actionVerbRate}%)`,
+            category: 'content',
+            status: 'warning',
+            description: 'Begin every work experience bullet point with an active power verb instead of passive responsibility phrases.',
+            fixTip: 'Use 1-Click "AI Enhance All Bullets" to rewrite bullets with active verbs.'
+        })
+    }
+
+    if (metricDensityRate >= 60) {
+        checks.push({
+            id: 'metric-density',
+            title: `Quantified Impact Metrics (${metricDensityRate}%)`,
+            category: 'content',
+            status: 'pass',
+            description: `${metricCount} of ${totalBullets} bullets feature quantifiable metrics (%, $, scale, or reduction counts).`
+        })
+    } else {
+        score -= 12
+        checks.push({
+            id: 'metric-density',
+            title: `Missing Measurable Metrics (${metricDensityRate}%)`,
+            category: 'content',
+            status: 'warning',
+            description: 'Recruiters and ATS rank candidate resumes higher when achievements include specific percentage gains, volume, or timeline numbers.',
+            fixTip: 'Add measurable result numbers (e.g., "reduced latency by 24%", "scaled to 50k DAU").'
+        })
+    }
+
+    // 5. Buzzword & AI Cliché Detector
+    if (buzzwordCount === 0 && weakWordCount === 0) {
+        checks.push({
+            id: 'fluff-check',
+            title: 'Zero Cliché / Banned AI Buzzwords',
+            category: 'content',
+            status: 'pass',
+            description: 'Free of generic filler words like "passionate go-getter", "team player", "delve", or "tapestry".'
+        })
+    } else {
+        score -= 8
+        checks.push({
+            id: 'fluff-check',
+            title: `${buzzwordCount + weakWordCount} Generic Fluff / Passive Phrases Detected`,
+            category: 'content',
+            status: 'warning',
+            description: 'Detected passive duty openers ("responsible for") or overused buzzwords.',
+            fixTip: 'Replace passive phrases with concrete skills and quantifiable accomplishments.'
+        })
+    }
+
+    // 6. Skills & Categorization Check
+    const totalSkills = resume.skills.technical.length + resume.skills.frameworksAndTools.length + resume.skills.coreCompetencies.length
+    if (totalSkills >= 8) {
+        checks.push({
+            id: 'skills-density',
+            title: `Comprehensive Keyword & Skills Coverage (${totalSkills} skills)`,
+            category: 'keywords',
+            status: 'pass',
+            description: 'Well-distributed hard skills and tools ready for keyword parsing algorithms.'
+        })
+    } else {
+        score -= 10
+        checks.push({
+            id: 'skills-density',
+            title: 'Low Skill Keyword Count',
+            category: 'keywords',
+            status: 'warning',
+            description: `Only ${totalSkills} skills listed. ATS algorithms match candidate profiles against target job requirements.`,
+            fixTip: 'Add at least 8-15 technical skills, frameworks, and methodologies.'
+        })
+    }
+
+    // Calculate word count and estimated page fit
+    const fullText = [
+        resume.contact.fullName,
+        resume.contact.headline,
+        resume.summary,
+        ...allBullets,
+        ...resume.skills.technical,
+        ...resume.skills.frameworksAndTools,
+        ...resume.skills.coreCompetencies,
+        ...resume.education.map(e => `${e.degree} ${e.school} ${e.details || ''}`)
+    ].join(' ')
+
+    const wordCount = fullText.split(/\s+/).filter(Boolean).length
+    const estimatedPages = wordCount <= 480 ? 1 : (wordCount <= 950 ? 2 : 3)
+
+    if (estimatedPages > 2) {
+        score -= 8
+        checks.push({
+            id: 'length-warning',
+            title: 'Resume Exceeds 2 Pages (Over 950 words)',
+            category: 'structure',
+            status: 'warning',
+            description: 'ATS parsers and recruiters prefer 1 page for <5 years experience or 2 pages for senior candidates.',
+            fixTip: 'Condense experience bullets to 3-5 high-impact bullets per role.'
+        })
+    }
+
+    const finalScore = Math.max(40, Math.min(100, score))
+    let grade: 'A+' | 'A' | 'B' | 'C' = 'C'
+    if (finalScore >= 90) grade = 'A+'
+    else if (finalScore >= 80) grade = 'A'
+    else if (finalScore >= 65) grade = 'B'
+
+    return {
+        overallScore: finalScore,
+        grade,
+        checks,
+        metrics: {
+            actionVerbRate,
+            metricDensityRate,
+            buzzwordCount: buzzwordCount + weakWordCount,
+            wordCount,
+            estimatedPages
+        }
+    }
+}
+
+/**
+ * Analyze Job Description against Resume for ATS Keyword Matching
+ */
+export function analyzeJobMatch(resume: ATSResumeData, jobDescription: string): JobMatchAnalysis {
+    if (!jobDescription || jobDescription.trim().length < 30) {
+        return {
+            matchScore: 0,
+            matchedKeywords: [],
+            missingKeywords: [],
+            recommendations: ['Paste a complete job description to analyze keyword match score and gap requirements.']
+        }
+    }
+
+    // Extract potential hard skills & keywords from Job Description
+    const jdClean = jobDescription.toLowerCase()
+    
+    // Compile resume text for searching
+    const resumeText = [
+        resume.contact.headline,
+        resume.summary,
+        ...resume.skills.technical,
+        ...resume.skills.frameworksAndTools,
+        ...resume.skills.coreCompetencies,
+        ...resume.experience.flatMap(e => [e.title, ...e.bullets]),
+        ...resume.education.map(e => `${e.degree} ${e.school}`)
+    ].join(' ').toLowerCase()
+
+    // Common technical and functional keyword bank for ATS matching
+    const candidateKeywords = [
+        'python', 'javascript', 'typescript', 'react', 'react native', 'node.js', 'nodejs',
+        'sql', 'postgresql', 'mysql', 'mongodb', 'graphql', 'rest api', 'apis',
+        'aws', 'amazon web services', 'azure', 'gcp', 'google cloud', 'docker', 'kubernetes',
+        'ci/cd', 'terraform', 'system design', 'microservices', 'distributed systems',
+        'agile', 'scrum', 'project management', 'cross-functional', 'leadership',
+        'data analysis', 'machine learning', 'ai', 'data engineering', 'analytics',
+        'seo', 'product management', 'ux', 'ui', 'performance optimization',
+        'unit testing', 'test automation', 'security', 'compliance', 'devops',
+        'stakeholder management', 'budget management', 'strategic planning', 'growth'
+    ]
+
+    // Find words that appear in JD
+    const jdKeywords: string[] = []
+    candidateKeywords.forEach(kw => {
+        if (jdClean.includes(kw)) {
+            jdKeywords.push(kw)
+        }
+    })
+
+    // Also extract 2-word & 3-word uppercase or titlecase technical terms from raw JD
+    const customMatches = jobDescription.match(/\b([A-Z][a-zA-Z0-9\+#\.]+(?:\s+[A-Z][a-zA-Z0-9\+#\.]+)?)\b/g) || []
+    customMatches.slice(0, 15).forEach(m => {
+        const low = m.toLowerCase().trim()
+        if (low.length > 2 && !jdKeywords.includes(low) && !['the', 'and', 'with', 'for', 'you', 'our', 'will', 'are'].includes(low)) {
+            jdKeywords.push(low)
+        }
+    })
+
+    const matchedKeywords: string[] = []
+    const missingKeywords: string[] = []
+
+    jdKeywords.forEach(kw => {
+        if (resumeText.includes(kw)) {
+            matchedKeywords.push(capitalizeSkill(kw))
+        } else {
+            missingKeywords.push(capitalizeSkill(kw))
+        }
+    })
+
+    const totalKeywords = jdKeywords.length || 1
+    const matchScore = Math.min(100, Math.round((matchedKeywords.length / totalKeywords) * 100))
+
+    const recommendations: string[] = []
+    if (missingKeywords.length > 0) {
+        recommendations.push(`Incorporate high-priority keywords (${missingKeywords.slice(0, 4).join(', ')}) into your Work Experience bullets or Skills section.`)
+        recommendations.push('Spell out abbreviations with the acronym in parentheses, e.g., "Search Engine Optimization (SEO)".')
+    }
+    if (matchScore >= 80) {
+        recommendations.push('Excellent match! Your resume contains over 80% of critical terminology found in this job description.')
+    } else {
+        recommendations.push('Click "1-Click AI Tailor to Job Description" to naturally integrate missing skills into your bullet points.')
+    }
+
+    return {
+        matchScore,
+        matchedKeywords: matchedKeywords.slice(0, 15),
+        missingKeywords: missingKeywords.slice(0, 15),
+        recommendations
+    }
+}
+
+function capitalizeSkill(str: string): string {
+    return str.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+}
+
+/**
+ * Generate a complete sample ATS Resume for 1-click preview
+ */
+export function generateSampleATSResume(): ATSResumeData {
+    return {
+        contact: {
+            fullName: 'Alex Morgan',
+            headline: 'Senior Full Stack Software Engineer',
+            email: 'alex.morgan@example.com',
+            phone: '(415) 890-1234',
+            location: 'San Francisco, CA',
+            linkedinUrl: 'https://linkedin.com/in/alexmorgan-eng',
+            portfolioUrl: 'https://alexmorgan.dev'
+        },
+        summary: 'Senior Software Engineer with 6+ years of experience architecting high-throughput distributed systems and responsive web applications. Proven track record reducing API latency by 42% and scaling cloud infrastructure to support 1.2M daily active users.',
+        experience: [
+            {
+                id: 'sample-exp-1',
+                title: 'Senior Software Engineer',
+                company: 'Vanguard Cloud Technologies',
+                location: 'San Francisco, CA',
+                startDate: '03/2022',
+                endDate: 'Present',
+                current: true,
+                bullets: [
+                    'Architected distributed microservices platform using Node.js and TypeScript, handling 45M+ daily requests with 99.99% uptime.',
+                    'Engineered PostgreSQL database query optimization pipelines, reducing average API response latency by 42% across core endpoints.',
+                    'Spearheaded automated CI/CD deployment pipelines on AWS and Docker, accelerating weekly release cycles from 3 days to under 40 minutes.',
+                    'Mentored 5 junior and mid-level engineers in test-driven development and code quality standards, decreasing bug reports by 28%.'
+                ]
+            },
+            {
+                id: 'sample-exp-2',
+                title: 'Software Engineer',
+                company: 'Nexus Digital Systems',
+                location: 'Austin, TX',
+                startDate: '06/2019',
+                endDate: '02/2022',
+                current: false,
+                bullets: [
+                    'Built scalable customer-facing dashboard features in React and TypeScript, increasing user session engagement by 34%.',
+                    'Integrated secure third-party payment and identity verification REST APIs with zero compliance incidents.',
+                    'Automated integration testing suite with Jest and Cypress, elevating overall test coverage from 62% to 91%.'
+                ]
+            }
+        ],
+        skills: {
+            technical: ['TypeScript', 'JavaScript', 'Node.js', 'Python', 'React', 'Next.js', 'PostgreSQL', 'GraphQL', 'REST APIs'],
+            frameworksAndTools: ['AWS (Lambda, S3, RDS)', 'Docker', 'Kubernetes', 'Git', 'CI/CD Pipelines', 'Redis', 'Tailwind CSS'],
+            coreCompetencies: ['System Architecture', 'Performance Optimization', 'Agile / Scrum', 'Cross-Functional Leadership', 'Code Review']
+        },
+        education: [
+            {
+                id: 'sample-edu-1',
+                degree: 'Bachelor of Science in Computer Science',
+                school: 'University of California, Berkeley',
+                location: 'Berkeley, CA',
+                graduationYear: '2019',
+                details: 'Dean\'s Honor List, Coursework in Distributed Systems & Data Structures'
+            }
+        ],
+        certifications: [
+            'AWS Certified Solutions Architect – Associate',
+            'Certified Scrum Master (CSM)'
+        ],
+        projects: []
+    }
+}
+
+/**
+ * Export ATS Resume to Plain Text (.txt) for direct ATS Portal Paste
+ */
+export function exportToPlainText(resume: ATSResumeData): string {
+    const lines: string[] = []
+
+    // Header
+    lines.push(resume.contact.fullName.toUpperCase())
+    lines.push(`${resume.contact.headline}`)
+    lines.push(`${resume.contact.location} | ${resume.contact.phone} | ${resume.contact.email} | ${resume.contact.linkedinUrl}`)
+    if (resume.contact.portfolioUrl) lines.push(`Portfolio: ${resume.contact.portfolioUrl}`)
+    lines.push('')
+
+    // Professional Summary
+    if (resume.summary) {
+        lines.push('PROFESSIONAL SUMMARY')
+        lines.push('--------------------')
+        lines.push(resume.summary)
+        lines.push('')
+    }
+
+    // Skills
+    const techSkills = resume.skills.technical.join(', ')
+    const tools = resume.skills.frameworksAndTools.join(', ')
+    const competencies = resume.skills.coreCompetencies.join(', ')
+
+    if (techSkills || tools || competencies) {
+        lines.push('CORE SKILLS & TECHNOLOGIES')
+        lines.push('--------------------------')
+        if (techSkills) lines.push(`Technical Skills: ${techSkills}`)
+        if (tools) lines.push(`Tools & Infrastructure: ${tools}`)
+        if (competencies) lines.push(`Core Competencies: ${competencies}`)
+        lines.push('')
+    }
+
+    // Work Experience
+    if (resume.experience.length > 0) {
+        lines.push('WORK EXPERIENCE')
+        lines.push('---------------')
+        resume.experience.forEach(exp => {
+            lines.push(`${exp.title.toUpperCase()} | ${exp.company}`)
+            lines.push(`${exp.startDate} - ${exp.endDate}${exp.location ? ` | ${exp.location}` : ''}`)
+            exp.bullets.forEach(b => {
+                lines.push(`* ${b}`)
+            })
+            lines.push('')
+        })
+    }
+
+    // Education
+    if (resume.education.length > 0) {
+        lines.push('EDUCATION')
+        lines.push('---------')
+        resume.education.forEach(edu => {
+            lines.push(`${edu.degree} | ${edu.school}`)
+            lines.push(`${edu.graduationYear}${edu.location ? ` | ${edu.location}` : ''}`)
+            if (edu.details) lines.push(`* ${edu.details}`)
+            lines.push('')
+        })
+    }
+
+    // Certifications
+    if (resume.certifications.length > 0) {
+        lines.push('CERTIFICATIONS')
+        lines.push('--------------')
+        resume.certifications.forEach(cert => {
+            lines.push(`* ${cert}`)
+        })
+        lines.push('')
+    }
+
+    return lines.join('\n')
+}
+
+/**
+ * Export ATS Resume to Word-Compatible HTML (.doc)
+ */
+export function exportToWordHtml(resume: ATSResumeData): string {
+    const contactLine = [
+        resume.contact.location,
+        resume.contact.phone,
+        resume.contact.email,
+        resume.contact.linkedinUrl
+    ].filter(Boolean).join(' | ')
+
+    return `<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset='utf-8'>
+<title>${resume.contact.fullName} - ATS Resume</title>
+<style>
+body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; line-height: 1.35; color: #111111; margin: 0.5in; }
+h1 { font-size: 18pt; margin: 0 0 4pt 0; text-transform: uppercase; letter-spacing: 0.5pt; }
+.headline { font-size: 12pt; font-weight: bold; color: #333333; margin-bottom: 4pt; }
+.contact { font-size: 10pt; color: #444444; margin-bottom: 14pt; padding-bottom: 6pt; border-bottom: 1.5pt solid #222222; }
+h2 { font-size: 12pt; text-transform: uppercase; margin: 12pt 0 4pt 0; border-bottom: 1pt solid #444444; padding-bottom: 2pt; letter-spacing: 0.5pt; }
+.job-header { display: flex; justify-content: space-between; font-weight: bold; margin-top: 6pt; }
+.job-title { font-weight: bold; }
+.job-date { float: right; font-style: normal; }
+ul { margin: 3pt 0 8pt 18pt; padding: 0; }
+li { margin-bottom: 3pt; }
+.skills-block { margin-top: 4pt; }
+</style>
+</head>
+<body>
+<h1>${resume.contact.fullName}</h1>
+<div class='headline'>${resume.contact.headline}</div>
+<div class='contact'>${contactLine}</div>
+
+${resume.summary ? `
+<h2>Professional Summary</h2>
+<p>${resume.summary}</p>
+` : ''}
+
+${(resume.skills.technical.length > 0 || resume.skills.frameworksAndTools.length > 0 || resume.skills.coreCompetencies.length > 0) ? `
+<h2>Skills & Core Competencies</h2>
+<div class='skills-block'>
+${resume.skills.technical.length > 0 ? `<p><strong>Technical Skills:</strong> ${resume.skills.technical.join(', ')}</p>` : ''}
+${resume.skills.frameworksAndTools.length > 0 ? `<p><strong>Tools & Infrastructure:</strong> ${resume.skills.frameworksAndTools.join(', ')}</p>` : ''}
+${resume.skills.coreCompetencies.length > 0 ? `<p><strong>Core Competencies:</strong> ${resume.skills.coreCompetencies.join(', ')}</p>` : ''}
+</div>
+` : ''}
+
+${resume.experience.length > 0 ? `
+<h2>Work Experience</h2>
+${resume.experience.map(exp => `
+<div style='margin-bottom: 8pt;'>
+<div class='job-header'>
+<span class='job-title'>${exp.title} | ${exp.company}</span>
+<span class='job-date'>${exp.startDate} – ${exp.endDate}</span>
+</div>
+${exp.location ? `<div style='font-size: 9.5pt; color: #555555; margin-bottom: 2pt;'>${exp.location}</div>` : ''}
+<ul>
+${exp.bullets.map(b => `<li>${b}</li>`).join('\n')}
+</ul>
+</div>
+`).join('\n')}
+` : ''}
+
+${resume.education.length > 0 ? `
+<h2>Education</h2>
+${resume.education.map(edu => `
+<div style='margin-bottom: 6pt;'>
+<div class='job-header'>
+<span class='job-title'>${edu.degree} | ${edu.school}</span>
+<span class='job-date'>${edu.graduationYear}</span>
+</div>
+${edu.details ? `<p style='margin: 2pt 0;'>${edu.details}</p>` : ''}
+</div>
+`).join('\n')}
+` : ''}
+
+${resume.certifications.length > 0 ? `
+<h2>Certifications</h2>
+<ul>
+${resume.certifications.map(c => `<li>${c}</li>`).join('\n')}
+</ul>
+` : ''}
+
+</body>
+</html>`
+}
+

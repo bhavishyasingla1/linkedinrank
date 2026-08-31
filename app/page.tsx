@@ -93,7 +93,14 @@ const homepageFaqSchema = {
     ],
 }
 
-const ALL_12_TOOLS = [
+const ALL_TOOLS_LIST = [
+    {
+        name: 'ATS Resume Maker',
+        slug: 'linkedin-pdf-to-ats-resume-maker',
+        tag: 'New · AI',
+        description: 'LinkedIn PDF to ATS single-column resume',
+        icon: <FileTextIcon size={18} className="text-[#2f27ce]" />,
+    },
     {
         name: 'Headline Generator',
         slug: 'linkedin-headline-generator',
@@ -499,7 +506,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* ── 7. ALL 12 FREE TOOLS — light bg ─────────────── */}
+                {/* ── 7. ALL 13 FREE TOOLS — light bg ─────────────── */}
                 <section className="py-16 sm:py-24 border-t border-[#dedcff] section-light relative overflow-hidden">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-12 relative z-10">
                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -510,10 +517,10 @@ export default function HomePage() {
                                     <span>&rarr;</span>
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#050315] tracking-tight leading-tight">
-                                    12 Free LinkedIn Generators
+                                    13 Free LinkedIn Generators
                                 </h2>
                                 <p className="text-base text-[#050315]/75 mt-2 max-w-xl leading-relaxed">
-                                    Instant standalone generators built for every profile section and content strategy.
+                                    Instant standalone generators built for ATS resumes, profile optimization, and content strategy.
                                 </p>
                             </div>
 
@@ -521,13 +528,13 @@ export default function HomePage() {
                                 href="/tools"
                                 className="inline-flex items-center gap-2 text-sm font-bold text-[#2f27ce] hover:text-[#433bff] transition-colors no-underline shrink-0"
                             >
-                                <span>Explore all 12 tools</span>
+                                <span>Explore all 13 tools</span>
                                 <ArrowRightIcon size={15} />
                             </Link>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                            {ALL_12_TOOLS.map((tool) => (
+                            {ALL_TOOLS_LIST.map((tool) => (
                                 <Link
                                     key={tool.slug}
                                     href={`/tools/${tool.slug}`}
@@ -682,7 +689,7 @@ export default function HomePage() {
                                 Ready to improve your LinkedIn rank?
                             </h2>
                             <p className="text-base sm:text-lg text-white/80 max-w-lg mx-auto leading-relaxed">
-                                Run a free recruiter-grade audit or explore 12 standalone optimization tools.
+                                Run a free recruiter-grade audit or explore 13 standalone optimization tools.
                             </p>
                         </div>
 
@@ -699,7 +706,7 @@ export default function HomePage() {
                                 href="/tools"
                                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 text-base font-bold transition-all no-underline cursor-pointer active:scale-95 backdrop-blur-sm"
                             >
-                                <span>Explore 12 Free Tools</span>
+                                <span>Explore 13 Free Tools</span>
                             </Link>
                         </div>
                     </div>

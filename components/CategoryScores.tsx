@@ -1,109 +1,70 @@
 'use client'
 
-import { useState } from 'react'
 import { CategoryScore } from '@/lib/types'
-import { ChevronDownIcon, CheckCircleIcon, AlertTriangleIcon, AlertCircleIcon, LayersIcon } from '@/components/ui/Icons'
+import { LayersIcon } from '@/components/ui/Icons'
 
 interface CategoryScoresProps {
     categories: CategoryScore[]
 }
 
 export default function CategoryScores({ categories }: CategoryScoresProps) {
-    const [expanded, setExpanded] = useState<number | null>(0)
-
-    if (!categories || categories.length === 0) return null
+    if (!categories || !Array.isArray(categories) || categories.length === 0) return null
 
     return (
-        <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow">
-            <div className="px-6 sm:px-8 py-5 border-b border-[#dedcff]/70 flex items-center justify-between">
+        <div className="bg-white border-2 border-[#dedcff] rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 space-y-4 sm:space-y-5 aside-card-shadow overflow-hidden">
+            <div className="space-y-1 border-b border-[#dedcff]/70 pb-3.5 sm:pb-4">
                 <div className="flex items-center gap-2">
-                    <LayersIcon size={16} className="text-[#2f27ce]" />
-                    <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
-                        Section Breakdown &amp; Algorithmic Signals
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 shadow-2xs">
+                        <LayersIcon size={16} />
+                    </div>
+                    <h3 className="text-[17px] sm:text-[20px] font-extrabold text-[#050315] tracking-tight">
+                        Section Health Breakdown
                     </h3>
                 </div>
-                <span className="text-[11.5px] font-bold text-[#050315]/60">
-                    {categories.length} Categories Audited
-                </span>
+                <p className="text-[13px] sm:text-[14.5px] text-[#050315]/75 leading-relaxed">
+                    How each section of your LinkedIn profile scores against recruiter search algorithms.
+                </p>
             </div>
 
-            <div className="divide-y divide-[#dedcff]/60">
+            <div className="space-y-3.5 sm:space-y-4 pt-0.5">
                 {categories.map((cat, i) => {
-                    const isExpanded = expanded === i
-                    const isStrong = cat.percentage >= 70
-                    const isNeedsWork = cat.percentage >= 45 && cat.percentage < 70
-                    const isWeak = cat.percentage < 45
+                    const rawPct = typeof cat.percentage === 'number' ? cat.percentage : 0
+                    const pct = Math.max(0, Math.min(100, Math.round(rawPct)))
+                    const earned = typeof cat.earnedPoints === 'number' ? cat.earnedPoints : Math.round((pct / 100) * (cat.maxPoints || 20))
+                    const max = typeof cat.maxPoints === 'number' ? cat.maxPoints : 20
+
+                    const isHigh = pct >= 80
+                    const isMed = pct >= 60 && pct < 80
+
+                    const badgeColor = isHigh
+                        ? 'bg-[#dedcff] text-[#2f27ce] border-[#dedcff]'
+                        : isMed
+                        ? 'bg-amber-50 text-amber-800 border-amber-200'
+                        : 'bg-rose-50 text-rose-700 border-rose-200'
 
                     return (
-                        <div key={i} className="transition-colors">
-                            <button
-                                className="w-full flex items-center justify-between gap-4 px-6 sm:px-8 py-5 hover:bg-[#dedcff]/15 transition-colors cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2f27ce]"
-                                onClick={() => setExpanded(isExpanded ? null : i)}
-                                aria-expanded={isExpanded}
-                            >
-                                <div className="flex-1 min-w-0 space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-[15px] font-bold text-[#050315]">
-                                            {cat.category}
-                                        </span>
-                                        <div className="flex items-center gap-2.5">
-                                            <span className={`inline-flex items-center justify-center text-center leading-none text-[11.5px] font-bold px-3 py-1.5 rounded-full shadow-2xs ${
-                                                isStrong
-                                                    ? 'bg-[#dedcff] text-[#2f27ce]'
-                                                    : isNeedsWork
-                                                    ? 'bg-amber-100 text-amber-800'
-                                                    : 'bg-rose-100 text-rose-700'
-                                            }`}>
-                                                {isStrong ? 'Strong' : isNeedsWork ? 'Needs Polish' : 'Weak'}
-                                            </span>
-                                            <span className="text-[13.5px] font-extrabold tabular-nums text-[#050315]">
-                                                {cat.earnedPoints}/{cat.maxPoints} pts
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="h-2 bg-[#dedcff]/50 rounded-full overflow-hidden">
-                                        <div
-                                            className={`h-full rounded-full transition-all duration-500 ease-out ${
-                                                isStrong
-                                                    ? 'bg-gradient-to-r from-[#2f27ce] to-[#433bff]'
-                                                    : isNeedsWork
-                                                    ? 'bg-amber-500'
-                                                    : 'bg-rose-500'
-                                            }`}
-                                            style={{ width: `${Math.max(cat.percentage, 5)}%` }}
-                                        />
-                                    </div>
+                        <div key={i} className="space-y-1.5 sm:space-y-2">
+                            <div className="flex items-center justify-between gap-2 text-[13px] sm:text-[14.5px]">
+                                <span className="font-bold text-[#050315] truncate">
+                                    {cat.category || 'Profile Section'}
+                                </span>
+                                <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                                    <span className="font-semibold text-[#050315]/70 tabular-nums text-[12px] sm:text-[14px]">
+                                        {earned} / {max} pts
+                                    </span>
+                                    <span className={`text-[10.5px] sm:text-[11.5px] font-extrabold px-2 py-0.5 sm:px-2.5 rounded-full border tabular-nums shadow-2xs ${badgeColor}`}>
+                                        {pct}%
+                                    </span>
                                 </div>
+                            </div>
 
-                                <div className={`w-8 h-8 rounded-full bg-[#dedcff] text-[#2f27ce] flex items-center justify-center shrink-0 ml-3 transition-transform duration-200 ${isExpanded ? 'rotate-180 bg-[#2f27ce] text-white' : ''}`}>
-                                    <ChevronDownIcon size={16} />
-                                </div>
-                            </button>
-
-                            {cat.breakdown && cat.breakdown.length > 0 && isExpanded && (
-                                <div className="px-6 sm:px-8 pb-5 pt-2 bg-[#dedcff]/10 border-t border-[#dedcff]/60 animate-fade-in space-y-2.5">
-                                    {cat.breakdown.map((item, j) => {
-                                        const isPositive = item.startsWith('✓') || item.startsWith('✔')
-                                        const isNegative = item.startsWith('○') || item.startsWith('✗') || item.startsWith('✘')
-                                        const cleanItem = item.replace(/^[✓✔○✗✘]\s*/, '')
-
-                                        return (
-                                            <div key={j} className="flex items-start gap-2.5 text-[13.5px]">
-                                                {isPositive ? (
-                                                    <CheckCircleIcon size={16} className="text-[#2f27ce] shrink-0 mt-0.5" />
-                                                ) : isNegative ? (
-                                                    <AlertTriangleIcon size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                                                ) : (
-                                                    <span className="w-2 h-2 rounded-full bg-[#2f27ce] shrink-0 mt-1.5" />
-                                                )}
-                                                <span className="text-[#050315]/80 leading-relaxed">
-                                                    {cleanItem}
-                                                </span>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )}
+                            {/* Thin, clean progress bar */}
+                            <div className="h-2 sm:h-2.5 w-full bg-[#dedcff]/50 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-gradient-to-r from-[#2f27ce] to-[#433bff] rounded-full transition-all duration-500 ease-out"
+                                    style={{ width: `${Math.max(pct, 4)}%` }}
+                                />
+                            </div>
                         </div>
                     )
                 })}

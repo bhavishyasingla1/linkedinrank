@@ -1,18 +1,27 @@
 'use client'
 
 import React from 'react'
-import HeadlineGeneratorTool from '@/components/tools/HeadlineGenerator'
-import AboutGeneratorTool from '@/components/tools/AboutGenerator'
-import BulletImproverV2 from '@/components/tools/BulletImproverV2'
-import ProfileRingCreator from '@/components/tools/ProfileRingCreator'
-import SEOCheckerTool from '@/components/tools/SEOChecker'
-import PostIdeaGenerator from '@/components/tools/PostIdeaGenerator'
-import StoryToPost from '@/components/tools/StoryToPost'
-import PostHookGeneratorTool from '@/components/tools/PostHookGenerator'
-import ContentPillarPlanner from '@/components/tools/ContentPillarPlanner'
-import CommentGenerator from '@/components/tools/CommentGenerator'
-import ConnectionMessageGenerator from '@/components/tools/ConnectionMessageGenerator'
-import QRCodeGeneratorTool from '@/components/tools/QRCodeGenerator'
+import dynamic from 'next/dynamic'
+
+const LoadingFallback = () => (
+    <div className="flex items-center justify-center p-12 text-[#2f27ce]">
+        <div className="w-8 h-8 border-3 border-[#2f27ce] border-t-transparent rounded-full animate-spin" />
+    </div>
+)
+
+const HeadlineGeneratorTool = dynamic(() => import('@/components/tools/HeadlineGenerator'), { loading: LoadingFallback, ssr: false })
+const AboutGeneratorTool = dynamic(() => import('@/components/tools/AboutGenerator'), { loading: LoadingFallback, ssr: false })
+const BulletImproverV2 = dynamic(() => import('@/components/tools/BulletImproverV2'), { loading: LoadingFallback, ssr: false })
+const ProfileRingCreator = dynamic(() => import('@/components/tools/ProfileRingCreator'), { loading: LoadingFallback, ssr: false })
+const SEOCheckerTool = dynamic(() => import('@/components/tools/SEOChecker'), { loading: LoadingFallback, ssr: false })
+const PostIdeaGenerator = dynamic(() => import('@/components/tools/PostIdeaGenerator'), { loading: LoadingFallback, ssr: false })
+const StoryToPost = dynamic(() => import('@/components/tools/StoryToPost'), { loading: LoadingFallback, ssr: false })
+const PostHookGeneratorTool = dynamic(() => import('@/components/tools/PostHookGenerator'), { loading: LoadingFallback, ssr: false })
+const ContentPillarPlanner = dynamic(() => import('@/components/tools/ContentPillarPlanner'), { loading: LoadingFallback, ssr: false })
+const CommentGenerator = dynamic(() => import('@/components/tools/CommentGenerator'), { loading: LoadingFallback, ssr: false })
+const ConnectionMessageGenerator = dynamic(() => import('@/components/tools/ConnectionMessageGenerator'), { loading: LoadingFallback, ssr: false })
+const QRCodeGeneratorTool = dynamic(() => import('@/components/tools/QRCodeGenerator'), { loading: LoadingFallback, ssr: false })
+const ATSResumeMaker = dynamic(() => import('@/components/tools/ATSResumeMaker'), { loading: LoadingFallback, ssr: false })
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     headline: HeadlineGeneratorTool,
@@ -27,6 +36,7 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     comments: CommentGenerator,
     messages: ConnectionMessageGenerator,
     qrcode: QRCodeGeneratorTool,
+    atsresume: ATSResumeMaker,
 }
 
 export default function ToolPageClient({ toolId }: { toolId: string }) {

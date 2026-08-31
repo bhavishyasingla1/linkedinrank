@@ -1,7 +1,7 @@
 'use client'
 
 import { ImprovementStep } from '@/lib/types'
-import { SparklesIcon, TrendingUpIcon } from '@/components/ui/Icons'
+import { TrendingUpIcon } from '@/components/ui/Icons'
 
 interface ImprovementPathProps {
     steps: ImprovementStep[]
@@ -15,56 +15,57 @@ export default function ImprovementPath({ steps, currentScore }: ImprovementPath
     const targetScore = Math.min(currentScore + totalGain, 100)
 
     return (
-        <div className="bg-white border-2 border-[#dedcff] rounded-3xl overflow-hidden aside-card-shadow space-y-0">
-            <div className="p-6 sm:p-8 border-b border-[#dedcff]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                        <TrendingUpIcon size={16} className="text-[#2f27ce]" />
-                        <h3 className="text-[12px] font-extrabold text-[#2f27ce] uppercase tracking-wider">
+        <div id="roadmap" className="bg-white border border-[#dedcff] rounded-lg overflow-hidden space-y-0">
+            {/* Header */}
+            <div className="p-4 sm:p-5 border-b border-[#dedcff] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                    <TrendingUpIcon size={15} className="text-[#2f27ce]" />
+                    <div>
+                        <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-[#050315]">
                             Priority Improvement Roadmap
                         </h3>
                     </div>
-                    <p className="text-[14px] text-[#050315]/70">
-                        High-leverage fixes sorted by potential score gain
-                    </p>
                 </div>
-                <span className="text-[12.5px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-3.5 py-1 rounded-full shadow-2xs self-start sm:self-auto">
-                    +{totalGain} pts possible
+                <span className="text-xs font-mono font-bold text-[#2f27ce] bg-[#fbfbfe] border border-[#dedcff] px-2.5 py-0.5 rounded">
+                    +{totalGain} pts Potential Gain
                 </span>
             </div>
 
-            <div className="p-6 sm:p-8 space-y-3.5">
+            {/* Roadmap Steps */}
+            <div className="p-4 sm:p-5 space-y-2.5">
                 {steps.map((step, i) => (
                     <div
                         key={i}
-                        className="flex items-center gap-4 p-4 rounded-2xl bg-[#dedcff]/20 border border-[#dedcff] hover:border-[#2f27ce] transition-colors"
+                        className="flex items-center justify-between gap-3 p-3 rounded-md bg-[#fbfbfe] border border-[#dedcff] hover:border-[#2f27ce] transition-colors"
                     >
-                        <span className="w-7 h-7 rounded-xl bg-gradient-to-tr from-[#2f27ce] to-[#433bff] text-[#fbfbfe] text-[12px] font-black flex items-center justify-center shrink-0 shadow-xs">
-                            {i + 1}
-                        </span>
-                        <p className="text-[14px] font-bold text-[#050315] flex-1 leading-snug">
-                            {step.action}
-                        </p>
-                        <span className="text-[12.5px] font-extrabold text-[#2f27ce] bg-[#dedcff] px-2.5 py-1 rounded-full tabular-nums shrink-0">
+                        <div className="flex items-center gap-2.5">
+                            <span className="w-5 h-5 rounded bg-white border border-[#dedcff] text-[#2f27ce] text-[11px] font-mono font-bold flex items-center justify-center shrink-0">
+                                {i + 1}
+                            </span>
+                            <p className="text-[12.5px] font-semibold text-[#050315] leading-snug">
+                                {step.action}
+                            </p>
+                        </div>
+                        <span className="text-[11.5px] font-mono font-bold text-[#2f27ce] bg-white border border-[#dedcff] px-2 py-0.5 rounded shrink-0 tabular-nums">
                             +{step.gain} pts
                         </span>
                     </div>
                 ))}
             </div>
 
-            {/* Potential Score Gain Comparison Bar */}
-            <div className="px-6 sm:px-8 py-5 bg-[#dedcff]/25 border-t border-[#dedcff]/70">
-                <div className="flex items-center justify-between text-[13px] text-[#050315]/70 mb-2 font-bold">
-                    <span>Current: <strong className="text-[#050315]">{currentScore}/100</strong></span>
-                    <span>Potential: <strong className="text-[#2f27ce]">{targetScore}/100</strong></span>
+            {/* Potential Score Gain Bar */}
+            <div className="p-4 sm:p-5 bg-[#fbfbfe] border-t border-[#dedcff] space-y-2">
+                <div className="flex items-center justify-between text-xs font-mono text-[#050315]/75">
+                    <span>Baseline: <strong className="text-[#050315]">{currentScore}/100</strong></span>
+                    <span>Target Potential: <strong className="text-[#2f27ce]">{targetScore}/100</strong></span>
                 </div>
-                <div className="h-3 bg-white border border-[#dedcff] rounded-full overflow-hidden relative shadow-inner">
+                <div className="h-2 bg-white border border-[#dedcff] rounded-full overflow-hidden relative">
                     <div
-                        className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-[#2f27ce] to-[#433bff]"
+                        className="absolute top-0 left-0 h-full rounded-full bg-[#2f27ce]"
                         style={{ width: `${currentScore}%` }}
                     />
                     <div
-                        className="absolute top-0 h-full rounded-full bg-[#dedcff] opacity-80"
+                        className="absolute top-0 h-full rounded-full bg-[#dedcff]"
                         style={{
                             left: `${currentScore}%`,
                             width: `${Math.min(totalGain, 100 - currentScore)}%`,

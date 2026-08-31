@@ -549,6 +549,139 @@ Return ONLY valid JSON array (no markdown, no backticks). Schema:
     return text ? parseJsonArray(text) : null
 }
 
+async function aiATSResumeTailor(input: {
+    resume: any
+    jobDescription: string
+}) {
+    if (!genAI) return null
+
+    const resumeSnippet = JSON.stringify({
+        headline: input.resume?.contact?.headline || '',
+        summary: input.resume?.summary || '',
+        experience: (input.resume?.experience || []).slice(0, 3).map((e: any) => ({
+            id: e.id,
+            title: e.title,
+            company: e.company,
+            bullets: (e.bullets || []).slice(0, 4)
+        })),
+        skills: input.resume?.skills || {}
+    })
+
+    const prompt = `You are a Principal Technical Recruiter and ATS Optimization Specialist. Tailor this candidate's resume for the target job description.
+
+RESUME DATA:
+${resumeSnippet}
+
+TARGET JOB DESCRIPTION:
+"""
+${input.jobDescription.slice(0, 3000)}
+"""
+
+${BANNED_VOCABULARY_CLAUSE}
+
+CRITICAL RULES:
+1. Extract exact hard skills, tools, and technical competencies mentioned in the Job Description.
+2. Generate an ATS-tailored Professional Summary (3-4 concise sentences) that mirrors key requirements without fluff.
+3. Identify 5-8 missing high-priority keywords from the job description that this candidate should include.
+4. Rewrite up to 4 key experience bullet points to naturally incorporate target keywords using the formula: [Power Verb] + [Core Skill / Tool] + [Quantified Business Outcome / Metric].
+5. Spell out abbreviations where helpful (e.g., "Search Engine Optimization (SEO)").
+6. Do NOT fabricate fake companies or degree titles. Keep metrics realistic.
+
+Return ONLY valid JSON object (no markdown, no backticks). Schema:
+{
+    "matchScore": number,
+    "tailoredSummary": "3-4 sentence ATS professional summary",
+    "missingKeywords": ["Skill 1", "Skill 2", "Skill 3"],
+    "suggestedSkills": ["Skill 1", "Tool 2", "Methodology 3"],
+    "optimizedBullets": [
+        {
+            "expId": "string matching experience id or role",
+            "original": "original bullet",
+            "optimized": "rewritten bullet with power verb + metric + keyword",
+            "matchedKeyword": "the target keyword injected"
+        }
+    ]
+}`
+
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.4, maxOutputTokens: 2500 })
+    return text ? parseJsonObject(text) : null
+}
+
+async function aiATSImproveBullet(input: {
+    bullet: string
+    targetRole?: string
+    keywords?: string[]
+}) {
+    if (!genAI) return null
+
+    const keywordsText = input.keywords && input.keywords.length > 0 ? `KEY TARGET KEYWORDS TO INCORPORATE: ${input.keywords.join(', ')}` : ''
+
+    const prompt = `You are an elite ATS resume writer and executive recruiter. Rewrite this weak experience bullet point into a high-converting, ATS-compliant accomplishment statement.
+
+ORIGINAL BULLET:
+"${input.bullet.slice(0, 1500)}"
+${input.targetRole ? `TARGET ROLE: ${input.targetRole}` : ''}
+${keywordsText}
+
+${BANNED_VOCABULARY_CLAUSE}
+
+CRITICAL ATS BULLET RULES:
+1. Formula: [Active Power Verb] + [Specific Technical Scope/Skill] + [Measurable Business Metric/Outcome].
+2. Start ONLY with strong power verbs (e.g., Architected, Engineered, Built, Scaled, Spearheaded, Automated, Reduced, Launched, Deployed).
+3. NEVER start with "Responsible for", "Helped with", "Worked on", "Assisted", "Utilized", or "Enhanced".
+4. Include concrete, realistic metric placeholders (e.g., "reducing build times by 35%", "supporting 80k active users") if numbers are not specified in the original.
+5. Keep each bullet under 160 characters for clean single-column line wrapping.
+6. Generate EXACTLY 3 variations with distinct focus areas.
+
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
+[
+    {"label": "Metrics & Performance", "text": "rewritten bullet", "powerVerb": "Architected"},
+    {"label": "Technical Execution", "text": "rewritten bullet", "powerVerb": "Engineered"},
+    {"label": "Leadership & Scale", "text": "rewritten bullet", "powerVerb": "Spearheaded"}
+]`
+
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.4, maxOutputTokens: 1200 })
+    return text ? parseJsonArray(text) : null
+}
+
+async function aiATSGenerateSummary(input: {
+    headline: string
+    experienceSummary?: string
+    keySkills?: string[]
+    targetRole?: string
+}) {
+    if (!genAI) return null
+
+    const skillsText = input.keySkills?.slice(0, 8).join(', ') || ''
+
+    const prompt = `You are an executive resume strategist. Write an ATS-friendly Professional Summary for this candidate.
+
+CANDIDATE CONTEXT:
+- Current Headline / Role: ${input.headline}
+${input.targetRole ? `- Target Role: ${input.targetRole}` : ''}
+${skillsText ? `- Key Skills: ${skillsText}` : ''}
+${input.experienceSummary ? `- Background Highlights: ${input.experienceSummary.slice(0, 600)}` : ''}
+
+${BANNED_VOCABULARY_CLAUSE}
+
+CRITICAL ATS SUMMARY RULES:
+1. Length: Exactly 3 to 4 concise sentences.
+2. Structure: Sentence 1 = Core identity + total years / domain specialization; Sentence 2 = 2-3 key technical tools / methodologies; Sentence 3 = Quantified business impact or flagship accomplishment; Sentence 4 = Target value proposition.
+3. Natural keyword density without buzzword stuffing.
+4. NO filler phrases like "passionate professional", "results-driven go-getter", "team player".
+5. Generate EXACTLY 3 variations with different angles.
+
+Return ONLY valid JSON array (no markdown, no backticks). Schema:
+[
+    {"label": "High-Impact & Metrics", "text": "summary text", "wordCount": number},
+    {"label": "Technical & Architecture", "text": "summary text", "wordCount": number},
+    {"label": "Concise & Direct", "text": "summary text", "wordCount": number}
+]`
+
+    const text = await callGeminiWithRetry(prompt, { temperature: 0.5, maxOutputTokens: 1600 })
+    return text ? parseJsonArray(text) : null
+}
+
 // ============================================================
 // MAIN API HANDLER
 // ============================================================
@@ -600,6 +733,15 @@ export async function POST(request: NextRequest) {
             case 'bullet-improve':
                 result = await aiImproveBullets(input)
                 break
+            case 'ats-resume-tailor':
+                result = await aiATSResumeTailor(input)
+                break
+            case 'ats-resume-improve-bullet':
+                result = await aiATSImproveBullet(input)
+                break
+            case 'ats-resume-generate-summary':
+                result = await aiATSGenerateSummary(input)
+                break
             default:
                 return NextResponse.json({ error: `Unknown tool: ${tool}` }, { status: 400 })
         }
@@ -625,6 +767,11 @@ export async function POST(request: NextRequest) {
 export async function GET() {
     return NextResponse.json({
         available: !!genAI,
-        tools: ['headline', 'about', 'post-ideas', 'story-to-post', 'comment', 'connection-message', 'post-hooks', 'content-planner', 'bullet-improve']
+        tools: [
+            'headline', 'about', 'post-ideas', 'story-to-post', 'comment',
+            'connection-message', 'post-hooks', 'content-planner', 'bullet-improve',
+            'ats-resume-tailor', 'ats-resume-improve-bullet', 'ats-resume-generate-summary'
+        ]
     })
 }
+
